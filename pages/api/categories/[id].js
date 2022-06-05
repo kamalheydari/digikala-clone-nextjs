@@ -47,13 +47,13 @@ const deleteCategory = async (req, res) => {
     const { id } = req.query;
 
     await db.connect();
-    // const products = await Products.findOne({ category: id });
-    // if (products)
-    //   sendError(
-    //     res,
-    //     400,
-    //     "لطفا تمام محصولات مربوط به این دسته بندی را حذف کنید"
-    //   );
+    const products = await Products.findOne({ category: id });
+    if (products)
+      sendError(
+        res,
+        400,
+        "لطفا تمام محصولات مربوط به این دسته بندی را حذف کنید"
+      );
     await Categories.findByIdAndDelete(id);
     await db.disconnect();
 
