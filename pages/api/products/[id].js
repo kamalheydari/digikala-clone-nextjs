@@ -1,5 +1,5 @@
 import db from "lib/db";
-import Products from "models/Products";
+import Products from "models/Product";
 import auth from "middleware/auth";
 import sendError from "utils/sendError";
 

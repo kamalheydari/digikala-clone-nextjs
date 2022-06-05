@@ -1,5 +1,5 @@
-import Categories from "models/Categories";
-// import Products from "models/Products";
+import Categories from "models/Category";
+import Product from "models/Product";
 import auth from "middleware/auth";
 import db from "lib/db";
 import sendError from "utils/sendError";
@@ -47,7 +47,7 @@ const deleteCategory = async (req, res) => {
     const { id } = req.query;
 
     await db.connect();
-    const products = await Products.findOne({ category: id });
+    const products = await Product.findOne({ category: id });
     if (products)
       sendError(
         res,

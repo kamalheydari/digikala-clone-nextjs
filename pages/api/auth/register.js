@@ -1,5 +1,5 @@
 import db from "lib/db";
-import Users from "models/User";
+import User from "models/User";
 import bcrypt from "bcrypt";
 import sendError from "utils/sendError";
 
@@ -16,14 +16,14 @@ const register = async (req, res) => {
     await db.connect();
     const { name, email, password } = req.body;
 
-    const user = await Users.findOne({ email });
+    const user = await User.findOne({ email });
 
     if (user)
       sendError(res, 400, "کاربری با این ایمیل در پایگاه داده موجود است");
 
     const hashPassword = await bcrypt.hash(password, 12);
 
-    const newUser = new Users({ name, email, password: hashPassword });
+    const newUser = new User({ name, email, password: hashPassword });
 
     await newUser.save();
     await db.disconnect();

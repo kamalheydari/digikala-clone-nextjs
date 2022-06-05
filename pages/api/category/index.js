@@ -1,4 +1,4 @@
-import Categories from "models/Categories";
+import Category from "models/Category";
 import auth from "middleware/auth";
 import db from "lib/db";
 import sendError from "utils/sendError";
@@ -27,7 +27,7 @@ const createCategory = async (req, res) => {
     if (!name) sendError(res, 400, "نام دسته بندی نباید خالی باشد");
 
     await db.connect();
-    const newCategory = new Categories({ name });
+    const newCategory = new Category({ name });
     await newCategory.save();
     await db.disconnect();
 
@@ -42,7 +42,7 @@ const createCategory = async (req, res) => {
 const getCategories = async (req, res) => {
   try {
     db.connect();
-    const categories = await Categories.find();
+    const categories = await Category.find();
     db.disconnect();
 
     res.status(200).json({ categories });

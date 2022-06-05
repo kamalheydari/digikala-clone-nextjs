@@ -1,5 +1,5 @@
 import db from "lib/db";
-import Users from "models/User";
+import User from "models/User";
 import bcrypt from "bcrypt";
 import sendError from "utils/sendError";
 import { createAccessToken, createRefreshToken } from "utils/generateToken";
@@ -12,7 +12,7 @@ export default async (req, res) => {
 
         const { email, password } = req.body;
 
-        const user = await Users.findOne({ email });
+        const user = await User.findOne({ email });
 
         if (!user) sendError(res, 400, "کاربری با این ایمیل یافت نشد");
 
