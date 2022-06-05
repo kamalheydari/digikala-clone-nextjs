@@ -10,7 +10,7 @@ export default async function auth(req, res) {
 
   const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 
-  if (!decoded) sendError(res, "توکن احراز هویت نامعتبر است", 400);
+  if (!decoded) sendError(res, 400, "توکن احراز هویت نامعتبر است");
 
   db.connect();
   const user = await Users.findOne({ _id: decoded.id });
