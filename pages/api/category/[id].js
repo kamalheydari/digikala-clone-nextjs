@@ -20,7 +20,7 @@ const updateCategory = async (req, res) => {
     const result = await auth(req, res);
 
     if (result.role !== "admin")
-      sendError(res, 400, "توکن احراز هویت نامعتبر است");
+      return sendError(res, 400, "توکن احراز هویت نامعتبر است");
 
     const { id } = req.query;
     const { name } = req.body;
@@ -42,14 +42,14 @@ const deleteCategory = async (req, res) => {
     const result = await auth(req, res);
 
     if (result.role !== "admin")
-      sendError(res, 400, "توکن احراز هویت نامعتبر است");
+      return sendError(res, 400, "توکن احراز هویت نامعتبر است");
 
     const { id } = req.query;
 
     await db.connect();
     const products = await Product.findOne({ category: id });
     if (products)
-      sendError(
+      return sendError(
         res,
         400,
         "لطفا تمام محصولات مربوط به این دسته بندی را حذف کنید"

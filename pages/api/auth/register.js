@@ -19,7 +19,11 @@ const register = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (user)
-      sendError(res, 400, "کاربری با این ایمیل در پایگاه داده موجود است");
+      return sendError(
+        res,
+        400,
+        "کاربری با این ایمیل در پایگاه داده موجود است"
+      );
 
     const hashPassword = await bcrypt.hash(password, 12);
 
