@@ -27,7 +27,7 @@ const getProduct = async (req, res) => {
     const product = await Products.findById(id);
     db.disconnect();
 
-    if (!product) sendError(res, 500, "این محصول موجود نمیباشد");
+    if (!product) return sendError(res, 500, "این محصول موجود نمیباشد");
 
     res.status(200).json({ product });
   } catch (error) {
@@ -40,7 +40,7 @@ const updateProduct = async (req, res) => {
     const result = await auth(req, res);
 
     if (result.role !== "admin")
-      sendError(res, 400, "توکن احراز هویت نامعتبر است");
+      return sendError(res, 400, "توکن احراز هویت نامعتبر است");
 
     const { id } = req.query;
 
@@ -63,7 +63,7 @@ const updateProduct = async (req, res) => {
       category === "all" ||
       images.length === 0
     )
-      sendError(res, 400, "لطفا تمام فیلد ها را پر کنید");
+      return sendError(res, 400, "لطفا تمام فیلد ها را پر کنید");
 
     await db.connect();
     await Products.findOneAndUpdate(
@@ -91,7 +91,7 @@ const deleteProduct = async (req, res) => {
     const result = await auth(req, res);
 
     if (result.role !== "admin")
-      sendError(res, 400, "توکن احراز هویت نامعتبر است");
+      return sendError(res, 400, "توکن احراز هویت نامعتبر است");
 
     const { id } = req.query;
 

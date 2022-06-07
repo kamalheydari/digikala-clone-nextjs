@@ -20,7 +20,6 @@ const uploadInfo = async (req, res) => {
     const result = await auth(req, res);
     const { name, avatar } = req.body;
 
-
     await db.connect();
     const newUser = await User.findOneAndUpdate(
       { _id: result.id },
@@ -28,12 +27,10 @@ const uploadInfo = async (req, res) => {
     );
     await db.disconnect();
 
-    res
-      .status(201)
-      .json({
-        msg: "اطلاعات کاربری با موفقیت به روز رسانی شد",
-        user: { name, avatar, email: newUser.email, role: newUser.role },
-      });
+    res.status(201).json({
+      msg: "اطلاعات کاربری با موفقیت به روز رسانی شد",
+      user: { name, avatar, email: newUser.email, role: newUser.role },
+    });
   } catch (error) {
     sendError(res, 500, error.message);
   }
@@ -44,7 +41,7 @@ const getUsers = async (req, res) => {
     const result = await auth(req, res);
 
     if (result.role !== "admin")
-      sendError(res, 400, "توکن احراز هویت نامعتبر است");
+      return sendError(res, 400, "توکن احراز هویت نامعتبر است");
 
     await db.connect();
     const users = await User.find().select("-password");
