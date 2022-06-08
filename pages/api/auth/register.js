@@ -2,6 +2,7 @@ import db from "lib/db";
 import User from "models/User";
 import bcrypt from "bcrypt";
 import sendError from "utils/sendError";
+import { createAccessToken, createRefreshToken } from "utils/generateToken";
 
 export default async (req, res) => {
   switch (req.method) {
@@ -32,7 +33,23 @@ const register = async (req, res) => {
     await newUser.save();
     await db.disconnect();
 
-    res.status(201).json({ msg: "عضویت موفقیت آمیز بود" });
+    const access_token = createAccessToken({ id: newUser._id });
+    const refresh_token = createRefreshToken({ id: newUser._id });
+
+    res.status(201).json({
+      msg: "عضویت موفقیت آمیز بود",
+      data: {
+        refresh_token,
+        access_token,
+        user: {
+          name: newUser.name,
+          email: newUser.email,
+          role: newUser.role,
+          avatar: newUser.avatar,
+          root: newUser.root,
+        },
+      },
+    });
   } catch (error) {
     sendError(res, 500, error.message);
   }
