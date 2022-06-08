@@ -26,14 +26,16 @@ export default async (req, res) => {
 
         res.json({
           msg: "ورود موفقیت آمیز بود",
-          refresh_token,
-          access_token,
-          user: {
-            name: user.name,
-            email: user.email,
-            role: user.role,
-            avatar: user.avatar,
-            root: user.root,
+          data: {
+            refresh_token,
+            access_token,
+            user: {
+              name: user.name,
+              email: user.email,
+              role: user.role,
+              avatar: user.avatar,
+              root: user.root,
+            },
           },
         });
       } catch (error) {
