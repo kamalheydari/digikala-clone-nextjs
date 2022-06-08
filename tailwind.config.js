@@ -9,6 +9,9 @@ module.exports = {
         vazir: "Vazir",
       },
     },
+    container: {
+      center: true,
+    },
   },
   plugins: [],
 };
