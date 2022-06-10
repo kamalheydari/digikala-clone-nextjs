@@ -23,7 +23,7 @@ const register = async (req, res) => {
       return sendError(
         res,
         400,
-        "کاربری با این ایمیل در پایگاه داده موجود است"
+        "شما قبلا با این آدرس ایمیل ثیت نام کردید"
       );
 
     const hashPassword = await bcrypt.hash(password, 12);
