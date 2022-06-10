@@ -155,7 +155,3 @@ export default function RegisterPage() {
   );
 }
 
-//? Lyout Config
-RegisterPage.getLayout = function pageLayout(page) {
-  return <>{page}</>;
-};

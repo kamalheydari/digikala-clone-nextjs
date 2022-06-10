@@ -31,15 +31,17 @@
     font-family: "Vazir";
   }
 
-  input {
-    box-shadow: 0 0 0px 1000px #fafafa inset;
-    -webkit-box-shadow: 0 0 0px 1000px #fafafa inset;
-  }
   h2 {
     @apply text-xl;
   }
   p {
     @apply text-base;
+  }
+  button {
+    @apply cursor-pointer;
+  }
+  a {
+    @apply cursor-pointer;
   }
 }
 
@@ -58,5 +60,11 @@
 
   .btn {
     @apply text-white bg-red-500 py-3 px-4 rounded-3xl block outline-none;
+  }
+  .icon {
+    @apply w-6 h-6 text-gray-700;
+  }
+  .b {
+    @apply border border-red-600;
   }
 }

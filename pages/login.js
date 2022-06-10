@@ -116,7 +116,3 @@ export default function LoginPage() {
   );
 }
 
-//? Lyout Config
-LoginPage.getLayout = function pageLayout(page) {
-  return <>{page}</>;
-};
