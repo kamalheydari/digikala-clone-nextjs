@@ -6,7 +6,7 @@ import { Layout } from "components";
 import { store } from "app/store";
 import { Provider } from "react-redux";
 import { useEffect, useState } from "react";
-import DashboardLayout from "components/DashboardLayout";
+import { DashboardLayout, RefreshTokenHandler } from "components";
 
 export default function MyApp({ Component, pageProps }) {
   //? Fix Hydration failed
@@ -25,6 +25,7 @@ export default function MyApp({ Component, pageProps }) {
       <Provider store={store}>
         <Layout>
           <Component {...pageProps} />
+          <RefreshTokenHandler />
         </Layout>
       </Provider>
     );

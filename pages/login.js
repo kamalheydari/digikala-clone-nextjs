@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -11,7 +12,8 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { userLogin } from "app/slices/authSlice";
 import alert from "utils/alert";
-import { useRouter } from "next/router";
+
+import Cookies from "js-cookie";
 
 //? Validation Schema
 const schema = Yup.object().shape({
@@ -38,6 +40,7 @@ export default function LoginPage() {
     if (isSuccess) {
       alert("success", data.msg);
       dispatch(userLogin(data.data));
+      Cookies.set("refreshToken", data?.data.refresh_token, { expires: 7 });
       reset();
       router.push("/");
     }

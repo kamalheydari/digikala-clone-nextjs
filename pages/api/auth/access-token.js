@@ -6,8 +6,8 @@ import jwt from "jsonwebtoken";
 
 export default async (req, res) => {
   try {
-    const rf_token = req.cookies.refreshtoken;
-    if (!rf_token) return sendError(res, 400, "لطفا ابتدا وارد وبسایت شوید");
+    const rf_token = req.cookies.refreshToken;
+    // if (!rf_token) return sendError(res, 400, "لطفا ابتدا وارد وبسایت شوید");
 
     const result = jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET);
     if (!result)
