@@ -17,9 +17,10 @@ const authSlice = createSlice({
       Cookies.set("userInfo", JSON.stringify({ token, user }));
     },
 
-    userLogout: (state, action) => {
-      state = {};
+    userLogout: (state) => {
       Cookies.remove("userInfo");
+      state.token = null;
+      state.user = null;
     },
   },
 });
