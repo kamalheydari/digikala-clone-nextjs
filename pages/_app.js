@@ -1,6 +1,6 @@
 import "/styles/globals.css";
 
-import { Layout } from "components";
+import { ClientLayout, ProfileLayout } from "components";
 
 //? store
 import { store } from "app/store";
@@ -23,10 +23,10 @@ export default function MyApp({ Component, pageProps }) {
   if (Component.getClientLayout) {
     return Component.getClientLayout(
       <Provider store={store}>
-        <Layout>
+        <ClientLayout>
           <Component {...pageProps} />
           <RefreshTokenHandler />
-        </Layout>
+        </ClientLayout>
       </Provider>
     );
   }
@@ -38,6 +38,16 @@ export default function MyApp({ Component, pageProps }) {
         <DashboardLayout>
           <Component {...pageProps} />
         </DashboardLayout>
+      </Provider>
+    );
+  }
+  //? Lyout Config
+  if (Component.getProfileLayout) {
+    return Component.getProfileLayout(
+      <Provider store={store}>
+        <ProfileLayout>
+          <Component {...pageProps} />
+        </ProfileLayout>
       </Provider>
     );
   }
