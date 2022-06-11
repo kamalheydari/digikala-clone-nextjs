@@ -5,6 +5,14 @@ import { createAccessToken } from "utils/generateToken";
 import jwt from "jsonwebtoken";
 
 export default async (req, res) => {
+  switch (req.method) {
+    case "GET":
+      await getAccessToken(req, res);
+      break;
+  }
+};
+
+const getAccessToken = async (req, res) => {
   try {
     const rf_token = req.cookies.refreshToken;
     // if (!rf_token) return sendError(res, 400, "لطفا ابتدا وارد وبسایت شوید");
