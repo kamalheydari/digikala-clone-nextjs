@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { Icons, BoxLink, Logout,Orders } from "components";
+import { Icons, BoxLink, Logout, Orders } from "components";
 
-export default function ProfileAside({user}) {
+export default function ProfileAside({ user }) {
   const profilePaths = [
     {
       name: "سفارش‌ها",
@@ -36,6 +36,8 @@ export default function ProfileAside({user}) {
       path: "/profile/personal-info",
     },
   ];
+
+  if (!user) return null;
 
   return (
     <aside className='mt-6 lg:border lg:border-gray-200 lg:rounded-md lg:py-4'>
