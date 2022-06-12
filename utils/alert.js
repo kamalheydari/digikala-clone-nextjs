@@ -33,11 +33,13 @@ export const editInfo = (type, title, patchData, token, isError, error) =>
     showLoaderOnConfirm: true,
     preConfirm: (data) => {
       if (type === "mobile") {
-        const mobile = Number(data);
-        if (mobile.length < 11 || mobile.length >= 12)
+        // if (String(mobile).length < 11 || String(mobile).length >= 12)
+        if (data.length < 11 || data.length >= 12)
           return Swal.showValidationMessage(
             "لطفا شماره موبایل خود را بصورت کامل وارد کنید"
           );
+        const mobile = Number(data);
+
         patchData({
           url: "/api/user",
           body: { mobile },
@@ -55,6 +57,16 @@ export const editInfo = (type, title, patchData, token, isError, error) =>
         patchData({
           url: "/api/user",
           body: { name },
+          token,
+        });
+      }
+
+      if (type === "address") {
+        const address = data;
+
+        patchData({
+          url: "/api/user",
+          body: { address },
           token,
         });
       }

@@ -30,6 +30,7 @@ const uploadInfo = async (req, res) => {
         name: newUser.name,
         mobile: newUser.mobile,
         email: newUser.email,
+        address: newUser.address,
         role: newUser.role,
         root: newUser.root,
       },
