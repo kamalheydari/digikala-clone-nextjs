@@ -35,6 +35,7 @@ const getAccessToken = async (req, res) => {
         email: user.email,
         role: user.role,
         avatar: user.avatar,
+        mobile: user?.mobile,
         root: user.root,
       },
     });

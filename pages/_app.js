@@ -37,6 +37,7 @@ export default function MyApp({ Component, pageProps }) {
       <Provider store={store}>
         <DashboardLayout>
           <Component {...pageProps} />
+          <RefreshTokenHandler />
         </DashboardLayout>
       </Provider>
     );
@@ -47,6 +48,7 @@ export default function MyApp({ Component, pageProps }) {
       <Provider store={store}>
         <ProfileLayout>
           <Component {...pageProps} />
+          <RefreshTokenHandler />
         </ProfileLayout>
       </Provider>
     );
