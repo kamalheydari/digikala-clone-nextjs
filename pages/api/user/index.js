@@ -18,6 +18,9 @@ export default async (req, res) => {
 const uploadInfo = async (req, res) => {
   try {
     const result = await auth(req, res);
+    if (!result)
+    return sendError(res, 400, "توکن احراز هویت نامعتبر است");
+
     await db.connect();
     await User.findOneAndUpdate({ _id: result.id }, { ...req.body });
     const newUser = await User.findOne({ _id: result.id });
@@ -26,7 +29,6 @@ const uploadInfo = async (req, res) => {
     res.status(201).json({
       msg: "اطلاعات کاربری با موفقیت به روز رسانی شد",
       user: {
-        avatar: newUser.avatar,
         name: newUser.name,
         mobile: newUser.mobile,
         email: newUser.email,

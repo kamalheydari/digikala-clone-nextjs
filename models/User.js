@@ -8,7 +8,6 @@ const userSchema = new mongoose.Schema({
   mobile: { type: Number },
   role: { type: String, default: "user" },
   root: { type: Boolean, default: false },
-  avatar: { type: String, default: "/images/person.svg" },
 });
 
 const User = mongoose.models.user || mongoose.model("user", userSchema);

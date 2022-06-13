@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import Cookies from "js-cookie";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -48,7 +47,6 @@ export default function RegisterPage() {
     if (isSuccess) {
       alert("success", data.msg);
       dispatch(userLogin(data.data));
-      Cookies.set("refreshToken", data?.data.refresh_token, { expires: 7 });
       reset();
       router.push("/");
     }

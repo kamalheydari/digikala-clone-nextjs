@@ -1,14 +1,20 @@
+import { useEffect, useState } from "react";
+
 import "/styles/globals.css";
 
 import { ClientLayout, ProfileLayout } from "components";
 
-//? store
+//? Store
 import { store } from "app/store";
 import { Provider } from "react-redux";
-import { useEffect, useState } from "react";
+
+//? Layouts
 import { DashboardLayout, RefreshTokenHandler } from "components";
 
+
 export default function MyApp({ Component, pageProps }) {
+  
+
   //? Fix Hydration failed
   const [showChild, setShowChild] = useState(false);
   useEffect(() => {

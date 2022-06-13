@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 export default function ProfilePage() {
   const { user } = useSelector((state) => state.auth);
 
+  if (!user) return null;
   return (
     <>
       <ClientLayout />

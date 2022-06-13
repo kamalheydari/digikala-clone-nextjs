@@ -2,7 +2,7 @@ import db from "lib/db";
 import User from "models/User";
 import bcrypt from "bcrypt";
 import sendError from "utils/sendError";
-import { createAccessToken, createRefreshToken } from "utils/generateToken";
+import { createAccessToken, } from "utils/generateToken";
 
 export default async (req, res) => {
   switch (req.method) {
@@ -22,18 +22,16 @@ export default async (req, res) => {
           return sendError(res, 400, "آدرس ایمیل یا کلمه عبور اشتباه است");
 
         const access_token = createAccessToken({ id: user._id });
-        const refresh_token = createRefreshToken({ id: user._id });
 
         res.json({
           msg: "ورود موفقیت آمیز بود",
           data: {
-            refresh_token,
             access_token,
             user: {
               name: user.name,
               email: user.email,
+              mobile: user.mobile,
               role: user.role,
-              avatar: user.avatar,
               root: user.root,
             },
           },

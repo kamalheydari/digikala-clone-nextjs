@@ -1,11 +1,9 @@
 import { useRouter } from "next/router";
-import { useEffect } from "react";
 
-import Cookies from "js-cookie";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogout } from "app/slices/authSlice";
 
-import { userLogin, userLogout } from "app/slices/authSlice";
-import { useGetDataQuery } from "app/slices/fetchApiSlice";
-import { useDispatch } from "react-redux";
+import verifyToken from "utils/verifyToken";
 
 import { confirmAlert } from "utils/alert";
 
@@ -13,28 +11,21 @@ export default function RefreshTokenHandler() {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const refreshToken = Cookies.get("refreshToken");
+  const { token } = useSelector((state) => state.auth);
 
-  if (refreshToken) {
-    const { data, isSuccess, isError } = useGetDataQuery({
-      url: "/api/auth/access-token",
-      token: "",
+  //? handle exp token
+  const isverify = verifyToken(token);
+
+  if (!isverify && token) {
+    dispatch(userLogout());
+    confirmAlert({
+      text: "توکن احراز هویت نادرست است یا منقضی شده است",
+      title: "",
+      icon: "warning",
+      confirmButtonText: "انقال به صفحه ورود",
+    }).then((result) => {
+      if (result.isConfirmed) router.push("/login");
     });
-
-    useEffect(() => {
-      if (isSuccess) dispatch(userLogin(data));
-      if (isError) {
-        dispatch(userLogout());
-        confirmAlert({
-          text: "توکن احراز هویت نادرست است یا منقضی شده است",
-          title: "",
-          icon: "warning",
-          confirmButtonText: "انقال به صفحه ورود",
-        }).then((result) => {
-          if (result.isConfirmed) router.push("/login");
-        });
-      }
-    }, [isSuccess, isError]);
   }
 
   return null;

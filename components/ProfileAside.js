@@ -43,7 +43,7 @@ export default function ProfileAside({ user }) {
     <aside className='mt-6 lg:border lg:border-gray-200 lg:rounded-md lg:py-4'>
       <div className='px-5 py-2 flex justify-between items-center '>
         <div className='relative w-12 h-12'>
-          <Image src={user.avatar} layout='fill' />
+          <Image src='/images/person.svg' layout='fill' />
         </div>
         <span className='ml-auto mr-2 font-bold '>{user.name}</span>
         <Link href='/profile/personal-info'>
