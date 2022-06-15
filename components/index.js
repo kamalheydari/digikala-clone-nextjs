@@ -13,4 +13,5 @@ export { default as RefreshTokenHandler } from "./RefreshTokenHandler";
 export { default as ProfileLayout } from "./Lyouts/ProfileLayout";
 export { default as Orders } from "./Orders";
 export { default as Logout } from "./Logout";
+export { default as Modal } from "./modal/Modal";
 export { default as ProfileAside } from "./ProfileAside";

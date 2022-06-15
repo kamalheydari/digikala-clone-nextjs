@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { userLogout } from "app/slices/authSlice";
 import { Icons } from "components";
-import alert from "utils/alert";
+import { openModal } from "app/slices/modalSlice";
 
 export default function Logout() {
   const dispatch = useDispatch();
@@ -10,12 +10,19 @@ export default function Logout() {
   const handleLogout = () => {
     router.push("/");
     dispatch(userLogout());
-    alert("success", "خروج موفقیت آمیز بود");
+    dispatch(
+      openModal({
+        isShow: true,
+        type: "alert",
+        status: "success",
+        text: "خروج موفقیت آمیز بود",
+      })
+    );
   };
   return (
     <div className='transition-colors hover:bg-gray-200 px-3'>
-
-      <div role='button'
+      <div
+        role='button'
         className='flex justify-between cursor-pointer py-4 gap-x-2 mx-4  border-t border-gray-300'
         onClick={() => handleLogout()}
       >

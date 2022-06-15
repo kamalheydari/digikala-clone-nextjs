@@ -11,8 +11,7 @@ import { DisplayError, Loading } from "components";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { userLogin } from "app/slices/authSlice";
-import alert from "utils/alert";
-
+import { openModal } from "app/slices/modalSlice";
 
 //? Validation Schema
 const schema = Yup.object().shape({
@@ -37,12 +36,27 @@ export default function LoginPage() {
   //? Handle Response
   useEffect(() => {
     if (isSuccess) {
-      alert("success", data.msg);
       dispatch(userLogin(data.data));
+      dispatch(
+        openModal({
+          isShow: true,
+          type: "alert",
+          status: "seccess",
+          text: data.msg,
+        })
+        );
+        router.push("/");
       reset();
-      router.push("/");
     }
-    if (isError) alert("error", error?.data.err);
+    if (isError)
+      dispatch(
+        openModal({
+          isShow: true,
+          type: "alert",
+          icon: "error",
+          text: error?.data.err,
+        })
+      );
   }, [isSuccess, isError]);
 
   //? Form Hook
@@ -71,7 +85,7 @@ export default function LoginPage() {
         <div className='relative w-44 h-24 mx-auto'>
           <Link passHref href='/'>
             <a>
-              <Image src='/images/logo.svg' layout='fill' />
+              <Image src='/icons/logo.svg' layout='fill' />
             </a>
           </Link>
         </div>
@@ -116,4 +130,3 @@ export default function LoginPage() {
     </div>
   );
 }
-

@@ -9,7 +9,7 @@ export default function Orders() {
 
       <div className='py-20'>
         <div className='relative h-52 w-52 mx-auto'>
-          <Image src='/images/order-empty.svg' layout='fill' />
+          <Image src='/icons/order-empty.svg' layout='fill' />
         </div>
 
         <p className='text-center'>هنوز هیچ سفارشی ندادید</p>

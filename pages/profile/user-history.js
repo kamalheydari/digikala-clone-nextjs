@@ -9,7 +9,7 @@ export default function UserHistory() {
 
       <div className='py-20'>
         <div className='relative h-52 w-52 mx-auto'>
-          <Image src='/images/empty-cart.svg' layout='fill' />
+          <Image src='/icons/empty-cart.svg' layout='fill' />
         </div>
 
         <p className='text-center'>لیست بازدید‌های اخیر شما خالی است.</p>

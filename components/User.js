@@ -47,7 +47,7 @@ export default function User({ user }) {
         >
           <BoxLink path='/profile' name={user.name} className='border-t-0'>
             <div className='relative w-6 h-6'>
-              <Image src='/images/person.svg' layout='fill' />
+              <Image src='/icons/person.svg' layout='fill' />
             </div>
           </BoxLink>
           <Logout />

@@ -14,7 +14,8 @@ import { userLogin } from "app/slices/authSlice";
 
 import { DisplayError, Loading } from "components";
 
-import alert, { confirmAlert } from "utils/alert";
+import  { confirmAlert } from "utils/alert";
+import { openModal } from "app/slices/modalSlice";
 
 //? Validation Schema
 const schema = Yup.object().shape({
@@ -45,7 +46,14 @@ export default function RegisterPage() {
   //? Handle Response
   useEffect(() => {
     if (isSuccess) {
-      alert("success", data.msg);
+      dispatch(
+        openModal({
+          isShow: true,
+          type: "alert",
+          status: "seccess",
+          text: data.msg,
+        })
+        );
       dispatch(userLogin(data.data));
       reset();
       router.push("/");
@@ -89,7 +97,7 @@ export default function RegisterPage() {
         <div className='relative w-44 h-24 mx-auto'>
           <Link passHref href='/'>
             <a>
-              <Image src='/images/logo.svg' layout='fill' />
+              <Image src='/icons/logo.svg' layout='fill' />
             </a>
           </Link>
         </div>

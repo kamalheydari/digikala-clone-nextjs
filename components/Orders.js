@@ -14,7 +14,7 @@ export default function Orders() {
         <div className='flex justify-evenly lg:py-20'>
           <div className='flex flex-col items-center lg:flex-row lg:gap-x-2'>
             <div className='relative w-14 h-14 '>
-              <Image src='/images/status-processing.svg' layout='fill' />
+              <Image src='/icons/status-processing.svg' layout='fill' />
               <span className='absolute order-badge'>0</span>
             </div>
             <div className='text-gray-700'>
@@ -28,7 +28,7 @@ export default function Orders() {
 
           <div className='flex flex-col items-center lg:flex-row lg:gap-x-2'>
             <div className='relative w-14 h-14 '>
-              <Image src='/images/status-delivered.svg' layout='fill' />
+              <Image src='/icons/status-delivered.svg' layout='fill' />
               <span className='absolute order-badge'>0</span>
             </div>
             <div className='text-gray-700'>
@@ -41,7 +41,7 @@ export default function Orders() {
 
           <div className='flex flex-col items-center lg:flex-row lg:gap-x-2'>
             <div className='relative w-14 h-14 '>
-              <Image src='/images/status-returned.svg' layout='fill' />
+              <Image src='/icons/status-returned.svg' layout='fill' />
               <span className='absolute order-badge'>0</span>
             </div>
             <div className='text-gray-700'>

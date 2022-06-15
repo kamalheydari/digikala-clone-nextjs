@@ -54,7 +54,7 @@ export default function Addresses() {
       ) : (
         <div className='py-20 flex flex-col items-center gap-y-4'>
           <div className='relative h-52 w-52'>
-            <Image src='/images/address.svg' layout='fill' />
+            <Image src='/icons/address.svg' layout='fill' />
           </div>
           <p>هنوز آدرس ثبت نکرده‌اید.</p>
 

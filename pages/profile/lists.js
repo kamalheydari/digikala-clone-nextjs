@@ -9,7 +9,7 @@ export default function Lists() {
 
       <div className='py-20'>
         <div className='relative h-52 w-52 mx-auto'>
-          <Image src='/images/favorites-list-empty.svg' layout='fill' />
+          <Image src='/icons/favorites-list-empty.svg' layout='fill' />
         </div>
 
         <p className='text-center'>لیست علاقه‌مندی‌های شما خالی است.</p>

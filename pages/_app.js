@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import "/styles/globals.css";
 
-import { ClientLayout, ProfileLayout } from "components";
+import { ClientLayout, ProfileLayout, Modal } from "components";
 
 //? Store
 import { store } from "app/store";
@@ -11,10 +11,7 @@ import { Provider } from "react-redux";
 //? Layouts
 import { DashboardLayout, RefreshTokenHandler } from "components";
 
-
 export default function MyApp({ Component, pageProps }) {
-  
-
   //? Fix Hydration failed
   const [showChild, setShowChild] = useState(false);
   useEffect(() => {
@@ -32,6 +29,7 @@ export default function MyApp({ Component, pageProps }) {
         <ClientLayout>
           <Component {...pageProps} />
           <RefreshTokenHandler />
+          <Modal />
         </ClientLayout>
       </Provider>
     );
@@ -44,6 +42,7 @@ export default function MyApp({ Component, pageProps }) {
         <DashboardLayout>
           <Component {...pageProps} />
           <RefreshTokenHandler />
+          <Modal />
         </DashboardLayout>
       </Provider>
     );
@@ -55,6 +54,7 @@ export default function MyApp({ Component, pageProps }) {
         <ProfileLayout>
           <Component {...pageProps} />
           <RefreshTokenHandler />
+          <Modal />
         </ProfileLayout>
       </Provider>
     );
@@ -63,6 +63,7 @@ export default function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <Component {...pageProps} />
+      <Modal />
     </Provider>
   );
 }
