@@ -19,7 +19,7 @@ export default function Navbar() {
           <div className='relative w-24 h-14 '>
             <Link passHref href='/'>
               <a>
-                <Image src='/images/logo.svg' layout='fill' />
+                <Image src='/icons/logo.svg' layout='fill' />
               </a>
             </Link>
           </div>

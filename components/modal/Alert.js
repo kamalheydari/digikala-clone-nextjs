@@ -33,15 +33,12 @@ export default function Alert({ isShow, status, text }) {
   }, [isShow]);
 
   return (
-    <div
-      className={`
-      ${isShow ? "top-32" : "-top-full"} 
-      bg-white rounded-md p-3 text-center shadow absolute transition-all duration-300 left-0 right-0 max-w-md mx-auto z-20 h-fit `}
-    >
+    
+    <>
       <div className='relative h-20 w-20 mx-auto '>
         <Image src={IconSrc} layout='fill' />
       </div>
       <p className='mt-2'>{text}</p>
-    </div>
+    </>
   );
 }

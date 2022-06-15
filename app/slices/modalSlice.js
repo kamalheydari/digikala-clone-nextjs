@@ -14,10 +14,10 @@ const modalSlice = createSlice({
   reducers: {
     closeModal: (state, action) => {
       state.isShow = false;
-      state.type = "";
-      state.text = "";
-      state.title = "";
-      state.status = "";
+      // state.type = "";
+      // state.text = "";
+      // state.title = "";
+      // state.status = "";
     },
     openModal: (state, action) => {
       state.isShow = true;
