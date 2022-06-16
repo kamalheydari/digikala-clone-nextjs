@@ -112,7 +112,7 @@ export default function LoginPage() {
           </div>
 
           <button
-            className='btn mx-auto w-60'
+            className='btn mx-auto w-full max-w-[200px]'
             type='submit'
             disabled={isLoading}
           >

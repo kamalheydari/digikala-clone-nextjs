@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -14,7 +13,6 @@ import { userLogin } from "app/slices/authSlice";
 
 import { DisplayError, Loading } from "components";
 
-import  { confirmAlert } from "utils/alert";
 import { openModal } from "app/slices/modalSlice";
 
 //? Validation Schema
@@ -53,20 +51,20 @@ export default function RegisterPage() {
           status: "seccess",
           text: data.msg,
         })
-        );
+      );
       dispatch(userLogin(data.data));
       reset();
       router.push("/");
     }
     if (isError) {
-      confirmAlert({
-        title: "مشکلی در ثبت‌نام شما وجود دارد",
-        text: error?.data.err,
-        icon: "warning",
-        confirmButtonText: "انتقال به صفحه ورود",
-      }).then((result) => {
-        if (result.isConfirmed) router.push("/login");
-      });
+      dispatch(
+        openModal({
+          isShow: true,
+          type: "redirect",
+          title: "مشکلی در ثبت‌نام شما وجود دارد",
+          text: error?.data.err,
+        })
+      );
     }
   }, [isSuccess, isError]);
 
@@ -145,7 +143,7 @@ export default function RegisterPage() {
           </div>
 
           <button
-            className='btn mx-auto w-60'
+         className='btn mx-auto w-full max-w-[200px]'
             type='submit'
             disabled={isLoading}
           >

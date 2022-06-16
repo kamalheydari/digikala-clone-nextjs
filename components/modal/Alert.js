@@ -33,7 +33,7 @@ export default function Alert({ isShow, status, text }) {
   }, [isShow]);
 
   return (
-    <div className='bg-white rounded-md p-3 text-center shadow h-fit'>
+    <div className='bg-white rounded-md p-3 text-center shadow h-fit mx-2'>
       <div className='relative h-20 w-20 mx-auto '>
         <Image src={IconSrc} layout='fill' />
       </div>
