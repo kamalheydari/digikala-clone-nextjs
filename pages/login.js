@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";
+
 
 import { usePostDataMutation } from "app/slices/fetchApiSlice";
 import { DisplayError, Loading } from "components";
@@ -14,14 +14,7 @@ import { userLogin } from "app/slices/authSlice";
 import { openModal } from "app/slices/modalSlice";
 
 //? Validation Schema
-const schema = Yup.object().shape({
-  email: Yup.string()
-    .required("آدرس ایمیل لازم است ثبت شود")
-    .email("آدرس ایمیل وارد شده معتبر نیست"),
-  password: Yup.string()
-    .required("رمز عبور لازم است ثبت شود")
-    .min(6, "رمز عبور باید بیشتر از 5 کارکتر باشد"),
-});
+import validation from "utils/validation";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
@@ -44,8 +37,8 @@ export default function LoginPage() {
           status: "seccess",
           text: data.msg,
         })
-        );
-        router.push("/");
+      );
+      router.push("/");
       reset();
     }
     if (isError)
@@ -66,7 +59,7 @@ export default function LoginPage() {
     formState: { errors: formErrors },
     reset,
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(validation.logInSchema),
   });
 
   //? Handlers

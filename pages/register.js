@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as Yup from "yup";
 
 import { usePostDataMutation } from "app/slices/fetchApiSlice";
 import { useDispatch } from "react-redux";
@@ -16,20 +15,7 @@ import { DisplayError, Loading } from "components";
 import { openModal } from "app/slices/modalSlice";
 
 //? Validation Schema
-const schema = Yup.object().shape({
-  name: Yup.string()
-    .required("نام و نام خانوادگی  لازم است ثبت شود")
-    .min(3, "نام و نام خانوادگی  باید بیشتر از 2 کارکتر باشد"),
-  email: Yup.string()
-    .required("آدرس ایمیل لازم است ثبت شود")
-    .email("آدرس ایمیل وارد شده معتبر نیست"),
-  password: Yup.string()
-    .required("رمز عبور لازم است ثبت شود")
-    .min(6, "رمز عبور باید بیشتر از 5 کارکتر باشد"),
-  confirmPassword: Yup.string()
-    .required("تکرار کلمه عبور الزامی می باشد")
-    .oneOf([Yup.ref("password"), null], "تکرار کلمه عبور صحیح نیست"),
-});
+import validation from "utils/validation";
 
 export default function RegisterPage() {
   const dispatch = useDispatch();
@@ -75,7 +61,7 @@ export default function RegisterPage() {
     formState: { errors: formErrors },
     reset,
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(validation.userSchema),
   });
 
   //? Handlers
@@ -143,7 +129,7 @@ export default function RegisterPage() {
           </div>
 
           <button
-         className='btn mx-auto w-full max-w-[200px]'
+            className='btn mx-auto w-full max-w-[200px]'
             type='submit'
             disabled={isLoading}
           >
