@@ -14,17 +14,13 @@ const modalSlice = createSlice({
   reducers: {
     closeModal: (state, action) => {
       state.isShow = false;
-      // state.type = "";
-      // state.text = "";
-      // state.title = "";
-      // state.status = "";
     },
     openModal: (state, action) => {
       state.isShow = true;
-      state.type = action.payload.type;
-      state.text = action.payload.text;
-      state.title = action.payload.title;
-      state.status = action.payload.status;
+      state.type = action.payload.type || "";
+      state.text = action.payload.text || "";
+      state.title = action.payload.title || "";
+      state.status = action.payload.status || "";
     },
   },
 });

@@ -9,9 +9,14 @@ export default function Modal() {
 
   const { type, text, status, isShow } = useSelector((state) => state.modal);
 
+  //? Config Modal
   let renderModal;
+  let effect = [];
+  let size = "";
   switch (type) {
     case "alert":
+      effect = ["top-40", "-top-full"];
+      size = "max-w-md";
       renderModal = <Alert text={text} status={status} isShow={isShow} />;
       break;
 
@@ -31,8 +36,8 @@ export default function Modal() {
       />
       <div
         className={`
-      ${isShow ? "top-40 " : "-top-full "}
-      bg-white rounded-md p-3 text-center shadow absolute transition-all duration-700 left-0 right-0 max-w-md mx-auto z-20 h-fit `}
+      ${isShow ? effect[0] : effect[1]} ${size}
+       absolute transition-all duration-700 left-0 right-0 mx-auto z-20 `}
       >
         {renderModal}
       </div>

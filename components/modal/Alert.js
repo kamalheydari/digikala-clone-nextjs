@@ -33,12 +33,11 @@ export default function Alert({ isShow, status, text }) {
   }, [isShow]);
 
   return (
-    
-    <>
+    <div className='bg-white rounded-md p-3 text-center shadow h-fit'>
       <div className='relative h-20 w-20 mx-auto '>
         <Image src={IconSrc} layout='fill' />
       </div>
       <p className='mt-2'>{text}</p>
-    </>
+    </div>
   );
 }
