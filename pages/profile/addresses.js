@@ -1,12 +1,18 @@
 import Image from "next/image";
-import { openModal } from "app/slices/modalSlice";
-import { BackButton, Icons } from "components";
+
 import { useDispatch, useSelector } from "react-redux";
+import { openModal } from "app/slices/modalSlice";
+
+import { BackButton, Icons } from "components";
 
 export default function Addresses() {
   const dispatch = useDispatch();
+  
+  //? Store
   const { user } = useSelector((state) => state.auth);
 
+
+  //? Handlers
   const edditAddressHandler = () => {
     dispatch(
       openModal({
@@ -24,7 +30,7 @@ export default function Addresses() {
       {user.address ? (
         <div className='flex-1 px-5 '>
           <div className='flex justify-between py-4 border-b border-gray-200'>
-            <p>{user.address.street}</p>
+            <p className='text-sm'>{user.address.street}</p>
             <Icons.Edit
               className='cursor-pointer icon'
               onClick={edditAddressHandler}
@@ -33,17 +39,25 @@ export default function Addresses() {
           <div className='my-2 space-y-3 text-gray-500'>
             <div className='flex items-center gap-x-2 '>
               <Icons.UserLocation className='text-gray-500 icon' />
-              <span>
+              <span className='text-xs md:text-sm'>
                 {user.address.provinces}, {user.address.city}
               </span>
             </div>
             <div className='flex items-center gap-x-2 '>
               <Icons.Post className='text-gray-500 icon' />
-              <span>{user.address.postalCode}</span>
+              <span className='text-xs md:text-sm'>
+                {user.address.postalCode}
+              </span>
             </div>
+            {user.mobile && (
+              <div className='flex items-center gap-x-2 '>
+                <Icons.Phone className='text-gray-500 icon' />
+                <span className='text-xs md:text-sm'>{user.mobile}</span>
+              </div>
+            )}
             <div className='flex items-center gap-x-2 '>
               <Icons.User className='text-gray-500 icon' />
-              <span>{user.name}</span>
+              <span className='text-xs md:text-sm'>{user.name}</span>
             </div>
           </div>
         </div>

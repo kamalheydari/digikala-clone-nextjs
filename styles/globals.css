@@ -30,9 +30,11 @@
   body {
     font-family: "Vazir";
   }
-
   h2 {
     @apply text-xl;
+  }
+  h4 {
+    @apply text-sm lg:text-base;
   }
   p {
     @apply text-base;
@@ -43,15 +45,12 @@
   a {
     @apply cursor-pointer;
   }
+
 }
 
 @layer components {
   .input {
-    @apply bg-zinc-50 w-full block
-     outline-none py-2 px-3 rounded-md
-     text-base lg:text-lg  text-center
-     border border-gray-200
-   focus:border-blue-600 transition-colors;
+    @apply block w-full px-3 py-2 text-base text-center transition-colors border border-gray-200 rounded-md outline-none bg-zinc-50 lg:text-lg focus:border-blue-600;
   }
 
   .error-msg {
@@ -62,10 +61,10 @@
     @apply text-white bg-red-500 py-3 px-4 rounded-3xl block outline-none;
   }
   .icon {
-    @apply w-6 h-6 text-gray-700;
+    @apply w-5 h-5 md:w-6 md:h-6 text-gray-700;
   }
   .order-badge {
-    @apply bottom-0 left-1 bg-slate-200 p-1 rounded-md w-6 h-6 text-center text-sm text-black/80 lg:hidden;
+    @apply bottom-0 left-1 bg-slate-200 p-1 rounded-md w-5 h-5  text-center text-[11px]  text-black/80 lg:hidden;
   }
   .section-divide-y {
     @apply h-3 bg-gray-200 lg:hidden;

@@ -43,15 +43,21 @@ export default function MobileForm({ title, token, dispatch, closeModal }) {
   return (
     <div className='flex flex-col h-full px-5 py-3 bg-white md:rounded-lg gap-y-5'>
       <div className='flex justify-between py-2 border-b-2 border-gray-200'>
-        {title}
+        <span className='text-sm'>{title}</span>
         <CloseModal />
       </div>
-      <p>لطفا شماره تلفن همراه خود را وارد کنید.</p>
+      <p className='text-sm'>لطفا شماره تلفن همراه خود را وارد کنید.</p>
       <form
-        className='flex flex-col justify-between flex-1  gap-y-5'
+        className='flex flex-col justify-between flex-1 gap-y-5'
         onSubmit={handleSubmit(submitHander)}
       >
         <div className='space-y-3 '>
+          <label
+            className='text-xs text-gray-700 lg:text-sm md:min-w-max'
+            htmlFor='mobile'
+          >
+            شماره موبایل
+          </label>
           <input
             className='input sm:max-w-sm lg:max-w-full '
             type='text'

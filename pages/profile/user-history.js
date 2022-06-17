@@ -1,5 +1,6 @@
-import { BackButton } from "components";
 import Image from "next/image";
+
+import { BackButton } from "components";
 
 export default function UserHistory() {
   return (
@@ -8,15 +9,15 @@ export default function UserHistory() {
       <div className='section-divide-y' />
 
       <div className='py-20'>
-        <div className='relative h-52 w-52 mx-auto'>
+        <div className='relative mx-auto h-52 w-52'>
           <Image src='/icons/empty-cart.svg' layout='fill' />
         </div>
-
         <p className='text-center'>لیست بازدید‌های اخیر شما خالی است.</p>
       </div>
-    </div>)
-  }
-  UserHistory.getProfileLayout = function pageLayout(page) {
-    return <>{page}</>;
-  };
-  
+    </div>
+  );
+}
+
+UserHistory.getProfileLayout = function pageLayout(page) {
+  return <>{page}</>;
+};

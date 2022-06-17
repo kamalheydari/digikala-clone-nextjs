@@ -20,13 +20,13 @@ export default function Logout() {
     );
   };
   return (
-    <div className='transition-colors hover:bg-gray-200 px-3'>
+    <div className='px-3 transition-colors hover:bg-gray-200'>
       <div
         role='button'
-        className='flex justify-between cursor-pointer py-4 gap-x-2 mx-4  border-t border-gray-300'
+        className='flex justify-between py-4 mx-4 text-gray-700 border-t border-gray-300 cursor-pointer gap-x-2'
         onClick={() => handleLogout()}
       >
-        <Icons.Logout className='icon text-black' />
+        <Icons.Logout className='text-black icon' />
         <span className='ml-auto mr-3'>خروج از حساب کاربری</span>
       </div>
     </div>

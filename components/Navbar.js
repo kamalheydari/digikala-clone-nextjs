@@ -12,7 +12,7 @@ export default function Navbar() {
   return (
     <header className='px-4 lg:shadow'>
       <div className='container max-w-[1550px] lg:flex lg:py-2 '>
-        <div className='inline-flex justify-between w-full items-center border-b lg:border-b-0 lg:max-w-min lg:ml-8'>
+        <div className='inline-flex items-center justify-between w-full border-b lg:border-b-0 lg:max-w-min lg:ml-8'>
           <button className='p-1 lg:hidden'>
             <Icons.Bars className='icon' />
           </button>
@@ -25,7 +25,7 @@ export default function Navbar() {
           </div>
           <Icons.Question className='icon lg:hidden' />
         </div>
-        <div className='inline-flex gap-x-10 justify-between py-2 w-full items-center border-b lg:border-b-0'>
+        <div className='inline-flex items-center justify-between w-full py-2 border-b gap-x-10 lg:border-b-0'>
           <Search />
           <div className='inline-flex items-center gap-x-4 '>
             <User user={user} />

@@ -10,7 +10,6 @@ export default function Loading() {
       <div className='bar bar7'></div>
       <div className='bar bar8'></div>
       <style jsx>{`
-  
         .bar {
           width: 8px;
           height: 15px;

@@ -1,6 +1,8 @@
-import { closeModal } from "app/slices/modalSlice";
-import { Icons } from "components";
 import { useDispatch } from "react-redux";
+
+import { closeModal } from "app/slices/modalSlice";
+
+import { Icons } from "components";
 
 export default function CloseModal() {
   const dispatch = useDispatch();

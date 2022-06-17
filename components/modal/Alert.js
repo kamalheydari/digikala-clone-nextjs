@@ -1,7 +1,8 @@
-import { closeModal } from "app/slices/modalSlice";
-import Image from "next/image";
 import { useEffect } from "react";
+import Image from "next/image";
+
 import { useDispatch } from "react-redux";
+import { closeModal } from "app/slices/modalSlice";
 
 export default function Alert({ isShow, status, text }) {
   const dispatch = useDispatch();
@@ -33,8 +34,8 @@ export default function Alert({ isShow, status, text }) {
   }, [isShow]);
 
   return (
-    <div className='bg-white rounded-md p-3 text-center shadow h-fit mx-2'>
-      <div className='relative h-20 w-20 mx-auto '>
+    <div className='p-3 mx-2 text-center bg-white rounded-md shadow h-fit'>
+      <div className='relative w-20 h-20 mx-auto '>
         <Image src={IconSrc} layout='fill' />
       </div>
       <p className='mt-2'>{text}</p>

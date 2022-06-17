@@ -1,4 +1,5 @@
 import Image from "next/image";
+
 import { BackButton } from "components";
 
 export default function Comments() {
@@ -8,7 +9,7 @@ export default function Comments() {
       <div className='section-divide-y' />
 
       <div className='py-20'>
-        <div className='relative h-52 w-52 mx-auto'>
+        <div className='relative mx-auto h-52 w-52'>
           <Image src='/icons/order-empty.svg' layout='fill' />
         </div>
 

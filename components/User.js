@@ -9,7 +9,7 @@ export default function User({ user }) {
 
   if (!user) {
     return (
-      <div className='flex items-center gap-x-2 lg:border lg:border-gray-300 lg:rounded-md lg:py-2 lg:px-3 text-sm'>
+      <div className='flex items-center text-sm gap-x-2 lg:border lg:border-gray-300 lg:rounded-md lg:py-2 lg:px-3'>
         <Link href='/login'>
           <a className='flex items-center gap-x-1'>
             <Icons.Login className='icon' />
@@ -18,7 +18,7 @@ export default function User({ user }) {
         </Link>
         <span className='hiden lg:block lg:border lg:border-gray-300 lg:h-6'></span>
         <Link href='/register'>
-          <a className='hidden lg:block px-2'>ثبت‌نام</a>
+          <a className='hidden px-2 lg:block'>ثبت‌نام</a>
         </Link>
       </div>
     );

@@ -1,12 +1,13 @@
 import Link from "next/link";
+
 import { Icons } from "components";
 
 const ArrowLink = ({ children, path }) => {
   return (
     <Link href={path}>
-      <a className='inline-flex items-center text-blue-400 text-sm max-w-max '>
-        <span className='uppercase'>{children}</span>
-        <Icons.ArrowLeft className='icon text-blue-400' />
+      <a className='inline-flex items-center text-sm text-blue-400 max-w-max '>
+        <span className='text-[11px] md:text-sm'>{children}</span>
+        <Icons.ArrowLeft className='text-blue-400 icon' />
       </a>
     </Link>
   );

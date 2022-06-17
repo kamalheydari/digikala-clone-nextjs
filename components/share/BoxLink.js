@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
+
 import { Icons } from "components";
 
 export default function BoxLink({ children, path, name }) {
@@ -13,10 +14,10 @@ export default function BoxLink({ children, path, name }) {
       }`}
     >
       <Link href={path}>
-        <a className='flex justify-between mx-4 py-4 gap-x-2 border-t border-gray-300'>
+        <a className='flex items-center justify-between py-4 mx-4 text-xs font-medium text-gray-700 border-t border-gray-300 gap-x-2 '>
           {children}
           <span className='ml-auto mr-3'>{name}</span>
-          <Icons.ArrowLeft className='icon' />
+          <Icons.ArrowLeft className='text-gray-700 icon' />
         </a>
       </Link>
     </div>

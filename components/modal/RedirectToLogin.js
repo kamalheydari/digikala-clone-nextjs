@@ -1,7 +1,9 @@
-import { closeModal } from "app/slices/modalSlice";
 import Image from "next/image";
 import { useRouter } from "next/router";
+
 import { useDispatch } from "react-redux";
+import { closeModal } from "app/slices/modalSlice";
+
 export default function RedirectToLogin({ text, title }) {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -12,13 +14,13 @@ export default function RedirectToLogin({ text, title }) {
   };
 
   return (
-    <div className='bg-white p-3 text-center space-y-4 md:rounded-lg'>
-      <div className='relative h-20 w-20 mx-auto'>
+    <div className='p-3 space-y-4 text-center bg-white md:rounded-lg'>
+      <div className='relative w-20 h-20 mx-auto'>
         <Image src='/icons/exclamation.svg' layout='fill' />
       </div>
-      <h4 className='font-bold text-xl'>{title}</h4>
+      <h4 className='text-xl font-bold'>{title}</h4>
       <p className='text-red-600'>{text}</p>
-      <button type='button' className='btn mx-auto' onClick={handleClick}>
+      <button type='button' className='mx-auto btn' onClick={handleClick}>
         انتقال به صفحه ورود
       </button>
     </div>
