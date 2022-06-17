@@ -5,8 +5,9 @@ import {
   BsShieldExclamation,
   BsQuestionSquare,
   BsClockHistory,
+  BsSignpost,
 } from "react-icons/bs";
-import { FiLogIn, FiLogOut, FiEdit,FiPlus } from "react-icons/fi";
+import { FiLogIn, FiLogOut, FiEdit, FiPlus } from "react-icons/fi";
 import { VscThreeBars } from "react-icons/vsc";
 import { HiOutlineUser } from "react-icons/hi";
 import { IoSearch } from "react-icons/io5";
@@ -19,6 +20,8 @@ import {
   RiChat1Line,
   RiUserLocationLine,
   RiHome6Line,
+  RiCloseLine,
+  RiUserLocationFill,
 } from "react-icons/ri";
 
 const Icons = {
@@ -42,7 +45,10 @@ const Icons = {
   Comment: RiChat1Line,
   Location: RiUserLocationLine,
   Home: RiHome6Line,
-  Plus:FiPlus
+  Plus: FiPlus,
+  Close: RiCloseLine,
+  UserLocation: RiUserLocationFill,
+  Post: BsSignpost,
 };
 
 export default Icons;

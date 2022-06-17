@@ -34,7 +34,7 @@ export default function RegisterPage() {
         openModal({
           isShow: true,
           type: "alert",
-          status: "seccess",
+          status: "success",
           text: data.msg,
         })
       );
@@ -61,7 +61,7 @@ export default function RegisterPage() {
     formState: { errors: formErrors },
     reset,
   } = useForm({
-    resolver: yupResolver(validation.userSchema),
+    resolver: yupResolver(validation.registerSchema),
   });
 
   //? Handlers

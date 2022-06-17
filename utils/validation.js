@@ -25,6 +25,24 @@ const logInSchema = Yup.object().shape({
     .min(6, "رمز عبور باید بیشتر از 5 کارکتر باشد"),
 });
 
-const validation = { registerSchema, logInSchema };
+const nameSchema = Yup.object().shape({
+  name: Yup.string()
+    .required("نام و نام خانوادگی  لازم است ثبت شود")
+    .min(3, "نام و نام خانوادگی  باید بیشتر از 2 کارکتر باشد"),
+});
+
+const mobileSchema = Yup.object().shape({
+  mobile: Yup.string()
+    .required("شماره تلفن همراه  لازم است ثبت شود")
+    .min(11, "شماره تلفن همراه باید 11 رقم باشد")
+    .max(11, "شماره تلفن همراه باید 11 رقم باشد"),
+});
+
+const validation = {
+  registerSchema,
+  logInSchema,
+  nameSchema,
+  mobileSchema,
+};
 
 export default validation;

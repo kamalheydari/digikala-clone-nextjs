@@ -14,7 +14,7 @@ const authSlice = createSlice({
 
       state.token = token;
       state.user = user;
-      Cookies.set("userInfo", JSON.stringify({ token, user }));
+      Cookies.set("userInfo", JSON.stringify({ token, user }), { expires: 10 });
     },
 
     userLogout: (state) => {
@@ -35,6 +35,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { userLogin, userLogout,updateUser } = authSlice.actions;
+export const { userLogin, userLogout, updateUser } = authSlice.actions;
 
 export default authSlice.reducer;

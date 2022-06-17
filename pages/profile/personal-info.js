@@ -1,41 +1,27 @@
-import { updateUser } from "app/slices/authSlice";
-import { usePatchDataMutation } from "app/slices/fetchApiSlice";
+import { openModal } from "app/slices/modalSlice";
 import { BackButton, Icons } from "components";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editInfo } from "utils/alert";
 
 export default function PersonalInfo() {
-  const { user, token } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
-  const [
-    patchData,
-    { data, isSuccess, isError, error },
-  ] = usePatchDataMutation();
-
-  useEffect(() => {
-    if (isSuccess) dispatch(updateUser(data.user));
-  }, [isSuccess]);
-
   const mobilEditHandler = () => {
-    editInfo(
-      "mobile",
-      "شماره موبایل خود را وارد کنید",
-      patchData,
-      token,
-      isError,
-      error
+    dispatch(
+      openModal({
+        isShow: true,
+        type: "edit-mobile",
+        title: "ثبت و ویرایش موبایل",
+      })
     );
   };
   const nameEditHandler = () => {
-    editInfo(
-      "name",
-      "نام و نام خانوادگی را وارد کنید",
-      patchData,
-      token,
-      isError,
-      error
+    dispatch(
+      openModal({
+        isShow: true,
+        type: "edit-name",
+        title: "ثبت و ویرایش اطلاعات شناسایی",
+      })
     );
   };
 

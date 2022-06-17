@@ -34,7 +34,7 @@ export default function LoginPage() {
         openModal({
           isShow: true,
           type: "alert",
-          status: "seccess",
+          status: "success",
           text: data.msg,
         })
       );
@@ -46,7 +46,7 @@ export default function LoginPage() {
         openModal({
           isShow: true,
           type: "alert",
-          icon: "error",
+          status: "error",
           text: error?.data.err,
         })
       );

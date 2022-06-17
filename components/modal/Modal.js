@@ -2,11 +2,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "app/slices/modalSlice";
 
 //? Components
-import Alert from "./Alert";
-import RedirectToLogin from "./RedirectToLogin";
+import {
+  Alert,
+  RedirectToLogin,
+  NameForm,
+  MobileForm,
+  AddressForm,
+} from "components";
 
 export default function Modal() {
   const dispatch = useDispatch();
+
+  const { token } = useSelector((state) => state.auth);
 
   const { type, text, status, isShow, title } = useSelector(
     (state) => state.modal
@@ -31,6 +38,45 @@ export default function Modal() {
       );
       break;
 
+    case "edit-name":
+      effect = ["bottom-0 lg:top-44", "-bottom-full lg:top-60"];
+      size = "w-full h-screen lg:h-fit lg:max-w-3xl";
+      renderModal = (
+        <NameForm
+          title={title}
+          token={token}
+          dispatch={dispatch}
+          closeModal={closeModal}
+        />
+      );
+      break;
+
+    case "edit-mobile":
+      effect = ["bottom-0 lg:top-44", "-bottom-full lg:top-60"];
+      size = "w-full h-screen lg:h-fit lg:max-w-3xl";
+      renderModal = (
+        <MobileForm
+          title={title}
+          token={token}
+          dispatch={dispatch}
+          closeModal={closeModal}
+        />
+      );
+      break;
+
+    case "edit-address":
+      effect = ["bottom-0 lg:top-44", "-bottom-full lg:top-60"];
+      size = "w-full h-screen lg:h-fit lg:max-w-3xl";
+      renderModal = (
+        <AddressForm
+          title={title}
+          token={token}
+          dispatch={dispatch}
+          closeModal={closeModal}
+        />
+      );
+      break;
+
     default:
       break;
   }
@@ -39,10 +85,10 @@ export default function Modal() {
     <div
       className={`${
         isShow ? "opacity-100 visible" : "opacity-0 invisible "
-      } transition-all duration-500 relative  `}
+      } transition-all duration-500 relative   `}
     >
       <div
-        className='fixed z-10 top-0 left-0 w-full h-full bg-gray-400/20'
+        className='fixed top-0 left-0 z-10 w-full h-full bg-gray-400/20'
         onClick={() => dispatch(closeModal())}
       />
       <div

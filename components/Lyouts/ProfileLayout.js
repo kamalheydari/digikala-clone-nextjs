@@ -13,7 +13,7 @@ export default function ProfileLayout({ children }) {
         <div className='hidden lg:block '>
           <ProfileAside user={user} />
         </div>
-        <div className='py-4 lg:py-8 lg:border  lg:border-gray-300 flex-1 lg:rounded-md lg:mt-6  h-fit'>
+        <div className='py-4 lg:py-8 lg:border  lg:border-gray-200 flex-1 lg:rounded-md lg:mt-6  h-fit'>
           {children}
         </div>
       </div>
