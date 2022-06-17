@@ -23,7 +23,7 @@ export default function Logout() {
     <div className='px-3 transition-colors hover:bg-gray-200'>
       <div
         role='button'
-        className='flex justify-between py-4 mx-4 text-gray-700 border-t border-gray-300 cursor-pointer gap-x-2'
+        className='flex justify-between py-4 mx-4 text-xs text-gray-700 border-t border-gray-300 cursor-pointer gap-x-2 md:text-sm'
         onClick={() => handleLogout()}
       >
         <Icons.Logout className='text-black icon' />

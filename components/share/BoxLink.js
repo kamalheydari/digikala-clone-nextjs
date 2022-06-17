@@ -14,10 +14,10 @@ export default function BoxLink({ children, path, name }) {
       }`}
     >
       <Link href={path}>
-        <a className='flex items-center justify-between py-4 mx-4 text-xs font-medium text-gray-700 border-t border-gray-300 gap-x-2 '>
+        <a className='flex items-center justify-between py-4 mx-4 text-xs font-medium text-gray-700 border-t border-gray-300 gap-x-1 md:text-sm '>
           {children}
           <span className='ml-auto mr-3'>{name}</span>
-          <Icons.ArrowLeft className='text-gray-700 icon' />
+          <Icons.ArrowLeft className='text-gray-700 icon lg:mr-3' />
         </a>
       </Link>
     </div>
