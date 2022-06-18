@@ -2,14 +2,18 @@ import { useEffect, useState } from "react";
 
 import "/styles/globals.css";
 
-import { ClientLayout, ProfileLayout, Modal } from "components";
-
 //? Store
 import { store } from "app/store";
 import { Provider } from "react-redux";
 
-//? Layouts
-import { DashboardLayout, RefreshTokenHandler } from "components";
+//? Layouts & Components
+import {
+  DashboardLayout,
+  ClientLayout,
+  ProfileLayout,
+  RefreshTokenHandler,
+  Modal,
+} from "components";
 
 export default function MyApp({ Component, pageProps }) {
   //? Fix Hydration failed
