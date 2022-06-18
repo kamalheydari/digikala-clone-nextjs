@@ -5,7 +5,7 @@ import { BackButton } from "components";
 export default function Lists() {
   return (
     <div>
-      <BackButton>لیست‌ها</BackButton>
+      <BackButton backRoute='/profile'>لیست‌ها</BackButton>
       <div className='section-divide-y' />
 
       <div className='py-20'>

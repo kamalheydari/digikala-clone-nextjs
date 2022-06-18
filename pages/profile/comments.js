@@ -5,7 +5,7 @@ import { BackButton } from "components";
 export default function Comments() {
   return (
     <div>
-      <BackButton>دیدگاه‌ها</BackButton>
+      <BackButton backRoute='/profile'>دیدگاه‌ها</BackButton>
       <div className='section-divide-y' />
 
       <div className='py-20'>

@@ -5,7 +5,7 @@ import { BackButton } from "components";
 export default function Orders() {
   return (
     <div>
-      <BackButton>تاریخچه سفارشات</BackButton>
+      <BackButton backRoute='/profile'>تاریخچه سفارشات</BackButton>
       <div className='section-divide-y' />
 
       <div className='py-20'>

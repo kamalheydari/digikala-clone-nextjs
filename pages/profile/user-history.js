@@ -5,7 +5,7 @@ import { BackButton } from "components";
 export default function UserHistory() {
   return (
     <div>
-      <BackButton>بازدید‌های اخیر</BackButton>
+      <BackButton backRoute='/profile'>بازدید‌های اخیر</BackButton>
       <div className='section-divide-y' />
 
       <div className='py-20'>

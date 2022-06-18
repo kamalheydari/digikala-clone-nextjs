@@ -33,7 +33,7 @@ export default function PersonalInfo() {
 
   return (
     <div>
-      <BackButton>اطلاعات حساب کاربری</BackButton>
+      <BackButton backRoute='/profile'>اطلاعات حساب کاربری</BackButton>
       <div className='section-divide-y' />
       <div className='lg:flex'>
         <div className='flex-1 px-5'>

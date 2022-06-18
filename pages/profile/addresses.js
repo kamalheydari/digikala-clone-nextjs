@@ -25,7 +25,7 @@ export default function Addresses() {
 
   return (
     <div>
-      <BackButton>آدرس‌ها</BackButton>
+      <BackButton backRoute='/profile'>آدرس‌ها</BackButton>
       <div className='section-divide-y' />
       {user.address ? (
         <div className='flex-1 px-5 '>
