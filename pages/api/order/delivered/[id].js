@@ -15,7 +15,7 @@ const deliveredOrder = async (req, res) => {
   try {
     const result = await auth(req, res);
 
-    if (result.role !== "admin")
+    if (!result.root)
     return sendError(res, 400, "توکن احراز هویت نامعتبر است");
 
     const { id } = req.query;

@@ -22,7 +22,7 @@ const getOrders = async (req, res) => {
 
     let orders;
 
-    if (result.role !== "admin") {
+    if (!result.root) {
       await db.connect();
       orders = await Order.find({ user: result.id }).populate(
         "user",

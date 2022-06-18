@@ -38,7 +38,7 @@ const deleteUser = async (req, res) => {
   try {
     const result = await auth(req, res);
 
-    if (result.role !== "admin" || !result.root)
+    if (!result.root)
     return sendError(res, 400, "توکن احراز هویت نامعتبر است");
 
     const { id } = req.query;
