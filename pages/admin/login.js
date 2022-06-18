@@ -30,7 +30,7 @@ export default function LoginPage() {
   //? Handle Response
   useEffect(() => {
     if (isSuccess) {
-      if (data.data.user.root && data.data.user.role === "admin") {
+      if (data.data.user.root || data.data.user.role === "admin") {
         dispatch(userLogin(data.data));
         dispatch(
           openModal({
@@ -86,9 +86,9 @@ export default function LoginPage() {
   };
 
   return (
-    <div className=' grid items-center min-h-screen '>
+    <div className='grid items-center min-h-screen '>
       <div className='container max-w-xl px-12 py-6 space-y-6 lg:border lg:border-gray-100 lg:rounded-lg lg:shadow'>
-        <div className='relative w-44 h-24 mx-auto'>
+        <div className='relative h-24 mx-auto w-44'>
           <Link passHref href='/'>
             <a>
               <Image src='/icons/logo.svg' layout='fill' />
@@ -129,7 +129,7 @@ export default function LoginPage() {
         <div>
           <p className='inline ml-2'>هنوز ثبت‌نام نکردی؟</p>
           <Link href='/register'>
-            <a className='text-blue-400 text-lg '>ثبت‌نام</a>
+            <a className='text-lg text-blue-400 '>ثبت‌نام</a>
           </Link>
         </div>
       </div>

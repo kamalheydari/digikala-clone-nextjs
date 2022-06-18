@@ -8,6 +8,7 @@ import {
   NameForm,
   MobileForm,
   AddressForm,
+  ConfirmModal,
 } from "components";
 
 export default function Modal() {
@@ -15,9 +16,11 @@ export default function Modal() {
 
   const { token } = useSelector((state) => state.auth);
 
-  const { type, text, status, isShow, title } = useSelector(
+  const { type, text, status, isShow, title, isConfirm, id } = useSelector(
     (state) => state.modal
   );
+
+  console.log(id)
 
   //? Config Modal
   let renderModal;
@@ -27,14 +30,38 @@ export default function Modal() {
     case "alert":
       effect = ["top-40", "-top-full"];
       size = "max-w-md";
-      renderModal = <Alert text={text} status={status} isShow={isShow} />;
+      renderModal = (
+        <Alert
+          text={text}
+          status={status}
+          isShow={isShow}
+          dispatch={dispatch}
+        />
+      );
       break;
 
     case "redirect":
       effect = ["top-40 transform scale-100", "top-40 transform scale-50 "];
       size = "max-w-3xl";
       renderModal = (
-        <RedirectToLogin text={text} title={title} isShow={isShow} />
+        <RedirectToLogin text={text} title={title} dispatch={dispatch} />
+      );
+      break;
+
+    case "confirm-user":
+    case "confirm-category":
+    case "confirm-product":
+      effect = ["top-40 transform scale-100", "top-40 transform scale-50 "];
+      size = "max-w-3xl";
+      renderModal = (
+        <ConfirmModal
+          title={title}
+          isConfirm={isConfirm}
+          id={id}
+          type={type}
+          token={token}
+          dispatch={dispatch}
+        />
       );
       break;
 

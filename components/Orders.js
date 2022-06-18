@@ -6,7 +6,7 @@ export default function Orders() {
     <>
       <div className='py-6 lg:py-0'>
         <div className='flex justify-between px-5 mb-7'>
-          <h4 className='inline-block py-1 border-b-2 border-red-500'>
+          <h4 className='inline-block py-1 text-sm border-b-2 border-red-500 md:text-base'>
             سفارش‌های من
           </h4>
           <ArrowLink path='profile/orders'>مشاهده همه</ArrowLink>
@@ -18,7 +18,9 @@ export default function Orders() {
               <span className='absolute order-badge'>0</span>
             </div>
             <div className='text-gray-700'>
-              <span className='hidden lg:block lg:text-black lg:text-md'> 0 سفارش</span>
+              <span className='hidden lg:block lg:text-black lg:text-md'>
+                0 سفارش
+              </span>
               <span className='text-xs lg:text-sm'>جاری</span>
             </div>
           </div>
@@ -31,7 +33,9 @@ export default function Orders() {
               <span className='absolute order-badge'>0</span>
             </div>
             <div className='text-gray-700'>
-              <span className='hidden lg:block lg:text-black lg:text-md'> 0 سفارش</span>
+              <span className='hidden lg:block lg:text-black lg:text-md'>
+                0 سفارش
+              </span>
               <span className='text-xs lg:text-sm'>تحویل شده</span>
             </div>
           </div>
@@ -44,7 +48,9 @@ export default function Orders() {
               <span className='absolute order-badge'>0</span>
             </div>
             <div className='text-gray-700'>
-              <span className='hidden lg:block lg:text-black lg:text-md'> 0 سفارش</span>
+              <span className='hidden lg:block lg:text-black lg:text-md'>
+                0 سفارش
+              </span>
               <span className='text-xs lg:text-sm'>مرجوع</span>
             </div>
           </div>

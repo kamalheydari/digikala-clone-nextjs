@@ -18,7 +18,7 @@ export default async (req, res) => {
 const uploadInfo = async (req, res) => {
   try {
     const result = await auth(req, res);
-    if (!result)
+    if (!result) 
     return sendError(res, 400, "توکن احراز هویت نامعتبر است");
 
     await db.connect();

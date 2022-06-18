@@ -22,7 +22,8 @@ import {
   RiHome6Line,
   RiCloseLine,
   RiUserLocationFill,
-  RiPhoneFill
+  RiPhoneFill,
+  RiDeleteBinLine,
 } from "react-icons/ri";
 
 const Icons = {
@@ -50,7 +51,8 @@ const Icons = {
   Close: RiCloseLine,
   UserLocation: RiUserLocationFill,
   Post: BsSignpost,
-  Phone:RiPhoneFill
+  Phone: RiPhoneFill,
+  Delete: RiDeleteBinLine,
 };
 
 export default Icons;

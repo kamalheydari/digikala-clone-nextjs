@@ -13,7 +13,9 @@ export default function BackButton({ children, backRoute }) {
       >
         <Icons.ArrowRight className='icon' />
       </button>
-      <span className='text-sm md:text-base'>{children}</span>
+      <span className='pb-1 text-sm lg:border-red-500 lg:border-b-2 md:text-base'>
+        {children}
+      </span>
     </div>
   );
 }

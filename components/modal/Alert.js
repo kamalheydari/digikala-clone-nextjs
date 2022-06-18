@@ -1,12 +1,9 @@
 import { useEffect } from "react";
 import Image from "next/image";
 
-import { useDispatch } from "react-redux";
 import { closeModal } from "app/slices/modalSlice";
 
-export default function Alert({ isShow, status, text }) {
-  const dispatch = useDispatch();
-
+export default function Alert({ isShow, status, text, dispatch }) {
   let IconSrc;
   switch (status) {
     case "error":

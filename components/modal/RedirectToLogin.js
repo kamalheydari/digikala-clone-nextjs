@@ -1,12 +1,10 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 
-import { useDispatch } from "react-redux";
 import { closeModal } from "app/slices/modalSlice";
 
-export default function RedirectToLogin({ text, title }) {
+export default function RedirectToLogin({ text, title ,dispatch }) {
   const router = useRouter();
-  const dispatch = useDispatch();
 
   const handleClick = () => {
     router.push("/login");
