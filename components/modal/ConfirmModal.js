@@ -20,7 +20,9 @@ export default function ConfirmModal({
   let url, editStore;
   if (type === "confirm-user") {
     url = `/api/user/${id}`;
-    editStore = () => dispatch(deleteUser(id));
+    editStore = () => {
+      dispatch(deleteUser(id));
+    };
   } else if (type === "confirm-post") {
     url = `/api/category/${id}`;
     editStore = () => {};
@@ -34,19 +36,17 @@ export default function ConfirmModal({
     deleteData,
     { data, isSuccess, isError, error },
   ] = useDeleteDataMutation();
-  console.log(error);
-  console.log(id);
+
   useEffect(() => {
     if (isConfirm) {
       deleteData({
         url,
         token,
       });
-      dispatch(confirmReset());
-      editStore();
     }
-
     if (isSuccess) {
+      editStore();
+      dispatch(confirmReset());
       openModal({
         isShow: true,
         type: "alert",
@@ -83,7 +83,7 @@ export default function ConfirmModal({
         آیا موافق حذف <span className='font-bold text-red-500'>{title}</span>{" "}
         انتخاب شده هستید؟
       </p>
-      <div className='flex justify-center gap-x-7'>
+      <div className='flex justify-center gap-x-20'>
         <button
           type='button'
           className='rounded-lg btn'

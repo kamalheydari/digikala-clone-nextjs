@@ -45,7 +45,8 @@ const getUsers = async (req, res) => {
   try {
     const result = await auth(req, res);
 
-    if (!result.root) return sendError(res, 400, "توکن احراز هویت نامعتبر است");
+    if (!result.root && result.role !== "admin")
+      return sendError(res, 400, "توکن احراز هویت نامعتبر است");
 
     await db.connect();
     const users = await User.find().select("-password");

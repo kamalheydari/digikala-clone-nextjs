@@ -20,7 +20,6 @@ export default function Modal() {
     (state) => state.modal
   );
 
-  console.log(id)
 
   //? Config Modal
   let renderModal;

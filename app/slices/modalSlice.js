@@ -24,9 +24,9 @@ const modalSlice = createSlice({
       state.text = action.payload.text || "";
       state.title = action.payload.title || "";
       state.status = action.payload.status || "";
+      state.isConfirm = action.payload.status || false;
     },
     confirmAction: (state, action) => {
-      console.log(state.id);
       state.isConfirm = true;
     },
     confirmReset: (state, action) => {
