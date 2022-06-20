@@ -25,4 +25,5 @@ export { default as MobileForm } from "./modal/MobileForm";
 export { default as AddressForm } from "./modal/AddressForm";
 export { default as ProfileAside } from "./ProfileAside";
 export { default as DashboardAside } from "./DashboardAside";
+export { default as SelectCategories } from "./SelectCategories";
 export { default as DashboardLayout } from "./Layouts/DashboardLayout";

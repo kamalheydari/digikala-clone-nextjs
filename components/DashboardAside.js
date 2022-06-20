@@ -21,6 +21,11 @@ export default function ProfileAside({ user }) {
       path: "/admin/categories",
     },
     {
+      name: "مشخصات دسته بندی ها",
+      icon: <Icons.Location className='text-black icon' />,
+      path: "/admin/details",
+    },
+    {
       name: "کاربران",
       icon: <Icons.Bag className='text-black icon' />,
       path: "/admin/users",

@@ -35,7 +35,6 @@ export default function AddressForm({ title, token, dispatch, closeModal }) {
 
   const handleChange = (e) => {
     setAddress({ ...address, [e.target.name]: e.target.value });
-    console.log(address);
   };
 
   //? Handle Get Cities
