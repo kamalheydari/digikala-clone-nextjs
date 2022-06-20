@@ -4,7 +4,6 @@ const initialState = {
   isShow: false,
   isConfirm: false,
   id: null,
-  tempData: null,
   type: "",
   title: "",
   text: "",
@@ -22,7 +21,6 @@ const modalSlice = createSlice({
       state.isShow = true;
       state.type = action.payload.type || "";
       state.id = action.payload.id || null;
-      state.tempData = action.payload.tempData || null;
       state.text = action.payload.text || "";
       state.title = action.payload.title || "";
       state.status = action.payload.status || "";

@@ -50,22 +50,24 @@ export default function CategoryForm({ title, token, dispatch, closeModal }) {
 
   //? Handlers
   const submitHander = ({ name, mainCategory, parentCategory }) => {
-    let parent, category;
+    let parent, category, slug;
+
+    slug = name.trim().split(" ").join("-");
 
     //? Set main category
     parent = "/";
-    category = parent + name.trim();
+    category = parent + slug;
 
     //? Set parent category
     if (mainCategory.length !== 0) {
       parent = "/" + mainCategory;
-      category = "/" + name.trim();
+      category = "/" + slug;
     }
 
     //? Set child category
     if (parentCategory.length > 0) {
       parent = "/" + parentCategory;
-      category = "/" + mainCategory + "/" + parentCategory + "/" + name.trim();
+      category = "/" + mainCategory + "/" + parentCategory + "/" + slug;
     }
 
     postData({ url: "/api/category", body: { name, parent, category }, token });
