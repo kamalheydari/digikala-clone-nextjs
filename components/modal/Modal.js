@@ -79,7 +79,7 @@ export default function Modal() {
       break;
 
     case "edit-category":
-      effect = ["bottom-0 lg:top-44", "-bottom-full lg:top-60"];
+      effect = ["bottom-0 lg:top-20", "-bottom-full lg:top-28"];
       size = "w-full h-screen lg:h-fit lg:max-w-3xl";
       renderModal = (
         <CategoryForm

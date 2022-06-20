@@ -89,7 +89,7 @@ export default function Categories() {
                                 {categories.map((childCategory) => {
                                   if (
                                     childCategory.parent ===
-                                    parentCategory.category
+                                    "/" + parentCategory.slug
                                   ) {
                                     return (
                                       <div
@@ -98,6 +98,7 @@ export default function Categories() {
                                       >
                                         <div className='flex-1 p-2 mt-2 text-center bg-blue-500 rounded'>
                                           {childCategory.name}
+                                       
                                         </div>
                                       </div>
                                     );

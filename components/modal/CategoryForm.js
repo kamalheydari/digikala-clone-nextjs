@@ -49,28 +49,33 @@ export default function CategoryForm({ title, token, dispatch, closeModal }) {
   });
 
   //? Handlers
-  const submitHander = ({ name, mainCategory, parentCategory }) => {
-    let parent, category, slug;
+  const submitHander = ({ name, slug, mainCategory, parentCategory }) => {
+    let parent, category;
 
-    slug = name.trim().split(" ").join("-");
-
+    name = name.trim();
+    slug = slug.trim().split(" ").join("-");
+    console.log({ name, mainCategory, parentCategory, slug });
     //? Set main category
     parent = "/";
     category = parent + slug;
 
     //? Set parent category
     if (mainCategory.length !== 0) {
-      parent = "/" + mainCategory;
-      category = "/" + slug;
+      parent = mainCategory;
+      category = parent + "/" + slug;
     }
 
     //? Set child category
     if (parentCategory.length > 0) {
       parent = "/" + parentCategory;
-      category = "/" + mainCategory + "/" + parentCategory + "/" + slug;
+      category = mainCategory + "/" + parentCategory + "/" + slug;
     }
-
-    postData({ url: "/api/category", body: { name, parent, category }, token });
+    console.log({ name, parent, category, slug });
+    postData({
+      url: "/api/category",
+      body: { name, parent, category, slug },
+      token,
+    });
   };
 
   return (
@@ -89,7 +94,7 @@ export default function CategoryForm({ title, token, dispatch, closeModal }) {
             className='text-xs text-gray-700 lg:text-sm md:min-w-max'
             htmlFor='name'
           >
-            دسته‌بندی
+            نام دسته‌بندی
           </label>
           <input
             className='input sm:max-w-sm lg:max-w-full '
@@ -99,6 +104,23 @@ export default function CategoryForm({ title, token, dispatch, closeModal }) {
             {...register("name")}
           />
           <DisplayError errors={formErrors.name} />
+        </div>
+
+        <div className='space-y-3 '>
+          <label
+            className='text-xs text-gray-700 lg:text-sm md:min-w-max'
+            htmlFor='slug'
+          >
+            مسیر (با حروف انگلیسی)
+          </label>
+          <input
+            className='input sm:max-w-sm lg:max-w-full '
+            type='text'
+            slug='slug'
+            id='slug'
+            {...register("slug")}
+          />
+          <DisplayError errors={formErrors.slug} />
         </div>
 
         <div className='flex-1 max-w-xl space-y-16 md:grid md:grid-cols-2 md:gap-x-12 md:gap-y-10 md:items-baseline lg:relative'>
@@ -114,11 +136,11 @@ export default function CategoryForm({ title, token, dispatch, closeModal }) {
               name='mainCategory'
               id='mainCategory'
               {...register("mainCategory")}
-              onChange={(e) => setchangeParentCategory("/" + e.target.value)}
+              onChange={(e) => setchangeParentCategory(e.target.value)}
             >
               <option></option>
               {mainCategories.map((item, index) => (
-                <option key={index} value={item.name}>
+                <option key={index} value={item.category}>
                   {item.name}
                 </option>
               ))}
@@ -140,7 +162,7 @@ export default function CategoryForm({ title, token, dispatch, closeModal }) {
             >
               <option></option>
               {parentCategories.map((item, index) => (
-                <option value={item.name} key={index}>
+                <option value={item.slug} key={index}>
                   {item.name}
                 </option>
               ))}

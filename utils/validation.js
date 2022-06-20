@@ -40,6 +40,7 @@ const mobileSchema = Yup.object().shape({
 
 const categorySchema = Yup.object().shape({
   name: Yup.string().required("نام دسته‌بندی نباید خالی باشد"),
+  slug: Yup.string().required("نام مسیر نباید خالی باشد"),
 });
 
 const validation = {
