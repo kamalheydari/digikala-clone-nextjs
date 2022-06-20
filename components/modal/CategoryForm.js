@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 
-import { useSelector } from "react-redux";
 import { addCategory } from "app/slices/categorySlice";
 import { usePostDataMutation } from "app/slices/fetchApiSlice";
 
@@ -8,21 +7,20 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import validation from "utils/validation";
 
-import { CloseModal, DisplayError, Loading } from "components";
+import {
+  CloseModal,
+  DisplayError,
+  Loading,
+  SelectCategories,
+} from "components";
 
 export default function CategoryForm({ title, token, dispatch, closeModal }) {
-  const [changeParentCategory, setchangeParentCategory] = useState("");
-
-  //? Store
-  const { categories } = useSelector((state) => state.categories);
-
-  //? Initial Select box
-  const parentCategories = categories.filter(
-    (category) => category.parent === changeParentCategory
-  );
-  const mainCategories = categories.filter(
-    (category) => category.parent === "/"
-  );
+  //? Local Store
+  const [selectedCategories, setSelectedCategories] = useState({
+    parentCategory: "",
+    mainCategory: "",
+  });
+  const { parentCategory, mainCategory } = selectedCategories;
 
   //? Post Data
   const [
@@ -34,6 +32,10 @@ export default function CategoryForm({ title, token, dispatch, closeModal }) {
     if (isSuccess) {
       dispatch(addCategory(data.newCategory));
       dispatch(closeModal());
+      setSelectedCategories({
+        parentCategory: "",
+        mainCategory: "",
+      });
       reset();
     }
   }, [isSuccess]);
@@ -49,12 +51,11 @@ export default function CategoryForm({ title, token, dispatch, closeModal }) {
   });
 
   //? Handlers
-  const submitHander = ({ name, slug, mainCategory, parentCategory }) => {
+  const submitHander = ({ name, slug }) => {
     let parent, category;
 
     name = name.trim();
     slug = slug.trim().split(" ").join("-");
-    console.log({ name, mainCategory, parentCategory, slug });
     //? Set main category
     parent = "/";
     category = parent + slug;
@@ -70,7 +71,6 @@ export default function CategoryForm({ title, token, dispatch, closeModal }) {
       parent = "/" + parentCategory;
       category = mainCategory + "/" + parentCategory + "/" + slug;
     }
-    console.log({ name, parent, category, slug });
     postData({
       url: "/api/category",
       body: { name, parent, category, slug },
@@ -124,51 +124,10 @@ export default function CategoryForm({ title, token, dispatch, closeModal }) {
         </div>
 
         <div className='flex-1 max-w-xl space-y-16 md:grid md:grid-cols-2 md:gap-x-12 md:gap-y-10 md:items-baseline lg:relative'>
-          <div className='flex flex-col items-start justify-between gap-y-2'>
-            <label
-              className='text-xs text-gray-700 lg:text-sm md:min-w-max'
-              htmlFor='mainCategory'
-            >
-              دسته‌بندی اصلی
-            </label>
-            <select
-              className='border-2 rounded-sm py-0.5 px-3 outline-none w-56'
-              name='mainCategory'
-              id='mainCategory'
-              {...register("mainCategory")}
-              onChange={(e) => setchangeParentCategory(e.target.value)}
-            >
-              <option></option>
-              {mainCategories.map((item, index) => (
-                <option key={index} value={item.category}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <div className='flex flex-col items-start justify-between gap-y-2 '>
-            <label
-              className='text-xs text-gray-700 lg:text-sm md:min-w-max'
-              htmlFor='parentCategory'
-            >
-              دسته‌بندی والد
-            </label>
-            <select
-              className='border-2 rounded-sm py-0.5 px-3 outline-none w-56'
-              name='parentCategory'
-              id='parentCategory'
-              {...register("parentCategory")}
-            >
-              <option></option>
-              {parentCategories.map((item, index) => (
-                <option value={item.slug} key={index}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
-          </div>
-
+          <SelectCategories
+            selectedCategories={selectedCategories}
+            setSelectedCategories={setSelectedCategories}
+          />
           <div />
         </div>
 
