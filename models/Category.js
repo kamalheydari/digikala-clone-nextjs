@@ -7,6 +7,14 @@ const CategorySchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    parent: {
+      type: String,
+      trim: true,
+    },
+    category: {
+      type: String,
+      trim: true,
+    },
   },
   { timestamps: true }
 );

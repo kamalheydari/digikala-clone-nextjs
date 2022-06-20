@@ -38,11 +38,16 @@ const mobileSchema = Yup.object().shape({
     .max(11, "شماره تلفن همراه باید 11 رقم باشد"),
 });
 
+const categorySchema = Yup.object().shape({
+  name: Yup.string().required("نام دسته‌بندی نباید خالی باشد"),
+});
+
 const validation = {
   registerSchema,
   logInSchema,
   nameSchema,
   mobileSchema,
+  categorySchema,
 };
 
 export default validation;

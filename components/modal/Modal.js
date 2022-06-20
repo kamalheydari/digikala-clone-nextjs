@@ -9,6 +9,7 @@ import {
   MobileForm,
   AddressForm,
   ConfirmModal,
+  CategoryForm
 } from "components";
 
 export default function Modal() {
@@ -69,6 +70,19 @@ export default function Modal() {
       size = "w-full h-screen lg:h-fit lg:max-w-3xl";
       renderModal = (
         <NameForm
+          title={title}
+          token={token}
+          dispatch={dispatch}
+          closeModal={closeModal}
+        />
+      );
+      break;
+
+    case "edit-category":
+      effect = ["bottom-0 lg:top-44", "-bottom-full lg:top-60"];
+      size = "w-full h-screen lg:h-fit lg:max-w-3xl";
+      renderModal = (
+        <CategoryForm
           title={title}
           token={token}
           dispatch={dispatch}

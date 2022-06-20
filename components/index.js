@@ -16,6 +16,7 @@ export { default as Orders } from "./Orders";
 export { default as Logout } from "./Logout";
 export { default as Modal } from "./modal/Modal";
 export { default as ConfirmModal } from "./modal/ConfirmModal";
+export { default as CategoryForm } from "./modal/CategoryForm";
 export { default as CloseModal } from "./modal/CloseModal";
 export { default as RedirectToLogin } from "./modal/RedirectToLogin";
 export { default as Alert } from "./modal/Alert";
