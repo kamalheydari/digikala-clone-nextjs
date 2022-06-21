@@ -16,10 +16,7 @@ import {
 
 export default function CategoryForm({ title, token, dispatch, closeModal }) {
   //? Local Store
-  const [selectedCategories, setSelectedCategories] = useState({
-    parentCategory: "",
-    mainCategory: "",
-  });
+  const [selectedCategories, setSelectedCategories] = useState({});
   const { parentCategory, mainCategory } = selectedCategories;
 
   //? Post Data
@@ -32,10 +29,7 @@ export default function CategoryForm({ title, token, dispatch, closeModal }) {
     if (isSuccess) {
       dispatch(addCategory(data.newCategory));
       dispatch(closeModal());
-      setSelectedCategories({
-        parentCategory: "",
-        mainCategory: "",
-      });
+      setSelectedCategories({});
       reset();
     }
   }, [isSuccess]);
@@ -56,21 +50,23 @@ export default function CategoryForm({ title, token, dispatch, closeModal }) {
 
     name = name.trim();
     slug = slug.trim().split(" ").join("-");
+
     //? Set main category
     parent = "/";
     category = parent + slug;
 
     //? Set parent category
-    if (mainCategory.length !== 0) {
+    if (mainCategory) {
       parent = mainCategory;
       category = parent + "/" + slug;
     }
 
     //? Set child category
-    if (parentCategory.length > 0) {
+    if (parentCategory) {
       parent = "/" + parentCategory;
       category = mainCategory + "/" + parentCategory + "/" + slug;
     }
+
     postData({
       url: "/api/category",
       body: { name, parent, category, slug },
@@ -123,7 +119,7 @@ export default function CategoryForm({ title, token, dispatch, closeModal }) {
           <DisplayError errors={formErrors.slug} />
         </div>
 
-        <div className='flex-1 max-w-xl space-y-16 md:grid md:grid-cols-2 md:gap-x-12 md:gap-y-10 md:items-baseline lg:relative'>
+        <div className='flex-1 max-w-xl space-y-16 md:grid md:grid-cols-2 md:gap-x-12 md:gap-y-10 md:items-baseline'>
           <SelectCategories
             selectedCategories={selectedCategories}
             setSelectedCategories={setSelectedCategories}

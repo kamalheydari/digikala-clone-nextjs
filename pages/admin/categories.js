@@ -47,7 +47,7 @@ export default function Categories() {
         </div>
       )}
 
-      <div className='p-3  '>
+      <div className='p-3'>
         {isSuccess && (
           <div className='text-white space-y-8'>
             <button
