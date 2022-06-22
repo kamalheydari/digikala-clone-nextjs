@@ -1,4 +1,8 @@
-import { useGetDataQuery, usePostDataMutation } from "app/slices/fetchApiSlice";
+import {
+  useGetDataQuery,
+  usePostDataMutation,
+  usePutDataMutation,
+} from "app/slices/fetchApiSlice";
 import { openModal } from "app/slices/modalSlice";
 import { BackButton, SelectCategories, FlexibleTR, Loading } from "components";
 import { useEffect } from "react";
@@ -9,8 +13,8 @@ export default function Details() {
   const dispatch = useDispatch();
 
   //? Local Store
-  const [category, setCategory] = useState({});
-  const [categoryDetails, setCategoryDetails] = useState({});
+  const [category, setCategory] = useState();
+  const [categoryDetails, setCategoryDetails] = useState();
   const [info, setInfo] = useState();
   const [specification, setSpecification] = useState();
 
@@ -25,11 +29,20 @@ export default function Details() {
     }
   }, [categoryDetails?.category_id]);
 
+  // console.log({ info, categoryDetails, specification, category });
+
   //? Store
   const { token } = useSelector((state) => state.auth);
   const { categories, parentCategory, mainCategory } = useSelector(
     (state) => state.categories
   );
+
+  useEffect(() => {
+    setInfo();
+    setSpecification();
+    setCategory();
+    setCategoryDetails();
+  }, [mainCategory]);
 
   //? Get Details
   useEffect(() => {
@@ -38,60 +51,106 @@ export default function Details() {
     }
   }, [parentCategory]);
 
-  const GetDetails = ({ detailsID, setCategoryDetails }) => {
-    const { data, isSuccess } = useGetDataQuery({
-      url: `/api/details/${detailsID}`,
-    });
-    useEffect(() => {
-      if (isSuccess) setCategoryDetails(data.details);
-    }, [isSuccess]);
-
-    return null;
-  };
-
   //? Post Data Query
   const [
     postData,
-    { data, isSuccess, isError, isLoading, error },
+    {
+      data: createData,
+      isSuccess: createIsSuccess,
+      isError: createIsError,
+      isLoading: createIsLoading,
+      error: createError,
+    },
   ] = usePostDataMutation();
 
   useEffect(() => {
-    if (isSuccess) {
+    if (createIsSuccess) {
       dispatch(
         openModal({
           isShow: true,
           type: "alert",
           status: "success",
-          text: data.msg,
+          text: createData.msg,
         })
       );
     }
-    if (isError)
+    if (createIsError)
       dispatch(
         openModal({
           isShow: true,
           type: "alert",
           status: "error",
-          text: error?.data.err,
+          text: createError?.data.err,
         })
       );
-  }, [isSuccess, isError]);
+  }, [createIsSuccess, createIsLoading]);
+
+  //? Put Data Query
+  const [
+    putData,
+    {
+      data: editData,
+      isSuccess: editIsSuccess,
+      isError: editIsError,
+      isLoading: editIsLoading,
+      error: editError,
+    },
+  ] = usePutDataMutation();
+  console.log({
+    editData,
+    editIsSuccess,
+    editIsError,
+    editIsLoading,
+    editError,
+  });
+  useEffect(() => {
+    if (editIsSuccess) {
+      dispatch(
+        openModal({
+          isShow: true,
+          type: "alert",
+          status: "success",
+          text: editData.msg,
+        })
+      );
+    }
+    if (editIsError)
+      dispatch(
+        openModal({
+          isShow: true,
+          type: "alert",
+          status: "error",
+          text: editError?.data.err,
+        })
+      );
+  }, [editIsSuccess, editIsLoading]);
 
   //? Handlers
-
   const submitHandler = async (e) => {
     e.preventDefault();
 
     if (info && specification) {
-      await postData({
-        url: "/api/details",
-        body: {
-          category_id: category._id,
-          info,
-          specification,
-        },
-        token,
-      });
+      if (categoryDetails) {
+        await putData({
+          url: `/api/details/${category._id}`,
+          body: {
+            category_id: category._id,
+            info,
+            specification,
+          },
+          token,
+        });
+      } else {
+        await postData({
+          url: "/api/details",
+          body: {
+            category_id: category._id,
+            info,
+            specification,
+          },
+          token,
+        });
+      }
     } else {
       dispatch(
         openModal({
@@ -102,6 +161,17 @@ export default function Details() {
         })
       );
     }
+  };
+
+  const GetDetails = ({ detailsID, setCategoryDetails }) => {
+    const { data, isSuccess } = useGetDataQuery({
+      url: `/api/details/${detailsID}`,
+    });
+    useEffect(() => {
+      if (isSuccess) setCategoryDetails(data.details);
+    }, [isSuccess]);
+
+    return null;
   };
 
   return (
@@ -163,12 +233,21 @@ export default function Details() {
                   />
                 </tbody>
               </table>
-              <button
-                className='btn mx-auto w-56 rounded-md mt-8'
-                type='submit'
-              >
-                {isLoading ? <Loading /> : "ثبت اطلاعات"}
-              </button>
+              {categoryDetails ? (
+                <button
+                  className='btn bg-green-500 mx-auto w-56 rounded-md mt-8'
+                  type='submit'
+                >
+                  {editIsLoading ? <Loading /> : "بروزرسانی اطلاعات"}
+                </button>
+              ) : (
+                <button
+                  className='btn mx-auto w-56 rounded-md mt-8'
+                  type='submit'
+                >
+                  {createIsLoading ? <Loading /> : "ثبت اطلاعات"}
+                </button>
+              )}
             </form>
           </div>
         )}

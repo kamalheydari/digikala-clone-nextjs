@@ -3,7 +3,7 @@ import { Icons } from "components";
 import { useEffect } from "react";
 
 export default function FlexibleTR({ data, type, values, setValues }) {
-  console.log({ data });
+
   //? Local State
   const [counter, setCounter] = useState();
 
@@ -57,7 +57,7 @@ export default function FlexibleTR({ data, type, values, setValues }) {
                 onChange={changeHandler}
                 type='text'
                 className='w-full inline-block outline-none '
-                value={data && data[`${type}-${index}`]}
+                defaultValue={data && data[`${type}-${index}`]}
               />
             </td>
             <td className=' bg-gray-100'></td>
