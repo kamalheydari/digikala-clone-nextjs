@@ -6,6 +6,8 @@ import "/styles/globals.css";
 import { store } from "app/store";
 import { Provider } from "react-redux";
 
+store.dispatch(fetchCategories());
+
 //? Layouts & Components
 import {
   DashboardLayout,
@@ -14,6 +16,7 @@ import {
   RefreshTokenHandler,
   Modal,
 } from "components";
+import { fetchCategories } from "app/slices/categorySlice";
 
 export default function MyApp({ Component, pageProps }) {
   //? Fix Hydration failed

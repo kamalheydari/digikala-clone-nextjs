@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
-import { addCategory } from "app/slices/categorySlice";
+import { addCategory, resetSelectedCategories } from "app/slices/categorySlice";
 import { usePostDataMutation } from "app/slices/fetchApiSlice";
 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -13,11 +13,13 @@ import {
   Loading,
   SelectCategories,
 } from "components";
+import { useSelector } from "react-redux";
 
 export default function CategoryForm({ title, token, dispatch, closeModal }) {
-  //? Local Store
-  const [selectedCategories, setSelectedCategories] = useState({});
-  const { parentCategory, mainCategory } = selectedCategories;
+  //? Store
+  const { parentCategory, mainCategory } = useSelector(
+    (state) => state.categories
+  );
 
   //? Post Data
   const [
@@ -29,7 +31,7 @@ export default function CategoryForm({ title, token, dispatch, closeModal }) {
     if (isSuccess) {
       dispatch(addCategory(data.newCategory));
       dispatch(closeModal());
-      setSelectedCategories({});
+      dispatch(resetSelectedCategories());
       reset();
     }
   }, [isSuccess]);
@@ -56,13 +58,13 @@ export default function CategoryForm({ title, token, dispatch, closeModal }) {
     category = parent + slug;
 
     //? Set parent category
-    if (mainCategory) {
+    if (mainCategory.length !== 0) {
       parent = mainCategory;
       category = parent + "/" + slug;
     }
 
     //? Set child category
-    if (parentCategory) {
+    if (parentCategory.length !== 0) {
       parent = "/" + parentCategory;
       category = mainCategory + "/" + parentCategory + "/" + slug;
     }
@@ -120,10 +122,7 @@ export default function CategoryForm({ title, token, dispatch, closeModal }) {
         </div>
 
         <div className='flex-1 max-w-xl space-y-16 md:grid md:grid-cols-2 md:gap-x-12 md:gap-y-10 md:items-baseline'>
-          <SelectCategories
-            selectedCategories={selectedCategories}
-            setSelectedCategories={setSelectedCategories}
-          />
+          <SelectCategories />
           <div />
         </div>
 

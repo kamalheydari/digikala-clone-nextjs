@@ -1,31 +1,53 @@
-const { createSlice } = require("@reduxjs/toolkit");
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-const initialState = { categories: [] };
+export const fetchCategories = createAsyncThunk(
+  "categories/fetchCategories",
+  async () => {
+    const res = await fetch(process.env.BASE_URL + "/api/category");
+    const data = await res.json();
+    return data?.categories;
+  }
+);
+
+const initialState = {
+  categories: [],
+  parentCategory: "",
+  mainCategory: "",
+};
 const categorySlice = createSlice({
   name: "categories",
   initialState,
   reducers: {
-    loadCategories: (state, action) => {
-      state.categories = action.payload;
-    },
     addCategory: (state, action) => {
       state.categories.push(action.payload);
     },
-    deleteCategory: (state, action) => {
-      const index = state.categories.findIndex(
-        (item) => item._id === action.payload
-      );
-      if (index !== -1) {
-        state.categories.splice(index, 1);
-      }
+    selecteMainCategory: (state, action) => {
+      state.mainCategory = action.payload;
     },
+    selecteParentCategory: (state, action) => {
+      state.parentCategory = action.payload;
+    },
+    resetParentCategory: (state, action) => {
+      state.parentCategory = "";
+    },
+    resetSelectedCategories: (state, action) => {
+      state.parentCategory = "";
+      state.mainCategory = "";
+    },
+  },
+  extraReducers(builder) {
+    builder.addCase(fetchCategories.fulfilled, (state, action) => {
+      state.categories = action.payload;
+    });
   },
 });
 
 export const {
-  loadCategories,
-  deleteCategory,
   addCategory,
+  selecteMainCategory,
+  selecteParentCategory,
+  resetParentCategory,
+  resetSelectedCategories,
 } = categorySlice.actions;
 
 export default categorySlice.reducer;

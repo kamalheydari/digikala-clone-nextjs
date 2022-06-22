@@ -1,25 +1,30 @@
-import { useSelector } from "react-redux";
+import {
+  resetParentCategory,
+  selecteMainCategory,
+  selecteParentCategory,
+} from "app/slices/categorySlice";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function SelectCategories({
-  setSelectedCategories,
-  selectedCategories,
-}) {
+export default function SelectCategories() {
+  const dispatch = useDispatch();
   //? Store
-  const { categories } = useSelector((state) => state.categories);
+  const { categories, mainCategory } = useSelector((state) => state.categories);
 
   //? Initial Select box
   const parentCategories = categories.filter(
-    (category) => category.parent === selectedCategories?.mainCategory
+    (category) => category.parent === mainCategory
   );
   const mainCategories = categories.filter(
     (category) => category.parent === "/"
   );
 
   const handleChange = (e) => {
-    setSelectedCategories({
-      ...selectedCategories,
-      [e.target.name]: e.target.value,
-    });
+    if (e.target.name === "mainCategory") {
+      dispatch(selecteMainCategory(e.target.value));
+      dispatch(resetParentCategory());
+    }
+    if (e.target.name === "parentCategory")
+      dispatch(selecteParentCategory(e.target.value));
   };
 
   return (
@@ -35,7 +40,6 @@ export default function SelectCategories({
           className='border-2 rounded-sm py-0.5 px-3 outline-none w-56'
           name='mainCategory'
           id='mainCategory'
-          //   onChange={(e) => setchangeParentCategory(e.target.value)}
           onChange={handleChange}
         >
           <option></option>
