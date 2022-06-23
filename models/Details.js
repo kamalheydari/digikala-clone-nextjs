@@ -7,8 +7,8 @@ const DetailsSchema = new mongoose.Schema(
       ref: "category",
       required: true,
     },
-    info: Object,
-    specification: Object,
+    info: [Object],
+    specification: [Object],
   },
   { timestamps: true }
 );

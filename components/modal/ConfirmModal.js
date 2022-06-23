@@ -7,6 +7,7 @@ import {
 import { useEffect } from "react";
 import { useDeleteDataMutation } from "app/slices/fetchApiSlice";
 import { deleteUser } from "app/slices/usersSlice";
+import { resetDetails } from "app/slices/detailsSlice";
 
 export default function ConfirmModal({
   title,
@@ -26,9 +27,11 @@ export default function ConfirmModal({
   } else if (type === "confirm-post") {
     url = `/api/category/${id}`;
     editStore = () => {};
-  } else if (type === "confirm-category") {
-    url = `/api/products/${id}`;
-    editStore = () => {};
+  } else if (type === "confirm-details") {
+    url = `/api/details/${id}`;
+    editStore = () => {
+      dispatch(resetDetails());
+    };
   }
 
   //? Delete Data

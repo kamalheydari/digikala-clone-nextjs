@@ -12,6 +12,10 @@ export default async function (req, res) {
     case "PUT":
       await updateDetails(req, res);
       break;
+
+    case "DELETE":
+      await deleteDetails(req, res);
+      break;
   }
 }
 
@@ -40,6 +44,25 @@ const updateDetails = async (req, res) => {
     await db.disconnect();
 
     res.status(200).json({ msg: "مشخصات دسته بندی با موفقیت بروزرسانی شد" });
+  } catch (error) {
+    sendError(res, 500, error.message);
+  }
+};
+
+const deleteDetails = async (req, res) => {
+  try {
+    const result = await auth(req, res);
+
+    if (!result.root)
+    return sendError(res, 400, "توکن احراز هویت نامعتبر است");
+
+    const { id } = req.query;
+
+    await db.connect();
+    await Details.findByIdAndDelete( id );
+    await db.disconnect();
+
+    res.status(200).json({ msg: "مشخصات دسته بندی با موفقیت حذف شد" });
   } catch (error) {
     sendError(res, 500, error.message);
   }
