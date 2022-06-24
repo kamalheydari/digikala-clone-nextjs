@@ -28,7 +28,7 @@ export default function Users() {
   //? Handlers
   const deleteUserHandler = async (id) => {
     dispatch(
-      openModal({ isShow: true, id, type: "confirm-user", title: "کاربر" })
+      openModal({ isShow: true, id, type: "confirm-delete-user", title: "کاربر" })
     );
   };
 

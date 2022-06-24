@@ -1,12 +1,14 @@
+import { useState } from "react";
+
 import {
   addInfo,
   addSpecification,
   deleteItem,
   editItem,
 } from "app/slices/detailsSlice";
-import { Icons } from "components";
-import { useState } from "react";
 import { useDispatch } from "react-redux";
+
+import { Icons } from "components";
 export default function DetailsList({ category, type, data }) {
   const dispatch = useDispatch();
 
@@ -46,12 +48,14 @@ export default function DetailsList({ category, type, data }) {
   return (
     <>
       <div className='text-sm lg:text-sm'>
-        {type === "inof" ? (
-          <span> ویژگی‌های دسته‌بندی</span>
-        ) : (
-          <span> مشخصات دسته‌بندی</span>
-        )}{" "}
-        <span className='text-green-500 text-base'>{category?.name}</span>
+        {type === "info" ? <span> ویژگی‌های</span> : <span> مشخصات</span>}{" "}
+        <span
+          className={
+            type === "info" ? " text-emerald-600" : " text-fuchsia-600"
+          }
+        >
+          {category?.name}
+        </span>
       </div>
       <table className='w-full'>
         <thead
@@ -105,7 +109,6 @@ export default function DetailsList({ category, type, data }) {
                 onChange={(e) => setName(e.target.value)}
                 className='w-full inline-block outline-none'
                 value={name}
-                // required
               />
             </td>
             <td

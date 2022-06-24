@@ -11,10 +11,6 @@ const detailsSlice = createSlice({
   name: "details",
   initialState,
   reducers: {
-    addCategory: (state, action) => {
-      state.category = action.payload;
-    },
-
     addInfo: (state, action) => {
       state.info.push({ name: action.payload, id: nanoid() });
     },
@@ -42,13 +38,13 @@ const detailsSlice = createSlice({
     },
 
     loadDetails: (state, action) => {
-      state.details_id = action.payload.details_id;
-      state.info = action.payload.info;
-      state.specification = action.payload.specification;
+      state.category = action.payload.category;
+      state.details_id = action.payload.details_id || "";
+      state.info = action.payload.info || [];
+      state.specification = action.payload.specification || [];
     },
 
     resetDetails: (state, action) => {
-      state.category = {};
       state.info = [];
       state.specification = [];
       state.details_id = "";
@@ -59,7 +55,6 @@ const detailsSlice = createSlice({
 export default detailsSlice.reducer;
 
 export const {
-  addCategory,
   addSpecification,
   resetDetails,
   addInfo,

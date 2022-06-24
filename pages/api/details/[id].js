@@ -40,7 +40,7 @@ const updateDetails = async (req, res) => {
     const { id } = req.query;
 
     await db.connect();
-    await Details.findOneAndUpdate({ category_id: id }, req.body);
+    await Details.findByIdAndUpdate({ _id: id }, { ...req.body });
     await db.disconnect();
 
     res.status(200).json({ msg: "مشخصات دسته بندی با موفقیت بروزرسانی شد" });
@@ -53,13 +53,12 @@ const deleteDetails = async (req, res) => {
   try {
     const result = await auth(req, res);
 
-    if (!result.root)
-    return sendError(res, 400, "توکن احراز هویت نامعتبر است");
+    if (!result.root) return sendError(res, 400, "توکن احراز هویت نامعتبر است");
 
     const { id } = req.query;
 
     await db.connect();
-    await Details.findByIdAndDelete( id );
+    await Details.findByIdAndDelete(id);
     await db.disconnect();
 
     res.status(200).json({ msg: "مشخصات دسته بندی با موفقیت حذف شد" });

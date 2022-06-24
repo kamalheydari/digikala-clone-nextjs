@@ -5,57 +5,41 @@ import {
   openModal,
 } from "app/slices/modalSlice";
 import { useEffect } from "react";
-import { useDeleteDataMutation } from "app/slices/fetchApiSlice";
-import { deleteUser } from "app/slices/usersSlice";
-import { resetDetails } from "app/slices/detailsSlice";
+import { usePutDataMutation } from "app/slices/fetchApiSlice";
 
-export default function ConfirmModal({
+export default function ConfirmUpdateModal({
   title,
   isConfirm,
   id,
   token,
   type,
   dispatch,
+  editedData,
 }) {
   //? Config Url & Edit Store
-  let url, editStore;
-  if (type === "confirm-user") {
-    url = `/api/user/${id}`;
-    editStore = () => {
-      dispatch(deleteUser(id));
-    };
-  } else if (type === "confirm-post") {
-    url = `/api/category/${id}`;
-    editStore = () => {};
-  } else if (type === "confirm-details") {
+  let url;
+
+  if (type === "confirm-update-details") {
     url = `/api/details/${id}`;
-    editStore = () => {
-      dispatch(resetDetails());
-    };
   }
-
-  //? Delete Data
-  const [
-    deleteData,
-    { data, isSuccess, isError, error },
-  ] = useDeleteDataMutation();
-
+  //? Update Data
+  const [putData, {data, isSuccess, isError, error }] = usePutDataMutation();
   useEffect(() => {
     if (isConfirm) {
-      deleteData({
+      putData({
         url,
         token,
+        body: {...editedData},
       });
     }
     if (isSuccess) {
-      editStore();
       dispatch(confirmReset());
       openModal({
         isShow: true,
         type: "alert",
         status: "success",
         text: data.msg,
-      });
+      })
     }
 
     if (isError) {
@@ -67,11 +51,12 @@ export default function ConfirmModal({
           text: error?.data.err,
         })
       );
+      dispatch(confirmReset());
     }
   }, [isConfirm, isSuccess, isError]);
 
   //? Handlers
-  const handleConfirmClick = (data) => {
+  const handleConfirmClick = () => {
     dispatch(confirmAction());
     dispatch(closeModal());
   };
@@ -83,20 +68,21 @@ export default function ConfirmModal({
   return (
     <div className='px-3 py-6 space-y-4 text-center bg-white md:rounded-lg'>
       <p className='text-gray-600'>
-        آیا موافق حذف <span className='font-bold text-red-500'>{title}</span>{" "}
-        انتخاب شده هستید؟
+        آیا موافق بروزرسانی{" "}
+        <span className='font-bold text-green-500'>{title}</span> تغییر داده شده
+        هستید؟
       </p>
       <div className='flex justify-center gap-x-20'>
         <button
           type='button'
-          className='rounded-lg btn'
+          className='rounded-lg btn bg-green-500'
           onClick={handleConfirmClick}
         >
-          حذف و ادامه
+          بروزرسانی و ادامه
         </button>
         <button
           type='button'
-          className='bg-green-500 rounded-lg btn'
+          className=' rounded-lg btn'
           onClick={handleCancleClick}
         >
           لغو

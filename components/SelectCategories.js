@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import {
   resetParentCategory,
   selecteMainCategory,
@@ -5,8 +6,10 @@ import {
 } from "app/slices/categorySlice";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function SelectCategories() {
+export default function SelectCategories({ detailsHome }) {
+  const router = useRouter();
   const dispatch = useDispatch();
+
   //? Store
   const { categories, mainCategory } = useSelector((state) => state.categories);
 
@@ -25,6 +28,10 @@ export default function SelectCategories() {
     }
     if (e.target.name === "parentCategory")
       dispatch(selecteParentCategory(e.target.value));
+  };
+
+  const handleRouteChange = (e) => {
+    router.push("/admin/details/" + e.target.value);
   };
 
   return (
@@ -58,19 +65,35 @@ export default function SelectCategories() {
         >
           دسته‌بندی والد
         </label>
-        <select
-          className='border-2 rounded-sm py-0.5 px-3 outline-none w-56'
-          name='parentCategory'
-          id='parentCategory'
-          onChange={handleChange}
-        >
-          <option></option>
-          {parentCategories.map((item, index) => (
-            <option value={item.slug} key={index}>
-              {item.name}
-            </option>
-          ))}
-        </select>
+        {detailsHome ? (
+          <select
+            className='border-2 rounded-sm py-0.5 px-3 outline-none w-56'
+            name='parentCategory'
+            id='parentCategory'
+            onChange={handleRouteChange}
+          >
+            <option></option>
+            {parentCategories.map((item, index) => (
+              <option value={item._id} key={index}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+        ) : (
+          <select
+            className='border-2 rounded-sm py-0.5 px-3 outline-none w-56'
+            name='parentCategory'
+            id='parentCategory'
+            onChange={handleChange}
+          >
+            <option></option>
+            {parentCategories.map((item, index) => (
+              <option value={item.slug} key={index}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+        )}
       </div>
     </>
   );

@@ -8,19 +8,26 @@ import {
   NameForm,
   MobileForm,
   AddressForm,
-  ConfirmModal,
-  CategoryForm
+  ConfirmDeleteModal,
+  CategoryForm,
 } from "components";
+import ConfirmUpdateModal from "./ConfirmUpdateModal";
 
 export default function Modal() {
   const dispatch = useDispatch();
 
   const { token } = useSelector((state) => state.auth);
 
-  const { type, text, status, isShow, title, isConfirm, id } = useSelector(
-    (state) => state.modal
-  );
-
+  const {
+    type,
+    text,
+    status,
+    isShow,
+    title,
+    isConfirm,
+    id,
+    editedData,
+  } = useSelector((state) => state.modal);
 
   //? Config Modal
   let renderModal;
@@ -48,18 +55,34 @@ export default function Modal() {
       );
       break;
 
-    case "confirm-user":
-    case "confirm-details":
-    case "confirm-product":
+    case "confirm-delete-user":
+    case "confirm-delete-details":
+    case "confirm-delete-product":
       effect = ["top-40 transform scale-100", "top-40 transform scale-50 "];
       size = "max-w-3xl";
       renderModal = (
-        <ConfirmModal
+        <ConfirmDeleteModal
           title={title}
           isConfirm={isConfirm}
           id={id}
           type={type}
           token={token}
+          dispatch={dispatch}
+        />
+      );
+      break;
+
+    case "confirm-update-details":
+      effect = ["top-40 transform scale-100", "top-40 transform scale-50 "];
+      size = "max-w-3xl";
+      renderModal = (
+        <ConfirmUpdateModal
+          title={title}
+          isConfirm={isConfirm}
+          id={id}
+          type={type}
+          token={token}
+          editedData={editedData}
           dispatch={dispatch}
         />
       );

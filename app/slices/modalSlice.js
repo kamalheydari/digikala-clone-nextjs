@@ -4,6 +4,7 @@ const initialState = {
   isShow: false,
   isConfirm: false,
   id: null,
+  editedData: null,
   type: "",
   title: "",
   text: "",
@@ -21,6 +22,7 @@ const modalSlice = createSlice({
       state.isShow = true;
       state.type = action.payload.type || "";
       state.id = action.payload.id || null;
+      state.editedData = action.payload.editedData || null;
       state.text = action.payload.text || "";
       state.title = action.payload.title || "";
       state.status = action.payload.status || "";
@@ -32,6 +34,7 @@ const modalSlice = createSlice({
     confirmReset: (state, action) => {
       state.isConfirm = false;
       state.id = null;
+      state.editedData = null;
     },
   },
 });
