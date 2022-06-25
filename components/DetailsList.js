@@ -14,22 +14,22 @@ export default function DetailsList({ category, type, data }) {
 
   //? Local state
   const [name, setName] = useState("");
-  const [status, setStatus] = useState("add");
+  const [onEdit, setOnEdit] = useState(false);
   const [editId, setEditId] = useState();
 
   //? Handlers
   const addToStore = () => {
     if (name.trim() === "") return;
-    if (status === "edit") {
-      dispatch(editItem({ id: editId, type, name }));
-      setName("");
-      setStatus("add");
-    } else {
+    if (!onEdit) {
       if (type === "info") {
         dispatch(addInfo(name));
       } else {
         dispatch(addSpecification(name));
       }
+    } else {
+      dispatch(editItem({ id: editId, type, name }));
+      setName("");
+      setOnEdit(false);
     }
     setName("");
   };
@@ -39,7 +39,7 @@ export default function DetailsList({ category, type, data }) {
   };
 
   const handleEdit = (id) => {
-    setStatus("edit");
+    setOnEdit(true)
     const item = data.find((item) => item.id === id);
     setName(item.name);
     setEditId(item.id);
