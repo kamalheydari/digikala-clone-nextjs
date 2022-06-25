@@ -5,6 +5,7 @@ const initialState = {
   category: {},
   info: [],
   specification: [],
+  optionsType: "none",
 };
 
 const detailsSlice = createSlice({
@@ -40,6 +41,7 @@ const detailsSlice = createSlice({
     loadDetails: (state, action) => {
       state.category = action.payload.category;
       state.details_id = action.payload.details_id || "";
+      state.optionsType = action.payload.optionsType || "none";
       state.info = action.payload.info || [];
       state.specification = action.payload.specification || [];
     },
@@ -48,6 +50,10 @@ const detailsSlice = createSlice({
       state.info = [];
       state.specification = [];
       state.details_id = "";
+    },
+
+    addOptionsType: (state, action) => {
+      state.optionsType = action.payload;
     },
   },
 });
@@ -61,4 +67,5 @@ export const {
   deleteItem,
   editItem,
   loadDetails,
+  addOptionsType
 } = detailsSlice.actions;

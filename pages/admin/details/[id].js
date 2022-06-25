@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 
 import { useDispatch, useSelector } from "react-redux";
-import { loadDetails } from "app/slices/detailsSlice";
+import { addOptionsType, loadDetails } from "app/slices/detailsSlice";
 import { useGetDataQuery, usePostDataMutation } from "app/slices/fetchApiSlice";
 import { openModal } from "app/slices/modalSlice";
 
@@ -15,7 +15,7 @@ export default function DetailsPage() {
   //? Store
   const { token } = useSelector((state) => state.auth);
   const { categories } = useSelector((state) => state.categories);
-  const { category, info, specification, details_id } = useSelector(
+  const { category, info, specification, details_id, optionsType } = useSelector(
     (state) => state.details
   );
 
@@ -33,6 +33,7 @@ export default function DetailsPage() {
         details_id: details?.details?._id,
         info: details?.details?.info,
         specification: details?.details?.specification,
+        optionsType: details?.details?.optionsType,
       })
     );
   }, [getCtegory, getDetailsIsLoading]);
@@ -76,6 +77,7 @@ export default function DetailsPage() {
           category_id: category._id,
           info,
           specification,
+          optionsType
         },
         token,
       });
@@ -113,9 +115,14 @@ export default function DetailsPage() {
           category_id: category._id,
           info,
           specification,
+          optionsType
         },
       })
     );
+  };
+
+  const handleOptionTypeChange = (e) => {
+    dispatch(addOptionsType(e.target.value));
   };
 
   return (
@@ -131,6 +138,42 @@ export default function DetailsPage() {
         </div>
       ) : (
         <form className='space-y-6 p-3' onSubmit={submitHandler}>
+          <div>
+            <p className='mb-2'>نوع انتخاب :</p>
+            <div className='flex items-center gap-x-1 '>
+              <input
+                type='radio'
+                checked={optionsType === "none"}
+                name='optionsType'
+                id='none'
+                value='none'
+                onChange={handleOptionTypeChange}
+              />
+              <label htmlFor='none'>بدون حق انتخاب</label>
+            </div>
+            <div className='flex items-center gap-x-1'>
+              <input
+                type='radio'
+                checked={optionsType === "colors"}
+                name='optionsType'
+                id='colors'
+                value='colors'
+                onChange={handleOptionTypeChange}
+              />
+              <label htmlFor='colors'>بر اساس رنگ</label>
+            </div>
+            <div className='flex items-center gap-x-1'>
+              <input
+                type='radio'
+                checked={optionsType === "sizes"}
+                name='optionsType'
+                id='sizes'
+                value='sizes'
+                onChange={handleOptionTypeChange}
+              />
+              <label htmlFor='sizes'>بر اساس سایز</label>
+            </div>
+          </div>
           <DetailsList category={category} type='info' data={info} />
           <DetailsList
             category={category}

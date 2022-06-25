@@ -7,8 +7,13 @@ const DetailsSchema = new mongoose.Schema(
       ref: "category",
       required: true,
     },
-    info: [Object],
-    specification: [Object],
+    info: { type: [Object], required: true },
+    specification: { type: [Object], required: true },
+    optionsType: {
+      type: String,
+      default: "none",
+      enum: ["colors", "sizes", "none"],
+    },
   },
   { timestamps: true }
 );

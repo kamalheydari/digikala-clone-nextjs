@@ -14,7 +14,7 @@ export default function DetailsList({ category, type, data }) {
 
   //? Local state
   const [name, setName] = useState("");
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState("add");
   const [editId, setEditId] = useState();
 
   //? Handlers
@@ -23,6 +23,7 @@ export default function DetailsList({ category, type, data }) {
     if (status === "edit") {
       dispatch(editItem({ id: editId, type, name }));
       setName("");
+      setStatus("add");
     } else {
       if (type === "info") {
         dispatch(addInfo(name));
@@ -40,7 +41,6 @@ export default function DetailsList({ category, type, data }) {
   const handleEdit = (id) => {
     setStatus("edit");
     const item = data.find((item) => item.id === id);
-    console.log(item);
     setName(item.name);
     setEditId(item.id);
   };
@@ -109,6 +109,7 @@ export default function DetailsList({ category, type, data }) {
                 onChange={(e) => setName(e.target.value)}
                 className='w-full inline-block outline-none'
                 value={name}
+                placeholder='...'
               />
             </td>
             <td
