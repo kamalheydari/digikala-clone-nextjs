@@ -21,6 +21,8 @@ export { default as ProfileAside } from "./ProfileAside";
 export { default as DashboardAside } from "./DashboardAside";
 export { default as SelectCategories } from "./SelectCategories";
 export { default as DetailsList } from "./DetailsList";
+export { default as Colors } from "./Colors";
+export { default as Sizes } from "./Sizes";
 
 export { default as Modal } from "./modal/Modal";
 export { default as ConfirmDeleteModal } from "./modal/ConfirmDeleteModal";

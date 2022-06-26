@@ -7,6 +7,7 @@ import modalReducer from "./slices/modalSlice";
 import usersReducer from "./slices/usersSlice";
 import categoryReducer from "./slices/categorySlice";
 import detailsReducer from "./slices/detailsSlice";
+import productReducer from "./slices/productSlice";
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     users: usersReducer,
     categories: categoryReducer,
     details: detailsReducer,
+    product: productReducer,
     [fetchApi.reducerPath]: fetchApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

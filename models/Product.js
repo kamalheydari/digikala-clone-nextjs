@@ -18,6 +18,8 @@ const productSchema = new mongoose.Schema(
       type: Array,
       required: true,
     },
+    size: [String],
+    color: [Object],
     category: {
       type: String,
       required: true,

@@ -8,7 +8,7 @@ export default function ProfileAside({ user }) {
     {
       name: "محصول جدید",
       icon: <Icons.Location className='text-black icon' />,
-      path: "/admin/new-product",
+      path: "/admin/product",
     },
     {
       name: "محصولات",

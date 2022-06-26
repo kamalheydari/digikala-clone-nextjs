@@ -75,6 +75,7 @@ export default function DetailsPage() {
         url: "/api/details",
         body: {
           category_id: category._id,
+          name:category.slug,
           info,
           specification,
           optionsType

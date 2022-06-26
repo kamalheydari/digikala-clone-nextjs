@@ -13,6 +13,7 @@ const initialState = {
   categories: [],
   parentCategory: "",
   mainCategory: "",
+  category: "",
 };
 const categorySlice = createSlice({
   name: "categories",
@@ -26,6 +27,9 @@ const categorySlice = createSlice({
     },
     selecteParentCategory: (state, action) => {
       state.parentCategory = action.payload;
+    },
+    selecteCategory: (state, action) => {
+      state.category = action.payload;
     },
     resetParentCategory: (state, action) => {
       state.parentCategory = "";
@@ -48,6 +52,7 @@ export const {
   selecteParentCategory,
   resetParentCategory,
   resetSelectedCategories,
+  selecteCategory,
 } = categorySlice.actions;
 
 export default categorySlice.reducer;
