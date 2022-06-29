@@ -1,11 +1,11 @@
 import Image from "next/image";
 
-import { BackButton } from "components";
+import { Buttons } from "components";
 
 export default function Orders() {
   return (
     <div>
-      <BackButton backRoute='/profile'>تاریخچه سفارشات</BackButton>
+      <Buttons.Back backRoute='/profile'>تاریخچه سفارشات</Buttons.Back>
       <div className='section-divide-y' />
 
       <div className='py-20'>

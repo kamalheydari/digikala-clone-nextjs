@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Icons } from "components";
+import { Buttons } from "components";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, deleteItem, editItem } from "app/slices/productSlice";
 import { useRef } from "react";
@@ -42,10 +42,8 @@ export default function Sizes() {
     <div className='text-sm space-y-1.5'>
       <span className='text-sm'>اندازه ها</span>
       <div className='w-full max-w-2xl mx-auto space-y-3'>
-        <div className='flex'>
-          <button className='mr-1 ml-3' type='button' onClick={addToStore}>
-            <Icons.Plus className='icon  text-green-500 border border-green-500 rounded-xl' />
-          </button>
+        <div className='flex items-center gap-x-2'>
+          <Buttons.Add onClick={addToStore} />
           <input
             type='text'
             onChange={(e) => setSize(e.target.value)}
@@ -59,22 +57,10 @@ export default function Sizes() {
           {sizes.map((item) => (
             <div
               key={item.id}
-              className='shadow rounded flex items-center px-1.5 py-2'
+              className='shadow rounded flex items-center gap-x-3 px-1.5 py-2'
             >
-              <button
-                className='mr-1 ml-2'
-                type='button'
-                onClick={() => handleDelete(item.id)}
-              >
-                <Icons.Delete className='icon text-red-500  w-8 h-8 p-1 rounded-2xl bg-red-100' />
-              </button>
-              <button
-                className='mr-1 ml-4'
-                type='button'
-                onClick={() => handleEdit(item.id)}
-              >
-                <Icons.Edit className='icon  text-amber-500 w-8 h-8 p-1 rounded-2xl bg-amber-100' />
-              </button>
+              <Buttons.Delete onClick={() => handleDelete(item.id)} />
+              <Buttons.Edit onClick={() => handleEdit(item.id)} />
               {item.size}
             </div>
           ))}

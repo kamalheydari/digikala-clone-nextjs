@@ -1,11 +1,11 @@
 import Image from "next/image";
 
-import { BackButton } from "components";
+import { Buttons } from "components";
 
 export default function UserHistory() {
   return (
     <div>
-      <BackButton backRoute='/profile'>بازدید‌های اخیر</BackButton>
+      <Buttons.Back backRoute='/profile'>بازدید‌های اخیر</Buttons.Back>
       <div className='section-divide-y' />
 
       <div className='py-20'>

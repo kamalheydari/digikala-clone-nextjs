@@ -6,7 +6,7 @@ import { addOptionsType, loadDetails } from "app/slices/detailsSlice";
 import { useGetDataQuery, usePostDataMutation } from "app/slices/fetchApiSlice";
 import { openModal } from "app/slices/modalSlice";
 
-import { BackButton, BigLoading, DetailsList, Loading } from "components";
+import { Buttons, BigLoading, DetailsList, Loading } from "components";
 
 export default function DetailsPage() {
   const router = useRouter();
@@ -128,10 +128,10 @@ export default function DetailsPage() {
 
   return (
     <>
-      <BackButton backRoute='/admin/details'>
+      <Buttons.Back backRoute='/admin/details'>
         مشخصات و ویژگی‌های دسته‌بندی
         <span> {category?.name}</span>
-      </BackButton>
+      </Buttons.Back>
       <div className='section-divide-y' />
       {getDetailsIsLoading ? (
         <div className='px-3 py-20'>

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "app/slices/modalSlice";
 
-import { BackButton, Icons } from "components";
+import { Buttons, Icons } from "components";
 
 export default function PersonalInfo() {
   const dispatch = useDispatch();
@@ -33,7 +33,7 @@ export default function PersonalInfo() {
 
   return (
     <div>
-      <BackButton backRoute='/profile'>اطلاعات حساب کاربری</BackButton>
+      <Buttons.Back backRoute='/profile'>اطلاعات حساب کاربری</Buttons.Back>
       <div className='section-divide-y' />
       <div className='lg:flex'>
         <div className='flex-1 px-5'>

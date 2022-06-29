@@ -1,8 +1,8 @@
 import { useGetDataQuery } from "app/slices/fetchApiSlice";
-import { BackButton, BigLoading, Icons } from "components";
+import { Buttons, BigLoading } from "components";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addUsers, deleteUser } from "app/slices/usersSlice";
+import { addUsers } from "app/slices/usersSlice";
 import Image from "next/image";
 import { openModal } from "app/slices/modalSlice";
 
@@ -28,13 +28,18 @@ export default function Users() {
   //? Handlers
   const deleteUserHandler = async (id) => {
     dispatch(
-      openModal({ isShow: true, id, type: "confirm-delete-user", title: "کاربر" })
+      openModal({
+        isShow: true,
+        id,
+        type: "confirm-delete-user",
+        title: "کاربر",
+      })
     );
   };
 
   return (
     <>
-      <BackButton backRoute='/admin'>کاربران</BackButton>
+      <Buttons.Back backRoute='/admin'>کاربران</Buttons.Back>
       <div className='section-divide-y' />
       {isLoading && (
         <div className='px-3 py-20'>
@@ -87,12 +92,9 @@ export default function Users() {
                     <td className='px-2 py-4'>{user.name}</td>
                     <td className='px-2 py-4'>{user.email}</td>
                     <td className='px-2 py-4'>
-                      <button
-                        type='button'
+                      <Buttons.Delete
                         onClick={() => deleteUserHandler(user._id)}
-                      >
-                        <Icons.Delete className='mx-auto text-red-600 icon' />
-                      </button>
+                      />
                     </td>
                   </tr>
                 ))}

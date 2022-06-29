@@ -3,8 +3,8 @@ export { default as Loading } from "./share/Loading";
 export { default as ArrowLink } from "./share/ArrowLink";
 export { default as BoxLink } from "./share/BoxLink";
 export { default as DisplayError } from "./share/DisplayError";
-export { default as BackButton } from "./share/BackButton";
 export { default as BigLoading } from "./share/BigLoading";
+export { default as Buttons } from "./share/Buttons";
 
 export { default as ClientLayout } from "./Layouts/ClientLayout";
 export { default as ProfileLayout } from "./Layouts/ProfileLayout";

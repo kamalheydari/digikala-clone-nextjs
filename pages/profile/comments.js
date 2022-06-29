@@ -1,11 +1,11 @@
 import Image from "next/image";
 
-import { BackButton } from "components";
+import { Buttons } from "components";
 
 export default function Comments() {
   return (
     <div>
-      <BackButton backRoute='/profile'>دیدگاه‌ها</BackButton>
+      <Buttons.Back backRoute='/profile'>دیدگاه‌ها</Buttons.Back>
       <div className='section-divide-y' />
 
       <div className='py-20'>

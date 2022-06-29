@@ -8,7 +8,7 @@ import {
 } from "app/slices/detailsSlice";
 import { useDispatch } from "react-redux";
 
-import { Icons } from "components";
+import { Icons, Buttons } from "components";
 export default function DetailsList({ category, type, data }) {
   const dispatch = useDispatch();
 
@@ -39,7 +39,7 @@ export default function DetailsList({ category, type, data }) {
   };
 
   const handleEdit = (id) => {
-    setOnEdit(true)
+    setOnEdit(true);
     const item = data.find((item) => item.id === id);
     setName(item.name);
     setEditId(item.id);
@@ -73,21 +73,10 @@ export default function DetailsList({ category, type, data }) {
         <tbody>
           {data.map((item) => (
             <tr key={item.id} className='border-b-2 border-gray-100'>
-              <td className='flex p-2'>
-                <button
-                  className='mr-1 ml-2'
-                  type='button'
-                  onClick={() => handleDelete(item.id)}
-                >
-                  <Icons.Delete className='icon  text-red-500' />
-                </button>
-                <button
-                  className='mr-1 ml-4'
-                  type='button'
-                  onClick={() => handleEdit(item.id)}
-                >
-                  <Icons.Edit className='icon  text-amber-500' />
-                </button>
+              <td className='flex items-center gap-x-2 p-2'>
+                <Buttons.Delete onClick={() => handleDelete(item.id)} />
+                <Buttons.Edit onClick={() => handleEdit(item.id)} />
+              
                 {item.name}
               </td>
               <td
@@ -101,13 +90,11 @@ export default function DetailsList({ category, type, data }) {
           ))}
           <tr className='border-b-2 border-green-50'>
             <td className='flex p-2'>
-              <button className='mr-1 ml-3' type='button' onClick={addToStore}>
-                <Icons.Plus className='icon  text-green-500 border border-green-500 rounded-xl' />
-              </button>
+            <Buttons.Add onClick={addToStore} />
               <input
                 type='text'
                 onChange={(e) => setName(e.target.value)}
-                className='w-full inline-block outline-none'
+                className='w-full inline-block outline-none mr-2'
                 value={name}
                 placeholder='...'
               />

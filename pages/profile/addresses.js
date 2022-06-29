@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "app/slices/modalSlice";
 
-import { BackButton, Icons } from "components";
+import { Buttons, Icons } from "components";
 
 export default function Addresses() {
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ export default function Addresses() {
 
   return (
     <div>
-      <BackButton backRoute='/profile'>آدرس‌ها</BackButton>
+      <Buttons.Back backRoute='/profile'>آدرس‌ها</Buttons.Back>
       <div className='section-divide-y' />
       {user.address ? (
         <div className='flex-1 px-5 '>

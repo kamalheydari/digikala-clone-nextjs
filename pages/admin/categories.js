@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { openModal } from "app/slices/modalSlice";
 
-import { BackButton } from "components";
+import { Buttons } from "components";
 
 export default function Categories() {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ export default function Categories() {
 
   return (
     <>
-      <BackButton backRoute='/admin'>دسته بندی ها</BackButton>
+      <Buttons.Back backRoute='/admin'>دسته بندی ها</Buttons.Back>
       <div className='section-divide-y' />
 
       <div className='p-3'>

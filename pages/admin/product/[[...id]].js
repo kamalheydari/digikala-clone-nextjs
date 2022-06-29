@@ -10,7 +10,7 @@ import {
   resetProduct,
 } from "app/slices/productSlice";
 import {
-  BackButton,
+  Buttons,
   Colors,
   SelectCategories,
   Sizes,
@@ -105,7 +105,7 @@ export default function Product() {
 
   return (
     <>
-      <BackButton backRoute='/admin'>محصول جدید</BackButton>
+      <Buttons.Back backRoute='/admin'>محصول جدید</Buttons.Back>
       <div className='section-divide-y' />
 
       <div className='p-3'>

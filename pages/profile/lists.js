@@ -1,11 +1,11 @@
 import Image from "next/image";
 
-import { BackButton } from "components";
+import { Buttons} from "components";
 
 export default function Lists() {
   return (
     <div>
-      <BackButton backRoute='/profile'>لیست‌ها</BackButton>
+      <Buttons.Back backRoute='/profile'>لیست‌ها</Buttons.Back>
       <div className='section-divide-y' />
 
       <div className='py-20'>

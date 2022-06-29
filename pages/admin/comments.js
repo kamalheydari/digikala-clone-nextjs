@@ -1,9 +1,9 @@
-import { BackButton } from "components";
+import { Buttons } from "components";
 
 export default function Comments() {
   return (
     <>
-    <BackButton backRoute='/admin'>دیدگاه‌ها</BackButton>
+    <Buttons.Back backRoute='/admin'>دیدگاه‌ها</Buttons.Back>
     <div className='section-divide-y' />
 
     <div className='py-20'>
