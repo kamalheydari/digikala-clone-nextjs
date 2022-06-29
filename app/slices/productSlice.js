@@ -57,6 +57,8 @@ const productSlice = createSlice({
         state.product.colors.push({ id: nanoid(), ...value });
 
       if (type === "images") state.product.images.push(...value);
+      
+      if (type === "uploaded-images") state.product.images = value;
     },
     deleteItem: (state, action) => {
       const { type, id } = action.payload;
@@ -85,7 +87,7 @@ const productSlice = createSlice({
     },
     resetProduct: (state, action) => {
       state.product = initialState;
-    }
+    },
   },
   extraReducers(builder) {
     builder.addCase(fetchDetails.fulfilled, (state, action) => {

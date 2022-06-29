@@ -21,11 +21,10 @@ import { useRef } from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import getDetailsArray from "utils/getDetailsArray";
-import { imageUpload } from "utils/imageUpload";
 
 export default function Product() {
   const dispatch = useDispatch();
-  const router=useRouter()
+  const router = useRouter();
 
   //? Local State
   const [categoryID, setCategoryID] = useState(null);
@@ -69,12 +68,12 @@ export default function Product() {
           status: "success",
           text: data.msg,
         })
-        );
-        dispatch(resetSelectedCategories())
-        dispatch(resetProduct())
-        router.push('/admin/products')
-      }
-      if (isError) {
+      );
+      dispatch(resetSelectedCategories());
+      dispatch(resetProduct());
+      router.push("/admin/products");
+    }
+    if (isError) {
       dispatch(
         openModal({
           isShow: true,
@@ -90,17 +89,11 @@ export default function Product() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let media = [];
-    const imgNewURL = product.images.filter((img) => !img.url);
-    const imgOldURL = product.images.filter((img) => img.url);
-
-    if (imgNewURL.length > 0) media = await imageUpload(imgNewURL);
-
     dispatch(addInfo(getDetailsArray(infoTableRef)));
     dispatch(addSpecification(getDetailsArray(specificationTableRef)));
     dispatch(addCategory(category));
 
-    postData({ url: `/api/products`, token, body: { ...product, images: media } });
+    postData({ url: `/api/products`, token, body: { ...product } });
   };
 
   return (
