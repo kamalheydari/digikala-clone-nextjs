@@ -24,10 +24,12 @@ export default function Alert({ isShow, status, text, dispatch }) {
   }
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      dispatch(closeModal());
-    }, 2000);
-    return () => clearTimeout(timeout);
+    if (isShow) {
+      const timeout = setTimeout(() => {
+        dispatch(closeModal());
+      }, 2000);
+      return () => clearTimeout(timeout);
+    }
   }, [isShow]);
 
   return (
