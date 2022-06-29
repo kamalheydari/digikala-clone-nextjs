@@ -34,17 +34,20 @@ const createProduct = async (req, res) => {
   try {
     const result = await auth(req, res);
 
-    if (!result.root)
-      return sendError(res, 400, "توکن احراز هویت نامعتبر است");
+    if (!result.root) return sendError(res, 400, "توکن احراز هویت نامعتبر است");
 
     const {
       title,
       price,
-      inStock,
+      discount,
       description,
-      content,
-      category,
       images,
+      sizes,
+      colors,
+      category,
+      inStock,
+      info,
+      specification,
     } = req.body;
 
     if (
@@ -52,9 +55,10 @@ const createProduct = async (req, res) => {
       !price ||
       !inStock ||
       !description ||
-      !content ||
-      category === "all" ||
-      images.length === 0
+      !category ||
+      images.length === 0 ||
+      info.length === 0 ||
+      specification.length === 0
     )
       return sendError(res, 400, "لطفا تمام فیلد ها را پر کنید");
 
@@ -62,11 +66,15 @@ const createProduct = async (req, res) => {
     const newProduct = new Products({
       title,
       price,
-      inStock,
+      discount,
       description,
-      content,
-      category,
       images,
+      sizes,
+      colors,
+      category,
+      inStock,
+      info,
+      specification,
     });
     await newProduct.save();
     await db.disconnect();

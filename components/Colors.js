@@ -79,14 +79,14 @@ export default function colors() {
                 type='button'
                 onClick={() => handleDelete(item.id)}
               >
-                <Icons.Delete className='icon  text-red-500' />
+                <Icons.Delete className='icon text-red-500  w-8 h-8 p-1 rounded-2xl bg-red-100' />
               </button>
               <button
                 className='mr-1 ml-4'
                 type='button'
                 onClick={() => handleEdit(item.id)}
               >
-                <Icons.Edit className='icon  text-amber-500' />
+                <Icons.Edit className='icon  text-amber-500 w-8 h-8 p-1 rounded-2xl bg-amber-100' />
               </button>
               {item.name}
               <span

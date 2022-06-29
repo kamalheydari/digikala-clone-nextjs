@@ -1,34 +1,50 @@
-import { useGetDataQuery } from "app/slices/fetchApiSlice";
+import { resetSelectedCategories } from "app/slices/categorySlice";
+import { usePostDataMutation } from "app/slices/fetchApiSlice";
+import { openModal } from "app/slices/modalSlice";
 import {
   addCategory,
   addInfo,
   addSpecification,
   changeProductItems,
   fetchDetails,
+  resetProduct,
 } from "app/slices/productSlice";
-import { BackButton, Colors, SelectCategories, Sizes } from "components";
+import {
+  BackButton,
+  Colors,
+  SelectCategories,
+  Sizes,
+  UploadImages,
+} from "components";
+import { useRouter } from "next/router";
 import { useRef } from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import getDetailsArray from "utils/getDetailsArray";
+import { imageUpload } from "utils/imageUpload";
 
 export default function Product() {
   const dispatch = useDispatch();
+  const router=useRouter()
 
+  //? Local State
   const [categoryID, setCategoryID] = useState(null);
 
-  //? TABLE
+  //? TABLE Refs
   const infoTableRef = useRef(null);
   const specificationTableRef = useRef(null);
 
   //? Store
+
+  const { token } = useSelector((state) => state.auth);
   const { parentCategory, categories, category } = useSelector(
     (state) => state.categories
   );
-  const { infoArray, specificationArray, optionsType } = useSelector(
+  const { infoArray, specificationArray, optionsType, product } = useSelector(
     (state) => state.product
   );
 
+  //? Select Category To Fetch Details
   useEffect(() => {
     if (parentCategory.length > 0) {
       const { _id } = categories.find((cat) => cat.slug === parentCategory);
@@ -42,12 +58,49 @@ export default function Product() {
     }
   }, [categoryID]);
 
-  const handleSubmit = (e) => {
+  //? Post Data Query
+  const [postData, { data, isSuccess, isError, error }] = usePostDataMutation();
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(
+        openModal({
+          isShow: true,
+          type: "alert",
+          status: "success",
+          text: data.msg,
+        })
+        );
+        dispatch(resetSelectedCategories())
+        dispatch(resetProduct())
+        router.push('/admin/products')
+      }
+      if (isError) {
+      dispatch(
+        openModal({
+          isShow: true,
+          type: "alert",
+          status: "error",
+          text: error?.data.err,
+        })
+      );
+    }
+  }, [isSuccess, isError]);
+
+  //? Hanlders
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    let media = [];
+    const imgNewURL = product.images.filter((img) => !img.url);
+    const imgOldURL = product.images.filter((img) => img.url);
+
+    if (imgNewURL.length > 0) media = await imageUpload(imgNewURL);
 
     dispatch(addInfo(getDetailsArray(infoTableRef)));
     dispatch(addSpecification(getDetailsArray(specificationTableRef)));
     dispatch(addCategory(category));
+
+    postData({ url: `/api/products`, token, body: { ...product, images: media } });
   };
 
   return (
@@ -89,7 +142,8 @@ export default function Product() {
               onChange={(e) => dispatch(changeProductItems(e))}
             />
           </div>
-          <div className='space-y-4 md:flex md:items-baseline md:justify-evenly'>
+          <UploadImages />
+          <div className='space-y-4 md:flex md:gap-x-2 md:items-baseline md:justify-evenly'>
             <div className='space-y-1.5'>
               <label
                 className='text-xs text-gray-700 lg:text-sm md:min-w-max'
@@ -102,6 +156,7 @@ export default function Product() {
                 name='price'
                 id='price'
                 className='input'
+                placeholder='0'
                 onChange={(e) => dispatch(changeProductItems(e))}
               />
             </div>
@@ -117,6 +172,23 @@ export default function Product() {
                 name='inStock'
                 id='inStock'
                 className='input'
+                placeholder='0'
+                onChange={(e) => dispatch(changeProductItems(e))}
+              />
+            </div>
+            <div className='space-y-1.5'>
+              <label
+                className='text-xs text-gray-700 lg:text-sm md:min-w-max'
+                htmlFor='discount'
+              >
+                تخفیف برحسب درصد
+              </label>
+              <input
+                type='number'
+                name='discount'
+                id='discount'
+                className='input'
+                placeholder='0%'
                 onChange={(e) => dispatch(changeProductItems(e))}
               />
             </div>

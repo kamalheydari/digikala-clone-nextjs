@@ -15,6 +15,7 @@ const initialState = {
   product: {
     title: "",
     price: 0,
+    discount: 0,
     description: "",
     images: [],
     sizes: [],
@@ -54,6 +55,8 @@ const productSlice = createSlice({
 
       if (type === "colors")
         state.product.colors.push({ id: nanoid(), ...value });
+
+      if (type === "images") state.product.images.push(...value);
     },
     deleteItem: (state, action) => {
       const { type, id } = action.payload;
@@ -63,6 +66,9 @@ const productSlice = createSlice({
         state.product.sizes.splice(index, 1);
       if (type === "colors" && index !== -1)
         state.product.colors.splice(index, 1);
+    },
+    deleteImage: (state, action) => {
+      state.product.images.splice(action.payload, 1);
     },
 
     editItem: (state, action) => {
@@ -77,6 +83,9 @@ const productSlice = createSlice({
         }
       });
     },
+    resetProduct: (state, action) => {
+      state.product = initialState;
+    }
   },
   extraReducers(builder) {
     builder.addCase(fetchDetails.fulfilled, (state, action) => {
@@ -98,4 +107,6 @@ export const {
   addItem,
   deleteItem,
   editItem,
+  deleteImage,
+  resetProduct,
 } = productSlice.actions;

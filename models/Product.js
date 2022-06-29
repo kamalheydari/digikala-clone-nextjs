@@ -14,12 +14,13 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    discount: { type: Number, default: 0 },
     images: {
       type: Array,
       required: true,
     },
-    size: [String],
-    color: [Object],
+    sizes: { type: Array },
+    colors: { type: Array },
     category: {
       type: String,
       required: true,
@@ -32,6 +33,8 @@ const productSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    info: { type: Array },
+    specification: { type: Array },
   },
   {
     timestamps: true,
