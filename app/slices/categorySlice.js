@@ -11,8 +11,8 @@ export const fetchCategories = createAsyncThunk(
 
 const initialState = {
   categories: [],
-  parentCategory: "",
   mainCategory: "",
+  parentCategory: "",
   category: "",
 };
 const categorySlice = createSlice({
@@ -37,6 +37,7 @@ const categorySlice = createSlice({
     resetSelectedCategories: (state, action) => {
       state.parentCategory = "";
       state.mainCategory = "";
+      state.category = "";
     },
   },
   extraReducers(builder) {

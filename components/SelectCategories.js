@@ -12,7 +12,7 @@ export default function SelectCategories({ detailsHome, productPage }) {
   const dispatch = useDispatch();
 
   //? Store
-  const { categories, mainCategory, parentCategory } = useSelector(
+  const { categories, mainCategory, parentCategory, category } = useSelector(
     (state) => state.categories
   );
 
@@ -35,9 +35,7 @@ export default function SelectCategories({ detailsHome, productPage }) {
     if (e.target.name === "parentCategory")
       dispatch(selecteParentCategory(e.target.value));
 
-    if (e.target.name === "category")
-      dispatch(selecteCategory(e.target.value));
-
+    if (e.target.name === "category") dispatch(selecteCategory(e.target.value));
   };
 
   const handleRouteChange = (e) => {
@@ -58,8 +56,9 @@ export default function SelectCategories({ detailsHome, productPage }) {
           name='mainCategory'
           id='mainCategory'
           onChange={handleChange}
+          value={mainCategory}
         >
-          <option></option>
+          <option value=''></option>
           {mainCategories.map((item, index) => (
             <option key={index} value={item.category}>
               {item.name}
@@ -81,8 +80,9 @@ export default function SelectCategories({ detailsHome, productPage }) {
             name='parentCategory'
             id='parentCategory'
             onChange={handleRouteChange}
+            value={parentCategory}
           >
-            <option></option>
+            <option value=''></option>
             {parentCategories.map((item, index) => (
               <option value={item._id} key={index}>
                 {item.name}
@@ -95,8 +95,9 @@ export default function SelectCategories({ detailsHome, productPage }) {
             name='parentCategory'
             id='parentCategory'
             onChange={handleChange}
+            value={parentCategory}
           >
-            <option></option>
+            <option value=''></option>
             {parentCategories.map((item, index) => (
               <option value={item.slug} key={index}>
                 {item.name}
@@ -119,8 +120,9 @@ export default function SelectCategories({ detailsHome, productPage }) {
             name='category'
             id='category'
             onChange={handleChange}
+            value={category}
           >
-            <option></option>
+            <option value=''></option>
             {categoryArray.map((item, index) => (
               <option key={index} value={item.category}>
                 {item.name}
