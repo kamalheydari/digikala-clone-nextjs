@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { useDeleteDataMutation } from "app/slices/fetchApiSlice";
 import { deleteUser } from "app/slices/usersSlice";
 import { resetDetails } from "app/slices/detailsSlice";
+import { useRouter } from "next/router";
 
 export default function ConfirmDeleteModal({
   title,
@@ -17,6 +18,8 @@ export default function ConfirmDeleteModal({
   type,
   dispatch,
 }) {
+  const router = useRouter();
+
   //? Config Url & Edit Store
   let url, editStore;
 
@@ -25,13 +28,15 @@ export default function ConfirmDeleteModal({
     editStore = () => {
       dispatch(deleteUser(id));
     };
-  } else if (type === "confirm-delete-post") {
-    url = `/api/category/${id}`;
-    editStore = () => {};
   } else if (type === "confirm-delete-details") {
     url = `/api/details/${id}`;
     editStore = () => {
       dispatch(resetDetails());
+    };
+  } else if (type === "confirm-delete-product") {
+    url = `/api/products/${id}`;
+    editStore = () => {
+      router.reload();
     };
   }
 

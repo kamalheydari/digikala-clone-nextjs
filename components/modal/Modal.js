@@ -73,6 +73,7 @@ export default function Modal() {
       break;
 
     case "confirm-update-details":
+    case "confirm-update-product":
       effect = ["top-40 transform scale-100", "top-40 transform scale-50 "];
       size = "max-w-3xl";
       renderModal = (

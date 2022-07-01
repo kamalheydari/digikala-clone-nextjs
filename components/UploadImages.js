@@ -94,10 +94,10 @@ export default function UploadImages() {
           onChange={handleAddImages}
         />
       </div>
-      {images.length > 0 && (
+      {images?.length > 0 && (
         <div className='pt-1 mt-2 pb-6 bg-gray-50 rounded'>
           <div className='mt-8 flex flex-wrap justify-center align-center gap-x-4 gap-y-2 '>
-            {images.map((img, index) => (
+            {images?.map((img, index) => (
               <div key={index} className='relative'>
                 <img
                   src={img.url ? img.url : URL.createObjectURL(img)}

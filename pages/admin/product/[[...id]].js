@@ -1,25 +1,26 @@
+import { useEffect, useState, useRef } from "react";
+import { useRouter } from "next/router";
+
+import { useDispatch, useSelector } from "react-redux";
 import { resetSelectedCategories } from "app/slices/categorySlice";
 import { usePostDataMutation } from "app/slices/fetchApiSlice";
 import { openModal } from "app/slices/modalSlice";
 import {
-  addCategory,
-  addInfo,
-  addSpecification,
   changeProductItems,
   fetchDetails,
+  fetchProduct,
   resetProduct,
 } from "app/slices/productSlice";
+
 import {
   Buttons,
   Colors,
   SelectCategories,
   Sizes,
   UploadImages,
+  Loading,
 } from "components";
-import { useRouter } from "next/router";
-import { useRef } from "react";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+
 import getDetailsArray from "utils/getDetailsArray";
 
 export default function Product() {
@@ -34,7 +35,6 @@ export default function Product() {
   const specificationTableRef = useRef(null);
 
   //? Store
-
   const { token } = useSelector((state) => state.auth);
   const { parentCategory, categories, category } = useSelector(
     (state) => state.categories
@@ -58,7 +58,10 @@ export default function Product() {
   }, [categoryID]);
 
   //? Post Data Query
-  const [postData, { data, isSuccess, isError, error }] = usePostDataMutation();
+  const [
+    postData,
+    { data, isSuccess, isLoading, isError, error },
+  ] = usePostDataMutation();
   useEffect(() => {
     if (isSuccess) {
       dispatch(
@@ -69,9 +72,9 @@ export default function Product() {
           text: data.msg,
         })
       );
+      router.push("/admin/products");
       dispatch(resetSelectedCategories());
       dispatch(resetProduct());
-      router.push("/admin/products");
     }
     if (isError) {
       dispatch(
@@ -85,15 +88,53 @@ export default function Product() {
     }
   }, [isSuccess, isError]);
 
+  //? Edit Product
+  const { id } = router.query;
+  useEffect(() => {
+    if (id) {
+      dispatch(resetProduct());
+      dispatch(fetchProduct(router.query.id));
+    } else {
+      dispatch(resetProduct());
+    }
+  }, [id]);
+
   //? Hanlders
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    dispatch(addInfo(getDetailsArray(infoTableRef)));
-    dispatch(addSpecification(getDetailsArray(specificationTableRef)));
-    dispatch(addCategory(category));
+    const infoArray = await getDetailsArray(infoTableRef);
+    const specificationArray = await getDetailsArray(specificationTableRef);
 
-    postData({ url: `/api/products`, token, body: { ...product } });
+    postData({
+      url: `/api/products`,
+      token,
+      body: {
+        ...product,
+        info: infoArray,
+        specification: specificationArray,
+        category,
+      },
+    });
+  };
+
+  const updateHandler = async () => {
+    const infoArray = await getDetailsArray(infoTableRef);
+    const specificationArray = await getDetailsArray(specificationTableRef);
+
+    dispatch(
+      openModal({
+        isShow: true,
+        id,
+        type: "confirm-update-product",
+        title: "مشخصات و ویژگی های",
+        editedData: {
+          ...product,
+          info: infoArray,
+          specification: specificationArray,
+        },
+      })
+    );
   };
 
   return (
@@ -115,7 +156,15 @@ export default function Product() {
               className='input text-right'
               name='title'
               id='title'
-              onChange={(e) => dispatch(changeProductItems(e))}
+              value={product.title}
+              onChange={(e) =>
+                dispatch(
+                  changeProductItems({
+                    name: e.target.name,
+                    value: e.target.value,
+                  })
+                )
+              }
             />
           </div>
           <div className='space-y-1.5'>
@@ -132,7 +181,15 @@ export default function Product() {
               className='input text-right'
               name='description'
               id='description'
-              onChange={(e) => dispatch(changeProductItems(e))}
+              value={product.description}
+              onChange={(e) =>
+                dispatch(
+                  changeProductItems({
+                    name: e.target.name,
+                    value: e.target.value,
+                  })
+                )
+              }
             />
           </div>
           <UploadImages />
@@ -150,7 +207,15 @@ export default function Product() {
                 id='price'
                 className='input'
                 placeholder='0'
-                onChange={(e) => dispatch(changeProductItems(e))}
+                value={product.price}
+                onChange={(e) =>
+                  dispatch(
+                    changeProductItems({
+                      name: e.target.name,
+                      value: e.target.value,
+                    })
+                  )
+                }
               />
             </div>
             <div className='space-y-1.5'>
@@ -166,7 +231,15 @@ export default function Product() {
                 id='inStock'
                 className='input'
                 placeholder='0'
-                onChange={(e) => dispatch(changeProductItems(e))}
+                value={product.inStock}
+                onChange={(e) =>
+                  dispatch(
+                    changeProductItems({
+                      name: e.target.name,
+                      value: e.target.value,
+                    })
+                  )
+                }
               />
             </div>
             <div className='space-y-1.5'>
@@ -182,16 +255,24 @@ export default function Product() {
                 id='discount'
                 className='input'
                 placeholder='0%'
-                onChange={(e) => dispatch(changeProductItems(e))}
+                value={product.discount}
+                onChange={(e) =>
+                  dispatch(
+                    changeProductItems({
+                      name: e.target.name,
+                      value: e.target.value,
+                    })
+                  )
+                }
               />
             </div>
           </div>
           <div className='space-y-8 py-3 mx-auto w-fit md:w-full md:py-0  md:flex md:items-baseline md:justify-between'>
-            <SelectCategories productPage />
+            {!id && <SelectCategories productPage />}
           </div>
-          {optionsType === "colors" ? (
+          {optionsType === "colors" || product.colors.length > 0 ? (
             <Colors />
-          ) : optionsType === "sizes" ? (
+          ) : optionsType === "sizes" || product.sizes.length > 0 ? (
             <Sizes />
           ) : (
             ""
@@ -206,15 +287,30 @@ export default function Product() {
                 </tr>
               </thead>
               <tbody>
-                {infoArray?.map((item, index) => (
-                  <tr key={index} className='border-b-2 border-gray-100'>
-                    <td className='p-2'>{item}</td>
-                    <td
-                      contentEditable='true'
-                      className='input my-0.5 text-right'
-                    ></td>
-                  </tr>
-                ))}
+                {!id &&
+                  infoArray?.map((item, index) => (
+                    <tr key={index} className='border-b-2 border-gray-100'>
+                      <td className='p-2'>{item}</td>
+                      <td
+                        contentEditable='true'
+                        suppressContentEditableWarning='true'
+                        className='input my-0.5 text-right'
+                      ></td>
+                    </tr>
+                  ))}
+                {id &&
+                  product.info.map((item, index) => (
+                    <tr key={index} className='border-b-2 border-gray-100'>
+                      <td className='p-2'>{item[0]}</td>
+                      <td
+                        contentEditable='true'
+                        suppressContentEditableWarning='true'
+                        className='input my-0.5 text-right'
+                      >
+                        {item[1]}
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>
@@ -231,25 +327,49 @@ export default function Product() {
                 </tr>
               </thead>
               <tbody>
-                {specificationArray?.map((item, index) => (
-                  <tr key={index} className='border-b-2 border-gray-100'>
-                    <td className='p-2'>{item}</td>
-                    <td
-                      contentEditable='true'
-                      className='input my-0.5 text-right'
-                    ></td>
-                  </tr>
-                ))}
+                {!id &&
+                  specificationArray?.map((item, index) => (
+                    <tr key={index} className='border-b-2 border-gray-100'>
+                      <td className='p-2'>{item}</td>
+                      <td
+                        contentEditable='true'
+                        suppressContentEditableWarning='true'
+                        className='input my-0.5 text-right'
+                      ></td>
+                    </tr>
+                  ))}
+                {id &&
+                  product.specification.map((item, index) => (
+                    <tr key={index} className='border-b-2 border-gray-100'>
+                      <td className='p-2'>{item[0]}</td>
+                      <td
+                        contentEditable='true'
+                        suppressContentEditableWarning='true'
+                        className='input my-0.5 text-right'
+                      >
+                        {item[1]}
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>
-          <button
-            className='btn mx-auto px-6 bg-green-500 rounded-md mt-8'
-            type='submit'
-          >
-            {/* {isLoading ? <Loading /> : "ثبت اطلاعات"} */}
-            ثبت اطلاعات
-          </button>
+          {id ? (
+            <button
+              className='btn px-6 mx-auto bg-amber-500 rounded-md mt-8'
+              type='button'
+              onClick={updateHandler}
+            >
+              {isLoading ? <Loading /> : "بروزرسانی اطلاعات"}
+            </button>
+          ) : (
+            <button
+              className='btn mx-auto px-6 bg-green-500 rounded-md mt-8'
+              type='submit'
+            >
+              {isLoading ? <Loading /> : "ثبت اطلاعات"}
+            </button>
+          )}
         </form>
       </div>
     </>

@@ -22,7 +22,7 @@ const Back = ({ children, backRoute }) => {
 
 const Delete = (props) => {
   return (
-    <button type='button' {...props}>
+    <button type='button' {...props} title='Delete'>
       <Icons.Delete className=' text-red-500  w-8 h-8 p-1 lg:w-9 lg:h-9 lg:p-1.5 rounded-2xl bg-red-100' />
     </button>
   );
@@ -30,7 +30,7 @@ const Delete = (props) => {
 
 const Edit = (props) => {
   return (
-    <button type='button' {...props}>
+    <button type='button' {...props} title='Edit'>
       <Icons.Edit className=' text-amber-500  w-8 h-8 p-1 lg:w-9 lg:h-9 lg:p-1.5 rounded-2xl bg-amber-100' />
     </button>
   );
@@ -38,7 +38,7 @@ const Edit = (props) => {
 
 const Add = (props) => {
   return (
-    <button type='button' {...props}>
+    <button type='button' {...props} title='Add'>
       <Icons.Plus className=' text-green-500 bg-green-100 rounded-2xl w-8 h-8 p-1 lg:w-9 lg:h-9 lg:p-1.5' />
     </button>
   );

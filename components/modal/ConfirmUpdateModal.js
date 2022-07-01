@@ -21,15 +21,17 @@ export default function ConfirmUpdateModal({
 
   if (type === "confirm-update-details") {
     url = `/api/details/${id}`;
+  } else if (type === "confirm-update-product") {
+    url = `/api/products/${id}`;
   }
   //? Update Data
-  const [putData, {data, isSuccess, isError, error }] = usePutDataMutation();
+  const [putData, { data, isSuccess, isError, error }] = usePutDataMutation();
   useEffect(() => {
     if (isConfirm) {
       putData({
         url,
         token,
-        body: {...editedData},
+        body: { ...editedData },
       });
     }
     if (isSuccess) {
@@ -39,7 +41,7 @@ export default function ConfirmUpdateModal({
         type: "alert",
         status: "success",
         text: data.msg,
-      })
+      });
     }
 
     if (isError) {

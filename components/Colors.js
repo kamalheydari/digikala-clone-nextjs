@@ -3,7 +3,7 @@ import {  Buttons } from "components";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, deleteItem, editItem } from "app/slices/productSlice";
 import { useRef } from "react";
-export default function colors() {
+export default function Colors() {
   const dispatch = useDispatch();
   const inputRef = useRef();
   const {
@@ -70,13 +70,13 @@ export default function colors() {
           {colors.map((item) => (
             <div
               key={item.id}
-              className='shadow rounded flex gap-x-2 items-center px-1.5 py-2'
+              className='shadow rounded flex gap-x-2 items-center px-1.5 py-2 bg-gray-50'
             >
               <Buttons.Delete onClick={() => handleDelete(item.id)} />
               <Buttons.Edit onClick={() => handleEdit(item.id)} />
               {item.name}
               <span
-                className=' w-6 h-6 mr-3 rounded-sm'
+                className=' w-6 h-6 mr-3 rounded-sm shadow'
                 style={{ background: item.hashCode }}
               ></span>
             </div>

@@ -11,6 +11,17 @@ export const fetchDetails = createAsyncThunk(
   }
 );
 
+export const fetchProduct = createAsyncThunk(
+  "product/fetchProduct",
+  async (productID) => {
+    const res = await fetch(
+      process.env.BASE_URL + `/api/products/${productID}`
+    );
+    const data = await res.json();
+    return data?.product;
+  }
+);
+
 const initialState = {
   product: {
     title: "",
@@ -35,17 +46,7 @@ const productSlice = createSlice({
   initialState,
   reducers: {
     changeProductItems: (state, action) => {
-      const e = action.payload;
-      state.product[e.target.name] = e.target.value;
-    },
-    addInfo: (state, action) => {
-      state.product.info = action.payload;
-    },
-    addSpecification: (state, action) => {
-      state.product.specification = action.payload;
-    },
-    addCategory: (state, action) => {
-      state.product.category = action.payload;
+      state.product[action.payload.name] = action.payload.value;
     },
     addItem: (state, action) => {
       const { type, value } = action.payload;
@@ -57,7 +58,7 @@ const productSlice = createSlice({
         state.product.colors.push({ id: nanoid(), ...value });
 
       if (type === "images") state.product.images.push(...value);
-      
+
       if (type === "uploaded-images") state.product.images = value;
     },
     deleteItem: (state, action) => {
@@ -86,7 +87,10 @@ const productSlice = createSlice({
       });
     },
     resetProduct: (state, action) => {
-      state.product = initialState;
+      state.product = initialState.product;
+      state.infoArray = [];
+      state.specificationArray = [];
+      state.optionsType = "";
     },
   },
   extraReducers(builder) {
@@ -95,6 +99,10 @@ const productSlice = createSlice({
       state.infoArray = info.map((item) => item.name);
       state.specificationArray = specification.map((item) => item.name);
       state.optionsType = optionsType;
+    });
+
+    builder.addCase(fetchProduct.fulfilled, (state, action) => {
+      state.product = action.payload;
     });
   },
 });

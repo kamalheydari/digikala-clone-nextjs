@@ -79,7 +79,7 @@ const createProduct = async (req, res) => {
     await newProduct.save();
     await db.disconnect();
 
-    res.status(201).json({ msg: "محصول جدید باموفقیت اضافه شد" });
+    res.status(201).json({ msg: "محصول جدید با موفقیت اضافه شد" });
   } catch (error) {
     sendError(res, 500, error.message);
   }
