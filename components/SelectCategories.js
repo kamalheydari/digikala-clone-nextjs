@@ -44,15 +44,10 @@ export default function SelectCategories({ detailsHome, productPage }) {
 
   return (
     <>
-      <div className='flex flex-col items-start justify-between gap-y-2'>
-        <label
-          className='text-xs text-gray-700 lg:text-sm md:min-w-max'
-          htmlFor='mainCategory'
-        >
-          دسته‌بندی اصلی
-        </label>
+      <div className='flex flex-col items-start justify-between gap-y-2 '>
+        <label htmlFor='mainCategory'>دسته‌بندی اصلی</label>
         <select
-          className='border-2 rounded-sm py-0.5 px-3 outline-none w-56'
+          className='border-2 rounded-sm py-0.5 px-3 outline-none w-56 text-gray-800'
           name='mainCategory'
           id='mainCategory'
           onChange={handleChange}
@@ -60,7 +55,7 @@ export default function SelectCategories({ detailsHome, productPage }) {
         >
           <option value=''></option>
           {mainCategories.map((item, index) => (
-            <option key={index} value={item.category}>
+            <option key={index} value={item.category} className='text-gray-700'>
               {item.name}
             </option>
           ))}
@@ -68,15 +63,10 @@ export default function SelectCategories({ detailsHome, productPage }) {
       </div>
 
       <div className='flex flex-col items-start justify-between gap-y-2 '>
-        <label
-          className='text-xs text-gray-700 lg:text-sm md:min-w-max'
-          htmlFor='parentCategory'
-        >
-          دسته‌بندی والد
-        </label>
+        <label htmlFor='parentCategory'>دسته‌بندی والد</label>
         {detailsHome ? (
           <select
-            className='border-2 rounded-sm py-0.5 px-3 outline-none w-56'
+            className='border-2 rounded-sm py-0.5 px-3 outline-none w-56 text-gray-800'
             name='parentCategory'
             id='parentCategory'
             onChange={handleRouteChange}
@@ -84,14 +74,14 @@ export default function SelectCategories({ detailsHome, productPage }) {
           >
             <option value=''></option>
             {parentCategories.map((item, index) => (
-              <option value={item._id} key={index}>
+              <option value={item._id} key={index} className='text-gray-700'>
                 {item.name}
               </option>
             ))}
           </select>
         ) : (
           <select
-            className='border-2 rounded-sm py-0.5 px-3 outline-none w-56'
+            className='border-2 rounded-sm py-0.5 px-3 outline-none w-56 text-gray-800'
             name='parentCategory'
             id='parentCategory'
             onChange={handleChange}
@@ -99,7 +89,7 @@ export default function SelectCategories({ detailsHome, productPage }) {
           >
             <option value=''></option>
             {parentCategories.map((item, index) => (
-              <option value={item.slug} key={index}>
+              <option value={item.slug} key={index} className='text-gray-700'>
                 {item.name}
               </option>
             ))}
@@ -109,14 +99,9 @@ export default function SelectCategories({ detailsHome, productPage }) {
 
       {productPage && (
         <div className='flex flex-col items-start justify-between gap-y-2'>
-          <label
-            className='text-xs text-gray-700 lg:text-sm md:min-w-max'
-            htmlFor='category'
-          >
-            دسته‌بندی
-          </label>
+          <label htmlFor='category'>دسته‌بندی</label>
           <select
-            className='border-2 rounded-sm py-0.5 px-3 outline-none w-56'
+            className='border-2 rounded-sm py-0.5 px-3 outline-none w-56 text-gray-800'
             name='category'
             id='category'
             onChange={handleChange}
@@ -124,7 +109,11 @@ export default function SelectCategories({ detailsHome, productPage }) {
           >
             <option value=''></option>
             {categoryArray.map((item, index) => (
-              <option key={index} value={item.category}>
+              <option
+                key={index}
+                value={item.category}
+                className='text-gray-700'
+              >
                 {item.name}
               </option>
             ))}

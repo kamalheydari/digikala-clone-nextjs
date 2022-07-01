@@ -40,7 +40,7 @@ export default function ProfileAside({ user }) {
   if (!user) return null;
 
   return (
-    <aside className='mt-6 lg:border lg:border-gray-200 lg:rounded-md lg:py-4'>
+    <aside className='sticky mt-6 lg:border lg:border-gray-200 lg:rounded-md lg:py-4 min-w-max top-6'>
       <div className='relative w-40 h-12 mx-auto'>
         <Link passHref href='/'>
           <a>

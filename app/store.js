@@ -4,7 +4,6 @@ import fetchApi from "app/slices/fetchApiSlice";
 import authReducer from "./slices/authSlice";
 import cartReducer from "./slices/cartSlice";
 import modalReducer from "./slices/modalSlice";
-import usersReducer from "./slices/usersSlice";
 import categoryReducer from "./slices/categorySlice";
 import detailsReducer from "./slices/detailsSlice";
 import productReducer from "./slices/productSlice";
@@ -14,7 +13,6 @@ export const store = configureStore({
     auth: authReducer,
     cart: cartReducer,
     modal: modalReducer,
-    users: usersReducer,
     categories: categoryReducer,
     details: detailsReducer,
     product: productReducer,

@@ -76,16 +76,16 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className=' grid items-center min-h-screen '>
+    <div className='grid items-center min-h-screen '>
       <div className='container max-w-xl px-12 py-6 space-y-6 lg:border lg:border-gray-100 lg:rounded-lg lg:shadow'>
-        <div className='relative w-44 h-24 mx-auto'>
+        <div className='relative h-24 mx-auto w-44'>
           <Link passHref href='/'>
             <a>
               <Image src='/icons/logo.svg' layout='fill' />
             </a>
           </Link>
         </div>
-        <h2>ثبت‌نام</h2>
+        <h2 className='text-gray-700'>ثبت‌نام</h2>
         <form className='space-y-5' onSubmit={handleSubmit(submitHander)}>
           <div>
             <input
@@ -129,7 +129,7 @@ export default function RegisterPage() {
           </div>
 
           <button
-            className='btn mx-auto w-full max-w-[200px]'
+          className='mx-auto w-44 btn rounded-3xl '
             type='submit'
             disabled={isLoading}
           >
@@ -138,9 +138,9 @@ export default function RegisterPage() {
         </form>
 
         <div>
-          <p className='inline ml-2'>حساب کاربری دارید؟</p>
+          <p className='inline ml-2 text-gray-800'>حساب کاربری دارید؟</p>
           <Link href='/login'>
-            <a className='text-blue-400 text-lg '>ورود</a>
+            <a className='text-lg text-blue-400 '>ورود</a>
           </Link>
         </div>
       </div>

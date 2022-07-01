@@ -27,24 +27,24 @@ export default function Categories() {
       <div className='section-divide-y' />
 
       <div className='p-3'>
-        <div className='text-white space-y-8'>
+        <div className='space-y-8 text-white'>
           <button
             className='flex items-center px-3 py-2 text-red-600 border-2 border-red-600 rounded-lg gap-x-3'
             onClick={categoryEditHandler}
           >
             افزودن دسته‌بندی جدید
           </button>
-          <div className='text-gray-600  flex gap-x-3'>
+          <div className='flex text-gray-600 gap-x-3'>
             <p className='flex items-center text-sm gap-x-1'>
-              <span className='w-6 h-6 rounded-md bg-red-500 inline-block' />
+              <span className='inline-block w-6 h-6 bg-red-500 rounded-md' />
               دسته‌بندی اصلی
             </p>
             <p className='flex items-center text-sm gap-x-1'>
-              <span className='w-6 h-6 rounded-md bg-green-500 inline-block' />
+              <span className='inline-block w-6 h-6 bg-green-500 rounded-md' />
               دسته‌بندی والد
             </p>
             <p className='flex items-center text-sm gap-x-1'>
-              <span className='w-6 h-6 rounded-md bg-blue-500 inline-block' />
+              <span className='inline-block w-6 h-6 bg-blue-500 rounded-md' />
               دسته‌بندی فرزند
             </p>
           </div>

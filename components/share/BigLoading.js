@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function BigLoading() {
   return (
-    <div className="bg-gray-50 max-w-max mx-auto text-center p-6 rounded-lg ">
+    <div className='p-6 mx-auto text-center rounded-lg bg-gray-50 max-w-max '>
       <div className='relative w-40 h-12 mx-auto'>
         <Image src='/icons/logo.svg' layout='fill' />
       </div>
@@ -24,7 +24,7 @@ export default function BigLoading() {
             width: 13px;
             height: 13px;
             border-radius: 50%;
-            background: #EE384E;
+            background: #ee384e;
             animation-timing-function: cubic-bezier(0, 1, 1, 0);
           }
           .lds-ellipsis div:nth-child(1) {

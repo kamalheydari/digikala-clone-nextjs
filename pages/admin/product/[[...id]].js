@@ -142,18 +142,13 @@ export default function Product() {
       <Buttons.Back backRoute='/admin'>محصول جدید</Buttons.Back>
       <div className='section-divide-y' />
 
-      <div className='p-3'>
+      <div className='p-3 md:px-3 xl:px-8 2xl:px-10'>
         <form onSubmit={handleSubmit} className='space-y-10'>
           <div className='space-y-1.5'>
-            <label
-              className='text-xs text-gray-700 lg:text-sm md:min-w-max'
-              htmlFor='title'
-            >
-              عنوان
-            </label>
+            <label htmlFor='title'>عنوان</label>
             <input
               type='text'
-              className='input text-right'
+              className='text-right input'
               name='title'
               id='title'
               value={product.title}
@@ -168,17 +163,12 @@ export default function Product() {
             />
           </div>
           <div className='space-y-1.5'>
-            <label
-              className='text-xs text-gray-700 lg:text-sm md:min-w-max'
-              htmlFor='description'
-            >
-              معرفی
-            </label>
+            <label htmlFor='description'>معرفی</label>
             <textarea
               cols='30'
               rows='4'
               type='text'
-              className='input text-right'
+              className='text-right input'
               name='description'
               id='description'
               value={product.description}
@@ -195,12 +185,7 @@ export default function Product() {
           <UploadImages />
           <div className='space-y-4 md:flex md:gap-x-2 md:items-baseline md:justify-evenly'>
             <div className='space-y-1.5'>
-              <label
-                className='text-xs text-gray-700 lg:text-sm md:min-w-max'
-                htmlFor='price'
-              >
-                قیمت برحسب تومان
-              </label>
+              <label htmlFor='price'>قیمت برحسب تومان</label>
               <input
                 type='number'
                 name='price'
@@ -219,12 +204,7 @@ export default function Product() {
               />
             </div>
             <div className='space-y-1.5'>
-              <label
-                className='text-xs text-gray-700 lg:text-sm md:min-w-max'
-                htmlFor='inStock'
-              >
-                موجودی
-              </label>
+              <label htmlFor='inStock'>موجودی</label>
               <input
                 type='number'
                 name='inStock'
@@ -243,12 +223,7 @@ export default function Product() {
               />
             </div>
             <div className='space-y-1.5'>
-              <label
-                className='text-xs text-gray-700 lg:text-sm md:min-w-max'
-                htmlFor='discount'
-              >
-                تخفیف برحسب درصد
-              </label>
+              <label htmlFor='discount'>تخفیف برحسب درصد</label>
               <input
                 type='number'
                 name='discount'
@@ -267,7 +242,7 @@ export default function Product() {
               />
             </div>
           </div>
-          <div className='space-y-8 py-3 mx-auto w-fit md:w-full md:py-0  md:flex md:items-baseline md:justify-between'>
+          <div className='py-3 mx-auto space-y-8 w-fit md:w-full md:py-0 md:flex md:items-baseline md:justify-between'>
             {!id && <SelectCategories productPage />}
           </div>
           {optionsType === "colors" || product.colors.length > 0 ? (
@@ -356,7 +331,7 @@ export default function Product() {
           </div>
           {id ? (
             <button
-              className='btn px-6 mx-auto bg-amber-500 rounded-md mt-8'
+              className='px-6 mx-auto mt-8 rounded-3xl btn bg-amber-500'
               type='button'
               onClick={updateHandler}
             >
@@ -364,7 +339,7 @@ export default function Product() {
             </button>
           ) : (
             <button
-              className='btn mx-auto px-6 bg-green-500 rounded-md mt-8'
+              className='px-6 mx-auto mt-8 bg-green-500 rounded-3xl btn'
               type='submit'
             >
               {isLoading ? <Loading /> : "ثبت اطلاعات"}

@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 import { closeModal } from "app/slices/modalSlice";
 
-export default function RedirectToLogin({ text, title ,dispatch }) {
+export default function RedirectToLogin({ text, title, dispatch }) {
   const router = useRouter();
 
   const handleClick = () => {

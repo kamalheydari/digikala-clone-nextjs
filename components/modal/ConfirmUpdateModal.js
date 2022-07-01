@@ -34,14 +34,19 @@ export default function ConfirmUpdateModal({
         body: { ...editedData },
       });
     }
+  }, [isConfirm]);
+
+  useEffect(() => {
     if (isSuccess) {
+      dispatch(
+        openModal({
+          isShow: true,
+          type: "alert",
+          status: "success",
+          text: data.msg,
+        })
+      );
       dispatch(confirmReset());
-      openModal({
-        isShow: true,
-        type: "alert",
-        status: "success",
-        text: data.msg,
-      });
     }
 
     if (isError) {
@@ -55,7 +60,7 @@ export default function ConfirmUpdateModal({
       );
       dispatch(confirmReset());
     }
-  }, [isConfirm, isSuccess, isError]);
+  }, [isSuccess, isError]);
 
   //? Handlers
   const handleConfirmClick = () => {
@@ -77,14 +82,14 @@ export default function ConfirmUpdateModal({
       <div className='flex justify-center gap-x-20'>
         <button
           type='button'
-          className='rounded-lg btn bg-green-500'
+          className='bg-green-500 rounded-lg btn'
           onClick={handleConfirmClick}
         >
           بروزرسانی و ادامه
         </button>
         <button
           type='button'
-          className=' rounded-lg btn'
+          className='rounded-lg  btn'
           onClick={handleCancleClick}
         >
           لغو

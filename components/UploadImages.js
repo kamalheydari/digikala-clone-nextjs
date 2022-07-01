@@ -86,7 +86,7 @@ export default function UploadImages() {
           انتخاب تصاویر
         </label>
         <input
-          className='block w-full px-2 py-1 text-sm text-gray-700 bg-white bg-clip-padding  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none'
+          className='block w-full px-2 py-1 text-sm text-gray-700 bg-white bg-clip-padding focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none'
           id='uploadImage'
           type='file'
           multiple
@@ -95,23 +95,23 @@ export default function UploadImages() {
         />
       </div>
       {images?.length > 0 && (
-        <div className='pt-1 mt-2 pb-6 bg-gray-50 rounded'>
-          <div className='mt-8 flex flex-wrap justify-center align-center gap-x-4 gap-y-2 '>
+        <div className='pt-1 pb-6 mt-2 rounded bg-gray-50'>
+          <div className='flex flex-wrap justify-center mt-8 align-center gap-x-4 gap-y-2 '>
             {images?.map((img, index) => (
               <div key={index} className='relative'>
                 <img
                   src={img.url ? img.url : URL.createObjectURL(img)}
-                  className='w-44 h-36 rounded-md '
+                  className='rounded-md w-44 h-36 '
                   alt='product img'
                 />
                 <button type='button' onClick={() => handleDeleteImage(index)}>
-                  <Icons.Delete className='icon text-red-500 absolute top-0 right-0 z-10 w-7 h-7 p-1 rounded-2xl bg-red-100' />
+                  <Icons.Delete className='absolute top-0 right-0 z-10 p-1 text-red-500 bg-red-100 icon w-7 h-7 rounded-2xl' />
                 </button>
               </div>
             ))}
           </div>
           <button
-            className='btn mx-auto bg-green-500'
+            className='mx-auto bg-green-500 btn rounded-3xl'
             type='button'
             onClick={handleUploadImages}
           >

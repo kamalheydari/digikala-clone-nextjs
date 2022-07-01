@@ -6,7 +6,7 @@ import {
 } from "app/slices/modalSlice";
 import { useEffect } from "react";
 import { useDeleteDataMutation } from "app/slices/fetchApiSlice";
-import { deleteUser } from "app/slices/usersSlice";
+
 import { resetDetails } from "app/slices/detailsSlice";
 import { useRouter } from "next/router";
 
@@ -21,21 +21,21 @@ export default function ConfirmDeleteModal({
   const router = useRouter();
 
   //? Config Url & Edit Store
-  let url, editStore;
+  let url, ifIsSucces;
 
   if (type === "confirm-delete-user") {
     url = `/api/user/${id}`;
-    editStore = () => {
-      dispatch(deleteUser(id));
+    ifIsSucces = () => {
+      router.reload();
     };
   } else if (type === "confirm-delete-details") {
     url = `/api/details/${id}`;
-    editStore = () => {
+    ifIsSucces = () => {
       dispatch(resetDetails());
     };
   } else if (type === "confirm-delete-product") {
     url = `/api/products/${id}`;
-    editStore = () => {
+    ifIsSucces = () => {
       router.reload();
     };
   }
@@ -51,7 +51,7 @@ export default function ConfirmDeleteModal({
       });
     }
     if (isSuccess) {
-      editStore();
+      ifIsSucces();
       dispatch(confirmReset());
     }
 

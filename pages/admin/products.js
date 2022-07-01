@@ -40,18 +40,18 @@ export default function Products() {
       )}
       <div className='px-3'>
         {isSuccess && (
-          <div className='overflow-x-auto mt-7'>
-            <table className='w-full whitespace-nowrap'>
+          <div className='overflow-x mt-7'>
+            <table className='w-full overflow-scroll table-auto'>
               <thead className='bg-zinc-50 h-9'>
                 <tr className='text-zinc-500'>
                   <th></th>
-                  <th className='border-r-2 border-zinc-300'>نام محصول</th>
+                  <th className='border-r-2 border-zinc-200'>نام محصول</th>
                 </tr>
               </thead>
               <tbody>
                 {data.products.map((item) => (
                   <tr key={item._id} className='border-b-2 border-gray-100'>
-                    <td className='flex items-center gap-x-2 p-2'>
+                    <td className='flex items-center p-2 gap-x-2'>
                       <Buttons.Delete onClick={() => handleDelete(item._id)} />
                       <Buttons.Edit onClick={() => handleEdit(item._id)} />
                     </td>

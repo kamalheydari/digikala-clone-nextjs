@@ -16,7 +16,7 @@ export default function User({ user }) {
             ورود
           </a>
         </Link>
-        <span className='hiden lg:block lg:border lg:border-gray-300 lg:h-6'></span>
+        <span className='hiden lg:block lg:bg-gray-300 lg:h-6'></span>
         <Link href='/register'>
           <a className='hidden px-2 lg:block'>ثبت‌نام</a>
         </Link>
@@ -42,7 +42,7 @@ export default function User({ user }) {
         <Icons.User className='icon' />
         <Icons.ArrowDown className='icon ' />
         <div
-          className={` bg-white shadow-md rounded overflow-hidden absolute top-full left-0 w-60 
+          className={`bg-white shadow-md rounded overflow-hidden absolute top-full left-0 w-60 
           border border-gray-100 ${isOpen ? "block" : "hidden"}`}
         >
           <BoxLink path='/profile' name={user.name} className='border-t-0'>

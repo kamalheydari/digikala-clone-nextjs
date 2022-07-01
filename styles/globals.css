@@ -45,12 +45,15 @@
   a {
     @apply cursor-pointer;
   }
-
+  label,
+  span {
+    @apply text-xs text-gray-500 md:text-sm font-bold;
+  }
 }
 
 @layer components {
   .input {
-    @apply block w-full px-3 py-1 text-base text-center transition-colors border border-gray-200 rounded-md outline-none bg-zinc-50 lg:text-lg focus:border-blue-600;
+    @apply block w-full px-3 py-1.5 text-base text-center transition-colors border border-gray-200 rounded-md outline-none bg-zinc-50 lg:text-lg focus:border-blue-600;
   }
 
   .error-msg {
@@ -58,7 +61,7 @@
   }
 
   .btn {
-    @apply text-white bg-red-500 py-3 px-4 rounded-3xl block outline-none;
+    @apply text-white bg-red-500 py-3 px-8 rounded-md block outline-none;
   }
   .icon {
     @apply w-5 h-5 md:w-6 md:h-6 text-gray-700;

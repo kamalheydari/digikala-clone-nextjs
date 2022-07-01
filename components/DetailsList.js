@@ -73,10 +73,10 @@ export default function DetailsList({ category, type, data }) {
         <tbody>
           {data.map((item) => (
             <tr key={item.id} className='border-b-2 border-gray-100'>
-              <td className='flex items-center gap-x-2 p-2'>
+              <td className='flex items-center p-2 gap-x-2'>
                 <Buttons.Delete onClick={() => handleDelete(item.id)} />
                 <Buttons.Edit onClick={() => handleEdit(item.id)} />
-              
+
                 {item.name}
               </td>
               <td
@@ -90,11 +90,11 @@ export default function DetailsList({ category, type, data }) {
           ))}
           <tr className='border-b-2 border-green-50'>
             <td className='flex p-2'>
-            <Buttons.Add onClick={addToStore} />
+              <Buttons.Add onClick={addToStore} />
               <input
                 type='text'
                 onChange={(e) => setName(e.target.value)}
-                className='w-full inline-block outline-none mr-2'
+                className='inline-block w-full mr-2 outline-none'
                 value={name}
                 placeholder='...'
               />

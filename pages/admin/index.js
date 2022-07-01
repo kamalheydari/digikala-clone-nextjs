@@ -7,7 +7,7 @@ export default function AdminPage() {
 
   if (user?.role === "admin" || user?.root)
     return (
-      <div className='lg:flex lg:gap-x-4 lg:px-3 lg:container lg:max-w-7xl '>
+      <div className='lg:flex lg:gap-x-4 lg:px-3 lg:container lg:max-w-8xl '>
         <div>
           <DashboardAside user={user} />
         </div>

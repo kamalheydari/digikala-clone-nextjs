@@ -15,9 +15,13 @@ export default function DetailsPage() {
   //? Store
   const { token } = useSelector((state) => state.auth);
   const { categories } = useSelector((state) => state.categories);
-  const { category, info, specification, details_id, optionsType } = useSelector(
-    (state) => state.details
-  );
+  const {
+    category,
+    info,
+    specification,
+    details_id,
+    optionsType,
+  } = useSelector((state) => state.details);
 
   //? Get Details
   const { data: details, isLoading: getDetailsIsLoading } = useGetDataQuery({
@@ -54,7 +58,7 @@ export default function DetailsPage() {
           text: data.msg,
         })
       );
-      router.reload();
+      router.push("/admin/details");
     }
     if (isError)
       dispatch(
@@ -75,10 +79,10 @@ export default function DetailsPage() {
         url: "/api/details",
         body: {
           category_id: category._id,
-          name:category.slug,
+          name: category.slug,
           info,
           specification,
-          optionsType
+          optionsType,
         },
         token,
       });
@@ -116,7 +120,7 @@ export default function DetailsPage() {
           category_id: category._id,
           info,
           specification,
-          optionsType
+          optionsType,
         },
       })
     );
@@ -138,7 +142,7 @@ export default function DetailsPage() {
           <BigLoading />
         </div>
       ) : (
-        <form className='space-y-6 p-3' onSubmit={submitHandler}>
+        <form className='p-3 space-y-6' onSubmit={submitHandler}>
           <div>
             <p className='mb-2'>نوع انتخاب :</p>
             <div className='flex items-center gap-x-1 '>
@@ -181,18 +185,18 @@ export default function DetailsPage() {
             type='specification'
             data={specification}
           />
-          <div className='flex gap-x-4 justify-center'>
+          <div className='flex justify-center gap-x-4'>
             {details_id ? (
               <>
                 <button
-                  className='btn px-6 bg-amber-500 rounded-md mt-8'
+                  className='mt-8 rounded-3xl btn bg-amber-500'
                   type='button'
                   onClick={updateHandler}
                 >
                   بروزرسانی اطلاعات
                 </button>
                 <button
-                  className='btn px-6 bg-red-500 rounded-md mt-8'
+                  className='mt-8 bg-red-500 rounded-3xl btn'
                   type='button'
                   onClick={deleteHandler}
                 >
@@ -201,7 +205,7 @@ export default function DetailsPage() {
               </>
             ) : (
               <button
-                className='btn px-6 bg-green-500 rounded-md mt-8'
+                className='mt-8 bg-green-500 rounded-3xl btn'
                 type='submit'
               >
                 {isLoading ? <Loading /> : "ثبت اطلاعات"}

@@ -40,20 +40,20 @@ export default function Sizes() {
 
   return (
     <div className='text-sm space-y-1.5'>
-      <span className='text-sm'>اندازه ها</span>
+      <span>اندازه ها</span>
       <div className='w-full max-w-2xl mx-auto space-y-3'>
         <div className='flex items-center gap-x-2'>
           <Buttons.Add onClick={addToStore} />
           <input
             type='text'
             onChange={(e) => setSize(e.target.value)}
-            className=' input w-44 inline-block outline-none'
+            className='inline-block outline-none  input w-44'
             value={size}
             placeholder='...'
             ref={inputRef}
           />
         </div>
-        <div className='flex flex-wrap gap-x-5 gap-y-3 justify-center'>
+        <div className='flex flex-wrap justify-center gap-x-5 gap-y-3'>
           {sizes.map((item) => (
             <div
               key={item.id}

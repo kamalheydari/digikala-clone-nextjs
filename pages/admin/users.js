@@ -1,29 +1,22 @@
-import { useGetDataQuery } from "app/slices/fetchApiSlice";
-import { Buttons, BigLoading } from "components";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addUsers } from "app/slices/usersSlice";
 import Image from "next/image";
+
+import { useDispatch, useSelector } from "react-redux";
+import { useGetDataQuery } from "app/slices/fetchApiSlice";
 import { openModal } from "app/slices/modalSlice";
+
+import { Buttons, BigLoading } from "components";
 
 export default function Users() {
   const dispatch = useDispatch();
 
   //? Store
   const { token } = useSelector((state) => state.auth);
-  const { users } = useSelector((state) => state.users);
 
   //? Get Data Query
   const { data, isLoading, isSuccess } = useGetDataQuery({
     url: "/api/user",
     token,
   });
-
-  useEffect(() => {
-    if (isSuccess) {
-      dispatch(addUsers(data.users));
-    }
-  }, [isSuccess]);
 
   //? Handlers
   const deleteUserHandler = async (id) => {
@@ -61,7 +54,7 @@ export default function Users() {
                 </tr>
               </thead>
               <tbody className='text-gray-600'>
-                {users.map((user) => (
+                {data.users.map((user) => (
                   <tr
                     className='text-xs text-center transition-colors border-b border-gray-100 md:text-sm hover:bg-gray-50'
                     key={user._id}

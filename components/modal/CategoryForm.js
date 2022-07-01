@@ -77,7 +77,7 @@ export default function CategoryForm({ title, token, dispatch, closeModal }) {
   };
 
   return (
-    <div className='flex flex-col h-full px-5 py-3 bg-white md:rounded-lg gap-y-3  '>
+    <div className='flex flex-col h-full px-5 py-3 bg-white md:rounded-lg gap-y-3 '>
       <div className='flex justify-between py-2 border-b-2 border-gray-200 '>
         <span className='text-sm'>{title}</span>
         <CloseModal />

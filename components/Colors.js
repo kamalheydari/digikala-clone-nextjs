@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {  Buttons } from "components";
+import { Buttons } from "components";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, deleteItem, editItem } from "app/slices/productSlice";
 import { useRef } from "react";
@@ -41,7 +41,7 @@ export default function Colors() {
 
   return (
     <div className='text-sm space-y-1.5'>
-      <span className='text-sm'>اندازه ها</span>
+      <span>اندازه ها</span>
       <div className='w-full max-w-2xl mx-auto space-y-3'>
         <div className='flex items-center gap-x-2'>
           <Buttons.Add onClick={addToStore} />
@@ -50,7 +50,7 @@ export default function Colors() {
             onChange={(e) =>
               setColor((color) => ({ ...color, name: e.target.value }))
             }
-            className=' input w-44 inline-block outline-none'
+            className='inline-block outline-none  input w-44'
             name='name'
             value={color.name}
             placeholder='نام رنگ'
@@ -66,7 +66,7 @@ export default function Colors() {
             className='w-24 h-9'
           />
         </div>
-        <div className='flex flex-wrap gap-x-5 gap-y-3 justify-center'>
+        <div className='flex flex-wrap justify-center gap-x-5 gap-y-3'>
           {colors.map((item) => (
             <div
               key={item.id}
@@ -76,7 +76,7 @@ export default function Colors() {
               <Buttons.Edit onClick={() => handleEdit(item.id)} />
               {item.name}
               <span
-                className=' w-6 h-6 mr-3 rounded-sm shadow'
+                className='w-6 h-6 mr-3 rounded-sm shadow '
                 style={{ background: item.hashCode }}
               ></span>
             </div>
