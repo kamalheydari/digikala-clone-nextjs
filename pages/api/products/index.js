@@ -50,17 +50,16 @@ const createProduct = async (req, res) => {
       specification,
     } = req.body;
 
-    // if (
-    //   !title ||
-    //   !price ||
-    //   !inStock ||
-    //   !description ||
-    //   !category ||
-    //   images.length === 0 ||
-    //   info.length === 0 ||
-    //   specification.length === 0
-    // )
-    //   return sendError(res, 400, "لطفا تمام فیلد ها را پر کنید");
+    if (
+      !title ||
+      !price ||
+      !inStock ||
+      !category ||
+      images.length === 0 ||
+      info.length === 0 ||
+      specification.length === 0
+    )
+      return sendError(res, 400, "لطفا تمام فیلد ها را پر کنید");
 
     await db.connect();
     const newProduct = new Products({

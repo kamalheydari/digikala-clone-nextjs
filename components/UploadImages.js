@@ -8,7 +8,7 @@ import { imageUpload } from "utils/imageUpload";
 import { useState } from "react";
 
 export default function UploadImages() {
-  const [uplodLoading, setUplodLoading] = useState(false);
+  const [uploadLoading, setUploadLoading] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -59,9 +59,9 @@ export default function UploadImages() {
     const imgNewURL = images.filter((img) => !img.url);
     // const imgOldURL = images.filter((img) => img.url);
 
-    setUplodLoading(true);
+    setUploadLoading(true);
     if (imgNewURL.length > 0) media = await imageUpload(imgNewURL);
-    setUplodLoading(false);
+    setUploadLoading(false);
 
     dispatch(addItem({ type: "uploaded-images", value: media }));
 
@@ -114,8 +114,9 @@ export default function UploadImages() {
             className='mx-auto bg-green-500 btn rounded-3xl'
             type='button'
             onClick={handleUploadImages}
+            disabled={uploadLoading}
           >
-            {uplodLoading ? <Loading /> : "آپلود تصاویر"}
+            {uploadLoading ? <Loading /> : "آپلود تصاویر"}
           </button>
         </div>
       )}

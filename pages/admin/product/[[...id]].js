@@ -335,12 +335,13 @@ export default function Product() {
               type='button'
               onClick={updateHandler}
             >
-              {isLoading ? <Loading /> : "بروزرسانی اطلاعات"}
+              بروزرسانی اطلاعات
             </button>
           ) : (
             <button
               className='px-6 mx-auto mt-8 bg-green-500 rounded-3xl btn'
               type='submit'
+              disabled={isLoading}
             >
               {isLoading ? <Loading /> : "ثبت اطلاعات"}
             </button>

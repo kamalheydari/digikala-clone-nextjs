@@ -61,7 +61,6 @@ const updateProduct = async (req, res) => {
       !title ||
       !price ||
       !inStock ||
-      !description ||
       !category ||
       images.length === 0 ||
       info.length === 0 ||
