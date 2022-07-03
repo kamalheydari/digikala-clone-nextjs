@@ -14,6 +14,7 @@ export default function DetailsPage() {
 
   //? Store
   const { token } = useSelector((state) => state.auth);
+  const { isConfirm } = useSelector((state) => state.modal);
   const { categories } = useSelector((state) => state.categories);
   const {
     category,
@@ -192,8 +193,9 @@ export default function DetailsPage() {
                   className='mt-8 rounded-3xl btn bg-amber-500'
                   type='button'
                   onClick={updateHandler}
+                  disabled={isConfirm}
                 >
-                  بروزرسانی اطلاعات
+                  {isConfirm ? <Loading /> : "بروزرسانی اطلاعات"}
                 </button>
                 <button
                   className='mt-8 bg-red-500 rounded-3xl btn'

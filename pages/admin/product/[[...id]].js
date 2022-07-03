@@ -36,6 +36,7 @@ export default function Product() {
 
   //? Store
   const { token } = useSelector((state) => state.auth);
+  const { isConfirm } = useSelector((state) => state.modal);
   const { parentCategory, categories, category } = useSelector(
     (state) => state.categories
   );
@@ -334,8 +335,9 @@ export default function Product() {
               className='px-6 mx-auto mt-8 rounded-3xl btn bg-amber-500'
               type='button'
               onClick={updateHandler}
+              disabled={isConfirm}
             >
-              بروزرسانی اطلاعات
+              {isConfirm ? <Loading /> : "بروزرسانی اطلاعات"}
             </button>
           ) : (
             <button

@@ -9,9 +9,9 @@ import {
   MobileForm,
   AddressForm,
   ConfirmDeleteModal,
+  ConfirmUpdateModal,
   CategoryForm,
 } from "components";
-import ConfirmUpdateModal from "./ConfirmUpdateModal";
 
 export default function Modal() {
   const dispatch = useDispatch();
