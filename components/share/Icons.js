@@ -14,6 +14,7 @@ import { IoSearch } from "react-icons/io5";
 import {
   RiArrowDownSFill,
   RiArrowDropLeftLine,
+  RiArrowDropRightLine,
   RiArrowRightLine,
   RiHandbagLine,
   RiHeartLine,
@@ -40,6 +41,7 @@ const Icons = {
   ArrowDown: RiArrowDownSFill,
   ArrowLeft: RiArrowDropLeftLine,
   ArrowRight: RiArrowRightLine,
+  ArrowRight2: RiArrowDropRightLine,
   Edit: FiEdit,
   Clock: BsClockHistory,
   Heart: RiHeartLine,

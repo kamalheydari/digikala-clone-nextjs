@@ -1,16 +1,20 @@
 import { useGetDataQuery } from "app/slices/fetchApiSlice";
 import { openModal } from "app/slices/modalSlice";
-import { BigLoading, Buttons } from "components";
+import { BigLoading, Buttons, Pagination } from "components";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 export default function Products() {
   const dispatch = useDispatch();
   const router = useRouter();
 
+  //? Local State
+  const [page, setPage] = useState(1);
+
   //? Get Data Query
   const { data, isLoading, isSuccess } = useGetDataQuery({
-    url: "/api/products",
+    url: `/api/products?page_size=3&page=${page}`,
   });
 
   //? Handlers
@@ -29,6 +33,8 @@ export default function Products() {
     router.push(`/admin/product/${id}`);
   };
 
+  
+
   return (
     <>
       <Buttons.Back backRoute='/admin'>محصولات</Buttons.Back>
@@ -38,8 +44,9 @@ export default function Products() {
           <BigLoading />
         </div>
       )}
-      <div className='px-3'>
-        {isSuccess && (
+
+      {isSuccess && (
+        <div className='px-3'>
           <div className='overflow-x mt-7'>
             <table className='w-full overflow-scroll table-auto'>
               <thead className='bg-zinc-50 h-9'>
@@ -61,8 +68,17 @@ export default function Products() {
               </tbody>
             </table>
           </div>
-        )}
-      </div>
+          <Pagination
+            currentPage={data.currentPage}
+            nextPage={data.nextPage}
+            previousPage={data.previousPage}
+            hasNextPage={data.hasNextPage}
+            hasPreviousPage={data.hasPreviousPage}
+            lastPage={data.lastPage}
+            setPage={setPage}
+          />
+        </div>
+      )}
     </>
   );
 }

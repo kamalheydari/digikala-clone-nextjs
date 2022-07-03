@@ -16,14 +16,29 @@ export default async (req, res) => {
 };
 
 const getProducts = async (req, res) => {
+  const page = +req.query.page || 1;
+  const page_size = +req.query.page_size || 10;
+
   try {
     await db.connect();
-    const products = await Products.find();
+
+    const products = await Products.find()
+      .skip((page - 1) * page_size)
+      .limit(page_size);
+
+    const productsLength = await Products.find().countDocuments();
+
     await db.disconnect();
 
     res.status(200).json({
-      result: products.length,
+      productsLength,
       products,
+      currentPage: page,
+      nextPage: page + 1,
+      previousPage: page - 1,
+      hasNextPage: page_size * page < productsLength,
+      hasPreviousPage: page > 1,
+      lastPage: Math.ceil(productsLength / page_size)
     });
   } catch (error) {
     sendError(res, 500, error.message);
