@@ -8,12 +8,14 @@ import {
   BsSignpost,
 } from "react-icons/bs";
 import { FiLogIn, FiLogOut, FiEdit, FiPlus } from "react-icons/fi";
-import { VscThreeBars } from "react-icons/vsc";
+import { VscThreeBars, VscLocation } from "react-icons/vsc";
 import { HiOutlineUser } from "react-icons/hi";
 import { IoSearch } from "react-icons/io5";
 import {
   RiArrowDownSFill,
   RiArrowDropLeftLine,
+  RiArrowDropDownLine,
+  RiArrowDropUpLine,
   RiArrowDropRightLine,
   RiArrowRightLine,
   RiHandbagLine,
@@ -40,6 +42,8 @@ const Icons = {
   Search: IoSearch,
   ArrowDown: RiArrowDownSFill,
   ArrowLeft: RiArrowDropLeftLine,
+  ArrowDown: RiArrowDropDownLine,
+  ArrowUp: RiArrowDropUpLine,
   ArrowRight: RiArrowRightLine,
   ArrowRight2: RiArrowDropRightLine,
   Edit: FiEdit,
@@ -48,6 +52,7 @@ const Icons = {
   Bag: RiHandbagLine,
   Comment: RiChat1Line,
   Location: RiUserLocationLine,
+  Location2: VscLocation,
   Home: RiHome6Line,
   Plus: FiPlus,
   Close: RiCloseLine,

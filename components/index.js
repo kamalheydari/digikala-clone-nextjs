@@ -25,6 +25,7 @@ export { default as Colors } from "./Colors";
 export { default as Sizes } from "./Sizes";
 export { default as UploadImages } from "./UploadImages";
 export { default as Pagination } from "./Pagination";
+export { default as Sidebar } from "./Sidebar";
 
 export { default as Modal } from "./modal/Modal";
 export { default as ConfirmDeleteModal } from "./modal/ConfirmDeleteModal";

@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Icons, User, Cart, Search } from "components";
-import { useDispatch, useSelector } from "react-redux";
+import { Icons, User, Cart, Search, Sidebar } from "components";
+import { useSelector } from "react-redux";
+import { useState } from "react";
 
 export default function Navbar() {
-  const dispatch = useDispatch();
+  //? Local State
+  const [isSidebar, setIsSidebar] = useState(false);
 
   //? Store
   const { user } = useSelector((state) => state.auth);
@@ -13,7 +15,11 @@ export default function Navbar() {
     <header className='px-4 lg:shadow'>
       <div className='container max-w-[1550px] lg:flex lg:py-2 '>
         <div className='inline-flex items-center justify-between w-full border-b lg:border-b-0 lg:max-w-min lg:ml-8'>
-          <button className='p-1 lg:hidden'>
+          <button
+            className='p-1 lg:hidden'
+            type='button'
+            onClick={() => setIsSidebar(true)}
+          >
             <Icons.Bars className='icon' />
           </button>
           <div className='relative w-24 h-14 '>
@@ -34,6 +40,7 @@ export default function Navbar() {
           </div>
         </div>
       </div>
+      <Sidebar isSidebar={isSidebar} setIsSidebar={setIsSidebar} />
     </header>
   );
 }
