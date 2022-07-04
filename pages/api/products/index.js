@@ -18,15 +18,24 @@ export default async (req, res) => {
 const getProducts = async (req, res) => {
   const page = +req.query.page || 1;
   const page_size = +req.query.page_size || 10;
-
+  const filterOptions = {
+    category: {
+      $regex: req.query.category,
+      $options: "i",
+    },
+    title: {
+      $regex: req.query.search,
+      $options: "i",
+    },
+  };
   try {
     await db.connect();
 
-    const products = await Products.find()
+    const products = await Products.find(filterOptions)
       .skip((page - 1) * page_size)
       .limit(page_size);
 
-    const productsLength = await Products.find().countDocuments();
+    const productsLength = await Products.countDocuments(filterOptions);
 
     await db.disconnect();
 
@@ -38,7 +47,7 @@ const getProducts = async (req, res) => {
       previousPage: page - 1,
       hasNextPage: page_size * page < productsLength,
       hasPreviousPage: page > 1,
-      lastPage: Math.ceil(productsLength / page_size)
+      lastPage: Math.ceil(productsLength / page_size),
     });
   } catch (error) {
     sendError(res, 500, error.message);

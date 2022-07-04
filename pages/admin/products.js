@@ -1,21 +1,46 @@
 import { useGetDataQuery } from "app/slices/fetchApiSlice";
 import { openModal } from "app/slices/modalSlice";
-import { BigLoading, Buttons, Pagination } from "components";
+import {
+  BigLoading,
+  Buttons,
+  Icons,
+  Pagination,
+  SelectCategories,
+} from "components";
 import { useRouter } from "next/router";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Products() {
   const dispatch = useDispatch();
   const router = useRouter();
+  const inputSearchRef = useRef();
 
   //? Local State
   const [page, setPage] = useState(1);
+  const [filterCategory, setFilterCategory] = useState("");
+  const [search, setSearch] = useState("");
+
+  //? Store
+  const { mainCategory, parentCategory, category } = useSelector(
+    (state) => state.categories
+  );
 
   //? Get Data Query
   const { data, isLoading, isSuccess } = useGetDataQuery({
-    url: `/api/products?page_size=3&page=${page}`,
+    url: `/api/products?page_size=10&page=${page}&category=${filterCategory}&search=${search}`,
   });
+
+  //? Filter Category
+  useEffect(() => {
+    setPage(1);
+    if (mainCategory.length > 0) setFilterCategory(mainCategory);
+    if (parentCategory.length > 0)
+      setFilterCategory((filterCategory) =>
+        filterCategory.concat("/").concat(parentCategory)
+      );
+    if (category.length > 0) setFilterCategory(category);
+  }, [mainCategory, parentCategory, category, search]);
 
   //? Handlers
   const handleDelete = (id) => {
@@ -33,7 +58,14 @@ export default function Products() {
     router.push(`/admin/product/${id}`);
   };
 
-  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSearch(inputSearchRef.current.value);
+  };
+
+  const handleRemoveSearch = () => {
+    setSearch("");
+  };
 
   return (
     <>
@@ -46,37 +78,71 @@ export default function Products() {
       )}
 
       {isSuccess && (
-        <div className='px-3'>
-          <div className='overflow-x mt-7'>
-            <table className='w-full overflow-scroll table-auto'>
-              <thead className='bg-zinc-50 h-9'>
-                <tr className='text-zinc-500'>
-                  <th></th>
-                  <th className='border-r-2 border-zinc-200'>نام محصول</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.products.map((item) => (
-                  <tr key={item._id} className='border-b-2 border-gray-100'>
-                    <td className='flex items-center p-2 gap-x-2'>
-                      <Buttons.Delete onClick={() => handleDelete(item._id)} />
-                      <Buttons.Edit onClick={() => handleEdit(item._id)} />
-                    </td>
-                    <td className='p-2'>{item.title}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <Pagination
-            currentPage={data.currentPage}
-            nextPage={data.nextPage}
-            previousPage={data.previousPage}
-            hasNextPage={data.hasNextPage}
-            hasPreviousPage={data.hasPreviousPage}
-            lastPage={data.lastPage}
-            setPage={setPage}
-          />
+        <div className='p-3 space-y-7'>
+          <form className='max-w-4xl mx-auto space-y-5' onSubmit={handleSubmit}>
+            <div className='space-y-8  md:py-0 md:flex md:gap-x-8 lg:gap-x-0.5 xl:gap-x-10 md:items-baseline md:justify-between'>
+              <SelectCategories productPage />
+            </div>
+
+            <div className='flex flex-row-reverse rounded-md bg-zinc-200/80 '>
+              <button className='p-2' onClick={handleRemoveSearch}>
+                <Icons.Close className='icon' />
+              </button>
+              <input
+                type='text'
+                placeholder='جستجو'
+                className='flex-grow p-1 text-right bg-transparent outline-none input'
+                ref={inputSearchRef}
+                defaultValue={search}
+              />
+              <button type='submit' className='p-2'>
+                <Icons.Search className='icon' />
+              </button>
+            </div>
+          </form>
+
+          {data.productsLength > 0 ? (
+            <>
+              <div className='overflow-x mt-7'>
+                <table className='w-full overflow-scroll table-auto'>
+                  <thead className='bg-zinc-50 h-9'>
+                    <tr className='text-zinc-500'>
+                      <th className='w-28'></th>
+                      <th className='border-r-2 border-zinc-200'>
+                        نام محصول (تعداد: {data.productsLength})
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data.products.map((item) => (
+                      <tr key={item._id} className='border-b-2 border-gray-100'>
+                        <td className='flex items-center justify-center p-2 gap-x-4'>
+                          <Buttons.Delete
+                            onClick={() => handleDelete(item._id)}
+                          />
+                          <Buttons.Edit onClick={() => handleEdit(item._id)} />
+                        </td>
+                        <td className='p-2'>{item.title}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <Pagination
+                currentPage={data.currentPage}
+                nextPage={data.nextPage}
+                previousPage={data.previousPage}
+                hasNextPage={data.hasNextPage}
+                hasPreviousPage={data.hasPreviousPage}
+                lastPage={data.lastPage}
+                setPage={setPage}
+              />
+            </>
+          ) : (
+            <div className='text-center text-red-500 lg:border lg:border-gray-200 lg:rounded-md lg:py-4'>
+              کالایی یافت نشد
+            </div>
+          )}
         </div>
       )}
     </>

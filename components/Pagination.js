@@ -10,7 +10,7 @@ export default function Pagination({
   setPage,
 }) {
   return (
-    <nav className='mt-7'>
+    <nav>
       <ul className='inline-flex items-center gap-x-2 w-full'>
         <div className='ml-auto'>
           {hasPreviousPage && (
