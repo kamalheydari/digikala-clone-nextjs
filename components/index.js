@@ -10,6 +10,7 @@ export { default as ClientLayout } from "./Layouts/ClientLayout";
 export { default as ProfileLayout } from "./Layouts/ProfileLayout";
 export { default as DashboardLayout } from "./Layouts/DashboardLayout";
 
+export { default as Header } from "./Header";
 export { default as Navbar } from "./Navbar";
 export { default as User } from "./User";
 export { default as Cart } from "./Cart";

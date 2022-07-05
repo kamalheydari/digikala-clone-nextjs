@@ -5,11 +5,16 @@ import { useState } from "react";
 import Link from "next/link";
 
 export default function Sidebar({ isSidebar, setIsSidebar }) {
+  //? Local States
   const [mainExpandCat, setMainExpandCat] = useState("");
   const [parentExpandCat, setParentExpandCat] = useState("");
 
+  //? Store
   const { categories } = useSelector((state) => state.categories);
 
+  const parents = [...new Set(categories.map((item) => item.parent))];
+
+  //? Handlers
   const clickHandler = (cat) => {
     if (cat.parent === "/") {
       setMainExpandCat(cat.category);
@@ -29,40 +34,43 @@ export default function Sidebar({ isSidebar, setIsSidebar }) {
     >
       <div className='z-10 w-full h-full' onClick={() => setIsSidebar(false)} />
 
-      <div className='bg-white space-y-4 absolute w-3/4 max-w-sm h-screen top-0 right-0 z-20'>
-        <div className='relative m-4 h-10 ml-auto w-28 p-4'>
+      <div className='absolute top-0 right-0 z-20 w-3/4 h-screen max-w-sm space-y-4 bg-white'>
+        <div className='relative h-10 p-4 m-4 ml-auto w-28'>
           <Image src='/icons/logoPersian.svg' layout='fill' />
         </div>
-        <p className='border-t-2 p-3 border-gray-200'>دسته‌بندی کالاها</p>
-        <div>
+        <p className='p-3 border-t-2 border-gray-200'>دسته‌بندی کالاها</p>
+        <ul>
           {categories.map((mainCategory) => {
             if (mainCategory.parent === "/") {
               return (
-                <div
+                <li
                   key={mainCategory._id}
-                  className='overflow-hidden text-sm md:text-base space-y-6 '
+                  className='space-y-4 overflow-hidden text-sm md:text-base '
                 >
                   <div
-                    className={`flex items-center justify-between px-4 py-2 ${
+                    className={`flex items-center justify-between px-4 py-2 text-gray-500 ${
                       mainCategory.category === mainExpandCat && "text-red-400"
                     }`}
                   >
                     <Link href={`/products?category=${mainCategory.slug}`}>
-                      <a className='px-1'>{mainCategory.name}</a>
+                      <a className='px-1 font-bold '>{mainCategory.name}</a>
                     </Link>
-                    <button onClick={() => clickHandler(mainCategory)}>
-                      {mainCategory.category === mainExpandCat ? (
-                        <Icons.ArrowUp className='w-7 h-7 text-red-400 bg-gray-50 rounded-2xl' />
-                      ) : (
-                        <Icons.ArrowDown className='w-7 h-7 text-gray-700 bg-gray-50 rounded-2xl' />
-                      )}
-                    </button>
+
+                    {parents.includes(mainCategory.category) && (
+                      <button onClick={() => clickHandler(mainCategory)}>
+                        {mainCategory.category === mainExpandCat ? (
+                          <Icons.ArrowUp className='text-red-400 w-7 h-7 bg-gray-50 rounded-2xl' />
+                        ) : (
+                          <Icons.ArrowDown className='text-gray-700 w-7 h-7 bg-gray-50 rounded-2xl' />
+                        )}
+                      </button>
+                    )}
                   </div>
-                  <div className=''>
+                  <ul>
                     {categories.map((parentCategory) => {
                       if (parentCategory.parent === mainCategory.category) {
                         return (
-                          <div
+                          <li
                             key={parentCategory._id}
                             className={`overflow-hidden ${
                               parentCategory.parent === mainExpandCat
@@ -71,7 +79,7 @@ export default function Sidebar({ isSidebar, setIsSidebar }) {
                             }`}
                           >
                             <div
-                              className={`flex items-center justify-between bg-gray-100 px-6 py-2 ${
+                              className={`flex items-center justify-between bg-gray-100 px-6 py-2 text-gray-500 ${
                                 "/" + parentCategory.slug === parentExpandCat &&
                                 "text-red-400"
                               }`}
@@ -79,58 +87,60 @@ export default function Sidebar({ isSidebar, setIsSidebar }) {
                               <Link
                                 href={`/products?category=${parentCategory.slug}`}
                               >
-                                <a className='px-1'>{parentCategory.name}</a>
+                                <a className='px-1 font-medium '>
+                                  {parentCategory.name}
+                                </a>
                               </Link>
-                              <button
-                                onClick={() => clickHandler(parentCategory)}
-                              >
-                                {"/" + parentCategory.slug ===
-                                parentExpandCat ? (
-                                  <Icons.ArrowUp className='w-7 h-7 text-red-400 bg-gray-200 rounded-2xl' />
-                                ) : (
-                                  <Icons.ArrowDown className='w-7 h-7 text-gray-700 bg-gray-200 rounded-2xl' />
-                                )}
-                              </button>
+                              {parents.includes("/" + parentCategory.slug) && (
+                                <button
+                                  onClick={() => clickHandler(parentCategory)}
+                                >
+                                  {"/" + parentCategory.slug ===
+                                  parentExpandCat ? (
+                                    <Icons.ArrowUp className='text-red-400 bg-gray-200 w-7 h-7 rounded-2xl' />
+                                  ) : (
+                                    <Icons.ArrowDown className='text-gray-700 bg-gray-200 w-7 h-7 rounded-2xl' />
+                                  )}
+                                </button>
+                              )}
                             </div>
-                            <div className=''>
+                            <ul>
                               {categories.map((childCategory) => {
                                 if (
                                   childCategory.parent ===
                                   "/" + parentCategory.slug
                                 ) {
                                   return (
-                                    <div
+                                    <li
                                       key={childCategory._id}
                                       className={`${
                                         childCategory.parent === parentExpandCat
-                                          ? "h-auto"
+                                          ? "h-auto bg-gray-100 px-8 py-2"
                                           : "h-0"
                                       }`}
                                     >
-                                      <div className='bg-gray-100 px-8 py-2'>
-                                        <Link
-                                          href={`/products?category=${childCategory.slug}`}
-                                        >
-                                          <a className='px-1'>
-                                            {childCategory.name}
-                                          </a>
-                                        </Link>
-                                      </div>
-                                    </div>
+                                      <Link
+                                        href={`/products?category=${childCategory.slug}`}
+                                      >
+                                        <a className='inline-block p-1 font-light text-gray-500'>
+                                          {childCategory.name}
+                                        </a>
+                                      </Link>
+                                    </li>
                                   );
                                 }
                               })}
-                            </div>
-                          </div>
+                            </ul>
+                          </li>
                         );
                       }
                     })}
-                  </div>
-                </div>
+                  </ul>
+                </li>
               );
             }
           })}
-        </div>
+        </ul>
       </div>
     </div>
   );

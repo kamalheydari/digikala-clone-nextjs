@@ -40,7 +40,7 @@
     @apply text-base;
   }
   button {
-    @apply cursor-pointer;
+    @apply cursor-pointer inline-block;
   }
   a {
     @apply cursor-pointer;

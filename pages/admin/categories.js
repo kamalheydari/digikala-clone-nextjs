@@ -48,49 +48,54 @@ export default function Categories() {
               دسته‌بندی فرزند
             </p>
           </div>
-          {categories.map((mainCategory) => {
-            if (mainCategory.parent === "/") {
-              return (
-                <div key={mainCategory._id} className='p-2 shadow-lg'>
-                  <div className='p-2 text-center bg-red-500 rounded'>
-                    {mainCategory.name}
-                  </div>
-                  <div className='flex flex-wrap gap-x-4'>
-                    {categories.map((parentCategory) => {
-                      if (parentCategory.parent === mainCategory.category) {
-                        return (
-                          <div key={parentCategory._id} className='flex-1'>
-                            <div className='p-2 mt-2 text-center bg-green-500 rounded'>
-                              {parentCategory.name}
-                            </div>
-                            <div className='flex flex-wrap gap-x-4'>
-                              {categories.map((childCategory) => {
-                                if (
-                                  childCategory.parent ===
-                                  "/" + parentCategory.slug
-                                ) {
-                                  return (
-                                    <div
-                                      key={childCategory._id}
-                                      className='flex-1'
-                                    >
-                                      <div className='flex-1 p-2 mt-2 text-center bg-blue-500 rounded'>
-                                        {childCategory.name}
-                                      </div>
-                                    </div>
-                                  );
-                                }
-                              })}
-                            </div>
-                          </div>
-                        );
-                      }
-                    })}
-                  </div>
-                </div>
-              );
-            }
-          })}
+          <ul className='space-y-8'>
+            {categories.map((mainCategory) => {
+              if (mainCategory.parent === "/") {
+                return (
+                  <li
+                    key={mainCategory._id}
+                    className='p-2 border border-gray-100 rounded-md shadow'
+                  >
+                    <div className='p-2 text-center bg-red-500 rounded'>
+                      {mainCategory.name}
+                    </div>
+                    <ul className='flex flex-wrap gap-x-4'>
+                      {categories.map((parentCategory) => {
+                        if (parentCategory.parent === mainCategory.category) {
+                          return (
+                            <li key={parentCategory._id} className='flex-1'>
+                              <div className='p-2 mt-2 text-center bg-green-500 rounded'>
+                                {parentCategory.name}
+                              </div>
+                              <ul className='flex flex-wrap gap-x-4'>
+                                {categories.map((childCategory) => {
+                                  if (
+                                    childCategory.parent ===
+                                    "/" + parentCategory.slug
+                                  ) {
+                                    return (
+                                      <li
+                                        key={childCategory._id}
+                                        className='flex-1'
+                                      >
+                                        <div className='flex-1 p-2 mt-2 text-center bg-blue-500 rounded'>
+                                          {childCategory.name}
+                                        </div>
+                                      </li>
+                                    );
+                                  }
+                                })}
+                              </ul>
+                            </li>
+                          );
+                        }
+                      })}
+                    </ul>
+                  </li>
+                );
+              }
+            })}
+          </ul>
         </div>
       </div>
       <div className='py-20 '></div>

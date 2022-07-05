@@ -34,7 +34,7 @@ export default function User({ user }) {
         </Link>
       </div>
       <div
-        className={`hidden lg:cursor-pointer lg:relative lg:flex lg:rounded lg:p-1.5 lg:transition ${
+        className={`hidden lg:cursor-pointer lg:relative lg:flex lg:rounded lg:p-1.5 lg:transition z-40 ${
           isOpen && "bg-red-100"
         }`}
         onClick={() => setIsOpen(!isOpen)}
