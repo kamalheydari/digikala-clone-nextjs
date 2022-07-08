@@ -7,4 +7,7 @@ module.exports = {
     CLOUD_NAME:"djvgq77b0",
     CLOUD_API:"https://api.cloudinary.com/v1_1/djvgq77b0/image/upload",
   },
+  images: {
+    domains: ["res.cloudinary.com"],
+  },
 };

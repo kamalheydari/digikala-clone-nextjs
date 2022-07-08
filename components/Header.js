@@ -28,7 +28,7 @@ export default function Header() {
 
   return (
     <header className='px-4 lg:shadow'>
-      <div className='container max-w-[1550px] lg:flex lg:py-2 '>
+      <div className='container max-w-[1700px] lg:flex lg:py-2 '>
         <div className='inline-flex items-center justify-between w-full border-b lg:border-b-0 lg:max-w-min lg:ml-8'>
           <button
             className='p-1 lg:hidden'
@@ -55,7 +55,7 @@ export default function Header() {
           </div>
         </div>
       </div>
-      <div className='py-2 flex justify-between mx-auto max-w-[1550px] relative'>
+      <div className='py-2 flex justify-between mx-auto max-w-[1700px] relative'>
         <div className='hidden lg:block'>
           <Navbar />
         </div>

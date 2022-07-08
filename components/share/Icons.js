@@ -6,11 +6,14 @@ import {
   BsQuestionSquare,
   BsClockHistory,
   BsSignpost,
+  BsSortDown,
 } from "react-icons/bs";
 import { FiLogIn, FiLogOut, FiEdit, FiPlus } from "react-icons/fi";
 import { VscThreeBars, VscLocation } from "react-icons/vsc";
 import { HiOutlineUser } from "react-icons/hi";
 import { IoSearch } from "react-icons/io5";
+import { BiAbacus } from "react-icons/bi";
+
 import {
   RiArrowDownSFill,
   RiArrowDropLeftLine,
@@ -27,9 +30,17 @@ import {
   RiUserLocationFill,
   RiPhoneFill,
   RiDeleteBinLine,
+  RiStarFill,
+  RiSave2Line,
+  RiCheckFill,
 } from "react-icons/ri";
 
 const Icons = {
+  Check: RiCheckFill,
+  Filter: BiAbacus,
+  Save: RiSave2Line,
+  Star: RiStarFill,
+  Sort: BsSortDown,
   Eye: BsEye,
   EyeSlash: BsEyeSlash,
   Cart: BsCart2,

@@ -18,7 +18,7 @@ export default function Products() {
 
   //? Local State
   const [page, setPage] = useState(1);
-  const [filterCategory, setFilterCategory] = useState("");
+  const [filterCategory, setFilterCategory] = useState("all");
   const [search, setSearch] = useState("");
 
   //? Store
@@ -64,6 +64,7 @@ export default function Products() {
   };
 
   const handleRemoveSearch = () => {
+    inputSearchRef.current.value = "";
     setSearch("");
   };
 
@@ -85,7 +86,11 @@ export default function Products() {
             </div>
 
             <div className='flex flex-row-reverse rounded-md bg-zinc-200/80 '>
-              <button className='p-2' onClick={handleRemoveSearch}>
+              <button
+                type='button'
+                className='p-2'
+                onClick={handleRemoveSearch}
+              >
                 <Icons.Close className='icon' />
               </button>
               <input

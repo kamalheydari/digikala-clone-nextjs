@@ -1,3 +1,22 @@
+export const sorts = [
+  {
+    name: "جدیدترین",
+    //  value: "newest"
+  },
+  {
+    name: "پرفروش‌ترین‌",
+    //  value: "bestSeller"
+  },
+  {
+    name: "ارزان‌ترین",
+    //  value: "lowest"
+  },
+  {
+    name: "گران‌ترین",
+    //  value: "highest"
+  },
+];
+
 export const provinces = [
   ["لطفا استان را انتخاب نمایید", "0"],
   ["تهران", "1"],

@@ -11,6 +11,7 @@ import {
   ConfirmDeleteModal,
   ConfirmUpdateModal,
   CategoryForm,
+  SortModal,
 } from "components";
 
 export default function Modal() {
@@ -141,6 +142,12 @@ export default function Modal() {
       );
       break;
 
+    case "sort":
+      effect = ["bottom-0", "-bottom-full"];
+      size = "lg:max-w-3xl";
+      renderModal = <SortModal dispatch={dispatch} closeModal={closeModal} />;
+      break;
+
     default:
       break;
   }
@@ -149,7 +156,7 @@ export default function Modal() {
     <div
       className={`${
         isShow ? "opacity-100 visible" : "opacity-0 invisible "
-      } transition-all duration-500 relative   `}
+      } transition-all duration-500 relative`}
     >
       <div
         className='fixed top-0 left-0 z-10 w-full h-full bg-gray-400/20'
@@ -157,8 +164,8 @@ export default function Modal() {
       />
       <div
         className={`
-      ${isShow ? effect[0] : effect[1]} ${size}
-       fixed transition-all duration-700  left-0 right-0 mx-auto z-40 `}
+      ${isShow ? effect[0] : effect[1]} ${size} 
+       fixed transition-all duration-700 left-0 right-0 mx-auto z-40`}
       >
         {renderModal}
       </div>

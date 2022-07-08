@@ -18,24 +18,40 @@ export default async (req, res) => {
 const getProducts = async (req, res) => {
   const page = +req.query.page || 1;
   const page_size = +req.query.page_size || 10;
-  const filterOptions = {
-    category: {
-      $regex: req.query.category,
-      $options: "i",
-    },
-    title: {
-      $regex: req.query.search,
-      $options: "i",
-    },
-  };
+  const { category, search } = req.query;
+
+  //? Filters
+  const categoryFilter =
+    category && category !== "all"
+      ? {
+          category: {
+            $regex: category,
+            $options: "i",
+          },
+        }
+      : {};
+
+  const searchFilter =
+    search && search !== "all"
+      ? {
+          title: {
+            $regex: search,
+            $options: "i",
+          },
+        }
+      : {};
+
   try {
     await db.connect();
 
-    const products = await Products.find(filterOptions)
+    const products = await Products.find({ ...categoryFilter, ...searchFilter })
       .skip((page - 1) * page_size)
       .limit(page_size);
 
-    const productsLength = await Products.countDocuments(filterOptions);
+    const productsLength = await Products.countDocuments({
+      ...categoryFilter,
+      ...searchFilter,
+    });
 
     await db.disconnect();
 

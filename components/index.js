@@ -12,6 +12,8 @@ export { default as DashboardLayout } from "./Layouts/DashboardLayout";
 
 export { default as Header } from "./Header";
 export { default as Navbar } from "./Navbar";
+export { default as ProductCard } from "./ProductCard";
+export { default as ProductsAside } from "./ProductsAside";
 export { default as User } from "./User";
 export { default as Cart } from "./Cart";
 export { default as Search } from "./Search";
@@ -27,6 +29,7 @@ export { default as Sizes } from "./Sizes";
 export { default as UploadImages } from "./UploadImages";
 export { default as Pagination } from "./Pagination";
 export { default as Sidebar } from "./Sidebar";
+export { default as Sort } from "./Sort";
 
 export { default as Modal } from "./modal/Modal";
 export { default as ConfirmDeleteModal } from "./modal/ConfirmDeleteModal";
@@ -38,3 +41,4 @@ export { default as Alert } from "./modal/Alert";
 export { default as NameForm } from "./modal/NameForm";
 export { default as MobileForm } from "./modal/MobileForm";
 export { default as AddressForm } from "./modal/AddressForm";
+export { default as SortModal } from "./modal/SortModal";

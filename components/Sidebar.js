@@ -28,7 +28,7 @@ export default function Sidebar({ isSidebar, setIsSidebar }) {
 
   return (
     <div
-      className={`w-full h-screen fixed bg-gray-100/50 duration-200 top-0 lg:hidden ${
+      className={`w-full h-screen fixed bg-gray-100/50 duration-200 z-10 top-0 lg:hidden ${
         isSidebar ? "right-0" : "-right-full"
       } `}
     >

@@ -18,7 +18,7 @@ export default function Navbar() {
 
   return (
     <div className='group'>
-      <Link href='/products'>
+      <Link href='/products?category=all'>
         <a className='flex px-2 gap-x-1 '>
           <Icons.Bars className='icon' />
           دسته‌بندی کالاها
