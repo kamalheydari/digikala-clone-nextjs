@@ -1,5 +1,14 @@
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+
 import db from "lib/db";
 import Product from "models/Product";
+
+import { useDispatch, useSelector } from "react-redux";
+import { openModal } from "app/slices/modalSlice";
+import { resetFilter, updateFilter } from "app/slices/filterSlice";
+
+import { toFarsiNumber } from "utils/FarsiNumber";
 
 import {
   ProductCard,
@@ -8,16 +17,12 @@ import {
   Sort,
   ProductsAside,
 } from "components";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { toFarsiNumber } from "utils/FarsiNumber";
-import { useDispatch, useSelector } from "react-redux";
-import { openModal } from "app/slices/modalSlice";
-import { resetFilter, updateFilter } from "app/slices/filterSlice";
 
 export default function ProductsHome(props) {
   const router = useRouter();
   const dispatch = useDispatch();
+
+  //? Store
   const { sort, inStock, discount, max_price, min_price } = useSelector(
     (state) => state.filter
   );
@@ -26,8 +31,8 @@ export default function ProductsHome(props) {
   const [page, setPage] = useState(1);
   const [price, setPrice] = useState(min_price + "-" + max_price);
   const [showFilters, setShowFilters] = useState(false);
-  console.log(showFilters);
 
+  //? Handlers
   const hanldeQuery = ({ page, sort, inStock, discount, price }) => {
     const { query, pathname } = router;
     if (page) query.page = page;
@@ -188,6 +193,7 @@ export async function getServerSideProps({ query }) {
         }
       : {};
 
+  //? Sort
   const order =
     sort === "ارزان‌ترین"
       ? { price: 1 }

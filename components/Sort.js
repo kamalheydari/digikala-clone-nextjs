@@ -1,6 +1,8 @@
 import { updateFilter } from "app/slices/filterSlice";
-import { Icons } from "components";
+
 import { sorts } from "utils/constatns";
+
+import { Icons } from "components";
 
 export default function Sort({ dispatch, sort, productsLength }) {
   //? Handlers

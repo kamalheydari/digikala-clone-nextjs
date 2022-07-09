@@ -6,7 +6,10 @@ import { useSelector } from "react-redux";
 import { Icons } from "components";
 
 export default function Navbar() {
+  //? Local State
   const [activeMinCat, setActiveMinCat] = useState("/electronic-devices");
+  const [hover, setHover] = useState(false);
+  //? Store
   const { categories } = useSelector((state) => state.categories);
 
   const active = (cat) => {
@@ -19,14 +22,28 @@ export default function Navbar() {
   return (
     <div className='group'>
       <Link href='/products?category=all'>
-        <a className='flex px-2 gap-x-1 '>
+        <a
+          className='flex px-2 gap-x-1 '
+          onMouseOver={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
+        >
           <Icons.Bars className='icon' />
           دسته‌بندی کالاها
         </a>
       </Link>
       <div
-        className='absolute z-10 hidden w-full bg-white rounded-md shadow top-8 group-hover:block'
-        onMouseLeave={deactive}
+        className={`fixed left-0 z-10 w-full h-screen top-28 bg-gray-400/50 ${
+          hover ? "block" : "hidden"
+        }`}
+      />
+
+      <div
+        className='absolute z-40 hidden w-full bg-white rounded-md shadow top-8 group-hover:block '
+        onMouseOver={() => setHover(true)}
+        onMouseLeave={() => {
+          deactive();
+          setHover(false);
+        }}
       >
         <div className='flex'>
           <ul className='border-l-2 border-gray-100 w-52'>
