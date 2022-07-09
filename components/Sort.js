@@ -11,7 +11,7 @@ export default function Sort({ dispatch, sort, productsLength }) {
   };
 
   return (
-    <div className='hidden lg:flex lg:pb-4 lg:gap-x-4 lg:items-center '>
+    <div className='hidden xl:flex xl:pb-4 xl:gap-x-4 xl:items-center '>
       <div className='flex items-center gap-x-1'>
         <Icons.Sort className='icon ' />
         <span>مرتب سازی:</span>

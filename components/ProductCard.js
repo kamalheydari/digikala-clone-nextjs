@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Icons } from "components";
 import { toFarsiNumber } from "utils/FarsiNumber";
+import { truncate } from "utils/truncate";
 
 export default function ProductCard({ product }) {
   const specialSell = () => {
@@ -83,7 +84,7 @@ export default function ProductCard({ product }) {
       <div className='relative w-16 h-7'>{specialSell()}</div>
       <div className='flex items-center gap-2 sm:flex-col'>
         <div className='sm:flex sm:p-1 '>
-          <div className='relative h-28 w-28 sm:w-56 sm:h-60 sm:mb-8 '>
+          <div className='relative h-28 w-28 sm:w-56 sm:h-60 sm:mb-8 xl:w-44 xl:h-48'>
             <Image src={product.images[0].url} layout='fill' />
           </div>
           <div className='p-2 flex gap-1.5 items-center sm:flex-col sm:items-end'>
@@ -92,7 +93,12 @@ export default function ProductCard({ product }) {
           </div>
         </div>
         <div className='flex-1 space-y-3'>
-          <h2 className='text-xs leading-6 text-gray-800 '>{product.title}</h2>
+          <h2 className='hidden text-xs leading-6 text-gray-800 break-all h-14 xl:block'>
+            {truncate(product.title, 70)}
+          </h2>
+          <h2 className='text-xs leading-6 text-gray-800 h-14 xl:hidden'>
+            {product.title}
+          </h2>
           <div className='flex justify-between'>
             <div>{depot()}</div>
             <div className='flex items-center gap-x-1'>
