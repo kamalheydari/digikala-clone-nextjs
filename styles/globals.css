@@ -70,7 +70,7 @@
     @apply bottom-0 left-1 bg-slate-200 p-1 rounded-md w-5 h-5  text-center text-[11px]  text-black/80 lg:hidden;
   }
   .section-divide-y {
-    @apply h-3 bg-gray-200 lg:hidden;
+    @apply h-2 bg-gray-100 lg:hidden;
   }
 
   .section-divide-x {
