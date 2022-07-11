@@ -47,7 +47,7 @@ export default function Sizes() {
           <input
             type='text'
             onChange={(e) => setSize(e.target.value)}
-            className='inline-block outline-none  input w-44'
+            className='inline-block outline-none input w-44'
             value={size}
             placeholder='...'
             ref={inputRef}

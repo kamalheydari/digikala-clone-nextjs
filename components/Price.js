@@ -21,7 +21,7 @@ export default function Price({ product, singleProduct }) {
 
         {product.discount > 0 && (
           <div className=''>
-            <span className='text-sm ml-2 text-gray-500 line-through'>
+            <span className='ml-2 text-sm text-gray-500 line-through'>
               {toFarsiNumber(product.price)}
             </span>
             {singleProduct && <Discount product={product} />}

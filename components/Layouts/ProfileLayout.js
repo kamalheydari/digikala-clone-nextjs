@@ -10,7 +10,7 @@ export default function ProfileLayout({ children }) {
   return (
     <>
       <ClientLayout />
-      <div className='lg:flex lg:gap-x-4 lg:px-3 lg:container lg:max-w-7xl'>
+      <div className='lg:flex lg:gap-x-4 lg:px-3 lg:container lg:max-w-7xl xl:mt-28'>
         <div className='hidden lg:block '>
           <ProfileAside user={user} />
         </div>

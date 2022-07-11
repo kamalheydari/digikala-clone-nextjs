@@ -29,7 +29,7 @@ export default function ProductsHome(props) {
 
   //? local State
   const [page, setPage] = useState(1);
-  const [price, setPrice] = useState(min_price + "-" + max_price);
+  const [price, setPrice] = useState("");
   const [showFilters, setShowFilters] = useState(false);
 
   //? Handlers
@@ -82,7 +82,9 @@ export default function ProductsHome(props) {
   }, [router.query.category]);
 
   useEffect(() => {
-    setPrice(min_price + "-" + max_price);
+    if (min_price !== 0 && max_price !== 0)
+      setPrice(min_price + "-" + max_price);
+    console.log({ max_price, min_price });
   }, [max_price, min_price]);
 
   return (
@@ -212,6 +214,7 @@ export async function getServerSideProps({ query }) {
     ...discountFilter,
     ...priceFilter,
   })
+    .select("-description -info -specification -sizes")
     .sort(order)
     .skip((page - 1) * page_size)
     .limit(page_size)

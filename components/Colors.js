@@ -50,7 +50,7 @@ export default function Colors() {
             onChange={(e) =>
               setColor((color) => ({ ...color, name: e.target.value }))
             }
-            className='inline-block outline-none  input w-44'
+            className='inline-block outline-none input w-44'
             name='name'
             value={color.name}
             placeholder='نام رنگ'
