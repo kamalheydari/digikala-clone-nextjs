@@ -1,10 +1,22 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, nanoid } from "@reduxjs/toolkit";
 import Cookies from "js-cookie";
+import getTotal from "utils/getTotal";
+import exsitItem from "utils/exsitItem";
+
+const getCartItems = Cookies.get("cartItems")
+  ? JSON.parse(Cookies.get("cartItems"))
+  : [];
+
+const setCartItems = (cartItems) =>
+  Cookies.set("cartItems", JSON.stringify(cartItems), {
+    expires: 10,
+  });
 
 const initialState = {
-  cartItems: Cookies.get("cartItems")
-    ? JSON.parse(Cookies.get("cartItems"))
-    : null,
+  cartItems: getCartItems,
+  totalItems: getTotal(getCartItems, "quantity"),
+  totalPrice: getTotal(getCartItems, "price"),
+  totalDiscount: getTotal(getCartItems, "discount"),
 };
 
 const cartSlice = createSlice({
@@ -12,44 +24,67 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action) => {
-      const itemExist = state.cartItems.find(
-        (item) => item._id === action.payload._id
+      let isItemExist = exsitItem(
+        state.cartItems,
+        action.payload.productID,
+        action.payload.color,
+        action.payload.size
       );
 
-      if (itemExist) {
-        itemExist.quantity += 1;
-        Cookies.set("cartItems", JSON.stringify(state.cart));
+      if (isItemExist) {
+        isItemExist.quantity += 1;
+        state.totalItems = getTotal(state.cartItems, "quantity");
+        state.totalPrice = getTotal(state.cartItems, "price");
+        state.totalDiscount = getTotal(state.cartItems, "discount");
+        setCartItems(state.cartItems);
       } else {
-        state.cartItems.push(action.payload);
-        Cookies.set("cartItems", JSON.stringify(state.cart));
+        state.cartItems.push({ itemID: nanoid(), ...action.payload });
+        state.totalItems = getTotal(state.cartItems, "quantity");
+        state.totalPrice = getTotal(state.cartItems, "price");
+        state.totalDiscount = getTotal(state.cartItems, "discount");
+        setCartItems(state.cartItems);
       }
     },
 
     removeFromCart: (state, action) => {
-      const index = state.cartItems.find(
-        (item) => item._id === action.payload._id
+      const index = state.cartItems.findIndex(
+        (item) => item.itemID === action.payload
       );
 
       if (index !== -1) {
         state.cartItems.splice(index, 1);
-        Cookies.set("cartItems", JSON.stringify(state.cart));
+        state.totalItems = getTotal(state.cartItems, "quantity");
+        state.totalPrice = getTotal(state.cartItems, "price");
+        state.totalDiscount = getTotal(state.cartItems, "discount");
+        setCartItems(state.cartItems);
       }
     },
 
     increase: (state, action) => {
       state.cartItems.forEach((item) => {
-        if (item._id === action.payload._id) item.quantity += 1;
+        if (item.itemID === action.payload) item.quantity += 1;
       });
+      state.totalItems = getTotal(state.cartItems, "quantity");
+      state.totalPrice = getTotal(state.cartItems, "price");
+      state.totalDiscount = getTotal(state.cartItems, "discount");
+      setCartItems(state.cartItems);
     },
 
     decrease: (state, action) => {
       state.cartItems.forEach((item) => {
-        if (item._id === action.payload._id) item.quantity -= 1;
+        if (item.itemID === action.payload) item.quantity -= 1;
       });
+      state.totalItems = getTotal(state.cartItems, "quantity");
+      state.totalPrice = getTotal(state.cartItems, "price");
+      state.totalDiscount = getTotal(state.cartItems, "discount");
+      setCartItems(state.cartItems);
     },
 
     clearCart: (state, action) => {
       state.cartItems = [];
+      state.totalItems = 0;
+      state.totalPrice = 0;
+      state.totalDiscount = 0;
       Cookies.remove("cartItems");
     },
   },

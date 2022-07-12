@@ -29,7 +29,8 @@ const authSlice = createSlice({
       state.user = action.payload;
       Cookies.set(
         "userInfo",
-        JSON.stringify({ token: state.token, user: action.payload })
+        JSON.stringify({ token: state.token, user: action.payload }),
+        { expires: 10 }
       );
     },
   },

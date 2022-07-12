@@ -32,11 +32,15 @@ export { default as Sidebar } from "./Sidebar";
 export { default as Sort } from "./Sort";
 export { default as Checkbox } from "./Checkbox";
 export { default as SpecialSell } from "./SpecialSell";
-export { default as Discount } from "./Discount";
-export { default as Price } from "./Price";
+export { default as DiscountProduct } from "./DiscountProduct";
+export { default as ProductPrice } from "./ProductPrice";
 export { default as AddToCart } from "./AddToCart";
 export { default as Services } from "./Services";
-export { default as Depot } from "./Depot";
+export { default as CartButtons } from "./CartButtons";
+export { default as DiscountCartItem } from "./DiscountCartItem";
+export { default as FreeShipping } from "./FreeShipping";
+export { default as CartItem } from "./CartItem";
+
 
 export { default as Modal } from "./modal/Modal";
 export { default as ConfirmDeleteModal } from "./modal/ConfirmDeleteModal";

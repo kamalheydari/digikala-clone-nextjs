@@ -7,12 +7,18 @@ import Product from "models/Product";
 import { toFarsiNumber } from "utils/FarsiNumber";
 import { truncate } from "utils/truncate";
 
-import { AddToCart, Icons, Services, SpecialSell } from "components";
+import {
+  AddToCart,
+  FreeShipping,
+  Icons,
+  Services,
+  SpecialSell,
+} from "components";
 
 export default function SingleProduct({ product }) {
   //? Local State
-  const [color, setColor] = useState(product.colors[0]);
-  const [size, setSize] = useState(product.sizes[0]);
+  const [color, setColor] = useState(product.colors[0] || null);
+  const [size, setSize] = useState(product.sizes[0] || null);
   const [isShowDesc, setIsShowDesc] = useState(false);
 
   //? Handlers
@@ -50,7 +56,17 @@ export default function SingleProduct({ product }) {
                 className='inline-block w-5 h-5 ml-3 shadow rounded-xl'
                 style={{ background: item.hashCode }}
               >
-                {color.id === item.id && <Icons.Check className='icon' />}
+                {color.id === item.id && (
+                  <Icons.Check
+                    className={`h-5 w-5 ${
+                      item.hashCode === "#ffffff"
+                        ? "text-gray-600"
+                        : item.hashCode === "#000000"
+                        ? "text-gray-200"
+                        : "text-white"
+                    } `}
+                  />
+                )}
               </span>
               <span>{item.name}</span>
             </button>
@@ -149,40 +165,33 @@ export default function SingleProduct({ product }) {
         </div>
 
         {/* free shipping */}
-        <div className='py-5 bg-gray-100 px-7 lg:col-start-4 lg:col-end-8 lg:row-start-5 lg:row-end-6 lg:bg-white '>
-          <div className='flex justify-between bg-white border border-gray-300 rounded-lg'>
-            <div className='p-3'>
-              <h4>ارسال رایگان</h4>
-              <p className='mt-2 text-xs text-gray-500 lg:text-sm'>
-                برای سفارش‌ بالای ۵۰۰ هزار تومان
-              </p>
-            </div>
-            <div className='relative w-32 h-20 px-4'>
-              <Image src='/icons/freeShipping.svg' layout='fill' />
-            </div>
-          </div>
+        <div className='lg:col-start-4 lg:col-end-8 lg:row-start-5 lg:row-end-6 lg:bg-white'>
+          <FreeShipping />
         </div>
 
-        <div className='lg:col-start-8 lg:col-end-10 lg:row-start-2 lg:row-end-4 lg:rounded-lg lg:bg-gray-100 lg:flex lg:flex-col lg:justify-evenly lg:gap-y-2 xl:row-end-4 lg:px-3 lg:py-1.5'>
-          <div className='hidden gap-x-1 lg:flex'>
-            <Icons.Save className='text-teal-700 icon' />
-            <span className='text-gray-700'>موجود در انبار دیجی کالا</span>
+        {/* Add To Cart */}
+        {product.inStock > 0 && (
+          <div className='lg:col-start-8 lg:col-end-10 lg:row-start-2 lg:row-end-4 lg:rounded-lg lg:bg-gray-100 lg:flex lg:flex-col lg:justify-evenly lg:gap-y-2 xl:row-end-4 lg:px-3 lg:py-1.5 lg:border lg:border-gray-200 lg:shadow lg:sticky lg:top-32'>
+            <div className='hidden gap-x-1 lg:flex'>
+              <Icons.Save className='text-teal-700 icon' />
+              <span className='text-gray-700'>موجود در انبار دیجی کالا</span>
+            </div>
+
+            <span className='hidden text-red-500 mr-7 lg:block'>
+              تنها {toFarsiNumber(product.inStock)} عدد در انبار باقی مانده
+            </span>
+
+            <div className='hidden lg:flex lg:items-center lg:gap-x-1'>
+              <Icons.Check className='icon' />
+              <span> فروش :</span>
+              <span>{toFarsiNumber(product.sold)}</span>
+            </div>
+
+            <AddToCart product={product} color={color} size={size} />
           </div>
-
-          <span className='hidden text-red-500 mr-7 lg:block'>
-            تنها {toFarsiNumber(product.inStock)} عدد در انبار باقی مانده
-          </span>
-
-          <div className='hidden lg:flex lg:items-center lg:gap-x-1'>
-            <Icons.Check className='icon' />
-            <span> فروش :</span>
-            <span>{toFarsiNumber(product.sold)}</span>
-          </div>
-
-          <AddToCart product={product} />
-        </div>
+        )}
       </div>
-
+      
       <Services />
 
       {/* description */}

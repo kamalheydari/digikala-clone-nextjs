@@ -84,7 +84,6 @@ export default function ProductsHome(props) {
   useEffect(() => {
     if (min_price !== 0 && max_price !== 0)
       setPrice(min_price + "-" + max_price);
-    console.log({ max_price, min_price });
   }, [max_price, min_price]);
 
   return (

@@ -1,18 +1,75 @@
-import { Price, Icons } from "components";
-import { toFarsiNumber } from "utils/FarsiNumber";
-export default function ({ product }) {
+import { useState, useEffect } from "react";
+
+import { addToCart } from "app/slices/cartSlice";
+import { openModal } from "app/slices/modalSlice";
+import { useDispatch, useSelector } from "react-redux";
+
+import exsitItem from "utils/exsitItem";
+
+import { ArrowLink, ProductPrice, CartButtons } from "components";
+
+export default function ({ product, color, size }) {
+  const dispatch = useDispatch();
+
+  //? Local State
+  const [currentItemInCart, setCurrentItemInCart] = useState(null);
+
+  //? Store
+  const { cartItems } = useSelector((state) => state.cart);
+
+  useEffect(() => {
+    setCurrentItemInCart(exsitItem(cartItems, product._id, color, size));
+  }, [size, color, cartItems]);
+
+  //? handlers
+  const addItem = () => {
+    if (product.inStock === 0)
+      return dispatch(
+        openModal({
+          isShow: true,
+          type: "alert",
+          status: "error",
+          text: "موجودی این محصول به اتمام رسیده",
+        })
+      );
+
+    dispatch(
+      addToCart({
+        productID: product._id,
+        name: product.title,
+        price: product.price,
+        discount: product.discount,
+        color,
+        size,
+        img: product.images[0],
+        quantity: 1,
+      })
+    );
+  };
+
   if (product.inStock !== 0)
     return (
-      <div
-        className={`px-5 fixed bottom-0 left-0 right-0 shadow-3xl border-t border-gray-300 bg-white flex justify-between items-baseline lg:sticky lg:flex-col-reverse lg:top-32 lg:bg-gray-100 lg:gap-y-4 lg:border-t-0 lg:shadow-none  ${
-          product.discount > 0 ? "pt-5 pb-3 lg:p-0" : "pt-2 pb-3 lg:p-0"
-        }`}
-      >
-        <button className='px-12 text-sm btn lg:w-full'>افزودن به سبد</button>
+      <div className='fixed bottom-0 left-0 right-0 flex items-baseline justify-between px-5 py-4 bg-white border-t border-gray-300 lg:p-0 shadow-3xl lg:sticky lg:flex-col-reverse lg:top-32 lg:bg-gray-100 lg:gap-y-4 lg:border-t-0 lg:shadow-none'>
+        {currentItemInCart ? (
+          <div className='flex w-full gap-x-4'>
+            <div className='w-52 lg:w-1/2 '>
+              <CartButtons item={currentItemInCart} />
+            </div>
+            <div className='hidden lg:block'>
+              <ArrowLink path='/checkout/cart'>مشاهده سبد خرید</ArrowLink>
+            </div>
+          </div>
+        ) : (
+          <button onClick={addItem} className='px-12 text-sm btn lg:w-full'>
+            افزودن به سبد
+          </button>
+        )}
 
-        <div className='lg:self-end'>
-          <Price product={product} singleProduct />
+        <div className='lg:self-end min-w-fit'>
+          <ProductPrice product={product} singleProduct />
         </div>
       </div>
     );
+    
+  return null;
 }

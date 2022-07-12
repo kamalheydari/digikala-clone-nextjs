@@ -6,8 +6,8 @@ const ArrowLink = ({ children, path }) => {
   return (
     <Link href={path}>
       <a className='inline-flex items-center text-sm text-blue-400 max-w-max '>
-        <span className='text-[11px] md:text-sm'>{children}</span>
-        <Icons.ArrowLeft className='text-blue-400 icon' />
+        <span className='text-sky-500'>{children}</span>
+        <Icons.ArrowLeft className='text-sky-500 icon' />
       </a>
     </Link>
   );

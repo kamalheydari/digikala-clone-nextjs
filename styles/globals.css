@@ -47,7 +47,7 @@
   }
   label,
   span {
-    @apply text-xs text-gray-500 md:text-sm font-bold;
+    @apply text-xs text-gray-500 md:text-sm font-thin;
   }
 }
 
@@ -67,7 +67,7 @@
     @apply w-5 h-5 md:w-6 md:h-6 text-gray-700;
   }
   .order-badge {
-    @apply bottom-0 left-1 bg-slate-200 p-1 rounded-md w-5 h-5  text-center text-[11px]  text-black/80 lg:hidden;
+    @apply bottom-0 left-1 bg-slate-200 p-1 rounded-md w-5 h-5  text-center text-xs  text-black/80 lg:hidden;
   }
   .section-divide-y {
     @apply h-2 bg-gray-100 lg:hidden;
@@ -76,7 +76,7 @@
   .section-divide-x {
     @apply w-0.5 bg-gray-200;
   }
-  .b {
+  .bbb {
     @apply border border-red-600;
   }
 }

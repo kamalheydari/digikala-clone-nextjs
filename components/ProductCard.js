@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { Icons, SpecialSell, Discount, Price, Depot } from "components";
+import { Icons, SpecialSell, DiscountProduct, ProductPrice } from "components";
 
 import { truncate } from "utils/truncate";
+import { toFarsiNumber } from "utils/FarsiNumber";
 
 export default function ProductCard({ product }) {
   //? Local Components
@@ -23,6 +24,25 @@ export default function ProductCard({ product }) {
   const PlusIcon = () => {
     if (product.colors.length > 3 && product.inStock !== 0)
       return <Icons.Plus className='w-3 h-3 mr-1 sm:mr-0' />;
+  };
+
+  const Depot = () => {
+    if (product.inStock === 0) {
+      return null;
+    } else if (product.inStock < 10) {
+      return (
+        <span className='text-red-500'>
+          تنها {toFarsiNumber(product.inStock)} عدد در انبار باقی مانده
+        </span>
+      );
+    } else {
+      return (
+        <div className='flex text-teal-700 gap-x-1'>
+          <Icons.Save />
+          <span className='text-teal-700'>موجود در انبار دیجی کالا</span>
+        </div>
+      );
+    }
   };
 
   return (
@@ -58,9 +78,9 @@ export default function ProductCard({ product }) {
               </div>
               <div className='flex justify-between'>
                 <div>
-                  <Discount product={product} />
+                  <DiscountProduct product={product} />
                 </div>
-                <Price product={product} />
+                <ProductPrice product={product} />
               </div>
             </div>
           </div>

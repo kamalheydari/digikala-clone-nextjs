@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { toFarsiNumber } from "utils/FarsiNumber";
-import Discount from "./Discount";
+import { DiscountProduct } from "components";
 
-export default function Price({ product, singleProduct }) {
+export default function ProductPrice({ product, singleProduct }) {
   if (product.inStock !== 0) {
     return (
       <div className={`${singleProduct && "flex flex-col-reverse"}`}>
@@ -14,7 +14,7 @@ export default function Price({ product, singleProduct }) {
               product.price - (product.discount * product.price) / 100
             )}
           </span>
-          <div className='relative w-6 h-6'>
+          <div className='relative mr-1 w-7 h-7'>
             <Image src='/icons/toman.svg' layout='fill' />
           </div>
         </div>
@@ -24,7 +24,7 @@ export default function Price({ product, singleProduct }) {
             <span className='ml-2 text-sm text-gray-500 line-through'>
               {toFarsiNumber(product.price)}
             </span>
-            {singleProduct && <Discount product={product} />}
+            {singleProduct && <DiscountProduct product={product} />}
           </div>
         )}
       </div>

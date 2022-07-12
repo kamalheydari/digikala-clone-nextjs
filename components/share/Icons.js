@@ -7,8 +7,9 @@ import {
   BsClockHistory,
   BsSignpost,
   BsSortDown,
+  BsShieldCheck
 } from "react-icons/bs";
-import { FiLogIn, FiLogOut, FiEdit, FiPlus } from "react-icons/fi";
+import { FiLogIn, FiLogOut, FiEdit, FiPlus, FiMinus } from "react-icons/fi";
 import { VscThreeBars, VscLocation } from "react-icons/vsc";
 import { HiOutlineUser } from "react-icons/hi";
 import { IoSearch } from "react-icons/io5";
@@ -33,9 +34,14 @@ import {
   RiStarFill,
   RiSave2Line,
   RiCheckFill,
+  RiMore2Fill,
+  RiPencilRuler2Line,
 } from "react-icons/ri";
 
 const Icons = {
+  Rule: RiPencilRuler2Line,
+  More: RiMore2Fill,
+  ShieldCheck:BsShieldCheck,
   Check: RiCheckFill,
   Filter: BiAbacus,
   Save: RiSave2Line,
@@ -66,6 +72,7 @@ const Icons = {
   Location2: VscLocation,
   Home: RiHome6Line,
   Plus: FiPlus,
+  Minus: FiMinus,
   Close: RiCloseLine,
   UserLocation: RiUserLocationFill,
   Post: BsSignpost,
