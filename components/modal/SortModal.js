@@ -18,7 +18,7 @@ export default function SortModal({ dispatch, closeModal }) {
   return (
     <div className='px-5 py-3 bg-white h-fit md:rounded-lg rounded-2xl'>
       <div className='flex justify-between py-3'>
-        <span className='text-base'>مرتب سازی بر اساس</span>
+        <h5>مرتب سازی بر اساس</h5>
         <CloseModal />
       </div>
       <div className='divide-y'>

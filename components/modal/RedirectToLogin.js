@@ -16,7 +16,7 @@ export default function RedirectToLogin({ text, title, dispatch }) {
       <div className='relative w-20 h-20 mx-auto'>
         <Image src='/icons/exclamation.svg' layout='fill' />
       </div>
-      <h4 className='text-xl font-bold'>{title}</h4>
+      <p className='text-xl font-bold'>{title}</p>
       <p className='text-red-600'>{text}</p>
       <button type='button' className='mx-auto btn' onClick={handleClick}>
         انتقال به صفحه ورود

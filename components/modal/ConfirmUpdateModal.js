@@ -74,7 +74,7 @@ export default function ConfirmUpdateModal({
 
   return (
     <div className='px-3 py-6 space-y-4 text-center bg-white md:rounded-lg'>
-      <p className='text-gray-600'>
+      <p>
         آیا موافق بروزرسانی{" "}
         <span className='font-bold text-green-500'>{title}</span> تغییر داده شده
         هستید؟
@@ -89,7 +89,7 @@ export default function ConfirmUpdateModal({
         </button>
         <button
           type='button'
-          className='rounded-lg  btn'
+          className='rounded-lg btn'
           onClick={handleCancleClick}
         >
           لغو

@@ -45,10 +45,10 @@ export default function AddressForm({ title, token, dispatch, closeModal }) {
   return (
     <div className='flex flex-col h-full px-5 py-3 bg-white md:rounded-lg gap-y-5'>
       <div className='flex justify-between py-2 border-b-2 border-gray-200'>
-        <span className='text-sm'>{title}</span>
+        <h5>{title}</h5>
         <CloseModal />
       </div>
-      <p className='text-sm'>لطفا اطلاعات موقعیت مکانی خود را وارد کنید.</p>
+      <p>لطفا اطلاعات موقعیت مکانی خود را وارد کنید.</p>
       <form
         className='flex flex-col justify-between flex-1 gap-y-5'
         onSubmit={submitHander}
@@ -134,11 +134,7 @@ export default function AddressForm({ title, token, dispatch, closeModal }) {
         </div>
 
         <div className='py-3 border-t-2 border-gray-200 lg:pb-0 '>
-          <button
-            className='w-full max-w-xl mx-auto rounded-md btn lg:w-64 lg:ml-0'
-            type='submit'
-            disabled={isLoading}
-          >
+          <button className='modal-btn' type='submit' disabled={isLoading}>
             {isLoading ? <Loading /> : "ثبت اطلاعات"}
           </button>
         </div>

@@ -68,11 +68,7 @@ export default function MobileForm({ title, token, dispatch, closeModal }) {
         </div>
 
         <div className='py-3 border-t-2 border-gray-200 lg:pb-0 '>
-          <button
-            className='w-full max-w-xl mx-auto rounded-md btn lg:w-64 lg:ml-0'
-            type='submit'
-            disabled={isLoading}
-          >
+          <button className='modal-btn' type='submit' disabled={isLoading}>
             {isLoading ? <Loading /> : "ثبت اطلاعات"}
           </button>
         </div>

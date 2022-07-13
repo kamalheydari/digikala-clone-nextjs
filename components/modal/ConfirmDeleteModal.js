@@ -80,7 +80,7 @@ export default function ConfirmDeleteModal({
 
   return (
     <div className='px-3 py-6 space-y-4 text-center bg-white md:rounded-lg'>
-      <p className='text-gray-600'>
+      <p>
         آیا موافق حذف <span className='font-bold text-red-500'>{title}</span>{" "}
         انتخاب شده هستید؟
       </p>

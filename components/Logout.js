@@ -27,7 +27,7 @@ export default function Logout() {
         onClick={() => handleLogout()}
       >
         <Icons.Logout className='text-black icon' />
-        <span className='ml-auto mr-3'>خروج از حساب کاربری</span>
+        <span className='ml-auto mr-3 text-gray-700'>خروج از حساب کاربری</span>
       </div>
     </div>
   );

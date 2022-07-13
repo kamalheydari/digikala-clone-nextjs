@@ -50,7 +50,6 @@ export default function Header() {
           <Search />
           <div className='inline-flex items-center gap-x-4 '>
             <User user={user} />
-            <span className='hiden lg:block lg:border lg:border-gray-300 lg:h-6'></span>
             <Cart />
           </div>
         </div>

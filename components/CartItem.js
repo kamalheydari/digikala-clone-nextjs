@@ -21,7 +21,7 @@ export default function CartItem({ item }) {
 
       {/* name */}
       <div>
-        <h5 className='mb-3 text-sm font-normal leading-6 tracking-wide'>
+        <h5 className='mb-3 text-sm'>
           <Link href={`/products/${item.productID}`}>
             <a>{item.name}</a>
           </Link>

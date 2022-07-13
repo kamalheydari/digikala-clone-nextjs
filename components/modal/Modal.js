@@ -159,7 +159,7 @@ export default function Modal() {
       } transition-all duration-500 relative`}
     >
       <div
-        className='fixed top-0 left-0 z-10 w-full h-full bg-gray-400/20'
+        className='fixed top-0 left-0 z-40 w-full h-full bg-gray-400/20'
         onClick={() => dispatch(closeModal())}
       />
       <div
