@@ -7,11 +7,15 @@ import { Loading, CloseModal } from "components";
 
 import cityList from "utils/cityList";
 import { provinces } from "utils/constatns";
+import { useSelector } from "react-redux";
 
 export default function AddressForm({ title, token, dispatch, closeModal }) {
+  //? Store
+  const { user } = useSelector((state) => state.auth);
+
   //? Local State
   const [cities, setCities] = useState([]);
-  const [address, setAddress] = useState({});
+  const [address, setAddress] = useState(user?.address || {});
 
   //? Patch Data
   const [patchData, { data, isSuccess, isLoading }] = usePatchDataMutation();
@@ -67,6 +71,7 @@ export default function AddressForm({ title, token, dispatch, closeModal }) {
               id='provinces'
               onChange={handleChange}
               required={true}
+              value={address.provinces}
             >
               {provinces.map((item, index) => (
                 <option value={item[0]} key={index}>
@@ -89,6 +94,7 @@ export default function AddressForm({ title, token, dispatch, closeModal }) {
               id='city'
               onChange={handleChange}
               required={true}
+              value={address.city}
             >
               {cities.map((item, index) => (
                 <option value={item[0]} key={index}>
@@ -110,6 +116,7 @@ export default function AddressForm({ title, token, dispatch, closeModal }) {
               type='text'
               name='street'
               id='street'
+              value={address.street}
               onChange={handleChange}
               required={true}
             />
@@ -127,6 +134,7 @@ export default function AddressForm({ title, token, dispatch, closeModal }) {
               type='text'
               name='postalCode'
               id='postalCode'
+              value={address.postalCode}
               onChange={handleChange}
               required={true}
             />
