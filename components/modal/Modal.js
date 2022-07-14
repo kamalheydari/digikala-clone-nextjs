@@ -99,8 +99,6 @@ export default function Modal() {
           token={token}
           dispatch={dispatch}
           closeModal={closeModal}
-          editedData={editedData}
-
         />
       );
       break;
@@ -127,7 +125,6 @@ export default function Modal() {
           token={token}
           dispatch={dispatch}
           closeModal={closeModal}
-          editedData={editedData}
         />
       );
       break;
@@ -159,10 +156,10 @@ export default function Modal() {
     <div
       className={`${
         isShow ? "opacity-100 visible" : "opacity-0 invisible "
-      } transition-all duration-500 relative`}
+      } transition-all duration-500 fixed inset-0 z-40`}
     >
       <div
-        className='fixed top-0 left-0 z-40 w-full h-full bg-gray-400/20'
+        className='w-full h-full bg-gray-400/20'
         onClick={() => dispatch(closeModal())}
       />
       <div

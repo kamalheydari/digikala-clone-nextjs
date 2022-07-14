@@ -59,21 +59,31 @@ export default function Header() {
           <Navbar />
         </div>
 
-        <button
-          type='button'
-          onClick={handleClick}
-          className='flex items-center w-full gap-x-1 lg:w-fit'
-        >
-          <Icons.Location2 className='icon' />
-          {user?.address ? (
+        {user?.address && (
+          <button
+            type='button'
+            onClick={handleClick}
+            className='flex items-center w-full gap-x-1 lg:w-fit'
+          >
+            <Icons.Location2 className='icon' />
             <span>
               ارسال به {user.address.provinces}, {user.address.city}
             </span>
-          ) : (
+            <Icons.ArrowLeft className='mr-auto icon' />
+          </button>
+        )}
+        {user && !user.address && (
+          <button
+            type='button'
+            onClick={handleClick}
+            className='flex items-center w-full gap-x-1 lg:w-fit'
+          >
+            <Icons.Location2 className='icon' />
             <span>لطفا شهر خود را انتخاب کنید</span>
-          )}
-          <Icons.ArrowLeft className='mr-auto icon' />
-        </button>
+
+            <Icons.ArrowLeft className='mr-auto icon' />
+          </button>
+        )}
       </div>
       <Sidebar isSidebar={isSidebar} setIsSidebar={setIsSidebar} />
     </header>

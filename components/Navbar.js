@@ -104,34 +104,3 @@ export default function Navbar() {
     </div>
   );
 }
-
-{
-  /* <div className="absolute top-0 space-y-3 text-right right-full b">
-{categories.map((parentCategory) => {
-  if (parentCategory.parent === mainCategory.category) {
-    return (
-      <li
-        key={parentCategory._id}
-        // hidden group-hover:flex
-        className=' min-w-max'
-      >
-        <div className=''>{parentCategory.name}</div>
-
-        {categories.map((childCategory) => {
-          if (
-            childCategory.parent ===
-            "/" + parentCategory.slug
-          ) {
-            return (
-              <li key={childCategory._id} className='hidden'>
-                <div className=''>{childCategory.name}</div>
-              </li>
-            );
-          }
-        })}
-      </li>
-    );
-  }
-})}
-</div> */
-}
