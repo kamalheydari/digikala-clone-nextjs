@@ -9,7 +9,7 @@ import { updateUser } from "app/slices/authSlice";
 
 import { DisplayError, Loading, CloseModal } from "components";
 
-export default function NameForm({ title, token, dispatch, closeModal }) {
+export default function NameForm({ title, token, dispatch, closeModal,editedData }) {
   //? Patch Data
   const [patchData, { data, isSuccess, isLoading }] = usePatchDataMutation();
 
@@ -66,6 +66,7 @@ export default function NameForm({ title, token, dispatch, closeModal }) {
             type='text'
             name='name'
             id='name'
+            defaultValue={editedData}
             {...register("name")}
           />
           <DisplayError errors={formErrors.name} />

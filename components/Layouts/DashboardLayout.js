@@ -1,9 +1,15 @@
 import { useSelector } from "react-redux";
 
 import { DashboardAside } from "components";
+import { useRouter } from "next/router";
 
 export default function DashboardLayout({ children }) {
-  const { user } = useSelector((state) => state.auth);
+  const router = useRouter();
+
+  //? Store
+  const { user, token } = useSelector((state) => state.auth);
+
+  if (!token || user?.role === "user") router.push("/admin/login");
 
   if (user?.role === "admin" || user?.root)
     return (
@@ -16,6 +22,4 @@ export default function DashboardLayout({ children }) {
         </div>
       </div>
     );
-
-  return null;
 }

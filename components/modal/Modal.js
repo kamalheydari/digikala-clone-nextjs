@@ -99,6 +99,8 @@ export default function Modal() {
           token={token}
           dispatch={dispatch}
           closeModal={closeModal}
+          editedData={editedData}
+
         />
       );
       break;
@@ -125,6 +127,7 @@ export default function Modal() {
           token={token}
           dispatch={dispatch}
           closeModal={closeModal}
+          editedData={editedData}
         />
       );
       break;

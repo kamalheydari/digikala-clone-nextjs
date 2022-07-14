@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 const initialState = Cookies.get("userInfo")
   ? JSON.parse(Cookies.get("userInfo"))
-  : {};
+  : { token: null, user: null };
 
 const authSlice = createSlice({
   name: "auth",

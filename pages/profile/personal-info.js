@@ -9,7 +9,6 @@ export default function PersonalInfo() {
   //? Store
   const { user } = useSelector((state) => state.auth);
 
-
   //? Handlers
   const mobilEditHandler = () => {
     dispatch(
@@ -17,16 +16,18 @@ export default function PersonalInfo() {
         isShow: true,
         type: "edit-mobile",
         title: "ثبت و ویرایش  شماره موبایل",
+        editedData: user?.mobile,
       })
-    );
-  };
-  
-  const nameEditHandler = () => {
-    dispatch(
-      openModal({
-        isShow: true,
-        type: "edit-name",
-        title: "ثبت و ویرایش اطلاعات شناسایی",
+      );
+    };
+    
+    const nameEditHandler = () => {
+      dispatch(
+        openModal({
+          isShow: true,
+          type: "edit-name",
+          title: "ثبت و ویرایش اطلاعات شناسایی",
+          editedData: user?.name,
       })
     );
   };

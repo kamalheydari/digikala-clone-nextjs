@@ -9,7 +9,13 @@ import { updateUser } from "app/slices/authSlice";
 
 import { DisplayError, Loading, CloseModal } from "components";
 
-export default function MobileForm({ title, token, dispatch, closeModal }) {
+export default function MobileForm({
+  title,
+  token,
+  dispatch,
+  closeModal,
+  editedData,
+}) {
   //? Patch Data
   const [patchData, { data, isSuccess, isLoading }] = usePatchDataMutation();
 
@@ -62,6 +68,7 @@ export default function MobileForm({ title, token, dispatch, closeModal }) {
             className='input sm:max-w-sm lg:max-w-full '
             type='text'
             name='mobile'
+            defaultValue={editedData}
             {...register("mobile")}
           />
           <DisplayError errors={formErrors.mobile} />

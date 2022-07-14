@@ -34,16 +34,14 @@ export default function User({ user }) {
         </Link>
       </div>
       <div
-        className={`hidden lg:cursor-pointer lg:relative lg:flex lg:rounded lg:p-1.5 lg:transition z-40 ${
-          isOpen && "bg-red-100"
-        }`}
-        onClick={() => setIsOpen(!isOpen)}
+        className='hidden lg:cursor-pointer lg:relative lg:flex lg:rounded lg:p-1.5 lg:transition z-40 
+          hover:bg-red-100 group '
       >
         <Icons.User className='icon' />
         <Icons.ArrowDown className='icon ' />
         <div
-          className={`bg-white shadow-md rounded overflow-hidden absolute top-full left-0 w-60 
-          border border-gray-100 ${isOpen ? "block" : "hidden"}`}
+          className='bg-white shadow-md rounded absolute top-full left-0 w-60 
+          border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300'
         >
           <BoxLink path='/profile' name={user.name} className='border-t-0'>
             <div className='relative w-6 h-6'>
