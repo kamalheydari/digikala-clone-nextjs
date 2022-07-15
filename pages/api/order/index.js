@@ -42,15 +42,10 @@ const createOrder = async (req, res) => {
   try {
     const result = await auth(req, res);
 
-    const { address, mobile, cart, total } = req.body;
-
     await db.connect();
     const newOrder = new Order({
       user: result.id,
-      address,
-      mobile,
-      cart,
-      total,
+      ...req.body,
     });
 
     //? update product beside on new order
@@ -61,7 +56,7 @@ const createOrder = async (req, res) => {
     await newOrder.save();
     await db.disconnect();
 
-    res.status(200).json({ msg: "سفاش شما ثبت شد ", newOrder });
+    res.status(200).json({ msg: "سفاش شما ثبت شد " });
   } catch (error) {
     sendError(res, 500, error.message);
   }

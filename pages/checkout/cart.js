@@ -1,18 +1,37 @@
 import { clearCart } from "app/slices/cartSlice";
-import { Icons, FreeShipping, CartItem, Buttons } from "components";
+import { openModal } from "app/slices/modalSlice";
+import { Icons, FreeShipping, CartItem, Buttons, CartInfo } from "components";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { toFarsiNumber } from "utils/FarsiNumber";
 
 export default function Cart() {
   const dispatch = useDispatch();
+  const router = useRouter();
+  //? Store
   const { cartItems, totalItems, totalPrice, totalDiscount } = useSelector(
     (state) => state.cart
   );
+  const { user } = useSelector((state) => state.auth);
+
+  //? Handlers
+  const handleRoute = () => {
+    if (!user)
+      return dispatch(
+        openModal({
+          isShow: true,
+          type: "redirect",
+          title: "شما هنوز وارد نشدید",
+        })
+      );
+
+    router.push("/checkout/shipping");
+  };
 
   if (cartItems.length === 0)
     return (
-      <div className='py-2 mx-auto mb-20 space-y-3 xl:mt-36  lg:mb-0 lg:max-w-7xl b lg:px-5 lg:mt-6 lg:space-y-0 lg:py-4 lg:border lg:border-gray-200 lg:rounded-md'>
+      <div className='py-2 mx-auto mb-20 space-y-3 xl:mt-36  lg:mb-0 lg:max-w-7xl lg:px-5 lg:mt-6 lg:space-y-0 lg:py-4 lg:border lg:border-gray-200 lg:rounded-md'>
         <Buttons.Back backRoute='/profile'>سبد خرید شما</Buttons.Back>
         <div className='section-divide-y' />
 
@@ -57,56 +76,21 @@ export default function Cart() {
         </div>
       </div>
 
+      <div className='section-divide-y lg:hidden' />
+
       {/* cart Info */}
       <div className='lg:sticky lg:top-6 lg:h-fit xl:top-36'>
-        <div className='px-4 mt-10 space-y-5 lg:mt-0 lg:h-fit lg:py-4 lg:border lg:border-gray-200 lg:rounded-md'>
-          <div className='flex justify-between'>
-            <span className='text-sm font-thin'>
-              قیمت کالاها ({toFarsiNumber(totalItems)})
-            </span>
-            <div className='flex items-center'>
-              <span className='text-sm'>{toFarsiNumber(totalPrice)}</span>
-              <div className='relative mr-1 w-7 h-7'>
-                <Image src='/icons/toman.svg' layout='fill' />
-              </div>
-            </div>
-          </div>
-          <div className='flex justify-between'>
-            <span className='text-sm font-thin'>جمع سبد خرید</span>
-            <div className='flex items-center'>
-              <span className='text-sm'>
-                {toFarsiNumber(totalPrice - totalDiscount)}
-              </span>
-              <div className='relative mr-1 w-7 h-7'>
-                <Image src='/icons/toman.svg' layout='fill' />
-              </div>
-            </div>
-          </div>
-          <span className='inline-block lg:max-w-xs'>
-            هزینه ارسال براساس آدرس، زمان تحویل، وزن و حجم مرسوله شما محاسبه
-            می‌شود
-          </span>
-          <div className='flex justify-between'>
-            <span className='text-sm font-thin text-red-500'>
-              سود شما از خرید
-            </span>
-            <div className='flex items-center gap-x-1'>
-              <span className='text-sm text-red-500'>
-                {toFarsiNumber(totalDiscount)}
-              </span>
-              <div className='relative mr-1 w-7 h-7'>
-                <Image src='/icons/tomanRed.svg' layout='fill' />
-              </div>
-            </div>
-          </div>
-          <button className='w-full btn'>ادامه</button>
+        <div className='lg:border lg:border-gray-200 lg:rounded-md'>
+          <CartInfo handleRoute={handleRoute} cart />
         </div>
         <FreeShipping />
       </div>
 
       {/* to Shipping */}
       <div className='fixed bottom-0 left-0 right-0 z-10 flex items-center justify-between px-3 py-3 bg-white border-t border-gray-300 shadow-3xl lg:hidden'>
-        <button className='w-1/2 btn'>ادامه</button>
+        <button onClick={handleRoute} className='w-1/2 btn'>
+          ادامه
+        </button>
         <div>
           <span className='font-thin'>جمع سبد خرید</span>
           <div className='flex items-center'>

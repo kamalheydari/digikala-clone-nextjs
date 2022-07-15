@@ -90,7 +90,7 @@ export default function ProductsHome(props) {
     <>
       <div className='lg:flex lg:gap-x-0 xl:gap-x-3 lg:px-3 lg:container lg:max-w-[1700px] xl:mt-28'>
         <div
-          className={`fixed transition-all duration-700 left-0 right-0 mx-auto z-40 bg-white w-full h-screen mt-1 xl:sticky xl:top-28 xl:z-0 xl:h-fit xl:w-fit  ${
+          className={`fixed transition-all duration-700 left-0 right-0 mx-auto z-40 bg-white w-full h-screen mt-1 xl:sticky xl:top-32 xl:z-0 xl:h-fit xl:w-fit  ${
             showFilters ? "top-0" : "top-full"
           }`}
         >
@@ -227,7 +227,7 @@ export async function getServerSideProps({ query }) {
 
   const maxPrice = await Math.max(...allProducts.map((item) => item.price));
   const minPrice = await Math.min(...allProducts.map((item) => item.price));
-
+  console.log({ maxPrice, minPrice });
   const productsLength = await allProducts.length;
   await db.disconnect();
 

@@ -2,6 +2,8 @@ import Image from "next/image";
 import { ArrowLink } from "components";
 
 export default function Orders() {
+
+  
   return (
     <>
       <div className='py-6 lg:py-0'>

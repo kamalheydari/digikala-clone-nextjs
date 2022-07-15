@@ -1,5 +1,4 @@
 export default function cityList(state) {
-  console.log(state);
   let options = [];
 
   if (state === "لطفا استان را انتخاب نمایید") {

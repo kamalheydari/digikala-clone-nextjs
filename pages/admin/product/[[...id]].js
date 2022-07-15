@@ -37,7 +37,7 @@ export default function Product() {
   //? Store
   const { token } = useSelector((state) => state.auth);
   const { isConfirm } = useSelector((state) => state.modal);
-  const { parentCategory, categories, category } = useSelector(
+  const { parentCategory, mainCategory, categories, category } = useSelector(
     (state) => state.categories
   );
   const { infoArray, specificationArray, optionsType, product } = useSelector(
@@ -106,7 +106,7 @@ export default function Product() {
 
     const infoArray = await getDetailsArray(infoTableRef);
     const specificationArray = await getDetailsArray(specificationTableRef);
-
+    if (!category) console.log("y");
     postData({
       url: `/api/products`,
       token,
@@ -114,7 +114,7 @@ export default function Product() {
         ...product,
         info: infoArray,
         specification: specificationArray,
-        category,
+        category: category ? category : mainCategory + "/" + parentCategory,
       },
     });
   };

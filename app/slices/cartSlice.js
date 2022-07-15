@@ -1,16 +1,14 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
-import Cookies from "js-cookie";
 import getTotal from "utils/getTotal";
 import exsitItem from "utils/exsitItem";
 
-const getCartItems = Cookies.get("cartItems")
-  ? JSON.parse(Cookies.get("cartItems"))
-  : [];
+const getCartItems =
+  typeof window !== "undefined" && localStorage.getItem("cartItems")
+    ? JSON.parse(localStorage.getItem("cartItems"))
+    : [];
 
 const setCartItems = (cartItems) =>
-  Cookies.set("cartItems", JSON.stringify(cartItems), {
-    expires: 10,
-  });
+  localStorage.setItem("cartItems", JSON.stringify(cartItems));
 
 const initialState = {
   cartItems: getCartItems,
@@ -85,7 +83,7 @@ const cartSlice = createSlice({
       state.totalItems = 0;
       state.totalPrice = 0;
       state.totalDiscount = 0;
-      Cookies.remove("cartItems");
+      localStorage.removeItem("cartItems");
     },
   },
 });
