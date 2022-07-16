@@ -39,6 +39,8 @@ export default function ({ product, color, size }) {
         name: product.title,
         price: product.price,
         discount: product.discount,
+        inStock: product.inStock,
+        sold: product.sold,
         color,
         size,
         img: product.images[0],
@@ -70,6 +72,6 @@ export default function ({ product, color, size }) {
         </div>
       </div>
     );
-    
+
   return null;
 }

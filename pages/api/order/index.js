@@ -22,15 +22,16 @@ const getOrders = async (req, res) => {
 
     let orders;
 
+    await db.connect();
     if (!result.root) {
-      await db.connect();
       orders = await Order.find({ user: result.id }).populate(
         "user",
-        "-password"
+        "-password -address"
       );
     } else {
-      orders = await Order.find().populate("user", "-password");
+      orders = await Order.find().populate("user", "-password -address");
     }
+    await db.disconnect();
 
     res.status(200).json({ orders });
   } catch (error) {
@@ -41,6 +42,7 @@ const getOrders = async (req, res) => {
 const createOrder = async (req, res) => {
   try {
     const result = await auth(req, res);
+    const { cart } = req.body;
 
     await db.connect();
     const newOrder = new Order({
@@ -49,9 +51,9 @@ const createOrder = async (req, res) => {
     });
 
     //? update product beside on new order
-    // cart.forEach((item) =>
-    //   sold(item._id, item.quantity, item.inStock, item.sold)
-    // );
+    cart.forEach((item) =>
+      sold(item.productID, item.quantity, item.inStock, item.sold)
+    );
 
     await newOrder.save();
     await db.disconnect();
@@ -62,12 +64,12 @@ const createOrder = async (req, res) => {
   }
 };
 
-// const sold = async (id, quantity, oldStock, oldSold) => {
-//   await Product.findOneAndUpdate(
-//     { _id: id },
-//     {
-//       inStock: oldStock - quantity,
-//       sold: quantity + oldSold,
-//     }
-//   );
-// };
+const sold = async (id, quantity, oldStock, oldSold) => {
+  await Product.findOneAndUpdate(
+    { _id: id },
+    {
+      inStock: oldStock - quantity,
+      sold: quantity + oldSold,
+    }
+  );
+};

@@ -24,6 +24,9 @@ export default function ConfirmUpdateModal({
   } else if (type === "confirm-update-product") {
     url = `/api/products/${id}`;
   }
+   else if (type === "confirm-update-order") {
+    url = `/api/order/delivered/${id}`;
+  }
   //? Update Data
   const [putData, { data, isSuccess, isError, error }] = usePutDataMutation();
   useEffect(() => {

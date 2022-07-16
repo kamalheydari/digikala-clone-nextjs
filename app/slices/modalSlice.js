@@ -26,7 +26,7 @@ const modalSlice = createSlice({
       state.text = action.payload.text || "";
       state.title = action.payload.title || "";
       state.status = action.payload.status || "";
-      state.isConfirm = action.payload.status || false;
+      state.isConfirm = action.payload.isConfirm || false;
     },
     confirmAction: (state, action) => {
       state.isConfirm = true;

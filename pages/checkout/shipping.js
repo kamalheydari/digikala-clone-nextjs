@@ -15,11 +15,11 @@ export default function ShippingPage() {
 
   const [
     postData,
-    { data, isSuccess, isError, isLoading },
+    { data, isSuccess, isError, isLoading,error },
   ] = usePostDataMutation();
 
   //? Local State
-  const [paymentMethod, setPaymentMethod] = useState("cash");
+  const [paymentMethod, setPaymentMethod] = useState("پرداخت در محل");
 
   //? Store
   const { user, token } = useSelector((state) => state.auth);
@@ -206,8 +206,8 @@ export default function ShippingPage() {
                 type='radio'
                 name='cash'
                 id='cash'
-                value='cash'
-                checked={paymentMethod === "cash"}
+                value="پرداخت در محل"
+                checked={paymentMethod === "پرداخت در محل"}
                 onChange={(e) => setPaymentMethod(e.target.value)}
               />
               <label className='text-sm' htmlFor='cash'>
@@ -219,9 +219,9 @@ export default function ShippingPage() {
                 type='radio'
                 name='zarinPal'
                 id='zarinPal'
-                value='zarinPal'
+                value='زرین پال'
                 disabled={true}
-                checked={paymentMethod === "zarinPal"}
+                checked={paymentMethod === "زرین پال"}
                 onChange={(e) => setPaymentMethod(e.target.value)}
               />
               <label className='text-sm' htmlFor='zarinPal'>

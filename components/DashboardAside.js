@@ -16,6 +16,11 @@ export default function ProfileAside({ user }) {
       path: "/admin/products",
     },
     {
+      name: "سفارشات",
+      icon: <Icons.Heart className='text-black icon' />,
+      path: "/admin/orders",
+    },
+    {
       name: "دسته بندی ها",
       icon: <Icons.Location className='text-black icon' />,
       path: "/admin/categories",

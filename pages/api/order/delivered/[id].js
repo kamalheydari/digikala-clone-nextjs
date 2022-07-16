@@ -5,7 +5,7 @@ import sendError from "utils/sendError";
 
 export default async (req, res) => {
   switch (req.method) {
-    case "PATCH":
+    case "PUT":
       await deliveredOrder(req, res);
       break;
   }
@@ -15,8 +15,7 @@ const deliveredOrder = async (req, res) => {
   try {
     const result = await auth(req, res);
 
-    if (!result.root)
-    return sendError(res, 400, "توکن احراز هویت نامعتبر است");
+    if (!result.root) return sendError(res, 400, "توکن احراز هویت نامعتبر است");
 
     const { id } = req.query;
 
@@ -24,22 +23,14 @@ const deliveredOrder = async (req, res) => {
     await Order.findOneAndUpdate(
       { _id: id },
       {
-        paid: true,
-        dateOfPayment: new Date().toISOString(),
-        method: "پرداخت در محل",
-        deliverd: true,
+        ...req.body,
       }
     );
     await db.disconnect();
 
     res.status(200).json({
       msg: "وضعیت سفارش بروزرسانی شد",
-      paid: true,
-      dateOfPayment: new Date().toISOString(),
-      method: "پرداخت در محل",
-      deliverd: true,
     });
-    
   } catch (error) {
     sendError(res, 500, error.message);
   }

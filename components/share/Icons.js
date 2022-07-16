@@ -39,6 +39,8 @@ import {
   RiWallet3Line,
 } from "react-icons/ri";
 
+import { CgSandClock } from "react-icons/cg";
+
 const Icons = {
   Wallet: RiWallet3Line,
   Rule: RiPencilRuler2Line,
@@ -67,6 +69,7 @@ const Icons = {
   ArrowRight2: RiArrowDropRightLine,
   Edit: FiEdit,
   Clock: BsClockHistory,
+  Clock2: CgSandClock,
   Heart: RiHeartLine,
   Bag: RiHandbagLine,
   Comment: RiChat1Line,

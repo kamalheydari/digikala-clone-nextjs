@@ -39,6 +39,7 @@ export { default as Services } from "./Services";
 export { default as CartButtons } from "./CartButtons";
 export { default as DiscountCartItem } from "./DiscountCartItem";
 export { default as CartInfo } from "./CartInfo";
+export { default as OrderCard } from "./OrderCard";
 export { default as FreeShipping } from "./FreeShipping";
 export { default as CartItem } from "./CartItem";
 
