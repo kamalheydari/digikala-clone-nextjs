@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { toFarsiNumber } from "utils/FarsiNumber";
+import { formatNumber } from "utils/formatNumber";
 
 import { SpecialSell, CartButtons, Icons, DiscountCartItem } from "components";
 import Link from "next/link";
@@ -41,7 +41,7 @@ export default function CartItem({ item }) {
           {item.size && (
             <div className='flex items-center gap-x-2'>
               <Icons.Rule className='icon' />
-              <span>{item.size.size}</span>
+              <span className="farsi-digits">{item.size.size}</span>
             </div>
           )}
           <div className='flex items-center gap-x-2'>
@@ -56,8 +56,8 @@ export default function CartItem({ item }) {
             <DiscountCartItem item={item} />
           ) : (
             <div className='flex items-center gap-x-2'>
-              <span className='text-sm text-gray-700'>
-                {toFarsiNumber(item.price)}
+              <span className='text-sm text-gray-700 farsi-digits'>
+                {formatNumber(item.price)}
               </span>
               <div className='relative w-6 h-6'>
                 <Image src='/icons/toman.svg' layout='fill' />

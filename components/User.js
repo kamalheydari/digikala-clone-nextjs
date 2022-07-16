@@ -1,11 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
 
 import { Icons, Logout, BoxLink } from "components";
 
 export default function User({ user }) {
-  const [isOpen, setIsOpen] = useState(false);
 
   if (!user) {
     return (

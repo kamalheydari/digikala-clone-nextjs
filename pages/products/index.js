@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "app/slices/modalSlice";
 import { resetFilter, updateFilter } from "app/slices/filterSlice";
 
-import { toFarsiNumber } from "utils/FarsiNumber";
+import { formatNumber } from "utils/formatNumber";
 
 import {
   ProductCard,
@@ -123,13 +123,13 @@ export default function ProductsHome(props) {
             </div>
             <div className='flex justify-between py-2'>
               <span>همه کالاها</span>
-              <span>{toFarsiNumber(props.productsLength)} کالا</span>
+              <span className="farsi-digits">{formatNumber(props.productsLength)} کالا</span>
             </div>
           </div>
           <Sort
             dispatch={dispatch}
             sort={sort}
-            productsLength={toFarsiNumber(props.productsLength)}
+            productsLength={formatNumber(props.productsLength)}
           />
           {props.products.length > 1 ? (
             <div className='sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5'>
@@ -227,7 +227,6 @@ export async function getServerSideProps({ query }) {
 
   const maxPrice = await Math.max(...allProducts.map((item) => item.price));
   const minPrice = await Math.min(...allProducts.map((item) => item.price));
-  console.log({ maxPrice, minPrice });
   const productsLength = await allProducts.length;
   await db.disconnect();
 

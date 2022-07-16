@@ -1,13 +1,16 @@
-import { clearCart } from "app/slices/cartSlice";
-import { usePostDataMutation } from "app/slices/fetchApiSlice";
-import { openModal } from "app/slices/modalSlice";
-import { CartInfo, Icons, Loading } from "components";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+
+import { clearCart } from "app/slices/cartSlice";
+import { usePostDataMutation } from "app/slices/fetchApiSlice";
+import { openModal } from "app/slices/modalSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { toFarsiNumber } from "utils/FarsiNumber";
+
+import { CartInfo, Icons, Loading } from "components";
+
+import { formatNumber } from "utils/formatNumber";
 
 export default function ShippingPage() {
   const router = useRouter();
@@ -154,8 +157,8 @@ export default function ShippingPage() {
                 <span className='text-black text-base'>ارسال عادی</span>
                 <span className='block'>موجود در انبار</span>
               </div>
-              <span className='bg-gray-100 inline-block px-2 py-1 mr-3 h-fit rounded-lg'>
-                {toFarsiNumber(totalItems)} کالا
+              <span className='farsi-digits bg-gray-100 inline-block px-2 py-1 mr-3 h-fit rounded-lg'>
+                {formatNumber(totalItems)} کالا
               </span>
             </div>
             <div className='flex flex-wrap gap-x-8 gap-y-5 justify-start'>
@@ -163,8 +166,8 @@ export default function ShippingPage() {
                 <article key={item.itemID}>
                   <div className='relative w-24 h-28 '>
                     <Image src={item.img.url} layout='fill' />
-                    <span className='order-badge lg:block absolute'>
-                      {toFarsiNumber(item.quantity)}
+                    <span className='farsi-digits order-badge lg:block absolute'>
+                      {formatNumber(item.quantity)}
                     </span>
                   </div>
                   {item.color && (

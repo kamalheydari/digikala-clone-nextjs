@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useGetDataQuery } from "app/slices/fetchApiSlice";
 import { useSelector } from "react-redux";
 
-import { toFarsiNumber } from "utils/FarsiNumber";
+import { formatNumber } from "utils/formatNumber";
 
 import { ArrowLink } from "components";
 
@@ -42,13 +42,13 @@ export default function Orders() {
           <div className='flex flex-col items-center lg:flex-row lg:gap-x-2'>
             <div className='relative w-12 h-12 lg:w-14 lg:h-14'>
               <Image src='/icons/status-processing.svg' layout='fill' />
-              <span className='absolute order-badge'>
-                {toFarsiNumber(pendingOrder)}
+              <span className='farsi-digits absolute order-badge'>
+                {formatNumber(pendingOrder)}
               </span>
             </div>
             <div className='text-gray-700'>
-              <span className='hidden lg:block lg:text-black lg:text-md'>
-                {toFarsiNumber(pendingOrder)} سفارش
+              <span className='farsi-digits hidden lg:block lg:text-black lg:text-md'>
+                {formatNumber(pendingOrder)} سفارش
               </span>
               <span className='text-xs lg:text-sm'>جاری</span>
             </div>
@@ -59,13 +59,13 @@ export default function Orders() {
           <div className='flex flex-col items-center lg:flex-row lg:gap-x-2'>
             <div className='relative w-12 h-12 lg:w-14 lg:h-14'>
               <Image src='/icons/status-delivered.svg' layout='fill' />
-              <span className='absolute order-badge'>
-                {toFarsiNumber(successOrder)}
+              <span className='farsi-digits absolute order-badge'>
+                {formatNumber(successOrder)}
               </span>
             </div>
             <div className='text-gray-700'>
-              <span className='hidden lg:block lg:text-black lg:text-md'>
-                {toFarsiNumber(successOrder)} سفارش
+              <span className='farsi-digits hidden lg:block lg:text-black lg:text-md'>
+                {formatNumber(successOrder)} سفارش
               </span>
               <span className='text-xs lg:text-sm'>تحویل شده</span>
             </div>

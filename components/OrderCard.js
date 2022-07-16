@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { Icons } from "components";
 
-import { toFarsiNumber } from "utils/FarsiNumber";
+import { formatNumber } from "utils/formatNumber";
 
 export default function OrderCard({ item }) {
   return (
@@ -27,8 +27,8 @@ export default function OrderCard({ item }) {
           <span className='mr-2 text-sm text-black'>{item._id}</span>
         </div>
         <div className='flex items-center gap-x-1'>
-          <span className='text-black'>
-            {toFarsiNumber(item.totalPrice - item.totalDiscount)}
+          <span className='farsi-digits text-black'>
+            {formatNumber(item.totalPrice - item.totalDiscount)}
           </span>
           <div className='relative w-6 h-6'>
             <Image src='/icons/toman.svg' layout='fill' />

@@ -4,7 +4,7 @@ import { useState } from "react";
 import db from "lib/db";
 import Product from "models/Product";
 
-import { toFarsiNumber } from "utils/FarsiNumber";
+import { formatNumber } from "utils/formatNumber";
 import { truncate } from "utils/truncate";
 
 import {
@@ -36,8 +36,8 @@ export default function SingleProduct({ product }) {
       <div className='lg:col-start-4 lg:col-end-8 lg:row-start-2 lg:row-end-4'>
         <div className='flex justify-between p-4'>
           <span className='text-sm text-gray-700'>رنگ: {color.name}</span>
-          <span className='text-sm'>
-            {toFarsiNumber(product.colors.length)} رنگ
+          <span className='text-sm farsi-digits'>
+            {formatNumber(product.colors.length)} رنگ
           </span>
         </div>
         <div className='flex flex-wrap gap-3 px-5 my-3'>
@@ -83,7 +83,7 @@ export default function SingleProduct({ product }) {
         <div className='flex justify-between p-4'>
           <span className='text-sm text-gray-700'>اندازه: {size.name}</span>
           <span className='text-sm'>
-            {toFarsiNumber(product.sizes.length)} اندازه
+            {formatNumber(product.sizes.length)} اندازه
           </span>
         </div>
         <div className='flex flex-wrap gap-3 px-5 my-3'>
@@ -177,21 +177,21 @@ export default function SingleProduct({ product }) {
               <span className='text-gray-700'>موجود در انبار دیجی کالا</span>
             </div>
 
-            <span className='hidden text-red-500 mr-7 lg:block'>
-              تنها {toFarsiNumber(product.inStock)} عدد در انبار باقی مانده
+            <span className='hidden text-red-500 mr-7 lg:block farsi-digits'>
+              تنها {formatNumber(product.inStock)} عدد در انبار باقی مانده
             </span>
 
             <div className='hidden lg:flex lg:items-center lg:gap-x-1'>
               <Icons.Check className='icon' />
               <span> فروش :</span>
-              <span>{toFarsiNumber(product.sold)}</span>
+              <span className='farsi-digits'>{formatNumber(product.sold)}</span>
             </div>
 
             <AddToCart product={product} color={color} size={size} />
           </div>
         )}
       </div>
-      
+
       <Services />
 
       {/* description */}

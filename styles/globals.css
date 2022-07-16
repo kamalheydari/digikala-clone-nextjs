@@ -28,7 +28,7 @@
 
 @layer base {
   body {
-    font-family: "Vazir";
+    @apply font-vazir;
   }
   h2 {
     @apply text-xl;
@@ -55,6 +55,9 @@
 }
 
 @layer components {
+  .farsi-digits {
+    font-feature-settings: "ss01";
+  }
   .input {
     @apply block w-full px-3 py-1.5 text-base text-center transition-colors border border-gray-200 rounded-md outline-none bg-zinc-50 lg:text-lg focus:border-blue-600;
   }

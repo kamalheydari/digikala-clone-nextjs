@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 
 import { Icons } from "components";
 
-import { toFarsiNumber } from "utils/FarsiNumber";
+import { formatNumber } from "utils/formatNumber";
 
 export default function CartButtons({ item }) {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ export default function CartButtons({ item }) {
         />
       </button>
 
-      <span className='text-sm'>{toFarsiNumber(item.quantity)}</span>
+      <span className='text-sm farsi-digits'>{formatNumber(item.quantity)}</span>
 
       {item.quantity === 1 ? (
         <button type='button'>

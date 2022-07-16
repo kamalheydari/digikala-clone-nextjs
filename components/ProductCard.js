@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Icons, SpecialSell, DiscountProduct, ProductPrice } from "components";
 
 import { truncate } from "utils/truncate";
-import { toFarsiNumber } from "utils/FarsiNumber";
+import { formatNumber } from "utils/formatNumber";
 
 export default function ProductCard({ product }) {
   //? Local Components
@@ -31,8 +31,8 @@ export default function ProductCard({ product }) {
       return null;
     } else if (product.inStock < 10) {
       return (
-        <span className='text-red-500'>
-          تنها {toFarsiNumber(product.inStock)} عدد در انبار باقی مانده
+        <span className='text-red-500 farsi-digits'>
+          تنها {formatNumber(product.inStock)} عدد در انبار باقی مانده
         </span>
       );
     } else {
@@ -60,7 +60,7 @@ export default function ProductCard({ product }) {
                 <PlusIcon />
               </div>
             </div>
-            <div className='flex-1 space-y-3'>
+            <div className='flex-1 space-y-3 sm:w-full'>
               <h2 className='hidden text-xs leading-6 text-gray-800 break-all h-14 xl:block'>
                 {truncate(product.title, 70)}
               </h2>

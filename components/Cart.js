@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { Icons } from "components";
 import { useSelector } from "react-redux";
-import { toFarsiNumber } from "utils/FarsiNumber";
+import { formatNumber } from "utils/formatNumber";
 
 export default function Cart() {
   const { totalItems } = useSelector((state) => state.cart);
   return (
     <div className='relative lg:border-r-2 lg:border-gray-300 lg:pr-4'>
-      <span className='absolute outline outline-3  bottom-3 left-3 bg-red-500 rounded-full w-5 h-5 p-0.5 text-center text-xs text-white'>
-        {toFarsiNumber(totalItems)}
+      <span className='absolute outline outline-3  bottom-3 left-3 bg-red-500 rounded-full w-5 h-5 p-0.5 text-center text-xs text-white farsi-digits'>
+        {formatNumber(totalItems)}
       </span>
       <Link href='/checkout/cart'>
         <a>

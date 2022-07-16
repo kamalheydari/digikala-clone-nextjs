@@ -1,10 +1,13 @@
-import { clearCart } from "app/slices/cartSlice";
-import { openModal } from "app/slices/modalSlice";
-import { Icons, FreeShipping, CartItem, Buttons, CartInfo } from "components";
 import Image from "next/image";
 import { useRouter } from "next/router";
+
+import { clearCart } from "app/slices/cartSlice";
+import { openModal } from "app/slices/modalSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { toFarsiNumber } from "utils/FarsiNumber";
+
+import { Icons, FreeShipping, CartItem, Buttons, CartInfo } from "components";
+
+import { formatNumber } from "utils/formatNumber";
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -53,7 +56,7 @@ export default function Cart() {
         <div className='flex justify-between px-4'>
           <div>
             <h3 className='mb-2 text-sm font-bold'>سبد خرید شما</h3>
-            <span className='text-sm'>{toFarsiNumber(totalItems)} کالا</span>
+            <span className='text-farsi-digits'>{formatNumber(totalItems)} کالا</span>
           </div>
 
           <div className='relative h-fit px-1.5 group'>
@@ -94,8 +97,8 @@ export default function Cart() {
         <div>
           <span className='font-thin'>جمع سبد خرید</span>
           <div className='flex items-center'>
-            <span className='text-sm'>
-              {toFarsiNumber(totalPrice - totalDiscount)}
+            <span className='text-sm farsi-digits'>
+              {formatNumber(totalPrice - totalDiscount)}
             </span>
             <div className='relative mr-1 w-7 h-7'>
               <Image src='/icons/toman.svg' layout='fill' />
