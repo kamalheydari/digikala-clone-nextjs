@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import db from "lib/db";
 import Product from "models/Product";
@@ -14,12 +14,28 @@ import {
   Services,
   SpecialSell,
 } from "components";
+import { openModal } from "app/slices/modalSlice";
+import { useDispatch } from "react-redux";
+import { useGetDataQuery } from "app/slices/fetchApiSlice";
+import moment from "moment-jalaali";
 
 export default function SingleProduct({ product }) {
+  const dispatch = useDispatch();
+
   //? Local State
   const [color, setColor] = useState(product.colors[0] || null);
   const [size, setSize] = useState(product.sizes[0] || null);
   const [isShowDesc, setIsShowDesc] = useState(false);
+  const [reviews, setReviews] = useState([]);
+
+  //? Get Query
+  const { data, isSuccess } = useGetDataQuery({
+    url: `/api/reviews/product/${product._id}`,
+  });
+
+  useEffect(() => {
+    if (isSuccess) setReviews(data?.reviews);
+  }, [isSuccess]);
 
   //? Handlers
   const handleChangeColor = (item) => {
@@ -28,6 +44,17 @@ export default function SingleProduct({ product }) {
 
   const handleChangeSize = (item) => {
     setSize(item);
+  };
+
+  const handleOpenCommentModal = () => {
+    dispatch(
+      openModal({
+        isShow: true,
+        type: "comment",
+        title: product.title,
+        id: product._id,
+      })
+    );
   };
 
   //? Local Components
@@ -92,7 +119,7 @@ export default function SingleProduct({ product }) {
               type='button'
               key={item.id}
               onClick={() => handleChangeSize(item)}
-              className={`rounded-2xl py-1.5 px-2 flex items-center cursor-pointer  ${
+              className={`rounded-full py-1.5 px-2 flex items-center cursor-pointer  ${
                 size.id === item.id
                   ? "border-2 border-sky-500"
                   : " border-2 border-gray-300"
@@ -126,10 +153,10 @@ export default function SingleProduct({ product }) {
   return (
     <div
       className={`xl:mt-28 lg:max-w-[1550px] mx-auto py-4 space-y-4 ${
-        product.inStock !== 0 && "mb-16"
+        product.inStock !== 0 && "mb-24"
       }`}
     >
-      <div className='h-fit lg:h-[650px] lg:grid lg:grid-cols-9 lg:grid-rows-5 lg:px-8 lg:gap-x-2 lg:gap-y-4 lg:mb-28'>
+      <div className='h-fit lg:h-[650px] lg:grid lg:grid-cols-9 lg:grid-rows-5 lg:px-4 lg:gap-x-2 lg:gap-y-4 lg:mb-28'>
         {/* image */}
         <div className='mb-5 lg:col-span-3 lg:row-span-6'>
           <SpecialSell product={product} />
@@ -198,29 +225,35 @@ export default function SingleProduct({ product }) {
       {product.description.length > 0 && (
         <>
           <div className='px-3 lg:max-w-3xl xl:max-w-5xl'>
-            <h4 className='mb-3'>معرفی</h4>
+            <h4 className='mb-3 lg:border-b-2 lg:border-red-500 w-min'>
+              معرفی
+            </h4>
             <p className='text-xs leading-6 tracking-wider text-gray-600 lg:text-sm lg:leading-8'>
               {isShowDesc
                 ? product.description
                 : truncate(product.description, 300)}
             </p>
-            <button
-              type='button'
-              className='flex items-center py-2 text-sm text-sky-400'
-              onClick={() => setIsShowDesc(!isShowDesc)}
-            >
-              {isShowDesc ? "بستن" : "مشاهده بیشتر"}
-              <Icons.ArrowLeft className='icon text-sky-400' />
-            </button>
+            {product.description.length > 300 && (
+              <button
+                type='button'
+                className='flex items-center py-2 text-sm text-sky-400'
+                onClick={() => setIsShowDesc(!isShowDesc)}
+              >
+                {isShowDesc ? "بستن" : "مشاهده بیشتر"}
+                <Icons.ArrowLeft className='icon text-sky-400' />
+              </button>
+            )}
           </div>
           <div className='section-divide-y lg:block' />
         </>
       )}
 
       {/* specification */}
-      <div className='px-4 lg:max-w-3xl xl:max-w-5xl'>
-        <h4 className='mb-3'>مشخصات</h4>
-        <ul className='space-y-4'>
+      <div className='px-4 lg:max-w-4xl xl:max-w-5xl lg:flex lg:gap-x-20'>
+        <h4 className='mb-3 h-fit w-min lg:border-b-2  lg:border-red-500'>
+          مشخصات
+        </h4>
+        <ul className='space-y-4 lg:mt-10'>
           {product.specification.map((item, i) => (
             <li key={i} className='flex '>
               <span className='py-2 ml-4 font-light leading-5 tracking-wide text-gray-500 w-36'>
@@ -232,6 +265,102 @@ export default function SingleProduct({ product }) {
             </li>
           ))}
         </ul>
+      </div>
+
+      <div className='section-divide-y' />
+      {/* comments */}
+      <div className='px-4 py-3 lg:max-w-4xl xl:max-w-5xl space-y-4'>
+        <div className='flex items-center justify-between'>
+          <h4 className='mb-3 lg:border-b-2  lg:border-red-500'>دیدگاه‌ها</h4>
+          <span className='text-xs text-sky-500 farsi-digits'>
+            {product.numReviews} دیدگاه
+          </span>
+        </div>
+        <div className='lg:mr-36'>
+          <div className="mb-8">
+            <button
+              type='button'
+              onClick={handleOpenCommentModal}
+              className='flex items-center gap-x-5 w-full'
+            >
+              <Icons.Comment className='icon' />
+              <span className='text-black text-sm '>
+                دیدگاه خود را درباره این کالا بنویسید
+              </span>
+              <Icons.ArrowLeft className='icon mr-auto' />
+            </button>
+            <p className='text-xs mt-6 text-gray-500'>
+              پس از تایید نظر، با مراجعه به صفحه‌ی ماموریت‌های کلابی امتیاز خود
+              را دریافت کنید.
+            </p>
+          </div>
+
+          {reviews.length > 0 ? (
+            <div className='divide-y-2 space-y-4 py-3 px-2 lg:px-6'>
+              {reviews.map((item) => (
+                <div className='flex py-3'>
+                  <div>
+                    <span
+                      className={`farsi-digits w-5 h-5 text-center pt-0.5 inline-block rounded-md text-white  ${
+                        item.rating <= 2
+                          ? "bg-red-500"
+                          : item.rating === 3
+                          ? "bg-amber-500"
+                          : "bg-green-500"
+                      }`}
+                    >
+                      {item.rating}
+                    </span>
+                  </div>
+                  <div className='flex-1 space-y-3 px-4 lg:px-10'>
+                    <div className='border-b border-gray-100 w-full'>
+                      <p>{item.title}</p>
+                      <span className='farsi-digits'>
+                        {moment(item.updatedAt).format("jYYYY/jM/jD")}
+                      </span>
+                      <span className='inline-block w-1 h-1 bg-gray-400 mx-3 rounded-full' />
+                      <span>{item.user.name}</span>
+                    </div>
+
+                    <p>{item.comment}</p>
+
+                    {item.positivePoints.length > 0 && (
+                      <div>
+                        {item.positivePoints.map((point) => (
+                          <div
+                            className='flex items-center gap-x-1'
+                            key={point.id}
+                          >
+                            <Icons.Plus className='icon text-green-400' />
+                            <p>{point.title}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {item.positivePoints.length > 0 && (
+                      <div>
+                        {item.negativePoints.map((point) => (
+                          <div
+                            className='flex items-center gap-x-1'
+                            key={point.id}
+                          >
+                            <Icons.Minus className='icon text-red-400' />
+                            <p>{point.title}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className='text-red-800 mt-6'>
+              هنوز هیچ نظری برای این محصول ثبت نشده, شما اولین نفر باشید.
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );

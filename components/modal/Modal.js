@@ -12,6 +12,7 @@ import {
   ConfirmUpdateModal,
   CategoryForm,
   SortModal,
+  CommentModal
 } from "components";
 
 export default function Modal() {
@@ -59,6 +60,7 @@ export default function Modal() {
     case "confirm-delete-user":
     case "confirm-delete-details":
     case "confirm-delete-product":
+    case "confirm-delete-reveiw":
       effect = ["top-40 transform scale-100", "top-40 transform scale-50 "];
       size = "max-w-3xl";
       renderModal = (
@@ -101,6 +103,20 @@ export default function Modal() {
           dispatch={dispatch}
           closeModal={closeModal}
           editedData={editedData}
+        />
+      );
+      break;
+    case "comment":
+      effect = ["bottom-0 lg:top-20", "-bottom-full lg:top-60"];
+      size = "w-full h-screen lg:h-fit lg:max-w-3xl lg:bg-white lg:p-1 lg:rounded-md";
+      renderModal = (
+        <CommentModal
+          title={title}
+          token={token}
+          dispatch={dispatch}
+          closeModal={closeModal}
+          id={id}
+
         />
       );
       break;

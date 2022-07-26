@@ -79,7 +79,7 @@ export default function Orders() {
               <span className='absolute order-badge'>0</span>
             </div>
             <div className='text-gray-700'>
-              <span className='hidden lg:block lg:text-black lg:text-md'>
+              <span className='hidden lg:block lg:text-black lg:text-md farsi-digits'>
                 0 سفارش
               </span>
               <span className='text-xs lg:text-sm'>مرجوع</span>

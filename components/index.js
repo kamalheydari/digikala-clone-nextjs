@@ -42,6 +42,7 @@ export { default as CartInfo } from "./CartInfo";
 export { default as OrderCard } from "./OrderCard";
 export { default as FreeShipping } from "./FreeShipping";
 export { default as CartItem } from "./CartItem";
+export { default as ReveiwCard } from "./ReveiwCard";
 
 
 export { default as Modal } from "./modal/Modal";
@@ -55,3 +56,4 @@ export { default as NameForm } from "./modal/NameForm";
 export { default as MobileForm } from "./modal/MobileForm";
 export { default as AddressForm } from "./modal/AddressForm";
 export { default as SortModal } from "./modal/SortModal";
+export { default as CommentModal } from "./modal/CommentModal";

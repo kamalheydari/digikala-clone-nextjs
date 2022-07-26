@@ -3,23 +3,11 @@ import Document, { Head, Html, Main, NextScript } from "next/document";
 class MyDocument extends Document {
   render() {
     return (
-      <Html  lang="fa" dir="rtl">
+      <Html lang='fa' dir='rtl'>
         <Head>
           <link
             rel='preload'
             href='/fonts/vazir/Vazirmatn-Regular.woff2'
-            as='font'
-            crossOrigin='anonymous'
-          ></link>
-          <link
-            rel='preload'
-            href='/fonts/vazir/Vazirmatn-Medium.woff2'
-            as='font'
-            crossOrigin='anonymous'
-          ></link>
-          <link
-            rel='preload'
-            href='/fonts/vazir/Vazirmatn-Bold.woff2'
             as='font'
             crossOrigin='anonymous'
           ></link>

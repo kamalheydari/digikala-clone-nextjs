@@ -72,7 +72,7 @@ export default function ProductCard({ product }) {
                   <Depot product={product} />
                 </div>
                 <div className='flex items-center gap-x-1'>
-                  <span>4.5</span>
+                  <span className="farsi-digits">{product.rating.toFixed(1)}</span>
                   <Icons.Star className='icon text-amber-400' />
                 </div>
               </div>

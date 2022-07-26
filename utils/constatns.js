@@ -17,6 +17,8 @@ export const sorts = [
   },
 ];
 
+export const ratingStatus = ["", "خیلی بد", "بد", "معمولی", "خوب", "عالی"];
+
 export const services = [
   { name: "امکان تحویل اکسپرس", img: "/icons/express-delivery.svg" },
   { name: "۲۴ ساعته، ۷ روز هفته", img: "/icons/support.svg" },

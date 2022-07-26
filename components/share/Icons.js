@@ -8,6 +8,7 @@ import {
   BsSignpost,
   BsSortDown,
   BsShieldCheck,
+  BsFillXCircleFill
 } from "react-icons/bs";
 import { FiLogIn, FiLogOut, FiEdit, FiPlus, FiMinus } from "react-icons/fi";
 import { VscThreeBars, VscLocation } from "react-icons/vsc";
@@ -37,11 +38,14 @@ import {
   RiMore2Fill,
   RiPencilRuler2Line,
   RiWallet3Line,
+  RiTimeFill,
 } from "react-icons/ri";
 
 import { CgSandClock } from "react-icons/cg";
 
 const Icons = {
+  Cross:BsFillXCircleFill,
+  Times: RiTimeFill,
   Wallet: RiWallet3Line,
   Rule: RiPencilRuler2Line,
   More: RiMore2Fill,

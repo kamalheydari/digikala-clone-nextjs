@@ -10,20 +10,7 @@
     src: url("/fonts/vazir/Vazirmatn-Regular.woff2") format("woff2");
     font-display: swap;
   }
-  @font-face {
-    font-family: "Vazir";
-    font-style: normal;
-    font-weight: 500;
-    src: url("/fonts/vazir/Vazirmatn-Medium.woff2") format("woff2");
-    font-display: swap;
-  }
-  @font-face {
-    font-family: "Vazir";
-    font-style: normal;
-    font-weight: 700;
-    src: url("/fonts/vazir/Vazirmatn-Bold.woff2") format("woff2");
-    font-display: swap;
-  }
+
 }
 
 @layer base {
@@ -59,7 +46,7 @@
     font-feature-settings: "ss01";
   }
   .input {
-    @apply block w-full px-3 py-1.5 text-base text-center transition-colors border border-gray-200 rounded-md outline-none bg-zinc-50 lg:text-lg focus:border-blue-600;
+    @apply block w-full px-3 py-1.5 text-base transition-colors border border-gray-200 rounded-md outline-none bg-zinc-50/30 lg:text-lg focus:border-blue-600;
   }
 
   .modal-btn {

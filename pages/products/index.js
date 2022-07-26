@@ -213,7 +213,7 @@ export async function getServerSideProps({ query }) {
     ...discountFilter,
     ...priceFilter,
   })
-    .select("-description -info -specification -sizes")
+    .select("-description -info -specification -sizes -reviews")
     .sort(order)
     .skip((page - 1) * page_size)
     .limit(page_size)

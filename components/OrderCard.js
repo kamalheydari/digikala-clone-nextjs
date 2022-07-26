@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import moment from "moment-jalaali";
+
 import { Icons } from "components";
 
 import { formatNumber } from "utils/formatNumber";
@@ -8,8 +10,8 @@ import { formatNumber } from "utils/formatNumber";
 export default function OrderCard({ item }) {
   return (
     <div className='py-4 space-y-3 border-b border-gray-200 lg:border lg:rounded-lg '>
-      <div className='flex justify-between'>
-        <div className='flex items-center gap-x-2 lg:px-3'>
+      <div className='flex justify-between lg:px-3'>
+        <div className='flex items-center gap-x-2 '>
           {item.delivered ? (
             <Icons.Check className='p-0.5 w-6 h-6 bg-lime-500 text-white rounded-full' />
           ) : (
@@ -20,6 +22,11 @@ export default function OrderCard({ item }) {
           </span>
         </div>
         {/* <Icons.ArrowLeft className='icon w-7 h-7' /> */}
+        {item.delivered && (
+          <span className='farsi-digits'>
+            {moment(item.updatedAt).format("jYYYY/jM/jD")}
+          </span>
+        )}
       </div>
       <div className='flex justify-between lg:px-3'>
         <div>

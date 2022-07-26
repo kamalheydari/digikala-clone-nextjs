@@ -1,13 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import fetchApi from "app/slices/fetchApiSlice";
-import authReducer from "./slices/authSlice";
-import cartReducer from "./slices/cartSlice";
-import modalReducer from "./slices/modalSlice";
-import categoryReducer from "./slices/categorySlice";
-import detailsReducer from "./slices/detailsSlice";
-import productReducer from "./slices/productSlice";
-import fitlerReducer from "./slices/filterSlice";
+import authReducer from "app/slices/authSlice";
+import cartReducer from "app/slices/cartSlice";
+import modalReducer from "app/slices/modalSlice";
+import categoryReducer from "app/slices/categorySlice";
+import detailsReducer from "app/slices/detailsSlice";
+import productReducer from "app/slices/productSlice";
+import fitlerReducer from "app/slices/filterSlice";
+import reviewsReducer from "app/slices/reviewsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ export const store = configureStore({
     details: detailsReducer,
     product: productReducer,
     filter: fitlerReducer,
+    reviews: reviewsReducer,
     [fetchApi.reducerPath]: fetchApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

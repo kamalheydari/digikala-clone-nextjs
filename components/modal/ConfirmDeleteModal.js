@@ -38,6 +38,11 @@ export default function ConfirmDeleteModal({
     ifIsSucces = () => {
       router.reload();
     };
+  } else if (type === "confirm-delete-reveiw") {
+    url = `/api/reviews/${id}`;
+    ifIsSucces = () => {
+      router.reload();
+    };
   }
 
   //? Delete Data
