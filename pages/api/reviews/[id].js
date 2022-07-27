@@ -72,32 +72,32 @@ const updateReview = async (req, res) => {
   try {
     const result = await auth(req, res);
     if (!result) return sendError(res, 400, "توکن احراز هویت نامعتبر است");
+
     await db.connect();
+
     const review = await Review.findOneAndUpdate(
       { _id: req.query.id },
       { ...req.body }
     );
 
-    if (req.body.status === 2) {
-      const product = await Product.findOne({ _id: review.product });
-      const reviews = await Review.find({ product: product._id });
+    const product = await Product.findOne({ _id: review.product });
+    const reviews = await Review.find({ product: product._id });
 
-      let { totalRating, totalReviews } = reviews.reduce(
-        (total, item) => {
-          if (item.status === 2) {
-            total.totalRating += item.rating;
-            total.totalReviews += 1;
-          }
-          return total;
-        },
-        { totalRating: 0, totalReviews: 0 }
-      );
+    let { totalRating, totalReviews } = await reviews.reduce(
+      (total, item) => {
+        if (item.status === 2) {
+          total.totalRating += item.rating;
+          total.totalReviews += 1;
+        }
+        return total;
+      },
+      { totalRating: 0, totalReviews: 0 }
+    );
 
-      product.numReviews = totalReviews;
-      product.rating = totalRating / totalReviews;
+    product.numReviews = totalReviews;
+    product.rating = totalRating / totalReviews;
+    await product.save();
 
-      await product.save();
-    }
     await db.disconnect();
 
     res.status(201).json({

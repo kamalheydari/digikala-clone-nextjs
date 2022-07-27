@@ -4,8 +4,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import validation from "utils/validation";
 
-import { usePatchDataMutation } from "app/slices/fetchApiSlice";
-import { updateUser } from "app/slices/authSlice";
+import { usePatchDataMutation } from "app/slices/fetchApi.slice";
+import { updateUser } from "app/slices/user.slice";
 
 import { DisplayError, Loading, CloseModal } from "components";
 

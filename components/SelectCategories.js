@@ -4,7 +4,7 @@ import {
   selecteCategory,
   selecteMainCategory,
   selecteParentCategory,
-} from "app/slices/categorySlice";
+} from "app/slices/category.slice";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function SelectCategories({ detailsHome, productPage }) {

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 
-import { openModal } from "app/slices/modalSlice";
+import { openModal } from "app/slices/modal.slice";
 
 import { Buttons } from "components";
 

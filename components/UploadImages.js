@@ -1,5 +1,5 @@
-import { openModal } from "app/slices/modalSlice";
-import { addItem, deleteImage } from "app/slices/productSlice";
+import { openModal } from "app/slices/modal.slice";
+import { addItem, deleteImage } from "app/slices/product.slice";
 import { Icons } from "components";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -7,8 +7,10 @@ import { Loading } from "components";
 import { imageUpload } from "utils/imageUpload";
 import { useState } from "react";
 
-export default function UploadImages() {
+export default function UploadImages({ multiple }) {
+  //? Local State
   const [uploadLoading, setUploadLoading] = useState(false);
+  const [media, setMedia] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -57,15 +59,17 @@ export default function UploadImages() {
     let media = [];
 
     const imgNewURL = images.filter((img) => !img.url);
-    // const imgOldURL = images.filter((img) => img.url);
+    const imgOldURL = images.filter((img) => img.url);
 
     setUploadLoading(true);
     if (imgNewURL.length > 0) media = await imageUpload(imgNewURL);
     setUploadLoading(false);
 
-    dispatch(addItem({ type: "uploaded-images", value: media }));
+    dispatch(
+      addItem({ type: "uploaded-images", value: [...media, ...imgOldURL] })
+    );
 
-    if (media[0].url)
+    if (media[0]?.url)
       dispatch(
         openModal({
           isShow: true,
@@ -89,7 +93,7 @@ export default function UploadImages() {
           className='block w-full px-2 py-1 text-sm text-gray-700 bg-white bg-clip-padding focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none'
           id='uploadImage'
           type='file'
-          multiple
+          multiple={multiple}
           accept='image/*'
           onChange={handleAddImages}
         />

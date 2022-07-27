@@ -5,7 +5,7 @@ import {
   addSpecification,
   deleteItem,
   editItem,
-} from "app/slices/detailsSlice";
+} from "app/slices/details.slice";
 import { useDispatch } from "react-redux";
 
 import { Icons, Buttons } from "components";

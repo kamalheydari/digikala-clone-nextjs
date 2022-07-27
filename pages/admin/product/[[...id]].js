@@ -2,15 +2,15 @@ import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
 
 import { useDispatch, useSelector } from "react-redux";
-import { resetSelectedCategories } from "app/slices/categorySlice";
-import { usePostDataMutation } from "app/slices/fetchApiSlice";
-import { openModal } from "app/slices/modalSlice";
+import { resetSelectedCategories } from "app/slices/category.slice";
+import { usePostDataMutation } from "app/slices/fetchApi.slice";
+import { openModal } from "app/slices/modal.slice";
 import {
   changeProductItems,
   fetchDetails,
   fetchProduct,
   resetProduct,
-} from "app/slices/productSlice";
+} from "app/slices/product.slice";
 
 import {
   Buttons,
@@ -35,7 +35,7 @@ export default function Product() {
   const specificationTableRef = useRef(null);
 
   //? Store
-  const { token } = useSelector((state) => state.auth);
+  const { token } = useSelector((state) => state.user);
   const { isConfirm } = useSelector((state) => state.modal);
   const { parentCategory, mainCategory, categories, category } = useSelector(
     (state) => state.categories
@@ -89,12 +89,17 @@ export default function Product() {
     }
   }, [isSuccess, isError]);
 
+  //? Reset Category
+  useEffect(() => {
+    return () => dispatch(resetSelectedCategories());
+  }, []);
+
   //? Edit Product
   const { id } = router.query;
   useEffect(() => {
     if (id) {
       dispatch(resetProduct());
-      dispatch(fetchProduct(router.query.id));
+      dispatch(fetchProduct(id));
     } else {
       dispatch(resetProduct());
     }
@@ -183,7 +188,7 @@ export default function Product() {
               }
             />
           </div>
-          <UploadImages />
+          <UploadImages multiple/>
           <div className='space-y-4 md:flex md:gap-x-2 md:items-baseline md:justify-evenly'>
             <div className='space-y-1.5'>
               <label htmlFor='price'>قیمت برحسب تومان</label>

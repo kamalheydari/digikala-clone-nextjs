@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-import { useGetDataQuery } from "app/slices/fetchApiSlice";
-import { openModal } from "app/slices/modalSlice";
+import { useGetDataQuery } from "app/slices/fetchApi.slice";
+import { openModal } from "app/slices/modal.slice";
 import { useDispatch, useSelector } from "react-redux";
 
 import { BigLoading, Buttons } from "components";
@@ -15,7 +15,7 @@ export default function OrdersHome() {
   const [orders, setOrders] = useState([]);
 
   //? Store
-  const { token } = useSelector((state) => state.auth);
+  const { token } = useSelector((state) => state.user);
   const { isConfirm } = useSelector((state) => state.modal);
 
   //? Get Query

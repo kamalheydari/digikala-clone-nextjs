@@ -16,7 +16,7 @@ import {
   RefreshTokenHandler,
   Modal,
 } from "components";
-import { fetchCategories } from "app/slices/categorySlice";
+import { fetchCategories } from "app/slices/category.slice";
 
 export default function MyApp({ Component, pageProps }) {
   //? Fix Hydration failed

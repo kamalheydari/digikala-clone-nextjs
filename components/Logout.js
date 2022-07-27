@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
-import { userLogout } from "app/slices/authSlice";
+import { userLogout } from "app/slices/user.slice";
 import { Icons } from "components";
-import { openModal } from "app/slices/modalSlice";
+import { openModal } from "app/slices/modal.slice";
 
 export default function Logout() {
   const dispatch = useDispatch();

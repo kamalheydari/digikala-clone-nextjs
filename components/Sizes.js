@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Buttons } from "components";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, deleteItem, editItem } from "app/slices/productSlice";
+import { addItem, deleteItem, editItem } from "app/slices/product.slice";
 import { useRef } from "react";
 export default function Sizes() {
   const dispatch = useDispatch();

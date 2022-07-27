@@ -5,8 +5,8 @@ const initialState = Cookies.get("userInfo")
   ? JSON.parse(Cookies.get("userInfo"))
   : { token: null, user: null };
 
-const authSlice = createSlice({
-  name: "auth",
+const userSlice = createSlice({
+  name: "user",
   initialState,
   reducers: {
     userLogin: (state, action) => {
@@ -36,6 +36,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { userLogin, userLogout, updateUser } = authSlice.actions;
+export const { userLogin, userLogout, updateUser } = userSlice.actions;
 
-export default authSlice.reducer;
+export default userSlice.reducer;

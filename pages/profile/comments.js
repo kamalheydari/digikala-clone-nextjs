@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 
 import { useSelector } from "react-redux";
-import { useGetDataQuery } from "app/slices/fetchApiSlice";
+import { useGetDataQuery } from "app/slices/fetchApi.slice";
 
 import { BigLoading, Buttons, ReveiwCard } from "components";
 
@@ -11,7 +11,7 @@ export default function Comments() {
   const [reviews, setReviews] = useState([]);
 
   //? Store
-  const { token } = useSelector((state) => state.auth);
+  const { token } = useSelector((state) => state.user);
 
   //? Get Query
   const { data, isLoading, isSuccess } = useGetDataQuery({

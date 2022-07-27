@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { closeModal } from "app/slices/modalSlice";
+import { closeModal } from "app/slices/modal.slice";
 
 //? Components
 import {
@@ -18,7 +18,7 @@ import {
 export default function Modal() {
   const dispatch = useDispatch();
 
-  const { token } = useSelector((state) => state.auth);
+  const { token } = useSelector((state) => state.user);
 
   const {
     type,

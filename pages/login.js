@@ -5,12 +5,12 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { usePostDataMutation } from "app/slices/fetchApiSlice";
+import { usePostDataMutation } from "app/slices/fetchApi.slice";
 import { DisplayError, Loading } from "components";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { userLogin } from "app/slices/authSlice";
-import { openModal } from "app/slices/modalSlice";
+import { userLogin } from "app/slices/user.slice";
+import { openModal } from "app/slices/modal.slice";
 
 //? Validation Schema
 import validation from "utils/validation";

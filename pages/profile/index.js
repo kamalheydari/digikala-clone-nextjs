@@ -4,7 +4,7 @@ import { ClientLayout, Orders, ProfileAside } from "components";
 
 export default function ProfilePage() {
   //? Store
-  const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.user);
 
   if (!user) return null;
   return (

@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 
 import { useSelector } from "react-redux";
-import { usePostDataMutation } from "app/slices/fetchApiSlice";
+import { usePostDataMutation } from "app/slices/fetchApi.slice";
 import {
   addReviewsItem,
   changeReviewsItems,
   deleteReviewsItem,
   resetReview,
-} from "app/slices/reviewsSlice";
-import { closeModal, openModal } from "app/slices/modalSlice";
+} from "app/slices/reviews.slice";
+import { closeModal, openModal } from "app/slices/modal.slice";
 
 import { ratingStatus } from "utils/constatns";
 
@@ -27,7 +27,7 @@ export default function CommentModal({ title: productTitle, dispatch, id }) {
     title,
     comment,
   } = useSelector((state) => state.reviews);
-  const { token } = useSelector((state) => state.auth);
+  const { token } = useSelector((state) => state.user);
 
   //? Post Query
   const [

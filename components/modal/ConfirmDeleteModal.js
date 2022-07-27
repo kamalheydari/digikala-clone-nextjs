@@ -3,11 +3,11 @@ import {
   confirmAction,
   confirmReset,
   openModal,
-} from "app/slices/modalSlice";
+} from "app/slices/modal.slice";
 import { useEffect } from "react";
-import { useDeleteDataMutation } from "app/slices/fetchApiSlice";
+import { useDeleteDataMutation } from "app/slices/fetchApi.slice";
 
-import { resetDetails } from "app/slices/detailsSlice";
+import { resetDetails } from "app/slices/details.slice";
 import { useRouter } from "next/router";
 
 export default function ConfirmDeleteModal({

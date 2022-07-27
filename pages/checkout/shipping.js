@@ -3,9 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { clearCart } from "app/slices/cartSlice";
-import { usePostDataMutation } from "app/slices/fetchApiSlice";
-import { openModal } from "app/slices/modalSlice";
+import { clearCart } from "app/slices/cart.slice";
+import { usePostDataMutation } from "app/slices/fetchApi.slice";
+import { openModal } from "app/slices/modal.slice";
 import { useDispatch, useSelector } from "react-redux";
 
 import { CartInfo, Icons, Loading } from "components";
@@ -25,7 +25,7 @@ export default function ShippingPage() {
   const [paymentMethod, setPaymentMethod] = useState("پرداخت در محل");
 
   //? Store
-  const { user, token } = useSelector((state) => state.auth);
+  const { user, token } = useSelector((state) => state.user);
   const { cartItems, totalItems, totalDiscount, totalPrice } = useSelector(
     (state) => state.cart
   );

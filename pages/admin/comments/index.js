@@ -1,11 +1,11 @@
-import { useGetDataQuery } from "app/slices/fetchApiSlice";
+import { useGetDataQuery } from "app/slices/fetchApi.slice";
 import { BigLoading, Buttons } from "components";
 import Image from "next/image";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 
 export default function Comments() {
-  const { token } = useSelector((state) => state.auth);
+  const { token } = useSelector((state) => state.user);
 
   const { data, isLoading, isSuccess } = useGetDataQuery({
     url: "/api/reviews",

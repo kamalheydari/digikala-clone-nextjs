@@ -1,4 +1,4 @@
-import { decrease, increase, removeFromCart } from "app/slices/cartSlice";
+import { decrease, increase, removeFromCart } from "app/slices/cart.slice";
 import { useDispatch } from "react-redux";
 
 import { Icons } from "components";

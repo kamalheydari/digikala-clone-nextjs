@@ -5,8 +5,8 @@ import db from "lib/db";
 import Product from "models/Product";
 
 import { useDispatch, useSelector } from "react-redux";
-import { openModal } from "app/slices/modalSlice";
-import { resetFilter, updateFilter } from "app/slices/filterSlice";
+import { openModal } from "app/slices/modal.slice";
+import { resetFilter, updateFilter } from "app/slices/filter.slice";
 
 import { formatNumber } from "utils/formatNumber";
 

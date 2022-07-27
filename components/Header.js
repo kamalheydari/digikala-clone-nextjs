@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Icons, User, Cart, Search, Sidebar, Navbar } from "components";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { openModal } from "app/slices/modalSlice";
+import { openModal } from "app/slices/modal.slice";
 
 export default function Header() {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ export default function Header() {
   const [isSidebar, setIsSidebar] = useState(false);
 
   //? Store
-  const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.user);
 
   //? Handlers
 

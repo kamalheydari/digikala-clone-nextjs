@@ -3,9 +3,9 @@ import {
   confirmAction,
   confirmReset,
   openModal,
-} from "app/slices/modalSlice";
+} from "app/slices/modal.slice";
 import { useEffect } from "react";
-import { usePutDataMutation } from "app/slices/fetchApiSlice";
+import { usePutDataMutation } from "app/slices/fetchApi.slice";
 
 export default function ConfirmUpdateModal({
   title,

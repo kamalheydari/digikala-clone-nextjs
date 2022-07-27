@@ -1,6 +1,16 @@
+import { resetSelectedCategories } from "app/slices/category.slice";
 import { Buttons, SelectCategories } from "components";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 export default function DetailsHome() {
+  const dispatch = useDispatch();
+
+  //? Reset Category
+  useEffect(() => {
+    return () => dispatch(resetSelectedCategories());
+  }, []);
+
   return (
     <>
       <Buttons.Back backRoute='/admin'>مشخصات</Buttons.Back>

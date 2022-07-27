@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
-import { addToCart } from "app/slices/cartSlice";
-import { openModal } from "app/slices/modalSlice";
+import { addToCart } from "app/slices/cart.slice";
+import { openModal } from "app/slices/modal.slice";
 import { useDispatch, useSelector } from "react-redux";
 
 import exsitItem from "utils/exsitItem";

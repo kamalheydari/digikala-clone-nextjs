@@ -7,7 +7,7 @@ export default function DashboardLayout({ children }) {
   const router = useRouter();
 
   //? Store
-  const { user, token } = useSelector((state) => state.auth);
+  const { user, token } = useSelector((state) => state.user);
 
   if (!token || user?.role === "user") router.push("/admin/login");
 

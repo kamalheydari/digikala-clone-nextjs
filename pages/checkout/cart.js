@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 
-import { clearCart } from "app/slices/cartSlice";
-import { openModal } from "app/slices/modalSlice";
+import { clearCart } from "app/slices/cart.slice";
+import { openModal } from "app/slices/modal.slice";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Icons, FreeShipping, CartItem, Buttons, CartInfo } from "components";
@@ -16,7 +16,7 @@ export default function Cart() {
   const { cartItems, totalItems, totalPrice, totalDiscount } = useSelector(
     (state) => state.cart
   );
-  const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.user);
 
   //? Handlers
   const handleRoute = () => {

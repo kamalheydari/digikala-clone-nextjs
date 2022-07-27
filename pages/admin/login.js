@@ -8,9 +8,9 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useDispatch } from "react-redux";
-import { usePostDataMutation } from "app/slices/fetchApiSlice";
-import { userLogin } from "app/slices/authSlice";
-import { openModal } from "app/slices/modalSlice";
+import { usePostDataMutation } from "app/slices/fetchApi.slice";
+import { userLogin } from "app/slices/user.slice";
+import { openModal } from "app/slices/modal.slice";
 
 import { DisplayError, Loading } from "components";
 

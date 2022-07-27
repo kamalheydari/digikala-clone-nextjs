@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { ClientLayout, ProfileAside } from "components";
 
 export default function ProfileLayout({ children }) {
-  const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.user);
 
   if (!user) return null;
 

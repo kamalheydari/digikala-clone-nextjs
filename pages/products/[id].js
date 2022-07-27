@@ -14,9 +14,9 @@ import {
   Services,
   SpecialSell,
 } from "components";
-import { openModal } from "app/slices/modalSlice";
+import { openModal } from "app/slices/modal.slice";
 import { useDispatch } from "react-redux";
-import { useGetDataQuery } from "app/slices/fetchApiSlice";
+import { useGetDataQuery } from "app/slices/fetchApi.slice";
 import moment from "moment-jalaali";
 
 export default function SingleProduct({ product }) {
@@ -314,12 +314,12 @@ export default function SingleProduct({ product }) {
                   </div>
                   <div className='flex-1 space-y-3 px-4 lg:px-10'>
                     <div className='border-b border-gray-100 w-full'>
-                      <p>{item.title}</p>
-                      <span className='farsi-digits'>
+                      <p className="mb-1">{item.title}</p>
+                      <span className='farsi-digits text-xs'>
                         {moment(item.updatedAt).format("jYYYY/jM/jD")}
                       </span>
                       <span className='inline-block w-1 h-1 bg-gray-400 mx-3 rounded-full' />
-                      <span>{item.user.name}</span>
+                      <span className="text-xs">{item.user.name}</span>
                     </div>
 
                     <p>{item.comment}</p>

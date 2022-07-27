@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Image from "next/image";
 
-import { closeModal } from "app/slices/modalSlice";
+import { closeModal } from "app/slices/modal.slice";
 
 export default function Alert({ isShow, status, text, dispatch }) {
   let IconSrc;

@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 
 import { useDispatch, useSelector } from "react-redux";
-import { addOptionsType, loadDetails } from "app/slices/detailsSlice";
-import { useGetDataQuery, usePostDataMutation } from "app/slices/fetchApiSlice";
-import { openModal } from "app/slices/modalSlice";
+import { addOptionsType, loadDetails } from "app/slices/details.slice";
+import { useGetDataQuery, usePostDataMutation } from "app/slices/fetchApi.slice";
+import { openModal } from "app/slices/modal.slice";
 
 import { Buttons, BigLoading, DetailsList, Loading } from "components";
 
@@ -13,7 +13,7 @@ export default function DetailsPage() {
   const dispatch = useDispatch();
 
   //? Store
-  const { token } = useSelector((state) => state.auth);
+  const { token } = useSelector((state) => state.user);
   const { isConfirm } = useSelector((state) => state.modal);
   const { categories } = useSelector((state) => state.categories);
   const {

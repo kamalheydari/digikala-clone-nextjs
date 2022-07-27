@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 import { useDispatch, useSelector } from "react-redux";
-import { openModal } from "app/slices/modalSlice";
-import { usePatchDataMutation } from "app/slices/fetchApiSlice";
+import { openModal } from "app/slices/modal.slice";
+import { usePatchDataMutation } from "app/slices/fetchApi.slice";
 
 import { Icons } from "components";
 
@@ -14,7 +14,7 @@ export default function ReveiwCard({ item, singleComment }) {
   const [status, setStatus] = useState(item.status);
 
   //? Store
-  const { token } = useSelector((state) => state.auth);
+  const { token } = useSelector((state) => state.user);
 
   //? Patch Query
   const [patchData] = usePatchDataMutation();

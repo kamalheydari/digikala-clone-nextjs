@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
-import { useGetDataQuery } from "app/slices/fetchApiSlice";
+import { useGetDataQuery } from "app/slices/fetchApi.slice";
 import { useSelector } from "react-redux";
 
 import { BigLoading, Buttons, OrderCard } from "components";
@@ -11,7 +11,7 @@ export default function Orders() {
   const [orders, setOrders] = useState([]);
 
   //? Store
-  const { token } = useSelector((state) => state.auth);
+  const { token } = useSelector((state) => state.user);
 
   //? Get Query
   const { data, isSuccess, isLoading } = useGetDataQuery({

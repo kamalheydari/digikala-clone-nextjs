@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { openModal } from "app/slices/modalSlice";
+import { openModal } from "app/slices/modal.slice";
 
 import { Buttons, Icons } from "components";
 
@@ -7,7 +7,7 @@ export default function PersonalInfo() {
   const dispatch = useDispatch();
 
   //? Store
-  const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.user);
 
   //? Handlers
   const mobilEditHandler = () => {

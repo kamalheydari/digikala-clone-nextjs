@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 
-import { addCategory, resetSelectedCategories } from "app/slices/categorySlice";
-import { usePostDataMutation } from "app/slices/fetchApiSlice";
+import { addCategory, resetSelectedCategories } from "app/slices/category.slice";
+import { usePostDataMutation } from "app/slices/fetchApi.slice";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";

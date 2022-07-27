@@ -1,5 +1,6 @@
-import { useGetDataQuery } from "app/slices/fetchApiSlice";
-import { openModal } from "app/slices/modalSlice";
+import { resetSelectedCategories } from "app/slices/category.slice";
+import { useGetDataQuery } from "app/slices/fetchApi.slice";
+import { openModal } from "app/slices/modal.slice";
 import {
   BigLoading,
   Buttons,
@@ -30,6 +31,11 @@ export default function Products() {
   const { data, isLoading, isSuccess } = useGetDataQuery({
     url: `/api/products?page_size=10&page=${page}&category=${filterCategory}&search=${search}`,
   });
+
+    //? Reset Category
+    useEffect(() => {
+      return () => dispatch(resetSelectedCategories());
+    }, []);
 
   //? Filter Category
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { updateFilter } from "app/slices/filterSlice";
+import { updateFilter } from "app/slices/filter.slice";
 
 import { sorts } from "utils/constatns";
 

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
-import { useGetDataQuery } from "app/slices/fetchApiSlice";
+import { useGetDataQuery } from "app/slices/fetchApi.slice";
 import { useSelector } from "react-redux";
 
 import { formatNumber } from "utils/formatNumber";
@@ -14,7 +14,7 @@ export default function Orders() {
   const [successOrder, setSuccessOrder] = useState(0);
 
   //? Store
-  const { token } = useSelector((state) => state.auth);
+  const { token } = useSelector((state) => state.user);
 
   //? Get Query
   const { data, isSuccess } = useGetDataQuery({ url: "/api/order", token });

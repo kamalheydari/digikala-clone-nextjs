@@ -1,8 +1,8 @@
 import Image from "next/image";
 
 import { useDispatch, useSelector } from "react-redux";
-import { useGetDataQuery } from "app/slices/fetchApiSlice";
-import { openModal } from "app/slices/modalSlice";
+import { useGetDataQuery } from "app/slices/fetchApi.slice";
+import { openModal } from "app/slices/modal.slice";
 
 import { Buttons, BigLoading } from "components";
 
@@ -10,7 +10,7 @@ export default function Users() {
   const dispatch = useDispatch();
 
   //? Store
-  const { token } = useSelector((state) => state.auth);
+  const { token } = useSelector((state) => state.user);
 
   //? Get Data Query
   const { data, isLoading, isSuccess } = useGetDataQuery({

@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { updateFilter } from "app/slices/filterSlice";
+import { updateFilter } from "app/slices/filter.slice";
 import { sorts } from "utils/constatns";
 
 import { Icons, CloseModal } from "components";

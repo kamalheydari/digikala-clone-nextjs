@@ -1,4 +1,4 @@
-import { resetFilter, updateFilter } from "app/slices/filterSlice";
+import { resetFilter, updateFilter } from "app/slices/filter.slice";
 import { Checkbox, Icons } from "components";
 import Image from "next/image";
 import { useSelector } from "react-redux";

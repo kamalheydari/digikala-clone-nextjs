@@ -1,4 +1,4 @@
-import { useGetDataQuery } from "app/slices/fetchApiSlice";
+import { useGetDataQuery } from "app/slices/fetchApi.slice";
 import { BigLoading, Buttons, ReveiwCard } from "components";
 import { useRouter } from "next/router";
 

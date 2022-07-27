@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 
-import { closeModal } from "app/slices/modalSlice";
+import { closeModal } from "app/slices/modal.slice";
 
 export default function RedirectToLogin({ text, title, dispatch }) {
   const router = useRouter();

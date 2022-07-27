@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-import { usePatchDataMutation } from "app/slices/fetchApiSlice";
-import { updateUser } from "app/slices/authSlice";
+import { usePatchDataMutation } from "app/slices/fetchApi.slice";
+import { updateUser } from "app/slices/user.slice";
 
 import { Loading, CloseModal } from "components";
 
@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 
 export default function AddressForm({ title, token, dispatch, closeModal }) {
   //? Store
-  const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.user);
 
   //? Local State
   const [cities, setCities] = useState([]);
