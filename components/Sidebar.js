@@ -48,12 +48,17 @@ export default function Sidebar({ isSidebar, setIsSidebar }) {
                   className='space-y-4 overflow-hidden text-sm md:text-base '
                 >
                   <div
-                    className={`flex items-center justify-between px-4 py-2 text-gray-500 ${
+                    className={`flex items-center justify-between px-4 py-2 text-gray-600 ${
                       mainCategory.category === mainExpandCat && "text-red-400"
                     }`}
                   >
                     <Link href={`/products?category=${mainCategory.slug}`}>
-                      <a className='px-1 font-bold '>{mainCategory.name}</a>
+                      <a
+                        className='px-1 font-semibold tracking-wide'
+                        onClick={() => setIsSidebar(false)}
+                      >
+                        {mainCategory.name}
+                      </a>
                     </Link>
 
                     {parents.includes(mainCategory.category) && (
@@ -87,7 +92,10 @@ export default function Sidebar({ isSidebar, setIsSidebar }) {
                               <Link
                                 href={`/products?category=${parentCategory.slug}`}
                               >
-                                <a className='px-1 font-medium '>
+                                <a
+                                  className='px-1 font-medium'
+                                  onClick={() => setIsSidebar(false)}
+                                >
                                   {parentCategory.name}
                                 </a>
                               </Link>
@@ -122,7 +130,10 @@ export default function Sidebar({ isSidebar, setIsSidebar }) {
                                       <Link
                                         href={`/products?category=${childCategory.slug}`}
                                       >
-                                        <a className='inline-block p-1 font-light text-gray-500'>
+                                        <a
+                                          className='inline-block p-1 font-light text-gray-500'
+                                          onClick={() => setIsSidebar(false)}
+                                        >
                                           {childCategory.name}
                                         </a>
                                       </Link>
