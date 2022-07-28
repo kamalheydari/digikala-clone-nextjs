@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 
 import { useSelector } from "react-redux";
@@ -46,7 +47,7 @@ export default function Navbar() {
         }}
       >
         <div className='flex'>
-          <ul className='border-l-2 border-gray-100 w-52'>
+          <ul className='w-64 border-l-2 border-gray-100'>
             {categories.map((mainCategory) => {
               if (mainCategory.parent === "/") {
                 return (
@@ -56,7 +57,12 @@ export default function Navbar() {
                     onMouseOver={() => active(mainCategory)}
                   >
                     <Link href={`/products?category=${mainCategory.slug}`}>
-                      <a className='px-1'>{mainCategory.name}</a>
+                      <a className='px-1 flex gap-x-1.5 items-center'>
+                        <div className='relative h-7 w-7 grayscale '>
+                          <Image src={mainCategory.image.url} layout='fill' />
+                        </div>
+                        <span>{mainCategory.name}</span>
+                      </a>
                     </Link>
                   </li>
                 );
@@ -69,7 +75,7 @@ export default function Navbar() {
                 return (
                   <li key={parentCategory._id} className='h-fit'>
                     <Link href={`/products?category=${parentCategory.slug}`}>
-                      <a className='flex items-center px-2 mb-1 text-sm font-bold text-gray-700 border-r-2 border-red-500'>
+                      <a className='flex items-center px-2 mb-1 text-sm font-semibold tracking-wider text-gray-700 border-r-2 border-red-500'>
                         {parentCategory.name}
                         <Icons.ArrowLeft className='icon' />
                       </a>

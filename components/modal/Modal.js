@@ -12,7 +12,7 @@ import {
   ConfirmUpdateModal,
   CategoryForm,
   SortModal,
-  CommentModal
+  CommentModal,
 } from "components";
 
 export default function Modal() {
@@ -108,7 +108,8 @@ export default function Modal() {
       break;
     case "comment":
       effect = ["bottom-0 lg:top-20", "-bottom-full lg:top-60"];
-      size = "w-full h-screen lg:h-fit lg:max-w-3xl lg:bg-white lg:p-1 lg:rounded-md";
+      size =
+        "w-full h-screen lg:h-fit lg:max-w-3xl lg:bg-white lg:py-4 lg:px-1 lg:rounded-md";
       renderModal = (
         <CommentModal
           title={title}
@@ -116,14 +117,14 @@ export default function Modal() {
           dispatch={dispatch}
           closeModal={closeModal}
           id={id}
-
         />
       );
       break;
 
     case "edit-category":
       effect = ["bottom-0 lg:top-20", "-bottom-full lg:top-28"];
-      size = "w-full h-screen lg:h-fit lg:max-w-3xl";
+      size =
+        "w-full h-screen lg:h-fit lg:max-w-3xl lg:bg-white lg:py-4 lg:px-1 lg:rounded-md";
       renderModal = (
         <CategoryForm
           title={title}

@@ -1,30 +1,32 @@
-import { openModal } from "app/slices/modal.slice";
-import { addItem, deleteImage } from "app/slices/product.slice";
-import { Icons } from "components";
-import { useDispatch, useSelector } from "react-redux";
-
-import { Loading } from "components";
-import { imageUpload } from "utils/imageUpload";
 import { useState } from "react";
 
-export default function UploadImages({ multiple }) {
-  //? Local State
-  const [uploadLoading, setUploadLoading] = useState(false);
-  const [media, setMedia] = useState([]);
+import { useDispatch, useSelector } from "react-redux";
+import { openModal } from "app/slices/modal.slice";
+import { addItem, deleteImage } from "app/slices/product.slice";
 
+import { imageUpload } from "utils/imageUpload";
+
+import { Icons, Loading } from "components";
+//!  addItem, deleteImage , images
+export default function UploadImages({
+  multiple,
+  deleteImageHandler,
+  images,
+  addImage,
+  getUploadedImages,
+}) {
   const dispatch = useDispatch();
 
+  //? Local State
+  const [uploadLoading, setUploadLoading] = useState(false);
+
   //? Store
-  const {
-    product: { images },
-  } = useSelector((state) => state.product);
 
   //? Handlers
   const handleAddImages = (e) => {
     let newImages = [];
     let err = "";
     const files = [...e.target.files];
-    console.log(images);
 
     if (files.length === 0) err = "باید حداقل یک تصویر انتخاب کنید";
 
@@ -38,7 +40,7 @@ export default function UploadImages({ multiple }) {
       newImages.push(file);
     });
 
-    dispatch(addItem({ type: "images", value: newImages }));
+    addImage(newImages);
 
     if (err)
       return dispatch(
@@ -51,10 +53,6 @@ export default function UploadImages({ multiple }) {
       );
   };
 
-  const handleDeleteImage = (index) => {
-    dispatch(deleteImage(index));
-  };
-
   const handleUploadImages = async () => {
     let media = [];
 
@@ -65,11 +63,9 @@ export default function UploadImages({ multiple }) {
     if (imgNewURL.length > 0) media = await imageUpload(imgNewURL);
     setUploadLoading(false);
 
-    dispatch(
-      addItem({ type: "uploaded-images", value: [...media, ...imgOldURL] })
-    );
+    getUploadedImages(media, imgOldURL);
 
-    if (media[0]?.url)
+    if (media[0]?.url && multiple)
       dispatch(
         openModal({
           isShow: true,
@@ -108,7 +104,7 @@ export default function UploadImages({ multiple }) {
                   className='rounded-md w-44 h-36 '
                   alt='product img'
                 />
-                <button type='button' onClick={() => handleDeleteImage(index)}>
+                <button type='button' onClick={() => deleteImageHandler(index)}>
                   <Icons.Delete className='absolute top-0 right-0 z-10 p-1 text-red-500 bg-red-100 icon w-7 h-7 rounded-2xl' />
                 </button>
               </div>

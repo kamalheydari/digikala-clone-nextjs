@@ -6,7 +6,9 @@ import { resetSelectedCategories } from "app/slices/category.slice";
 import { usePostDataMutation } from "app/slices/fetchApi.slice";
 import { openModal } from "app/slices/modal.slice";
 import {
+  addItem,
   changeProductItems,
+  deleteImage,
   fetchDetails,
   fetchProduct,
   resetProduct,
@@ -106,7 +108,7 @@ export default function Product() {
   }, [id]);
 
   //? Hanlders
-  const handleSubmit = async (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
 
     const infoArray = await getDetailsArray(infoTableRef);
@@ -143,13 +145,27 @@ export default function Product() {
     );
   };
 
+  const deleteImageHandler = (index) => {
+    dispatch(deleteImage(index));
+  };
+
+  const addImageHandler = (newImages) => {
+    dispatch(addItem({ type: "images", value: newImages }));
+  };
+
+  const getUploadedImagesHandler = (media, imgOldURL) => {
+    dispatch(
+      addItem({ type: "uploaded-images", value: [...media, ...imgOldURL] })
+    );
+  };
+
   return (
     <>
       <Buttons.Back backRoute='/admin'>محصول جدید</Buttons.Back>
       <div className='section-divide-y' />
 
       <div className='p-3 md:px-3 xl:px-8 2xl:px-10'>
-        <form onSubmit={handleSubmit} className='space-y-10'>
+        <form onSubmit={submitHandler} className='space-y-10'>
           <div className='space-y-1.5'>
             <label htmlFor='title'>عنوان</label>
             <input
@@ -188,7 +204,13 @@ export default function Product() {
               }
             />
           </div>
-          <UploadImages multiple/>
+          <UploadImages
+            multiple
+            deleteImageHandler={deleteImageHandler}
+            images={product.images}
+            addImage={addImageHandler}
+            getUploadedImages={getUploadedImagesHandler}
+          />
           <div className='space-y-4 md:flex md:gap-x-2 md:items-baseline md:justify-evenly'>
             <div className='space-y-1.5'>
               <label htmlFor='price'>قیمت برحسب تومان</label>

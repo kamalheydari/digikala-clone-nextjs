@@ -1,6 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-import { addCategory, resetSelectedCategories } from "app/slices/category.slice";
+import {
+  addCategory,
+  resetSelectedCategories,
+} from "app/slices/category.slice";
 import { usePostDataMutation } from "app/slices/fetchApi.slice";
 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -12,10 +15,13 @@ import {
   DisplayError,
   Loading,
   SelectCategories,
+  UploadImages,
 } from "components";
 import { useSelector } from "react-redux";
 
 export default function CategoryForm({ title, token, dispatch, closeModal }) {
+  const [images, setImages] = useState([]);
+  console.log(images[0]?.url);
   //? Store
   const { parentCategory, mainCategory } = useSelector(
     (state) => state.categories
@@ -76,8 +82,20 @@ export default function CategoryForm({ title, token, dispatch, closeModal }) {
     });
   };
 
+  const deleteImageHandler = (index) => {
+    setImages([]);
+  };
+
+  const addImageHandler = (newImages) => {
+    setImages([...newImages]);
+  };
+
+  const getUploadedImagesHandler = (media, imgOldURL) => {
+    setImages([...media, ...imgOldURL]);
+  };
+
   return (
-    <div className='flex flex-col h-full px-5 py-3 bg-white md:rounded-lg gap-y-3 '>
+    <div className='flex flex-col h-full lg:h-[770px] px-5 py-3 bg-white md:rounded-lg gap-y-3 overflow-y-auto'>
       <div className='flex justify-between py-2 border-b-2 border-gray-200 '>
         <h5>{title}</h5>
         <CloseModal />
@@ -120,6 +138,13 @@ export default function CategoryForm({ title, token, dispatch, closeModal }) {
           />
           <DisplayError errors={formErrors.slug} />
         </div>
+
+        <UploadImages
+          deleteImageHandler={deleteImageHandler}
+          images={images}
+          addImage={addImageHandler}
+          getUploadedImages={getUploadedImagesHandler}
+        />
 
         <div className='flex-1 max-w-xl space-y-16 md:grid md:grid-cols-2 md:gap-x-12 md:gap-y-10 md:items-baseline'>
           <SelectCategories />

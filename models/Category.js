@@ -6,13 +6,13 @@ const CategorySchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true,
-      unique: true
+      unique: true,
     },
     slug: {
       type: String,
       required: true,
       trim: true,
-      unique: true
+      unique: true,
     },
     parent: {
       type: String,
@@ -21,6 +21,10 @@ const CategorySchema = new mongoose.Schema(
     category: {
       type: String,
       trim: true,
+    },
+    image: {
+      type: Object,
+      required: true,
     },
   },
   { timestamps: true }

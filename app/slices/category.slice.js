@@ -22,14 +22,8 @@ const categorySlice = createSlice({
     addCategory: (state, action) => {
       state.categories.push(action.payload);
     },
-    selecteMainCategory: (state, action) => {
-      state.mainCategory = action.payload;
-    },
-    selecteParentCategory: (state, action) => {
-      state.parentCategory = action.payload;
-    },
-    selecteCategory: (state, action) => {
-      state.category = action.payload;
+    selectCategory: (state, action) => {
+      state[action.payload.type] = action.payload.value;
     },
     resetParentCategory: (state, action) => {
       state.parentCategory = "";
@@ -49,11 +43,9 @@ const categorySlice = createSlice({
 
 export const {
   addCategory,
-  selecteMainCategory,
-  selecteParentCategory,
   resetParentCategory,
   resetSelectedCategories,
-  selecteCategory,
+  selectCategory,
 } = categorySlice.actions;
 
 export default categorySlice.reducer;

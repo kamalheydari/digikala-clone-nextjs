@@ -7,9 +7,11 @@ export default function ProductPrice({ product, singleProduct }) {
     return (
       <div className={`${singleProduct && "flex flex-col-reverse"}`}>
         <div
-          className={`flex items-center ${product.discount === 0 && "h-12"}`}
+          className={`flex items-center ${
+            product.discount === 0 && "h-12 my-0.5"
+          }`}
         >
-          <span className='farsi-digits text-sm text-gray-700'>
+          <span className='text-sm text-gray-700 farsi-digits'>
             {formatNumber(
               product.price - (product.discount * product.price) / 100
             )}
@@ -21,7 +23,7 @@ export default function ProductPrice({ product, singleProduct }) {
 
         {product.discount > 0 && (
           <div className=''>
-            <span className='farsi-digits ml-2 text-sm text-gray-500 line-through'>
+            <span className='ml-2 text-sm text-gray-500 line-through farsi-digits'>
               {formatNumber(product.price)}
             </span>
             {singleProduct && <DiscountProduct product={product} />}
@@ -30,6 +32,6 @@ export default function ProductPrice({ product, singleProduct }) {
       </div>
     );
   } else {
-    return <span className='h-12'>ناموجود</span>;
+    return <span className='h-12 my-0.5'>ناموجود</span>;
   }
 }

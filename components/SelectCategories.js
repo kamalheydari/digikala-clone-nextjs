@@ -1,10 +1,5 @@
 import { useRouter } from "next/router";
-import {
-  resetParentCategory,
-  selecteCategory,
-  selecteMainCategory,
-  selecteParentCategory,
-} from "app/slices/category.slice";
+import { resetParentCategory, selectCategory } from "app/slices/category.slice";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function SelectCategories({ detailsHome, productPage }) {
@@ -29,13 +24,17 @@ export default function SelectCategories({ detailsHome, productPage }) {
 
   const handleChange = (e) => {
     if (e.target.name === "mainCategory") {
-      dispatch(selecteMainCategory(e.target.value));
+      dispatch(selectCategory({ type: "mainCategory", value: e.target.value }));
       dispatch(resetParentCategory());
     }
-    if (e.target.name === "parentCategory")
-      dispatch(selecteParentCategory(e.target.value));
 
-    if (e.target.name === "category") dispatch(selecteCategory(e.target.value));
+    if (e.target.name === "parentCategory")
+      dispatch(
+        selectCategory({ type: "parentCategory", value: e.target.value })
+      );
+
+    if (e.target.name === "category")
+      dispatch(selectCategory({ type: "category", value: e.target.value }));
   };
 
   const handleRouteChange = (e) => {

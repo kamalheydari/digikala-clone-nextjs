@@ -17,6 +17,8 @@ import {
   Sort,
   ProductsAside,
 } from "components";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function ProductsHome(props) {
   const router = useRouter();
@@ -26,11 +28,18 @@ export default function ProductsHome(props) {
   const { sort, inStock, discount, max_price, min_price } = useSelector(
     (state) => state.filter
   );
+  const { categories } = useSelector((state) => state.categories);
 
   //? local State
   const [page, setPage] = useState(1);
   const [price, setPrice] = useState("");
   const [showFilters, setShowFilters] = useState(false);
+
+  const childCategory = [
+    ...new Set(
+      categories.filter((cat) => cat.parent === "/" + router.query.category)
+    ),
+  ];
 
   //? Handlers
   const hanldeQuery = ({ page, sort, inStock, discount, price }) => {
@@ -64,14 +73,17 @@ export default function ProductsHome(props) {
     );
   };
 
+  //? Handle Query
   useEffect(() => {
     hanldeQuery({ page, sort, inStock, discount, price });
   }, [page, sort, inStock, discount, price]);
 
+  //? Reset Page On Query Change
   useEffect(() => {
     setPage(1);
   }, [sort, price, inStock, discount]);
 
+  //? Reset Filer On Category Change
   useEffect(() => {
     dispatch(
       resetFilter({ maxPrice: props.maxPrice, minPrice: props.minPrice })
@@ -81,16 +93,40 @@ export default function ProductsHome(props) {
     dispatch(updateFilter({ name: "min_price", value: props.minPrice }));
   }, [router.query.category]);
 
+  //? Set Prices
   useEffect(() => {
     if (min_price !== 0 && max_price !== 0)
       setPrice(min_price + "-" + max_price);
   }, [max_price, min_price]);
 
   return (
-    <>
-      <div className='lg:flex lg:gap-x-0 xl:gap-x-3 lg:px-3 lg:container lg:max-w-[1700px] xl:mt-28'>
+    <div className='lg:px-3 lg:container lg:max-w-[1700px] xl:mt-32'>
+      {/* Categories */}
+      {childCategory.length > 0 && (
+        <div className='px-4 my-7'>
+          <h4 className='mb-4 text-base text-black'>دسته‌بندی‌ها</h4>
+          <div className='flex flex-wrap gap-3'>
+            {childCategory.map((item) => (
+              <div
+                key={item._id}
+                className='px-3 py-4 text-center border-4 border-gray-100 rounded-md'
+              >
+                <Link href={`/products?category=${item.slug}`}>
+                  <a>
+                    <div className='relative w-24 h-24 md:h-28 md:w-32 lg:w-36 xl:w-40 xl:h-36'>
+                      <Image src={item.image.url} layout='fill' />
+                    </div>
+                    <span>{item.name}</span>
+                  </a>
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      <div className='px-1 lg:flex lg:gap-x-0 xl:gap-x-3'>
         <div
-          className={`fixed transition-all duration-700 left-0 right-0 mx-auto z-40 bg-white w-full h-screen mt-1 xl:sticky xl:top-32 xl:z-0 xl:h-fit xl:w-fit  ${
+          className={`fixed transition-all duration-700 left-0 right-0 mx-auto z-40 bg-white w-full h-screen mt-1 xl:sticky xl:top-28 xl:z-0 xl:h-fit xl:w-fit  ${
             showFilters ? "top-0" : "top-full"
           }`}
         >
@@ -102,6 +138,7 @@ export default function ProductsHome(props) {
           />
         </div>
         <div className='w-full p-4 mt-3 '>
+          {/* Filters */}
           <div className='divide-y-2 xl:hidden'>
             <div className='flex py-2 gap-x-3'>
               <button
@@ -123,7 +160,9 @@ export default function ProductsHome(props) {
             </div>
             <div className='flex justify-between py-2'>
               <span>همه کالاها</span>
-              <span className="farsi-digits">{formatNumber(props.productsLength)} کالا</span>
+              <span className='farsi-digits'>
+                {formatNumber(props.productsLength)} کالا
+              </span>
             </div>
           </div>
           <Sort
@@ -131,7 +170,9 @@ export default function ProductsHome(props) {
             sort={sort}
             productsLength={formatNumber(props.productsLength)}
           />
-          {props.products.length > 1 ? (
+
+          {/* Products */}
+          {props.products.length > 0 ? (
             <div className='sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5'>
               {props.products.map((item) => (
                 <ProductCard product={item} key={item._id} />
@@ -157,7 +198,7 @@ export default function ProductsHome(props) {
           />
         </div>
       )}
-    </>
+    </div>
   );
 }
 
