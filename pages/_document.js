@@ -7,7 +7,7 @@ class MyDocument extends Document {
         <Head>
           <link
             rel='preload'
-            href='/fonts/vazir/Vazir.woff2.woff2'
+            href='/fonts/vazir/Vazir.woff2'
             as='font'
             crossOrigin='anonymous'
           ></link>

@@ -4,6 +4,12 @@ import { useEffect, useState } from "react";
 import db from "lib/db";
 import Product from "models/Product";
 
+import { openModal } from "app/slices/modal.slice";
+import { useDispatch } from "react-redux";
+import { useGetDataQuery } from "app/slices/fetchApi.slice";
+
+import moment from "moment-jalaali";
+
 import { formatNumber } from "utils/formatNumber";
 import { truncate } from "utils/truncate";
 
@@ -13,13 +19,11 @@ import {
   Icons,
   Services,
   SpecialSell,
+  Depot,
+  SmilarProductsSlider,
 } from "components";
-import { openModal } from "app/slices/modal.slice";
-import { useDispatch } from "react-redux";
-import { useGetDataQuery } from "app/slices/fetchApi.slice";
-import moment from "moment-jalaali";
 
-export default function SingleProduct({ product }) {
+export default function SingleProduct({ product, smilarProducts }) {
   const dispatch = useDispatch();
 
   //? Local State
@@ -204,9 +208,9 @@ export default function SingleProduct({ product }) {
               <span className='text-gray-700'>موجود در انبار دیجی کالا</span>
             </div>
 
-            <span className='hidden text-red-500 mr-7 lg:block farsi-digits'>
-              تنها {formatNumber(product.inStock)} عدد در انبار باقی مانده
-            </span>
+            <div className='hidden lg:block'>
+              <Depot product={product} />
+            </div>
 
             <div className='hidden lg:flex lg:items-center lg:gap-x-1'>
               <Icons.Check className='icon' />
@@ -248,9 +252,14 @@ export default function SingleProduct({ product }) {
         </>
       )}
 
+      {/* SmilarProductsSlider */}
+      <SmilarProductsSlider products={smilarProducts} />
+
+      <div className='section-divide-y' />
+
       {/* specification */}
       <div className='px-4 lg:max-w-4xl xl:max-w-5xl lg:flex lg:gap-x-20'>
-        <h4 className='mb-3 h-fit w-min lg:border-b-2  lg:border-red-500'>
+        <h4 className='mb-3 h-fit w-min lg:border-b-2 lg:border-red-500'>
           مشخصات
         </h4>
         <ul className='space-y-4 lg:mt-10'>
@@ -269,34 +278,34 @@ export default function SingleProduct({ product }) {
 
       <div className='section-divide-y' />
       {/* comments */}
-      <div className='px-4 py-3 lg:max-w-4xl xl:max-w-5xl space-y-4'>
+      <div className='px-4 py-3 space-y-4 lg:max-w-4xl xl:max-w-5xl'>
         <div className='flex items-center justify-between'>
-          <h4 className='mb-3 lg:border-b-2  lg:border-red-500'>دیدگاه‌ها</h4>
+          <h4 className='mb-3 lg:border-b-2 lg:border-red-500'>دیدگاه‌ها</h4>
           <span className='text-xs text-sky-500 farsi-digits'>
             {product.numReviews} دیدگاه
           </span>
         </div>
         <div className='lg:mr-36'>
-          <div className="mb-8">
+          <div className='mb-8'>
             <button
               type='button'
               onClick={handleOpenCommentModal}
-              className='flex items-center gap-x-5 w-full'
+              className='flex items-center w-full gap-x-5'
             >
               <Icons.Comment className='icon' />
-              <span className='text-black text-sm '>
+              <span className='text-sm text-black '>
                 دیدگاه خود را درباره این کالا بنویسید
               </span>
-              <Icons.ArrowLeft className='icon mr-auto' />
+              <Icons.ArrowLeft className='mr-auto icon' />
             </button>
-            <p className='text-xs mt-6 text-gray-500'>
+            <p className='mt-6 text-xs text-gray-500'>
               پس از تایید نظر، با مراجعه به صفحه‌ی ماموریت‌های کلابی امتیاز خود
               را دریافت کنید.
             </p>
           </div>
 
           {reviews.length > 0 ? (
-            <div className='divide-y-2 space-y-4 py-3 px-2 lg:px-6'>
+            <div className='px-2 py-3 space-y-4 divide-y-2 lg:px-6'>
               {reviews.map((item) => (
                 <div className='flex py-3'>
                   <div>
@@ -312,14 +321,14 @@ export default function SingleProduct({ product }) {
                       {item.rating}
                     </span>
                   </div>
-                  <div className='flex-1 space-y-3 px-4 lg:px-10'>
-                    <div className='border-b border-gray-100 w-full'>
-                      <p className="mb-1">{item.title}</p>
-                      <span className='farsi-digits text-xs'>
+                  <div className='flex-1 px-4 space-y-3 lg:px-10'>
+                    <div className='w-full border-b border-gray-100'>
+                      <p className='mb-1'>{item.title}</p>
+                      <span className='text-xs farsi-digits'>
                         {moment(item.updatedAt).format("jYYYY/jM/jD")}
                       </span>
-                      <span className='inline-block w-1 h-1 bg-gray-400 mx-3 rounded-full' />
-                      <span className="text-xs">{item.user.name}</span>
+                      <span className='inline-block w-1 h-1 mx-3 bg-gray-400 rounded-full' />
+                      <span className='text-xs'>{item.user.name}</span>
                     </div>
 
                     <p>{item.comment}</p>
@@ -331,7 +340,7 @@ export default function SingleProduct({ product }) {
                             className='flex items-center gap-x-1'
                             key={point.id}
                           >
-                            <Icons.Plus className='icon text-green-400' />
+                            <Icons.Plus className='text-green-400 icon' />
                             <p>{point.title}</p>
                           </div>
                         ))}
@@ -345,7 +354,7 @@ export default function SingleProduct({ product }) {
                             className='flex items-center gap-x-1'
                             key={point.id}
                           >
-                            <Icons.Minus className='icon text-red-400' />
+                            <Icons.Minus className='text-red-400 icon' />
                             <p>{point.title}</p>
                           </div>
                         ))}
@@ -356,7 +365,7 @@ export default function SingleProduct({ product }) {
               ))}
             </div>
           ) : (
-            <p className='text-red-800 mt-6'>
+            <p className='mt-6 text-red-800'>
               هنوز هیچ نظری برای این محصول ثبت نشده, شما اولین نفر باشید.
             </p>
           )}
@@ -366,14 +375,25 @@ export default function SingleProduct({ product }) {
   );
 }
 
-export async function getServerSideProps({ query }) {
+export async function getServerSideProps({ params: { id } }) {
   await db.connect();
-  const product = await Product.findById({ _id: query.id }).lean();
+  const product = await Product.findById({ _id: id }).lean();
+
+  const smilarProducts = await Product.find({
+    category: {
+      $regex: product.category,
+      $options: "i",
+    },
+    inStock: { $gte: 1 },
+  })
+    .limit(10)
+    .lean();
   await db.disconnect();
 
   return {
     props: {
       product: db.convertDocToObj(product),
+      smilarProducts: smilarProducts.map(db.convertDocToObj),
     },
   };
 }

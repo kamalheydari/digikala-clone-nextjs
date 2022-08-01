@@ -40,7 +40,7 @@ export default function Orders() {
           <p className='text-center'>هنوز هیچ سفارشی ندادید</p>
         </div>
       ) : (
-        <div className='py-3 px-4 space-y-3'>
+        <div className='px-4 py-3 space-y-3'>
           {orders.map((item) => (
             <OrderCard key={item._id} item={item} />
           ))}

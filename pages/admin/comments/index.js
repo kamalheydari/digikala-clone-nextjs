@@ -32,7 +32,7 @@ export default function Comments() {
           <p className='text-center'>هنوز هیچ نظری ندارید</p>
         </div>
       ) : (
-        <div className='overflow-x-auto mt-7 mx-3 lg:mx-10'>
+        <div className='mx-3 overflow-x-auto mt-7 lg:mx-10'>
           <table className='w-full whitespace-nowrap'>
             <thead className='h-9 bg-emerald-50'>
               <tr className='text-emerald-500'>

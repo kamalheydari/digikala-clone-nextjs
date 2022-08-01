@@ -112,9 +112,9 @@ export default function CommentModal({ title: productTitle, dispatch, id }) {
       >
         {/* rating */}
         <div>
-          <div className='text-center my-2'>
+          <div className='my-2 text-center'>
             <span className='text-sm text-black'>امتیاز دهید!:‌</span>
-            <span className='text-sm text-sky-500 px-1'>
+            <span className='px-1 text-sm text-sky-500'>
               {ratingStatus[rating]}
             </span>
           </div>
@@ -126,7 +126,7 @@ export default function CommentModal({ title: productTitle, dispatch, id }) {
             max='5'
             value={rating}
             step='1'
-            className='w-full h-2 bg-gray-200 rounded-lg  cursor-pointer '
+            className='w-full h-2 bg-gray-200 rounded-lg cursor-pointer '
             onChange={handleChangeItems}
           />
           <div className='flex justify-between'>
@@ -137,7 +137,7 @@ export default function CommentModal({ title: productTitle, dispatch, id }) {
             <span className='h-1 w-1 rounded-full mx-1.5 bg-gray-300 inline-block' />
           </div>
         </div>
-        
+
         {/* title */}
         <div className='space-y-3 '>
           <label
@@ -165,9 +165,9 @@ export default function CommentModal({ title: productTitle, dispatch, id }) {
             >
               نکات مثبت
             </label>
-            <div className='input flex items-center'>
+            <div className='flex items-center input'>
               <input
-                className='outline-none flex-1 bg-transparent'
+                className='flex-1 bg-transparent outline-none'
                 type='text'
                 name='positivePoints'
                 id='positivePoints'
@@ -185,8 +185,8 @@ export default function CommentModal({ title: productTitle, dispatch, id }) {
           {positivePoints.length > 0 && (
             <div className='space-y-3'>
               {positivePoints.map((item) => (
-                <div key={item.id} className='flex gap-x-4 items-center px-3'>
-                  <Icons.Plus className='icon text-green-500' />
+                <div key={item.id} className='flex items-center px-3 gap-x-4'>
+                  <Icons.Plus className='text-green-500 icon' />
                   <span className='ml-auto'>{item.title}</span>
                   <button>
                     <Icons.Delete
@@ -209,9 +209,9 @@ export default function CommentModal({ title: productTitle, dispatch, id }) {
             >
               نکات منفی
             </label>
-            <div className='input flex items-center'>
+            <div className='flex items-center input'>
               <input
-                className='outline-none flex-1 bg-transparent'
+                className='flex-1 bg-transparent outline-none'
                 type='text'
                 name='negativePoints'
                 id='negativePoints'
@@ -229,8 +229,8 @@ export default function CommentModal({ title: productTitle, dispatch, id }) {
           {negativePoints.length > 0 && (
             <div className='space-y-3'>
               {negativePoints.map((item) => (
-                <div key={item.id} className='flex gap-x-4 items-center px-3'>
-                  <Icons.Minus className='icon text-red-500' />
+                <div key={item.id} className='flex items-center px-3 gap-x-4'>
+                  <Icons.Minus className='text-red-500 icon' />
                   <span className='ml-auto'>{item.title}</span>
                   <button>
                     <Icons.Delete
@@ -253,7 +253,7 @@ export default function CommentModal({ title: productTitle, dispatch, id }) {
             متن نظر
           </label>
           <textarea
-            className='input resize-none h-24'
+            className='h-24 resize-none input'
             type='text'
             name='comment'
             id='comment'

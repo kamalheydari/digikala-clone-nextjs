@@ -21,7 +21,7 @@ import { useSelector } from "react-redux";
 
 export default function CategoryForm({ title, token, dispatch, closeModal }) {
   const [images, setImages] = useState([]);
-  console.log(images[0]?.url);
+
   //? Store
   const { parentCategory, mainCategory } = useSelector(
     (state) => state.categories
@@ -37,6 +37,7 @@ export default function CategoryForm({ title, token, dispatch, closeModal }) {
     if (isSuccess) {
       dispatch(addCategory(data.newCategory));
       dispatch(closeModal());
+      setImages([]);
       dispatch(resetSelectedCategories());
       reset();
     }
@@ -77,7 +78,7 @@ export default function CategoryForm({ title, token, dispatch, closeModal }) {
 
     postData({
       url: "/api/category",
-      body: { name, parent, category, slug },
+      body: { name, parent, category, slug, image: images[0] },
       token,
     });
   };

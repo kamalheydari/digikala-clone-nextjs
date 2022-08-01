@@ -18,16 +18,16 @@ export default function PersonalInfo() {
         title: "ثبت و ویرایش  شماره موبایل",
         editedData: user?.mobile,
       })
-      );
-    };
-    
-    const nameEditHandler = () => {
-      dispatch(
-        openModal({
-          isShow: true,
-          type: "edit-name",
-          title: "ثبت و ویرایش اطلاعات شناسایی",
-          editedData: user?.name,
+    );
+  };
+
+  const nameEditHandler = () => {
+    dispatch(
+      openModal({
+        isShow: true,
+        type: "edit-name",
+        title: "ثبت و ویرایش اطلاعات شناسایی",
+        editedData: user?.name,
       })
     );
   };

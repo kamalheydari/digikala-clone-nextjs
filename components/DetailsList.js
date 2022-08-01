@@ -9,6 +9,7 @@ import {
 import { useDispatch } from "react-redux";
 
 import { Icons, Buttons } from "components";
+
 export default function DetailsList({ category, type, data }) {
   const dispatch = useDispatch();
 
@@ -18,7 +19,7 @@ export default function DetailsList({ category, type, data }) {
   const [editId, setEditId] = useState();
 
   //? Handlers
-  const addToStore = () => {
+  const handleAddToStore = () => {
     if (name.trim() === "") return;
     if (!onEdit) {
       if (type === "info") {
@@ -90,7 +91,7 @@ export default function DetailsList({ category, type, data }) {
           ))}
           <tr className='border-b-2 border-green-50'>
             <td className='flex p-2'>
-              <Buttons.Add onClick={addToStore} />
+              <Buttons.Add onClick={handleAddToStore} />
               <input
                 type='text'
                 onChange={(e) => setName(e.target.value)}

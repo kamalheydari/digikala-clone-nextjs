@@ -40,10 +40,10 @@ export default function ReveiwCard({ item, singleComment }) {
   };
 
   return (
-    <div className='py-4 lg:px-2 flex space-y-3 border-b border-gray-200 lg:border gap-x-3 lg:gap-x-8 lg:rounded-lg '>
+    <div className='flex py-4 space-y-3 border-b border-gray-200 lg:px-2 lg:border gap-x-3 lg:gap-x-8 lg:rounded-lg '>
       {/* image */}
       <div>
-        <div className='relative h-12 w-16 lg:w-24 lg:h-20'>
+        <div className='relative w-16 h-12 lg:w-24 lg:h-20'>
           <Image src={item.product.images[0].url} layout='fill' />
         </div>
         <span
@@ -60,9 +60,8 @@ export default function ReveiwCard({ item, singleComment }) {
       </div>
 
       <div className='flex-1 '>
-        
         {/* header */}
-        <div className='lg:flex lg:pb-3 lg:flex-row-reverse lg:items-center border-b border-gray-100 pb-1 lg:ml-4'>
+        <div className='pb-1 border-b border-gray-100 lg:flex lg:pb-3 lg:flex-row-reverse lg:items-center lg:ml-4'>
           <div className='flex justify-between'>
             <div
               className={`flex w-fit items-center gap-x-2 px-1.5 py-0.5 rounded-md ${
@@ -98,12 +97,12 @@ export default function ReveiwCard({ item, singleComment }) {
             </div>
             <div className='relative h-fit px-1.5 group self-end'>
               <Icons.More className='cursor-pointer icon' />
-              <div className='absolute left-0  hidden px-4 py-3 bg-white rounded shadow-3xl top-5  group-hover:flex'>
+              <div className='absolute left-0 hidden px-4 py-3 bg-white rounded shadow-3xl top-5 group-hover:flex'>
                 {singleComment ? (
                   <div className='space-y-4'>
                     <button
                       type='button'
-                      className='flex items-center gap-x-3 w-48'
+                      className='flex items-center w-48 gap-x-3'
                       onClick={() => setStatus(2)}
                     >
                       <Icons.Check className='text-white rounded-full p-0.5 icon bg-green-500 ' />
@@ -111,7 +110,7 @@ export default function ReveiwCard({ item, singleComment }) {
                     </button>
                     <button
                       type='button'
-                      className='flex items-center gap-x-3 w-48'
+                      className='flex items-center w-48 gap-x-3'
                       onClick={() => setStatus(3)}
                     >
                       <Icons.Cross className='text-white rounded-full p-0.5 icon bg-red-500 ' />
@@ -135,12 +134,12 @@ export default function ReveiwCard({ item, singleComment }) {
         </div>
 
         {/* content */}
-        <div className='space-y-2 py-4'>
+        <div className='py-4 space-y-2'>
           <p>{item.comment}</p>
           <div>
             {item.positivePoints.map((point) => (
               <div className='flex items-center gap-x-1' key={point.id}>
-                <Icons.Plus className='icon text-green-400' />
+                <Icons.Plus className='text-green-400 icon' />
                 <p>{point.title}</p>
               </div>
             ))}
@@ -148,7 +147,7 @@ export default function ReveiwCard({ item, singleComment }) {
           <div>
             {item.negativePoints.map((point) => (
               <div className='flex items-center gap-x-1' key={point.id}>
-                <Icons.Minus className='icon text-red-400' />
+                <Icons.Minus className='text-red-400 icon' />
                 <p>{point.title}</p>
               </div>
             ))}

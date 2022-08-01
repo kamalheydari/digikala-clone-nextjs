@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import "/styles/globals.css";
+import "/styles/scrollbar.css";
 
 //? Store
 import { store } from "app/store";

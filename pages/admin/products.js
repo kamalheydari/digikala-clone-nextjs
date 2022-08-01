@@ -32,10 +32,10 @@ export default function Products() {
     url: `/api/products?page_size=10&page=${page}&category=${filterCategory}&search=${search}`,
   });
 
-    //? Reset Category
-    useEffect(() => {
-      return () => dispatch(resetSelectedCategories());
-    }, []);
+  //? Reset Category
+  useEffect(() => {
+    return () => dispatch(resetSelectedCategories());
+  }, []);
 
   //? Filter Category
   useEffect(() => {
@@ -139,15 +139,17 @@ export default function Products() {
                   </tbody>
                 </table>
               </div>
-              <Pagination
-                currentPage={data.currentPage}
-                nextPage={data.nextPage}
-                previousPage={data.previousPage}
-                hasNextPage={data.hasNextPage}
-                hasPreviousPage={data.hasPreviousPage}
-                lastPage={data.lastPage}
-                setPage={setPage}
-              />
+              {data.productsLength > 10 && (
+                <Pagination
+                  currentPage={data.currentPage}
+                  nextPage={data.nextPage}
+                  previousPage={data.previousPage}
+                  hasNextPage={data.hasNextPage}
+                  hasPreviousPage={data.hasPreviousPage}
+                  lastPage={data.lastPage}
+                  setPage={setPage}
+                />
+              )}
             </>
           ) : (
             <div className='text-center text-red-500 lg:border lg:border-gray-200 lg:rounded-md lg:py-4'>

@@ -1,0 +1,137 @@
+{
+  "electronic-devices": {
+    "colors": ["#5C51BF", "#6662D8"],
+    "slider": [
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659180790/nextjs_media/dpyy3rkg8bwvohf0wgim.jpg",
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659180792/nextjs_media/wnv1qja3bvtmn5ucmmim.jpg",
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659180794/nextjs_media/tizlipnnhcje199uvidn.jpg",
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659180796/nextjs_media/hzb93hwigp92wtojip8y.jpg"
+    ],
+    "banner_one": [
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659180866/nextjs_media/lntlvyl7i9bqbglypsom.jpg",
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659180867/nextjs_media/vn5yoobngcjc2lystrxc.jpg",
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659180868/nextjs_media/rgt3xy9hkw7glcm71gn8.jpg",
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659180870/nextjs_media/axpbo9c9uowipdwkxrgb.jpg"
+    ],
+    "banner_two": [
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659180922/nextjs_media/gzthhpnl4mmyq9g3glbu.jpg",
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659180924/nextjs_media/yj3uo8qeniataveo8ybk.jpg",
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659180924/nextjs_media/uraoywwz5jdmhvh59ltj.jpg",
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659180926/nextjs_media/fcnz9vdogza3xf5zk35o.jpg"
+    ]
+  },
+  "apparel": {
+    "colors": ["#E88060", "#FEA267"],
+    "slider": [
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659182059/nextjs_media/mvauoscbzpa5qp2bspmn.jpg",
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659182061/nextjs_media/yaaxjizy59yortrssxe5.jpg",
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659182063/nextjs_media/jww0a90c6ckmiksvoukg.jpg",
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659182065/nextjs_media/mhteudh2u95zk3kggcah.jpg",
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659182067/nextjs_media/k43xv6n6axenxuuzhrn1.jpg"
+    ],
+    "banner_one": [
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659182110/nextjs_media/m6kustxsseliwfxxajsp.jpg",
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659182111/nextjs_media/gkk5naqsvytrqqjmb7br.jpg",
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659182112/nextjs_media/dirzoxkvvne49t7sgl0r.jpg",
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659182114/nextjs_media/fy4zvrapofkt0prhcnox.jpg"
+    ],
+    "banner_two": [
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659182160/nextjs_media/wh4fqdj20po3jghqo4us.jpg",
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659182161/nextjs_media/tylzet4vbdbn3l7uj4gn.jpg",
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659182163/nextjs_media/fhckyy8bbb67gdvbxjje.jpg",
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659182164/nextjs_media/ectsui3uv8x0qirs8dks.jpg"
+    ]
+  },
+
+  "mobile-phone": {
+    "colors": ["", ""],
+    "slider": [],
+    "banner_one": [],
+    "banner_two": []
+  },
+
+  "computer-parts": {
+    "colors": ["", ""],
+    "slider": [],
+    "banner_one": [],
+    "banner_two": []
+  },
+
+  "shoes": {
+    "colors": ["", ""],
+    "slider": [],
+    "banner_one": [],
+    "banner_two": []
+  },
+
+  "mother-and-child": {
+    "colors": ["", ""],
+    "slider": [],
+    "banner_one": [],
+    "banner_two": []
+  },
+
+  "food-beverage": {
+    "colors": ["", ""],
+    "slider": [],
+    "banner_one": [],
+    "banner_two": []
+  },
+  "vehicles": {
+    "colors": ["#FAC569", "#F0C781"],
+    "slider": [
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659181434/nextjs_media/qlpipoi81mugs1vbvw8y.jpg",
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659181436/nextjs_media/zrcigucu1l4mmygbmayo.jpg",
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659181438/nextjs_media/rnqxknamipiud5vkh0bz.jpg",
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659181439/nextjs_media/tildn5pgcq7leculyhob.jpg",
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659181441/nextjs_media/ikathjp605vpwfkm021i.jpg"
+    ],
+    "banner_one": [
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659181513/nextjs_media/xnm0rqgvzfw7ivngzs7d.jpg",
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659181514/nextjs_media/xcbakefh6rmtjc4obcdr.jpg",
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659181515/nextjs_media/fqj3bwxxmjpjupo5aza3.jpg",
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659181516/nextjs_media/vlhjzlfwphsknmv7ldfg.jpg"
+    ],
+    "banner_two": [
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659181847/nextjs_media/gmkbh82ihrcslam31mch.jpg",
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659181849/nextjs_media/clqqklzgvfwzm6hizk3s.jpg",
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659181850/nextjs_media/tlxsfgtlsn5c3k76d3ab.jpg",
+      "https://res.cloudinary.com/djvgq77b0/image/upload/v1659181851/nextjs_media/fsx4wrtj2tvonrruehgb.jpg"
+    ]
+  },
+
+  "rural-products": {
+    "colors": ["", ""],
+    "slider": [],
+    "banner_one": [],
+    "banner_two": []
+  },
+
+  "personal-appliance": {
+    "colors": ["", ""],
+    "slider": [],
+    "banner_one": [],
+    "banner_two": []
+  },
+
+  "home-and-kitchen": {
+    "colors": ["", ""],
+    "slider": [],
+    "banner_one": [],
+    "banner_two": []
+  },
+
+  "book-and-media": {
+    "colors": ["", ""],
+    "slider": [],
+    "banner_one": [],
+    "banner_two": []
+  },
+
+  "sport-entertainment": {
+    "colors": ["", ""],
+    "slider": [],
+    "banner_one": [],
+    "banner_two": []
+  }
+}

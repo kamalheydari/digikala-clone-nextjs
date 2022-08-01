@@ -40,7 +40,7 @@ export default function Comments() {
           <p className='text-center'>هنوز هیچ نظری ندارید</p>
         </div>
       ) : (
-        <div className='py-3 px-4 space-y-3 '>
+        <div className='px-4 py-3 space-y-3 '>
           {reviews.map((item) => (
             <ReveiwCard key={item._id} item={item} />
           ))}

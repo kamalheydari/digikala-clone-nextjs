@@ -1,7 +1,10 @@
 import Link from "next/link";
-import { Icons } from "components";
+
 import { useSelector } from "react-redux";
+
 import { formatNumber } from "utils/formatNumber";
+
+import { Icons } from "components";
 
 export default function Cart() {
   const { totalItems } = useSelector((state) => state.cart);

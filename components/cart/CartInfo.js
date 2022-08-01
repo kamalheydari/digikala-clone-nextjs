@@ -11,7 +11,8 @@ export default function CartInfo({ handleRoute, cart }) {
   );
   return (
     <div className='px-4 py-2 mt-10 space-y-5 lg:mt-0 lg:h-fit lg:py-4 '>
-      <div className='flex justify-between border-b border-gray-200 pb-2'>
+      {/* total cart price */}
+      <div className='flex justify-between pb-2 border-b border-gray-200'>
         <span className='text-sm font-thin farsi-digits'>
           قیمت کالاها ({formatNumber(totalItems)})
         </span>
@@ -24,6 +25,8 @@ export default function CartInfo({ handleRoute, cart }) {
           </div>
         </div>
       </div>
+
+      {/* total cart items */}
       <div className='flex justify-between'>
         <span className='text-sm font-thin'>جمع سبد خرید</span>
         <div className='flex items-center'>
@@ -35,9 +38,12 @@ export default function CartInfo({ handleRoute, cart }) {
           </div>
         </div>
       </div>
-      <span className='inline-block lg:max-w-xs border-b border-gray-200 pb-2 w-full'>
+
+      <span className='inline-block w-full pb-2 border-b border-gray-200 lg:max-w-xs'>
         هزینه ارسال براساس آدرس، زمان تحویل، وزن و حجم مرسوله شما محاسبه می‌شود
       </span>
+
+      {/* total cart profit */}
       <div className='flex justify-between'>
         <span className='text-sm font-thin text-red-500'>سود شما از خرید</span>
         <div className='flex items-center gap-x-1'>
@@ -52,8 +58,9 @@ export default function CartInfo({ handleRoute, cart }) {
           </div>
         </div>
       </div>
+
       {cart && (
-        <button onClick={handleRoute} className='w-full hidden lg:block btn'>
+        <button onClick={handleRoute} className='hidden w-full lg:block btn'>
           ادامه
         </button>
       )}

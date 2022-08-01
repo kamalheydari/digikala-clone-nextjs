@@ -33,6 +33,7 @@ const createCategory = async (req, res) => {
       .status(201)
       .json({ msg: "ساخت دسته بندی جدید موفقیت آمیز بود", newCategory });
   } catch (error) {
+    console.log(error.message);
     sendError(res, 500, error.message);
   }
 };

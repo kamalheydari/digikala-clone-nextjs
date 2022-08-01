@@ -4,7 +4,6 @@ import Image from "next/image";
 import { Icons, Logout, BoxLink } from "components";
 
 export default function User({ user }) {
-
   if (!user) {
     return (
       <div className='flex items-center text-sm gap-x-2 lg:border lg:border-gray-300 lg:rounded-md lg:py-2 lg:px-3'>
@@ -38,8 +37,7 @@ export default function User({ user }) {
         <Icons.User className='icon' />
         <Icons.ArrowDown className='icon ' />
         <div
-          className='bg-white shadow-md rounded absolute top-full left-0 w-60 
-          border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300'
+          className='absolute left-0 invisible transition duration-300 bg-white border border-gray-100 rounded shadow-md opacity-0 top-full w-60 group-hover:opacity-100 group-hover:visible'
         >
           <BoxLink path='/profile' name={user.name} className='border-t-0'>
             <div className='relative w-6 h-6'>

@@ -34,7 +34,7 @@ export default function Cart() {
 
   if (cartItems.length === 0)
     return (
-      <div className='py-2 mx-auto mb-20 space-y-3 xl:mt-36  lg:mb-0 lg:max-w-7xl lg:px-5 lg:mt-6 lg:space-y-0 lg:py-4 lg:border lg:border-gray-200 lg:rounded-md'>
+      <div className='py-2 mx-auto mb-20 space-y-3 xl:mt-36 lg:mb-0 lg:max-w-7xl lg:px-5 lg:mt-6 lg:space-y-0 lg:py-4 lg:border lg:border-gray-200 lg:rounded-md'>
         <Buttons.Back backRoute='/profile'>سبد خرید شما</Buttons.Back>
         <div className='section-divide-y' />
 
@@ -56,7 +56,9 @@ export default function Cart() {
         <div className='flex justify-between px-4'>
           <div>
             <h3 className='mb-2 text-sm font-bold'>سبد خرید شما</h3>
-            <span className='text-farsi-digits'>{formatNumber(totalItems)} کالا</span>
+            <span className='text-farsi-digits'>
+              {formatNumber(totalItems)} کالا
+            </span>
           </div>
 
           <div className='relative h-fit px-1.5 group'>

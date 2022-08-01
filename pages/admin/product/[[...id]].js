@@ -65,6 +65,7 @@ export default function Product() {
     postData,
     { data, isSuccess, isLoading, isError, error },
   ] = usePostDataMutation();
+
   useEffect(() => {
     if (isSuccess) {
       dispatch(
@@ -113,7 +114,7 @@ export default function Product() {
 
     const infoArray = await getDetailsArray(infoTableRef);
     const specificationArray = await getDetailsArray(specificationTableRef);
-    if (!category) console.log("y");
+
     postData({
       url: `/api/products`,
       token,

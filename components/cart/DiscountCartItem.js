@@ -8,7 +8,7 @@ export default function DiscountCartItem({ item }) {
   return (
     <div>
       <div className='flex items-center gap-x-2'>
-        <span className='farsi-digits text-red-500'>
+        <span className='text-red-500 farsi-digits'>
           {formatNumber(item.price * discount)}
         </span>
         <div className='relative w-6 h-6'>
@@ -17,7 +17,7 @@ export default function DiscountCartItem({ item }) {
         <span className='text-red-500'>تخفیف</span>
       </div>
       <div className='flex items-center gap-x-2'>
-        <span className='farsi-digits text-sm text-gray-700'>
+        <span className='text-sm text-gray-700 farsi-digits'>
           {formatNumber(item.price - (item.discount * item.price) / 100)}
         </span>
         <div className='relative w-6 h-6'>

@@ -10,28 +10,28 @@ export default function Navbar() {
   //? Local State
   const [activeMinCat, setActiveMinCat] = useState("/electronic-devices");
   const [hover, setHover] = useState(false);
+
   //? Store
   const { categories } = useSelector((state) => state.categories);
 
-  const active = (cat) => {
+  //? Handlers
+  const handleActive = (cat) => {
     setActiveMinCat(cat.category);
   };
-  const deactive = () => {
+  const hanldeDeactive = () => {
     setActiveMinCat("/electronic-devices");
   };
 
   return (
     <div className='group'>
-      <Link href='/products?category=all'>
-        <a
-          className='flex px-2 gap-x-1 '
-          onMouseOver={() => setHover(true)}
-          onMouseLeave={() => setHover(false)}
-        >
-          <Icons.Bars className='icon' />
-          دسته‌بندی کالاها
-        </a>
-      </Link>
+      <span
+        className='flex px-2 cursor-default gap-x-1'
+        onMouseOver={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+      >
+        <Icons.Bars className='icon' />
+        دسته‌بندی کالاها
+      </span>
       <div
         className={`fixed left-0 z-10 w-full h-screen top-28 bg-gray-400/50 ${
           hover ? "block" : "hidden"
@@ -42,22 +42,22 @@ export default function Navbar() {
         className='absolute z-40 hidden w-full bg-white rounded-md shadow top-8 group-hover:block '
         onMouseOver={() => setHover(true)}
         onMouseLeave={() => {
-          deactive();
+          hanldeDeactive();
           setHover(false);
         }}
       >
         <div className='flex'>
-          <ul className='w-64 border-l-2 border-gray-100'>
+          <ul className='border-l-2 border-gray-100 w-72'>
             {categories.map((mainCategory) => {
               if (mainCategory.parent === "/") {
                 return (
                   <li
                     key={mainCategory._id}
-                    className='w-full px-2 py-4 text-sm hover:bg-gray-100 group'
-                    onMouseOver={() => active(mainCategory)}
+                    className='w-full px-2 py-0.5 text-sm hover:bg-gray-100 group'
+                    onMouseOver={() => handleActive(mainCategory)}
                   >
-                    <Link href={`/products?category=${mainCategory.slug}`}>
-                      <a className='px-1 flex gap-x-1.5 items-center'>
+                    <Link href={`/main/${mainCategory.slug}`}>
+                      <a className='px-3 py-3 flex gap-x-1.5 items-center'>
                         <div className='relative h-7 w-7 grayscale '>
                           <Image src={mainCategory.image.url} layout='fill' />
                         </div>

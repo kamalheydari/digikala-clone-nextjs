@@ -1,12 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { Icons, SpecialSell, DiscountProduct, ProductPrice } from "components";
+import {
+  Icons,
+  SpecialSell,
+  DiscountProduct,
+  ProductPrice,
+  Depot,
+} from "components";
 
 import { truncate } from "utils/truncate";
-import { formatNumber } from "utils/formatNumber";
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product ,slide}) {
   //? Local Components
   const Colors = () => {
     if (product.colors && product.inStock !== 0)
@@ -26,29 +31,14 @@ export default function ProductCard({ product }) {
       return <Icons.Plus className='w-3 h-3 mr-1 sm:mr-0' />;
   };
 
-  const Depot = () => {
-    if (product.inStock === 0) {
-      return null;
-    } else if (product.inStock < 10) {
-      return (
-        <span className='text-red-500 farsi-digits'>
-          تنها {formatNumber(product.inStock)} عدد در انبار باقی مانده
-        </span>
-      );
-    } else {
-      return (
-        <div className='flex text-teal-700 gap-x-1'>
-          <Icons.Save />
-          <span className='text-teal-700'>موجود در انبار دیجی کالا</span>
-        </div>
-      );
-    }
-  };
-
   return (
-    <Link href={`products/${product._id}`}>
+    <Link href={`/products/${product._id}`}>
       <a>
-        <article className='pt-2 pb-3 border-b border-gray-100 sm:hover:shadow-3xl sm:px-3 sm:border'>
+        <article
+          className={`pt-2 pb-3 border-b border-gray-100 sm:px-3 ${
+            !slide && "sm:border sm:hover:shadow-3xl"
+          }`}
+        >
           <SpecialSell product={product} />
           <div className='flex items-center gap-2 sm:flex-col'>
             <div className='sm:flex sm:p-1 '>
@@ -72,7 +62,9 @@ export default function ProductCard({ product }) {
                   <Depot product={product} />
                 </div>
                 <div className='flex items-center gap-x-1'>
-                  <span className="farsi-digits">{product.rating.toFixed(1)}</span>
+                  <span className='farsi-digits'>
+                    {product.rating.toFixed(1)}
+                  </span>
                   <Icons.Star className='icon text-amber-400' />
                 </div>
               </div>

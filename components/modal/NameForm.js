@@ -9,7 +9,13 @@ import { updateUser } from "app/slices/user.slice";
 
 import { DisplayError, Loading, CloseModal } from "components";
 
-export default function NameForm({ title, token, dispatch, closeModal,editedData }) {
+export default function NameForm({
+  title,
+  token,
+  dispatch,
+  closeModal,
+  editedData,
+}) {
   //? Patch Data
   const [patchData, { data, isSuccess, isLoading }] = usePatchDataMutation();
 

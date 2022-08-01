@@ -34,7 +34,7 @@ export default function OrderCard({ item }) {
           <span className='mr-2 text-sm text-black'>{item._id}</span>
         </div>
         <div className='flex items-center gap-x-1'>
-          <span className='farsi-digits text-black'>
+          <span className='text-black farsi-digits'>
             {formatNumber(item.totalPrice - item.totalDiscount)}
           </span>
           <div className='relative w-6 h-6'>

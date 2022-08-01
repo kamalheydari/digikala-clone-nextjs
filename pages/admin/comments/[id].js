@@ -9,7 +9,6 @@ export default function SingleComment() {
     url: `/api/reviews/${router.query.id}`,
   });
 
-
   return (
     <div>
       <Buttons.Back backRoute='/admin/comments'>دیدگاه</Buttons.Back>
@@ -20,11 +19,11 @@ export default function SingleComment() {
           <BigLoading />
         </div>
       ) : data?.review ? (
-        <div className='py-3 px-3 lg:px-8 max-w-5xl mx-auto'>
-             <ReveiwCard singleComment item={data?.review} />
+        <div className='max-w-5xl px-3 py-3 mx-auto lg:px-8'>
+          <ReveiwCard singleComment item={data?.review} />
         </div>
       ) : (
-        <div className='py-3 px-4 space-y-3 '>
+        <div className='px-4 py-3 space-y-3 '>
           <p className='text-center'>این نظر ثبت نشده است</p>
         </div>
       )}

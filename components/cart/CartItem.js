@@ -1,9 +1,9 @@
+import Link from "next/link";
 import Image from "next/image";
 
 import { formatNumber } from "utils/formatNumber";
 
 import { SpecialSell, CartButtons, Icons, DiscountCartItem } from "components";
-import Link from "next/link";
 
 export default function CartItem({ item }) {
   return (
@@ -41,7 +41,7 @@ export default function CartItem({ item }) {
           {item.size && (
             <div className='flex items-center gap-x-2'>
               <Icons.Rule className='icon' />
-              <span className="farsi-digits">{item.size.size}</span>
+              <span className='farsi-digits'>{item.size.size}</span>
             </div>
           )}
           <div className='flex items-center gap-x-2'>

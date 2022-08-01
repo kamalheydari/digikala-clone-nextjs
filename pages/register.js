@@ -129,7 +129,7 @@ export default function RegisterPage() {
           </div>
 
           <button
-          className='mx-auto w-44 btn rounded-3xl '
+            className='mx-auto w-44 btn rounded-3xl '
             type='submit'
             disabled={isLoading}
           >

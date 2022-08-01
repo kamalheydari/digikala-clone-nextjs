@@ -15,7 +15,7 @@ export default function Sidebar({ isSidebar, setIsSidebar }) {
   const parents = [...new Set(categories.map((item) => item.parent))];
 
   //? Handlers
-  const clickHandler = (cat) => {
+  const handleClick = (cat) => {
     if (cat.parent === "/") {
       setMainExpandCat(cat.category);
     } else {
@@ -52,7 +52,7 @@ export default function Sidebar({ isSidebar, setIsSidebar }) {
                       mainCategory.category === mainExpandCat && "text-red-400"
                     }`}
                   >
-                    <Link href={`/products?category=${mainCategory.slug}`}>
+                    <Link href={`/main/${mainCategory.slug}`}>
                       <a
                         className='px-1 font-semibold tracking-wide'
                         onClick={() => setIsSidebar(false)}
@@ -62,7 +62,7 @@ export default function Sidebar({ isSidebar, setIsSidebar }) {
                     </Link>
 
                     {parents.includes(mainCategory.category) && (
-                      <button onClick={() => clickHandler(mainCategory)}>
+                      <button onClick={() => handleClick(mainCategory)}>
                         {mainCategory.category === mainExpandCat ? (
                           <Icons.ArrowUp className='text-red-400 w-7 h-7 bg-gray-50 rounded-2xl' />
                         ) : (
@@ -101,7 +101,7 @@ export default function Sidebar({ isSidebar, setIsSidebar }) {
                               </Link>
                               {parents.includes("/" + parentCategory.slug) && (
                                 <button
-                                  onClick={() => clickHandler(parentCategory)}
+                                  onClick={() => handleClick(parentCategory)}
                                 >
                                   {"/" + parentCategory.slug ===
                                   parentExpandCat ? (

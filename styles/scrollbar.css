@@ -1,0 +1,42 @@
+/* Firefox */
+* {
+  scrollbar-width: thin; /* none | auto  */
+  scrollbar-color: #ef4056 transparent;
+}
+
+/* The first applies to the thumb of the scrollbar, the second to the track. */
+/* Firefox */
+
+/* Chrome, Edge, Safari */
+*::-webkit-scrollbar {
+  width: 10px; /* vertical scrollbar */
+  height: 10px; /* horizontal scrollbar */
+}
+
+*::-webkit-scrollbar-track {
+  background: #e8e8e8;
+  border-radius: 14px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #ef4056;
+  border-radius: 14px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #ef3f55;
+}
+/* Chrome, Edge, Safari */
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: #0ea5e9 !important;
+  background: #f2f2f2;
+  opacity: 90%;
+  border-radius: 50%;
+  width: 2rem !important;
+  height: 2rem !important;
+}
+.swiper-button-next::after,.swiper-button-prev::after {
+  font-size: 20px !important;
+}

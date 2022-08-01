@@ -1,20 +1,26 @@
-import { useState } from "react";
-import { Buttons } from "components";
+import { useRef, useState } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, deleteItem, editItem } from "app/slices/product.slice";
-import { useRef } from "react";
+
+import { Buttons } from "components";
+
 export default function Colors() {
   const dispatch = useDispatch();
   const inputRef = useRef();
-  const {
-    product: { colors },
-  } = useSelector((state) => state.product);
 
+  //? Local State
   const [color, setColor] = useState({ name: "", hashCode: "#2fd13c" });
   const [onEdit, setOnEdit] = useState(false);
   const [editId, setEditId] = useState();
 
-  const addToStore = () => {
+  //? Store
+  const {
+    product: { colors },
+  } = useSelector((state) => state.product);
+
+  //? Handlers
+  const handleAddToStore = () => {
     if (color.name.trim() === "") return;
 
     if (!onEdit) {
@@ -44,7 +50,7 @@ export default function Colors() {
       <span>اندازه ها</span>
       <div className='w-full max-w-2xl mx-auto space-y-3'>
         <div className='flex items-center gap-x-2'>
-          <Buttons.Add onClick={addToStore} />
+          <Buttons.Add onClick={handleAddToStore} />
           <input
             type='text'
             onChange={(e) =>

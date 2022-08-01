@@ -3,7 +3,10 @@ import { useRouter } from "next/router";
 
 import { useDispatch, useSelector } from "react-redux";
 import { addOptionsType, loadDetails } from "app/slices/details.slice";
-import { useGetDataQuery, usePostDataMutation } from "app/slices/fetchApi.slice";
+import {
+  useGetDataQuery,
+  usePostDataMutation,
+} from "app/slices/fetchApi.slice";
 import { openModal } from "app/slices/modal.slice";
 
 import { Buttons, BigLoading, DetailsList, Loading } from "components";

@@ -7,4 +7,6 @@ export default function DiscountProduct({ product }) {
         {formatNumber(product.discount)}%
       </span>
     );
+
+  return null;
 }

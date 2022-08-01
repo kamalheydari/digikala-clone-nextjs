@@ -11,21 +11,21 @@ export default function Pagination({
 }) {
   return (
     <nav>
-      <ul className='inline-flex items-center gap-x-2 w-full'>
+      <ul className='inline-flex items-center w-full gap-x-2 farsi-digits'>
         <div className='ml-auto'>
           {hasPreviousPage && (
             <li
-              className='cursor-pointer p-1 flex justify-center text-red-500'
+              className='flex justify-center p-1 text-red-500 cursor-pointer'
               onClick={() => setPage(previousPage)}
             >
-              <Icons.ArrowRight2 className=' icon text-red-500' />
+              <Icons.ArrowRight2 className='text-red-500 icon' />
               قبلی
             </li>
           )}
         </div>
         {currentPage !== 1 && previousPage !== 1 && (
           <li
-            className='cursor-pointer w-8 h-8 p-1 text-center  border-2 border-transparent hover:text-red-500 transition-colors hover:border-red-500 rounded-2xl'
+            className='w-8 h-8 p-1 text-center transition-colors border-2 border-transparent cursor-pointer hover:text-red-500 hover:border-red-500 rounded-2xl'
             onClick={() => setPage(1)}
           >
             1
@@ -35,7 +35,7 @@ export default function Pagination({
 
         {hasPreviousPage && (
           <li
-            className='cursor-pointer w-8 h-8 p-1 text-center  border-2 border-transparent hover:text-red-500 transition-colors hover:border-red-500 rounded-2xl'
+            className='w-8 h-8 p-1 text-center transition-colors border-2 border-transparent cursor-pointer hover:text-red-500 hover:border-red-500 rounded-2xl'
             onClick={() => setPage(previousPage)}
           >
             {previousPage}
@@ -49,7 +49,7 @@ export default function Pagination({
         </li>
         {hasNextPage && (
           <li
-            className='cursor-pointer w-8 h-8 p-1 text-center  border-2 border-transparent hover:text-red-500 transition-colors hover:border-red-500 rounded-2xl'
+            className='w-8 h-8 p-1 text-center transition-colors border-2 border-transparent cursor-pointer hover:text-red-500 hover:border-red-500 rounded-2xl'
             onClick={() => setPage(nextPage)}
           >
             {nextPage}
@@ -58,7 +58,7 @@ export default function Pagination({
         {hasNextPage && nextPage !== lastPage && <li>...</li>}
         {lastPage !== currentPage && lastPage !== nextPage && (
           <li
-            className='cursor-pointer w-8 h-8 p-1 text-center  border-2 border-transparent hover:text-red-500 transition-colors hover:border-red-500 rounded-2xl'
+            className='w-8 h-8 p-1 text-center transition-colors border-2 border-transparent cursor-pointer hover:text-red-500 hover:border-red-500 rounded-2xl'
             onClick={() => setPage(lastPage)}
           >
             {lastPage}
@@ -67,11 +67,11 @@ export default function Pagination({
         <div className='mr-auto'>
           {hasNextPage && (
             <li
-              className='cursor-pointer p-1  flex justify-center text-red-500'
+              className='flex justify-center p-1 text-red-500 cursor-pointer'
               onClick={() => setPage(nextPage)}
             >
               بعدی
-              <Icons.ArrowLeft className='icon text-red-500' />
+              <Icons.ArrowLeft className='text-red-500 icon' />
             </li>
           )}
         </div>

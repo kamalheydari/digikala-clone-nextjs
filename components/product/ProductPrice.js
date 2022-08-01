@@ -1,5 +1,7 @@
 import Image from "next/image";
+
 import { formatNumber } from "utils/formatNumber";
+
 import { DiscountProduct } from "components";
 
 export default function ProductPrice({ product, singleProduct }) {

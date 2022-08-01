@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { Buttons} from "components";
+import { Buttons } from "components";
 
 export default function Lists() {
   return (

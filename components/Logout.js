@@ -1,12 +1,15 @@
 import { useRouter } from "next/router";
+
 import { useDispatch } from "react-redux";
 import { userLogout } from "app/slices/user.slice";
-import { Icons } from "components";
 import { openModal } from "app/slices/modal.slice";
+
+import { Icons } from "components";
 
 export default function Logout() {
   const dispatch = useDispatch();
   const router = useRouter();
+
   const handleLogout = () => {
     router.push("/");
     dispatch(userLogout());
@@ -19,6 +22,7 @@ export default function Logout() {
       })
     );
   };
+
   return (
     <div className='px-3 transition-colors hover:bg-gray-200'>
       <div

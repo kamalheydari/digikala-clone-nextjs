@@ -23,8 +23,7 @@ export default function ConfirmUpdateModal({
     url = `/api/details/${id}`;
   } else if (type === "confirm-update-product") {
     url = `/api/products/${id}`;
-  }
-   else if (type === "confirm-update-order") {
+  } else if (type === "confirm-update-order") {
     url = `/api/order/delivered/${id}`;
   }
   //? Update Data

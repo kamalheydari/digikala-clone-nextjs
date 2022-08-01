@@ -17,7 +17,9 @@ export default function CartButtons({ item }) {
         />
       </button>
 
-      <span className='text-sm farsi-digits'>{formatNumber(item.quantity)}</span>
+      <span className='text-sm farsi-digits'>
+        {formatNumber(item.quantity)}
+      </span>
 
       {item.quantity === 1 ? (
         <button type='button'>

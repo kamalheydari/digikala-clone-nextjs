@@ -60,7 +60,6 @@ const updateProduct = async (req, res) => {
     if (
       !title ||
       !price ||
-      !inStock ||
       !category ||
       images.length === 0 ||
       info.length === 0 ||

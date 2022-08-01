@@ -7,10 +7,9 @@ import { Buttons, Icons } from "components";
 
 export default function Addresses() {
   const dispatch = useDispatch();
-  
+
   //? Store
   const { user } = useSelector((state) => state.user);
-
 
   //? Handlers
   const edditAddressHandler = () => {
