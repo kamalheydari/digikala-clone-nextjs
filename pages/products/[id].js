@@ -21,6 +21,7 @@ import {
   SpecialSell,
   Depot,
   SmilarProductsSlider,
+  ImageGallery,
 } from "components";
 
 export default function SingleProduct({ product, smilarProducts }) {
@@ -160,13 +161,10 @@ export default function SingleProduct({ product, smilarProducts }) {
         product.inStock !== 0 && "mb-24"
       }`}
     >
-      <div className='h-fit lg:h-[650px] lg:grid lg:grid-cols-9 lg:grid-rows-5 lg:px-4 lg:gap-x-2 lg:gap-y-4 lg:mb-28'>
+      <div className='h-fit lg:h-[650px] lg:grid lg:grid-cols-9 lg:grid-rows-5 lg:px-4 lg:gap-x-2 lg:gap-y-4 lg:mb-28 xl:gap-x-7'>
         {/* image */}
         <div className='mb-5 lg:col-span-3 lg:row-span-6'>
-          <SpecialSell product={product} />
-          <div className='relative w-full h-[95vw] lg:h-[350px] xl:h-[510px] max-w-6xl px-4 mx-auto'>
-            <Image src={product.images[0].url} layout='fill' />
-          </div>
+          <ImageGallery product={product} />
         </div>
 
         {/* title */}

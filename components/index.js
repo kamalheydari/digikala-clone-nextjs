@@ -77,3 +77,4 @@ export { default as Services } from "./Services";
 export { default as OrderCard } from "./OrderCard";
 export { default as FreeShipping } from "./FreeShipping";
 export { default as ReveiwCard } from "./ReveiwCard";
+export { default as ImageGallery } from "./product/ImageGallery";
