@@ -10,8 +10,6 @@ import {
 } from "components";
 import db from "lib/db";
 import Product from "models/Product";
-import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -70,7 +68,7 @@ export default function MainCategory(props) {
   }, [isSuccess, category]);
 
   return (
-    <main className='py-4 mx-auto space-y-12 xl:mt-28 lg:max-w-7xl '>
+    <main className='py-4 mx-auto space-y-12 xl:mt-28 lg:max-w-[1450px] '>
       {/* Slider */}
       {isSuccess && <Slider images={images?.slider} />}
 

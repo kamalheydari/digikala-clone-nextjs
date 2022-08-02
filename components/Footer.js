@@ -4,8 +4,8 @@ import { Icons, Services } from "components";
 
 export default function Footer() {
   return (
-    <footer className='border-t border-gray-200 pt-4 mt-8'>
-      <div className='px-3 lg:max-w-[1550px] space-y-8 mx-auto '>
+    <footer className='border-t border-gray-200 pt-4 mt-8 bg-gray-50'>
+      <div className='px-3 lg:max-w-[1700px] space-y-8 mx-auto '>
         {/* Logo & scroll to top */}
         <div className='flex justify-between'>
           <div>
