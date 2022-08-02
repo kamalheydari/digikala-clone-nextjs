@@ -155,6 +155,51 @@ export default function SingleProduct({ product, smilarProducts }) {
     );
   };
 
+  const ProductInfo = ({ image }) => {
+    return (
+      <div
+        className={`divide-y lg:col-start-8 lg:col-end-10 lg:row-start-2 lg:row-end-5 lg:rounded-lg lg:bg-gray-100 lg:flex lg:flex-col   xl:row-end-5 lg:px-3 lg:py-1.5 lg:border lg:border-gray-200 lg:shadow lg:sticky ${
+          image ? "lg:top-4 xl:top-32" : "lg:top-60 xl:top-[260px]"
+        } `}
+      >
+        <div className='space-y-2 lg:py-3'>
+          <span className='text-base text-black'>فروشنده</span>
+          <div className='flex gap-x-2'>
+            <div className='relative w-6 h-6'>
+              <Image src='/icons/mini-logo.png' layout='fill' />
+            </div>
+            <span>دیجی‌کالا</span>
+          </div>
+        </div>
+        {image && (
+          <div className='flex py-3 gap-x-4 '>
+            <div className='relative w-28 h-28'>
+              <Image src={product.images[0].url} layout='fill' />
+            </div>
+            <span>{product.title}</span>
+          </div>
+        )}
+
+        <div className='flex items-center py-3 gap-x-2'>
+          <Icons.ShieldCheck className='icon' />
+          <span className='font-light'>گارانتی اصالت و ضمانت تحویل</span>
+        </div>
+
+        <div className='hidden lg:block lg:py-3 '>
+          <Depot product={product} />
+        </div>
+
+        <div className='hidden lg:flex lg:items-center lg:gap-x-1 lg:py-3'>
+          <Icons.Check className='icon' />
+          <span> فروش :</span>
+          <span className='farsi-digits'>{formatNumber(product.sold)}</span>
+        </div>
+
+        <AddToCart product={product} color={color} size={size} />
+      </div>
+    );
+  };
+
   return (
     <div
       className={`xl:mt-28 lg:max-w-[1550px] mx-auto py-4 space-y-4 ${
@@ -199,26 +244,7 @@ export default function SingleProduct({ product, smilarProducts }) {
         </div>
 
         {/* Add To Cart */}
-        {product.inStock > 0 && (
-          <div className='lg:col-start-8 lg:col-end-10 lg:row-start-2 lg:row-end-4 lg:rounded-lg lg:bg-gray-100 lg:flex lg:flex-col lg:justify-evenly lg:gap-y-2 xl:row-end-4 lg:px-3 lg:py-1.5 lg:border lg:border-gray-200 lg:shadow lg:sticky lg:top-32'>
-            <div className='hidden gap-x-1 lg:flex'>
-              <Icons.Save className='text-teal-700 icon' />
-              <span className='text-gray-700'>موجود در انبار دیجی کالا</span>
-            </div>
-
-            <div className='hidden lg:block'>
-              <Depot product={product} />
-            </div>
-
-            <div className='hidden lg:flex lg:items-center lg:gap-x-1'>
-              <Icons.Check className='icon' />
-              <span> فروش :</span>
-              <span className='farsi-digits'>{formatNumber(product.sold)}</span>
-            </div>
-
-            <AddToCart product={product} color={color} size={size} />
-          </div>
-        )}
+        {product.inStock > 0 && <ProductInfo />}
       </div>
 
       <Services />
@@ -255,118 +281,127 @@ export default function SingleProduct({ product, smilarProducts }) {
 
       <div className='section-divide-y' />
 
-      {/* specification */}
-      <div className='px-4 lg:max-w-4xl xl:max-w-5xl lg:flex lg:gap-x-20'>
-        <h4 className='mb-3 h-fit w-min lg:border-b-2 lg:border-red-500'>
-          مشخصات
-        </h4>
-        <ul className='space-y-4 lg:mt-10'>
-          {product.specification.map((item, i) => (
-            <li key={i} className='flex '>
-              <span className='py-2 ml-4 font-light leading-5 tracking-wide text-gray-500 w-36'>
-                {item[0]}
-              </span>
-              <span className='w-full py-2 font-normal leading-5 tracking-wider text-gray-600 border-b border-gray-100'>
-                {item[1]}
-              </span>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div className='section-divide-y' />
-      {/* comments */}
-      <div className='px-4 py-3 space-y-4 lg:max-w-4xl xl:max-w-5xl'>
-        <div className='flex items-center justify-between'>
-          <h4 className='mb-3 lg:border-b-2 lg:border-red-500'>دیدگاه‌ها</h4>
-          <span className='text-xs text-sky-500 farsi-digits'>
-            {product.numReviews} دیدگاه
-          </span>
-        </div>
-        <div className='lg:mr-36'>
-          <div className='mb-8'>
-            <button
-              type='button'
-              onClick={handleOpenCommentModal}
-              className='flex items-center w-full gap-x-5'
-            >
-              <Icons.Comment className='icon' />
-              <span className='text-sm text-black '>
-                دیدگاه خود را درباره این کالا بنویسید
-              </span>
-              <Icons.ArrowLeft className='mr-auto icon' />
-            </button>
-            <p className='mt-6 text-xs text-gray-500'>
-              پس از تایید نظر، با مراجعه به صفحه‌ی ماموریت‌های کلابی امتیاز خود
-              را دریافت کنید.
-            </p>
+      <div className='flex'>
+        <div className='flex-1'>
+          {/* specification */}
+          <div className='px-4 lg:max-w-3xl xl:max-w-5xl lg:flex lg:gap-x-20'>
+            <h4 className='mb-3 h-fit w-min lg:border-b-2 lg:border-red-500'>
+              مشخصات
+            </h4>
+            <ul className='space-y-4 lg:mt-10'>
+              {product.specification.map((item, i) => (
+                <li key={i} className='flex '>
+                  <span className='py-2 ml-4 font-light leading-5 tracking-wide text-gray-500 w-36'>
+                    {item[0]}
+                  </span>
+                  <span className='w-full py-2 font-normal leading-5 tracking-wider text-gray-600 border-b border-gray-100'>
+                    {item[1]}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          {reviews.length > 0 ? (
-            <div className='px-2 py-3 space-y-4 divide-y-2 lg:px-6'>
-              {reviews.map((item) => (
-                <div className='flex py-3'>
-                  <div>
-                    <span
-                      className={`farsi-digits w-5 h-5 text-center pt-0.5 inline-block rounded-md text-white  ${
-                        item.rating <= 2
-                          ? "bg-red-500"
-                          : item.rating === 3
-                          ? "bg-amber-500"
-                          : "bg-green-500"
-                      }`}
-                    >
-                      {item.rating}
-                    </span>
-                  </div>
-                  <div className='flex-1 px-4 space-y-3 lg:px-10'>
-                    <div className='w-full border-b border-gray-100'>
-                      <p className='mb-1'>{item.title}</p>
-                      <span className='text-xs farsi-digits'>
-                        {moment(item.updatedAt).format("jYYYY/jM/jD")}
-                      </span>
-                      <span className='inline-block w-1 h-1 mx-3 bg-gray-400 rounded-full' />
-                      <span className='text-xs'>{item.user.name}</span>
-                    </div>
-
-                    <p>{item.comment}</p>
-
-                    {item.positivePoints.length > 0 && (
-                      <div>
-                        {item.positivePoints.map((point) => (
-                          <div
-                            className='flex items-center gap-x-1'
-                            key={point.id}
-                          >
-                            <Icons.Plus className='text-green-400 icon' />
-                            <p>{point.title}</p>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                    {item.positivePoints.length > 0 && (
-                      <div>
-                        {item.negativePoints.map((point) => (
-                          <div
-                            className='flex items-center gap-x-1'
-                            key={point.id}
-                          >
-                            <Icons.Minus className='text-red-400 icon' />
-                            <p>{point.title}</p>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ))}
+          <div className='section-divide-y' />
+          {/* comments */}
+          <div className='px-4 py-3 space-y-4 lg:max-w-3xl xl:max-w-5xl'>
+            <div className='flex items-center justify-between'>
+              <h4 className='mb-3 lg:border-b-2 lg:border-red-500'>
+                دیدگاه‌ها
+              </h4>
+              <span className='text-xs text-sky-500 farsi-digits'>
+                {product.numReviews} دیدگاه
+              </span>
             </div>
-          ) : (
-            <p className='mt-6 text-red-800'>
-              هنوز هیچ نظری برای این محصول ثبت نشده, شما اولین نفر باشید.
-            </p>
-          )}
+            <div className='lg:mr-36'>
+              <div className='mb-8'>
+                <button
+                  type='button'
+                  onClick={handleOpenCommentModal}
+                  className='flex items-center w-full gap-x-5'
+                >
+                  <Icons.Comment className='icon' />
+                  <span className='text-sm text-black '>
+                    دیدگاه خود را درباره این کالا بنویسید
+                  </span>
+                  <Icons.ArrowLeft className='mr-auto icon' />
+                </button>
+                <p className='mt-6 text-xs text-gray-500'>
+                  پس از تایید نظر، با مراجعه به صفحه‌ی ماموریت‌های کلابی امتیاز
+                  خود را دریافت کنید.
+                </p>
+              </div>
+
+              {reviews.length > 0 ? (
+                <div className='px-2 py-3 space-y-4 divide-y-2 lg:px-6'>
+                  {reviews.map((item) => (
+                    <div className='flex py-3'>
+                      <div>
+                        <span
+                          className={`farsi-digits w-5 h-5 text-center pt-0.5 inline-block rounded-md text-white  ${
+                            item.rating <= 2
+                              ? "bg-red-500"
+                              : item.rating === 3
+                              ? "bg-amber-500"
+                              : "bg-green-500"
+                          }`}
+                        >
+                          {item.rating}
+                        </span>
+                      </div>
+                      <div className='flex-1 px-4 space-y-3 lg:px-10'>
+                        <div className='w-full border-b border-gray-100'>
+                          <p className='mb-1'>{item.title}</p>
+                          <span className='text-xs farsi-digits'>
+                            {moment(item.updatedAt).format("jYYYY/jM/jD")}
+                          </span>
+                          <span className='inline-block w-1 h-1 mx-3 bg-gray-400 rounded-full' />
+                          <span className='text-xs'>{item.user.name}</span>
+                        </div>
+
+                        <p>{item.comment}</p>
+
+                        {item.positivePoints.length > 0 && (
+                          <div>
+                            {item.positivePoints.map((point) => (
+                              <div
+                                className='flex items-center gap-x-1'
+                                key={point.id}
+                              >
+                                <Icons.Plus className='text-green-400 icon' />
+                                <p>{point.title}</p>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+
+                        {item.positivePoints.length > 0 && (
+                          <div>
+                            {item.negativePoints.map((point) => (
+                              <div
+                                className='flex items-center gap-x-1'
+                                key={point.id}
+                              >
+                                <Icons.Minus className='text-red-400 icon' />
+                                <p>{point.title}</p>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className='mt-6 text-red-800'>
+                  هنوز هیچ نظری برای این محصول ثبت نشده, شما اولین نفر باشید.
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+        <div className='w-full px-3 lg:max-w-xs xl:max-w-sm'>
+          <ProductInfo image />
         </div>
       </div>
     </div>

@@ -13,8 +13,8 @@ export default function Depot({ product }) {
     );
   } else {
     return (
-      <div className='flex text-teal-700 gap-x-1'>
-        <Icons.Save />
+      <div className='flex text-teal-400 gap-x-1'>
+        <Icons.Save className="icon text-teal-400" />
         <span className='text-teal-700'>موجود در انبار دیجی کالا</span>
       </div>
     );

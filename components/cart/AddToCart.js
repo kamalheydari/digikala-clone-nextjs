@@ -51,7 +51,7 @@ export default function AddToCart({ product, color, size }) {
 
   if (product.inStock !== 0)
     return (
-      <div className='fixed bottom-0 left-0 right-0 flex items-baseline justify-between px-5 py-4 bg-white z-20 border-t border-gray-300 lg:p-0 shadow-3xl lg:sticky lg:flex-col-reverse lg:top-32 lg:bg-gray-100 lg:gap-y-4 lg:border-t-0 lg:shadow-none'>
+      <div className='fixed bottom-0 left-0 right-0 z-20 flex items-baseline justify-between px-5 py-4 bg-white border-t border-gray-300 lg:py-3 lg:p-0 shadow-3xl lg:sticky lg:flex-col-reverse lg:top-32 lg:bg-gray-100 lg:gap-y-4 lg:border-t-0 lg:shadow-none'>
         {currentItemInCart ? (
           <div className='flex w-full gap-x-4'>
             <div className='w-52 lg:w-1/2 '>
