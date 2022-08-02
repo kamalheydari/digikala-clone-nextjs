@@ -18,6 +18,7 @@ import {
   UploadImages,
 } from "components";
 import { useSelector } from "react-redux";
+import { openModal } from "app/slices/modal.slice";
 
 export default function CategoryForm({ title, token, dispatch, closeModal }) {
   const [images, setImages] = useState([]);
@@ -30,7 +31,7 @@ export default function CategoryForm({ title, token, dispatch, closeModal }) {
   //? Post Data
   const [
     postData,
-    { data, isSuccess, isLoading, error },
+    { data, isSuccess, isLoading, error ,isError},
   ] = usePostDataMutation();
 
   useEffect(() => {
@@ -41,7 +42,18 @@ export default function CategoryForm({ title, token, dispatch, closeModal }) {
       dispatch(resetSelectedCategories());
       reset();
     }
-  }, [isSuccess]);
+
+    if (isError) {
+      dispatch(
+        openModal({
+          isShow: true,
+          type: "alert",
+          status: "error",
+          text: error?.data.err,
+        })
+      );
+    }
+  }, [isSuccess,isError]);
 
   //? Form Hook
   const {

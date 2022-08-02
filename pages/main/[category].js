@@ -85,7 +85,15 @@ export default function MainCategory(props) {
 
       {/* Categories */}
       <Categories childCategories={childCategories}>
-        خرید بر اساس دسته‌بندی
+        خرید بر اساس دسته‌بندهای{" "}
+        <span
+          className='text-xl'
+          style={{
+            color: `${images.colors ? `${images?.colors[0]}` : "#212121"}`,
+          }}
+        >
+          {category?.name}
+        </span>
       </Categories>
 
       {/* Banner One */}

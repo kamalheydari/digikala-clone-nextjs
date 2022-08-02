@@ -147,9 +147,9 @@ export default function DetailsPage() {
         </div>
       ) : (
         <form className='p-3 space-y-6' onSubmit={submitHandler}>
-          <div>
+          <div className="space-y-3">
             <p className='mb-2'>نوع انتخاب :</p>
-            <div className='flex items-center gap-x-1 '>
+            <div className='flex items-center gap-x-1'>
               <input
                 type='radio'
                 checked={optionsType === "none"}
