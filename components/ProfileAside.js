@@ -40,7 +40,7 @@ export default function ProfileAside({ user }) {
   if (!user) return null;
 
   return (
-    <aside className='sticky mt-6 lg:border lg:border-gray-200 lg:rounded-md lg:py-4 top-6'>
+    <aside className='sticky mt-6 lg:border lg:border-gray-200 lg:rounded-md lg:py-4 lg:top-[136px]'>
       <div className='flex items-center justify-between px-5 py-2 '>
         <div className='relative w-12 h-12'>
           <Image src='/icons/person.svg' layout='fill' />

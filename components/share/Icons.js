@@ -39,11 +39,19 @@ import {
   RiPencilRuler2Line,
   RiWallet3Line,
   RiTimeFill,
+  RiTwitterFill,
+  RiLinkedinFill,
+  RiInstagramFill,
+  RiYoutubeFill,
 } from "react-icons/ri";
 
 import { CgSandClock } from "react-icons/cg";
 
 const Icons = {
+  Twitter: RiTwitterFill,
+  Linkedin: RiLinkedinFill,
+  Instagram: RiInstagramFill,
+  Youtube: RiYoutubeFill,
   Cross: BsFillXCircleFill,
   Times: RiTimeFill,
   Wallet: RiWallet3Line,

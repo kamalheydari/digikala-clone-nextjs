@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 
-import { ClientLayout, Orders, ProfileAside } from "components";
+import { Header, Orders, ProfileAside } from "components";
 
 export default function ProfilePage() {
   //? Store
@@ -9,7 +9,7 @@ export default function ProfilePage() {
   if (!user) return null;
   return (
     <>
-      <ClientLayout />
+      <Header />
       <div className='lg:flex lg:gap-x-4 lg:px-3 lg:container lg:max-w-7xl xl:mt-28'>
         <div>
           <ProfileAside user={user} />

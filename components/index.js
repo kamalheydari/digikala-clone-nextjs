@@ -31,6 +31,7 @@ export { default as SpecialSell } from "./product/SpecialSell";
 export { default as Checkbox } from "./product/Checkbox";
 export { default as Depot } from "./product/Depot";
 export { default as MostFavouraiteProducts } from "./product/MostFavouraiteProducts";
+export { default as ImageGallery } from "./product/ImageGallery";
 
 //* CART COMPONENTS
 export { default as Cart } from "./cart/Cart";
@@ -77,4 +78,4 @@ export { default as Services } from "./Services";
 export { default as OrderCard } from "./OrderCard";
 export { default as FreeShipping } from "./FreeShipping";
 export { default as ReveiwCard } from "./ReveiwCard";
-export { default as ImageGallery } from "./product/ImageGallery";
+export { default as Footer } from "./Footer";
