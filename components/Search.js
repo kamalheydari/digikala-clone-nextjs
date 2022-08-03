@@ -1,7 +1,25 @@
+import { useDispatch } from "react-redux";
+
 import { Icons } from "components";
+import { openModal } from "app/slices/modal.slice";
+
 export default function Search() {
+  const dispatch = useDispatch();
+
+  //? Handlers
+  const handleOpenModal = () => {
+    dispatch(
+      openModal({
+        isShow: true,
+        type: "search",
+      })
+    );
+  };
   return (
-    <form className='flex flex-row-reverse flex-grow max-w-3xl rounded-md bg-zinc-200/80 '>
+    <div
+      onClick={handleOpenModal}
+      className='flex flex-row-reverse flex-grow max-w-3xl rounded-md bg-zinc-200/80 '
+    >
       <input
         type='text'
         placeholder='جستجو'
@@ -10,6 +28,6 @@ export default function Search() {
       <button className='p-2'>
         <Icons.Search className='icon' />
       </button>
-    </form>
+    </div>
   );
 }

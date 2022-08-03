@@ -335,7 +335,7 @@ export default function SingleProduct({ product, smilarProducts }) {
               {reviews.length > 0 ? (
                 <div className='px-2 py-3 space-y-4 divide-y-2 lg:px-6'>
                   {reviews.map((item) => (
-                    <div className='flex py-3'>
+                    <div className='flex py-3' key={item._id}>
                       <div>
                         <span
                           className={`farsi-digits w-5 h-5 text-center pt-0.5 inline-block rounded-md text-white  ${
@@ -401,7 +401,7 @@ export default function SingleProduct({ product, smilarProducts }) {
           </div>
         </div>
         <div className='w-full px-3 lg:max-w-xs xl:max-w-sm'>
-          <ProductInfo image />
+          {product.inStock > 0 && <ProductInfo image />}
         </div>
       </div>
     </div>
