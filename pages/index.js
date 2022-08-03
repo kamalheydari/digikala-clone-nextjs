@@ -34,41 +34,42 @@ export default function Home(props) {
   }, [isSuccess]);
 
   return (
-    <main className='py-4 mx-auto space-y-12 xl:mt-28 lg:max-w-[1450px] '>
+    <main className='space-y-12 xl:mt-28'>
       {/* Slider */}
       {isSuccess && <Slider images={images?.slider} />}
+      <div className='py-4 mx-auto space-y-12 xl:mt-28 lg:max-w-[1450px]'>
+        {/* Discount Products */}
+        {isSuccess && (
+          <DiscountSlider
+            products={props.discountProducts}
+            colors={images.colors}
+          />
+        )}
 
-      {/* Discount Products */}
-      {isSuccess && (
-        <DiscountSlider
-          products={props.discountProducts}
-          colors={images.colors}
-        />
-      )}
+        {/* Categories */}
+        <Categories childCategories={childCategories}>
+          خرید بر اساس دسته‌بندهای{" "}
+          <span
+            className='text-xl'
+            style={{
+              color: `${images.colors ? `${images?.colors[0]}` : "#212121"}`,
+            }}
+          >
+            دیجی‌کالا
+          </span>
+        </Categories>
 
-      {/* Categories */}
-      <Categories childCategories={childCategories}>
-        خرید بر اساس دسته‌بندهای{" "}
-        <span
-          className='text-xl'
-          style={{
-            color: `${images.colors ? `${images?.colors[0]}` : "#212121"}`,
-          }}
-        >
-          دیجی‌کالا
-        </span>
-      </Categories>
+        {/* Banner One */}
+        {isSuccess && <BannerOne images={images?.banner_one} />}
 
-      {/* Banner One */}
-      {isSuccess && <BannerOne images={images?.banner_one} />}
+        <BestSellsSlider products={props.bestSells} />
 
-      <BestSellsSlider products={props.bestSells} />
+        {/* Banner Two */}
+        {isSuccess && <BannerTwo images={images?.banner_two} />}
 
-      {/* Banner Two */}
-      {isSuccess && <BannerTwo images={images?.banner_two} />}
-
-      {/* MostFavouraiteProducts */}
-      <MostFavouraiteProducts products={props.mostFavourite} />
+        {/* MostFavouraiteProducts */}
+        <MostFavouraiteProducts products={props.mostFavourite} />
+      </div>
     </main>
   );
 }

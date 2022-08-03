@@ -7,7 +7,7 @@ import "swiper/css/pagination";
 
 export default function Slider({ images = [] }) {
   return (
-    <section className='overflow-hidden  lg:rounded-xl lg:mx-3'>
+    <section className='overflow-hidden lg:rounded-xl xl:rounded-none xl:mx-0 lg:mx-3'>
       <Swiper
         pagination={true}
         autoplay={{
