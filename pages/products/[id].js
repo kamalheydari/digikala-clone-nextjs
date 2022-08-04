@@ -65,7 +65,7 @@ export default function SingleProduct({ product, smilarProducts }) {
   //? Local Components
   const Colors = () => {
     return (
-      <div className='lg:col-start-4 lg:col-end-8 lg:row-start-2 lg:row-end-4'>
+      <section className='lg:col-start-4 lg:col-end-8 lg:row-start-2 lg:row-end-4'>
         <div className='flex justify-between p-4'>
           <span className='text-sm text-gray-700'>رنگ: {color.name}</span>
           <span className='text-sm farsi-digits'>
@@ -105,13 +105,13 @@ export default function SingleProduct({ product, smilarProducts }) {
           ))}
         </div>
         <div className='section-divide-y' />
-      </div>
+      </section>
     );
   };
 
   const Sizes = () => {
     return (
-      <div className='lg:col-start-4 lg:col-end-8 lg:row-start-2 lg:row-end-4'>
+      <section className='lg:col-start-4 lg:col-end-8 lg:row-start-2 lg:row-end-4'>
         <div className='flex justify-between p-4'>
           <span className='text-sm text-gray-700'>اندازه: {size.name}</span>
           <span className='text-sm'>
@@ -135,13 +135,13 @@ export default function SingleProduct({ product, smilarProducts }) {
           ))}
         </div>
         <div className='section-divide-y' />
-      </div>
+      </section>
     );
   };
 
   const OutOfStock = () => {
     return (
-      <div className='lg:col-start-8 lg:col-end-10 lg:row-start-2 lg:row-end-3 lg:py-2 lg:bg-gray-100 mx-3 p-1.5 rounded bg-gray-50/50 my-5 lg:my-0 lg:rounded-lg'>
+      <section className='lg:col-start-8 lg:col-end-10 lg:row-start-2 lg:row-end-3 lg:py-2 lg:bg-gray-100 mx-3 p-1.5 rounded bg-gray-50/50 my-5 lg:my-0 lg:rounded-lg'>
         <div className='flex items-center justify-between gap-x-2'>
           <div className='h-[3px] bg-gray-300 flex-1' />
           <h4 className='text-base font-bold text-gray-500'>ناموجود</h4>
@@ -151,7 +151,7 @@ export default function SingleProduct({ product, smilarProducts }) {
           این کالا فعلا موجود نیست اما می‌توانید زنگوله را بزنید تا به محض موجود
           شدن، به شما خبر دهیم
         </p>
-      </div>
+      </section>
     );
   };
 
@@ -162,8 +162,8 @@ export default function SingleProduct({ product, smilarProducts }) {
           image ? "lg:top-4 xl:top-32" : "lg:top-60 xl:top-[260px]"
         } `}
       >
-        <div className='space-y-2 lg:py-3'>
-          <span className='text-base text-black'>فروشنده</span>
+        <div className='items-center justify-between hidden space-y-2 lg:py-3 lg:flex'>
+          <span className='text-base text-black'>فروشنده :</span>
           <div className='flex gap-x-2'>
             <div className='relative w-6 h-6'>
               <Image src='/icons/mini-logo.png' layout='fill' />
@@ -180,7 +180,7 @@ export default function SingleProduct({ product, smilarProducts }) {
           </div>
         )}
 
-        <div className='flex items-center py-3 gap-x-2'>
+        <div className='hidden py-3  lg:items-center lg:gap-x-2 lg:flex'>
           <Icons.ShieldCheck className='icon' />
           <span className='font-light'>گارانتی اصالت و ضمانت تحویل</span>
         </div>
@@ -201,16 +201,16 @@ export default function SingleProduct({ product, smilarProducts }) {
   };
 
   return (
-    <div
+    <main
       className={`xl:mt-28 lg:max-w-[1550px] mx-auto py-4 space-y-4 ${
         product.inStock !== 0 && "mb-24"
       }`}
     >
       <div className='h-fit lg:h-[650px] lg:grid lg:grid-cols-9 lg:grid-rows-5 lg:px-4 lg:gap-x-2 lg:gap-y-4 lg:mb-28 xl:gap-x-7'>
         {/* image */}
-        <div className='mb-5 lg:col-span-3 lg:row-span-6'>
+        <section className='mb-5 lg:col-span-3 lg:row-span-6'>
           <ImageGallery product={product} />
-        </div>
+        </section>
 
         {/* title */}
         <h2 className='p-3 text-base font-semibold leading-8 tracking-wide text-black/80 lg:col-span-6'>
@@ -226,7 +226,7 @@ export default function SingleProduct({ product, smilarProducts }) {
         {product.inStock === 0 && <OutOfStock />}
 
         {/* info */}
-        <div className='px-4 pb-2 lg:col-start-4 lg:col-end-8 lg:row-start-3 lg:row-end-4'>
+        <section className='px-4 pb-2 lg:col-start-4 lg:col-end-8 lg:row-start-3 lg:row-end-4'>
           <h4 className='my-3 lg:mt-6'>ویژگی‌ها</h4>
           <ul className='mr-6 space-y-2 list-disc'>
             {product.info.map((item, i) => (
@@ -236,12 +236,12 @@ export default function SingleProduct({ product, smilarProducts }) {
               </li>
             ))}
           </ul>
-        </div>
+        </section>
 
         {/* free shipping */}
-        <div className='lg:col-start-4 lg:col-end-8 lg:row-start-5 lg:row-end-6 lg:bg-white'>
+        <section className='lg:col-start-4 lg:col-end-8 lg:row-start-5 lg:row-end-6 lg:bg-white'>
           <FreeShipping />
-        </div>
+        </section>
 
         {/* Add To Cart */}
         {product.inStock > 0 && <ProductInfo />}
@@ -251,7 +251,7 @@ export default function SingleProduct({ product, smilarProducts }) {
 
       {/* description */}
       {product.description.length > 0 && (
-        <>
+        <section>
           <div className='px-3 lg:max-w-3xl xl:max-w-5xl'>
             <h4 className='mb-3 lg:border-b-2 lg:border-red-500 w-min'>
               معرفی
@@ -273,7 +273,7 @@ export default function SingleProduct({ product, smilarProducts }) {
             )}
           </div>
           <div className='section-divide-y lg:block' />
-        </>
+        </section>
       )}
 
       {/* SmilarProductsSlider */}
@@ -284,7 +284,7 @@ export default function SingleProduct({ product, smilarProducts }) {
       <div className='flex'>
         <div className='flex-1'>
           {/* specification */}
-          <div className='px-4 lg:max-w-3xl xl:max-w-5xl lg:flex lg:gap-x-20'>
+          <section className='px-4 lg:max-w-3xl xl:max-w-5xl lg:flex lg:gap-x-20'>
             <h4 className='mb-3 h-fit w-min lg:border-b-2 lg:border-red-500'>
               مشخصات
             </h4>
@@ -300,11 +300,11 @@ export default function SingleProduct({ product, smilarProducts }) {
                 </li>
               ))}
             </ul>
-          </div>
+          </section>
 
           <div className='section-divide-y' />
           {/* comments */}
-          <div className='px-4 py-3 space-y-4 lg:max-w-3xl xl:max-w-5xl'>
+          <section className='px-4 py-3 space-y-4 lg:max-w-3xl xl:max-w-5xl'>
             <div className='flex items-center justify-between'>
               <h4 className='mb-3 lg:border-b-2 lg:border-red-500'>
                 دیدگاه‌ها
@@ -333,7 +333,7 @@ export default function SingleProduct({ product, smilarProducts }) {
               </div>
 
               {reviews.length > 0 ? (
-                <div className='px-2 py-3 space-y-4 divide-y-2 lg:px-6'>
+                <section className='px-2 py-3 space-y-4 divide-y-2 lg:px-6'>
                   {reviews.map((item) => (
                     <div className='flex py-3' key={item._id}>
                       <div>
@@ -391,20 +391,20 @@ export default function SingleProduct({ product, smilarProducts }) {
                       </div>
                     </div>
                   ))}
-                </div>
+                </section>
               ) : (
                 <p className='mt-6 text-red-800'>
                   هنوز هیچ نظری برای این محصول ثبت نشده, شما اولین نفر باشید.
                 </p>
               )}
             </div>
-          </div>
+          </section>
         </div>
-        <div className='w-full px-3 lg:max-w-xs xl:max-w-sm'>
+        <div className='hidden w-full px-3 lg:block lg:max-w-xs xl:max-w-sm'>
           {product.inStock > 0 && <ProductInfo image />}
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 

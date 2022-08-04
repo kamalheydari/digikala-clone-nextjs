@@ -46,15 +46,15 @@ export default function OrdersHome() {
   };
 
   return (
-    <div>
+    <main>
       <Buttons.Back backRoute='/admin'>سفارشات</Buttons.Back>
       <div className='section-divide-y' />
       {isLoading && (
-        <div className='px-3 py-20'>
+        <section className='px-3 py-20'>
           <BigLoading />
-        </div>
+        </section>
       )}
-      <div className='p-3 md:px-3 xl:px-8 2xl:px-10'>
+      <section className='p-3 md:px-3 xl:px-8 2xl:px-10'>
         {isSuccess && (
           <div className='overflow-x-auto mt-7'>
             <table className='w-full whitespace-nowrap'>
@@ -97,8 +97,8 @@ export default function OrdersHome() {
             </table>
           </div>
         )}
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }
 OrdersHome.getDashboardLayout = function pageLayout(page) {

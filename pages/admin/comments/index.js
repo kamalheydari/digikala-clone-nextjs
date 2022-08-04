@@ -12,27 +12,25 @@ export default function Comments() {
     token,
   });
 
-  console.log(data);
-
   return (
-    <>
+    <main>
       <Buttons.Back backRoute='/admin'>دیدگاه‌ها</Buttons.Back>
       <div className='section-divide-y' />
 
       {isLoading ? (
-        <div className='px-3 py-20'>
+        <section className='px-3 py-20'>
           <BigLoading />
-        </div>
+        </section>
       ) : data?.reviews.length === 0 ? (
-        <div className='py-20'>
+        <section className='py-20'>
           <div className='relative mx-auto h-52 w-52'>
             <Image src='/icons/order-empty.svg' layout='fill' />
           </div>
 
           <p className='text-center'>هنوز هیچ نظری ندارید</p>
-        </div>
+        </section>
       ) : (
-        <div className='mx-3 overflow-x-auto mt-7 lg:mx-10'>
+        <section className='mx-3 overflow-x-auto mt-7 lg:mx-10'>
           <table className='w-full whitespace-nowrap'>
             <thead className='h-9 bg-emerald-50'>
               <tr className='text-emerald-500'>
@@ -87,9 +85,9 @@ export default function Comments() {
               ))}
             </tbody>
           </table>
-        </div>
+        </section>
       )}
-    </>
+    </main>
   );
 }
 

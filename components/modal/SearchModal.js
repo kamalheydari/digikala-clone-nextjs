@@ -1,4 +1,10 @@
+import { useRef, useState, useEffect } from "react";
+
+import Image from "next/image";
+import Link from "next/link";
+
 import { useGetDataQuery } from "app/slices/fetchApi.slice";
+
 import {
   CloseModal,
   Icons,
@@ -6,10 +12,7 @@ import {
   DiscountProduct,
   ProductPrice,
 } from "components";
-import Image from "next/image";
-import Link from "next/link";
-import { useEffect } from "react";
-import { useRef, useState } from "react";
+
 import { truncate } from "utils/truncate";
 
 export default function SearchModal({ isShow, dispatch, closeModal }) {
@@ -25,7 +28,7 @@ export default function SearchModal({ isShow, dispatch, closeModal }) {
 
   //? Reset Search
   useEffect(() => {
-    if (isShow) {
+    if (!isShow) {
       inputSearchRef.current.value = "";
       setSearch("");
     }

@@ -34,7 +34,7 @@ export default function Cart() {
 
   if (cartItems.length === 0)
     return (
-      <div className='py-2 mx-auto mb-20 space-y-3 xl:mt-36 lg:mb-0 lg:max-w-7xl lg:px-5 lg:mt-6 lg:space-y-0 lg:py-4 lg:border lg:border-gray-200 lg:rounded-md'>
+      <section className='py-2 mx-auto mb-20 space-y-3 xl:mt-36 lg:mb-0 lg:max-w-7xl lg:px-5 lg:mt-6 lg:space-y-0 lg:py-4 lg:border lg:border-gray-200 lg:rounded-md'>
         <Buttons.Back backRoute='/profile'>سبد خرید شما</Buttons.Back>
         <div className='section-divide-y' />
 
@@ -46,14 +46,14 @@ export default function Cart() {
             سبد خرید شما خالی است!
           </p>
         </div>
-      </div>
+      </section>
     );
 
   return (
-    <div className='py-2 mx-auto mb-20 space-y-3 xl:mt-36 lg:py-0 lg:mb-0 lg:max-w-7xl b lg:px-5 lg:mt-6 lg:gap-x-3 lg:flex lg:flex-wrap lg:space-y-0'>
+    <main className='py-2 mx-auto mb-20 space-y-3 xl:mt-36 lg:py-0 lg:mb-0 lg:max-w-7xl b lg:px-5 lg:mt-6 lg:gap-x-3 lg:flex lg:flex-wrap lg:space-y-0'>
       <div className='lg:py-4 lg:border lg:border-gray-200 lg:rounded-md lg:flex-1 h-fit'>
         {/* title */}
-        <div className='flex justify-between px-4'>
+        <section className='flex justify-between px-4'>
           <div>
             <h3 className='mb-2 text-sm font-bold'>سبد خرید شما</h3>
             <span className='text-farsi-digits'>
@@ -71,28 +71,28 @@ export default function Cart() {
               <span>حذف همه</span>
             </button>
           </div>
-        </div>
+        </section>
 
         {/* carts */}
-        <div className='divide-y'>
+        <section className='divide-y'>
           {cartItems.map((item) => (
             <CartItem item={item} key={item.itemID} />
           ))}
-        </div>
+        </section>
       </div>
 
       <div className='section-divide-y lg:hidden' />
 
       {/* cart Info */}
-      <div className='lg:sticky lg:top-6 lg:h-fit xl:top-36'>
+      <section className='lg:sticky lg:top-6 lg:h-fit xl:top-36'>
         <div className='lg:border lg:border-gray-200 lg:rounded-md'>
           <CartInfo handleRoute={handleRoute} cart />
         </div>
         <FreeShipping />
-      </div>
+      </section>
 
       {/* to Shipping */}
-      <div className='fixed bottom-0 left-0 right-0 z-10 flex items-center justify-between px-3 py-3 bg-white border-t border-gray-300 shadow-3xl lg:hidden'>
+      <section className='fixed bottom-0 left-0 right-0 z-10 flex items-center justify-between px-3 py-3 bg-white border-t border-gray-300 shadow-3xl lg:hidden'>
         <button onClick={handleRoute} className='w-1/2 btn'>
           ادامه
         </button>
@@ -107,8 +107,8 @@ export default function Cart() {
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }
 

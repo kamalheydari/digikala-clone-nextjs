@@ -100,10 +100,10 @@ export default function ProductsHome(props) {
   }, [max_price, min_price]);
 
   return (
-    <div className='lg:px-3 lg:container lg:max-w-[1700px] xl:mt-32'>
+    <main className='lg:px-3 lg:container lg:max-w-[1700px] xl:mt-32'>
       {/* Categories */}
       {childCategory.length > 0 && (
-        <div className='px-4 my-7'>
+        <section className='px-4 my-7'>
           <h4 className='mb-4 text-base text-black'>دسته‌بندی‌ها</h4>
           <div className='flex flex-wrap gap-3'>
             {childCategory.map((item) => (
@@ -122,7 +122,7 @@ export default function ProductsHome(props) {
               </div>
             ))}
           </div>
-        </div>
+        </section>
       )}
       <div className='px-1 lg:flex lg:gap-x-0 xl:gap-x-3'>
         <div
@@ -173,15 +173,15 @@ export default function ProductsHome(props) {
 
           {/* Products */}
           {props.products.length > 0 ? (
-            <div className='sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5'>
+            <section className='sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5'>
               {props.products.map((item) => (
                 <ProductCard product={item} key={item._id} />
               ))}
-            </div>
+            </section>
           ) : (
-            <div className='text-center text-red-500 xl:border xl:border-gray-200 xl:rounded-md xl:py-4'>
+            <section className='text-center text-red-500 xl:border xl:border-gray-200 xl:rounded-md xl:py-4'>
               کالایی یافت نشد
-            </div>
+            </section>
           )}
         </div>
       </div>
@@ -198,7 +198,7 @@ export default function ProductsHome(props) {
           />
         </div>
       )}
-    </div>
+    </main>
   );
 }
 

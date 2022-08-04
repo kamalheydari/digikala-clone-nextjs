@@ -33,10 +33,10 @@ export default function PersonalInfo() {
   };
 
   return (
-    <div>
+    <main>
       <Buttons.Back backRoute='/profile'>اطلاعات حساب کاربری</Buttons.Back>
       <div className='section-divide-y' />
-      <div className='lg:flex'>
+      <section className='lg:flex'>
         <div className='flex-1 px-5'>
           <div className='flex items-center justify-between py-4 border-b border-gray-200'>
             <div>
@@ -76,8 +76,8 @@ export default function PersonalInfo() {
             )}
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }
 PersonalInfo.getProfileLayout = function pageLayout(page) {

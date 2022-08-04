@@ -13,7 +13,7 @@ import {
   CategoryForm,
   SortModal,
   CommentModal,
-  SearchModal
+  SearchModal,
 } from "components";
 
 export default function Modal() {
@@ -170,19 +170,18 @@ export default function Modal() {
       renderModal = <SortModal dispatch={dispatch} closeModal={closeModal} />;
       break;
 
-      case "search":
-        effect = ["bottom-0 lg:top-20", "-bottom-full lg:top-60"];
-        size =
-          "w-full h-screen lg:h-fit lg:max-w-3xl lg:bg-white lg:py-4 lg:px-1 lg:rounded-md";
-        renderModal = (
-          <SearchModal
-            dispatch={dispatch}
-            closeModal={closeModal}
+    case "search":
+      effect = ["bottom-0 lg:top-20", "-bottom-full lg:top-60"];
+      size =
+        "w-full h-screen lg:h-fit lg:max-w-3xl lg:bg-white lg:py-4 lg:px-1 lg:rounded-md";
+      renderModal = (
+        <SearchModal
+          dispatch={dispatch}
+          closeModal={closeModal}
           isShow={isShow}
-
-          />
-        );
-        break;
+        />
+      );
+      break;
 
     default:
       break;

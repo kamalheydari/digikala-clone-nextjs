@@ -25,7 +25,7 @@ export default function ImageGallery({ product }) {
           {product.images.map((image, index) => (
             <div
               key={index}
-              className={`relative h-20 w-24 flex-1 cursor-pointer border-2 border-transparent rounded-md overflow-hidden ${
+              className={`relative h-20 w-24  cursor-pointer border-2 border-transparent rounded-md overflow-hidden ${
                 index === currentImage && "border-red-400"
               }`}
               onClick={() => setCurrentImage(index)}

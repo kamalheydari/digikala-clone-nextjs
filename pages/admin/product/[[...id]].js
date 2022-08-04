@@ -161,11 +161,11 @@ export default function Product() {
   };
 
   return (
-    <>
+    <main>
       <Buttons.Back backRoute='/admin'>محصول جدید</Buttons.Back>
       <div className='section-divide-y' />
 
-      <div className='p-3 md:px-3 xl:px-8 2xl:px-10'>
+      <section className='p-3 md:px-3 xl:px-8 2xl:px-10'>
         <form onSubmit={submitHandler} className='space-y-10'>
           <div className='space-y-1.5'>
             <label htmlFor='title'>عنوان</label>
@@ -377,8 +377,8 @@ export default function Product() {
             </button>
           )}
         </form>
-      </div>
-    </>
+      </section>
+    </main>
   );
 }
 

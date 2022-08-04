@@ -23,11 +23,11 @@ export default function Addresses() {
   };
 
   return (
-    <div>
+    <main>
       <Buttons.Back backRoute='/profile'>آدرس‌ها</Buttons.Back>
       <div className='section-divide-y' />
       {user.address ? (
-        <div className='flex-1 px-5 '>
+        <section className='flex-1 px-5 '>
           <div className='flex justify-between py-4 border-b border-gray-200'>
             <p className='text-sm'>{user.address.street}</p>
             <Icons.Edit
@@ -59,9 +59,9 @@ export default function Addresses() {
               <span className='text-xs md:text-sm'>{user.name}</span>
             </div>
           </div>
-        </div>
+        </section>
       ) : (
-        <div className='flex flex-col items-center py-20 gap-y-4'>
+        <section className='flex flex-col items-center py-20 gap-y-4'>
           <div className='relative h-52 w-52'>
             <Image src='/icons/address.svg' layout='fill' />
           </div>
@@ -74,9 +74,9 @@ export default function Addresses() {
             <Icons.Location className='text-red-600 icon' />
             <span>ثبت آدرس</span>
           </button>
-        </div>
+        </section>
       )}
-    </div>
+    </main>
   );
 }
 Addresses.getProfileLayout = function pageLayout(page) {

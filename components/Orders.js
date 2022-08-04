@@ -30,7 +30,7 @@ export default function Orders() {
   }, [isSuccess]);
 
   return (
-    <>
+    <section>
       <div className='py-6 lg:py-0'>
         <div className='flex justify-between px-5 mb-7'>
           <h4 className='inline-block py-1 text-sm border-b-2 border-red-500 md:text-base'>
@@ -88,6 +88,6 @@ export default function Orders() {
         </div>
       </div>
       <div className='section-divide-y' />
-    </>
+    </section>
   );
 }

@@ -47,7 +47,7 @@ export default function Footer() {
           </div>
 
           {/* Newslatter */}
-          <div className="flex-1 max-w-lg">
+          <div className='flex-1 max-w-lg'>
             <form className='flex gap-x-3'>
               <input placeholder='ایمیل شما' className='input' type='email' />
               <button

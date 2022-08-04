@@ -135,19 +135,19 @@ export default function DetailsPage() {
   };
 
   return (
-    <>
+    <main>
       <Buttons.Back backRoute='/admin/details'>
         مشخصات و ویژگی‌های دسته‌بندی
         <span> {category?.name}</span>
       </Buttons.Back>
       <div className='section-divide-y' />
       {getDetailsIsLoading ? (
-        <div className='px-3 py-20'>
+        <section className='px-3 py-20'>
           <BigLoading />
-        </div>
+        </section>
       ) : (
         <form className='p-3 space-y-6' onSubmit={submitHandler}>
-          <div className="space-y-3">
+          <div className='space-y-3'>
             <p className='mb-2'>نوع انتخاب :</p>
             <div className='flex items-center gap-x-1'>
               <input
@@ -219,7 +219,7 @@ export default function DetailsPage() {
           </div>
         </form>
       )}
-    </>
+    </main>
   );
 }
 

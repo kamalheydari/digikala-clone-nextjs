@@ -75,17 +75,17 @@ export default function Products() {
   };
 
   return (
-    <>
+    <main>
       <Buttons.Back backRoute='/admin'>محصولات</Buttons.Back>
       <div className='section-divide-y' />
       {isLoading && (
-        <div className='px-3 py-20'>
+        <section className='px-3 py-20'>
           <BigLoading />
-        </div>
+        </section>
       )}
 
       {isSuccess && (
-        <div className='p-3 space-y-7'>
+        <section className='p-3 space-y-7'>
           <form className='max-w-4xl mx-auto space-y-5' onSubmit={handleSubmit}>
             <div className='space-y-8  md:py-0 md:flex md:gap-x-8 lg:gap-x-0.5 xl:gap-x-10 md:items-baseline md:justify-between'>
               <SelectCategories productPage />
@@ -114,7 +114,7 @@ export default function Products() {
 
           {data.productsLength > 0 ? (
             <>
-              <div className='overflow-x mt-7'>
+              <section className='overflow-x mt-7'>
                 <table className='w-full overflow-scroll table-auto'>
                   <thead className='bg-zinc-50 h-9'>
                     <tr className='text-zinc-500'>
@@ -138,7 +138,7 @@ export default function Products() {
                     ))}
                   </tbody>
                 </table>
-              </div>
+              </section>
               {data.productsLength > 10 && (
                 <Pagination
                   currentPage={data.currentPage}
@@ -156,9 +156,9 @@ export default function Products() {
               کالایی یافت نشد
             </div>
           )}
-        </div>
+        </section>
       )}
-    </>
+    </main>
   );
 }
 

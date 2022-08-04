@@ -47,7 +47,7 @@ export default function Home(props) {
         )}
 
         {/* Categories */}
-        <Categories childCategories={childCategories}>
+        <Categories childCategories={childCategories} homePage>
           خرید بر اساس دسته‌بندهای{" "}
           <span
             className='text-xl'

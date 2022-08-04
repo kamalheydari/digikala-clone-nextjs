@@ -31,7 +31,7 @@ export default function CategoryForm({ title, token, dispatch, closeModal }) {
   //? Post Data
   const [
     postData,
-    { data, isSuccess, isLoading, error ,isError},
+    { data, isSuccess, isLoading, error, isError },
   ] = usePostDataMutation();
 
   useEffect(() => {
@@ -53,7 +53,7 @@ export default function CategoryForm({ title, token, dispatch, closeModal }) {
         })
       );
     }
-  }, [isSuccess,isError]);
+  }, [isSuccess, isError]);
 
   //? Form Hook
   const {

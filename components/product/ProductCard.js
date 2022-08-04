@@ -11,7 +11,7 @@ import {
 
 import { truncate } from "utils/truncate";
 
-export default function ProductCard({ product ,slide}) {
+export default function ProductCard({ product, slide }) {
   //? Local Components
   const Colors = () => {
     if (product.colors && product.inStock !== 0)

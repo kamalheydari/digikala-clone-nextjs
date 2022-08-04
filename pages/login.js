@@ -72,8 +72,8 @@ export default function LoginPage() {
     }
   };
   return (
-    <div className='grid items-center min-h-screen '>
-      <div className='container max-w-xl px-12 py-6 space-y-6 lg:border lg:border-gray-100 lg:rounded-lg lg:shadow'>
+    <main className='grid items-center min-h-screen '>
+      <section className='container max-w-xl px-12 py-6 space-y-6 lg:border lg:border-gray-100 lg:rounded-lg lg:shadow'>
         <div className='relative h-24 mx-auto w-44'>
           <Link passHref href='/'>
             <a>
@@ -118,7 +118,7 @@ export default function LoginPage() {
             <a className='text-lg text-blue-400 '>ثبت‌نام</a>
           </Link>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }

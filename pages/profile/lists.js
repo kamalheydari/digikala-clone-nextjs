@@ -4,18 +4,21 @@ import { Buttons } from "components";
 
 export default function Lists() {
   return (
-    <div>
+    <main>
       <Buttons.Back backRoute='/profile'>لیست‌ها</Buttons.Back>
       <div className='section-divide-y' />
 
-      <div className='py-20'>
+      <section className='py-20'>
         <div className='relative mx-auto h-52 w-52'>
           <Image src='/icons/favorites-list-empty.svg' layout='fill' />
         </div>
 
         <p className='text-center'>لیست علاقه‌مندی‌های شما خالی است.</p>
-      </div>
-    </div>
+        <span className='text-amber-500 text-base text-center block my-3'>
+          (بزودی)
+        </span>
+      </section>
+    </main>
   );
 }
 Lists.getProfileLayout = function pageLayout(page) {

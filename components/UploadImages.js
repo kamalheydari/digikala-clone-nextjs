@@ -77,7 +77,7 @@ export default function UploadImages({
   };
 
   return (
-    <div>
+    <section>
       <div className='space-y-1.5'>
         <label
           htmlFor='uploadImage'
@@ -120,6 +120,6 @@ export default function UploadImages({
           </button>
         </div>
       )}
-    </div>
+    </section>
   );
 }

@@ -8,7 +8,7 @@ import {
 } from "app/slices/details.slice";
 import { useDispatch } from "react-redux";
 
-import { Icons, Buttons } from "components";
+import { Buttons } from "components";
 
 export default function DetailsList({ category, type, data }) {
   const dispatch = useDispatch();
@@ -47,7 +47,7 @@ export default function DetailsList({ category, type, data }) {
   };
 
   return (
-    <>
+    <section>
       <div className='text-sm lg:text-sm'>
         {type === "info" ? <span> ویژگی‌های</span> : <span> مشخصات</span>}{" "}
         <span
@@ -110,6 +110,6 @@ export default function DetailsList({ category, type, data }) {
           </tr>
         </tbody>
       </table>
-    </>
+    </section>
   );
 }

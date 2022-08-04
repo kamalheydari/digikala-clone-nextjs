@@ -22,11 +22,11 @@ export default function Categories() {
   };
 
   return (
-    <>
+    <main>
       <Buttons.Back backRoute='/admin'>دسته بندی ها</Buttons.Back>
       <div className='section-divide-y' />
 
-      <div className='p-3'>
+      <section className='p-3'>
         <div className='space-y-8 text-white'>
           <button
             className='flex items-center px-3 py-2 text-red-600 border-2 border-red-600 rounded-lg gap-x-3'
@@ -97,9 +97,9 @@ export default function Categories() {
             })}
           </ul>
         </div>
-      </div>
+      </section>
       <div className='py-20 '></div>
-    </>
+    </main>
   );
 }
 

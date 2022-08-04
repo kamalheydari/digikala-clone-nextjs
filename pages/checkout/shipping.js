@@ -97,9 +97,9 @@ export default function ShippingPage() {
   };
 
   return (
-    <div className='py-2 mx-auto space-y-3 lg:max-w-7xl lg:px-5 lg:py-10'>
+    <main className='py-2 mx-auto space-y-3 lg:max-w-7xl lg:px-5 lg:py-10'>
       {/* header */}
-      <div className='lg:border lg:border-gray-200 lg:rounded-lg'>
+      <header className='lg:border lg:border-gray-200 lg:rounded-lg'>
         <Link href='/'>
           <a>
             <div className='relative w-24 h-12 mx-auto'>
@@ -121,14 +121,14 @@ export default function ShippingPage() {
             <span className='text-base font-normal text-red-500'>پرداخت</span>
           </div>
         </div>
-      </div>
+      </header>
 
       <div className='section-divide-y lg:hidden' />
 
       <div className='lg:flex lg:gap-x-3'>
         <div className='lg:flex-1'>
           {/* address */}
-          <div className='flex items-center px-3 py-4 lg:border lg:border-gray-200 lg:rounded-lg gap-x-3'>
+          <section className='flex items-center px-3 py-4 lg:border lg:border-gray-200 lg:rounded-lg gap-x-3'>
             <Icons.Location2 className='text-black w-7 h-7' />
             <div className='space-y-2'>
               <span className=''>آدرس تحویل سفارش</span>
@@ -143,12 +143,12 @@ export default function ShippingPage() {
               <span className='text-base text-sky-500'>تغییر | ویرایش</span>
               <Icons.ArrowLeft className='icon text-sky-500' />
             </button>
-          </div>
+          </section>
 
           <div className='section-divide-y lg:hidden' />
 
           {/* products */}
-          <div className='px-2 py-4 mx-3 border border-gray-200 rounded-lg lg:mx-0 lg:mt-3 '>
+          <section className='px-2 py-4 mx-3 border border-gray-200 rounded-lg lg:mx-0 lg:mt-3 '>
             <div className='flex mb-5'>
               <div className='relative w-10 h-10 ml-4 '>
                 <Image src='/icons/car.png' layout='fill' />
@@ -195,13 +195,13 @@ export default function ShippingPage() {
                 بازگشت به سبد خرید
               </a>
             </Link>
-          </div>
+          </section>
         </div>
 
         <div className='section-divide-y lg:hidden' />
 
         {/* cart info */}
-        <div className='lg:border lg:border-gray-200 lg:rounded-md lg:h-fit'>
+        <section className='lg:border lg:border-gray-200 lg:rounded-md lg:h-fit'>
           <CartInfo />
           <div className='px-3 py-2 space-y-3'>
             <div className='flex items-center gap-x-2 '>
@@ -240,8 +240,8 @@ export default function ShippingPage() {
               {isLoading ? <Loading /> : "نهایی کردن خرید"}
             </button>
           </div>
-        </div>
+        </section>
       </div>
-    </div>
+    </main>
   );
 }

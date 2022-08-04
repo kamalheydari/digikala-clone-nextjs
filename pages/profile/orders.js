@@ -24,29 +24,29 @@ export default function Orders() {
   }, [isSuccess]);
 
   return (
-    <div>
+    <main>
       <Buttons.Back backRoute='/profile'>تاریخچه سفارشات</Buttons.Back>
       <div className='section-divide-y' />
       {isLoading ? (
-        <div className='px-3 py-20'>
+        <section className='px-3 py-20'>
           <BigLoading />
-        </div>
+        </section>
       ) : orders.length === 0 ? (
-        <div className='py-20'>
+        <section className='py-20'>
           <div className='relative mx-auto h-52 w-52'>
             <Image src='/icons/order-empty.svg' layout='fill' />
           </div>
 
           <p className='text-center'>هنوز هیچ سفارشی ندادید</p>
-        </div>
+        </section>
       ) : (
-        <div className='px-4 py-3 space-y-3'>
+        <section className='px-4 py-3 space-y-3'>
           {orders.map((item) => (
             <OrderCard key={item._id} item={item} />
           ))}
-        </div>
+        </section>
       )}
-    </div>
+    </main>
   );
 }
 Orders.getProfileLayout = function pageLayout(page) {

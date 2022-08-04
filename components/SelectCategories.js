@@ -42,7 +42,7 @@ export default function SelectCategories({ detailsHome, productPage }) {
   };
 
   return (
-    <>
+    <section>
       <div className='flex flex-col items-start justify-between gap-y-2 '>
         <label htmlFor='mainCategory'>دسته‌بندی اصلی</label>
         <select
@@ -119,6 +119,6 @@ export default function SelectCategories({ detailsHome, productPage }) {
           </select>
         </div>
       )}
-    </>
+    </section>
   );
 }

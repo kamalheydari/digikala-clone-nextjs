@@ -12,13 +12,13 @@ export default function DetailsHome() {
   }, []);
 
   return (
-    <>
+    <main>
       <Buttons.Back backRoute='/admin'>مشخصات</Buttons.Back>
       <div className='section-divide-y' />
-      <div className='flex-1 p-3 mx-auto mb-10 space-y-8 w-fit md:w-full md:grid md:grid-cols-2 md:gap-x-12 md:items-baseline'>
+      <section className='flex-1 p-3 mx-auto mb-10 space-y-8 w-fit md:w-full md:grid md:grid-cols-2 md:gap-x-12 md:items-baseline'>
         <SelectCategories detailsHome />
-      </div>
-    </>
+      </section>
+    </main>
   );
 }
 

@@ -31,15 +31,15 @@ export default function Users() {
   };
 
   return (
-    <>
+    <main>
       <Buttons.Back backRoute='/admin'>کاربران</Buttons.Back>
       <div className='section-divide-y' />
       {isLoading && (
-        <div className='px-3 py-20'>
+        <section className='px-3 py-20'>
           <BigLoading />
-        </div>
+        </section>
       )}
-      <div className='px-3'>
+      <section className='px-3'>
         {isSuccess && (
           <div className='overflow-x-auto mt-7'>
             <table className='w-full whitespace-nowrap'>
@@ -95,8 +95,8 @@ export default function Users() {
             </table>
           </div>
         )}
-      </div>
-    </>
+      </section>
+    </main>
   );
 }
 

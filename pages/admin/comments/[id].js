@@ -10,24 +10,24 @@ export default function SingleComment() {
   });
 
   return (
-    <div>
+    <main>
       <Buttons.Back backRoute='/admin/comments'>دیدگاه</Buttons.Back>
       <div className='section-divide-y' />
 
       {isLoading ? (
-        <div className='px-3 py-20'>
+        <section className='px-3 py-20'>
           <BigLoading />
-        </div>
+        </section>
       ) : data?.review ? (
-        <div className='max-w-5xl px-3 py-3 mx-auto lg:px-8'>
+        <section className='max-w-5xl px-3 py-3 mx-auto lg:px-8'>
           <ReveiwCard singleComment item={data?.review} />
-        </div>
+        </section>
       ) : (
         <div className='px-4 py-3 space-y-3 '>
           <p className='text-center'>این نظر ثبت نشده است</p>
         </div>
       )}
-    </div>
+    </main>
   );
 }
 
