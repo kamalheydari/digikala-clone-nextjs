@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
+import  Head  from "next/head";
 import { useRouter } from "next/router";
+import Image from "next/image";
+import Link from "next/link";
 
 import db from "lib/db";
 import Product from "models/Product";
@@ -17,8 +20,6 @@ import {
   Sort,
   ProductsAside,
 } from "components";
-import Image from "next/image";
-import Link from "next/link";
 
 export default function ProductsHome(props) {
   const router = useRouter();
@@ -101,6 +102,9 @@ export default function ProductsHome(props) {
 
   return (
     <main className='lg:px-3 lg:container lg:max-w-[1700px] xl:mt-32'>
+      <Head>
+        <title>دیجی‌کالا | فروشگاه</title>
+      </Head>
       {/* Categories */}
       {childCategory.length > 0 && (
         <section className='px-4 my-7'>

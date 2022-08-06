@@ -11,6 +11,7 @@ class MyDocument extends Document {
             as='font'
             crossOrigin='anonymous'
           ></link>
+          <link rel='icon' href='/mini-logo.ico' />
         </Head>
         <body>
           <Main></Main>

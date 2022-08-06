@@ -8,10 +8,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Icons, FreeShipping, CartItem, Buttons, CartInfo } from "components";
 
 import { formatNumber } from "utils/formatNumber";
+import Head from "next/head";
 
 export default function Cart() {
   const dispatch = useDispatch();
   const router = useRouter();
+
   //? Store
   const { cartItems, totalItems, totalPrice, totalDiscount } = useSelector(
     (state) => state.cart
@@ -35,6 +37,9 @@ export default function Cart() {
   if (cartItems.length === 0)
     return (
       <section className='py-2 mx-auto mb-20 space-y-3 xl:mt-36 lg:mb-0 lg:max-w-7xl lg:px-5 lg:mt-6 lg:space-y-0 lg:py-4 lg:border lg:border-gray-200 lg:rounded-md'>
+        <Head>
+          <title>دیجی‌کالا | سبد خرید</title>
+        </Head>
         <Buttons.Back backRoute='/profile'>سبد خرید شما</Buttons.Back>
         <div className='section-divide-y' />
 
@@ -51,6 +56,9 @@ export default function Cart() {
 
   return (
     <main className='py-2 mx-auto mb-20 space-y-3 xl:mt-36 lg:py-0 lg:mb-0 lg:max-w-7xl b lg:px-5 lg:mt-6 lg:gap-x-3 lg:flex lg:flex-wrap lg:space-y-0'>
+      <Head>
+        <title>دیجی‌کالا | سبد خرید</title>
+      </Head>
       <div className='lg:py-4 lg:border lg:border-gray-200 lg:rounded-md lg:flex-1 h-fit'>
         {/* title */}
         <section className='flex justify-between px-4'>

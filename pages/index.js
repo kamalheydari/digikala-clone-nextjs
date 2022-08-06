@@ -1,4 +1,12 @@
+import { useEffect, useState } from "react";
+import Head from "next/head";
+
+import db from "lib/db";
+import Product from "models/Product";
+
 import { useGetDataQuery } from "app/slices/fetchApi.slice";
+import { useSelector } from "react-redux";
+
 import {
   BannerOne,
   BannerTwo,
@@ -8,11 +16,6 @@ import {
   MostFavouraiteProducts,
   Slider,
 } from "components";
-import db from "lib/db";
-import Product from "models/Product";
-import { useEffect } from "react";
-import { useState } from "react";
-import { useSelector } from "react-redux";
 
 export default function Home(props) {
   //? Local State
@@ -35,6 +38,14 @@ export default function Home(props) {
 
   return (
     <main className='space-y-12 xl:mt-28'>
+      <Head>
+        <title>فروشگاه اینترنتی دیجی‌کالا</title>
+        <meta
+          name='description'
+          content='هر آنچه که نیاز دارید با بهترین قیمت از دیجی‌کالا بخرید! جدیدترین انواع گوشی موبایل، لپ تاپ، لباس، لوازم آرایشی و بهداشتی، کتاب، لوازم خانگی، خودرو و... با امکان تعویض و مرجوعی آسان | ✓ارسال رايگان ✓پرداخت در محل ✓ضمانت بازگشت کالا - برای خرید کلیک کنید!'
+        />
+      </Head>
+
       {/* Slider */}
       {isSuccess && <Slider images={images?.slider} />}
       <div className='py-4 mx-auto space-y-12 xl:mt-28 lg:max-w-[1450px]'>

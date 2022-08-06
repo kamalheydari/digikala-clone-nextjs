@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -77,6 +78,9 @@ export default function RegisterPage() {
 
   return (
     <main className='grid items-center min-h-screen '>
+      <Head>
+        <title>دیجی‌کالا | ثبت‌نام</title>
+      </Head>
       <section className='container max-w-xl px-12 py-6 space-y-6 lg:border lg:border-gray-100 lg:rounded-lg lg:shadow'>
         <div className='relative h-24 mx-auto w-44'>
           <Link passHref href='/'>

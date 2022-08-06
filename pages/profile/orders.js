@@ -1,5 +1,6 @@
-import { useState } from "react";
+import Head from "next/head";
 import Image from "next/image";
+import { useState } from "react";
 
 import { useGetDataQuery } from "app/slices/fetchApi.slice";
 import { useSelector } from "react-redux";
@@ -21,6 +22,9 @@ export default function Orders() {
 
   return (
     <main>
+      <Head>
+        <title>دیجی‌کالا | تاریخچه سفارشات</title>
+      </Head>
       <Buttons.Back backRoute='/profile'>تاریخچه سفارشات</Buttons.Back>
       <div className='section-divide-y' />
       {isLoading ? (

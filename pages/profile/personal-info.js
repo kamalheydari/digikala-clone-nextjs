@@ -1,3 +1,5 @@
+import Head from "next/head";
+
 import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "app/slices/modal.slice";
 
@@ -34,6 +36,9 @@ export default function PersonalInfo() {
 
   return (
     <main>
+      <Head>
+        <title>دیجی‌کالا | اطلاعات حساب کاربری</title>
+      </Head>
       <Buttons.Back backRoute='/profile'>اطلاعات حساب کاربری</Buttons.Back>
       <div className='section-divide-y' />
       <section className='lg:flex'>

@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Image from "next/image";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -24,6 +25,9 @@ export default function Addresses() {
 
   return (
     <main>
+      <Head>
+        <title>دیجی‌کالا | آدرس‌ها</title>
+      </Head>
       <Buttons.Back backRoute='/profile'>آدرس‌ها</Buttons.Back>
       <div className='section-divide-y' />
       {user.address ? (

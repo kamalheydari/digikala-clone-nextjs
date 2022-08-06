@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
@@ -202,6 +203,13 @@ export default function SingleProduct({ product, smilarProducts }) {
         product.inStock !== 0 && "mb-24"
       }`}
     >
+      <Head>
+        <title>{`خرید ${product.title}`}</title>
+        <meta
+          name='description'
+          content='هر آنچه که نیاز دارید با بهترین قیمت از دیجی‌کالا بخرید! جدیدترین انواع گوشی موبایل، لپ تاپ، لباس، لوازم آرایشی و بهداشتی، کتاب، لوازم خانگی، خودرو و... با امکان تعویض و مرجوعی آسان | ✓ارسال رايگان ✓پرداخت در محل ✓ضمانت بازگشت کالا - برای خرید کلیک کنید!'
+        />
+      </Head>
       <div className='h-fit lg:h-[650px] lg:grid lg:grid-cols-9 lg:grid-rows-5 lg:px-4 lg:gap-x-2 lg:gap-y-4 lg:mb-28 xl:gap-x-7'>
         {/* image */}
         <section className='mb-5 lg:col-span-3 lg:row-span-6'>

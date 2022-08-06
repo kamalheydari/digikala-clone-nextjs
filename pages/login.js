@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -73,6 +74,11 @@ export default function LoginPage() {
   };
   return (
     <main className='grid items-center min-h-screen '>
+      <Head>
+        <title>
+        دیجی‌کالا | ورود
+        </title>
+      </Head>
       <section className='container max-w-xl px-12 py-6 space-y-6 lg:border lg:border-gray-100 lg:rounded-lg lg:shadow'>
         <div className='relative h-24 mx-auto w-44'>
           <Link passHref href='/'>

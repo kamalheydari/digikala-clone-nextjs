@@ -1,5 +1,6 @@
-import { useState } from "react";
+import Head from "next/head";
 import Image from "next/image";
+import { useState } from "react";
 
 import { useSelector } from "react-redux";
 import { useGetDataQuery } from "app/slices/fetchApi.slice";
@@ -21,6 +22,9 @@ export default function Comments() {
 
   return (
     <main>
+      <Head>
+        <title>دیجی‌کالا | دیدگاه‌ها</title>
+      </Head>
       <Buttons.Back backRoute='/profile'>دیدگاه‌ها</Buttons.Back>
       <div className='section-divide-y' />
       {isLoading ? (

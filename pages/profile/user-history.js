@@ -1,10 +1,14 @@
 import Image from "next/image";
+import Head from "next/head";
 
 import { Buttons } from "components";
 
 export default function UserHistory() {
   return (
     <main>
+      <Head>
+        <title>دیجی‌کالا | بازدید‌های اخیر</title>
+      </Head>
       <Buttons.Back backRoute='/profile'>بازدید‌های اخیر</Buttons.Back>
       <div className='section-divide-y' />
 

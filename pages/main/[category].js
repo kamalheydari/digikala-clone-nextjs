@@ -1,4 +1,13 @@
+import { useEffect,useState } from "react";
+import Head from "next/head";
+
+import db from "lib/db";
+import Product from "models/Product";
+
 import { useGetDataQuery } from "app/slices/fetchApi.slice";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+
 import {
   BannerOne,
   BannerTwo,
@@ -8,12 +17,6 @@ import {
   MostFavouraiteProducts,
   Slider,
 } from "components";
-import db from "lib/db";
-import Product from "models/Product";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { useState } from "react";
-import { useSelector } from "react-redux";
 
 const getCategory =
   typeof window !== "undefined" && localStorage.getItem("category")
@@ -69,6 +72,9 @@ export default function MainCategory(props) {
 
   return (
     <main className='space-y-12 xl:mt-28'>
+      <Head>
+        <title>{`دیجی‌کالا | ${category?.name}`}</title>
+      </Head>
       {/* Slider */}
       {isSuccess && <Slider images={images?.slider} />}
       <div className='py-4 mx-auto space-y-12 xl:mt-28 lg:max-w-[1450px]'>

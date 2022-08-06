@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { CartInfo, Icons, Loading } from "components";
 
 import { formatNumber } from "utils/formatNumber";
+import Head from "next/head";
 
 export default function ShippingPage() {
   const router = useRouter();
@@ -98,6 +99,9 @@ export default function ShippingPage() {
 
   return (
     <main className='py-2 mx-auto space-y-3 lg:max-w-7xl lg:px-5 lg:py-10'>
+        <Head>
+          <title>دیجی‌کالا | پرداخت</title>
+        </Head>
       {/* header */}
       <header className='lg:border lg:border-gray-200 lg:rounded-lg'>
         <Link href='/'>

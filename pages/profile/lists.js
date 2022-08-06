@@ -1,10 +1,14 @@
 import Image from "next/image";
+import Head from "next/head";
 
 import { Buttons } from "components";
 
 export default function Lists() {
   return (
     <main>
+      <Head>
+        <title>دیجی‌کالا | لیست‌ها</title>
+      </Head>
       <Buttons.Back backRoute='/profile'>لیست‌ها</Buttons.Back>
       <div className='section-divide-y' />
 
