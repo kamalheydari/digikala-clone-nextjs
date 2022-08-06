@@ -17,23 +17,48 @@ export default async (req, res) => {
 };
 
 const getOrders = async (req, res) => {
+  const page = +req.query.page || 1;
+  const page_size = +req.query.page_size || 5;
+
   try {
     const result = await auth(req, res);
 
-    let orders;
+    let orders, ordersLength;
 
     await db.connect();
     if (!result.root) {
-      orders = await Order.find({ user: result.id }).populate(
-        "user",
-        "-password -address"
-      );
+      orders = await Order.find({ user: result.id })
+        .populate("user", "-password -address")
+        .skip((page - 1) * page_size)
+        .limit(page_size)
+        .sort({
+          createdAt: "desc",
+        });
+
+      ordersLength = await Order.countDocuments({ user: result.id });
     } else {
-      orders = await Order.find().populate("user", "-password -address");
+      orders = await Order.find()
+        .populate("user", "-password -address")
+        .skip((page - 1) * page_size)
+        .limit(page_size)
+        .sort({
+          createdAt: "desc",
+        });
+
+      ordersLength = await Order.countDocuments();
     }
     await db.disconnect();
 
-    res.status(200).json({ orders });
+    res.status(200).json({
+      orders,
+      ordersLength,
+      currentPage: page,
+      nextPage: page + 1,
+      previousPage: page - 1,
+      hasNextPage: page_size * page < ordersLength,
+      hasPreviousPage: page > 1,
+      lastPage: Math.ceil(ordersLength / page_size),
+    });
   } catch (error) {
     sendError(res, 500, error.message);
   }

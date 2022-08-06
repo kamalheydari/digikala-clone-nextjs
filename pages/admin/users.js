@@ -4,17 +4,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { useGetDataQuery } from "app/slices/fetchApi.slice";
 import { openModal } from "app/slices/modal.slice";
 
-import { Buttons, BigLoading } from "components";
+import { Buttons, BigLoading, Pagination } from "components";
+import { useState } from "react";
 
 export default function Users() {
   const dispatch = useDispatch();
+
+  //? Local State
+  const [page, setPage] = useState(1);
 
   //? Store
   const { token } = useSelector((state) => state.user);
 
   //? Get Data Query
   const { data, isLoading, isSuccess } = useGetDataQuery({
-    url: "/api/user",
+    url: `/api/user?page=${page}&page_size=10`,
     token,
   });
 
@@ -96,6 +100,19 @@ export default function Users() {
           </div>
         )}
       </section>
+      {data?.usersLength > 10 && (
+        <div className='py-4 mx-auto lg:max-w-5xl'>
+          <Pagination
+            currentPage={data.currentPage}
+            nextPage={data.nextPage}
+            previousPage={data.previousPage}
+            hasNextPage={data.hasNextPage}
+            hasPreviousPage={data.hasPreviousPage}
+            lastPage={data.lastPage}
+            setPage={setPage}
+          />
+        </div>
+      )}
     </main>
   );
 }

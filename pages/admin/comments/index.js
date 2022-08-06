@@ -1,14 +1,22 @@
-import { useGetDataQuery } from "app/slices/fetchApi.slice";
-import { BigLoading, Buttons } from "components";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+
+import { useGetDataQuery } from "app/slices/fetchApi.slice";
 import { useSelector } from "react-redux";
 
+import { BigLoading, Buttons, Pagination } from "components";
+
 export default function Comments() {
+  //? Local State
+  const [page, setPage] = useState(1);
+
+  //? Store
   const { token } = useSelector((state) => state.user);
 
-  const { data, isLoading, isSuccess } = useGetDataQuery({
-    url: "/api/reviews",
+  //? Get Query
+  const { data, isLoading } = useGetDataQuery({
+    url: `/api/reviews?page=${page}&page_size=10`,
     token,
   });
 
@@ -21,7 +29,7 @@ export default function Comments() {
         <section className='px-3 py-20'>
           <BigLoading />
         </section>
-      ) : data?.reviews.length === 0 ? (
+      ) : data.reviewsLength === 0 ? (
         <section className='py-20'>
           <div className='relative mx-auto h-52 w-52'>
             <Image src='/ico`ns/order-empty.svg' layout='fill' />
@@ -85,6 +93,19 @@ export default function Comments() {
               ))}
             </tbody>
           </table>
+          {data?.reviewsLength > 10 && (
+            <div className='py-4 mx-auto lg:max-w-5xl'>
+              <Pagination
+                currentPage={data.currentPage}
+                nextPage={data.nextPage}
+                previousPage={data.previousPage}
+                hasNextPage={data.hasNextPage}
+                hasPreviousPage={data.hasPreviousPage}
+                lastPage={data.lastPage}
+                setPage={setPage}
+              />
+            </div>
+          )}
         </section>
       )}
     </main>

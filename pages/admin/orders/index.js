@@ -5,14 +5,14 @@ import { useGetDataQuery } from "app/slices/fetchApi.slice";
 import { openModal } from "app/slices/modal.slice";
 import { useDispatch, useSelector } from "react-redux";
 
-import { BigLoading, Buttons } from "components";
+import { BigLoading, Buttons, Pagination } from "components";
 
 export default function OrdersHome() {
   const dispatch = useDispatch();
   const router = useRouter();
 
   //? Local State
-  const [orders, setOrders] = useState([]);
+  const [page, setPage] = useState(1);
 
   //? Store
   const { token } = useSelector((state) => state.user);
@@ -20,13 +20,9 @@ export default function OrdersHome() {
 
   //? Get Query
   const { data, isSuccess, isLoading } = useGetDataQuery({
-    url: "/api/order",
+    url: `/api/order?page=${page}&page_size=10`,
     token,
   });
-
-  useEffect(() => {
-    if (isSuccess) setOrders(data.orders);
-  }, [isSuccess]);
 
   useEffect(() => {
     if (isConfirm) router.reload();
@@ -67,13 +63,12 @@ export default function OrdersHome() {
                 </tr>
               </thead>
               <tbody className='text-gray-600'>
-                {orders.map((order) => (
+                {data.orders.map((order) => (
                   <tr
                     className='text-xs text-center transition-colors border-b border-gray-100 md:text-sm hover:bg-gray-50'
                     key={order._id}
                   >
                     <td className='py-3 px-1.5'>{order._id}</td>
-
                     <td className='py-3 px-1.5'>{order.user.name}</td>
                     <td className='py-3 px-1.5'>{order.user.email}</td>
                     <td className='py-3 px-1.5'>
@@ -95,6 +90,19 @@ export default function OrdersHome() {
                 ))}
               </tbody>
             </table>
+            {data?.ordersLength > 10 && (
+              <div className='py-4 mx-auto lg:max-w-5xl'>
+                <Pagination
+                  currentPage={data.currentPage}
+                  nextPage={data.nextPage}
+                  previousPage={data.previousPage}
+                  hasNextPage={data.hasNextPage}
+                  hasPreviousPage={data.hasPreviousPage}
+                  lastPage={data.lastPage}
+                  setPage={setPage}
+                />
+              </div>
+            )}
           </div>
         )}
       </section>

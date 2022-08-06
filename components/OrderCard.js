@@ -42,7 +42,7 @@ export default function OrderCard({ item }) {
           </div>
         </div>
       </div>
-      <div className='flex gap-x-3 lg:border-t lg:border-gray-200 lg:px-3'>
+      <div className='flex gap-x-3 lg:border-t lg:border-gray-200 lg:px-3 py-2'>
         {item.cart.map((cartItem, index) => (
           <Link href={`/products/${cartItem.productID}`} key={index}>
             <a>

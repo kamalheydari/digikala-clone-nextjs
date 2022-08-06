@@ -42,6 +42,9 @@ const uploadInfo = async (req, res) => {
 };
 
 const getUsers = async (req, res) => {
+  const page = +req.query.page || 1;
+  const page_size = +req.query.page_size || 5;
+
   try {
     const result = await auth(req, res);
 
@@ -49,10 +52,31 @@ const getUsers = async (req, res) => {
       return sendError(res, 400, "توکن احراز هویت نامعتبر است");
 
     await db.connect();
-    const users = await User.find().select("-password");
+
+    const users = await User.find()
+      .select("-password")
+      .skip((page - 1) * page_size)
+      .limit(page_size)
+      .sort({
+        createdAt: "desc",
+      });
+
+    const usersLength = await User.countDocuments();
+
     await db.disconnect();
 
-    res.status(200).json({ users });
+    res
+      .status(200)
+      .json({
+        users,
+        usersLength,
+        currentPage: page,
+        nextPage: page + 1,
+        previousPage: page - 1,
+        hasNextPage: page_size * page < usersLength,
+        hasPreviousPage: page > 1,
+        lastPage: Math.ceil(usersLength / page_size),
+      });
   } catch (error) {
     sendError(res, 500, error.message);
   }
