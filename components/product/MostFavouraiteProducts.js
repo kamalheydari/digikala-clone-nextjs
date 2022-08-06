@@ -26,9 +26,13 @@ export default function MostFavouraiteProducts({ products }) {
                 </div>
                 <div className='flex justify-between px-3'>
                   <div>
-                    <DiscountProduct product={product} />
+                    <DiscountProduct discount={product.discount} />
                   </div>
-                  <ProductPrice product={product} />
+                  <ProductPrice
+                    inStock={product.inStock}
+                    discount={product.discount}
+                    price={product.price}
+                  />
                 </div>
               </article>
             </a>

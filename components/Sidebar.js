@@ -40,7 +40,7 @@ export default function Sidebar({ isSidebar, setIsSidebar }) {
         </div>
         <p className='p-3 border-t-2 border-gray-200'>دسته‌بندی کالاها</p>
         <ul>
-          {categories.map((mainCategory) => {
+          {categories.slice(0,2).map((mainCategory) => {
             if (mainCategory.parent === "/") {
               return (
                 <li

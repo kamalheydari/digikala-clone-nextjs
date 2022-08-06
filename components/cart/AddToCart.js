@@ -71,7 +71,12 @@ export default function AddToCart({ product, color, size }) {
         )}
 
         <div className='lg:self-end min-w-fit'>
-          <ProductPrice product={product} singleProduct />
+          <ProductPrice
+            inStock={product.inStock}
+            discount={product.discount}
+            price={product.price}
+            singleProduct
+          />
         </div>
       </div>
     );

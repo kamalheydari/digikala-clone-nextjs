@@ -46,7 +46,10 @@ const getProducts = async (req, res) => {
 
     const products = await Products.find({ ...categoryFilter, ...searchFilter })
       .skip((page - 1) * page_size)
-      .limit(page_size);
+      .limit(page_size)
+      .sort({
+        createdAt: "desc",
+      });
 
     const productsLength = await Products.countDocuments({
       ...categoryFilter,

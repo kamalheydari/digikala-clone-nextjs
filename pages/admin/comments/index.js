@@ -24,7 +24,7 @@ export default function Comments() {
       ) : data?.reviews.length === 0 ? (
         <section className='py-20'>
           <div className='relative mx-auto h-52 w-52'>
-            <Image src='/icons/order-empty.svg' layout='fill' />
+            <Image src='/ico`ns/order-empty.svg' layout='fill' />
           </div>
 
           <p className='text-center'>هنوز هیچ نظری ندارید</p>

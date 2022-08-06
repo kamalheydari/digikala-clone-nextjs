@@ -48,7 +48,7 @@ export default function Navbar() {
       >
         <div className='flex'>
           <ul className='border-l-2 border-gray-100 w-72'>
-            {categories.map((mainCategory) => {
+            {categories.slice(0,2).map((mainCategory) => {
               if (mainCategory.parent === "/") {
                 return (
                   <li

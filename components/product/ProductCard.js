@@ -39,7 +39,7 @@ export default function ProductCard({ product, slide }) {
             !slide && "sm:border sm:hover:shadow-3xl"
           }`}
         >
-          <SpecialSell product={product} />
+          <SpecialSell discount={product.discount} inStock={product.inStock} />
           <div className='flex items-center gap-2 sm:flex-col'>
             <div className='sm:flex sm:p-1 '>
               <div className='relative h-28 w-28 sm:w-56 sm:h-60 sm:mb-8 xl:w-44 xl:h-48'>
@@ -59,7 +59,7 @@ export default function ProductCard({ product, slide }) {
               </h2>
               <div className='flex justify-between'>
                 <div>
-                  <Depot product={product} />
+                  <Depot inStock={product.inStock} />
                 </div>
                 <div className='flex items-center gap-x-1'>
                   <span className='farsi-digits'>
@@ -70,9 +70,15 @@ export default function ProductCard({ product, slide }) {
               </div>
               <div className='flex justify-between'>
                 <div>
-                  <DiscountProduct product={product} />
+                  {product.discount > 0 && product.inStock !== 0 && (
+                    <DiscountProduct discount={product.discount} />
+                  )}
                 </div>
-                <ProductPrice product={product} />
+                <ProductPrice
+                  inStock={product.inStock}
+                  discount={product.discount}
+                  price={product.price}
+                />
               </div>
             </div>
           </div>

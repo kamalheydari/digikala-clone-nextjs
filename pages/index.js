@@ -87,7 +87,7 @@ export async function getServerSideProps() {
     discount: { $gte: 1 },
     inStock: { $gte: 1 },
   })
-    .limit(10)
+    .limit(15)
     .sort({ discount: -1 })
     .lean();
 

@@ -176,7 +176,7 @@ export default function SingleProduct({ product, smilarProducts }) {
             <div className='relative w-28 h-28'>
               <Image src={product.images[0].url} layout='fill' />
             </div>
-            <span>{product.title}</span>
+            <span className='flex-1 text-justify'>{product.title}</span>
           </div>
         )}
 
@@ -186,7 +186,7 @@ export default function SingleProduct({ product, smilarProducts }) {
         </div>
 
         <div className='hidden lg:block lg:py-3 '>
-          <Depot product={product} />
+          <Depot inStock={product.inStock} />
         </div>
 
         <div className='hidden lg:flex lg:items-center lg:gap-x-1 lg:py-3'>
@@ -209,7 +209,11 @@ export default function SingleProduct({ product, smilarProducts }) {
       <div className='h-fit lg:h-[650px] lg:grid lg:grid-cols-9 lg:grid-rows-5 lg:px-4 lg:gap-x-2 lg:gap-y-4 lg:mb-28 xl:gap-x-7'>
         {/* image */}
         <section className='mb-5 lg:col-span-3 lg:row-span-6'>
-          <ImageGallery product={product} />
+          <ImageGallery
+            images={product.images}
+            discount={product.discount}
+            inStock={product.inStock}
+          />
         </section>
 
         {/* title */}
