@@ -8,6 +8,8 @@ export default function exsitItem(cartItems, productID, color, size) {
     result = cartItems.find(
       (item) => item.productID === productID && item.size?.id === size?.id
     );
+  } else {
+    result = cartItems.find((item) => item.productID === productID);
   }
 
   return result;
