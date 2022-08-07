@@ -3,9 +3,7 @@ import { createAsyncThunk, createSlice, nanoid } from "@reduxjs/toolkit";
 export const fetchDetails = createAsyncThunk(
   "product/fetchDetails",
   async (categoryID) => {
-    const res = await fetch(
-      process.env.BASE_URL + `/api/details/${categoryID}`
-    );
+    const res = await fetch(`/api/details/${categoryID}`);
     const data = await res.json();
     return data?.details;
   }
@@ -14,9 +12,7 @@ export const fetchDetails = createAsyncThunk(
 export const fetchProduct = createAsyncThunk(
   "product/fetchProduct",
   async (productID) => {
-    const res = await fetch(
-      process.env.BASE_URL + `/api/products/${productID}`
-    );
+    const res = await fetch(`/api/products/${productID}`);
     const data = await res.json();
     return data?.product;
   }

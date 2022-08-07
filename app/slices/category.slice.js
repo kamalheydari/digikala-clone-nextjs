@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 export const fetchCategories = createAsyncThunk(
   "categories/fetchCategories",
   async () => {
-    const res = await fetch(process.env.BASE_URL + "/api/category");
+    const res = await fetch("/api/category");
     const data = await res.json();
     return data?.categories;
   }
