@@ -6,7 +6,7 @@ import { truncate } from "utils/truncate";
 export default function BestSellsSlider({ products }) {
   return (
     <section className='px-3'>
-      <div className='flex items-center mb-3'>
+      <div className='flex items-center mb-3 gap-x-2'>
         <Icons.Check className='w-7 h-7 text-amber-400' />
         <h4 className='text-xl'>پرفروش‌ترین کالاها</h4>
       </div>
