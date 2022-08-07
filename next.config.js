@@ -1,7 +1,8 @@
 module.exports = {
   env: {
     BASE_URL: "http://localhost:3000",
-    MONGODB_URL: "mongodb://localhost:27017/digikala-clone-nextjs",
+    // MONGODB_URL: "mongodb://localhost:27017/digikala-clone-nextjs",
+    MONGODB_URL: "mongodb+srv://digikala-clone-nextjs:digikala-clone-nextjs123456@cluster0.k5i8lxq.mongodb.net/digikala-clone-nextjs?retryWrites=true&w=majority",
     ACCESS_TOKEN_SECRET: "h1n0U6LHJtCZuWitwjn3oLd5qCRIgUFtemnjTrpfZLzVZ3ff0f",
     CLOUD_UPDATE_PRESET:"nextjs_store",
     CLOUD_NAME:"djvgq77b0",
