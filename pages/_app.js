@@ -16,6 +16,7 @@ import {
   ProfileLayout,
   RefreshTokenHandler,
   Modal,
+  PageLoading,
 } from "components";
 import { fetchCategories } from "app/slices/category.slice";
 
@@ -35,6 +36,7 @@ export default function MyApp({ Component, pageProps }) {
     return Component.getClientLayout(
       <Provider store={store}>
         <ClientLayout>
+          <PageLoading />
           <Component {...pageProps} />
           <RefreshTokenHandler />
           <Modal />
