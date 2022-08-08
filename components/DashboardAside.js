@@ -7,22 +7,22 @@ export default function ProfileAside({ user }) {
   const profilePaths = [
     {
       name: "محصول جدید",
-      icon: <Icons.Location className='text-black icon' />,
+      icon: <Icons.Plus className='text-black icon' />,
       path: "/admin/product",
     },
     {
       name: "محصولات",
-      icon: <Icons.Heart className='text-black icon' />,
+      icon: <Icons.Save className='text-black icon' />,
       path: "/admin/products",
     },
     {
       name: "سفارشات",
-      icon: <Icons.Heart className='text-black icon' />,
+      icon: <Icons.Bag className='text-black icon' />,
       path: "/admin/orders",
     },
     {
       name: "دسته بندی ها",
-      icon: <Icons.Location className='text-black icon' />,
+      icon: <Icons.Category className='text-black icon' />,
       path: "/admin/categories",
     },
     {
@@ -32,7 +32,7 @@ export default function ProfileAside({ user }) {
     },
     {
       name: "کاربران",
-      icon: <Icons.Bag className='text-black icon' />,
+      icon: <Icons.Users className='text-black icon' />,
       path: "/admin/users",
     },
     {

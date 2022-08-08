@@ -12,9 +12,9 @@ import {
 } from "react-icons/bs";
 import { FiLogIn, FiLogOut, FiEdit, FiPlus, FiMinus } from "react-icons/fi";
 import { VscThreeBars, VscLocation } from "react-icons/vsc";
-import { HiOutlineUser } from "react-icons/hi";
+import { HiOutlineUser, HiOutlineUsers } from "react-icons/hi";
 import { IoSearch } from "react-icons/io5";
-import { BiAbacus } from "react-icons/bi";
+import { BiAbacus, BiCategory } from "react-icons/bi";
 
 import {
   RiArrowDownSFill,
@@ -71,6 +71,8 @@ const Icons = {
   Exclamation: BsShieldExclamation,
   Bars: VscThreeBars,
   User: HiOutlineUser,
+  Users: HiOutlineUsers,
+  Category: BiCategory,
   Question: BsQuestionSquare,
   Search: IoSearch,
   ArrowDown: RiArrowDownSFill,
