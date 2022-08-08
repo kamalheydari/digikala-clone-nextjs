@@ -9,7 +9,7 @@ export default function DiscountCartItem({ item }) {
     <div>
       <div className='flex items-center gap-x-2'>
         <span className='text-red-500 farsi-digits'>
-          {formatNumber(item.price * discount)}
+          {formatNumber((item.price * discount).toFixed())}
         </span>
         <div className='relative w-6 h-6'>
           <Image src='/icons/tomanRed.svg' layout='fill' />

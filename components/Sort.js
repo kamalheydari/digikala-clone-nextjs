@@ -16,6 +16,7 @@ export default function Sort({
     dispatch(
       updateFilter({ name: e.target.name, value: e.target.dataset.value })
     );
+    setShowSort(false);
   };
 
   return (
@@ -45,7 +46,7 @@ export default function Sort({
       </section>
 
       <section
-        className={`xl:hidden fixed transition-all duration-700 left-0 right-0 mx-auto z-40 bg-white w-full h-fit shadow-3xl border-t border-gray-200 rounded-xl  ${
+        className={`xl:hidden fixed transition-all duration-700 left-0 right-0 mx-auto z-10 bg-white w-full h-fit shadow-3xl border-t border-gray-200 rounded-xl  ${
           showSort ? "bottom-0" : "-bottom-full"
         }`}
       >

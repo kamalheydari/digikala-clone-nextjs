@@ -16,8 +16,10 @@ export default function DiscountSlider({ products, colors, categoryImage }) {
     >
       <Swiper
         watchSlidesProgress={true}
-        slidesPerView={3}
-        breakpoints={{ 650: { width: 650, slidesPerView: 4 } }}
+        slidesPerView={2}
+        breakpoints={{
+          490: { width: 490, slidesPerView: 3 },
+        }}
       >
         <SwiperSlide className='py-10 '>
           <div className='relative w-20 h-20 mx-auto'>
@@ -43,7 +45,7 @@ export default function DiscountSlider({ products, colors, categoryImage }) {
                   <div className='relative w-32 mx-auto h-36 '>
                     <Image src={product.images[0].url} layout='fill' />
                   </div>
-                  <div className='flex justify-between px-3'>
+                  <div className='flex px-2 justify-evenly gap-x-2 '>
                     <div>
                       <DiscountProduct discount={product.discount} />
                     </div>

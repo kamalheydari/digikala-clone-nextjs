@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Image from "next/image";
@@ -101,7 +101,7 @@ export default function ProductsHome(props) {
       {childCategory.length > 0 && (
         <section className='px-4 my-7'>
           <h4 className='mb-4 text-base text-black'>دسته‌بندی‌ها</h4>
-          <div className='flex flex-wrap gap-3'>
+          <div className='flex gap-3 pb-3 overflow-x-auto'>
             {childCategory.map((item) => (
               <div
                 key={item._id}

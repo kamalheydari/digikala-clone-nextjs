@@ -7,8 +7,6 @@ import "/styles/scrollbar.css";
 import { store } from "app/store";
 import { Provider } from "react-redux";
 
-store.dispatch(fetchCategories());
-
 //? Layouts & Components
 import {
   DashboardLayout,
@@ -21,10 +19,12 @@ import {
 import { fetchCategories } from "app/slices/category.slice";
 
 export default function MyApp({ Component, pageProps }) {
-  //? Fix Hydration failed
+  //? Fix Hydration failed & fetch Categories
   const [showChild, setShowChild] = useState(false);
   useEffect(() => {
     setShowChild(true);
+
+    store.dispatch(fetchCategories());
   }, []);
 
   if (!showChild) {
@@ -36,7 +36,7 @@ export default function MyApp({ Component, pageProps }) {
     return Component.getClientLayout(
       <Provider store={store}>
         <ClientLayout>
-          {/* <PageLoading /> */}
+          <PageLoading />
           <Component {...pageProps} />
           <RefreshTokenHandler />
           <Modal />

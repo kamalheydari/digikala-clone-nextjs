@@ -20,16 +20,12 @@ export default function SmilarProductsSlider({ products }) {
         navigation={true}
         modules={[Navigation, FreeMode]}
         slidesPerView={1}
-        spaceBetween={0}
+        spaceBetween={20}
         breakpoints={{ 640: { width: 640, slidesPerView: 2 } }}
         freeMode={true}
-        className=''
       >
         {products.map((item) => (
-          <SwiperSlide
-            key={item._id}
-            className='px-12 sm:px-0 sm:border-l lg:my-3'
-          >
+          <SwiperSlide key={item._id} className='sm:border-l'>
             <ProductCard product={item} slide />
           </SwiperSlide>
         ))}

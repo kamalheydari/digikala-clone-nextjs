@@ -1,8 +1,14 @@
-import Image from "next/image";
-import { useSelector } from "react-redux";
-import { Icons } from "components";
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
+
+import { useSelector } from "react-redux";
+import {
+  resetParentCategory,
+  resetSelectedCategories,
+} from "app/slices/category.slice";
+
+import { Icons } from "components";
 
 export default function Sidebar({ isSidebar, setIsSidebar }) {
   //? Local States
@@ -26,13 +32,19 @@ export default function Sidebar({ isSidebar, setIsSidebar }) {
     if ("/" + cat.slug === parentExpandCat) setParentExpandCat("");
   };
 
+  const hanldeClose = () => {
+    setIsSidebar(false);
+    dispatch(resetParentCategory());
+    dispatch(resetSelectedCategories());
+  };
+
   return (
     <div
       className={`w-full h-screen fixed bg-gray-100/50 duration-200 z-10 top-0 lg:hidden ${
         isSidebar ? "right-0" : "-right-full"
       } `}
     >
-      <div className='z-10 w-full h-full' onClick={() => setIsSidebar(false)} />
+      <div className='z-10 w-full h-full' onClick={hanldeClose} />
 
       <div className='absolute top-0 right-0 z-20 w-3/4 h-screen max-w-sm space-y-4 bg-white'>
         <div className='relative h-10 p-4 m-4 ml-auto w-28'>
@@ -40,7 +52,7 @@ export default function Sidebar({ isSidebar, setIsSidebar }) {
         </div>
         <p className='p-3 border-t-2 border-gray-200'>دسته‌بندی کالاها</p>
         <ul>
-          {categories.slice(0,2).map((mainCategory) => {
+          {categories.slice(0, 2).map((mainCategory) => {
             if (mainCategory.parent === "/") {
               return (
                 <li
@@ -55,7 +67,7 @@ export default function Sidebar({ isSidebar, setIsSidebar }) {
                     <Link href={`/main/${mainCategory.slug}`}>
                       <a
                         className='px-1 font-semibold tracking-wide'
-                        onClick={() => setIsSidebar(false)}
+                        onClick={hanldeClose}
                       >
                         {mainCategory.name}
                       </a>
@@ -94,7 +106,7 @@ export default function Sidebar({ isSidebar, setIsSidebar }) {
                               >
                                 <a
                                   className='px-1 font-medium'
-                                  onClick={() => setIsSidebar(false)}
+                                  onClick={hanldeClose}
                                 >
                                   {parentCategory.name}
                                 </a>
@@ -132,7 +144,7 @@ export default function Sidebar({ isSidebar, setIsSidebar }) {
                                       >
                                         <a
                                           className='inline-block p-1 font-light text-gray-500'
-                                          onClick={() => setIsSidebar(false)}
+                                          onClick={hanldeClose}
                                         >
                                           {childCategory.name}
                                         </a>

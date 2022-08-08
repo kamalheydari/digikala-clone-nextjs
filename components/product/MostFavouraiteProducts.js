@@ -10,21 +10,21 @@ export default function MostFavouraiteProducts({ products }) {
         <Icons.Heart className='icon text-amber-400' />
         <h4 className='text-xl'>محبوب ترین کالاها</h4>
       </div>
-      <div className='grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
+      <div className='grid grid-cols-2 gap-1 md:gap-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
         {products.map((product) => (
           <Link key={product._id} href={`/products/${product._id}`}>
             <a>
-              <article className='p-1 border border-gray-50 hover:border-gray-200 transition'>
-                <div className='flex items-center gap-x-1 '>
+              <article className='p-1 transition border border-gray-50 hover:border-gray-200'>
+                <div className='flex gap-x-1 '>
                   <span className='text-base farsi-digits'>
                     {product.rating.toFixed(1)}
                   </span>
-                  <Icons.Star className='w-7 h-7 text-amber-400' />
+                  <Icons.Star className='w-5 h-5 md:w-7 md:h-7 text-amber-400 ' />
                 </div>
-                <div className='relative w-32 mx-auto h-36 '>
+                <div className='relative h-32 mx-auto w-28 md:w-32 md:h-36 '>
                   <Image src={product.images[0].url} layout='fill' />
                 </div>
-                <div className='flex justify-between px-3'>
+                <div className='flex items-center mt-1 gap-x-2 justify-evenly '>
                   <div>
                     <DiscountProduct discount={product.discount} />
                   </div>

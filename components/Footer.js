@@ -4,7 +4,7 @@ import { Icons, Services } from "components";
 
 export default function Footer() {
   return (
-    <footer className='border-t border-gray-200 pt-4 mt-8 bg-gray-50'>
+    <footer className='pt-4 mt-8 border-t border-gray-200 bg-gray-50'>
       <div className='px-3 lg:max-w-[1700px] space-y-8 mx-auto '>
         {/* Logo & scroll to top */}
         <div className='flex justify-between'>
@@ -18,14 +18,14 @@ export default function Footer() {
               <span>۷ روز هفته، ۲۴ ساعته پاسخگوی شما هستیم</span>
             </div>
           </div>
-          <div>
+          <div className='min-w-max'>
             <button
               type='button'
               onClick={() => window.scrollTo(0, 0)}
-              className='flex items-center border border-gray-300 rounded-md px-3 py-1'
+              className='flex items-center px-3 py-1 border border-gray-300 rounded-md'
             >
-              <span className='text-sm'>بازگشت به بالا</span>
-              <Icons.ArrowUp className='h-7 w-7 text-gray-400' />
+              <span className='text-sm '>بازگشت به بالا</span>
+              <Icons.ArrowUp className='text-gray-400 h-7 w-7' />
             </button>
           </div>
         </div>
@@ -38,11 +38,11 @@ export default function Footer() {
           {/* socials */}
           <div className='flex items-center justify-between'>
             <p className='lg:ml-20'>همراه ما باشید!</p>
-            <div className='flex gap-x-8'>
-              <Icons.Twitter className='text-gray-400 w-8 h-8' />
-              <Icons.Linkedin className='text-gray-400 w-8 h-8' />
-              <Icons.Instagram className='text-gray-400 w-8 h-8' />
-              <Icons.Youtube className='text-gray-400 w-8 h-8' />
+            <div className='flex gap-x-5'>
+              <Icons.Twitter className='w-8 h-8 text-gray-400' />
+              <Icons.Linkedin className='w-8 h-8 text-gray-400' />
+              <Icons.Instagram className='w-8 h-8 text-gray-400' />
+              <Icons.Youtube className='w-8 h-8 text-gray-400' />
             </div>
           </div>
 
@@ -52,7 +52,7 @@ export default function Footer() {
               <input placeholder='ایمیل شما' className='input' type='email' />
               <button
                 type='submit'
-                className=' bg-gray-200 text-white px-2 rounded-md'
+                className='px-2 text-white bg-gray-200 rounded-md '
               >
                 ثبت
               </button>
@@ -61,39 +61,39 @@ export default function Footer() {
         </div>
 
         {/* Apps */}
-        <div className='bg-sky-900 flex rounded-md gap-6 py-3 flex-col items-center lg:flex-row lg:justify-evenly'>
+        <div className='flex flex-col items-center gap-6 py-3 rounded-md bg-sky-900 lg:flex-row lg:justify-evenly'>
           <div className='flex items-center gap-x-3 '>
             <div className='relative w-8 h-8 '>
               <Image src='/icons/mini-logo.png' layout='fill' />
             </div>
-            <span className='text-white text-xl'>
+            <span className='text-xl text-white'>
               دانلود اپلیکیشن دیجی‌کالا
             </span>
           </div>
 
-          <div className='grid grid-cols-2 lg:grid-cols-4 gap-x-4'>
-            <div className='relative w-40 h-12 mb-3 lg:mb-0'>
+          <div className='grid grid-cols-2 sm:grid-cols-4 gap-x-3'>
+            <div className='relative w-32 h-12 mb-1 sm:w-36 lg:w-44 lg:mb-0'>
               <Image src='/icons/app-coffe-bazzar.svg' layout='fill' />
             </div>
-            <div className='relative w-40 h-12'>
+            <div className='relative w-32 h-12 sm:w-36 lg:w-44'>
               <Image src='/icons/app-google-play.svg' layout='fill' />
             </div>
-            <div className='relative w-40 h-12 mb-3 lg:mb-0'>
+            <div className='relative w-32 h-12 mb-1 sm:w-36 lg:w-44 lg:mb-0'>
               <Image src='/icons/app-myket.svg' layout='fill' />
             </div>
-            <div className='relative w-40 h-12'>
+            <div className='relative w-32 h-12 sm:w-36 lg:w-44'>
               <Image src='/icons/app-sib.svg' layout='fill' />
             </div>
           </div>
         </div>
 
         {/* info */}
-        <div className=' mx-3 space-y-6 lg:flex lg:justify-between'>
+        <div className='space-y-6 lg:flex lg:justify-between'>
           <div className='space-y-3 lg:max-w-2xl'>
-            <h5 className='text-black font-semibold'>
+            <h5 className='font-semibold text-black'>
               فروشگاه اینترنتی دیجی‌کالا، بررسی، انتخاب و خرید آنلاین
             </h5>
-            <p className='text-gray-700 text-justify'>
+            <p className='text-justify text-gray-700'>
               یک خرید اینترنتی مطمئن، نیازمند فروشگاهی است که بتواند کالاهایی
               متنوع، باکیفیت و دارای قیمت مناسب را در مدت زمانی کوتاه به دست
               مشتریان خود برساند و ضمانت بازگشت کالا هم داشته باشد؛ ویژگی‌هایی
@@ -103,19 +103,19 @@ export default function Footer() {
           </div>
 
           <div className='flex justify-center gap-x-2'>
-            <div className='border border-gray-300 w-fit p-2 rounded-md'>
+            <div className='p-2 border border-gray-300 rounded-md w-fit'>
               <div className='relative w-16 h-16 '>
                 <Image src='/icons/m-enamad.png' layout='fill' />
               </div>
             </div>
 
-            <div className='border border-gray-300 w-fit p-2 rounded-md'>
+            <div className='p-2 border border-gray-300 rounded-md w-fit'>
               <div className='relative w-16 h-16 '>
                 <Image src='/icons/m-kasbokar.png' layout='fill' />
               </div>
             </div>
 
-            <div className='border border-gray-300 w-fit p-2 rounded-md'>
+            <div className='p-2 border border-gray-300 rounded-md w-fit'>
               <div className='relative w-16 h-16 '>
                 <Image src='/icons/m-rezi.png' layout='fill' />
               </div>
@@ -124,8 +124,8 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className='bg-gray-600 py-3 flex items-center justify-center gap-x-3 mt-6'>
-        <div className='relative h-16 w-16 rounded-full overflow-hidden border-4 border-red-600'>
+      <div className='flex items-center justify-center py-3 mt-6 bg-gray-600 gap-x-3'>
+        <div className='relative w-16 h-16 overflow-hidden border-4 border-red-600 rounded-full'>
           <Image src='/developer.jpg' layout='fill' />
         </div>
         <p className='text-white'>

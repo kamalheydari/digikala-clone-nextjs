@@ -32,7 +32,12 @@ export default function SingleProduct({ product, smilarProducts }) {
   const [color, setColor] = useState(product.colors[0] || null);
   const [size, setSize] = useState(product.sizes[0] || null);
   const [isShowDesc, setIsShowDesc] = useState(false);
+  const [isShowSpec, setIsShowSpec] = useState(false);
   const [reviewsPage, setReviewsPage] = useState(1);
+
+  let renderSpecification = isShowSpec
+    ? product.specification
+    : product.specification.slice(0, 7);
 
   //? Get Query
   const { data, isSuccess } = useGetDataQuery({
@@ -177,7 +182,7 @@ export default function SingleProduct({ product, smilarProducts }) {
           </div>
         )}
 
-        <div className='hidden py-3  lg:items-center lg:gap-x-2 lg:flex'>
+        <div className='hidden py-3 lg:items-center lg:gap-x-2 lg:flex'>
           <Icons.ShieldCheck className='icon' />
           <span className='font-light'>گارانتی اصالت و ضمانت تحویل</span>
         </div>
@@ -198,11 +203,7 @@ export default function SingleProduct({ product, smilarProducts }) {
   };
 
   return (
-    <main
-      className={`xl:mt-28 lg:max-w-[1550px] mx-auto py-4 space-y-4 ${
-        product.inStock !== 0 && "mb-24"
-      }`}
-    >
+    <main className='xl:mt-28 lg:max-w-[1550px] mx-auto py-4 space-y-4'>
       <Head>
         <title>{`خرید ${product.title}`}</title>
         <meta
@@ -292,28 +293,41 @@ export default function SingleProduct({ product, smilarProducts }) {
       <div className='flex'>
         <div className='flex-1'>
           {/* specification */}
-          <section className='px-4 lg:max-w-3xl xl:max-w-5xl lg:flex lg:gap-x-20'>
-            <h4 className='mb-3 h-fit w-min lg:border-b-2 lg:border-red-500'>
-              مشخصات
-            </h4>
-            <ul className='space-y-4 lg:mt-10'>
-              {product.specification.map((item, i) => (
-                <li key={i} className='flex '>
-                  <span className='py-2 ml-4 font-light leading-5 tracking-wide text-gray-500 w-36'>
-                    {item[0]}
-                  </span>
-                  <span className='w-full py-2 font-normal leading-5 tracking-wider text-gray-600 border-b border-gray-100'>
-                    {item[1]}
-                  </span>
-                </li>
-              ))}
-            </ul>
+          <section className='px-4 '>
+            <div className='lg:max-w-3xl xl:max-w-5xl lg:flex lg:gap-x-20'>
+              <h4 className='mb-3 h-fit w-min lg:border-b-2 lg:border-red-500'>
+                مشخصات
+              </h4>
+              <ul className='space-y-4 lg:mt-10'>
+                {renderSpecification.map((item, i) => (
+                  <li key={i} className='flex'>
+                    <span className='py-2 ml-3 font-light leading-5 tracking-wide text-gray-500 w-36'>
+                      {item[0]}
+                    </span>
+                    <span
+                      className='w-full py-2 font-normal leading-5 tracking-wide text-gray-600 break-all border-b border-gray-100 md:break-normal '
+                      dangerouslySetInnerHTML={{ __html: item[1] }}
+                    ></span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            {product.specification.length > 7 && (
+              <button
+                type='button'
+                className='flex items-center py-2 text-sm text-sky-400'
+                onClick={() => setIsShowSpec(!isShowSpec)}
+              >
+                {isShowSpec ? "بستن" : "مشاهده بیشتر"}
+                <Icons.ArrowLeft className='icon text-sky-400' />
+              </button>
+            )}
           </section>
 
           <div className='section-divide-y' />
 
           {/* comments */}
-          <section className='px-4 py-3 space-y-4 lg:max-w-3xl xl:max-w-5xl'>
+          <section className='px-3 py-3 space-y-4 lg:max-w-3xl xl:max-w-5xl'>
             <div className='flex items-center justify-between'>
               <h4 className='mb-3 lg:border-b-2 lg:border-red-500'>
                 دیدگاه‌ها
@@ -343,7 +357,7 @@ export default function SingleProduct({ product, smilarProducts }) {
 
               {isSuccess && data.reviewsLength > 0 ? (
                 <>
-                  <section className='px-2 py-3 space-y-4 divide-y-2 lg:px-6'>
+                  <section className='py-3 space-y-4 divide-y-2 lg:px-6 sm:px-2'>
                     {data.reviews.map((item) => (
                       <div className='flex py-3' key={item._id}>
                         <div>
@@ -359,7 +373,7 @@ export default function SingleProduct({ product, smilarProducts }) {
                             {item.rating}
                           </span>
                         </div>
-                        <div className='flex-1 px-4 space-y-3 lg:px-10'>
+                        <div className='flex-1 px-2.5 space-y-3 lg:px-6'>
                           <div className='w-full border-b border-gray-100'>
                             <p className='mb-1'>{item.title}</p>
                             <span className='text-xs farsi-digits'>

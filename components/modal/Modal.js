@@ -163,8 +163,6 @@ export default function Modal() {
       );
       break;
 
-
-
     case "search":
       effect = ["bottom-0 lg:top-20", "-bottom-full lg:top-60"];
       size =
