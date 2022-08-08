@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import  Head  from "next/head";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
@@ -35,6 +35,7 @@ export default function ProductsHome(props) {
   const [page, setPage] = useState(1);
   const [price, setPrice] = useState("");
   const [showFilters, setShowFilters] = useState(false);
+  const [showSort, setShowSort] = useState(false);
 
   const childCategory = [
     ...new Set(
@@ -63,15 +64,6 @@ export default function ProductsHome(props) {
       pathname,
       query,
     });
-  };
-
-  const openSortModal = () => {
-    dispatch(
-      openModal({
-        isShow: true,
-        type: "sort",
-      })
-    );
   };
 
   //? Handle Query
@@ -156,7 +148,7 @@ export default function ProductsHome(props) {
               <button
                 type='button'
                 className='flex items-center gap-x-1'
-                onClick={openSortModal}
+                onClick={() => setShowSort((prevShowSort) => !prevShowSort)}
               >
                 <Icons.Sort className='w-6 h-6 icon' />
                 <span>{sort}</span>
@@ -170,6 +162,8 @@ export default function ProductsHome(props) {
             </div>
           </div>
           <Sort
+            setShowSort={setShowSort}
+            showSort={showSort}
             dispatch={dispatch}
             sort={sort}
             productsLength={formatNumber(props.productsLength)}

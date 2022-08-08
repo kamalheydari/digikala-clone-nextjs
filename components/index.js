@@ -52,7 +52,6 @@ export { default as Alert } from "./modal/Alert";
 export { default as NameForm } from "./modal/NameForm";
 export { default as MobileForm } from "./modal/MobileForm";
 export { default as AddressForm } from "./modal/AddressForm";
-export { default as SortModal } from "./modal/SortModal";
 export { default as CommentModal } from "./modal/CommentModal";
 export { default as SearchModal } from "./modal/SearchModal";
 

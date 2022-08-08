@@ -36,7 +36,7 @@ export default function MyApp({ Component, pageProps }) {
     return Component.getClientLayout(
       <Provider store={store}>
         <ClientLayout>
-          <PageLoading />
+          {/* <PageLoading /> */}
           <Component {...pageProps} />
           <RefreshTokenHandler />
           <Modal />

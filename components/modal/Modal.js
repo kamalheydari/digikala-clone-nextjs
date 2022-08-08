@@ -11,7 +11,6 @@ import {
   ConfirmDeleteModal,
   ConfirmUpdateModal,
   CategoryForm,
-  SortModal,
   CommentModal,
   SearchModal,
 } from "components";
@@ -164,11 +163,7 @@ export default function Modal() {
       );
       break;
 
-    case "sort":
-      effect = ["bottom-0", "-bottom-full"];
-      size = "lg:max-w-3xl";
-      renderModal = <SortModal dispatch={dispatch} closeModal={closeModal} />;
-      break;
+
 
     case "search":
       effect = ["bottom-0 lg:top-20", "-bottom-full lg:top-60"];
