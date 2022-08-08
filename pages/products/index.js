@@ -266,6 +266,7 @@ export async function getServerSideProps({ query }) {
 
   const maxPrice = await Math.max(...allProducts.map((item) => item.price));
   const minPrice = await Math.min(...allProducts.map((item) => item.price));
+  
   const productsLength = await allProducts.length;
   await db.disconnect();
 
@@ -275,7 +276,6 @@ export async function getServerSideProps({ query }) {
       productsLength,
       maxPrice,
       minPrice,
-      products,
       currentPage: page,
       nextPage: page + 1,
       previousPage: page - 1,

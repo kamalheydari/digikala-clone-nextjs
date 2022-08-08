@@ -16,19 +16,14 @@ import {
   MostFavouraiteProducts,
   Slider,
 } from "components";
+import Category from "models/Category";
 
 export default function Home(props) {
   //? Local State
   const [images, setImages] = useState({});
-  const [childCategories, setChildCategories] = useState([]);
 
   //? Store
   const { categories } = useSelector((state) => state.categories);
-
-  //? Set Categories
-  useEffect(() => {
-    setChildCategories(categories.filter((cat) => cat.parent === "/"));
-  }, [categories]);
 
   //? Get Slider Images Query
   const { data, isSuccess } = useGetDataQuery({ url: "/api/images" });
@@ -58,7 +53,7 @@ export default function Home(props) {
         )}
 
         {/* Categories */}
-        <Categories childCategories={childCategories} homePage>
+        <Categories childCategories={props.childCategories} homePage>
           خرید بر اساس دسته‌بندهای{" "}
           <span
             className='text-xl'
@@ -102,6 +97,8 @@ export async function getServerSideProps() {
     .sort({ discount: -1 })
     .lean();
 
+  const childCategories = await Category.find({ parent: "/" }).lean();
+
   await db.disconnect();
 
   return {
@@ -109,6 +106,7 @@ export async function getServerSideProps() {
       bestSells: bestSells.map(db.convertDocToObj),
       mostFavourite: mostFavourite.map(db.convertDocToObj),
       discountProducts: discountProducts.map(db.convertDocToObj),
+      childCategories: childCategories.map(db.convertDocToObj),
     },
   };
 }

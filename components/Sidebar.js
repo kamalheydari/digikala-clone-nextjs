@@ -2,7 +2,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   resetParentCategory,
   resetSelectedCategories,
@@ -11,6 +11,8 @@ import {
 import { Icons } from "components";
 
 export default function Sidebar({ isSidebar, setIsSidebar }) {
+  const dispatch = useDispatch();
+  
   //? Local States
   const [mainExpandCat, setMainExpandCat] = useState("");
   const [parentExpandCat, setParentExpandCat] = useState("");

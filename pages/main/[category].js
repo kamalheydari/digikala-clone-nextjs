@@ -1,12 +1,12 @@
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
 
 import db from "lib/db";
 import Product from "models/Product";
+import Category from "models/Category";
 
 import { useGetDataQuery } from "app/slices/fetchApi.slice";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
 
 import {
   BannerOne,
@@ -18,57 +18,19 @@ import {
   Slider,
 } from "components";
 
-const getCategory =
-  typeof window !== "undefined" && localStorage.getItem("category")
-    ? JSON.parse(localStorage.getItem("category"))
-    : {};
-
-const getChildCategories =
-  typeof window !== "undefined" && localStorage.getItem("childCategories")
-    ? JSON.parse(localStorage.getItem("childCategories"))
-    : [];
-
 export default function MainCategory(props) {
   const router = useRouter();
 
   //? Local State
   const [images, setImages] = useState({});
-  const [category, setCategory] = useState(getCategory);
-  const [childCategories, setChildCategories] = useState(getChildCategories);
-
-  //? Store
-  const { categories } = useSelector((state) => state.categories);
-
-  //? Set Categories
-  useEffect(() => {
-    const currentCategory = categories.find(
-      (cat) => cat.slug === router.query.category
-    );
-
-    const currentChildCategories = [
-      ...new Set(
-        categories.filter((cat) => cat.parent === "/" + currentCategory.slug)
-      ),
-    ];
-
-    if (currentCategory) {
-      setCategory(currentCategory);
-
-      setChildCategories(currentChildCategories);
-
-      localStorage.setItem("category", JSON.stringify(currentCategory));
-      localStorage.setItem(
-        "childCategories",
-        JSON.stringify(currentChildCategories)
-      );
-    }
-  }, [router.query.category]);
+  const [category, setCategory] = useState(props.currentCategory);
 
   //? Get Slider Images Query
   const { data, isSuccess } = useGetDataQuery({ url: "/api/images" });
+  
   useEffect(() => {
     if (isSuccess) setImages(data[router.query.category]);
-  }, [isSuccess, category]);
+  }, [isSuccess, router.query.category]);
 
   return (
     <main className='space-y-12 xl:mt-28'>
@@ -88,7 +50,7 @@ export default function MainCategory(props) {
         )}
 
         {/* Categories */}
-        <Categories childCategories={childCategories}>
+        <Categories childCategories={props.childCategories}>
           خرید بر اساس دسته‌بندهای{" "}
           <span
             className='text-xl'
@@ -146,6 +108,14 @@ export async function getServerSideProps({ params: { category } }) {
     .sort({ discount: -1 })
     .lean();
 
+  const childCategories = await Category.find({
+    parent: "/" + category,
+  }).lean();
+
+  const currentCategory = await Category.findOne({
+    slug: category,
+  }).lean();
+
   await db.disconnect();
 
   return {
@@ -153,6 +123,8 @@ export async function getServerSideProps({ params: { category } }) {
       bestSells: bestSells.map(db.convertDocToObj),
       mostFavourite: mostFavourite.map(db.convertDocToObj),
       discountProducts: discountProducts.map(db.convertDocToObj),
+      childCategories: childCategories.map(db.convertDocToObj),
+      currentCategory: db.convertDocToObj(currentCategory),
     },
   };
 }
