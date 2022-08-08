@@ -27,7 +27,7 @@ export default function MainCategory(props) {
 
   //? Get Slider Images Query
   const { data, isSuccess } = useGetDataQuery({ url: "/api/images" });
-  
+
   useEffect(() => {
     if (isSuccess) setImages(data[router.query.category]);
   }, [isSuccess, router.query.category]);
@@ -38,16 +38,18 @@ export default function MainCategory(props) {
         <title>{`دیجی‌کالا | ${category?.name}`}</title>
       </Head>
       {/* Slider */}
-      {isSuccess && <Slider images={images?.slider} />}
+      {isSuccess ? (
+        <Slider images={images?.slider} />
+      ) : (
+        <div className='h-52 md:h-70 lg:h-[370px] bg-gray-50' />
+      )}
       <div className='py-4 mx-auto space-y-12 xl:mt-28 lg:max-w-[1450px]'>
         {/* Discount Products */}
-        {isSuccess && (
-          <DiscountSlider
-            products={props.discountProducts}
-            categoryImage={category?.image}
-            colors={images.colors}
-          />
-        )}
+        <DiscountSlider
+          products={props.discountProducts}
+          categoryImage={category?.image}
+          colors={images.colors}
+        />
 
         {/* Categories */}
         <Categories childCategories={props.childCategories}>

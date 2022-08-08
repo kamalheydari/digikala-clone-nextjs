@@ -3,9 +3,9 @@ import Head from "next/head";
 
 import db from "lib/db";
 import Product from "models/Product";
+import Category from "models/Category";
 
 import { useGetDataQuery } from "app/slices/fetchApi.slice";
-import { useSelector } from "react-redux";
 
 import {
   BannerOne,
@@ -16,14 +16,10 @@ import {
   MostFavouraiteProducts,
   Slider,
 } from "components";
-import Category from "models/Category";
 
 export default function Home(props) {
   //? Local State
   const [images, setImages] = useState({});
-
-  //? Store
-  const { categories } = useSelector((state) => state.categories);
 
   //? Get Slider Images Query
   const { data, isSuccess } = useGetDataQuery({ url: "/api/images" });
@@ -42,15 +38,18 @@ export default function Home(props) {
       </Head>
 
       {/* Slider */}
-      {isSuccess && <Slider images={images?.slider} />}
+      {isSuccess ? (
+        <Slider images={images?.slider} />
+      ) : (
+        <div className='h-52 md:h-70 lg:h-[370px] bg-gray-50' />
+      )}
+
       <div className='py-4 mx-auto space-y-12 xl:mt-28 lg:max-w-[1450px]'>
         {/* Discount Products */}
-        {isSuccess && (
-          <DiscountSlider
-            products={props.discountProducts}
-            colors={images.colors}
-          />
-        )}
+        <DiscountSlider
+          products={props.discountProducts}
+          colors={images.colors}
+        />
 
         {/* Categories */}
         <Categories childCategories={props.childCategories} homePage>

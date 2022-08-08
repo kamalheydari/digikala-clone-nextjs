@@ -8,7 +8,6 @@ import db from "lib/db";
 import Product from "models/Product";
 
 import { useDispatch, useSelector } from "react-redux";
-import { openModal } from "app/slices/modal.slice";
 import { resetFilter, updateFilter } from "app/slices/filter.slice";
 
 import { formatNumber } from "utils/formatNumber";
@@ -266,7 +265,7 @@ export async function getServerSideProps({ query }) {
 
   const maxPrice = await Math.max(...allProducts.map((item) => item.price));
   const minPrice = await Math.min(...allProducts.map((item) => item.price));
-  
+
   const productsLength = await allProducts.length;
   await db.disconnect();
 
