@@ -1,3 +1,3 @@
-export default function sendError(res, status, msg) {
-  res.status(status).json({ err: msg });
+export default function sendError(res, statusCode, msg) {
+  res.status(statusCode).json({ err: msg });
 }

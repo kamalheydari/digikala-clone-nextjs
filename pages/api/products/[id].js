@@ -31,7 +31,7 @@ const getProduct = async (req, res) => {
     const product = await Products.findById(id);
     db.disconnect();
 
-    if (!product) return sendError(res, 500, "این محصول موجود نمیباشد");
+    if (!product) return sendError(res, 400, "این محصول موجود نمیباشد");
 
     res.status(200).json({ product });
   } catch (error) {
