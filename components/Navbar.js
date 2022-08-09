@@ -69,7 +69,7 @@ export default function Navbar() {
               }
             })}
           </ul>
-          <ul className='flex flex-wrap w-full gap-10 p-2'>
+          <ul className='flex flex-wrap w-full gap-10 px-2 py-4'>
             {categories.map((parentCategory) => {
               if (parentCategory.parent === activeMinCat) {
                 return (
