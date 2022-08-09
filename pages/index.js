@@ -3,7 +3,6 @@ import Head from "next/head";
 
 import db from "lib/db";
 import Product from "models/Product";
-import Category from "models/Category";
 
 import { useGetDataQuery } from "app/slices/fetchApi.slice";
 
@@ -13,13 +12,22 @@ import {
   BestSellsSlider,
   Categories,
   DiscountSlider,
-  MostFavouraiteProducts,
   Slider,
 } from "components";
+import { useSelector } from "react-redux";
 
 export default function Home(props) {
   //? Local State
   const [images, setImages] = useState({});
+  const [childCategories, setChildCategories] = useState([]);
+
+  //? Store
+  const { categories } = useSelector((state) => state.categories);
+
+  //? Set Categories
+  useEffect(() => {
+    setChildCategories(categories.filter((cat) => cat.parent === "/"));
+  }, [categories]);
 
   //? Get Slider Images Query
   const { data, isSuccess } = useGetDataQuery({ url: "/api/images" });
@@ -52,7 +60,7 @@ export default function Home(props) {
         />
 
         {/* Categories */}
-        <Categories childCategories={props.childCategories} homePage>
+        <Categories childCategories={childCategories} homePage>
           خرید بر اساس دسته‌بندهای{" "}
           <span
             className='text-xl'
@@ -71,9 +79,6 @@ export default function Home(props) {
 
         {/* Banner Two */}
         {isSuccess && <BannerTwo images={images?.banner_two} />}
-
-        {/* MostFavouraiteProducts */}
-        <MostFavouraiteProducts products={props.mostFavourite} />
       </div>
     </main>
   );
@@ -81,12 +86,8 @@ export default function Home(props) {
 
 export async function getServerSideProps() {
   await db.connect();
-  const bestSells = await Product.find().sort({ sold: -1 }).limit(15).lean();
 
-  const mostFavourite = await Product.find()
-    .sort({ rating: -1 })
-    .limit(10)
-    .lean();
+  const bestSells = await Product.find().sort({ sold: -1 }).limit(10).lean();
 
   const discountProducts = await Product.find({
     discount: { $gte: 1 },
@@ -96,16 +97,12 @@ export async function getServerSideProps() {
     .sort({ discount: -1 })
     .lean();
 
-  const childCategories = await Category.find({ parent: "/" }).lean();
-
   await db.disconnect();
 
   return {
     props: {
       bestSells: bestSells.map(db.convertDocToObj),
-      mostFavourite: mostFavourite.map(db.convertDocToObj),
       discountProducts: discountProducts.map(db.convertDocToObj),
-      childCategories: childCategories.map(db.convertDocToObj),
     },
   };
 }
