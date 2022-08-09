@@ -1,8 +1,10 @@
+import bcrypt from "bcrypt";
+
 import db from "lib/db";
 import User from "models/User";
-import bcrypt from "bcrypt";
+
 import sendError from "utils/sendError";
-import { createAccessToken, } from "utils/generateToken";
+import { createAccessToken } from "utils/generateToken";
 
 export default async (req, res) => {
   switch (req.method) {
@@ -23,7 +25,7 @@ export default async (req, res) => {
 
         const access_token = createAccessToken({ id: user._id });
 
-        res.json({
+        res.status(200).json({
           msg: "ورود موفقیت آمیز بود",
           data: {
             access_token,
@@ -40,6 +42,9 @@ export default async (req, res) => {
       } catch (error) {
         sendError(res, 500, error.message);
       }
+      break;
+
+    default:
       break;
   }
 };

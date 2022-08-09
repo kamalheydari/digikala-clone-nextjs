@@ -1,12 +1,16 @@
 import db from "lib/db";
-import auth from "middleware/auth";
 import Details from "models/Details";
+
+import auth from "middleware/auth";
 import sendError from "utils/sendError";
 
 export default async function (req, res) {
   switch (req.method) {
     case "POST":
       await createDetails(req, res);
+      break;
+
+    default:
       break;
   }
 }

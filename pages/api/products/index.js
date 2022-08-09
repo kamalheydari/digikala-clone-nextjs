@@ -1,7 +1,8 @@
-import sendError from "utils/sendError";
-import Products from "models/Product";
-import auth from "middleware/auth";
 import db from "lib/db";
+import Products from "models/Product";
+
+import sendError from "utils/sendError";
+import auth from "middleware/auth";
 
 export default async (req, res) => {
   switch (req.method) {
@@ -11,6 +12,9 @@ export default async (req, res) => {
 
     case "POST":
       await createProduct(req, res);
+      break;
+
+    default:
       break;
   }
 };

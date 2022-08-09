@@ -1,8 +1,9 @@
-import Order from "models/Order";
-import auth from "middleware/auth";
 import db from "lib/db";
-import sendError from "utils/sendError";
+import Order from "models/Order";
 import Product from "models/Product";
+
+import auth from "middleware/auth";
+import sendError from "utils/sendError";
 
 export default async (req, res) => {
   switch (req.method) {
@@ -12,6 +13,9 @@ export default async (req, res) => {
 
     case "GET":
       await getOrders(req, res);
+      break;
+
+    default:
       break;
   }
 };

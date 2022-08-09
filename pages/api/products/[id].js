@@ -1,5 +1,6 @@
 import db from "lib/db";
 import Products from "models/Product";
+
 import auth from "middleware/auth";
 import sendError from "utils/sendError";
 
@@ -15,6 +16,9 @@ export default async (req, res) => {
 
     case "DELETE":
       await deleteProduct(req, res);
+      break;
+
+    default:
       break;
   }
 };
@@ -46,13 +50,8 @@ const updateProduct = async (req, res) => {
     const {
       title,
       price,
-      discount,
-      description,
       images,
-      sizes,
-      colors,
       category,
-      inStock,
       info,
       specification,
     } = req.body;

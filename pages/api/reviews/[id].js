@@ -1,8 +1,8 @@
 import db from "lib/db";
-import auth from "middleware/auth";
 import Product from "models/Product";
 import Review from "models/Review";
 
+import auth from "middleware/auth";
 import sendError from "utils/sendError";
 
 export default async function (req, res) {
@@ -49,11 +49,15 @@ const createReview = async (req, res) => {
 };
 
 const getReview = async (req, res) => {
-  const review = await Review.findOne({ _id: req.query.id })
-    .populate("product", "images")
-    .populate("user", "name");
+  try {
+    const review = await Review.findOne({ _id: req.query.id })
+      .populate("product", "images")
+      .populate("user", "name");
 
-  res.status(200).json({ review });
+    res.status(200).json({ review });
+  } catch (error) {
+    sendError(res, 500, error.message);
+  }
 };
 
 const deleteReview = async (req, res) => {

@@ -1,6 +1,8 @@
+import bcrypt from "bcrypt";
+
 import db from "lib/db";
 import User from "models/User";
-import bcrypt from "bcrypt";
+
 import sendError from "utils/sendError";
 import { createAccessToken } from "utils/generateToken";
 
@@ -8,6 +10,9 @@ export default async (req, res) => {
   switch (req.method) {
     case "POST":
       await register(req, res);
+      break;
+
+    default:
       break;
   }
 };

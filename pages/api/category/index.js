@@ -1,6 +1,7 @@
 import Category from "models/Category";
-import auth from "middleware/auth";
 import db from "lib/db";
+
+import auth from "middleware/auth";
 import sendError from "utils/sendError";
 
 export default async (req, res) => {
@@ -11,6 +12,9 @@ export default async (req, res) => {
 
     case "GET":
       await getCategories(req, res);
+      break;
+
+    default:
       break;
   }
 };
@@ -33,7 +37,6 @@ const createCategory = async (req, res) => {
       .status(201)
       .json({ msg: "ساخت دسته بندی جدید موفقیت آمیز بود", newCategory });
   } catch (error) {
-    console.log(error.message);
     sendError(res, 500, error.message);
   }
 };

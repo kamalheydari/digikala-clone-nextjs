@@ -1,6 +1,7 @@
 import db from "lib/db";
-import auth from "middleware/auth";
 import Review from "models/Review";
+
+import auth from "middleware/auth";
 import sendError from "utils/sendError";
 
 export default async function (req, res) {

@@ -1,6 +1,7 @@
 import Order from "models/Order";
-import auth from "middleware/auth";
 import db from "lib/db";
+
+import auth from "middleware/auth";
 import sendError from "utils/sendError";
 
 export default async (req, res) => {

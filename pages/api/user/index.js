@@ -1,5 +1,6 @@
 import db from "lib/db";
 import User from "models/User";
+
 import auth from "middleware/auth";
 import sendError from "utils/sendError";
 
@@ -11,6 +12,9 @@ export default async (req, res) => {
 
     case "GET":
       await getUsers(req, res);
+      break;
+
+    default:
       break;
   }
 };
@@ -65,18 +69,16 @@ const getUsers = async (req, res) => {
 
     await db.disconnect();
 
-    res
-      .status(200)
-      .json({
-        users,
-        usersLength,
-        currentPage: page,
-        nextPage: page + 1,
-        previousPage: page - 1,
-        hasNextPage: page_size * page < usersLength,
-        hasPreviousPage: page > 1,
-        lastPage: Math.ceil(usersLength / page_size),
-      });
+    res.status(200).json({
+      users,
+      usersLength,
+      currentPage: page,
+      nextPage: page + 1,
+      previousPage: page - 1,
+      hasNextPage: page_size * page < usersLength,
+      hasPreviousPage: page > 1,
+      lastPage: Math.ceil(usersLength / page_size),
+    });
   } catch (error) {
     sendError(res, 500, error.message);
   }

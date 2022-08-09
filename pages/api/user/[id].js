@@ -1,5 +1,6 @@
 import db from "lib/db";
 import User from "models/User";
+
 import auth from "middleware/auth";
 import sendError from "utils/sendError";
 
@@ -12,6 +13,9 @@ export default async (req, res) => {
     case "DELETE":
       await deleteUser(req, res);
       break;
+
+    default:
+      break;
   }
 };
 
@@ -20,7 +24,7 @@ const updateRole = async (req, res) => {
     const result = await auth(req, res);
 
     if (result.role !== "admin")
-    return sendError(res, 400, "توکن احراز هویت نامعتبر است");
+      return sendError(res, 400, "توکن احراز هویت نامعتبر است");
 
     const { id } = req.query;
     const { role } = req.body;
@@ -38,13 +42,12 @@ const deleteUser = async (req, res) => {
   try {
     const result = await auth(req, res);
 
-    if (!result.root)
-    return sendError(res, 400, "توکن احراز هویت نامعتبر است");
+    if (!result.root) return sendError(res, 400, "توکن احراز هویت نامعتبر است");
 
     const { id } = req.query;
 
     await db.connect();
-    await User.findByIdAndDelete( id );
+    await User.findByIdAndDelete(id);
     await db.disconnect();
 
     res.status(200).json({ msg: "کاربر با موفقیت حذف شد" });
@@ -52,4 +55,3 @@ const deleteUser = async (req, res) => {
     sendError(res, 500, error.message);
   }
 };
-
