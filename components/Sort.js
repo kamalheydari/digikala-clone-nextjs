@@ -45,12 +45,20 @@ export default function Sort({
         <span className='mr-auto'>{productsLength} کالا</span>
       </section>
 
-      <section
-        className={`xl:hidden fixed transition-all duration-700 left-0 right-0 mx-auto z-10 bg-white w-full h-fit shadow-3xl border-t border-gray-200 rounded-xl  ${
-          showSort ? "bottom-0" : "-bottom-full"
-        }`}
+      <div
+        className={`${
+          showSort ? "opacity-100 visible" : "opacity-0 invisible "
+        } transition-all duration-300 fixed inset-0 z-40`}
       >
-        <div className='px-5 py-3 bg-white h-fit md:rounded-lg rounded-2xl'>
+        <div
+          className='fixed inset-0 z-20 bg-gray-50/50'
+          onClick={() => setShowSort(false)}
+        />
+        <section
+          className={`xl:hidden fixed transition-all duration-300 left-0 right-0 mx-auto z-30  w-full max-w-xl shadow-3xl border-t border-gray-200 rounded-xl px-5 py-3 bg-white h-fit md:rounded-lg  ${
+            showSort ? "bottom-0" : "-bottom-full"
+          }`}
+        >
           <div className='flex justify-between py-3'>
             <h5>مرتب سازی بر اساس</h5>
             <button type='button' onClick={() => setShowSort(false)}>
@@ -73,8 +81,8 @@ export default function Sort({
               </div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </>
   );
 }
