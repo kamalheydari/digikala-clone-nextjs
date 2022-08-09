@@ -15,6 +15,7 @@ import {
   RefreshTokenHandler,
   Modal,
   PageLoading,
+  ErrorBoundary,
 } from "components";
 import { fetchCategories } from "app/slices/category.slice";
 
@@ -37,7 +38,9 @@ export default function MyApp({ Component, pageProps }) {
       <Provider store={store}>
         <ClientLayout>
           <PageLoading />
-          <Component {...pageProps} />
+          <ErrorBoundary>
+            <Component {...pageProps} />
+          </ErrorBoundary>
           <RefreshTokenHandler />
           <Modal />
         </ClientLayout>
@@ -50,7 +53,9 @@ export default function MyApp({ Component, pageProps }) {
     return Component.getDashboardLayout(
       <Provider store={store}>
         <DashboardLayout>
-          <Component {...pageProps} />
+          <ErrorBoundary>
+            <Component {...pageProps} />
+          </ErrorBoundary>
           <RefreshTokenHandler />
           <Modal />
         </DashboardLayout>
@@ -62,7 +67,9 @@ export default function MyApp({ Component, pageProps }) {
     return Component.getProfileLayout(
       <Provider store={store}>
         <ProfileLayout>
-          <Component {...pageProps} />
+          <ErrorBoundary>
+            <Component {...pageProps} />
+          </ErrorBoundary>
           <RefreshTokenHandler />
           <Modal />
         </ProfileLayout>
@@ -72,7 +79,9 @@ export default function MyApp({ Component, pageProps }) {
 
   return (
     <Provider store={store}>
-      <Component {...pageProps} />
+      <ErrorBoundary>
+        <Component {...pageProps} />
+      </ErrorBoundary>
       <Modal />
     </Provider>
   );
