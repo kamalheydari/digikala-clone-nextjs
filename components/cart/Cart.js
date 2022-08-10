@@ -43,39 +43,41 @@ export default function Cart() {
           <Icons.Cart className='icon h-7 w-7' />
         </a>
       </Link>
-      <div
-        className='absolute left-0 transition duration-300 bg-white border border-gray-100 py-2 invisible opacity-0  lg:group-hover:opacity-100 lg:group-hover:visible  rounded z-40 shadow-xl top-full w-[440px]
+      {totalItems > 0 && (
+        <div
+          className='absolute left-0 transition duration-300 bg-white border border-gray-100 py-2 invisible opacity-0  lg:group-hover:opacity-100 lg:group-hover:visible  rounded z-40 shadow-xl top-full w-[440px]
        '
-      >
-        {/* Header */}
-        <div className='flex items-center justify-between px-2 py-1'>
-          <span className='farsi-digits'>{totalItems} کالا</span>
-          <ArrowLink path='/checkout/cart'>مشاهده‌ی سبد خرید</ArrowLink>
-        </div>
-        {/* Itmes */}
-        <div className='overflow-y-auto h-80'>
-          {cartItems.map((item) => (
-            <CartItem item={item} key={item.itemID} />
-          ))}
-        </div>
-        {/* Footer */}
-        <div className='px-3 pt-1.5 flex justify-between items-center border-t'>
-          <div>
-            <span>مبلغ قابل پرداخت</span>
-            <div className='flex items-center'>
-              <span className='text-sm farsi-digits'>
-                {formatNumber(totalPrice - totalDiscount)}
-              </span>
-              <div className='relative mr-1 w-7 h-7'>
-                <Image src='/icons/toman.svg' layout='fill' />
+        >
+          {/* Header */}
+          <div className='flex items-center justify-between px-2 py-1'>
+            <span className='farsi-digits'>{totalItems} کالا</span>
+            <ArrowLink path='/checkout/cart'>مشاهده‌ی سبد خرید</ArrowLink>
+          </div>
+          {/* Itmes */}
+          <div className='overflow-y-auto h-80'>
+            {cartItems.map((item) => (
+              <CartItem item={item} key={item.itemID} />
+            ))}
+          </div>
+          {/* Footer */}
+          <div className='px-3 pt-1.5 flex justify-between items-center border-t'>
+            <div>
+              <span>مبلغ قابل پرداخت</span>
+              <div className='flex items-center'>
+                <span className='text-sm farsi-digits'>
+                  {formatNumber(totalPrice - totalDiscount)}
+                </span>
+                <div className='relative mr-1 w-7 h-7'>
+                  <Image src='/icons/toman.svg' layout='fill' />
+                </div>
               </div>
             </div>
+            <button className='btn' type='button' onClick={handleRoute}>
+              ثبت سفارش
+            </button>
           </div>
-          <button className='btn' type='button' onClick={handleRoute}>
-            ثبت سفارش
-          </button>
         </div>
-      </div>
+      )}
     </div>
   );
 }
