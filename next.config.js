@@ -1,6 +1,6 @@
 module.exports = {
   env: {
-    MONGODB_URL: "mongodb+srv://digikala-clone-nextjs:digikala-clone-nextjs123456@cluster0.k5i8lxq.mongodb.net/digikala-clone-nextjs?retryWrites=true&w=majority",
+    MONGODB_URL: "mongodb://root:3F6NVtZZctS0lfIzeWUJsjuT@finn.iran.liara.ir:34423/my-app?authSource=admin",
     NEXT_PUBLIC_ACCESS_TOKEN_SECRET:
       "h1n0U6LHJtCZuWitwjn3oLd5qCRIgUFtemnjTrpfZLzVZ3ff0f",
     ACCESS_TOKEN_SECRET: "h1n0U6LHJtCZuWitwjn3oLd5qCRIgUFtemnjTrpfZLzVZ3ff0f",
