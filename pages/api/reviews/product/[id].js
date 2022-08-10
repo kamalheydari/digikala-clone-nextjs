@@ -1,3 +1,4 @@
+import db from "lib/db";
 import Review from "models/Review";
 
 import sendError from "utils/sendError";
@@ -18,6 +19,8 @@ const getReviews = async (req, res) => {
   const page_size = +req.query.page_size || 5;
 
   try {
+    await db.connect();
+
     const reviews = await Review.find({
       product: req.query.id,
       status: 2,
@@ -34,18 +37,18 @@ const getReviews = async (req, res) => {
       status: 2,
     });
 
-    res
-      .status(200)
-      .json({
-        reviews,
-        reviewsLength,
-        currentPage: page,
-        nextPage: page + 1,
-        previousPage: page - 1,
-        hasNextPage: page_size * page < reviewsLength,
-        hasPreviousPage: page > 1,
-        lastPage: Math.ceil(reviewsLength / page_size),
-      });
+    await db.disconnect();
+
+    res.status(200).json({
+      reviews,
+      reviewsLength,
+      currentPage: page,
+      nextPage: page + 1,
+      previousPage: page - 1,
+      hasNextPage: page_size * page < reviewsLength,
+      hasPreviousPage: page > 1,
+      lastPage: Math.ceil(reviewsLength / page_size),
+    });
   } catch (error) {
     sendError(res, 500, error.message);
   }

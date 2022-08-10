@@ -50,9 +50,13 @@ const createReview = async (req, res) => {
 
 const getReview = async (req, res) => {
   try {
+    await db.connect();
+
     const review = await Review.findOne({ _id: req.query.id })
       .populate("product", "images")
       .populate("user", "name");
+
+    await db.disconnect();
 
     res.status(200).json({ review });
   } catch (error) {
@@ -63,7 +67,9 @@ const getReview = async (req, res) => {
 const deleteReview = async (req, res) => {
   try {
     await db.connect();
+
     await Review.findByIdAndDelete(req.query.id);
+
     await db.disconnect();
 
     res.status(200).json({ msg: "دیدگاه با موفقیت حذف شد" });

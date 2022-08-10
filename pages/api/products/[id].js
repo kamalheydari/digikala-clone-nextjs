@@ -27,9 +27,9 @@ const getProduct = async (req, res) => {
   try {
     const { id } = req.query;
 
-    db.connect();
+   await  db.connect();
     const product = await Products.findById(id);
-    db.disconnect();
+    await db.disconnect();
 
     if (!product) return sendError(res, 400, "این محصول موجود نمیباشد");
 

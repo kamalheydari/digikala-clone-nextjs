@@ -5,14 +5,15 @@ import User from "models/User";
 
 import sendError from "utils/sendError";
 import { createAccessToken } from "utils/generateToken";
+import { disconnect } from "mongoose";
 
 export default async (req, res) => {
   switch (req.method) {
     case "POST":
       try {
-        db.connect();
-
         const { email, password } = req.body;
+
+        await db.connect();
 
         const user = await User.findOne({ email });
 
@@ -24,6 +25,8 @@ export default async (req, res) => {
           return sendError(res, 400, "آدرس ایمیل یا کلمه عبور اشتباه است");
 
         const access_token = createAccessToken({ id: user._id });
+
+        await disconnect();
 
         res.status(200).json({
           msg: "ورود موفقیت آمیز بود",

@@ -43,9 +43,9 @@ const createCategory = async (req, res) => {
 
 const getCategories = async (req, res) => {
   try {
-    db.connect();
+    await db.connect();
     const categories = await Category.find();
-    db.disconnect();
+    await db.disconnect();
 
     res.status(200).json({ categories });
   } catch (error) {

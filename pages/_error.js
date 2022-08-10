@@ -1,16 +1,23 @@
+import Link from "next/link";
+
 function Error({ statusCode }) {
-    return (
+  return (
+    <div className='mx-auto'>
       <p>
         {statusCode
           ? `An error ${statusCode} occurred on server`
-          : 'An error occurred on client'}
+          : "An error occurred on client"}
       </p>
-    )
-  }
-  
-  Error.getInitialProps = ({ res, err }) => {
-    const statusCode = res ? res.statusCode : err ? err.statusCode : 404
-    return { statusCode }
-  }
-  
-  export default Error
+      <Link href='/'>
+        <a>home</a>
+      </Link>
+    </div>
+  );
+}
+
+Error.getInitialProps = ({ res, err }) => {
+  const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
+  return { statusCode };
+};
+
+export default Error;
