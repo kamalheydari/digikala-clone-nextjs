@@ -1,11 +1,16 @@
 import Head from "next/head";
-import Image from "next/image";
 import { useState } from "react";
 
 import { useSelector } from "react-redux";
 import { useGetDataQuery } from "app/slices/fetchApi.slice";
 
-import { BigLoading, Buttons, Pagination, ReveiwCard } from "components";
+import {
+  Buttons,
+  Pagination,
+  ReveiwCard,
+  ShowWrapper,
+  EmptyCommentsList,
+} from "components";
 
 export default function Comments() {
   //? Local State
@@ -15,7 +20,14 @@ export default function Comments() {
   const { token } = useSelector((state) => state.user);
 
   //? Get Query
-  const { data, isLoading, isSuccess } = useGetDataQuery({
+  const {
+    data,
+    isSuccess,
+    isFetching,
+    error,
+    isError,
+    refetch,
+  } = useGetDataQuery({
     url: `/api/reviews?page=${page}&page_size=5`,
     token,
   });
@@ -23,29 +35,28 @@ export default function Comments() {
   return (
     <main>
       <Head>
-        <title>دیجی‌کالا | دیدگاه‌ها</title>
+        <title>پروفایل | دیدگاه‌ها</title>
       </Head>
       <Buttons.Back backRoute='/profile'>دیدگاه‌ها</Buttons.Back>
       <div className='section-divide-y' />
-      {isLoading ? (
-        <section className='px-3 py-20'>
-          <BigLoading />
-        </section>
-      ) : data.reviewsLength === 0 ? (
-        <section className='py-20'>
-          <div className='relative mx-auto h-52 w-52'>
-            <Image src='/icons/order-empty.svg' layout='fill' />
-          </div>
 
-          <p className='text-center'>هنوز هیچ نظری ندارید</p>
-        </section>
-      ) : (
-        <section className='px-4 py-3 space-y-3 '>
-          {data.reviews.map((item) => (
+      <ShowWrapper
+        error={error}
+        isError={isError}
+        refetch={refetch}
+        isFetching={isFetching}
+        isSuccess={isSuccess}
+        dataLength={data ? data.reviewsLength : 0}
+        page={page}
+        emptyElement={<EmptyCommentsList />}
+        top
+      >
+        <div className='px-4 py-3 space-y-3 '>
+          {data?.reviews.map((item) => (
             <ReveiwCard key={item._id} item={item} />
           ))}
-        </section>
-      )}
+        </div>
+      </ShowWrapper>
 
       {data?.reviewsLength > 5 && (
         <div className='py-4 mx-auto lg:max-w-5xl'>
@@ -66,3 +77,23 @@ export default function Comments() {
 Comments.getProfileLayout = function pageLayout(page) {
   return <>{page}</>;
 };
+
+// {isLoading ? (
+//   <section className='px-3 py-20'>
+//     <BigLoading />
+//   </section>
+// ) : data.reviewsLength === 0 ? (
+//   <section className='py-20'>
+//     <div className='relative mx-auto h-52 w-52'>
+//       <Image src='/icons/order-empty.svg' layout='fill' />
+//     </div>
+
+//     <p className='text-center'>هنوز هیچ نظری ندارید</p>
+//   </section>
+// ) : (
+//   <section className='px-4 py-3 space-y-3 '>
+//     {data.reviews.map((item) => (
+//       <ReveiwCard key={item._id} item={item} />
+//     ))}
+//   </section>
+// )}

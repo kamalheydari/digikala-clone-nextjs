@@ -1,6 +1,12 @@
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
+
+import { useDispatch, useSelector } from "react-redux";
 import { resetSelectedCategories } from "app/slices/category.slice";
 import { useGetDataQuery } from "app/slices/fetchApi.slice";
 import { openModal } from "app/slices/modal.slice";
+
 import {
   BigLoading,
   Buttons,
@@ -8,9 +14,6 @@ import {
   Pagination,
   SelectCategories,
 } from "components";
-import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 export default function Products() {
   const dispatch = useDispatch();
@@ -28,7 +31,14 @@ export default function Products() {
   );
 
   //? Get Data Query
-  const { data, isLoading, isSuccess } = useGetDataQuery({
+  const {
+    data,
+    isFetching,
+    isSuccess,
+    error,
+    isError,
+    refetch,
+  } = useGetDataQuery({
     url: `/api/products?page_size=10&page=${page}&category=${filterCategory}&search=${search}`,
   });
 
@@ -74,17 +84,31 @@ export default function Products() {
     setSearch("");
   };
 
+  if (isError) {
+    return (
+      <div className='py-20 mx-auto space-y-3 text-center w-fit'>
+        <h5 className='text-xl'>خطایی رخ داده</h5>
+        <p className='text-lg text-red-500'>{error.data.err}</p>
+        <button className='mx-auto btn' onClick={refetch}>
+          تلاش مجدد
+        </button>
+      </div>
+    );
+  }
+
   return (
     <main>
+      <Head>
+        <title>مدیریت | محصولات</title>
+      </Head>
       <Buttons.Back backRoute='/admin'>محصولات</Buttons.Back>
       <div className='section-divide-y' />
-      {isLoading && (
+
+      {isFetching && !isSuccess ? (
         <section className='px-3 py-20'>
           <BigLoading />
         </section>
-      )}
-
-      {isSuccess && (
+      ) : (
         <section className='p-3 space-y-7'>
           <form className='max-w-4xl mx-auto space-y-5' onSubmit={handleSubmit}>
             <div className='space-y-8  md:py-0 md:flex md:gap-x-8 lg:gap-x-0.5 xl:gap-x-10 md:items-baseline md:justify-between'>
@@ -112,7 +136,7 @@ export default function Products() {
             </div>
           </form>
 
-          {data.productsLength > 0 ? (
+          {data?.productsLength > 0 ? (
             <>
               <section className='overflow-x mt-7'>
                 <table className='w-full overflow-scroll table-auto'>
@@ -139,7 +163,7 @@ export default function Products() {
                   </tbody>
                 </table>
               </section>
-              {data.productsLength > 10 && (
+              {data?.productsLength > 10 && (
                 <Pagination
                   currentPage={data.currentPage}
                   nextPage={data.nextPage}

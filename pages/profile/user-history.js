@@ -7,7 +7,7 @@ export default function UserHistory() {
   return (
     <main>
       <Head>
-        <title>دیجی‌کالا | بازدید‌های اخیر</title>
+        <title>پروفایل | بازدید‌های اخیر</title>
       </Head>
       <Buttons.Back backRoute='/profile'>بازدید‌های اخیر</Buttons.Back>
       <div className='section-divide-y' />

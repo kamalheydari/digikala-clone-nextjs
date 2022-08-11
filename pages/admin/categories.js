@@ -1,5 +1,6 @@
-import { useDispatch, useSelector } from "react-redux";
+import Head from "next/head";
 
+import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "app/slices/modal.slice";
 
 import { Buttons } from "components";
@@ -23,6 +24,10 @@ export default function Categories() {
 
   return (
     <main>
+      <Head>
+        <title>مدیریت | دسته بندی ها</title>
+      </Head>
+
       <Buttons.Back backRoute='/admin'>دسته بندی ها</Buttons.Back>
       <div className='section-divide-y' />
 

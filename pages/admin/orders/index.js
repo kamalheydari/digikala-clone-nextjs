@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
@@ -5,7 +6,12 @@ import { useGetDataQuery } from "app/slices/fetchApi.slice";
 import { openModal } from "app/slices/modal.slice";
 import { useDispatch, useSelector } from "react-redux";
 
-import { BigLoading, Buttons, Pagination } from "components";
+import {
+  Buttons,
+  Pagination,
+  ShowWrapper,
+  EmptyOrdersList,
+} from "components";
 
 export default function OrdersHome() {
   const dispatch = useDispatch();
@@ -19,7 +25,14 @@ export default function OrdersHome() {
   const { isConfirm } = useSelector((state) => state.modal);
 
   //? Get Query
-  const { data, isSuccess, isLoading } = useGetDataQuery({
+  const {
+    data,
+    isSuccess,
+    isFetching,
+    error,
+    isError,
+    refetch,
+  } = useGetDataQuery({
     url: `/api/order?page=${page}&page_size=10`,
     token,
   });
@@ -43,15 +56,22 @@ export default function OrdersHome() {
 
   return (
     <main>
+      <Head>
+        <title>مدیریت | سفارشات</title>
+      </Head>
       <Buttons.Back backRoute='/admin'>سفارشات</Buttons.Back>
       <div className='section-divide-y' />
-      {isLoading && (
-        <section className='px-3 py-20'>
-          <BigLoading />
-        </section>
-      )}
-      <section className='p-3 md:px-3 xl:px-8 2xl:px-10'>
-        {isSuccess && (
+      <div className='p-3 md:px-3 xl:px-8 2xl:px-10'>
+        <ShowWrapper
+          error={error}
+          isError={isError}
+          refetch={refetch}
+          isFetching={isFetching}
+          isSuccess={isSuccess}
+          dataLength={data ? data.ordersLength : 0}
+          emptyElement={<EmptyOrdersList />}
+          top
+        >
           <div className='overflow-x-auto mt-7'>
             <table className='w-full whitespace-nowrap'>
               <thead className='h-9 bg-emerald-50'>
@@ -63,7 +83,7 @@ export default function OrdersHome() {
                 </tr>
               </thead>
               <tbody className='text-gray-600'>
-                {data.orders.map((order) => (
+                {data?.orders.map((order) => (
                   <tr
                     className='text-xs text-center transition-colors border-b border-gray-100 md:text-sm hover:bg-gray-50'
                     key={order._id}
@@ -90,22 +110,23 @@ export default function OrdersHome() {
                 ))}
               </tbody>
             </table>
-            {data?.ordersLength > 10 && (
-              <div className='py-4 mx-auto lg:max-w-5xl'>
-                <Pagination
-                  currentPage={data.currentPage}
-                  nextPage={data.nextPage}
-                  previousPage={data.previousPage}
-                  hasNextPage={data.hasNextPage}
-                  hasPreviousPage={data.hasPreviousPage}
-                  lastPage={data.lastPage}
-                  setPage={setPage}
-                />
-              </div>
-            )}
+          </div>
+        </ShowWrapper>
+
+        {data?.ordersLength > 10 && (
+          <div className='py-4 mx-auto lg:max-w-5xl'>
+            <Pagination
+              currentPage={data.currentPage}
+              nextPage={data.nextPage}
+              previousPage={data.previousPage}
+              hasNextPage={data.hasNextPage}
+              hasPreviousPage={data.hasPreviousPage}
+              lastPage={data.lastPage}
+              setPage={setPage}
+            />
           </div>
         )}
-      </section>
+      </div>
     </main>
   );
 }

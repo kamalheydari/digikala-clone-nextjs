@@ -26,7 +26,7 @@ export default function Addresses() {
   return (
     <main>
       <Head>
-        <title>دیجی‌کالا | آدرس‌ها</title>
+        <title>پروفایل | آدرس‌ها</title>
       </Head>
       <Buttons.Back backRoute='/profile'>آدرس‌ها</Buttons.Back>
       <div className='section-divide-y' />

@@ -1,11 +1,17 @@
 import { useState } from "react";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 
 import { useGetDataQuery } from "app/slices/fetchApi.slice";
 import { useSelector } from "react-redux";
 
-import { BigLoading, Buttons, Pagination } from "components";
+import {
+  Buttons,
+  Pagination,
+  ShowWrapper,
+  EmptyCommentsList,
+} from "components";
 
 export default function Comments() {
   //? Local State
@@ -15,29 +21,37 @@ export default function Comments() {
   const { token } = useSelector((state) => state.user);
 
   //? Get Query
-  const { data, isLoading } = useGetDataQuery({
+  const {
+    data,
+    isError,
+    error,
+    isFetching,
+    refetch,
+    isSuccess,
+  } = useGetDataQuery({
     url: `/api/reviews?page=${page}&page_size=10`,
     token,
   });
 
   return (
     <main>
+      <Head>
+        <title>مدیریت | دیدگاه‌ها</title>
+      </Head>
       <Buttons.Back backRoute='/admin'>دیدگاه‌ها</Buttons.Back>
       <div className='section-divide-y' />
 
-      {isLoading ? (
-        <section className='px-3 py-20'>
-          <BigLoading />
-        </section>
-      ) : data.reviewsLength === 0 ? (
-        <section className='py-20'>
-          <div className='relative mx-auto h-52 w-52'>
-            <Image src='/ico`ns/order-empty.svg' layout='fill' />
-          </div>
-
-          <p className='text-center'>هنوز هیچ نظری ندارید</p>
-        </section>
-      ) : (
+      <ShowWrapper
+        error={error}
+        isError={isError}
+        refetch={refetch}
+        isFetching={isFetching}
+        isSuccess={isSuccess}
+        dataLength={data ? data.reviewsLength : 0}
+        emptyElement={<EmptyCommentsList />}
+        page={page}
+        top
+      >
         <section className='mx-3 overflow-x-auto mt-7 lg:mx-10'>
           <table className='w-full whitespace-nowrap'>
             <thead className='h-9 bg-emerald-50'>
@@ -50,7 +64,7 @@ export default function Comments() {
               </tr>
             </thead>
             <tbody className='text-gray-600'>
-              {data.reviews.map((review) => (
+              {data?.reviews.map((review) => (
                 <tr
                   className='text-xs text-center transition-colors border-b border-gray-100 md:text-sm hover:bg-gray-50'
                   key={review._id}
@@ -107,7 +121,7 @@ export default function Comments() {
             </div>
           )}
         </section>
-      )}
+      </ShowWrapper>
     </main>
   );
 }

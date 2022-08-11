@@ -28,7 +28,7 @@ export default function OrderCard({ item }) {
           </span>
         )}
       </div>
-      <div className='flex justify-between lg:px-3'>
+      <div className='flex justify-between lg:px-3 flex-wrap'>
         <div>
           <span>کد سفارش</span>
           <span className='mr-2 text-sm text-black'>{item._id}</span>

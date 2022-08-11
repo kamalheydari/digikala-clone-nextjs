@@ -56,6 +56,8 @@ const getReview = async (req, res) => {
       .populate("product", "images")
       .populate("user", "name");
 
+    if (!review) return sendError(res, 400, "این نظر وجود ندارد");
+
     await db.disconnect();
 
     res.status(200).json({ review });

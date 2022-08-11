@@ -43,7 +43,7 @@ export default function SelectCategories({ detailsHome, productPage }) {
 
   return (
     <>
-      <div className='flex flex-col items-start justify-between gap-y-2 '>
+      <div className='flex flex-col items-start justify-between gap-y-2'>
         <label htmlFor='mainCategory'>دسته‌بندی اصلی</label>
         <select
           className='border-2 rounded-sm py-0.5 px-3 outline-none w-56 text-gray-800'

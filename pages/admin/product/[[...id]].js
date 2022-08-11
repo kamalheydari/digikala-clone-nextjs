@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
 
@@ -162,7 +163,12 @@ export default function Product() {
 
   return (
     <main>
-      <Buttons.Back backRoute='/admin'>محصول جدید</Buttons.Back>
+      <Head>
+        <title>مدیریت | {id ? "بروزرسانی محصول" : "محصول جدید"}</title>
+      </Head>
+      <Buttons.Back backRoute='/admin'>
+        {id ? "بروزرسانی محصول" : "محصول جدید"}
+      </Buttons.Back>
       <div className='section-divide-y' />
 
       <section className='p-3 md:px-3 xl:px-8 2xl:px-10'>

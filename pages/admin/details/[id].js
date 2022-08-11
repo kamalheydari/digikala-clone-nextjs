@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 
@@ -9,7 +10,12 @@ import {
 } from "app/slices/fetchApi.slice";
 import { openModal } from "app/slices/modal.slice";
 
-import { Buttons, BigLoading, DetailsList, Loading } from "components";
+import {
+  Buttons,
+  DetailsList,
+  Loading,
+  ShowWrapper,
+} from "components";
 
 export default function DetailsPage() {
   const router = useRouter();
@@ -28,7 +34,14 @@ export default function DetailsPage() {
   } = useSelector((state) => state.details);
 
   //? Get Details
-  const { data: details, isLoading: getDetailsIsLoading } = useGetDataQuery({
+  const {
+    data: details,
+    error: detailsError,
+    isError: detailsIsError,
+    isFetching: detailsIsFetching,
+    isSuccess: detailsIsSuccess,
+    refetch,
+  } = useGetDataQuery({
     url: `/api/details/${router.query.id}`,
   });
 
@@ -44,7 +57,7 @@ export default function DetailsPage() {
         optionsType: details?.details?.optionsType,
       })
     );
-  }, [getCtegory, getDetailsIsLoading]);
+  }, [getCtegory, detailsIsSuccess]);
 
   //? Post Data Query
   const [
@@ -136,16 +149,24 @@ export default function DetailsPage() {
 
   return (
     <main>
+      <Head>
+        <title>مدیریت | مشخصات</title>
+      </Head>
       <Buttons.Back backRoute='/admin/details'>
         مشخصات و ویژگی‌های دسته‌بندی
         <span> {category?.name}</span>
       </Buttons.Back>
       <div className='section-divide-y' />
-      {getDetailsIsLoading ? (
-        <section className='px-3 py-20'>
-          <BigLoading />
-        </section>
-      ) : (
+
+      <ShowWrapper
+        error={detailsError}
+        isError={detailsIsError}
+        refetch={refetch}
+        isFetching={detailsIsFetching}
+        isSuccess={detailsIsSuccess}
+        dataLength={details ? 1 : 0}
+        emptyElement={null}
+      >
         <form className='p-3 space-y-6' onSubmit={submitHandler}>
           <div className='space-y-3'>
             <p className='mb-2'>نوع انتخاب :</p>
@@ -218,7 +239,7 @@ export default function DetailsPage() {
             )}
           </div>
         </form>
-      )}
+      </ShowWrapper>
     </main>
   );
 }

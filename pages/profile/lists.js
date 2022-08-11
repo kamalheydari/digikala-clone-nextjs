@@ -7,7 +7,7 @@ export default function Lists() {
   return (
     <main>
       <Head>
-        <title>دیجی‌کالا | لیست‌ها</title>
+        <title>پروفایل | لیست‌ها</title>
       </Head>
       <Buttons.Back backRoute='/profile'>لیست‌ها</Buttons.Back>
       <div className='section-divide-y' />

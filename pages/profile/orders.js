@@ -1,11 +1,16 @@
 import Head from "next/head";
-import Image from "next/image";
 import { useState } from "react";
 
 import { useGetDataQuery } from "app/slices/fetchApi.slice";
 import { useSelector } from "react-redux";
 
-import { BigLoading, Buttons, OrderCard, Pagination } from "components";
+import {
+  Buttons,
+  OrderCard,
+  Pagination,
+  ShowWrapper,
+  EmptyOrdersList,
+} from "components";
 
 export default function Orders() {
   //? Local State
@@ -15,7 +20,14 @@ export default function Orders() {
   const { token } = useSelector((state) => state.user);
 
   //? Get Query
-  const { data, isLoading } = useGetDataQuery({
+  const {
+    data,
+    isSuccess,
+    isFetching,
+    error,
+    isError,
+    refetch,
+  } = useGetDataQuery({
     url: `/api/order?page=${page}&page_size=5`,
     token,
   });
@@ -23,29 +35,27 @@ export default function Orders() {
   return (
     <main>
       <Head>
-        <title>دیجی‌کالا | تاریخچه سفارشات</title>
+        <title>پروفایل | تاریخچه سفارشات</title>
       </Head>
       <Buttons.Back backRoute='/profile'>تاریخچه سفارشات</Buttons.Back>
       <div className='section-divide-y' />
-      {isLoading ? (
-        <section className='px-3 py-20'>
-          <BigLoading />
-        </section>
-      ) : data.ordersLength === 0 ? (
-        <section className='py-20'>
-          <div className='relative mx-auto h-52 w-52'>
-            <Image src='/icons/order-empty.svg' layout='fill' />
-          </div>
-
-          <p className='text-center'>هنوز هیچ سفارشی ندادید</p>
-        </section>
-      ) : (
-        <section className='px-4 py-3 space-y-3'>
-          {data.orders.map((item) => (
+      <ShowWrapper
+        error={error}
+        isError={isError}
+        refetch={refetch}
+        isFetching={isFetching}
+        isSuccess={isSuccess}
+        dataLength={data ? data.ordersLength : 0}
+        emptyElement={<EmptyOrdersList />}
+        page={page}
+        top
+      >
+        <div className='px-4 py-3 space-y-3'>
+          {data?.orders.map((item) => (
             <OrderCard key={item._id} item={item} />
           ))}
-        </section>
-      )}
+        </div>
+      </ShowWrapper>
 
       {data?.ordersLength > 5 && (
         <div className='py-4 mx-auto lg:max-w-5xl'>
