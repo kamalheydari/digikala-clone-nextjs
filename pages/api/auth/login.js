@@ -5,7 +5,6 @@ import User from "models/User";
 
 import sendError from "utils/sendError";
 import { createAccessToken } from "utils/generateToken";
-import { disconnect } from "mongoose";
 
 export default async (req, res) => {
   switch (req.method) {
@@ -26,7 +25,7 @@ export default async (req, res) => {
 
         const access_token = createAccessToken({ id: user._id });
 
-        await disconnect();
+        await db.disconnect();
 
         res.status(200).json({
           msg: "ورود موفقیت آمیز بود",
