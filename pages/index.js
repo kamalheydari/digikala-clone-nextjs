@@ -87,7 +87,7 @@ export default function Home(props) {
 export async function getServerSideProps() {
   await db.connect();
 
-  const bestSells = await Product.find().sort({ sold: -1 }).limit(10).lean();
+  const bestSells = await Product.find().sort({ sold: -1 }).limit(15).lean();
 
   const discountProducts = await Product.find({
     discount: { $gte: 1 },
