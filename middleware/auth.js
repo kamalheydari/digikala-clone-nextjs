@@ -2,6 +2,7 @@ import sendError from "utils/sendError";
 import jwt from "jsonwebtoken";
 import Users from "models/User";
 import db from "lib/db";
+import mongoose from "mongoose";
 
 export default async function auth(req, res) {
   const token = req.headers.authorization;
@@ -16,5 +17,5 @@ export default async function auth(req, res) {
   const user = await Users.findOne({ _id: decoded.id });
   db.disconnect();
 
-  return { id: user._id, role: user.role, root: user.root };
+  return { id: decoded.id, role: user.role, root: user.root };
 }
