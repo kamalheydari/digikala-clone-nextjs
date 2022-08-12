@@ -14,9 +14,6 @@ module.exports = {
       "https://api.cloudinary.com/v1_1/djvgq77b0/image/upload",
   },
   images: {
-    domains: ["res.cloudinary.com"],
-  },
-  experimental: {
-    outputStandalone: true,
-  },
+    domains: ["res.cloudinary.com","digikala-clone-heydari-db.storage.iran.liara.space"],
+  }
 };
