@@ -130,7 +130,7 @@ export default function Footer() {
         </div>
         <p className='text-white'>
           توسعه داده شده توسط{" "}
-          <a href='http://heydari-dev.ir' target='_blank'>
+          <a href='http://heydari-dev.ir' target='_blank' className="text-sky-400">
             کمال حیدری
           </a>
         </p>
