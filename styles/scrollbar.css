@@ -4,6 +4,13 @@
   scrollbar-color: #ef4056 transparent;
 }
 
+@media (min-width: 1024px) {
+  * {
+    scrollbar-width: thin; /* none | auto  */
+    scrollbar-color: #b7bdc2 transparent;
+  }
+}
+
 /* The first applies to the thumb of the scrollbar, the second to the track. */
 /* Firefox */
 
@@ -23,8 +30,16 @@
   border-radius: 14px;
 }
 
-*::-webkit-scrollbar-thumb:hover {
-  background: #ef3f55;
+@media (min-width: 1024px) {
+  *::-webkit-scrollbar-track {
+    background: #e8e8e8;
+    border-radius: 14px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: #b7bdc2;
+    border-radius: 14px;
+  }
 }
 /* Chrome, Edge, Safari */
 
@@ -37,6 +52,7 @@
   width: 2rem !important;
   height: 2rem !important;
 }
-.swiper-button-next::after,.swiper-button-prev::after {
+.swiper-button-next::after,
+.swiper-button-prev::after {
   font-size: 20px !important;
 }
