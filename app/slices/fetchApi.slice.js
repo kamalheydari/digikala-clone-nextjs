@@ -8,7 +8,7 @@ const fetchApi = createApi({
       query: ({ url, token }) => ({
         url,
         method: "GET",
-        headers: { "Content-Type": "application/json", Authorization: token },
+        headers: { "Content-Type": "application/json", "Authorization": token },
       }),
     }),
 
@@ -16,7 +16,7 @@ const fetchApi = createApi({
       query: ({ url, body, token }) => ({
         url,
         method: "POST",
-        headers: { "Content-Type": "application/json", Authorization: token },
+        headers: { "Content-Type": "application/json", "Authorization": token },
         body,
       }),
     }),
@@ -25,7 +25,7 @@ const fetchApi = createApi({
       query: ({ url, body, token }) => ({
         url,
         method: "PATCH",
-        headers: { "Content-Type": "application/json", Authorization: token },
+        headers: { "Content-Type": "application/json", "Authorization": token },
         body,
       }),
     }),
@@ -34,7 +34,7 @@ const fetchApi = createApi({
       query: ({ url, body, token }) => ({
         url,
         method: "PUT",
-        headers: { "Content-Type": "application/json", Authorization: token },
+        headers: { "Content-Type": "application/json", "Authorization": token },
         body,
       }),
     }),
@@ -43,7 +43,7 @@ const fetchApi = createApi({
       query: ({ url, token }) => ({
         url,
         method: "DELETE",
-        headers: { "Content-Type": "application/json", Authorization: token },
+        headers: { "Content-Type": "application/json", "Authorization": token },
       }),
     }),
   }),
