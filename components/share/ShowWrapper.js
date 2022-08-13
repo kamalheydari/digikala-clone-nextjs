@@ -38,7 +38,7 @@ export default function ShowWrapper({
             تلاش مجدد
           </button>
         </div>
-      ) : isFetching && !isSuccess ? (
+      ) : isFetching ? (
         <div className='px-3 py-20'>
           <BigLoading />
         </div>

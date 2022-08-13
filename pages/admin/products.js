@@ -104,7 +104,7 @@ export default function Products() {
       <Buttons.Back backRoute='/admin'>محصولات</Buttons.Back>
       <div className='section-divide-y' />
 
-      {isFetching && !isSuccess ? (
+      {isFetching ? (
         <section className='px-3 py-20'>
           <BigLoading />
         </section>
