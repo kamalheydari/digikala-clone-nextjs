@@ -9,6 +9,7 @@ import detailsReducer from "app/slices/details.slice";
 import productReducer from "app/slices/product.slice";
 import fitlerReducer from "app/slices/filter.slice";
 import reviewsReducer from "app/slices/reviews.slice";
+import alertReducer from "app/slices/alert.slice";
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
     product: productReducer,
     filter: fitlerReducer,
     reviews: reviewsReducer,
+    alert: alertReducer,
     [fetchApi.reducerPath]: fetchApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

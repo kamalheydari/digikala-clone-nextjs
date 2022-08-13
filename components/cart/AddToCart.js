@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
-import { addToCart } from "app/slices/cart.slice";
-import { openModal } from "app/slices/modal.slice";
 import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "app/slices/cart.slice";
+import { showAlert } from "app/slices/alert.slice";
 
 import exsitItem from "utils/exsitItem";
 
@@ -25,11 +25,9 @@ export default function AddToCart({ product, color, size }) {
   const handleAddItem = () => {
     if (product.inStock === 0)
       return dispatch(
-        openModal({
-          isShow: true,
-          type: "alert",
+        showAlert({
           status: "error",
-          text: "موجودی این محصول به اتمام رسیده",
+          title: "موجودی این محصول به اتمام رسیده",
         })
       );
 

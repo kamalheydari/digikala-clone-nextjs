@@ -5,6 +5,7 @@ import {
   resetSelectedCategories,
 } from "app/slices/category.slice";
 import { usePostDataMutation } from "app/slices/fetchApi.slice";
+import { showAlert } from "app/slices/alert.slice";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
@@ -18,7 +19,6 @@ import {
   UploadImages,
 } from "components";
 import { useSelector } from "react-redux";
-import { openModal } from "app/slices/modal.slice";
 
 export default function CategoryForm({ title, token, dispatch, closeModal }) {
   const [images, setImages] = useState([]);
@@ -45,11 +45,9 @@ export default function CategoryForm({ title, token, dispatch, closeModal }) {
 
     if (isError) {
       dispatch(
-        openModal({
-          isShow: true,
-          type: "alert",
+        showAlert({
           status: "error",
-          text: error?.data.err,
+          title: error?.data.err,
         })
       );
     }

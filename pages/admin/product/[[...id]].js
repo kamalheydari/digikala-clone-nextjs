@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { resetSelectedCategories } from "app/slices/category.slice";
 import { usePostDataMutation } from "app/slices/fetchApi.slice";
 import { openModal } from "app/slices/modal.slice";
+import { showAlert } from "app/slices/alert.slice";
 import {
   addItem,
   changeProductItems,
@@ -70,11 +71,9 @@ export default function Product() {
   useEffect(() => {
     if (isSuccess) {
       dispatch(
-        openModal({
-          isShow: true,
-          type: "alert",
+        showAlert({
           status: "success",
-          text: data.msg,
+          title: data.msg,
         })
       );
       router.push("/admin/products");
@@ -83,11 +82,9 @@ export default function Product() {
     }
     if (isError) {
       dispatch(
-        openModal({
-          isShow: true,
-          type: "alert",
+        showAlert({
           status: "error",
-          text: error?.data.err,
+          title: error?.data.err,
         })
       );
     }

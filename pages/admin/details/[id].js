@@ -9,13 +9,9 @@ import {
   usePostDataMutation,
 } from "app/slices/fetchApi.slice";
 import { openModal } from "app/slices/modal.slice";
+import { showAlert } from "app/slices/alert.slice";
 
-import {
-  Buttons,
-  DetailsList,
-  Loading,
-  ShowWrapper,
-} from "components";
+import { Buttons, DetailsList, Loading, ShowWrapper } from "components";
 
 export default function DetailsPage() {
   const router = useRouter();
@@ -68,22 +64,18 @@ export default function DetailsPage() {
   useEffect(() => {
     if (isSuccess) {
       dispatch(
-        openModal({
-          isShow: true,
-          type: "alert",
+        showAlert({
           status: "success",
-          text: data.msg,
+          title: data.msg,
         })
       );
       router.push("/admin/details");
     }
     if (isError)
       dispatch(
-        openModal({
-          isShow: true,
-          type: "alert",
+        showAlert({
           status: "error",
-          text: error?.data.err,
+          title: error?.data.err,
         })
       );
   }, [isSuccess, isLoading]);
@@ -105,11 +97,9 @@ export default function DetailsPage() {
       });
     } else {
       dispatch(
-        openModal({
-          isShow: true,
-          type: "alert",
+        showAlert({
           status: "error",
-          text: "لطفا مشخصات و ویژگی ها را وارد کنید",
+          title: "لطفا مشخصات و ویژگی ها را وارد کنید",
         })
       );
     }

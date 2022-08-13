@@ -10,6 +10,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { usePostDataMutation } from "app/slices/fetchApi.slice";
 import { useDispatch } from "react-redux";
 import { userLogin } from "app/slices/user.slice";
+import { showAlert } from "app/slices/alert.slice";
 
 import { DisplayError, Loading } from "components";
 
@@ -32,11 +33,9 @@ export default function RegisterPage() {
   useEffect(() => {
     if (isSuccess) {
       dispatch(
-        openModal({
-          isShow: true,
-          type: "alert",
+        showAlert({
           status: "success",
-          text: data.msg,
+          title: data.msg,
         })
       );
       dispatch(userLogin(data.data));

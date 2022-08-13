@@ -7,6 +7,7 @@ import { clearCart } from "app/slices/cart.slice";
 import { usePostDataMutation } from "app/slices/fetchApi.slice";
 import { openModal } from "app/slices/modal.slice";
 import { useDispatch, useSelector } from "react-redux";
+import { showAlert } from "app/slices/alert.slice";
 
 import { CartInfo, Icons, Loading } from "components";
 
@@ -35,11 +36,9 @@ export default function ShippingPage() {
   useEffect(() => {
     if (isSuccess) {
       dispatch(
-        openModal({
-          isShow: true,
-          type: "alert",
+        showAlert({
           status: "success",
-          text: data.msg,
+          title: data.msg,
         })
       );
       dispatch(clearCart());
@@ -47,11 +46,9 @@ export default function ShippingPage() {
     }
     if (isError) {
       dispatch(
-        openModal({
-          isShow: true,
-          type: "alert",
+        showAlert({
           status: "error",
-          text: error?.data.err,
+          title: error?.data.err,
         })
       );
     }
@@ -76,11 +73,9 @@ export default function ShippingPage() {
       !user.address?.postalCode
     )
       return dispatch(
-        openModal({
-          isShow: true,
-          type: "alert",
+        showAlert({
           status: "error",
-          text: "لطفا آدرس خود را تکمیل کنید",
+          title: "لطفا آدرس خود را تکمیل کنید",
         })
       );
     postData({

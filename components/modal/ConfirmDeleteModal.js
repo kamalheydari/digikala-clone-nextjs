@@ -1,14 +1,15 @@
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+
 import {
   closeModal,
   confirmAction,
   confirmReset,
-  openModal,
 } from "app/slices/modal.slice";
-import { useEffect } from "react";
+import { showAlert } from "app/slices/alert.slice";
 import { useDeleteDataMutation } from "app/slices/fetchApi.slice";
-
 import { resetDetails } from "app/slices/details.slice";
-import { useRouter } from "next/router";
+
 
 export default function ConfirmDeleteModal({
   title,
@@ -62,11 +63,9 @@ export default function ConfirmDeleteModal({
 
     if (isError) {
       dispatch(
-        openModal({
-          isShow: true,
-          type: "alert",
+        showAlert({
           status: "error",
-          text: error?.data.err,
+          title: error?.data.err,
         })
       );
       dispatch(confirmReset());

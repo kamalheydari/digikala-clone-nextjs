@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 
 import { useDispatch } from "react-redux";
 import { userLogout } from "app/slices/user.slice";
-import { openModal } from "app/slices/modal.slice";
+import { showAlert } from "app/slices/alert.slice";
 
 import { Icons } from "components";
 
@@ -14,11 +14,9 @@ export default function Logout() {
     router.push("/");
     dispatch(userLogout());
     dispatch(
-      openModal({
-        isShow: true,
-        type: "alert",
+      showAlert({
         status: "success",
-        text: "خروج موفقیت آمیز بود",
+        title: "خروج موفقیت آمیز بود",
       })
     );
   };

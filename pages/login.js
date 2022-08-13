@@ -11,10 +11,10 @@ import { DisplayError, Loading } from "components";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { userLogin } from "app/slices/user.slice";
-import { openModal } from "app/slices/modal.slice";
 
 //? Validation Schema
 import validation from "utils/validation";
+import { showAlert } from "app/slices/alert.slice";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
@@ -31,11 +31,9 @@ export default function LoginPage() {
     if (isSuccess) {
       dispatch(userLogin(data.data));
       dispatch(
-        openModal({
-          isShow: true,
-          type: "alert",
+        showAlert({
           status: "success",
-          text: data.msg,
+          title: data.msg,
         })
       );
       router.push("/");
@@ -43,11 +41,9 @@ export default function LoginPage() {
     }
     if (isError)
       dispatch(
-        openModal({
-          isShow: true,
-          type: "alert",
+        showAlert({
           status: "error",
-          text: error?.data.err,
+          title: error?.data.err,
         })
       );
   }, [isSuccess, isError]);
@@ -75,9 +71,7 @@ export default function LoginPage() {
   return (
     <main className='grid items-center min-h-screen '>
       <Head>
-        <title>
-        دیجی‌کالا | ورود
-        </title>
+        <title>دیجی‌کالا | ورود</title>
       </Head>
       <section className='container max-w-xl px-12 py-6 space-y-6 lg:border lg:border-gray-100 lg:rounded-lg lg:shadow'>
         <div className='relative h-24 mx-auto w-44'>

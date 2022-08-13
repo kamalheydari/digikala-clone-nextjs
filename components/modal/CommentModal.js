@@ -8,7 +8,8 @@ import {
   deleteReviewsItem,
   resetReview,
 } from "app/slices/reviews.slice";
-import { closeModal, openModal } from "app/slices/modal.slice";
+import { closeModal } from "app/slices/modal.slice";
+import { showAlert } from "app/slices/alert.slice";
 
 import { ratingStatus } from "utils/constatns";
 
@@ -40,11 +41,9 @@ export default function CommentModal({ title: productTitle, dispatch, id }) {
       dispatch(closeModal());
       dispatch(resetReview());
       dispatch(
-        openModal({
-          isShow: true,
-          type: "alert",
+        showAlert({
           status: "success",
-          text: data.msg,
+          title: data.msg,
         })
       );
     }
@@ -53,11 +52,9 @@ export default function CommentModal({ title: productTitle, dispatch, id }) {
       dispatch(closeModal());
       dispatch(resetReview());
       dispatch(
-        openModal({
-          isShow: true,
-          type: "alert",
+        showAlert({
           status: "error",
-          text: error?.data.err,
+          title: error?.data.err,
         })
       );
     }

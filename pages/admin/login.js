@@ -10,7 +10,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useDispatch } from "react-redux";
 import { usePostDataMutation } from "app/slices/fetchApi.slice";
 import { userLogin } from "app/slices/user.slice";
-import { openModal } from "app/slices/modal.slice";
+import { showAlert } from "app/slices/alert.slice";
 
 import { DisplayError, Loading } from "components";
 
@@ -34,33 +34,27 @@ export default function LoginPage() {
       if (data.data.user.root || data.data.user.role === "admin") {
         dispatch(userLogin(data.data));
         dispatch(
-          openModal({
-            isShow: true,
-            type: "alert",
+          showAlert({
             status: "success",
-            text: data.msg,
+            title: data.msg,
           })
         );
         router.push("/admin");
         reset();
       } else {
         dispatch(
-          openModal({
-            isShow: true,
-            type: "alert",
+          showAlert({
             status: "error",
-            text: "شما اجازه دسترسی به پنل ادمین را ندارید",
+            title: "شما اجازه دسترسی به پنل ادمین را ندارید",
           })
         );
       }
     }
     if (isError)
       dispatch(
-        openModal({
-          isShow: true,
-          type: "alert",
+        showAlert({
           status: "error",
-          text: error?.data.err,
+          title: error?.data.err,
         })
       );
   }, [isSuccess, isError]);

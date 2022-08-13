@@ -16,6 +16,7 @@ import {
   Modal,
   PageLoading,
   ErrorBoundary,
+  Alert,
 } from "components";
 import { fetchCategories } from "app/slices/category.slice";
 
@@ -43,6 +44,7 @@ export default function MyApp({ Component, pageProps }) {
           </ErrorBoundary>
           <RefreshTokenHandler />
           <Modal />
+          <Alert />
         </ClientLayout>
       </Provider>
     );
@@ -58,6 +60,7 @@ export default function MyApp({ Component, pageProps }) {
           </ErrorBoundary>
           <RefreshTokenHandler />
           <Modal />
+          <Alert />
         </DashboardLayout>
       </Provider>
     );
@@ -72,6 +75,7 @@ export default function MyApp({ Component, pageProps }) {
           </ErrorBoundary>
           <RefreshTokenHandler />
           <Modal />
+          <Alert />
         </ProfileLayout>
       </Provider>
     );
@@ -83,6 +87,7 @@ export default function MyApp({ Component, pageProps }) {
         <Component {...pageProps} />
       </ErrorBoundary>
       <Modal />
+      <Alert />
     </Provider>
   );
 }

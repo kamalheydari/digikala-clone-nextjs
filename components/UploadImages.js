@@ -1,13 +1,12 @@
 import { useState } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
-import { openModal } from "app/slices/modal.slice";
-import { addItem, deleteImage } from "app/slices/product.slice";
+import { useDispatch } from "react-redux";
+import { showAlert } from "app/slices/alert.slice";
 
 import { imageUpload } from "utils/imageUpload";
 
 import { Icons, Loading } from "components";
-//!  addItem, deleteImage , images
+
 export default function UploadImages({
   multiple,
   deleteImageHandler,
@@ -44,11 +43,9 @@ export default function UploadImages({
 
     if (err)
       return dispatch(
-        openModal({
-          isShow: true,
-          type: "alert",
+        showAlert({
           status: "error",
-          text: err,
+          title: err,
         })
       );
   };
@@ -67,11 +64,9 @@ export default function UploadImages({
 
     if (media[0]?.url && multiple)
       dispatch(
-        openModal({
-          isShow: true,
-          type: "alert",
+        showAlert({
           status: "success",
-          text: "تصاویر با موفقیت آپلود شدند",
+          title: "تصاویر با موفقیت آپلود شدند",
         })
       );
   };

@@ -49,7 +49,6 @@ export { default as ConfirmUpdateModal } from "./modal/ConfirmUpdateModal";
 export { default as CategoryForm } from "./modal/CategoryForm";
 export { default as CloseModal } from "./modal/CloseModal";
 export { default as RedirectToLogin } from "./modal/RedirectToLogin";
-export { default as Alert } from "./modal/Alert";
 export { default as NameForm } from "./modal/NameForm";
 export { default as MobileForm } from "./modal/MobileForm";
 export { default as AddressForm } from "./modal/AddressForm";
@@ -64,6 +63,7 @@ export { default as EmptyComment } from "./emptyList/EmptyComment";
 export { default as EmptySearchList } from "./emptyList/EmptySearchList";
 
 //* OTHER COMPONENTS
+export { default as Alert } from "./Alert";
 export { default as Header } from "./Header";
 export { default as Navbar } from "./Navbar";
 export { default as Categories } from "./Categories";

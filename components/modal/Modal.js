@@ -3,7 +3,6 @@ import { closeModal } from "app/slices/modal.slice";
 
 //? Components
 import {
-  Alert,
   RedirectToLogin,
   NameForm,
   MobileForm,
@@ -20,35 +19,15 @@ export default function Modal() {
 
   const { token } = useSelector((state) => state.user);
 
-  const {
-    type,
-    text,
-    status,
-    isShow,
-    title,
-    isConfirm,
-    id,
-    editedData,
-  } = useSelector((state) => state.modal);
+  const { type, text, isShow, title, isConfirm, id, editedData } = useSelector(
+    (state) => state.modal
+  );
 
   //? Config Modal
   let renderModal;
   let effect = [];
   let size = "";
   switch (type) {
-    case "alert":
-      effect = ["top-40", "-top-full"];
-      size = "max-w-md";
-      renderModal = (
-        <Alert
-          text={text}
-          status={status}
-          isShow={isShow}
-          dispatch={dispatch}
-        />
-      );
-      break;
-
     case "redirect":
       effect = ["top-40 transform scale-100", "top-40 transform scale-50 "];
       size = "max-w-3xl";

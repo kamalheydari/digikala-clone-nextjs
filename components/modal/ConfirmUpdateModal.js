@@ -1,11 +1,12 @@
+import { useEffect } from "react";
+
 import {
   closeModal,
   confirmAction,
   confirmReset,
-  openModal,
 } from "app/slices/modal.slice";
-import { useEffect } from "react";
 import { usePutDataMutation } from "app/slices/fetchApi.slice";
+import { showAlert } from "app/slices/alert.slice";
 
 export default function ConfirmUpdateModal({
   title,
@@ -41,11 +42,9 @@ export default function ConfirmUpdateModal({
   useEffect(() => {
     if (isSuccess) {
       dispatch(
-        openModal({
-          isShow: true,
-          type: "alert",
+        showAlert({
           status: "success",
-          text: data.msg,
+          title: data.msg,
         })
       );
       dispatch(confirmReset());
@@ -53,11 +52,9 @@ export default function ConfirmUpdateModal({
 
     if (isError) {
       dispatch(
-        openModal({
-          isShow: true,
-          type: "alert",
+        showAlert({
           status: "error",
-          text: error?.data.err,
+          title: error?.data.err,
         })
       );
       dispatch(confirmReset());
