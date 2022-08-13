@@ -11,11 +11,11 @@ export default function Pagination({
 }) {
   return (
     <nav>
-      <ul className='inline-flex items-center w-full gap-x-2 farsi-digits'>
+      <ul className='inline-flex items-center w-full px-10 gap-x-2 farsi-digits'>
         <div className='ml-auto'>
           {hasPreviousPage && (
             <li
-              className='flex justify-center p-1 text-red-500 cursor-pointer'
+              className='flex items-center p-1 text-red-500 cursor-pointer'
               onClick={() => setPage(previousPage)}
             >
               <Icons.ArrowRight2 className='text-red-500 icon' />
@@ -67,7 +67,7 @@ export default function Pagination({
         <div className='mr-auto'>
           {hasNextPage && (
             <li
-              className='flex justify-center p-1 text-red-500 cursor-pointer'
+              className='flex items-center p-1 text-red-500 cursor-pointer'
               onClick={() => setPage(nextPage)}
             >
               بعدی
