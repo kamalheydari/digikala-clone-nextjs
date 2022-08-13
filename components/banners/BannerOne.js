@@ -5,7 +5,7 @@ export default function BannerOne({ images = [] }) {
     <section className='grid gap-3 px-3 lg:relative lg:grid-cols-2 lg:gap-4'>
       {images.map((item, index) => (
         <div
-          className={`relative h-[30vw] lg:h-64 w-full rounded-2xl overflow-hidden ${
+          className={`relative h-[40vw] lg:h-72 w-full rounded-2xl overflow-hidden ${
             index === 0
               ? "lg:rounded-none lg:rounded-tr-2xl"
               : index === 1
