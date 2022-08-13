@@ -8,9 +8,10 @@ import { useGetDataQuery } from "app/slices/fetchApi.slice";
 import {
   CloseModal,
   Icons,
-  BigLoading,
   DiscountProduct,
   ProductPrice,
+  EmptySearchList,
+  ShowWrapper,
 } from "components";
 
 import { truncate } from "utils/truncate";
@@ -22,10 +23,17 @@ export default function SearchModal({ isShow, dispatch, closeModal }) {
   const [search, setSearch] = useState("");
 
   //? Get Data Query
-  const { data, isLoading } = useGetDataQuery({
+  const {
+    data,
+    isSuccess,
+    isFetching,
+    error,
+    isError,
+    refetch,
+  } = useGetDataQuery({
     url: `/api/products?page_size=5&page=1&category=all&search=${search}`,
   });
-
+  console.log(data);
   //? Reset Search
   useEffect(() => {
     if (!isShow) {
@@ -72,19 +80,19 @@ export default function SearchModal({ isShow, dispatch, closeModal }) {
           <Icons.Search className='icon' />
         </button>
       </form>
-
-      <div className=''>
-        {isLoading ? (
-          <div className='px-3 py-20'>
-            <BigLoading />
-          </div>
-        ) : data.products.length === 0 ? (
-          <div className='py-20'>
-            <p className='text-center text-red-500'>محصول مورد نظر یافت نشد</p>
-          </div>
-        ) : data.products.length > 0 && search.length > 0 ? (
-          <div className='px-4 py-3 divide-y'>
-            {data.products.map((item) => (
+      <ShowWrapper
+        error={error}
+        isError={isError}
+        refetch={refetch}
+        isFetching={isFetching}
+        isSuccess={isSuccess}
+        dataLength={data ? data.productsLength : 0}
+        emptyElement={<EmptySearchList />}
+      >
+        <div className='px-4 py-3 divide-y'>
+          {data?.productsLength > 0 &&
+            search.length > 0 &&
+            data?.products.map((item) => (
               <article key={item._id} className='pt-1'>
                 <div className='relative w-12 h-12'>
                   <Image src={item.images[0].url} layout='fill' />
@@ -99,15 +107,20 @@ export default function SearchModal({ isShow, dispatch, closeModal }) {
                 </Link>
                 <div className='flex justify-between'>
                   <div>
-                    <DiscountProduct product={item} />
+                    {item.discount > 0 && (
+                      <DiscountProduct discount={item.discount} />
+                    )}
                   </div>
-                  <ProductPrice product={item} />
+                  <ProductPrice
+                    inStock={item.inStock}
+                    discount={item.discount}
+                    price={item.price}
+                  />
                 </div>
               </article>
             ))}
-          </div>
-        ) : null}
-      </div>
+        </div>
+      </ShowWrapper>
     </div>
   );
 }
