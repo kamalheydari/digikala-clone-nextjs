@@ -61,6 +61,7 @@ export { default as EmptyCommentsList } from "./emptyList/EmptyCommentsList";
 export { default as EmptyOrdersList } from "./emptyList/EmptyOrdersList";
 export { default as EmptyUsersList } from "./emptyList/EmptyUsersList";
 export { default as EmptyComment } from "./emptyList/EmptyComment";
+export { default as EmptySearchList } from "./emptyList/EmptySearchList";
 
 //* OTHER COMPONENTS
 export { default as Header } from "./Header";
