@@ -10,6 +10,7 @@ import { showAlert } from "app/slices/alert.slice";
 import { useDeleteDataMutation } from "app/slices/fetchApi.slice";
 import { resetDetails } from "app/slices/details.slice";
 
+import { ModalWrapper } from "components";
 
 export default function ConfirmDeleteModal({
   title,
@@ -18,6 +19,7 @@ export default function ConfirmDeleteModal({
   token,
   type,
   dispatch,
+  isShow,
 }) {
   const router = useRouter();
 
@@ -83,27 +85,38 @@ export default function ConfirmDeleteModal({
   };
 
   return (
-    <div className='px-3 py-6 space-y-4 text-center bg-white md:rounded-lg'>
-      <p>
-        آیا موافق حذف <span className='font-bold text-red-500'>{title}</span>{" "}
-        انتخاب شده هستید؟
-      </p>
-      <div className='flex justify-center gap-x-20'>
-        <button
-          type='button'
-          className='rounded-lg btn'
-          onClick={handleConfirmClick}
-        >
-          حذف و ادامه
-        </button>
-        <button
-          type='button'
-          className='bg-green-500 rounded-lg btn'
-          onClick={handleCancleClick}
-        >
-          لغو
-        </button>
+    <ModalWrapper isShow={isShow}>
+      <div
+        className={`
+  ${
+    isShow ? "top-40 transform scale-100" : "top-40 transform scale-50 "
+  } max-w-3xl 
+   fixed transition-all duration-700 left-0 right-0 mx-auto z-40`}
+      >
+        <div className='px-3 py-6 space-y-4 text-center bg-white md:rounded-lg'>
+          <p>
+            آیا موافق حذف{" "}
+            <span className='font-bold text-red-500'>{title}</span> انتخاب شده
+            هستید؟
+          </p>
+          <div className='flex justify-center gap-x-20'>
+            <button
+              type='button'
+              className='rounded-lg btn'
+              onClick={handleConfirmClick}
+            >
+              حذف و ادامه
+            </button>
+            <button
+              type='button'
+              className='bg-green-500 rounded-lg btn'
+              onClick={handleCancleClick}
+            >
+              لغو
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
+    </ModalWrapper>
   );
 }

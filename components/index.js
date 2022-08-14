@@ -7,7 +7,7 @@ export { default as BigLoading } from "./loading/BigLoading";
 export { default as ShowWrapper } from "./share/ShowWrapper";
 
 //* LOADING
-export { default as Loading } from "./loading/Loading";
+export { default as Loading } from "./share/Loading";
 export { default as Buttons } from "./share/Buttons";
 export { default as PageLoading } from "./loading/PageLoading";
 
@@ -57,6 +57,7 @@ export { default as MobileForm } from "./modal/MobileForm";
 export { default as AddressForm } from "./modal/AddressForm";
 export { default as CommentModal } from "./modal/CommentModal";
 export { default as SearchModal } from "./modal/SearchModal";
+export { default as ModalWrapper } from "./modal/ModalWrapper";
 
 //* EMPTY LIST COMPONENTS
 export { default as EmptyCommentsList } from "./emptyList/EmptyCommentsList";

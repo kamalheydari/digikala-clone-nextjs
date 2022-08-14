@@ -7,7 +7,7 @@ import validation from "utils/validation";
 import { usePatchDataMutation } from "app/slices/fetchApi.slice";
 import { updateUser } from "app/slices/user.slice";
 
-import { DisplayError, Loading, CloseModal } from "components";
+import { DisplayError, Loading, CloseModal, ModalWrapper } from "components";
 
 export default function MobileForm({
   title,
@@ -15,6 +15,7 @@ export default function MobileForm({
   dispatch,
   closeModal,
   editedData,
+  isShow,
 }) {
   //? Patch Data
   const [patchData, { data, isSuccess, isLoading }] = usePatchDataMutation();
@@ -47,39 +48,48 @@ export default function MobileForm({
   };
 
   return (
-    <div className='flex flex-col h-full px-5 py-3 bg-white md:rounded-lg gap-y-5'>
-      <div className='flex justify-between py-2 border-b-2 border-gray-200'>
-        <span className='text-sm'>{title}</span>
-        <CloseModal />
-      </div>
-      <p className='text-sm'>لطفا شماره تلفن همراه خود را وارد کنید.</p>
-      <form
-        className='flex flex-col justify-between flex-1 gap-y-5'
-        onSubmit={handleSubmit(submitHander)}
+    <ModalWrapper isShow={isShow}>
+      <div
+        className={`
+  ${
+    isShow ? "bottom-0 lg:top-44" : "-bottom-full lg:top-60"
+  } w-full h-[90vh] lg:h-fit lg:max-w-3xl fixed transition-all duration-700 left-0 right-0 mx-auto z-40`}
       >
-        <div className='space-y-3 '>
-          <label
-            className='text-xs text-gray-700 lg:text-sm md:min-w-max'
-            htmlFor='mobile'
+        <div className='flex flex-col h-full px-5 py-3 bg-white md:rounded-lg gap-y-5'>
+          <div className='flex justify-between py-2 border-b-2 border-gray-200'>
+            <span className='text-sm'>{title}</span>
+            <CloseModal />
+          </div>
+          <p className='text-sm'>لطفا شماره تلفن همراه خود را وارد کنید.</p>
+          <form
+            className='flex flex-col justify-between flex-1 gap-y-5'
+            onSubmit={handleSubmit(submitHander)}
           >
-            شماره موبایل
-          </label>
-          <input
-            className='input sm:max-w-sm lg:max-w-full '
-            type='text'
-            name='mobile'
-            defaultValue={editedData}
-            {...register("mobile")}
-          />
-          <DisplayError errors={formErrors.mobile} />
-        </div>
+            <div className='space-y-3 '>
+              <label
+                className='text-xs text-gray-700 lg:text-sm md:min-w-max'
+                htmlFor='mobile'
+              >
+                شماره موبایل
+              </label>
+              <input
+                className='input sm:max-w-sm lg:max-w-full '
+                type='text'
+                name='mobile'
+                defaultValue={editedData}
+                {...register("mobile")}
+              />
+              <DisplayError errors={formErrors.mobile} />
+            </div>
 
-        <div className='py-3 border-t-2 border-gray-200 lg:pb-0 '>
-          <button className='modal-btn' type='submit' disabled={isLoading}>
-            {isLoading ? <Loading /> : "ثبت اطلاعات"}
-          </button>
+            <div className='py-3 border-t-2 border-gray-200 lg:pb-0 '>
+              <button className='modal-btn' type='submit' disabled={isLoading}>
+                {isLoading ? <Loading /> : "ثبت اطلاعات"}
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
-    </div>
+      </div>
+    </ModalWrapper>
   );
 }
