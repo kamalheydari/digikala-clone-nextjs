@@ -81,7 +81,7 @@ const createProduct = async (req, res) => {
   try {
     const result = await auth(req, res);
 
-    if (!result.root) return sendError(res, 400, "توکن احراز هویت نامعتبر است");
+    if (!result.root) return sendError(res, 403, "توکن احراز هویت نامعتبر است");
 
     const {
       title,
@@ -105,7 +105,7 @@ const createProduct = async (req, res) => {
       info.length === 0 ||
       specification.length === 0
     )
-      return sendError(res, 400, "لطفا تمام فیلد ها را پر کنید");
+      return sendError(res, 204, "لطفا تمام فیلد ها را پر کنید");
 
     await db.connect();
     const newProduct = new Products({

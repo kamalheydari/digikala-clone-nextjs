@@ -39,7 +39,7 @@ const getDetails = async (req, res) => {
 const updateDetails = async (req, res) => {
   try {
     const result = await auth(req, res);
-    if (!result) return sendError(res, 400, "توکن احراز هویت نامعتبر است");
+    if (!result) return sendError(res, 403, "توکن احراز هویت نامعتبر است");
 
     const { id } = req.query;
 

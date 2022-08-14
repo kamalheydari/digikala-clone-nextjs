@@ -56,7 +56,7 @@ const getReview = async (req, res) => {
       .populate("product", "images")
       .populate("user", "name");
 
-    if (!review) return sendError(res, 400, "این نظر وجود ندارد");
+    if (!review) return sendError(res, 404, "این نظر وجود ندارد");
 
     await db.disconnect();
 
@@ -68,7 +68,14 @@ const getReview = async (req, res) => {
 
 const deleteReview = async (req, res) => {
   try {
+    const result = await auth(req, res);
+
     await db.connect();
+
+    const review = await Review.findOne({ user: result.id });
+
+    if (review.user !== result.id)
+      return sendError(res, 403, "توکن احراز هویت نامعتبر است");
 
     await Review.findByIdAndDelete(req.query.id);
 
@@ -83,7 +90,7 @@ const deleteReview = async (req, res) => {
 const updateReview = async (req, res) => {
   try {
     const result = await auth(req, res);
-    if (!result) return sendError(res, 400, "توکن احراز هویت نامعتبر است");
+    if (!result.root) return sendError(res, 403, "توکن احراز هویت نامعتبر است");
 
     await db.connect();
 

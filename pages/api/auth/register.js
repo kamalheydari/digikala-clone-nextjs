@@ -25,7 +25,7 @@ const register = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (user)
-      return sendError(res, 400, "شما قبلا با این آدرس ایمیل ثیت نام کردید");
+      return sendError(res, 422, "شما قبلا با این آدرس ایمیل ثیت نام کردید");
 
     const hashPassword = await bcrypt.hash(password, 12);
 

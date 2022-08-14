@@ -16,12 +16,12 @@ export default async (req, res) => {
 
         const user = await User.findOne({ email });
 
-        if (!user) return sendError(res, 400, "کاربری با این ایمیل یافت نشد");
+        if (!user) return sendError(res, 404, "کاربری با این ایمیل یافت نشد");
 
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (!isMatch)
-          return sendError(res, 400, "آدرس ایمیل یا کلمه عبور اشتباه است");
+          return sendError(res, 422, "آدرس ایمیل یا کلمه عبور اشتباه است");
 
         const access_token = createAccessToken({ id: user._id });
 

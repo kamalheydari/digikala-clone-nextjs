@@ -22,7 +22,7 @@ export default async (req, res) => {
 const uploadInfo = async (req, res) => {
   try {
     const result = await auth(req, res);
-    if (!result) return sendError(res, 400, "توکن احراز هویت نامعتبر است");
+    if (!result) return sendError(res, 403, "توکن احراز هویت نامعتبر است");
 
     await db.connect();
     await User.findOneAndUpdate({ _id: result.id }, { ...req.body });
@@ -52,7 +52,7 @@ const getUsers = async (req, res) => {
   try {
     const result = await auth(req, res);
     if (!result.root && result.role !== "admin")
-      return sendError(res, 400, "توکن احراز هویت نامعتبر است");
+      return sendError(res, 403, "توکن احراز هویت نامعتبر است");
 
     await db.connect();
 

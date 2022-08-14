@@ -23,10 +23,10 @@ const createCategory = async (req, res) => {
   try {
     const result = await auth(req, res);
 
-    if (!result.root) return sendError(res, 400, "توکن احراز هویت نامعتبر است");
+    if (!result.root) return sendError(res, 403, "توکن احراز هویت نامعتبر است");
 
     const { name } = req.body;
-    if (!name) return sendError(res, 400, "نام دسته بندی نباید خالی باشد");
+    if (!name) return sendError(res, 204, "نام دسته بندی نباید خالی باشد");
 
     await db.connect();
     const newCategory = new Category({ ...req.body });
