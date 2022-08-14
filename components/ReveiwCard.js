@@ -6,6 +6,7 @@ import { openModal } from "app/slices/modal.slice";
 import { usePatchDataMutation } from "app/slices/fetchApi.slice";
 
 import { Icons } from "components";
+import { showAlert } from "app/slices/alert.slice";
 
 export default function ReveiwCard({ item, singleComment }) {
   const dispatch = useDispatch();
@@ -17,15 +18,28 @@ export default function ReveiwCard({ item, singleComment }) {
   const { token } = useSelector((state) => state.user);
 
   //? Patch Query
-  const [patchData] = usePatchDataMutation();
+  const [patchData, { isSuccess, isError, error }] = usePatchDataMutation();
 
   useEffect(() => {
-    patchData({
-      url: `/api/reviews/${item._id}`,
-      token,
-      body: { status },
-    });
-  }, [status]);
+    if (isSuccess) {
+      dispatch(
+        showAlert({
+          status: "success",
+          title: data.msg,
+        })
+      );
+    }
+
+    if (isError) {
+      dispatch(
+        showAlert({
+          status: "error",
+          title: error?.data.err,
+        })
+      );
+      setStatus(1);
+    }
+  }, [isSuccess, isError]);
 
   //? Handlers
   const handleDelete = () => {
@@ -37,6 +51,14 @@ export default function ReveiwCard({ item, singleComment }) {
         title: "دیدگاه‌",
       })
     );
+  };
+
+  const handleChangeStatus = (statusNum) => {
+    patchData({
+      url: `/api/reviews/${item._id}`,
+      token,
+      body: { status },
+    });
   };
 
   return (
@@ -103,7 +125,7 @@ export default function ReveiwCard({ item, singleComment }) {
                     <button
                       type='button'
                       className='flex items-center w-48 gap-x-3'
-                      onClick={() => setStatus(2)}
+                      onClick={() => handleChangeStatus(2)}
                     >
                       <Icons.Check className='text-white rounded-full p-0.5 icon bg-green-500 ' />
                       <span className='block'>تغییر وضعیت به تایید شده</span>
@@ -111,7 +133,7 @@ export default function ReveiwCard({ item, singleComment }) {
                     <button
                       type='button'
                       className='flex items-center w-48 gap-x-3'
-                      onClick={() => setStatus(3)}
+                      onClick={() => handleChangeStatus(3)}
                     >
                       <Icons.Cross className='text-white rounded-full p-0.5 icon bg-red-500 ' />
                       <span className='block'>تغییر وضعیت به رد شده</span>
