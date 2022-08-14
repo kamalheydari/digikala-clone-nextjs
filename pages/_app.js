@@ -55,6 +55,7 @@ export default function MyApp({ Component, pageProps }) {
     return Component.getDashboardLayout(
       <Provider store={store}>
         <DashboardLayout>
+          <PageLoading />
           <ErrorBoundary>
             <Component {...pageProps} />
           </ErrorBoundary>
@@ -70,6 +71,7 @@ export default function MyApp({ Component, pageProps }) {
     return Component.getProfileLayout(
       <Provider store={store}>
         <ProfileLayout>
+          <PageLoading />
           <ErrorBoundary>
             <Component {...pageProps} />
           </ErrorBoundary>
@@ -83,6 +85,7 @@ export default function MyApp({ Component, pageProps }) {
 
   return (
     <Provider store={store}>
+      <PageLoading />
       <ErrorBoundary>
         <Component {...pageProps} />
       </ErrorBoundary>

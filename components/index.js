@@ -1,12 +1,15 @@
 //* SHARE COMPONENTS
 export { default as Icons } from "./share/Icons";
-export { default as Loading } from "./share/Loading";
 export { default as ArrowLink } from "./share/ArrowLink";
 export { default as BoxLink } from "./share/BoxLink";
 export { default as DisplayError } from "./share/DisplayError";
-export { default as BigLoading } from "./share/BigLoading";
-export { default as Buttons } from "./share/Buttons";
+export { default as BigLoading } from "./loading/BigLoading";
 export { default as ShowWrapper } from "./share/ShowWrapper";
+
+//* LOADING
+export { default as Loading } from "./loading/Loading";
+export { default as Buttons } from "./share/Buttons";
+export { default as PageLoading } from "./loading/PageLoading";
 
 //* LAYOUT COMPONENTS
 export { default as ClientLayout } from "./Layouts/ClientLayout";
@@ -87,5 +90,4 @@ export { default as OrderCard } from "./OrderCard";
 export { default as FreeShipping } from "./FreeShipping";
 export { default as ReveiwCard } from "./ReveiwCard";
 export { default as Footer } from "./Footer";
-export { default as PageLoading } from "./PageLoading";
 export { default as ErrorBoundary } from "./ErrorBoundary";
