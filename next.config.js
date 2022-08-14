@@ -1,8 +1,8 @@
 module.exports = {
   env: {
-    MONGODB_URL: "mongodb://localhost:27017/digikala-clone-nextjs",
-    // MONGODB_URL:
-    //   "mongodb://root:3F6NVtZZctS0lfIzeWUJsjuT@finn.iran.liara.ir:34423/digikala-clone-nexjs?authSource=admin",
+    // MONGODB_URL: "mongodb://localhost:27017/digikala-clone-nextjs",
+    MONGODB_URL:
+      "mongodb://root:3F6NVtZZctS0lfIzeWUJsjuT@finn.iran.liara.ir:34423/digikala-clone-nexjs?authSource=admin",
     NEXT_PUBLIC_ACCESS_TOKEN_SECRET:
       "h1n0U6LHJtCZuWitwjn3oLd5qCRIgUFtemnjTrpfZLzVZ3ff0f",
     ACCESS_TOKEN_SECRET: "h1n0U6LHJtCZuWitwjn3oLd5qCRIgUFtemnjTrpfZLzVZ3ff0f",

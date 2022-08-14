@@ -26,6 +26,7 @@ import {
   ShowWrapper,
   EmptyComment,
 } from "components";
+import { addToLastSeen } from "app/slices/user.slice";
 
 export default function SingleProduct({ product, smilarProducts }) {
   const dispatch = useDispatch();
@@ -40,6 +41,17 @@ export default function SingleProduct({ product, smilarProducts }) {
   let renderSpecification = isShowSpec
     ? product.specification
     : product.specification.slice(0, 7);
+
+  //? Add To LastSeen
+  useEffect(() => {
+    dispatch(
+      addToLastSeen({
+        productID: product._id,
+        image: product.images[0],
+        title: product.title,
+      })
+    );
+  }, [product._id]);
 
   //? Get Query
   const {

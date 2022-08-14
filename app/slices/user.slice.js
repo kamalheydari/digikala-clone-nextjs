@@ -1,9 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import Cookies from "js-cookie";
+import exsitItem from "utils/exsitItem";
 
-const initialState = Cookies.get("userInfo")
+const userInfo = Cookies.get("userInfo")
   ? JSON.parse(Cookies.get("userInfo"))
   : { token: null, user: null };
+
+const lastSeen =
+  typeof window !== "undefined" && localStorage.getItem("lastSeen")
+    ? JSON.parse(localStorage.getItem("lastSeen"))
+    : [];
+
+const initialState = { ...userInfo, lastSeen };
 
 const userSlice = createSlice({
   name: "user",
@@ -33,9 +41,25 @@ const userSlice = createSlice({
         { expires: 10 }
       );
     },
+    addToLastSeen: (state, action) => {
+      let isItemExist = exsitItem(state.lastSeen, action.payload.productID);
+      console.log(action.payload);
+      if (!isItemExist) {
+        if (state.lastSeen.length === 15) {
+          state.lastSeen.splice(14, 1);
+        }
+        state.lastSeen.unshift(action.payload);
+        localStorage.setItem("lastSeen", JSON.stringify(state.lastSeen));
+      }
+    },
   },
 });
 
-export const { userLogin, userLogout, updateUser } = userSlice.actions;
+export const {
+  userLogin,
+  userLogout,
+  updateUser,
+  addToLastSeen,
+} = userSlice.actions;
 
 export default userSlice.reducer;
