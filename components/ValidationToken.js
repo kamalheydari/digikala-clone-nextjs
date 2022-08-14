@@ -5,7 +5,7 @@ import verifyToken from "utils/verifyToken";
 
 import { openModal } from "app/slices/modal.slice";
 
-export default function RefreshTokenHandler() {
+export default function ValidationToken() {
   const dispatch = useDispatch();
 
   const { token } = useSelector((state) => state.user);
