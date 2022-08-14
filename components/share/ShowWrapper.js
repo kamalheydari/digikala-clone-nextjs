@@ -18,7 +18,7 @@ export default function ShowWrapper({
 
   //? Scroll to top
   useEffect(() => {
-    if (isSuccess && window.scrollY > 200) {
+    if (isSuccess && window.scrollY > 1900) {
       if (top) {
         window.scrollTo(0, 0);
       } else {
