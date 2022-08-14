@@ -120,7 +120,7 @@ export default function CategoryForm({
     isShow ? "bottom-0 lg:top-20" : "-bottom-full lg:top-28"
   } w-full h-[90vh] lg:h-fit lg:max-w-3xl  fixed transition-all duration-700 left-0 right-0 mx-auto z-40`}
       >
-        <div className='flex flex-col h-full lg:h-[770px] px-5 py-3 bg-white md:rounded-lg gap-y-3 '>
+        <div className='flex flex-col h-full lg:h-[770px] pl-2 pr-4 py-3 bg-white md:rounded-lg gap-y-3 '>
           <div className='flex justify-between py-2 border-b-2 border-gray-200 '>
             <h5>{title}</h5>
             <CloseModal />

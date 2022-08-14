@@ -60,14 +60,14 @@ export default function AddressForm({
     isShow ? "bottom-0 lg:top-44" : "-bottom-full lg:top-60"
   } w-full h-[90vh] lg:h-fit lg:max-w-3xl fixed transition-all duration-700 left-0 right-0 mx-auto z-40`}
       >
-        <div className='flex flex-col h-full px-5 py-3 bg-white md:rounded-lg gap-y-5'>
+        <div className='flex flex-col h-full pl-2 pr-4 py-3 bg-white md:rounded-lg gap-y-5'>
           <div className='flex justify-between py-2 border-b-2 border-gray-200'>
             <h5>{title}</h5>
             <CloseModal />
           </div>
           <p>لطفا اطلاعات موقعیت مکانی خود را وارد کنید.</p>
           <form
-            className='flex flex-col justify-between flex-1 gap-y-5'
+            className='flex flex-col justify-between flex-1 gap-y-5 overflow-y-auto pl-4'
             onSubmit={submitHander}
           >
             <div className='max-w-xl space-y-16 md:grid md:grid-cols-2 md:gap-x-12 md:gap-y-10 md:items-baseline '>
