@@ -131,6 +131,19 @@ export default function LoginPage() {
           </Link>
         </div>
       </section>
+
+      <div className='fixed max-w-xs px-2 py-3 border rounded-lg top-5 right-5'>
+        <h5 className='mb-2 text-amber-600'>
+          برای مشاهده داشبورد مدیریت میتوانید از آدرس ایمیل و رمز عبور زیر
+          استفاده کنید.
+        </h5>
+        <div className="text-left">
+        <span className="text-sm text-zinc-500">Email: admin@gmail.com</span>
+        <br />
+        <span className="text-sm text-zinc-500">Password: 123456</span>
+          
+        </div>
+      </div>
     </main>
   );
 }
