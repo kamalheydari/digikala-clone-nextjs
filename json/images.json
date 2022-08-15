@@ -138,12 +138,11 @@
   "root": {
     "colors": ["#EF394E", "#EF3F55"],
     "slider": [
-      "https://digikala-clone-heydari-db.storage.iran.liara.space/sliders/index-s1.jpg",
-      "https://digikala-clone-heydari-db.storage.iran.liara.space/sliders/index-s2.jpg",
-      "https://digikala-clone-heydari-db.storage.iran.liara.space/sliders/index-s3.jpg",
-      "https://digikala-clone-heydari-db.storage.iran.liara.space/sliders/index-s4.jpg",
-      "https://digikala-clone-heydari-db.storage.iran.liara.space/sliders/index-s5.jpg",
-      "https://digikala-clone-heydari-db.storage.iran.liara.space/sliders/index-s6.jpg"
+      "https://digikala-clone-heydari-db.storage.iran.liara.space/sliders/ss1.jpg",
+      "https://digikala-clone-heydari-db.storage.iran.liara.space/sliders/ss2.jpg",
+      "https://digikala-clone-heydari-db.storage.iran.liara.space/sliders/ss3.jpg",
+      "https://digikala-clone-heydari-db.storage.iran.liara.space/sliders/ss4.jpg",
+      "https://digikala-clone-heydari-db.storage.iran.liara.space/sliders/ss5.jpg"
     ],
     "banner_one": [
       "https://digikala-clone-heydari-db.storage.iran.liara.space/sliders/index-b1.jpg",
