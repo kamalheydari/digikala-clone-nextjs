@@ -52,7 +52,7 @@ export default function ConfirmDeleteModal({
   const [deleteData, { isSuccess, isError, error }] = useDeleteDataMutation();
 
   useEffect(() => {
-    if (isConfirm) {
+    if (isConfirm && url) {
       deleteData({
         url,
         token,

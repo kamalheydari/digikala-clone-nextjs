@@ -17,8 +17,8 @@ import {
 export default function Modal() {
   const dispatch = useDispatch();
 
+  //? Store
   const { token } = useSelector((state) => state.user);
-
   const { type, text, isShow, title, isConfirm, id, editedData } = useSelector(
     (state) => state.modal
   );
@@ -26,7 +26,7 @@ export default function Modal() {
   return (
     <>
       <RedirectToLogin
-        isShow={type === "redirect" && true}
+        isShow={isShow && type === "redirect" }
         text={text}
         title={title}
         dispatch={dispatch}
@@ -38,7 +38,7 @@ export default function Modal() {
         type={type}
         token={token}
         dispatch={dispatch}
-        isShow={type.includes("confirm-delete")}
+        isShow={isShow && type.includes("confirm-delete")}
       />
       <ConfirmUpdateModal
         title={title}
@@ -48,7 +48,7 @@ export default function Modal() {
         token={token}
         editedData={editedData}
         dispatch={dispatch}
-        isShow={type.includes("confirm-update")}
+        isShow={isShow && type.includes("confirm-update")}
       />
       <NameForm
         title={title}
@@ -56,7 +56,7 @@ export default function Modal() {
         dispatch={dispatch}
         closeModal={closeModal}
         editedData={editedData}
-        isShow={type === "edit-name"}
+        isShow={isShow && type === "edit-name"}
       />
       <CommentModal
         title={title}
@@ -64,14 +64,14 @@ export default function Modal() {
         dispatch={dispatch}
         closeModal={closeModal}
         id={id}
-        isShow={type === "comment"}
+        isShow={isShow && type === "comment"}
       />
       <CategoryForm
         title={title}
         token={token}
         dispatch={dispatch}
         closeModal={closeModal}
-        isShow={type === "edit-category"}
+        isShow={isShow && type === "edit-category"}
       />
       <MobileForm
         title={title}
@@ -79,19 +79,19 @@ export default function Modal() {
         dispatch={dispatch}
         closeModal={closeModal}
         editedData={editedData}
-        isShow={type === "edit-mobile"}
+        isShow={isShow && type === "edit-mobile"}
       />
       <AddressForm
         title={title}
         token={token}
         dispatch={dispatch}
         closeModal={closeModal}
-        isShow={type === "edit-address"}
+        isShow={isShow && type === "edit-address"}
       />
       <SearchModal
         dispatch={dispatch}
         closeModal={closeModal}
-        isShow={type === "search"}
+        isShow={isShow && type === "search"}
       />
     </>
   );

@@ -32,17 +32,16 @@ export default function ConfirmUpdateModal({
   }
   //? Update Data
   const [putData, { data, isSuccess, isError, error }] = usePutDataMutation();
+
   useEffect(() => {
-    if (isConfirm) {
+    if (isConfirm && url) {
       putData({
         url,
         token,
         body: { ...editedData },
       });
     }
-  }, [isConfirm]);
 
-  useEffect(() => {
     if (isSuccess) {
       dispatch(
         showAlert({
@@ -57,12 +56,12 @@ export default function ConfirmUpdateModal({
       dispatch(
         showAlert({
           status: "error",
-          title: error?.data.err,
+          title: error.data.err,
         })
       );
       dispatch(confirmReset());
     }
-  }, [isSuccess, isError]);
+  }, [isConfirm, isSuccess, isError]);
 
   //? Handlers
   const handleConfirmClick = () => {

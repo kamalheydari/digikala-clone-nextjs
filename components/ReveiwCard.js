@@ -18,7 +18,10 @@ export default function ReveiwCard({ item, singleComment }) {
   const { token } = useSelector((state) => state.user);
 
   //? Patch Query
-  const [patchData, { isSuccess, isError, error }] = usePatchDataMutation();
+  const [
+    patchData,
+    { data, isSuccess, isError, error },
+  ] = usePatchDataMutation();
 
   useEffect(() => {
     if (isSuccess) {
@@ -37,7 +40,7 @@ export default function ReveiwCard({ item, singleComment }) {
           title: error?.data.err,
         })
       );
-      setStatus(1);
+      setStatus(item.status);
     }
   }, [isSuccess, isError]);
 
@@ -57,8 +60,9 @@ export default function ReveiwCard({ item, singleComment }) {
     patchData({
       url: `/api/reviews/${item._id}`,
       token,
-      body: { status },
+      body: { status: statusNum },
     });
+    setStatus(statusNum);
   };
 
   return (

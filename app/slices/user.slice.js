@@ -43,7 +43,7 @@ const userSlice = createSlice({
     },
     addToLastSeen: (state, action) => {
       let isItemExist = exsitItem(state.lastSeen, action.payload.productID);
-      console.log(action.payload);
+
       if (!isItemExist) {
         if (state.lastSeen.length === 15) {
           state.lastSeen.splice(14, 1);
