@@ -53,7 +53,7 @@ export default function SelectCategories({ detailsHome, productPage }) {
           value={mainCategory}
         >
           <option value=''></option>
-          {mainCategories.map((item, index) => (
+          {mainCategories.slice(0,2).map((item, index) => (
             <option key={index} value={item.category} className='text-gray-700'>
               {item.name}
             </option>

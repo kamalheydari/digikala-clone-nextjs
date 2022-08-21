@@ -54,7 +54,7 @@ export default function Categories() {
             </p>
           </div>
           <ul className='space-y-8'>
-            {categories.map((mainCategory) => {
+            {categories.slice(0,2).map((mainCategory) => {
               if (mainCategory.parent === "/") {
                 return (
                   <li
