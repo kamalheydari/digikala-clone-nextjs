@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { useRouter } from "next/router";
 
 import {
   closeModal,
@@ -21,35 +20,57 @@ export default function ConfirmDeleteModal({
   dispatch,
   isShow,
 }) {
-  const router = useRouter();
-
   //? Config Url & Edit Store
-  let url, ifIsSucces;
+  let url, successAction;
 
   if (type === "confirm-delete-user") {
     url = `/api/user/${id}`;
-    ifIsSucces = () => {
-      router.reload();
+    successAction = () => {
+      dispatch(
+        showAlert({
+          status: "success",
+          title: data.msg,
+        })
+      );
     };
   } else if (type === "confirm-delete-details") {
     url = `/api/details/${id}`;
-    ifIsSucces = () => {
+    successAction = () => {
       dispatch(resetDetails());
+      dispatch(
+        showAlert({
+          status: "success",
+          title: data.msg,
+        })
+      );
     };
   } else if (type === "confirm-delete-product") {
     url = `/api/products/${id}`;
-    ifIsSucces = () => {
-      router.reload();
+    successAction = () => {
+      dispatch(
+        showAlert({
+          status: "success",
+          title: data.msg,
+        })
+      );
     };
   } else if (type === "confirm-delete-reveiw") {
     url = `/api/reviews/${id}`;
-    ifIsSucces = () => {
-      router.reload();
+    successAction = () => {
+      dispatch(
+        showAlert({
+          status: "success",
+          title: data.msg,
+        })
+      );
     };
   }
 
   //? Delete Data
-  const [deleteData, { isSuccess, isError, error }] = useDeleteDataMutation();
+  const [
+    deleteData,
+    { isSuccess, isError, error, data },
+  ] = useDeleteDataMutation();
 
   useEffect(() => {
     if (isConfirm && url) {
@@ -57,12 +78,18 @@ export default function ConfirmDeleteModal({
         url,
         token,
       });
-    }
-    if (isSuccess) {
-      ifIsSucces();
       dispatch(confirmReset());
     }
+  }, [isConfirm]);
 
+  useEffect(() => {
+    if (isSuccess) {
+      successAction();
+      dispatch(confirmReset());
+    }
+  }, [isSuccess]);
+
+  useEffect(() => {
     if (isError) {
       dispatch(
         showAlert({
@@ -72,7 +99,7 @@ export default function ConfirmDeleteModal({
       );
       dispatch(confirmReset());
     }
-  }, [isConfirm, isSuccess, isError]);
+  }, [isError]);
 
   //? Handlers
   const handleConfirmClick = () => {

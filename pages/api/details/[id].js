@@ -39,7 +39,8 @@ const getDetails = async (req, res) => {
 const updateDetails = async (req, res) => {
   try {
     const result = await auth(req, res);
-    if (!result) return sendError(res, 403, "توکن احراز هویت نامعتبر است");
+    if (!result)
+      return sendError(res, 403, "شما اجازه انجام این عملیات را ندارید");
 
     const { id } = req.query;
 
@@ -57,7 +58,8 @@ const deleteDetails = async (req, res) => {
   try {
     const result = await auth(req, res);
 
-    if (!result.root) return sendError(res, 400, "توکن احراز هویت نامعتبر است");
+    if (!result.root)
+      return sendError(res, 403, "شما اجازه انجام این عملیات را ندارید");
 
     const { id } = req.query;
 

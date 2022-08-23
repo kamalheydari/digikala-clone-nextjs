@@ -24,7 +24,7 @@ const updateRole = async (req, res) => {
     const result = await auth(req, res);
 
     if (result.role !== "admin")
-      return sendError(res, 403, "توکن احراز هویت نامعتبر است");
+    return sendError(res, 403, "شما اجازه انجام این عملیات را ندارید");
 
     const { id } = req.query;
     const { role } = req.body;
@@ -42,7 +42,7 @@ const deleteUser = async (req, res) => {
   try {
     const result = await auth(req, res);
 
-    if (!result.root) return sendError(res, 403, "توکن احراز هویت نامعتبر است");
+    if (!result.root)   return sendError(res, 403, "شما اجازه انجام این عملیات را ندارید");
 
     const { id } = req.query;
 

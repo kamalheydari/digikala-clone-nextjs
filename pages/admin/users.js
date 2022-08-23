@@ -6,12 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useGetDataQuery } from "app/slices/fetchApi.slice";
 import { openModal } from "app/slices/modal.slice";
 
-import {
-  Buttons,
-  Pagination,
-  ShowWrapper,
-  EmptyUsersList,
-} from "components";
+import { Buttons, Pagination, ShowWrapper, EmptyUsersList } from "components";
 
 export default function Users() {
   const dispatch = useDispatch();
@@ -65,7 +60,7 @@ export default function Users() {
         emptyElement={<EmptyUsersList />}
         top
       >
-        <div className='overflow-x-auto mt-7'>
+        <div className='mx-3 overflow-x-auto mt-7 lg:mx-5 xl:mx-10'>
           <table className='w-full whitespace-nowrap'>
             <thead className='h-9 bg-emerald-50'>
               <tr className='text-emerald-500'>

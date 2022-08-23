@@ -16,7 +16,8 @@ const deliveredOrder = async (req, res) => {
   try {
     const result = await auth(req, res);
 
-    if (!result.root) return sendError(res, 403, "توکن احراز هویت نامعتبر است");
+    if (!result.root)
+      return sendError(res, 403, "شما اجازه انجام این عملیات را ندارید");
 
     const { id } = req.query;
 

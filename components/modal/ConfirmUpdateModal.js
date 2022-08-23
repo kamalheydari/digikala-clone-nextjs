@@ -40,8 +40,11 @@ export default function ConfirmUpdateModal({
         token,
         body: { ...editedData },
       });
+      dispatch(confirmReset());
     }
+  }, [isConfirm]);
 
+  useEffect(() => {
     if (isSuccess) {
       dispatch(
         showAlert({
@@ -51,7 +54,9 @@ export default function ConfirmUpdateModal({
       );
       dispatch(confirmReset());
     }
+  }, [isSuccess]);
 
+  useEffect(() => {
     if (isError) {
       dispatch(
         showAlert({
@@ -61,7 +66,7 @@ export default function ConfirmUpdateModal({
       );
       dispatch(confirmReset());
     }
-  }, [isConfirm, isSuccess, isError]);
+  }, [isError]);
 
   //? Handlers
   const handleConfirmClick = () => {

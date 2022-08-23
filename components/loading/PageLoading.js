@@ -26,7 +26,7 @@ export default function PageLoading() {
   return (
     loading && (
       <div className='fixed inset-0 z-40 '>
-        <div className='grid h-full xl:mt-28 bg-blue-50/30 place-items-center '>
+        <div className='grid h-full bg-blue-50/30 place-items-center '>
           <BigLoading />
         </div>
       </div>

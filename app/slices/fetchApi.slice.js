@@ -3,6 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const fetchApi = createApi({
   reducerPath: "fetchApi",
   baseQuery: fetchBaseQuery({ baseUrl: "" }),
+  tagTypes: [""],
   endpoints: (builder) => ({
     getData: builder.query({
       query: ({ url, token }) => ({
@@ -10,6 +11,7 @@ const fetchApi = createApi({
         method: "GET",
         headers: { "Content-Type": "application/json", "Authorization": token },
       }),
+      providesTags: [""],
     }),
 
     postData: builder.mutation({
@@ -19,6 +21,7 @@ const fetchApi = createApi({
         headers: { "Content-Type": "application/json", "Authorization": token },
         body,
       }),
+      invalidatesTags: [""],
     }),
 
     patchData: builder.mutation({
@@ -28,6 +31,7 @@ const fetchApi = createApi({
         headers: { "Content-Type": "application/json", "Authorization": token },
         body,
       }),
+      invalidatesTags: [""],
     }),
 
     putData: builder.mutation({
@@ -37,6 +41,7 @@ const fetchApi = createApi({
         headers: { "Content-Type": "application/json", "Authorization": token },
         body,
       }),
+      invalidatesTags: [""],
     }),
 
     deleteData: builder.mutation({
@@ -45,6 +50,7 @@ const fetchApi = createApi({
         method: "DELETE",
         headers: { "Content-Type": "application/json", "Authorization": token },
       }),
+      invalidatesTags: [""],
     }),
   }),
 });

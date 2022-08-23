@@ -16,5 +16,5 @@ export default async function auth(req, res) {
   const user = await Users.findOne({ _id: decoded.id });
   await db.disconnect();
 
-  return { id: decoded.id, role: user.role, root: user.root };
+  return { id: user._id, role: user.role, root: user.root };
 }

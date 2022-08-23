@@ -27,7 +27,7 @@ const getProduct = async (req, res) => {
   try {
     const { id } = req.query;
 
-   await  db.connect();
+    await db.connect();
     const product = await Products.findById(id);
     await db.disconnect();
 
@@ -43,18 +43,12 @@ const updateProduct = async (req, res) => {
   try {
     const result = await auth(req, res);
 
-    if (!result.root) return sendError(res, 403, "توکن احراز هویت نامعتبر است");
+    if (!result.root)
+      return sendError(res, 403, "شما اجازه انجام این عملیات را ندارید");
 
     const { id } = req.query;
 
-    const {
-      title,
-      price,
-      images,
-      category,
-      info,
-      specification,
-    } = req.body;
+    const { title, price, images, category, info, specification } = req.body;
 
     if (
       !title ||
@@ -85,7 +79,8 @@ const deleteProduct = async (req, res) => {
   try {
     const result = await auth(req, res);
 
-    if (!result.root) return sendError(res, 403, "توکن احراز هویت نامعتبر است");
+    if (!result.root)
+      return sendError(res, 403, "شما اجازه انجام این عملیات را ندارید");
 
     const { id } = req.query;
 

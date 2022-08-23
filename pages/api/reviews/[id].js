@@ -74,8 +74,8 @@ const deleteReview = async (req, res) => {
 
     const review = await Review.findOne({ user: result.id });
 
-    if (review.user !== result.id)
-      return sendError(res, 403, "توکن احراز هویت نامعتبر است");
+    if (review.user.toString() !== result.id.toString())
+      return sendError(res, 403, "شما اجازه انجام این عملیات را ندارید");
 
     await Review.findByIdAndDelete(req.query.id);
 
@@ -90,7 +90,8 @@ const deleteReview = async (req, res) => {
 const updateReview = async (req, res) => {
   try {
     const result = await auth(req, res);
-    if (!result.root) return sendError(res, 403, "توکن احراز هویت نامعتبر است");
+    if (!result.root)
+      return sendError(res, 403, "شما اجازه انجام این عملیات را ندارید");
 
     await db.connect();
 
