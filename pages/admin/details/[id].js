@@ -168,6 +168,7 @@ export default function DetailsPage() {
                 id='none'
                 value='none'
                 onChange={handleOptionTypeChange}
+                className='ml-1'
               />
               <label htmlFor='none'>بدون حق انتخاب</label>
             </div>
@@ -179,6 +180,7 @@ export default function DetailsPage() {
                 id='colors'
                 value='colors'
                 onChange={handleOptionTypeChange}
+                className='ml-1'
               />
               <label htmlFor='colors'>بر اساس رنگ</label>
             </div>
@@ -190,6 +192,7 @@ export default function DetailsPage() {
                 id='sizes'
                 value='sizes'
                 onChange={handleOptionTypeChange}
+                className='ml-1'
               />
               <label htmlFor='sizes'>بر اساس سایز</label>
             </div>

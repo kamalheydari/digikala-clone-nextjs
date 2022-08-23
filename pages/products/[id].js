@@ -5,14 +5,10 @@ import { useEffect, useState } from "react";
 import db from "lib/db";
 import Product from "models/Product";
 
-import { openModal } from "app/slices/modal.slice";
 import { useDispatch } from "react-redux";
-import { useGetDataQuery } from "app/slices/fetchApi.slice";
-
-import moment from "moment-jalaali";
+import { addToLastSeen } from "app/slices/user.slice";
 
 import { formatNumber } from "utils/formatNumber";
-import { truncate } from "utils/truncate";
 
 import {
   AddToCart,
@@ -22,11 +18,10 @@ import {
   Depot,
   SmilarProductsSlider,
   ImageGallery,
-  Pagination,
-  ShowWrapper,
-  EmptyComment,
+  Description,
+  Specification,
+  Reviews,
 } from "components";
-import { addToLastSeen } from "app/slices/user.slice";
 
 export default function SingleProduct({ product, smilarProducts }) {
   const dispatch = useDispatch();
@@ -34,13 +29,6 @@ export default function SingleProduct({ product, smilarProducts }) {
   //? Local State
   const [color, setColor] = useState(product.colors[0] || null);
   const [size, setSize] = useState(product.sizes[0] || null);
-  const [isShowDesc, setIsShowDesc] = useState(false);
-  const [isShowSpec, setIsShowSpec] = useState(false);
-  const [reviewsPage, setReviewsPage] = useState(1);
-
-  let renderSpecification = isShowSpec
-    ? product.specification
-    : product.specification.slice(0, 7);
 
   //? Add To LastSeen
   useEffect(() => {
@@ -53,18 +41,6 @@ export default function SingleProduct({ product, smilarProducts }) {
     );
   }, [product._id]);
 
-  //? Get Query
-  const {
-    data,
-    isSuccess,
-    isFetching,
-    error,
-    isError,
-    refetch,
-  } = useGetDataQuery({
-    url: `/api/reviews/product/${product._id}?page=${reviewsPage}&page_size=5`,
-  });
-
   //? Handlers
   const handleChangeColor = (item) => {
     setColor(item);
@@ -74,17 +50,6 @@ export default function SingleProduct({ product, smilarProducts }) {
     setSize(item);
   };
 
-  const handleOpenCommentModal = () => {
-    dispatch(
-      openModal({
-        isShow: true,
-        type: "comment",
-        title: product.title,
-        id: product._id,
-      })
-    );
-  };
-
   //? Local Components
   const Colors = () => {
     return (
@@ -92,7 +57,7 @@ export default function SingleProduct({ product, smilarProducts }) {
         <div className='flex justify-between p-4'>
           <span className='text-sm text-gray-700'>رنگ: {color.name}</span>
           <span className='text-sm farsi-digits'>
-            {formatNumber(product.colors.length)} رنگ
+            {product.colors.length} رنگ
           </span>
         </div>
         <div className='flex flex-wrap gap-3 px-5 my-3'>
@@ -281,29 +246,7 @@ export default function SingleProduct({ product, smilarProducts }) {
 
       {/* description */}
       {product.description.length > 0 && (
-        <section>
-          <div className='px-3 lg:max-w-3xl xl:max-w-5xl'>
-            <h4 className='mb-3 lg:border-b-2 lg:border-red-500 w-min'>
-              معرفی
-            </h4>
-            <p className='text-xs leading-6 tracking-wider text-gray-600 lg:text-sm lg:leading-8'>
-              {isShowDesc
-                ? product.description
-                : truncate(product.description, 300)}
-            </p>
-            {product.description.length > 300 && (
-              <button
-                type='button'
-                className='flex items-center py-2 text-sm text-sky-400'
-                onClick={() => setIsShowDesc(!isShowDesc)}
-              >
-                {isShowDesc ? "بستن" : "مشاهده بیشتر"}
-                <Icons.ArrowLeft className='icon text-sky-400' />
-              </button>
-            )}
-          </div>
-          <div className='section-divide-y lg:block' />
-        </section>
+        <Description description={product.description} />
       )}
 
       {/* SmilarProductsSlider */}
@@ -314,153 +257,16 @@ export default function SingleProduct({ product, smilarProducts }) {
       <div className='flex'>
         <div className='flex-1'>
           {/* specification */}
-          <section className='px-4 '>
-            <div className='lg:max-w-3xl xl:max-w-5xl lg:flex lg:gap-x-20'>
-              <h4 className='mb-3 h-fit w-min lg:border-b-2 lg:border-red-500'>
-                مشخصات
-              </h4>
-              <ul className='space-y-4 lg:mt-10'>
-                {renderSpecification.map((item, i) => (
-                  <li key={i} className='flex'>
-                    <span className='py-2 ml-3 font-light leading-5 tracking-wide text-gray-500 w-36'>
-                      {item[0]}
-                    </span>
-                    <span
-                      className='w-full py-2 font-normal leading-5 tracking-wide text-gray-600 break-all border-b border-gray-100 md:break-normal '
-                      dangerouslySetInnerHTML={{ __html: item[1] }}
-                    ></span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            {product.specification.length > 7 && (
-              <button
-                type='button'
-                className='flex items-center py-2 text-sm text-sky-400'
-                onClick={() => setIsShowSpec(!isShowSpec)}
-              >
-                {isShowSpec ? "بستن" : "مشاهده بیشتر"}
-                <Icons.ArrowLeft className='icon text-sky-400' />
-              </button>
-            )}
-          </section>
+          <Specification specification={product.specification} />
 
           <div className='section-divide-y' />
 
-          {/* comments */}
-          <section className='px-3 py-3 space-y-4 lg:max-w-3xl xl:max-w-5xl'>
-            <div className='flex items-center justify-between'>
-              <h4 className='mb-3 lg:border-b-2 lg:border-red-500'>
-                دیدگاه‌ها
-              </h4>
-              <span className='text-xs text-sky-500 farsi-digits'>
-                {product.numReviews} دیدگاه
-              </span>
-            </div>
-            <div className='lg:mr-36'>
-              <div className='mb-8'>
-                <button
-                  type='button'
-                  onClick={handleOpenCommentModal}
-                  className='flex items-center w-full gap-x-5'
-                >
-                  <Icons.Comment className='icon' />
-                  <span className='text-sm text-black '>
-                    دیدگاه خود را درباره این کالا بنویسید
-                  </span>
-                  <Icons.ArrowLeft className='mr-auto icon' />
-                </button>
-                <p className='mt-6 text-xs text-gray-500'>
-                  پس از تایید نظر، با مراجعه به صفحه‌ی ماموریت‌های کلابی امتیاز
-                  خود را دریافت کنید.
-                </p>
-              </div>
-              <ShowWrapper
-                error={error}
-                isError={isError}
-                refetch={refetch}
-                isFetching={isFetching}
-                isSuccess={isSuccess}
-                dataLength={data ? data.reviewsLength : 0}
-                page={reviewsPage}
-                emptyElement={<EmptyComment />}
-              >
-                <div className='py-3 space-y-4 divide-y-2 lg:px-6 sm:px-2'>
-                  {data?.reviews.map((item) => (
-                    <div className='flex py-3' key={item._id}>
-                      <div>
-                        <span
-                          className={`farsi-digits w-5 h-5 text-center pt-0.5 inline-block rounded-md text-white  ${
-                            item.rating <= 2
-                              ? "bg-red-500"
-                              : item.rating === 3
-                              ? "bg-amber-500"
-                              : "bg-green-500"
-                          }`}
-                        >
-                          {item.rating}
-                        </span>
-                      </div>
-                      <div className='flex-1 px-2.5 space-y-3 lg:px-6'>
-                        <div className='w-full border-b border-gray-100'>
-                          <p className='mb-1'>{item.title}</p>
-                          <span className='text-xs farsi-digits'>
-                            {moment(item.updatedAt).format("jYYYY/jM/jD")}
-                          </span>
-                          <span className='inline-block w-1 h-1 mx-3 bg-gray-400 rounded-full' />
-                          <span className='text-xs'>{item.user.name}</span>
-                        </div>
-
-                        <p>{item.comment}</p>
-
-                        {item.positivePoints.length > 0 && (
-                          <div>
-                            {item.positivePoints.map((point) => (
-                              <div
-                                className='flex items-center gap-x-1'
-                                key={point.id}
-                              >
-                                <Icons.Plus className='text-green-400 icon' />
-                                <p>{point.title}</p>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-
-                        {item.positivePoints.length > 0 && (
-                          <div>
-                            {item.negativePoints.map((point) => (
-                              <div
-                                className='flex items-center gap-x-1'
-                                key={point.id}
-                              >
-                                <Icons.Minus className='text-red-400 icon' />
-                                <p>{point.title}</p>
-                              </div>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </ShowWrapper>
-
-              {data?.reviewsLength > 5 && (
-                <div className='py-4 mx-auto lg:max-w-5xl'>
-                  <Pagination
-                    currentPage={data.currentPage}
-                    nextPage={data.nextPage}
-                    previousPage={data.previousPage}
-                    hasNextPage={data.hasNextPage}
-                    hasPreviousPage={data.hasPreviousPage}
-                    lastPage={data.lastPage}
-                    setPage={setReviewsPage}
-                  />
-                </div>
-              )}
-            </div>
-          </section>
+          {/* Reviews */}
+          <Reviews
+            numReviews={product.numReviews}
+            prdouctID={product._id}
+            productTitle={product.title}
+          />
         </div>
         <div className='hidden w-full px-3 lg:block lg:max-w-xs xl:max-w-sm'>
           {product.inStock > 0 && <ProductInfo image />}

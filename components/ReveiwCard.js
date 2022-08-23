@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "app/slices/modal.slice";
 import { usePatchDataMutation } from "app/slices/fetchApi.slice";
+import { showAlert } from "app/slices/alert.slice";
 
 import { Icons } from "components";
-import { showAlert } from "app/slices/alert.slice";
 
 export default function ReveiwCard({ item, singleComment }) {
   const dispatch = useDispatch();
@@ -32,7 +32,9 @@ export default function ReveiwCard({ item, singleComment }) {
         })
       );
     }
+  }, [isSuccess]);
 
+  useEffect(() => {
     if (isError) {
       dispatch(
         showAlert({
@@ -42,7 +44,7 @@ export default function ReveiwCard({ item, singleComment }) {
       );
       setStatus(item.status);
     }
-  }, [isSuccess, isError]);
+  }, [isError]);
 
   //? Handlers
   const handleDelete = () => {
@@ -130,6 +132,7 @@ export default function ReveiwCard({ item, singleComment }) {
                       type='button'
                       className='flex items-center w-48 gap-x-3'
                       onClick={() => handleChangeStatus(2)}
+                      disabled={status === 2}
                     >
                       <Icons.Check className='text-white rounded-full p-0.5 icon bg-green-500 ' />
                       <span className='block'>تغییر وضعیت به تایید شده</span>
@@ -138,6 +141,7 @@ export default function ReveiwCard({ item, singleComment }) {
                       type='button'
                       className='flex items-center w-48 gap-x-3'
                       onClick={() => handleChangeStatus(3)}
+                      disabled={status === 3}
                     >
                       <Icons.Cross className='text-white rounded-full p-0.5 icon bg-red-500 ' />
                       <span className='block'>تغییر وضعیت به رد شده</span>

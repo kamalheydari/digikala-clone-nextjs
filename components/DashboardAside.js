@@ -38,7 +38,7 @@ export default function ProfileAside({ user }) {
     {
       name: "دیدگاه‌ها",
       icon: <Icons.Comment className='text-black icon' />,
-      path: "/admin/comments",
+      path: "/admin/reviews",
     },
   ];
 

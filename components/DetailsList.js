@@ -48,7 +48,7 @@ export default function DetailsList({ category, type, data }) {
 
   return (
     <section>
-      <div className='text-sm lg:text-sm'>
+      <div className='mb-2 text-sm lg:text-base'>
         {type === "info" ? <span> ویژگی‌های</span> : <span> مشخصات</span>}{" "}
         <span
           className={

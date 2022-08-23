@@ -13,7 +13,7 @@ import {
   EmptyCommentsList,
 } from "components";
 
-export default function Comments() {
+export default function Reviews() {
   //? Local State
   const [page, setPage] = useState(1);
 
@@ -97,7 +97,7 @@ export default function Comments() {
                   <td className='p-2'>{review.user.name}</td>
 
                   <td className='p-2'>
-                    <Link href={`/admin/comments/${review._id}`}>
+                    <Link href={`/admin/reviews/${review._id}`}>
                       <a>
                         <Buttons.Edit />
                       </a>
@@ -126,6 +126,6 @@ export default function Comments() {
   );
 }
 
-Comments.getDashboardLayout = function pageLayout(page) {
+Reviews.getDashboardLayout = function pageLayout(page) {
   return <>{page}</>;
 };

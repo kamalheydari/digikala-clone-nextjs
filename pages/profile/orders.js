@@ -52,7 +52,7 @@ export default function Orders() {
       >
         <div className='px-4 py-3 space-y-3'>
           {data?.orders.map((item) => (
-            <OrderCard key={item._id} item={item} />
+            <OrderCard key={item._id} order={item} />
           ))}
         </div>
       </ShowWrapper>

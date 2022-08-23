@@ -1,20 +1,14 @@
+import Link from "next/link";
 import Head from "next/head";
-import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 import { useGetDataQuery } from "app/slices/fetchApi.slice";
-import { openModal } from "app/slices/modal.slice";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
-import {
-  Buttons,
-  Pagination,
-  ShowWrapper,
-  EmptyOrdersList,
-} from "components";
+import { Buttons, Pagination, ShowWrapper, EmptyOrdersList } from "components";
 
 export default function OrdersHome() {
-  const dispatch = useDispatch();
   const router = useRouter();
 
   //? Local State
@@ -41,19 +35,6 @@ export default function OrdersHome() {
     if (isConfirm) router.reload();
   }, [isConfirm]);
 
-  //? Handlers
-  const handleEditOrder = (id) => {
-    dispatch(
-      openModal({
-        isShow: true,
-        id,
-        type: "confirm-update-order",
-        title: "سفارش",
-        editedData: { paid: true, delivered: true },
-      })
-    );
-  };
-
   return (
     <main>
       <Head>
@@ -78,8 +59,9 @@ export default function OrdersHome() {
                 <tr className='text-emerald-500'>
                   <th className='border-gray-100 border-x-2'>ID</th>
                   <th>نام گیرنده</th>
-                  <th className='border-gray-100 border-x-2'>ایمیل</th>
                   <th>وضعیت</th>
+                  <th className='border-gray-100 border-x-2'>ایمیل</th>
+                  <th>تغییر وضعیت</th>
                 </tr>
               </thead>
               <tbody className='text-gray-600'>
@@ -90,21 +72,24 @@ export default function OrdersHome() {
                   >
                     <td className='py-3 px-1.5'>{order._id}</td>
                     <td className='py-3 px-1.5'>{order.user.name}</td>
-                    <td className='py-3 px-1.5'>{order.user.email}</td>
                     <td className='py-3 px-1.5'>
                       {order.delivered ? (
                         <span className='inline-block p-1 text-green-600 rounded-md bg-green-50'>
                           تحویل داده شده
                         </span>
                       ) : (
-                        <button
-                          type='button'
-                          onClick={() => handleEditOrder(order._id)}
-                          className='p-1 rounded-md text-amber-600 bg-amber-50'
-                        >
-                          تغییر وضعیت به تحویل داده شده
-                        </button>
+                        <span className='p-1 rounded-md text-amber-600 bg-amber-50'>
+                          در حال پردازش
+                        </span>
                       )}
+                    </td>
+                    <td className='py-3 px-1.5'>{order.user.email}</td>
+                    <td className='p-2'>
+                      <Link href={`/admin/orders/${order._id}`}>
+                        <a>
+                          <Buttons.Edit />
+                        </a>
+                      </Link>
                     </td>
                   </tr>
                 ))}

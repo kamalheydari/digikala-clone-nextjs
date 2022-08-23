@@ -36,6 +36,9 @@ export { default as Checkbox } from "./product/Checkbox";
 export { default as Depot } from "./product/Depot";
 export { default as MostFavouraiteProducts } from "./product/MostFavouraiteProducts";
 export { default as ImageGallery } from "./product/ImageGallery";
+export { default as Description } from "./product/Description";
+export { default as Specification } from "./product/Specification";
+export { default as Reviews } from "./product/Reviews";
 
 //* CART COMPONENTS
 export { default as Cart } from "./cart/Cart";
@@ -66,6 +69,10 @@ export { default as EmptyUsersList } from "./emptyList/EmptyUsersList";
 export { default as EmptyComment } from "./emptyList/EmptyComment";
 export { default as EmptySearchList } from "./emptyList/EmptySearchList";
 
+//* ORDERS COMPONENTS
+export { default as OrderCard } from "./order/OrderCard";
+export { default as Orders } from "./order/Orders";
+
 //* OTHER COMPONENTS
 export { default as Alert } from "./Alert";
 export { default as Header } from "./Header";
@@ -74,7 +81,6 @@ export { default as Categories } from "./Categories";
 export { default as User } from "./User";
 export { default as Search } from "./Search";
 export { default as ValidationToken } from "./ValidationToken";
-export { default as Orders } from "./Orders";
 export { default as Logout } from "./Logout";
 export { default as ProfileAside } from "./ProfileAside";
 export { default as DashboardAside } from "./DashboardAside";
@@ -87,7 +93,6 @@ export { default as Pagination } from "./Pagination";
 export { default as Sidebar } from "./Sidebar";
 export { default as Sort } from "./Sort";
 export { default as Services } from "./Services";
-export { default as OrderCard } from "./OrderCard";
 export { default as FreeShipping } from "./FreeShipping";
 export { default as ReveiwCard } from "./ReveiwCard";
 export { default as Footer } from "./Footer";
