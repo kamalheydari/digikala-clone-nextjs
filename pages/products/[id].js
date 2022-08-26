@@ -154,7 +154,7 @@ export default function SingleProduct({ product, smilarProducts }) {
           <span className='text-base text-black'>فروشنده :</span>
           <div className='flex gap-x-2'>
             <div className='relative w-6 h-6'>
-              <Image src='/icons/mini-logo.png' layout='fill' />
+              <Image src='/icons/mini-logo.png' layout='fill' alt="دیجی‌کالا"/>
             </div>
             <span>دیجی‌کالا</span>
           </div>
@@ -162,7 +162,7 @@ export default function SingleProduct({ product, smilarProducts }) {
         {image && (
           <div className='flex py-3 gap-x-4 '>
             <div className='relative w-28 h-28'>
-              <Image src={product.images[0].url} layout='fill' />
+              <Image src={product.images[0].url} layout='fill' alt={product.title} />
             </div>
             <span className='flex-1 text-justify'>{product.title}</span>
           </div>
@@ -204,6 +204,7 @@ export default function SingleProduct({ product, smilarProducts }) {
             images={product.images}
             discount={product.discount}
             inStock={product.inStock}
+            productName={product.title}
           />
         </section>
 

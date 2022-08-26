@@ -84,7 +84,7 @@ export default function RegisterPage() {
         <div className='relative h-24 mx-auto w-44'>
           <Link passHref href='/'>
             <a>
-              <Image src='/icons/logo.svg' layout='fill' />
+              <Image src='/icons/logo.svg' layout='fill' alt="دیجی‌کالا"/>
             </a>
           </Link>
         </div>

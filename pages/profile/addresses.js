@@ -67,7 +67,7 @@ export default function Addresses() {
       ) : (
         <section className='flex flex-col items-center py-20 gap-y-4'>
           <div className='relative h-52 w-52'>
-            <Image src='/icons/address.svg' layout='fill' />
+            <Image src='/icons/address.svg' layout='fill' alt="آدرس" />
           </div>
           <p>هنوز آدرس ثبت نکرده‌اید.</p>
 

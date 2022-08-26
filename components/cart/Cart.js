@@ -68,7 +68,7 @@ export default function Cart() {
                   {formatNumber(totalPrice - totalDiscount)}
                 </span>
                 <div className='relative mr-1 w-7 h-7'>
-                  <Image src='/icons/toman.svg' layout='fill' />
+                  <Image src='/icons/toman.svg' layout='fill' alt="تومان" />
                 </div>
               </div>
             </div>

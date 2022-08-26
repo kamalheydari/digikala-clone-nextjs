@@ -55,7 +55,7 @@ export default function Alert() {
       >
         <div className='p-3 mx-2 text-center bg-white rounded-md shadow h-fit'>
           <div className='relative w-20 h-20 mx-auto '>
-            <Image src={IconSrc} layout='fill' />
+            <Image src={IconSrc} layout='fill' alt={status} />
           </div>
           <p className='mt-2'>{title}</p>
         </div>

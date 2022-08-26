@@ -72,7 +72,7 @@ export default function ReveiwCard({ item, singleComment }) {
       {/* image */}
       <div>
         <div className='relative w-16 h-12 lg:w-24 lg:h-20'>
-          <Image src={item.product.images[0].url} layout='fill' />
+          <Image src={item.product.images[0].url} layout='fill' alt="تصویر محصول" />
         </div>
         <span
           className={`farsi-digits w-5 h-5 text-center pt-0.5 inline-block rounded-md text-white  mr-10 lg:mr-20 ${

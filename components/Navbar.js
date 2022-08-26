@@ -48,7 +48,7 @@ export default function Navbar() {
       >
         <div className='flex'>
           <ul className='border-l-2 border-gray-100 w-72'>
-            {categories.slice(0,2).map((mainCategory) => {
+            {categories.slice(0, 2).map((mainCategory) => {
               if (mainCategory.parent === "/") {
                 return (
                   <li
@@ -59,7 +59,11 @@ export default function Navbar() {
                     <Link href={`/main/${mainCategory.slug}`}>
                       <a className='px-3 py-3 flex gap-x-1.5 items-center'>
                         <div className='relative h-7 w-7 grayscale '>
-                          <Image src={mainCategory.image.url} layout='fill' />
+                          <Image
+                            src={mainCategory.image.url}
+                            layout='fill'
+                            alt={mainCategory.name}
+                          />
                         </div>
                         <span>{mainCategory.name}</span>
                       </a>

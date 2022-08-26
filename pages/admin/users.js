@@ -80,7 +80,11 @@ export default function Users() {
                 >
                   <td className='px-2 py-4'>
                     <div className='relative mx-auto w-7 h-7'>
-                      <Image src='/icons/person.svg' layout='fill' />
+                      <Image
+                        src='/icons/person.svg'
+                        layout='fill'
+                        alt='کاربر'
+                      />
                     </div>
                   </td>
                   <td className='px-2 py-4'>{user._id}</td>

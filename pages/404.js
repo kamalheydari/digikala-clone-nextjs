@@ -5,16 +5,16 @@ import { ArrowLink } from "components";
 
 export default function NotFoundPage() {
   return (
-    <main className='flex items-center justify-center flex-col gap-y-6 py-8 xl:mt-28'>
+    <main className='flex flex-col items-center justify-center py-8 gap-y-6 xl:mt-28'>
       <Head>
         <title>دیجی‌کالا | 404</title>
       </Head>
-      <p className='text-black text-base font-semibold'>
+      <p className='text-base font-semibold text-black'>
         صفحه‌ای که دنبال آن بودید پیدا نشد!
       </p>
       <ArrowLink path='/'>صفحه اصلی</ArrowLink>
-      <div className='relative w-full h-72 max-w-lg'>
-        <Image src='/icons/page-not-found.png' layout='fill' />
+      <div className='relative w-full max-w-lg h-72'>
+        <Image src='/icons/page-not-found.png' layout='fill' alt='404' />
       </div>
     </main>
   );

@@ -118,7 +118,7 @@ export default function OrderCard({ order, singleOrder }) {
             {formatNumber(order.totalPrice - order.totalDiscount)}
           </span>
           <div className='relative w-6 h-6'>
-            <Image src='/icons/toman.svg' layout='fill' />
+            <Image src='/icons/toman.svg' layout='fill' alt='تومان' />
           </div>
         </div>
       </div>
@@ -127,7 +127,11 @@ export default function OrderCard({ order, singleOrder }) {
           <Link href={`/products/${cartItem.productID}`} key={index}>
             <a>
               <div className='relative w-16 h-16 '>
-                <Image src={cartItem.img.url} layout='fill' />
+                <Image
+                  src={cartItem.img.url}
+                  layout='fill'
+                  alt={cartItem.name}
+                />
               </div>
             </a>
           </Link>

@@ -35,9 +35,9 @@ export default function Orders() {
   return (
     <section>
       {isError ? (
-        <div className='py-10 lg:py-20 mx-auto w-fit text-center space-y-3'>
+        <div className='py-10 mx-auto space-y-3 text-center lg:py-20 w-fit'>
           <h5 className='text-xl'>خطایی رخ داده</h5>
-          <p className='text-red-500 text-lg'>{error.data.err}</p>
+          <p className='text-lg text-red-500'>{error.data.err}</p>
           <button className='btn' onClick={refetch}>
             تلاش مجدد
           </button>
@@ -53,7 +53,11 @@ export default function Orders() {
           <div className='flex justify-evenly lg:py-20'>
             <div className='flex flex-col items-center lg:flex-row lg:gap-x-2'>
               <div className='relative w-12 h-12 lg:w-14 lg:h-14'>
-                <Image src='/icons/status-processing.svg' layout='fill' />
+                <Image
+                  src='/icons/status-processing.svg'
+                  layout='fill'
+                  alt='جاری'
+                />
                 <span className='absolute farsi-digits order-badge'>
                   {formatNumber(pendingOrder)}
                 </span>
@@ -70,7 +74,11 @@ export default function Orders() {
 
             <div className='flex flex-col items-center lg:flex-row lg:gap-x-2'>
               <div className='relative w-12 h-12 lg:w-14 lg:h-14'>
-                <Image src='/icons/status-delivered.svg' layout='fill' />
+                <Image
+                  src='/icons/status-delivered.svg'
+                  layout='fill'
+                  alt='تحویل شده'
+                />
                 <span className='absolute farsi-digits order-badge'>
                   {formatNumber(successOrder)}
                 </span>
@@ -87,7 +95,11 @@ export default function Orders() {
 
             <div className='flex flex-col items-center lg:flex-row lg:gap-x-2'>
               <div className='relative w-12 h-12 lg:w-14 lg:h-14'>
-                <Image src='/icons/status-returned.svg' layout='fill' />
+                <Image
+                  src='/icons/status-returned.svg'
+                  layout='fill'
+                  alt='مرجوع'
+                />
                 <span className='absolute order-badge farsi-digits'>0</span>
               </div>
               <div className='text-gray-700'>

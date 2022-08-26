@@ -109,7 +109,7 @@ export default function ProductsHome(props) {
                 <Link href={`/products?category=${item.slug}`}>
                   <a>
                     <div className='relative w-24 h-24 md:h-28 md:w-32 lg:w-36 xl:w-40 xl:h-36'>
-                      <Image src={item.image.url} layout='fill' />
+                      <Image src={item.image.url} layout='fill' alt={item.name}/>
                     </div>
                     <span>{item.name}</span>
                   </a>

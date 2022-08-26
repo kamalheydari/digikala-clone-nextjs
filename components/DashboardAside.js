@@ -49,7 +49,7 @@ export default function ProfileAside({ user }) {
       <div className='relative w-40 h-12 mx-auto'>
         <Link passHref href='/'>
           <a>
-            <Image src='/icons/logo.svg' layout='fill' />
+            <Image src='/icons/logo.svg' layout='fill' alt="دیجی‌کالا" />
           </a>
         </Link>
       </div>

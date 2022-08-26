@@ -7,7 +7,7 @@ export default function Services() {
       {services.map((item, i) => (
         <div key={i} className='flex items-center gap-x-1'>
           <div className='relative w-10 h-10'>
-            <Image src={item.img} layout='fill' />
+            <Image src={item.img} layout='fill' alt="{item.name}" />
           </div>
           <span className='text-xs'>{item.name}</span>
         </div>

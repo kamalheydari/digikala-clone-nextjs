@@ -8,7 +8,7 @@ export default function Bannertwo({ images = [] }) {
           className='relative h-[30vw] lg:h-52 w-full rounded-xl overflow-hidden'
           key={index}
         >
-          <Image src={item} layout='fill' />
+          <Image src={item} layout='fill' alt="Banner"/>
         </div>
       ))}
     </section>

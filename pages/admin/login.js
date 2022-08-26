@@ -89,7 +89,7 @@ export default function LoginPage() {
         <div className='relative h-24 mx-auto w-44'>
           <Link passHref href='/'>
             <a>
-              <Image src='/icons/logo.svg' layout='fill' />
+              <Image src='/icons/logo.svg' layout='fill' alt='دیجی‌کالا' />
             </a>
           </Link>
         </div>
@@ -137,11 +137,10 @@ export default function LoginPage() {
           برای مشاهده داشبورد مدیریت میتوانید از آدرس ایمیل و رمز عبور زیر
           استفاده کنید.
         </h5>
-        <div className="text-left">
-        <span className="text-sm text-zinc-500">Email: admin@gmail.com</span>
-        <br />
-        <span className="text-sm text-zinc-500">Password: 123456</span>
-          
+        <div className='text-left'>
+          <span className='text-sm text-zinc-500'>Email: admin@gmail.com</span>
+          <br />
+          <span className='text-sm text-zinc-500'>Password: 123456</span>
         </div>
       </div>
     </main>

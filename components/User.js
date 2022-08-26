@@ -39,7 +39,7 @@ export default function User({ user }) {
         <div className='absolute left-0 invisible transition duration-300 bg-white border border-gray-100 rounded shadow-md opacity-0 top-full w-60 group-hover:opacity-100 group-hover:visible'>
           <BoxLink path='/profile' name={user.name} className='border-t-0'>
             <div className='relative w-6 h-6'>
-              <Image src='/icons/person.svg' layout='fill' />
+              <Image src='/icons/person.svg' layout='fill' alt="کاربر"/>
             </div>
           </BoxLink>
           <Logout />

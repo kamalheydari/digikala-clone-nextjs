@@ -12,7 +12,7 @@ export default function DiscountCartItem({ item }) {
           {formatNumber((item.price * discount).toFixed())}
         </span>
         <div className='relative w-6 h-6'>
-          <Image src='/icons/tomanRed.svg' layout='fill' />
+          <Image src='/icons/tomanRed.svg' layout='fill' alt="تومان"/>
         </div>
         <span className='text-red-500'>تخفیف</span>
       </div>
@@ -21,7 +21,7 @@ export default function DiscountCartItem({ item }) {
           {formatNumber(item.price - (item.discount * item.price) / 100)}
         </span>
         <div className='relative w-6 h-6'>
-          <Image src='/icons/toman.svg' layout='fill' />
+          <Image src='/icons/toman.svg' layout='fill' alt="تومان"/>
         </div>
       </div>
     </div>

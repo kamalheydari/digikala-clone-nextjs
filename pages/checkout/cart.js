@@ -54,7 +54,7 @@ export default function Cart() {
 
           <div className='py-20'>
             <div className='relative mx-auto h-52 w-52'>
-              <Image src='/icons/empty-cart.svg' layout='fill' />
+              <Image src='/icons/empty-cart.svg' layout='fill' alt="سبد خالی"/>
             </div>
             <p className='text-base font-bold text-center'>
               سبد خرید شما خالی است!
@@ -123,7 +123,7 @@ export default function Cart() {
                 {formatNumber(totalPrice - totalDiscount)}
               </span>
               <div className='relative mr-1 w-7 h-7'>
-                <Image src='/icons/toman.svg' layout='fill' />
+                <Image src='/icons/toman.svg' layout='fill' alt="تومان"/>
               </div>
             </div>
           </div>

@@ -11,7 +11,12 @@ import "swiper/css/pagination";
 // import required modules
 import { Pagination } from "swiper";
 
-export default function ImageGallery({ images, discount, inStock }) {
+export default function ImageGallery({
+  images,
+  discount,
+  inStock,
+  productName,
+}) {
   const [currentImage, setCurrentImage] = useState(0);
 
   return (
@@ -19,9 +24,13 @@ export default function ImageGallery({ images, discount, inStock }) {
       <div className='hidden lg:block'>
         <SpecialSell discount={discount} inStock={inStock} />
         <div className='relative w-full h-[95vw] lg:h-[350px] xl:h-[510px] max-w-6xl px-4 mx-auto'>
-          <Image src={images[currentImage].url} layout='fill' />
+          <Image
+            src={images[currentImage].url}
+            layout='fill'
+            alt={productName}
+          />
         </div>
-        <div className='flex gap-x-3 mt-5'>
+        <div className='flex mt-5 gap-x-3'>
           {images.map((image, index) => (
             <div
               key={index}
@@ -30,7 +39,7 @@ export default function ImageGallery({ images, discount, inStock }) {
               }`}
               onClick={() => setCurrentImage(index)}
             >
-              <Image src={image.url} layout='fill' />
+              <Image src={image.url} layout='fill' alt={productName} />
             </div>
           ))}
         </div>

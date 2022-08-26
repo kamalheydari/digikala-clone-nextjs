@@ -11,7 +11,7 @@ export default function FreeShipping() {
           </p>
         </div>
         <div className='relative w-32 h-20 px-4'>
-          <Image src='/icons/freeShipping.svg' layout='fill' />
+          <Image src='/icons/freeShipping.svg' layout='fill' alt="ارسال رایگان"/>
         </div>
       </div>
     </div>

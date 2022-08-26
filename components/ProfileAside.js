@@ -43,7 +43,7 @@ export default function ProfileAside({ user }) {
     <aside className='sticky mt-6 lg:border lg:border-gray-200 lg:rounded-md lg:py-4 lg:top-6 xl:top-[136px]'>
       <div className='flex items-center justify-between px-5 py-2 '>
         <div className='relative w-12 h-12'>
-          <Image src='/icons/person.svg' layout='fill' />
+          <Image src='/icons/person.svg' layout='fill' alt='کاربر' />
         </div>
         <div className='flex flex-col ml-auto mr-3 gap-y-1'>
           <span className='text-sm font-medium lg:text-base'>{user.name}</span>

@@ -13,12 +13,16 @@ export default function BestSellsSlider({ products }) {
 
       <div className='grid grid-cols-[repeat(5,280px)] md:grid-cols-[repeat(5,300px)] grid-rows-3 xl:grid-cols-[repeat(5,330px)] grid-flow-col overflow-x-auto  gap-x-2 p-2'>
         {products.map((item, index) => (
-          <div key={item._id} className='p-1  w-60 md:w-72 xl:w-80'>
+          <div key={item._id} className='p-1 w-60 md:w-72 xl:w-80'>
             <Link href={`/products/${item._id}`}>
               <a>
                 <article className='flex gap-x-4'>
                   <div className='relative w-24 h-24 '>
-                    <Image src={item.images[0].url} layout='fill' />
+                    <Image
+                      src={item.images[0].url}
+                      layout='fill'
+                      alt={item.title}
+                    />
                   </div>
                   <div className='flex items-center border-b gap-x-3'>
                     <span className='text-2xl farsi-digits text-sky-500 '>

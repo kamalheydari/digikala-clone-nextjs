@@ -14,11 +14,11 @@ export default function Lists() {
 
       <section className='py-20'>
         <div className='relative mx-auto h-52 w-52'>
-          <Image src='/icons/favorites-list-empty.svg' layout='fill' />
+          <Image src='/icons/favorites-list-empty.svg' layout='fill' alt='لیست خالی' />
         </div>
 
         <p className='text-center'>لیست علاقه‌مندی‌های شما خالی است.</p>
-        <span className='text-amber-500 text-base text-center block my-3'>
+        <span className='block my-3 text-base text-center text-amber-500'>
           (بزودی)
         </span>
       </section>

@@ -4,7 +4,7 @@ export default function BigLoading() {
   return (
     <div className='p-8 mx-auto text-center rounded-lg bg-red-100/90 max-w-max '>
       <div className='relative w-40 h-12 mx-auto'>
-        <Image src='/icons/logo.svg' layout='fill' />
+        <Image src='/icons/logo.svg' layout='fill' alt="digikala"/>
       </div>
       <div className='lds-ellipsis'>
         <div></div>

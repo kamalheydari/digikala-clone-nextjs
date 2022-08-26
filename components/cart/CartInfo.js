@@ -21,7 +21,7 @@ export default function CartInfo({ handleRoute, cart }) {
             {formatNumber(totalPrice)}
           </span>
           <div className='relative mr-1 w-7 h-7'>
-            <Image src='/icons/toman.svg' layout='fill' />
+            <Image src='/icons/toman.svg' layout='fill'  alt="تومان" />
           </div>
         </div>
       </div>
@@ -34,7 +34,7 @@ export default function CartInfo({ handleRoute, cart }) {
             {formatNumber(totalPrice - totalDiscount)}
           </span>
           <div className='relative mr-1 w-7 h-7'>
-            <Image src='/icons/toman.svg' layout='fill' />
+            <Image src='/icons/toman.svg' layout='fill'  alt="تومان"/>
           </div>
         </div>
       </div>
@@ -54,7 +54,7 @@ export default function CartInfo({ handleRoute, cart }) {
             {formatNumber(totalDiscount)}
           </span>
           <div className='relative mr-1 w-7 h-7'>
-            <Image src='/icons/tomanRed.svg' layout='fill' />
+            <Image src='/icons/tomanRed.svg' layout='fill'  alt="تومان"/>
           </div>
         </div>
       </div>

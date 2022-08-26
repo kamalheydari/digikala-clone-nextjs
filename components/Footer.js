@@ -10,7 +10,7 @@ export default function Footer() {
         <div className='flex justify-between'>
           <div>
             <div className='relative w-32 h-10 mb-6'>
-              <Image src='/icons/logoPersian.svg' layout='fill' />
+              <Image src='/icons/logoPersian.svg' layout='fill' alt="دیجی‌کالا" />
             </div>
             <div className='flex flex-col gap-y-2 lg:flex-row lg:gap-x-5'>
               <span>تلفن پشتیبانی ۶۱۹۳۰۰۰۰ - ۰۲۱</span>
@@ -64,7 +64,7 @@ export default function Footer() {
         <div className='flex flex-col items-center gap-6 py-3 rounded-md bg-sky-900 lg:flex-row lg:justify-evenly'>
           <div className='flex items-center gap-x-3 '>
             <div className='relative w-8 h-8 '>
-              <Image src='/icons/mini-logo.png' layout='fill' />
+              <Image src='/icons/mini-logo.png' layout='fill' alt="دیجی‌کالا" />
             </div>
             <span className='text-xl text-white'>
               دانلود اپلیکیشن دیجی‌کالا
@@ -73,16 +73,16 @@ export default function Footer() {
 
           <div className='grid grid-cols-2 sm:grid-cols-4 gap-x-3'>
             <div className='relative w-32 h-12 mb-1 sm:w-36 lg:w-44 lg:mb-0'>
-              <Image src='/icons/app-coffe-bazzar.svg' layout='fill' />
+              <Image src='/icons/app-coffe-bazzar.svg' layout='fill' alt="کافه بازار" />
             </div>
             <div className='relative w-32 h-12 sm:w-36 lg:w-44'>
-              <Image src='/icons/app-google-play.svg' layout='fill' />
+              <Image src='/icons/app-google-play.svg' layout='fill' alt="گوگل استور" />
             </div>
             <div className='relative w-32 h-12 mb-1 sm:w-36 lg:w-44 lg:mb-0'>
-              <Image src='/icons/app-myket.svg' layout='fill' />
+              <Image src='/icons/app-myket.svg' layout='fill' alt="متیکن" />
             </div>
             <div className='relative w-32 h-12 sm:w-36 lg:w-44'>
-              <Image src='/icons/app-sib.svg' layout='fill' />
+              <Image src='/icons/app-sib.svg' layout='fill' alt="سیب" />
             </div>
           </div>
         </div>
@@ -105,19 +105,19 @@ export default function Footer() {
           <div className='flex justify-center gap-x-2'>
             <div className='p-2 border border-gray-300 rounded-md w-fit'>
               <div className='relative w-16 h-16 '>
-                <Image src='/icons/m-enamad.png' layout='fill' />
+                <Image src='/icons/m-enamad.png' layout='fill' alt="ای نماد" />
               </div>
             </div>
 
             <div className='p-2 border border-gray-300 rounded-md w-fit'>
               <div className='relative w-16 h-16 '>
-                <Image src='/icons/m-kasbokar.png' layout='fill' />
+                <Image src='/icons/m-kasbokar.png' layout='fill' alt="کسب و کار"/>
               </div>
             </div>
 
             <div className='p-2 border border-gray-300 rounded-md w-fit'>
               <div className='relative w-16 h-16 '>
-                <Image src='/icons/m-rezi.png' layout='fill' />
+                <Image src='/icons/m-rezi.png' layout='fill' alt="ساماندهی"/>
               </div>
             </div>
           </div>
@@ -126,7 +126,7 @@ export default function Footer() {
 
       <div className='flex items-center justify-center py-3 mt-6 bg-gray-600 gap-x-3'>
         <div className='relative w-16 h-16 overflow-hidden border-4 border-red-600 rounded-full'>
-          <Image src='/developer.jpg' layout='fill' />
+          <Image src='/developer.jpg' layout='fill' alt="کمال حیدری" />
         </div>
         <p className='text-white'>
           توسعه داده شده توسط{" "}

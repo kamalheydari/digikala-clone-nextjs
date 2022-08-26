@@ -11,7 +11,7 @@ export default function CartItem({ item }) {
       {/* image & cartButtons */}
       <div className='space-y-4'>
         <div className='relative w-28 h-28'>
-          <Image src={item.img.url} layout='fill' />
+          <Image src={item.img.url} layout='fill' alt={item.name} />
         </div>
         <div className='mx-auto w-fit '>
           <SpecialSell product={item} />
@@ -60,7 +60,7 @@ export default function CartItem({ item }) {
                 {formatNumber(item.price)}
               </span>
               <div className='relative w-6 h-6'>
-                <Image src='/icons/toman.svg' layout='fill' />
+                <Image src='/icons/toman.svg' layout='fill' alt="تومان"/>
               </div>
             </div>
           )}

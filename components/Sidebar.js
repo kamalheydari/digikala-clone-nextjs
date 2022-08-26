@@ -12,7 +12,7 @@ import { Icons } from "components";
 
 export default function Sidebar({ isSidebar, setIsSidebar }) {
   const dispatch = useDispatch();
-  
+
   //? Local States
   const [mainExpandCat, setMainExpandCat] = useState("");
   const [parentExpandCat, setParentExpandCat] = useState("");
@@ -50,7 +50,7 @@ export default function Sidebar({ isSidebar, setIsSidebar }) {
 
       <div className='absolute top-0 right-0 z-20 w-3/4 h-screen max-w-sm space-y-4 bg-white'>
         <div className='relative h-10 p-4 m-4 ml-auto w-28'>
-          <Image src='/icons/logoPersian.svg' layout='fill' />
+          <Image src='/icons/logoPersian.svg' layout='fill' alt='دیجی‌کالا' />
         </div>
         <p className='p-3 border-t-2 border-gray-200'>دسته‌بندی کالاها</p>
         <ul>

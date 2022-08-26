@@ -16,10 +16,10 @@ export default function BannerOne({ images = [] }) {
           }`}
           key={index}
         >
-          <Image src={item} layout='fill' />
+          <Image src={item} layout='fill' alt="Banner" />
         </div>
       ))}
-      <div className='hidden  absolute z-10 w-16 h-16 translate-x-1/2 -translate-y-1/2 bg-white rounded-full inset-1/2 lg:block' />
+      <div className='absolute z-10 hidden w-16 h-16 translate-x-1/2 -translate-y-1/2 bg-white rounded-full inset-1/2 lg:block' />
     </section>
   );
 }

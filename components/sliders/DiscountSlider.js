@@ -23,12 +23,17 @@ export default function DiscountSlider({ products, colors, categoryImage }) {
       >
         <SwiperSlide className='py-10 '>
           <div className='relative w-20 h-20 mx-auto'>
-            <Image src='/icons/amazing-typo.svg' layout='fill' />
+            <Image
+              src='/icons/amazing-typo.svg'
+              layout='fill'
+              alt='پیشنهاد شگفت انگیز'
+            />
           </div>
           <div className='relative w-20 h-20 mx-auto'>
             <Image
               src={categoryImage?.url || "/icons/general.png"}
               layout='fill'
+              alt='icon'
             />
           </div>
         </SwiperSlide>
@@ -43,7 +48,11 @@ export default function DiscountSlider({ products, colors, categoryImage }) {
               <a>
                 <article>
                   <div className='relative w-32 mx-auto h-36 '>
-                    <Image src={product.images[0].url} layout='fill' />
+                    <Image
+                      src={product.images[0].url}
+                      layout='fill'
+                      alt={product.title}
+                    />
                   </div>
                   <div className='flex px-2 justify-evenly gap-x-2 '>
                     <div>

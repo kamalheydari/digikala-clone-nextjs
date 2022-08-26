@@ -77,23 +77,3 @@ export default function Comments() {
 Comments.getProfileLayout = function pageLayout(page) {
   return <>{page}</>;
 };
-
-// {isLoading ? (
-//   <section className='px-3 py-20'>
-//     <BigLoading />
-//   </section>
-// ) : data.reviewsLength === 0 ? (
-//   <section className='py-20'>
-//     <div className='relative mx-auto h-52 w-52'>
-//       <Image src='/icons/order-empty.svg' layout='fill' />
-//     </div>
-
-//     <p className='text-center'>هنوز هیچ نظری ندارید</p>
-//   </section>
-// ) : (
-//   <section className='px-4 py-3 space-y-3 '>
-//     {data.reviews.map((item) => (
-//       <ReveiwCard key={item._id} item={item} />
-//     ))}
-//   </section>
-// )}

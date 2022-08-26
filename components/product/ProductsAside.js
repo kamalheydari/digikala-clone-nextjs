@@ -55,22 +55,8 @@ export default function ProductsAside({
 
       <div className='py-4'>
         <span className='font-medium text-gray-700'>محدوده قیمت</span>
-        <div className='flex items-center justify-between mt-2 mb-4 gap-x-1'>
-          <span>از</span>
-          <input
-            type='number'
-            className='w-3/4 px-1 text-xl text-left border-b border-gray-200 outline-none'
-            name='max_price'
-            value={max_price}
-            max={maxPrice}
-            onChange={handlefilter}
-          />
-          <div className='relative w-6 h-6 '>
-            <Image src='/icons/toman.svg' layout='fill' />
-          </div>
-        </div>
         <div className='flex items-center justify-between gap-x-1'>
-          <span>تا</span>
+          <span>از</span>
           <input
             type='number'
             className='w-3/4 px-1 text-xl text-left border-b border-gray-200 outline-none'
@@ -80,7 +66,21 @@ export default function ProductsAside({
             onChange={handlefilter}
           />
           <div className='relative w-6 h-6 '>
-            <Image src='/icons/toman.svg' layout='fill' />
+            <Image src='/icons/toman.svg' layout='fill' alt='تومان' />
+          </div>
+        </div>
+        <div className='flex items-center justify-between mt-2 mb-4 gap-x-1'>
+          <span>تا</span>
+          <input
+            type='number'
+            className='w-3/4 px-1 text-xl text-left border-b border-gray-200 outline-none'
+            name='max_price'
+            value={max_price}
+            max={maxPrice}
+            onChange={handlefilter}
+          />
+          <div className='relative w-6 h-6 '>
+            <Image src='/icons/toman.svg' layout='fill' alt='تومان' />
           </div>
         </div>
       </div>

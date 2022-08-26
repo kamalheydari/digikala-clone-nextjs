@@ -103,7 +103,7 @@ export default function SearchModal({ isShow, dispatch, closeModal }) {
                 data?.products.map((item) => (
                   <article key={item._id} className='pt-1'>
                     <div className='relative w-12 h-12'>
-                      <Image src={item.images[0].url} layout='fill' />
+                      <Image src={item.images[0].url} layout='fill' alt={item.name}/>
                     </div>
                     <Link href={`/products/${item._id}`}>
                       <a

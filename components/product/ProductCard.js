@@ -43,7 +43,11 @@ export default function ProductCard({ product, slide }) {
           <div className='flex items-center gap-4 sm:flex-col'>
             <div className='sm:flex sm:p-1 '>
               <div className='relative h-[28vw] w-[26vw] sm:w-56 sm:h-60 sm:mb-8 xl:w-44 xl:h-48'>
-                <Image src={product.images[0].url} layout='fill' />
+                <Image
+                  src={product.images[0].url}
+                  layout='fill'
+                  alt={product.title}
+                />
               </div>
               <div className='p-2 flex gap-1.5 items-center sm:flex-col sm:items-end'>
                 <Colors />

@@ -21,7 +21,7 @@ export default function Slider({ images = [] }) {
         {images.map((img, index) => (
           <SwiperSlide key={index}>
             <div className='relative w-full h-52 md:h-70 lg:h-[370px]'>
-              <Image className='object-cover object-[70%] lg:object-center' src={img} layout='fill' />
+              <Image className='object-cover object-[70%] lg:object-center' src={img} layout='fill' alt={img} />
             </div>
           </SwiperSlide>
         ))}

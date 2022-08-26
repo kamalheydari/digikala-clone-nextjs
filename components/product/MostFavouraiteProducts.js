@@ -22,7 +22,11 @@ export default function MostFavouraiteProducts({ products }) {
                   <Icons.Star className='w-5 h-5 md:w-7 md:h-7 text-amber-400 ' />
                 </div>
                 <div className='relative h-32 mx-auto w-28 md:w-32 md:h-36 '>
-                  <Image src={product.images[0].url} layout='fill' />
+                  <Image
+                    src={product.images[0].url}
+                    layout='fill'
+                    alt={product.title}
+                  />
                 </div>
                 <div className='flex items-center mt-1 gap-x-2 justify-evenly '>
                   <div>
