@@ -1,12 +1,11 @@
-import { useState } from "react";
+import useToggle from "hooks/useToggle";
 
 import { Icons } from "components";
 
 import { truncate } from "utils/truncate";
 
 export default function Description({ description }) {
-  //? Local State
-  const [isShowDesc, setIsShowDesc] = useState(false);
+  const { status: isShowDesc, toggleStatus: toggleShowDesc } = useToggle();
 
   return (
     <section>
@@ -19,7 +18,7 @@ export default function Description({ description }) {
           <button
             type='button'
             className='flex items-center py-2 text-sm text-sky-400'
-            onClick={() => setIsShowDesc(!isShowDesc)}
+            onClick={toggleShowDesc}
           >
             {isShowDesc ? "بستن" : "مشاهده بیشتر"}
             <Icons.ArrowLeft className='icon text-sky-400' />

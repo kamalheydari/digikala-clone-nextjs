@@ -10,7 +10,7 @@ import {
 
 import { Icons } from "components";
 
-export default function Sidebar({ isSidebar, setIsSidebar }) {
+export default function Sidebar({ isSidebar, toggleSidebar }) {
   const dispatch = useDispatch();
 
   //? Local States
@@ -35,7 +35,7 @@ export default function Sidebar({ isSidebar, setIsSidebar }) {
   };
 
   const hanldeClose = () => {
-    setIsSidebar(false);
+    toggleSidebar(false);
     dispatch(resetParentCategory());
     dispatch(resetSelectedCategories());
   };

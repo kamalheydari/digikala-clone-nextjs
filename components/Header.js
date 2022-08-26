@@ -2,14 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Icons, User, Cart, Search, Sidebar, Navbar } from "components";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
 import { openModal } from "app/slices/modal.slice";
+import useToggle from "hooks/useToggle";
 
 export default function Header() {
   const dispatch = useDispatch();
 
-  //? Local State
-  const [isSidebar, setIsSidebar] = useState(false);
+  const { status: isSidebar, toggleStatus: toggleSidebar } = useToggle();
 
   //? Store
   const { user } = useSelector((state) => state.user);
@@ -33,14 +32,14 @@ export default function Header() {
           <button
             className='p-1 lg:hidden'
             type='button'
-            onClick={() => setIsSidebar(true)}
+            onClick={toggleSidebar}
           >
             <Icons.Bars className='icon' />
           </button>
           <div className='relative w-24 h-14 '>
             <Link passHref href='/'>
               <a>
-                <Image src='/icons/logo.svg' layout='fill' alt="دیجی‌کالا" />
+                <Image src='/icons/logo.svg' layout='fill' alt='دیجی‌کالا' />
               </a>
             </Link>
           </div>
@@ -86,7 +85,7 @@ export default function Header() {
           </button>
         )}
       </div>
-      <Sidebar isSidebar={isSidebar} setIsSidebar={setIsSidebar} />
+      <Sidebar isSidebar={isSidebar} toggleSidebar={toggleSidebar} />
     </header>
   );
 }
