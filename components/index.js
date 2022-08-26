@@ -38,7 +38,11 @@ export { default as MostFavouraiteProducts } from "./product/MostFavouraiteProdu
 export { default as ImageGallery } from "./product/ImageGallery";
 export { default as Description } from "./product/Description";
 export { default as Specification } from "./product/Specification";
-export { default as Reviews } from "./product/Reviews";
+export { default as AddColors } from "./product/AddColors";
+export { default as AddSizes } from "./product/AddSizes";
+export { default as SelectColor } from "./product/SelectColor";
+export { default as SelectSize } from "./product/SelectSize";
+export { default as OutOfStock } from "./product/OutOfStock";
 
 //* CART COMPONENTS
 export { default as Cart } from "./cart/Cart";
@@ -47,6 +51,7 @@ export { default as CartButtons } from "./cart/CartButtons";
 export { default as CartInfo } from "./cart/CartInfo";
 export { default as CartItem } from "./cart/CartItem";
 export { default as DiscountCartItem } from "./cart/DiscountCartItem";
+export { default as AddToCartInfo } from "./cart/AddToCartInfo";
 
 //* MODAL COMPONENTS
 export { default as Modal } from "./modal/Modal";
@@ -73,6 +78,10 @@ export { default as EmptySearchList } from "./emptyList/EmptySearchList";
 export { default as OrderCard } from "./order/OrderCard";
 export { default as Orders } from "./order/Orders";
 
+//* REVIEW COMPONENTS
+export { default as ReveiwCard } from "./review/ReveiwCard";
+export { default as Reviews } from "./review/Reviews";
+
 //* OTHER COMPONENTS
 export { default as Alert } from "./Alert";
 export { default as Header } from "./Header";
@@ -86,13 +95,11 @@ export { default as ProfileAside } from "./ProfileAside";
 export { default as DashboardAside } from "./DashboardAside";
 export { default as SelectCategories } from "./SelectCategories";
 export { default as DetailsList } from "./DetailsList";
-export { default as Colors } from "./Colors";
-export { default as Sizes } from "./Sizes";
+
 export { default as UploadImages } from "./UploadImages";
 export { default as Pagination } from "./Pagination";
 export { default as Sidebar } from "./Sidebar";
 export { default as Sort } from "./Sort";
 export { default as Services } from "./Services";
 export { default as FreeShipping } from "./FreeShipping";
-export { default as ReveiwCard } from "./ReveiwCard";
 export { default as Footer } from "./Footer";

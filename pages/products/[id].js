@@ -1,6 +1,5 @@
 import Head from "next/head";
-import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 
 import db from "lib/db";
 import Product from "models/Product";
@@ -8,27 +7,23 @@ import Product from "models/Product";
 import { useDispatch } from "react-redux";
 import { addToLastSeen } from "app/slices/user.slice";
 
-import { formatNumber } from "utils/formatNumber";
 
 import {
-  AddToCart,
   FreeShipping,
-  Icons,
   Services,
-  Depot,
   SmilarProductsSlider,
   ImageGallery,
   Description,
   Specification,
   Reviews,
+  SelectColor,
+  SelectSize,
+  OutOfStock,
+  AddToCartInfo,
 } from "components";
 
 export default function SingleProduct({ product, smilarProducts }) {
   const dispatch = useDispatch();
-
-  //? Local State
-  const [color, setColor] = useState(product.colors[0] || null);
-  const [size, setSize] = useState(product.sizes[0] || null);
 
   //? Add To LastSeen
   useEffect(() => {
@@ -40,153 +35,6 @@ export default function SingleProduct({ product, smilarProducts }) {
       })
     );
   }, [product._id]);
-
-  //? Handlers
-  const handleChangeColor = (item) => {
-    setColor(item);
-  };
-
-  const handleChangeSize = (item) => {
-    setSize(item);
-  };
-
-  //? Local Components
-  const Colors = () => {
-    return (
-      <section className='lg:col-start-4 lg:col-end-8 lg:row-start-2 lg:row-end-4'>
-        <div className='flex justify-between p-4'>
-          <span className='text-sm text-gray-700'>رنگ: {color.name}</span>
-          <span className='text-sm farsi-digits'>
-            {product.colors.length} رنگ
-          </span>
-        </div>
-        <div className='flex flex-wrap gap-3 px-5 my-3'>
-          {product.colors.map((item) => (
-            <button
-              type='button'
-              key={item.id}
-              onClick={() => handleChangeColor(item)}
-              className={` rounded-2xl py-1 px-1.5 flex items-center cursor-pointer  ${
-                color.id === item.id
-                  ? "border-2 border-sky-500"
-                  : " border-2 border-gray-300"
-              }`}
-            >
-              <span
-                className='inline-block w-5 h-5 ml-3 shadow rounded-xl'
-                style={{ background: item.hashCode }}
-              >
-                {color.id === item.id && (
-                  <Icons.Check
-                    className={`h-5 w-5 ${
-                      item.hashCode === "#ffffff"
-                        ? "text-gray-600"
-                        : item.hashCode === "#000000"
-                        ? "text-gray-200"
-                        : "text-white"
-                    } `}
-                  />
-                )}
-              </span>
-              <span>{item.name}</span>
-            </button>
-          ))}
-        </div>
-        <div className='section-divide-y' />
-      </section>
-    );
-  };
-
-  const Sizes = () => {
-    return (
-      <section className='lg:col-start-4 lg:col-end-8 lg:row-start-2 lg:row-end-4'>
-        <div className='flex justify-between p-4'>
-          <span className='text-sm text-gray-700'>اندازه: {size.name}</span>
-          <span className='text-sm'>
-            {formatNumber(product.sizes.length)} اندازه
-          </span>
-        </div>
-        <div className='flex flex-wrap gap-3 px-5 my-3'>
-          {product.sizes.map((item) => (
-            <button
-              type='button'
-              key={item.id}
-              onClick={() => handleChangeSize(item)}
-              className={`rounded-full py-1.5 px-2 flex items-center cursor-pointer  ${
-                size.id === item.id
-                  ? "border-2 border-sky-500"
-                  : " border-2 border-gray-300"
-              }`}
-            >
-              <span>{item.size}</span>
-            </button>
-          ))}
-        </div>
-        <div className='section-divide-y' />
-      </section>
-    );
-  };
-
-  const OutOfStock = () => {
-    return (
-      <section className='lg:col-start-8 lg:col-end-10 lg:row-start-2 lg:row-end-3 lg:py-2 lg:bg-gray-100 mx-3 p-1.5 rounded bg-gray-50/50 my-5 lg:my-0 lg:rounded-lg'>
-        <div className='flex items-center justify-between gap-x-2'>
-          <div className='h-[3px] bg-gray-300 flex-1' />
-          <h4 className='text-base font-bold text-gray-500'>ناموجود</h4>
-          <div className='h-[3px] bg-gray-300 flex-1' />
-        </div>
-        <p className='px-3 text-sm text-gray-700'>
-          این کالا فعلا موجود نیست اما می‌توانید زنگوله را بزنید تا به محض موجود
-          شدن، به شما خبر دهیم
-        </p>
-      </section>
-    );
-  };
-
-  const ProductInfo = ({ image }) => {
-    return (
-      <div
-        className={`divide-y lg:col-start-8 lg:col-end-10 lg:row-start-2 lg:row-end-5 lg:rounded-lg lg:bg-gray-100 lg:flex lg:flex-col   xl:row-end-5 lg:px-3 lg:py-1.5 lg:border lg:border-gray-200 lg:shadow lg:sticky ${
-          image ? "lg:top-4 xl:top-32" : "lg:top-60 xl:top-[260px]"
-        } `}
-      >
-        <div className='items-center justify-between hidden space-y-2 lg:py-3 lg:flex'>
-          <span className='text-base text-black'>فروشنده :</span>
-          <div className='flex gap-x-2'>
-            <div className='relative w-6 h-6'>
-              <Image src='/icons/mini-logo.png' layout='fill' alt="دیجی‌کالا"/>
-            </div>
-            <span>دیجی‌کالا</span>
-          </div>
-        </div>
-        {image && (
-          <div className='flex py-3 gap-x-4 '>
-            <div className='relative w-28 h-28'>
-              <Image src={product.images[0].url} layout='fill' alt={product.title} />
-            </div>
-            <span className='flex-1 text-justify'>{product.title}</span>
-          </div>
-        )}
-
-        <div className='hidden py-3 lg:items-center lg:gap-x-2 lg:flex'>
-          <Icons.ShieldCheck className='icon' />
-          <span className='font-light'>گارانتی اصالت و ضمانت تحویل</span>
-        </div>
-
-        <div className='hidden lg:block lg:py-3 '>
-          <Depot inStock={product.inStock} />
-        </div>
-
-        <div className='hidden lg:flex lg:items-center lg:gap-x-1 lg:py-3'>
-          <Icons.Check className='icon' />
-          <span> فروش :</span>
-          <span className='farsi-digits'>{formatNumber(product.sold)}</span>
-        </div>
-
-        <AddToCart product={product} color={color} size={size} />
-      </div>
-    );
-  };
 
   return (
     <main className='xl:mt-28 lg:max-w-[1550px] mx-auto py-4 space-y-4'>
@@ -215,9 +63,9 @@ export default function SingleProduct({ product, smilarProducts }) {
 
         <div className='section-divide-y' />
 
-        {product.colors.length > 0 && <Colors />}
+        {product.colors.length > 0 && <SelectColor colors={product.colors} />}
 
-        {product.sizes.length > 0 && <Sizes />}
+        {product.sizes.length > 0 && <SelectSize sizes={product.sizes} />}
 
         {product.inStock === 0 && <OutOfStock />}
 
@@ -240,7 +88,7 @@ export default function SingleProduct({ product, smilarProducts }) {
         </section>
 
         {/* Add To Cart */}
-        {product.inStock > 0 && <ProductInfo />}
+        {product.inStock > 0 && <AddToCartInfo product={product} />}
       </div>
 
       <Services />
@@ -270,7 +118,7 @@ export default function SingleProduct({ product, smilarProducts }) {
           />
         </div>
         <div className='hidden w-full px-3 lg:block lg:max-w-xs xl:max-w-sm'>
-          {product.inStock > 0 && <ProductInfo image />}
+          {product.inStock > 0 && <AddToCartInfo product={product} second />}
         </div>
       </div>
     </main>

@@ -12,25 +12,6 @@ import {
 import { truncate } from "utils/truncate";
 
 export default function ProductCard({ product, slide }) {
-  //? Local Components
-  const Colors = () => {
-    if (product.colors && product.inStock !== 0)
-      return product.colors
-        .slice(0, 3)
-        .map((color) => (
-          <span
-            key={color.id}
-            className='inline-block w-2.5 h-2.5 rounded-xl border-gray-300 shadow border '
-            style={{ background: color.hashCode }}
-          ></span>
-        ));
-  };
-
-  const PlusIcon = () => {
-    if (product.colors.length > 3 && product.inStock !== 0)
-      return <Icons.Plus className='w-3 h-3 mr-1 sm:mr-0' />;
-  };
-
   return (
     <Link href={`/products/${product._id}`}>
       <a>
@@ -50,8 +31,20 @@ export default function ProductCard({ product, slide }) {
                 />
               </div>
               <div className='p-2 flex gap-1.5 items-center sm:flex-col sm:items-end'>
-                <Colors />
-                <PlusIcon />
+                {product.colors &&
+                  product.inStock !== 0 &&
+                  product.colors
+                    .slice(0, 3)
+                    .map((color) => (
+                      <span
+                        key={color.id}
+                        className='inline-block w-2.5 h-2.5 rounded-xl border-gray-300 shadow border '
+                        style={{ background: color.hashCode }}
+                      ></span>
+                    ))}
+                {product.colors.length > 3 && product.inStock !== 0 && (
+                  <Icons.Plus className='w-3 h-3 mr-1 sm:mr-0' />
+                )}
               </div>
             </div>
             <div className='flex-1 space-y-5 sm:w-full'>

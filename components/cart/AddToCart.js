@@ -8,8 +8,11 @@ import exsitItem from "utils/exsitItem";
 
 import { ArrowLink, ProductPrice, CartButtons } from "components";
 
-export default function AddToCart({ product, color, size }) {
+export default function AddToCart({ product }) {
   const dispatch = useDispatch();
+
+  //? Store
+  const { tempColor, tempSize } = useSelector((state) => state.cart);
 
   //? Local State
   const [currentItemInCart, setCurrentItemInCart] = useState(null);
@@ -18,8 +21,10 @@ export default function AddToCart({ product, color, size }) {
   const { cartItems } = useSelector((state) => state.cart);
 
   useEffect(() => {
-    setCurrentItemInCart(exsitItem(cartItems, product._id, color, size));
-  }, [size, color, cartItems]);
+    setCurrentItemInCart(
+      exsitItem(cartItems, product._id, tempColor, tempSize)
+    );
+  }, [tempColor, tempSize, cartItems]);
 
   //? handlers
   const handleAddItem = () => {
@@ -39,8 +44,8 @@ export default function AddToCart({ product, color, size }) {
         discount: product.discount,
         inStock: product.inStock,
         sold: product.sold,
-        color,
-        size,
+        color: tempColor,
+        size: tempSize,
         img: product.images[0],
         quantity: 1,
       })

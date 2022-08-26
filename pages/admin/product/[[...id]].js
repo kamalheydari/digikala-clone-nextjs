@@ -18,9 +18,9 @@ import {
 
 import {
   Buttons,
-  Colors,
+  AddColors,
   SelectCategories,
-  Sizes,
+  AddSizes,
   UploadImages,
   Loading,
 } from "components";
@@ -278,9 +278,9 @@ export default function Product() {
             {!id && <SelectCategories productPage />}
           </div>
           {optionsType === "colors" || product.colors.length > 0 ? (
-            <Colors />
+            <AddColors />
           ) : optionsType === "sizes" || product.sizes.length > 0 ? (
-            <Sizes />
+            <AddSizes />
           ) : (
             ""
           )}

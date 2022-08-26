@@ -26,7 +26,7 @@ export default function Description({ description }) {
           </button>
         )}
       </div>
-      <div className='section-divide-y lg:block' />
+      <div className='section-divide-y ' />
     </section>
   );
 }

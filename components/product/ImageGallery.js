@@ -35,7 +35,7 @@ export default function ImageGallery({
             <div
               key={index}
               className={`relative h-20 w-24  cursor-pointer border-2 border-transparent rounded-md overflow-hidden ${
-                index === currentImage && "border-red-400"
+                index === currentImage && "border-gray-300 shadow-3xl"
               }`}
               onClick={() => setCurrentImage(index)}
             >

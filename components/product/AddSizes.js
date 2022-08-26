@@ -5,30 +5,31 @@ import { addItem, deleteItem, editItem } from "app/slices/product.slice";
 
 import { Buttons } from "components";
 
-export default function Colors() {
+export default function AddSizes() {
   const dispatch = useDispatch();
+
+  //? Refs
   const inputRef = useRef();
 
-  //? Local State
-  const [color, setColor] = useState({ name: "", hashCode: "#2fd13c" });
+  //? Local States
+  const [size, setSize] = useState();
   const [onEdit, setOnEdit] = useState(false);
   const [editId, setEditId] = useState();
 
   //? Store
   const {
-    product: { colors },
+    product: { sizes },
   } = useSelector((state) => state.product);
 
   //? Handlers
   const handleAddToStore = () => {
-    if (color.name.trim() === "") return;
-
+    if (size.trim() === "") return;
     if (!onEdit) {
-      dispatch(addItem({ type: "colors", value: color }));
-      setColor({ name: "", hashCode: "#2fd13c" });
+      dispatch(addItem({ type: "sizes", value: size }));
+      setSize("");
     } else {
-      dispatch(editItem({ id: editId, type: "colors", value: color }));
-      setColor({ name: "", hashCode: "#2fd13c" });
+      dispatch(editItem({ id: editId, type: "sizes", value: size }));
+      setSize("");
       setEditId();
       setOnEdit(false);
     }
@@ -36,13 +37,13 @@ export default function Colors() {
 
   const handleEdit = (id) => {
     setOnEdit(true);
-    const item = colors.find((item) => item.id === id);
-    setColor({ name: item.name, hashCode: item.hashCode });
+    const item = sizes.find((item) => item.id === id);
+    setSize(item.size);
     setEditId(item.id);
     inputRef.current.focus();
   };
   const handleDelete = (id) => {
-    dispatch(deleteItem({ id, type: "colors" }));
+    dispatch(deleteItem({ id, type: "sizes" }));
   };
 
   return (
@@ -53,38 +54,22 @@ export default function Colors() {
           <Buttons.Add onClick={handleAddToStore} />
           <input
             type='text'
-            onChange={(e) =>
-              setColor((color) => ({ ...color, name: e.target.value }))
-            }
+            onChange={(e) => setSize(e.target.value)}
             className='inline-block outline-none input w-44'
-            name='name'
-            value={color.name}
-            placeholder='نام رنگ'
+            value={size}
+            placeholder='...'
             ref={inputRef}
-          />
-          <input
-            type='color'
-            name='hashCode'
-            value={color.hashCode}
-            onChange={(e) =>
-              setColor((color) => ({ ...color, hashCode: e.target.value }))
-            }
-            className='w-24 h-9'
           />
         </div>
         <div className='flex flex-wrap justify-center gap-x-5 gap-y-3'>
-          {colors.map((item) => (
+          {sizes.map((item) => (
             <div
               key={item.id}
-              className='shadow rounded flex gap-x-2 items-center px-1.5 py-2 bg-gray-50'
+              className='shadow rounded flex items-center gap-x-3 px-1.5 py-2'
             >
               <Buttons.Delete onClick={() => handleDelete(item.id)} />
               <Buttons.Edit onClick={() => handleEdit(item.id)} />
-              {item.name}
-              <span
-                className='w-6 h-6 mr-3 rounded-sm shadow '
-                style={{ background: item.hashCode }}
-              ></span>
+              {item.size}
             </div>
           ))}
         </div>

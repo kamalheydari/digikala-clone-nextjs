@@ -15,6 +15,8 @@ const initialState = {
   totalItems: getTotal(getCartItems, "quantity"),
   totalPrice: getTotal(getCartItems, "price"),
   totalDiscount: getTotal(getCartItems, "discount"),
+  tempSize: null,
+  tempColor: null,
 };
 
 const cartSlice = createSlice({
@@ -85,6 +87,14 @@ const cartSlice = createSlice({
       state.totalDiscount = 0;
       localStorage.removeItem("cartItems");
     },
+
+    setTempColor: (state, action) => {
+      state.tempColor = action.payload;
+    },
+
+    setTempSize: (state, action) => {
+      state.tempSize = action.payload;
+    },
   },
 });
 
@@ -94,6 +104,8 @@ export const {
   clearCart,
   decrease,
   increase,
+  setTempColor,
+  setTempSize,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
