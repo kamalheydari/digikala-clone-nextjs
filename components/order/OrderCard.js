@@ -131,6 +131,8 @@ export default function OrderCard({ order, singleOrder }) {
                   src={cartItem.img.url}
                   layout='fill'
                   alt={cartItem.name}
+                  placeholder='blur'
+                  blurDataURL='/placeholder.png'
                 />
               </div>
             </a>

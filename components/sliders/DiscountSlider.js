@@ -34,6 +34,8 @@ export default function DiscountSlider({ products, colors, categoryImage }) {
               src={categoryImage?.url || "/icons/general.png"}
               layout='fill'
               alt='icon'
+              placeholder='blur'
+              blurDataURL='/placeholder.png'
             />
           </div>
         </SwiperSlide>
@@ -52,6 +54,8 @@ export default function DiscountSlider({ products, colors, categoryImage }) {
                       src={product.images[0].url}
                       layout='fill'
                       alt={product.title}
+                      placeholder='blur'
+                      blurDataURL='/placeholder.png'
                     />
                   </div>
                   <div className='flex px-2 justify-evenly gap-x-2 '>

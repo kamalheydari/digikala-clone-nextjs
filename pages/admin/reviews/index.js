@@ -71,7 +71,13 @@ export default function Reviews() {
                 >
                   <td className='p-2'>
                     <div className='relative mx-auto w-7 h-7'>
-                      <Image src={review.product.images[0].url} layout='fill' alt="تصویر محصول" />
+                      <Image
+                        src={review.product.images[0].url}
+                        layout='fill'
+                        alt='تصویر محصول'
+                        placeholder='blur'
+                        blurDataURL='/placeholder.png'
+                      />
                     </div>
                   </td>
                   <td className='p-2'>{review._id}</td>

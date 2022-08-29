@@ -22,6 +22,8 @@ export default function BestSellsSlider({ products }) {
                       src={item.images[0].url}
                       layout='fill'
                       alt={item.title}
+                      placeholder='blur'
+                      blurDataURL='/placeholder.png'
                     />
                   </div>
                   <div className='flex items-center border-b gap-x-3'>

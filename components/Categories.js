@@ -23,6 +23,8 @@ export default function Categories({ children, childCategories, homePage }) {
                         src={item.image.url}
                         layout='fill'
                         alt={item.name}
+                        placeholder='blur'
+                        blurDataURL='/placeholder.png'
                       />
                     </div>
                     <span className='text-sm'>{item.name}</span>
@@ -34,7 +36,13 @@ export default function Categories({ children, childCategories, homePage }) {
             return (
               <div key={index} className='text-center grayscale'>
                 <div className='relative w-32 h-32 mx-auto mb-1'>
-                  <Image src={item.image.url} layout='fill' alt={item.name} />
+                  <Image
+                    src={item.image.url}
+                    layout='fill'
+                    alt={item.name}
+                    placeholder='blur'
+                    blurDataURL='/placeholder.png'
+                  />
                 </div>
                 <span className='text-sm'>{item.name}</span>
               </div>

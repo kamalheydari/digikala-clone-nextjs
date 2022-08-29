@@ -26,6 +26,8 @@ export default function MostFavouraiteProducts({ products }) {
                     src={product.images[0].url}
                     layout='fill'
                     alt={product.title}
+                    placeholder='blur'
+                    blurDataURL='/placeholder.png'
                   />
                 </div>
                 <div className='flex items-center mt-1 gap-x-2 justify-evenly '>

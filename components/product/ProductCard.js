@@ -28,6 +28,8 @@ export default function ProductCard({ product, slide }) {
                   src={product.images[0].url}
                   layout='fill'
                   alt={product.title}
+                  placeholder='blur'
+                  blurDataURL='/placeholder.png'
                 />
               </div>
               <div className='p-2 flex gap-1.5 items-center sm:flex-col sm:items-end'>

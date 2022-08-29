@@ -63,6 +63,8 @@ export default function Navbar() {
                             src={mainCategory.image.url}
                             layout='fill'
                             alt={mainCategory.name}
+                            placeholder='blur'
+                            blurDataURL='/placeholder.png'
                           />
                         </div>
                         <span>{mainCategory.name}</span>

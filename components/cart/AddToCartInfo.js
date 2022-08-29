@@ -32,6 +32,8 @@ export default function AddToCartInfo({ second, product }) {
                 src={product.images[0].url}
                 layout='fill'
                 alt={product.title}
+                placeholder='blur'
+                blurDataURL='/placeholder.png'
               />
             </div>
             <span className='flex-1 text-justify'>{product.title}</span>

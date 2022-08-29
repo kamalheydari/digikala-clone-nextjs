@@ -103,7 +103,11 @@ export default function ShippingPage() {
         <Link href='/'>
           <a>
             <div className='relative w-24 h-12 mx-auto'>
-              <Image src='/icons/logoPersian.svg' layout='fill' alt="دیجی‌کالا"/>
+              <Image
+                src='/icons/logoPersian.svg'
+                layout='fill'
+                alt='دیجی‌کالا'
+              />
             </div>
           </a>
         </Link>
@@ -151,7 +155,7 @@ export default function ShippingPage() {
           <section className='px-2 py-4 mx-3 border border-gray-200 rounded-lg lg:mx-0 lg:mt-3 '>
             <div className='flex mb-5'>
               <div className='relative w-10 h-10 ml-4 '>
-                <Image src='/icons/car.png' layout='fill' alt="ارسال"/>
+                <Image src='/icons/car.png' layout='fill' alt='ارسال' />
               </div>
               <div>
                 <span className='text-base text-black'>ارسال عادی</span>
@@ -165,7 +169,13 @@ export default function ShippingPage() {
               {cartItems.map((item) => (
                 <article key={item.itemID}>
                   <div className='relative w-24 h-28 '>
-                    <Image src={item.img.url} layout='fill' alt={item.name} />
+                    <Image
+                      src={item.img.url}
+                      layout='fill'
+                      alt={item.name}
+                      placeholder='blur'
+                      blurDataURL='/placeholder.png'
+                    />
                     <span className='absolute farsi-digits order-badge lg:block'>
                       {formatNumber(item.quantity)}
                     </span>

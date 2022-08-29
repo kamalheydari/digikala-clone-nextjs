@@ -28,6 +28,8 @@ export default function ImageGallery({
             src={images[currentImage].url}
             layout='fill'
             alt={productName}
+            placeholder='blur'
+            blurDataURL='/placeholder.png'
           />
         </div>
         <div className='flex mt-5 gap-x-3'>
@@ -39,7 +41,13 @@ export default function ImageGallery({
               }`}
               onClick={() => setCurrentImage(index)}
             >
-              <Image src={image.url} layout='fill' alt={productName} />
+              <Image
+                src={image.url}
+                layout='fill'
+                alt={productName}
+                placeholder='blur'
+                blurDataURL='/placeholder.png'
+              />
             </div>
           ))}
         </div>
@@ -49,7 +57,12 @@ export default function ImageGallery({
           {images.map((image, index) => (
             <SwiperSlide key={index}>
               <div className='relative h-[95vw] w-full'>
-                <Image src={image.url} layout='fill' />
+                <Image
+                  src={image.url}
+                  layout='fill'
+                  placeholder='blur'
+                  blurDataURL='/placeholder.png'
+                />
               </div>
             </SwiperSlide>
           ))}

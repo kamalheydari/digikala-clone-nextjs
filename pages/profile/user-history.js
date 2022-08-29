@@ -32,7 +32,8 @@ export default function UserHistory() {
                     <Image
                       src={item.image.url}
                       layout='fill'
-                      alt={item.title}
+                      alt={item.title}         placeholder='blur'
+                      blurDataURL='/placeholder.png'
                     />
                   </div>
                   <h5 className='flex-1 px-3 text-right text-gray-800 leadiri-6 md:h-32'>
