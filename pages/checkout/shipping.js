@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { clearCart } from "app/slices/cart.slice";
-import { usePostDataMutation } from "app/slices/fetchApi.slice";
+import { useCreateOrderMutation } from "app/api/orderApi";
 import { openModal } from "app/slices/modal.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { showAlert } from "app/slices/alert.slice";
@@ -18,12 +18,6 @@ export default function ShippingPage() {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  //? Post Query
-  const [
-    postData,
-    { data, isSuccess, isError, isLoading, error },
-  ] = usePostDataMutation();
-
   //? Local State
   const [paymentMethod, setPaymentMethod] = useState("پرداخت در محل");
 
@@ -33,6 +27,13 @@ export default function ShippingPage() {
     (state) => state.cart
   );
 
+  //? Create Order Query
+  const [
+    postData,
+    { data, isSuccess, isError, isLoading, error },
+  ] = useCreateOrderMutation();
+
+  //? Handle Create Order Response
   useEffect(() => {
     if (isSuccess) {
       dispatch(
@@ -44,6 +45,9 @@ export default function ShippingPage() {
       dispatch(clearCart());
       router.push("/profile");
     }
+  }, [isSuccess]);
+
+  useEffect(() => {
     if (isError) {
       dispatch(
         showAlert({
@@ -52,7 +56,7 @@ export default function ShippingPage() {
         })
       );
     }
-  }, [isSuccess, isError]);
+  }, [isError]);
 
   //? Handlers
   const handleChangeAddress = () => {
@@ -79,7 +83,6 @@ export default function ShippingPage() {
         })
       );
     postData({
-      url: "/api/order",
       body: {
         address: user.address,
         mobile: user.mobile,

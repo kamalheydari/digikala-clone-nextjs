@@ -1,10 +1,10 @@
+import { useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 
-import { useGetDataQuery } from "app/slices/fetchApi.slice";
 import { useSelector } from "react-redux";
+import { useGetOrdersQuery } from "app/api/orderApi";
 
 import { Buttons, Pagination, ShowWrapper, EmptyOrdersList } from "components";
 
@@ -16,9 +16,8 @@ export default function OrdersHome() {
 
   //? Store
   const { token } = useSelector((state) => state.user);
-  const { isConfirm } = useSelector((state) => state.modal);
 
-  //? Get Query
+  //? Get Orders Query
   const {
     data,
     isSuccess,
@@ -26,14 +25,11 @@ export default function OrdersHome() {
     error,
     isError,
     refetch,
-  } = useGetDataQuery({
-    url: `/api/order?page=${page}&page_size=10`,
+  } = useGetOrdersQuery({
+    page,
     token,
+    pageSize: 5,
   });
-
-  useEffect(() => {
-    if (isConfirm) router.reload();
-  }, [isConfirm]);
 
   return (
     <main>

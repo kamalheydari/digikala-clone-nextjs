@@ -3,7 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 
-import { useGetDataQuery } from "app/slices/fetchApi.slice";
+import { useGetReviewsQuery } from "app/api/reviewApi";
 import { useSelector } from "react-redux";
 
 import {
@@ -20,7 +20,7 @@ export default function Reviews() {
   //? Store
   const { token } = useSelector((state) => state.user);
 
-  //? Get Query
+  //? Get Review Query
   const {
     data,
     isError,
@@ -28,8 +28,8 @@ export default function Reviews() {
     isFetching,
     refetch,
     isSuccess,
-  } = useGetDataQuery({
-    url: `/api/reviews?page=${page}&page_size=10`,
+  } = useGetReviewsQuery({
+    page,
     token,
   });
 

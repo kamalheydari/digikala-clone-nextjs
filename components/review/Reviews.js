@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { useDispatch } from "react-redux";
-import { useGetDataQuery } from "app/slices/fetchApi.slice";
+import { useGetProductReviewsQuery } from "app/api/reviewApi";
 import { openModal } from "app/slices/modal.slice";
 
 import { Pagination, Icons, ShowWrapper, EmptyComment } from "components";
@@ -14,7 +14,7 @@ export default function Reviews({ numReviews, prdouctID, productTitle }) {
   //? Local State
   const [reviewsPage, setReviewsPage] = useState(1);
 
-  //? Get Query
+  //? Get Product-Reviews Query
   const {
     data,
     isSuccess,
@@ -22,10 +22,12 @@ export default function Reviews({ numReviews, prdouctID, productTitle }) {
     error,
     isError,
     refetch,
-  } = useGetDataQuery({
-    url: `/api/reviews/product/${prdouctID}?page=${reviewsPage}&page_size=5`,
+  } = useGetProductReviewsQuery({
+    id: prdouctID,
+    page: reviewsPage,
   });
 
+  //? Handlers
   const handleOpenCommentModal = () => {
     dispatch(
       openModal({

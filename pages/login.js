@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -6,9 +7,7 @@ import Head from "next/head";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { usePostDataMutation } from "app/slices/fetchApi.slice";
-import { DisplayError, Loading } from "components";
-import { useEffect } from "react";
+import { useLoginMutation } from "app/api/userApi";
 import { useDispatch } from "react-redux";
 import { userLogin } from "app/slices/user.slice";
 
@@ -16,17 +15,19 @@ import { userLogin } from "app/slices/user.slice";
 import validation from "utils/validation";
 import { showAlert } from "app/slices/alert.slice";
 
+import { DisplayError, Loading } from "components";
+
 export default function LoginPage() {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  //? Post query
+  //? Login User Query
   const [
-    postData,
+    login,
     { data, isSuccess, isError, isLoading, error },
-  ] = usePostDataMutation();
+  ] = useLoginMutation();
 
-  //? Handle Response
+  //? Handle Login Response
   useEffect(() => {
     if (isSuccess) {
       dispatch(userLogin(data.data));
@@ -39,6 +40,9 @@ export default function LoginPage() {
       router.push("/");
       reset();
     }
+  }, [isSuccess]);
+
+  useEffect(() => {
     if (isError)
       dispatch(
         showAlert({
@@ -46,7 +50,7 @@ export default function LoginPage() {
           title: error?.data.err,
         })
       );
-  }, [isSuccess, isError]);
+  }, [isError]);
 
   //? Form Hook
   const {
@@ -61,10 +65,8 @@ export default function LoginPage() {
   //? Handlers
   const submitHander = async ({ email, password }) => {
     if (email && password) {
-      await postData({
-        url: "/api/auth/login",
+      await login({
         body: { email, password },
-        token: "",
       });
     }
   };
@@ -77,7 +79,7 @@ export default function LoginPage() {
         <div className='relative h-24 mx-auto w-44'>
           <Link passHref href='/'>
             <a>
-              <Image src='/icons/logo.svg' layout='fill' alt="دیجی‌کالا"/>
+              <Image src='/icons/logo.svg' layout='fill' alt='دیجی‌کالا' />
             </a>
           </Link>
         </div>

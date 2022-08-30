@@ -7,10 +7,10 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import { usePostDataMutation } from "app/slices/fetchApi.slice";
 import { useDispatch } from "react-redux";
 import { userLogin } from "app/slices/user.slice";
 import { showAlert } from "app/slices/alert.slice";
+import { useCreateUserMutation } from "app/api/userApi";
 
 import { DisplayError, Loading } from "components";
 
@@ -23,13 +23,13 @@ export default function RegisterPage() {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  //? Post query
+  //? Create User Query
   const [
-    postData,
+    createUser,
     { data, isSuccess, isError, isLoading, error },
-  ] = usePostDataMutation();
+  ] = useCreateUserMutation();
 
-  //? Handle Response
+  //? Handle Create User Response
   useEffect(() => {
     if (isSuccess) {
       dispatch(
@@ -42,6 +42,9 @@ export default function RegisterPage() {
       reset();
       router.push("/");
     }
+  }, [isSuccess]);
+
+  useEffect(() => {
     if (isError) {
       dispatch(
         openModal({
@@ -52,7 +55,7 @@ export default function RegisterPage() {
         })
       );
     }
-  }, [isSuccess, isError]);
+  }, [isError]);
 
   //? Form Hook
   const {
@@ -67,10 +70,8 @@ export default function RegisterPage() {
   //? Handlers
   const submitHander = async ({ name, email, password }) => {
     if (name && email && password) {
-      await postData({
-        url: "/api/auth/register",
+      await createUser({
         body: { name, email, password },
-        token: "",
       });
     }
   };
@@ -84,7 +85,7 @@ export default function RegisterPage() {
         <div className='relative h-24 mx-auto w-44'>
           <Link passHref href='/'>
             <a>
-              <Image src='/icons/logo.svg' layout='fill' alt="دیجی‌کالا"/>
+              <Image src='/icons/logo.svg' layout='fill' alt='دیجی‌کالا' />
             </a>
           </Link>
         </div>

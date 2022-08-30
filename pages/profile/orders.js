@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { useState } from "react";
 
-import { useGetDataQuery } from "app/slices/fetchApi.slice";
 import { useSelector } from "react-redux";
 
 import {
@@ -11,6 +10,7 @@ import {
   ShowWrapper,
   EmptyOrdersList,
 } from "components";
+import { useGetOrdersQuery } from "app/api/orderApi";
 
 export default function Orders() {
   //? Local State
@@ -19,7 +19,7 @@ export default function Orders() {
   //? Store
   const { token } = useSelector((state) => state.user);
 
-  //? Get Query
+  //? Get Orders Query
   const {
     data,
     isSuccess,
@@ -27,8 +27,9 @@ export default function Orders() {
     error,
     isError,
     refetch,
-  } = useGetDataQuery({
-    url: `/api/order?page=${page}&page_size=5`,
+  } = useGetOrdersQuery({
+    pageSize: 5,
+    page,
     token,
   });
 

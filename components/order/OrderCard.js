@@ -6,10 +6,10 @@ import moment from "moment-jalaali";
 import { Icons } from "components";
 
 import { formatNumber } from "utils/formatNumber";
-import { usePatchDataMutation } from "app/slices/fetchApi.slice";
 import { useEffect } from "react";
 import { showAlert } from "app/slices/alert.slice";
 import { useDispatch, useSelector } from "react-redux";
+import { useEditOrderMutation } from "app/api/orderApi";
 
 export default function OrderCard({ order, singleOrder }) {
   const dispatch = useDispatch();
@@ -17,12 +17,13 @@ export default function OrderCard({ order, singleOrder }) {
   //? Store
   const { token } = useSelector((state) => state.user);
 
-  //? Patch Query
+  //? Edit Order Query
   const [
-    patchData,
+    editOrder,
     { data, isSuccess, isError, error },
-  ] = usePatchDataMutation();
+  ] = useEditOrderMutation();
 
+  //? Handle Edit Order Response
   useEffect(() => {
     if (isSuccess) {
       dispatch(
@@ -47,15 +48,15 @@ export default function OrderCard({ order, singleOrder }) {
 
   //? Handlers
   const handleChangeToDelivered = () => {
-    patchData({
-      url: `/api/order/${order._id}`,
+    editOrder({
+      id: order._id,
       token,
       body: { paid: true, delivered: true },
     });
   };
   const handleChangeToInProccess = () => {
-    patchData({
-      url: `/api/order/${order._id}`,
+    editOrder({
+      id: order._id,
       token,
       body: { paid: false, delivered: false },
     });

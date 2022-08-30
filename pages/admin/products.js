@@ -4,12 +4,16 @@ import { useEffect, useRef, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { resetSelectedCategories } from "app/slices/category.slice";
-import { useGetDataQuery } from "app/slices/fetchApi.slice";
 import { openModal } from "app/slices/modal.slice";
+import {
+  useDeleteProductMutation,
+  useGetProductsQuery,
+} from "app/api/productApi";
 
 import {
   BigLoading,
   Buttons,
+  HandleDelete,
   Icons,
   Pagination,
   SelectCategories,
@@ -30,17 +34,23 @@ export default function Products() {
     (state) => state.categories
   );
 
-  //? Get Data Query
-  const {
-    data,
-    isFetching,
-    isSuccess,
-    error,
-    isError,
-    refetch,
-  } = useGetDataQuery({
-    url: `/api/products?page_size=10&page=${page}&category=${filterCategory}&search=${search}`,
+  //? Get Products Query
+  const { data, isFetching, error, isError, refetch } = useGetProductsQuery({
+    page,
+    filterCategory,
+    search,
   });
+
+  //? Delete Product Query
+  const [
+    deleteProduct,
+    {
+      isSuccess: isSuccess_product,
+      isError: isError_product,
+      error: error_product,
+      data: data_product,
+    },
+  ] = useDeleteProductMutation();
 
   //? Reset Category
   useEffect(() => {
@@ -84,27 +94,32 @@ export default function Products() {
     setSearch("");
   };
 
-  if (isError) {
-    return (
-      <div className='py-20 mx-auto space-y-3 text-center w-fit'>
-        <h5 className='text-xl'>خطایی رخ داده</h5>
-        <p className='text-lg text-red-500'>{error.data.err}</p>
-        <button className='mx-auto btn' onClick={refetch}>
-          تلاش مجدد
-        </button>
-      </div>
-    );
-  }
-
   return (
     <main>
       <Head>
         <title>مدیریت | محصولات</title>
       </Head>
+
+      <HandleDelete
+        deleteFunc={deleteProduct}
+        isSuccess={isSuccess_product}
+        isError={isError_product}
+        error={error_product}
+        data={data_product}
+      />
+
       <Buttons.Back backRoute='/admin'>محصولات</Buttons.Back>
       <div className='section-divide-y' />
 
-      {isFetching ? (
+      {isError ? (
+        <div className='py-20 mx-auto space-y-3 text-center w-fit'>
+          <h5 className='text-xl'>خطایی رخ داده</h5>
+          <p className='text-lg text-red-500'>{error.data.err}</p>
+          <button className='mx-auto btn' onClick={refetch}>
+            تلاش مجدد
+          </button>
+        </div>
+      ) : isFetching ? (
         <section className='px-3 py-20'>
           <BigLoading />
         </section>

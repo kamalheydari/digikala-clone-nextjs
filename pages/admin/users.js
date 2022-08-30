@@ -3,10 +3,16 @@ import Image from "next/image";
 import { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { useGetDataQuery } from "app/slices/fetchApi.slice";
 import { openModal } from "app/slices/modal.slice";
+import { useDeleteUserMutation, useGetUsersQuery } from "app/api/userApi";
 
-import { Buttons, Pagination, ShowWrapper, EmptyUsersList } from "components";
+import {
+  Buttons,
+  Pagination,
+  ShowWrapper,
+  EmptyUsersList,
+  HandleDelete,
+} from "components";
 
 export default function Users() {
   const dispatch = useDispatch();
@@ -17,7 +23,7 @@ export default function Users() {
   //? Store
   const { token } = useSelector((state) => state.user);
 
-  //? Get Data Query
+  //? Get User Query
   const {
     data,
     isSuccess,
@@ -25,10 +31,18 @@ export default function Users() {
     error,
     isError,
     refetch,
-  } = useGetDataQuery({
-    url: `/api/user?page=${page}&page_size=10`,
-    token,
-  });
+  } = useGetUsersQuery({ page, token });
+
+  //? Delete User Query
+  const [
+    deleteUser,
+    {
+      isSuccess: isSuccess_delete,
+      isError: isError_delete,
+      error: error_delete,
+      data: data_delete,
+    },
+  ] = useDeleteUserMutation();
 
   //? Handlers
   const deleteUserHandler = async (id) => {
@@ -47,6 +61,15 @@ export default function Users() {
       <Head>
         <title>مدیریت | کاربران</title>
       </Head>
+
+      <HandleDelete
+        deleteFunc={deleteUser}
+        isSuccess={isSuccess_delete}
+        isError={isError_delete}
+        error={error_delete}
+        data={data_delete}
+      />
+
       <Buttons.Back backRoute='/admin'>کاربران</Buttons.Back>
       <div className='section-divide-y' />
 
@@ -119,7 +142,7 @@ export default function Users() {
         </div>
       </ShowWrapper>
 
-      {data?.usersLength > 10 && (
+      {data?.usersLength > 5 && (
         <div className='py-4 mx-auto lg:max-w-5xl'>
           <Pagination
             currentPage={data.currentPage}

@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 
 import { useDispatch, useSelector } from "react-redux";
 import { resetSelectedCategories } from "app/slices/category.slice";
-import { usePostDataMutation } from "app/slices/fetchApi.slice";
 import { openModal } from "app/slices/modal.slice";
 import { showAlert } from "app/slices/alert.slice";
 import {
@@ -15,6 +14,7 @@ import {
   fetchProduct,
   resetProduct,
 } from "app/slices/product.slice";
+import { useCreateProductMutation, useUpdateProductMutation } from "app/api/productApi";
 
 import {
   Buttons,
@@ -23,6 +23,7 @@ import {
   AddSizes,
   UploadImages,
   Loading,
+  HandleUpdate,
 } from "components";
 
 import getDetailsArray from "utils/getDetailsArray";
@@ -62,12 +63,24 @@ export default function Product() {
     }
   }, [categoryID]);
 
-  //? Post Data Query
+  //? Create Product Query
   const [
-    postData,
+    createProduct,
     { data, isSuccess, isLoading, isError, error },
-  ] = usePostDataMutation();
+  ] = useCreateProductMutation();
 
+  //? Update Product Query
+  const [
+    updateProduct,
+    {
+      data: data_update,
+      isSuccess: isSuccess_update,
+      isError: isError_update,
+      error: error_update,
+    },
+  ] = useUpdateProductMutation();
+
+  //? Handle Create Product Response
   useEffect(() => {
     if (isSuccess) {
       dispatch(
@@ -113,8 +126,7 @@ export default function Product() {
     const infoArray = await getDetailsArray(infoTableRef);
     const specificationArray = await getDetailsArray(specificationTableRef);
 
-    postData({
-      url: `/api/products`,
+    createProduct({
       token,
       body: {
         ...product,
@@ -163,6 +175,15 @@ export default function Product() {
       <Head>
         <title>مدیریت | {id ? "بروزرسانی محصول" : "محصول جدید"}</title>
       </Head>
+
+      <HandleUpdate
+        updateFunc={updateProduct}
+        isSuccess={isSuccess_update}
+        isError={isError_update}
+        error={error_update}
+        data={data_update}
+      />
+
       <Buttons.Back backRoute='/admin'>
         {id ? "بروزرسانی محصول" : "محصول جدید"}
       </Buttons.Back>

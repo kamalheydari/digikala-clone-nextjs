@@ -4,14 +4,23 @@ import { useRouter } from "next/router";
 
 import { useDispatch, useSelector } from "react-redux";
 import { addOptionsType, loadDetails } from "app/slices/details.slice";
-import {
-  useGetDataQuery,
-  usePostDataMutation,
-} from "app/slices/fetchApi.slice";
 import { openModal } from "app/slices/modal.slice";
 import { showAlert } from "app/slices/alert.slice";
+import {
+  useCreateDetailsMutation,
+  useDeleteDetailsMutation,
+  useGetDetailsQuery,
+  useUpdateDetailsMutation,
+} from "app/api/detailsApi";
 
-import { Buttons, DetailsList, Loading, ShowWrapper } from "components";
+import {
+  Buttons,
+  DetailsList,
+  HandleDelete,
+  HandleUpdate,
+  Loading,
+  ShowWrapper,
+} from "components";
 
 export default function DetailsPage() {
   const router = useRouter();
@@ -29,16 +38,13 @@ export default function DetailsPage() {
     optionsType,
   } = useSelector((state) => state.details);
 
-  //? Get Details
+  //? Get Details Query
   const {
     data: details,
-    error: detailsError,
-    isError: detailsIsError,
     isFetching: detailsIsFetching,
     isSuccess: detailsIsSuccess,
-    refetch,
-  } = useGetDataQuery({
-    url: `/api/details/${router.query.id}`,
+  } = useGetDetailsQuery({
+    id: router.query.id,
   });
 
   //? Load Details Store
@@ -55,12 +61,35 @@ export default function DetailsPage() {
     );
   }, [getCtegory, detailsIsSuccess]);
 
-  //? Post Data Query
+  //? Delete Details Query
   const [
-    postData,
-    { data, isSuccess, isError, isLoading, error },
-  ] = usePostDataMutation();
+    deleteDetails,
+    {
+      isSuccess: isSuccess_delete,
+      isError: isError_delete,
+      error: error_delete,
+      data: data_delete,
+    },
+  ] = useDeleteDetailsMutation();
 
+  //? Update Details Query
+  const [
+    updateDetails,
+    {
+      data: data_update,
+      isSuccess: isSuccess_update,
+      isError: isError_update,
+      error: error_update,
+    },
+  ] = useUpdateDetailsMutation();
+
+  //? Create Details Query
+  const [
+    createDetails,
+    { data, isSuccess, isError, isLoading, error },
+  ] = useCreateDetailsMutation();
+
+  //? Handle Create Details Response
   useEffect(() => {
     if (isSuccess) {
       dispatch(
@@ -84,8 +113,7 @@ export default function DetailsPage() {
   const submitHandler = async (e) => {
     e.preventDefault();
     if (info.length !== 0 && specification.length !== 0) {
-      await postData({
-        url: "/api/details",
+      await createDetails({
         body: {
           category_id: category._id,
           name: category.slug,
@@ -142,6 +170,22 @@ export default function DetailsPage() {
       <Head>
         <title>مدیریت | مشخصات</title>
       </Head>
+
+      <HandleDelete
+        deleteFunc={deleteDetails}
+        isSuccess={isSuccess_delete}
+        isError={isError_delete}
+        error={error_delete}
+        data={data_delete}
+      />
+      <HandleUpdate
+        updateFunc={updateDetails}
+        isSuccess={isSuccess_update}
+        isError={isError_update}
+        error={error_update}
+        data={data_update}
+      />
+
       <Buttons.Back backRoute='/admin/details'>
         مشخصات و ویژگی‌های دسته‌بندی
         <span> {category?.name}</span>
@@ -149,9 +193,9 @@ export default function DetailsPage() {
       <div className='section-divide-y' />
 
       <ShowWrapper
-        error={detailsError}
-        isError={detailsIsError}
-        refetch={refetch}
+        error={null}
+        isError={null}
+        refetch={null}
         isFetching={detailsIsFetching}
         isSuccess={detailsIsSuccess}
         dataLength={details ? 1 : 0}

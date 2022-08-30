@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 
-import { useGetDataQuery } from "app/slices/fetchApi.slice";
 import { useSelector } from "react-redux";
+import { useGetOrdersQuery } from "app/api/orderApi";
 
 import { formatNumber } from "utils/formatNumber";
 
@@ -16,12 +16,12 @@ export default function Orders() {
   //? Store
   const { token } = useSelector((state) => state.user);
 
-  //? Get Query
-  const { data, isSuccess, refetch, isError, error } = useGetDataQuery({
-    url: "/api/order",
+  //? Get Order Query
+  const { data, isSuccess, refetch, isError, error } = useGetOrdersQuery({
     token,
   });
 
+  //? Handle Get Order Response
   useEffect(() => {
     if (isSuccess) {
       const pending = data?.orders.filter((item) => item.delivered === false);

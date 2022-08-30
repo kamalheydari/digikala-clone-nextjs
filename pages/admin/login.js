@@ -8,9 +8,9 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useDispatch } from "react-redux";
-import { usePostDataMutation } from "app/slices/fetchApi.slice";
 import { userLogin } from "app/slices/user.slice";
 import { showAlert } from "app/slices/alert.slice";
+import { useLoginMutation } from "app/api/userApi";
 
 import { DisplayError, Loading } from "components";
 
@@ -22,13 +22,13 @@ export default function LoginPage() {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  //? Post query
+  //? Login User Query
   const [
-    postData,
+    login,
     { data, isSuccess, isError, isLoading, error },
-  ] = usePostDataMutation();
+  ] = useLoginMutation();
 
-  //? Handle Response
+  //? Handle Login User Response
   useEffect(() => {
     if (isSuccess) {
       if (data.data.user.root || data.data.user.role === "admin") {
@@ -72,10 +72,8 @@ export default function LoginPage() {
   //? Handlers
   const submitHander = async ({ email, password }) => {
     if (email && password) {
-      await postData({
-        url: "/api/auth/login",
+      await login({
         body: { email, password },
-        token: "",
       });
     }
   };

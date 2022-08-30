@@ -22,7 +22,7 @@ export default async (req, res) => {
 
 const getOrders = async (req, res) => {
   const page = +req.query.page || 1;
-  const page_size = +req.query.page_size || 5;
+  const page_size = +req.query.page_size || null;
 
   try {
     const result = await auth(req, res);

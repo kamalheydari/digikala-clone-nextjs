@@ -5,7 +5,7 @@ import db from "lib/db";
 import Product from "models/Product";
 import Category from "models/Category";
 
-import { useGetDataQuery } from "app/slices/fetchApi.slice";
+import { useGetImagesQuery } from "app/api/categoryApi";
 import { useRouter } from "next/router";
 
 import {
@@ -26,7 +26,7 @@ export default function MainCategory(props) {
   const [category, setCategory] = useState(props.currentCategory);
 
   //? Get Slider Images Query
-  const { data, isSuccess } = useGetDataQuery({ url: "/api/images" });
+  const { data, isSuccess } = useGetImagesQuery();
 
   useEffect(() => {
     if (isSuccess) setImages(data[router.query.category]);

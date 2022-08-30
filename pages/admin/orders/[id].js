@@ -1,14 +1,14 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
 
-import { useGetDataQuery } from "app/slices/fetchApi.slice";
+import { useGetSingleOrderQuery } from "app/api/orderApi";
 
 import { Buttons, OrderCard, ShowWrapper } from "components";
-import Head from "next/head";
 
 export default function SingleOrder() {
   const router = useRouter();
 
-  //? Get Query
+  //? Get Order Query
   const {
     data,
     isError,
@@ -16,8 +16,8 @@ export default function SingleOrder() {
     isFetching,
     refetch,
     isSuccess,
-  } = useGetDataQuery({
-    url: `/api/order/${router.query.id}`,
+  } = useGetSingleOrderQuery({
+    id: router.query.id,
   });
 
   return (

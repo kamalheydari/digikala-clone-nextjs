@@ -1,17 +1,14 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-import { useGetDataQuery } from "app/slices/fetchApi.slice";
+import { useGetSingleReviewQuery } from "app/api/reviewApi";
 
-import {
-  Buttons,
-  ReveiwCard,
-  ShowWrapper,
-} from "components";
+import { Buttons, ReveiwCard, ShowWrapper } from "components";
 
 export default function SingleComment() {
   const router = useRouter();
 
+  //? Get Single Review Query
   const {
     data,
     isError,
@@ -19,8 +16,8 @@ export default function SingleComment() {
     isFetching,
     refetch,
     isSuccess,
-  } = useGetDataQuery({
-    url: `/api/reviews/${router.query.id}`,
+  } = useGetSingleReviewQuery({
+    id: router.query.id,
   });
 
   return (
@@ -28,7 +25,7 @@ export default function SingleComment() {
       <Head>
         <title>مدیریت | دیدگاه‌</title>
       </Head>
-      <Buttons.Back backRoute='/admin/comments'>دیدگاه</Buttons.Back>
+      <Buttons.Back backRoute='/admin/reviews'>دیدگاه</Buttons.Back>
       <div className='section-divide-y' />
       <ShowWrapper
         error={error}

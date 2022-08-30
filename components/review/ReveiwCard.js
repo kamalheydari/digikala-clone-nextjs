@@ -3,10 +3,12 @@ import { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "app/slices/modal.slice";
-import { usePatchDataMutation } from "app/slices/fetchApi.slice";
+import {
+  useEditReviewMutation,
+} from "app/api/reviewApi";
 import { showAlert } from "app/slices/alert.slice";
 
-import { Icons } from "components";
+import {  Icons } from "components";
 
 export default function ReveiwCard({ item, singleComment }) {
   const dispatch = useDispatch();
@@ -17,12 +19,13 @@ export default function ReveiwCard({ item, singleComment }) {
   //? Store
   const { token } = useSelector((state) => state.user);
 
-  //? Patch Query
+  //? Edit Review Query
   const [
-    patchData,
+    editReview,
     { data, isSuccess, isError, error },
-  ] = usePatchDataMutation();
+  ] = useEditReviewMutation();
 
+  //? Handle Edit Review Response
   useEffect(() => {
     if (isSuccess) {
       dispatch(
@@ -52,15 +55,15 @@ export default function ReveiwCard({ item, singleComment }) {
       openModal({
         isShow: true,
         id: item._id,
-        type: "confirm-delete-reveiw",
+        type: "confirm-delete-review",
         title: "دیدگاه‌",
       })
     );
   };
 
   const handleChangeStatus = (statusNum) => {
-    patchData({
-      url: `/api/reviews/${item._id}`,
+    editReview({
+      id: item._id,
       token,
       body: { status: statusNum },
     });

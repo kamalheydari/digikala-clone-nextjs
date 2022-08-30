@@ -4,7 +4,7 @@ import Head from "next/head";
 import db from "lib/db";
 import Product from "models/Product";
 
-import { useGetDataQuery } from "app/slices/fetchApi.slice";
+import { useGetImagesQuery } from "app/api/categoryApi";
 
 import {
   BannerOne,
@@ -30,7 +30,7 @@ export default function Home(props) {
   }, [categories]);
 
   //? Get Slider Images Query
-  const { data, isSuccess } = useGetDataQuery({ url: "/api/images" });
+  const { data, isSuccess } = useGetImagesQuery();
   useEffect(() => {
     if (isSuccess) setImages(data.root);
   }, [isSuccess]);
