@@ -1,80 +1,21 @@
-import { useEffect } from "react";
-
 import {
   closeModal,
-  confirmAction,
+  confirmUpdateAction,
   confirmReset,
 } from "app/slices/modal.slice";
-import { usePutDataMutation } from "app/slices/fetchApi.slice";
-import { showAlert } from "app/slices/alert.slice";
 
 import { ModalWrapper } from "components";
 
-export default function ConfirmUpdateModal({
-  title,
-  isConfirm,
-  id,
-  token,
-  type,
-  dispatch,
-  editedData,
-  isShow,
-}) {
-  //? Config Url & Edit Store
-  let url;
-
-  if (type === "confirm-update-details") {
-    url = `/api/details/${id}`;
-  } else if (type === "confirm-update-product") {
-    url = `/api/products/${id}`;
-  } else if (type === "confirm-update-order") {
-    url = `/api/order/delivered/${id}`;
-  }
-  //? Update Data
-  const [putData, { data, isSuccess, isError, error }] = usePutDataMutation();
-
-  useEffect(() => {
-    if (isConfirm && url) {
-      putData({
-        url,
-        token,
-        body: { ...editedData },
-      });
-      dispatch(confirmReset());
-    }
-  }, [isConfirm]);
-
-  useEffect(() => {
-    if (isSuccess) {
-      dispatch(
-        showAlert({
-          status: "success",
-          title: data.msg,
-        })
-      );
-      dispatch(confirmReset());
-    }
-  }, [isSuccess]);
-
-  useEffect(() => {
-    if (isError) {
-      dispatch(
-        showAlert({
-          status: "error",
-          title: error.data.err,
-        })
-      );
-      dispatch(confirmReset());
-    }
-  }, [isError]);
+export default function ConfirmUpdateModal({ title, dispatch, isShow }) {
 
   //? Handlers
   const handleConfirmClick = () => {
-    dispatch(confirmAction());
+    dispatch(confirmUpdateAction());
     dispatch(closeModal());
   };
 
   const handleCancleClick = () => {
+    dispatch(confirmReset());
     dispatch(closeModal());
   };
 

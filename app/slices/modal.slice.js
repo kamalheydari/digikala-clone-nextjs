@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isShow: false,
-  isConfirm: false,
+  isConfirmDelete: false,
+  isConfirmUpdate: false,
   id: null,
   editedData: null,
   type: "",
@@ -28,13 +29,18 @@ const modalSlice = createSlice({
       state.status = action.payload.status || "";
       state.isConfirm = action.payload.isConfirm || false;
     },
-    confirmAction: (state, action) => {
-      state.isConfirm = true;
+    confirmDeleteAction: (state, action) => {
+      state.isConfirmDelete = true;
+    },
+    confirmUpdateAction: (state, action) => {
+      state.isConfirmUpdate = true;
     },
     confirmReset: (state, action) => {
-      state.isConfirm = false;
+      state.isConfirmDelete = false;
+      state.isConfirmUpdate = false;
       state.id = null;
       state.editedData = null;
+      state.title = "";
     },
   },
 });
@@ -42,7 +48,8 @@ const modalSlice = createSlice({
 export const {
   closeModal,
   openModal,
-  confirmAction,
+  confirmDeleteAction,
+  confirmUpdateAction,
   confirmReset,
 } = modalSlice.actions;
 

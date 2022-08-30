@@ -3,8 +3,6 @@ import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { useGetDataQuery } from "app/slices/fetchApi.slice";
-
 import {
   CloseModal,
   Icons,
@@ -16,6 +14,7 @@ import {
 } from "components";
 
 import { truncate } from "utils/truncate";
+import { useGetProductsQuery } from "app/api/productApi";
 
 export default function SearchModal({ isShow, dispatch, closeModal }) {
   const inputSearchRef = useRef();
@@ -23,7 +22,7 @@ export default function SearchModal({ isShow, dispatch, closeModal }) {
   //? Local State
   const [search, setSearch] = useState("");
 
-  //? Get Data Query
+  //? Search Products Query
   const {
     data,
     isSuccess,
@@ -31,8 +30,11 @@ export default function SearchModal({ isShow, dispatch, closeModal }) {
     error,
     isError,
     refetch,
-  } = useGetDataQuery({
+  } = useGetProductsQuery({
     url: `/api/products?page_size=5&page=1&category=all&search=${search}`,
+    search,
+    page: 1,
+    filterCategory: "all",
   });
 
   //? Reset Search
@@ -103,7 +105,11 @@ export default function SearchModal({ isShow, dispatch, closeModal }) {
                 data?.products.map((item) => (
                   <article key={item._id} className='pt-1'>
                     <div className='relative w-12 h-12'>
-                      <Image src={item.images[0].url} layout='fill' alt={item.name}/>
+                      <Image
+                        src={item.images[0].url}
+                        layout='fill'
+                        alt={item.name}
+                      />
                     </div>
                     <Link href={`/products/${item._id}`}>
                       <a

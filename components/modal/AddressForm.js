@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-import { usePatchDataMutation } from "app/slices/fetchApi.slice";
 import { updateUser } from "app/slices/user.slice";
+import { useEditUserMutation } from "app/api/userApi";
 
 import { Loading, CloseModal, ModalWrapper } from "components";
 
@@ -24,7 +24,7 @@ export default function AddressForm({
   const [address, setAddress] = useState(user?.address || {});
 
   //? Patch Data
-  const [patchData, { data, isSuccess, isLoading }] = usePatchDataMutation();
+  const [editUser, { data, isSuccess, isLoading }] = useEditUserMutation();
 
   useEffect(() => {
     if (isSuccess) {
@@ -36,8 +36,7 @@ export default function AddressForm({
   //? Handlers
   const submitHander = async (e) => {
     e.preventDefault();
-    patchData({
-      url: "/api/user",
+    editUser({
       body: { address },
       token,
     });

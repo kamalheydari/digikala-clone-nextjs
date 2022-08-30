@@ -4,10 +4,11 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import validation from "utils/validation";
 
-import { usePatchDataMutation } from "app/slices/fetchApi.slice";
+import { useEditUserMutation } from "app/api/userApi";
 import { updateUser } from "app/slices/user.slice";
 
 import { DisplayError, Loading, CloseModal, ModalWrapper } from "components";
+import { showAlert } from "app/slices/alert.slice";
 
 export default function MobileForm({
   title,
@@ -17,16 +18,40 @@ export default function MobileForm({
   editedData,
   isShow,
 }) {
-  //? Patch Data
-  const [patchData, { data, isSuccess, isLoading }] = usePatchDataMutation();
 
+  //? Patch Data
+  const [
+    editUser,
+    { data, isSuccess, isLoading, error, isError },
+  ] = useEditUserMutation();
+
+  //? Handle Edit User Response
   useEffect(() => {
     if (isSuccess) {
       dispatch(updateUser(data.user));
       dispatch(closeModal());
       reset();
+      dispatch(
+        showAlert({
+          status: "success",
+          title: data.msg,
+        })
+      );
     }
   }, [isSuccess]);
+
+  useEffect(() => {
+    if (isError) {
+      dispatch(closeModal());
+      reset();
+      dispatch(
+        showAlert({
+          status: "error",
+          title: error?.data.err,
+        })
+      );
+    }
+  }, [isError]);
 
   //? Form Hook
   const {
@@ -40,8 +65,7 @@ export default function MobileForm({
 
   //? Handlers
   const submitHander = async ({ mobile }) => {
-    patchData({
-      url: "/api/user",
+    editUser({
       body: { mobile },
       token,
     });

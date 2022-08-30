@@ -4,10 +4,11 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import validation from "utils/validation";
 
-import { usePatchDataMutation } from "app/slices/fetchApi.slice";
 import { updateUser } from "app/slices/user.slice";
 
-import { DisplayError, Loading, CloseModal ,ModalWrapper} from "components";
+import { DisplayError, Loading, CloseModal, ModalWrapper } from "components";
+import { useEditUserMutation } from "app/api/userApi";
+import { showAlert } from "app/slices/alert.slice";
 
 export default function NameForm({
   title,
@@ -17,16 +18,39 @@ export default function NameForm({
   editedData,
   isShow,
 }) {
-  //? Patch Data
-  const [patchData, { data, isSuccess, isLoading }] = usePatchDataMutation();
+  //? Edit User Query
+  const [
+    editUser,
+    { data, isSuccess, isLoading, isError, error },
+  ] = useEditUserMutation();
 
+  //? Handle Edit User Response
   useEffect(() => {
     if (isSuccess) {
       dispatch(updateUser(data.user));
       dispatch(closeModal());
       reset();
+      dispatch(
+        showAlert({
+          status: "success",
+          title: data.msg,
+        })
+      );
     }
   }, [isSuccess]);
+
+  useEffect(() => {
+    if (isError) {
+      dispatch(closeModal());
+      reset();
+      dispatch(
+        showAlert({
+          status: "error",
+          title: error?.data.err,
+        })
+      );
+    }
+  }, [isError]);
 
   //? Form Hook
   const {
@@ -40,8 +64,7 @@ export default function NameForm({
 
   //? Handlers
   const submitHander = async ({ name }) => {
-    patchData({
-      url: "/api/user",
+    editUser({
       body: { name },
       token,
     });

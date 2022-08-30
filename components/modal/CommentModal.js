@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import { useSelector } from "react-redux";
-import { usePostDataMutation } from "app/slices/fetchApi.slice";
+import { useCreateReviewMutation } from "app/api/reviewApi";
 import {
   addReviewsItem,
   changeReviewsItems,
@@ -13,7 +13,7 @@ import { showAlert } from "app/slices/alert.slice";
 
 import { ratingStatus } from "utils/constatns";
 
-import { Icons, Loading, CloseModal ,ModalWrapper} from "components";
+import { Icons, Loading, CloseModal, ModalWrapper } from "components";
 
 export default function CommentModal({
   title: productTitle,
@@ -35,12 +35,13 @@ export default function CommentModal({
   } = useSelector((state) => state.reviews);
   const { token } = useSelector((state) => state.user);
 
-  //? Post Query
+  //? Create Review Query
   const [
-    postData,
+    createReview,
     { isSuccess, isLoading, data, isError, error },
-  ] = usePostDataMutation();
+  ] = useCreateReviewMutation();
 
+  //? Handle Create Review Response
   useEffect(() => {
     if (isSuccess) {
       dispatch(closeModal());
@@ -52,7 +53,9 @@ export default function CommentModal({
         })
       );
     }
-
+  }, [isSuccess]);
+  
+  useEffect(() => {
     if (isError) {
       dispatch(closeModal());
       dispatch(resetReview());
@@ -63,7 +66,7 @@ export default function CommentModal({
         })
       );
     }
-  }, [isSuccess, isError]);
+  }, [isError]);
 
   //? Handlers
   const handleChangeItems = (e) => {
@@ -91,8 +94,8 @@ export default function CommentModal({
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    postData({
-      url: `/api/reviews/${id}`,
+    createReview({
+      id,
       token,
       body: { title, comment, rating, positivePoints, negativePoints },
     });
@@ -100,186 +103,195 @@ export default function CommentModal({
 
   return (
     <ModalWrapper isShow={isShow}>
-      
-    <div
-      className={`
+      <div
+        className={`
   ${
-    isShow  ? "bottom-0 lg:top-20" : "-bottom-full lg:top-60"
+    isShow ? "bottom-0 lg:top-20" : "-bottom-full lg:top-60"
   } w-full h-[90vh] lg:h-fit lg:max-w-3xl fixed transition-all duration-700 left-0 right-0 mx-auto z-40`}
-    >
-      <div className='flex flex-col h-full lg:h-[770px] pl-2 pr-4 py-3 bg-white md:rounded-lg gap-y-3 '>
-        <div className='py-2 border-b-2 border-gray-200'>
-          <div className='flex justify-between '>
-            <span className='text-sm text-black'>دیدگاه شما</span>
-            <CloseModal />
+      >
+        <div className='flex flex-col h-full lg:h-[770px] pl-2 pr-4 py-3 bg-white md:rounded-lg gap-y-3 '>
+          <div className='py-2 border-b-2 border-gray-200'>
+            <div className='flex justify-between '>
+              <span className='text-sm text-black'>دیدگاه شما</span>
+              <CloseModal />
+            </div>
+            <span>در مورد {productTitle}</span>
           </div>
-          <span>در مورد {productTitle}</span>
+
+          <form
+            className='flex flex-col justify-between flex-1 gap-y-5 overflow-y-auto pl-4'
+            onSubmit={handleSubmit}
+          >
+            {/* rating */}
+            <div>
+              <div className='my-2 text-center'>
+                <span className='text-sm text-black'>امتیاز دهید!:‌</span>
+                <span className='px-1 text-sm text-sky-500'>
+                  {ratingStatus[rating]}
+                </span>
+              </div>
+              <input
+                id='rating'
+                name='rating'
+                type='range'
+                min='1'
+                max='5'
+                value={rating}
+                step='1'
+                className='w-full h-2 bg-gray-200 rounded-lg cursor-pointer '
+                onChange={handleChangeItems}
+              />
+              <div className='flex justify-between'>
+                <span className='h-1 w-1 rounded-full mx-1.5 bg-gray-300 inline-block' />
+                <span className='h-1 w-1 rounded-full mx-1.5 bg-gray-300 inline-block' />
+                <span className='h-1 w-1 rounded-full mx-1.5 bg-gray-300 inline-block' />
+                <span className='h-1 w-1 rounded-full mx-1.5 bg-gray-300 inline-block' />
+                <span className='h-1 w-1 rounded-full mx-1.5 bg-gray-300 inline-block' />
+              </div>
+            </div>
+
+            {/* title */}
+            <div className='space-y-3 '>
+              <label
+                className='text-xs text-gray-700 lg:text-sm md:min-w-max'
+                htmlFor='title'
+              >
+                عنوان نظر
+              </label>
+              <input
+                className='input'
+                type='text'
+                name='title'
+                id='title'
+                required={true}
+                onChange={handleChangeItems}
+              />
+            </div>
+
+            {/* positivePoints */}
+            <div className='space-y-3'>
+              <div className='space-y-3'>
+                <label
+                  className='text-xs text-gray-700 lg:text-sm md:min-w-max'
+                  htmlFor='positivePoints'
+                >
+                  نکات مثبت
+                </label>
+                <div className='flex items-center input'>
+                  <input
+                    className='flex-1 bg-transparent outline-none'
+                    type='text'
+                    name='positivePoints'
+                    id='positivePoints'
+                    value={positiveValue}
+                    onChange={(e) => setPositiveValue(e.target.value)}
+                  />
+                  <button
+                    onClick={() => handleAddItems("positivePoints")}
+                    type='button'
+                  >
+                    <Icons.Plus className='icon' />
+                  </button>
+                </div>
+              </div>
+              {positivePoints.length > 0 && (
+                <div className='space-y-3'>
+                  {positivePoints.map((item) => (
+                    <div
+                      key={item.id}
+                      className='flex items-center px-3 gap-x-4'
+                    >
+                      <Icons.Plus className='text-green-500 icon' />
+                      <span className='ml-auto'>{item.title}</span>
+                      <button>
+                        <Icons.Delete
+                          className='icon text-gray'
+                          onClick={() =>
+                            handleDelete("positivePoints", item.id)
+                          }
+                        />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* negativePoints */}
+            <div className='space-y-3'>
+              <div className='space-y-3'>
+                <label
+                  className='text-xs text-gray-700 lg:text-sm md:min-w-max'
+                  htmlFor='negativePoints'
+                >
+                  نکات منفی
+                </label>
+                <div className='flex items-center input'>
+                  <input
+                    className='flex-1 bg-transparent outline-none'
+                    type='text'
+                    name='negativePoints'
+                    id='negativePoints'
+                    value={negativeValue}
+                    onChange={(e) => setNegativeValue(e.target.value)}
+                  />
+                  <button
+                    onClick={() => handleAddItems("negativePoints")}
+                    type='button'
+                  >
+                    <Icons.Plus className='icon' />
+                  </button>
+                </div>
+              </div>
+              {negativePoints.length > 0 && (
+                <div className='space-y-3'>
+                  {negativePoints.map((item) => (
+                    <div
+                      key={item.id}
+                      className='flex items-center px-3 gap-x-4'
+                    >
+                      <Icons.Minus className='text-red-500 icon' />
+                      <span className='ml-auto'>{item.title}</span>
+                      <button>
+                        <Icons.Delete
+                          className='icon text-gray'
+                          onClick={() =>
+                            handleDelete("negativePoints", item.id)
+                          }
+                        />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* comment */}
+            <div className='space-y-3 '>
+              <label
+                className='text-xs text-gray-700 lg:text-sm md:min-w-max'
+                htmlFor='comment'
+              >
+                متن نظر
+              </label>
+              <textarea
+                className='h-24 resize-none input'
+                type='text'
+                name='comment'
+                id='comment'
+                required={true}
+                onChange={handleChangeItems}
+              />
+            </div>
+
+            <div className='py-3 border-t-2 border-gray-200 lg:pb-0 '>
+              <button className='modal-btn' type='submit' disabled={isLoading}>
+                {isLoading ? <Loading /> : "ثبت دیدگاه"}
+              </button>
+            </div>
+          </form>
         </div>
-
-        <form
-          className='flex flex-col justify-between flex-1 gap-y-5 overflow-y-auto pl-4'
-          onSubmit={handleSubmit}
-        >
-          {/* rating */}
-          <div>
-            <div className='my-2 text-center'>
-              <span className='text-sm text-black'>امتیاز دهید!:‌</span>
-              <span className='px-1 text-sm text-sky-500'>
-                {ratingStatus[rating]}
-              </span>
-            </div>
-            <input
-              id='rating'
-              name='rating'
-              type='range'
-              min='1'
-              max='5'
-              value={rating}
-              step='1'
-              className='w-full h-2 bg-gray-200 rounded-lg cursor-pointer '
-              onChange={handleChangeItems}
-            />
-            <div className='flex justify-between'>
-              <span className='h-1 w-1 rounded-full mx-1.5 bg-gray-300 inline-block' />
-              <span className='h-1 w-1 rounded-full mx-1.5 bg-gray-300 inline-block' />
-              <span className='h-1 w-1 rounded-full mx-1.5 bg-gray-300 inline-block' />
-              <span className='h-1 w-1 rounded-full mx-1.5 bg-gray-300 inline-block' />
-              <span className='h-1 w-1 rounded-full mx-1.5 bg-gray-300 inline-block' />
-            </div>
-          </div>
-
-          {/* title */}
-          <div className='space-y-3 '>
-            <label
-              className='text-xs text-gray-700 lg:text-sm md:min-w-max'
-              htmlFor='title'
-            >
-              عنوان نظر
-            </label>
-            <input
-              className='input'
-              type='text'
-              name='title'
-              id='title'
-              required={true}
-              onChange={handleChangeItems}
-            />
-          </div>
-
-          {/* positivePoints */}
-          <div className='space-y-3'>
-            <div className='space-y-3'>
-              <label
-                className='text-xs text-gray-700 lg:text-sm md:min-w-max'
-                htmlFor='positivePoints'
-              >
-                نکات مثبت
-              </label>
-              <div className='flex items-center input'>
-                <input
-                  className='flex-1 bg-transparent outline-none'
-                  type='text'
-                  name='positivePoints'
-                  id='positivePoints'
-                  value={positiveValue}
-                  onChange={(e) => setPositiveValue(e.target.value)}
-                />
-                <button
-                  onClick={() => handleAddItems("positivePoints")}
-                  type='button'
-                >
-                  <Icons.Plus className='icon' />
-                </button>
-              </div>
-            </div>
-            {positivePoints.length > 0 && (
-              <div className='space-y-3'>
-                {positivePoints.map((item) => (
-                  <div key={item.id} className='flex items-center px-3 gap-x-4'>
-                    <Icons.Plus className='text-green-500 icon' />
-                    <span className='ml-auto'>{item.title}</span>
-                    <button>
-                      <Icons.Delete
-                        className='icon text-gray'
-                        onClick={() => handleDelete("positivePoints", item.id)}
-                      />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* negativePoints */}
-          <div className='space-y-3'>
-            <div className='space-y-3'>
-              <label
-                className='text-xs text-gray-700 lg:text-sm md:min-w-max'
-                htmlFor='negativePoints'
-              >
-                نکات منفی
-              </label>
-              <div className='flex items-center input'>
-                <input
-                  className='flex-1 bg-transparent outline-none'
-                  type='text'
-                  name='negativePoints'
-                  id='negativePoints'
-                  value={negativeValue}
-                  onChange={(e) => setNegativeValue(e.target.value)}
-                />
-                <button
-                  onClick={() => handleAddItems("negativePoints")}
-                  type='button'
-                >
-                  <Icons.Plus className='icon' />
-                </button>
-              </div>
-            </div>
-            {negativePoints.length > 0 && (
-              <div className='space-y-3'>
-                {negativePoints.map((item) => (
-                  <div key={item.id} className='flex items-center px-3 gap-x-4'>
-                    <Icons.Minus className='text-red-500 icon' />
-                    <span className='ml-auto'>{item.title}</span>
-                    <button>
-                      <Icons.Delete
-                        className='icon text-gray'
-                        onClick={() => handleDelete("negativePoints", item.id)}
-                      />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* comment */}
-          <div className='space-y-3 '>
-            <label
-              className='text-xs text-gray-700 lg:text-sm md:min-w-max'
-              htmlFor='comment'
-            >
-              متن نظر
-            </label>
-            <textarea
-              className='h-24 resize-none input'
-              type='text'
-              name='comment'
-              id='comment'
-              required={true}
-              onChange={handleChangeItems}
-            />
-          </div>
-
-          <div className='py-3 border-t-2 border-gray-200 lg:pb-0 '>
-            <button className='modal-btn' type='submit' disabled={isLoading}>
-              {isLoading ? <Loading /> : "ثبت دیدگاه"}
-            </button>
-          </div>
-        </form>
       </div>
-    </div>
     </ModalWrapper>
   );
 }

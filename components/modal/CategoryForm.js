@@ -4,7 +4,7 @@ import {
   addCategory,
   resetSelectedCategories,
 } from "app/slices/category.slice";
-import { usePostDataMutation } from "app/slices/fetchApi.slice";
+import { useCreateCategoryMutation } from "app/api/categoryApi";
 import { showAlert } from "app/slices/alert.slice";
 
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -17,7 +17,7 @@ import {
   Loading,
   SelectCategories,
   UploadImages,
-  ModalWrapper
+  ModalWrapper,
 } from "components";
 import { useSelector } from "react-redux";
 
@@ -35,12 +35,13 @@ export default function CategoryForm({
     (state) => state.categories
   );
 
-  //? Post Data
+  //? Create Category Query
   const [
-    postData,
+    createCtegory,
     { data, isSuccess, isLoading, error, isError },
-  ] = usePostDataMutation();
+  ] = useCreateCategoryMutation();
 
+  //? Handle Create Category Response
   useEffect(() => {
     if (isSuccess) {
       dispatch(addCategory(data.newCategory));
@@ -48,9 +49,21 @@ export default function CategoryForm({
       setImages([]);
       dispatch(resetSelectedCategories());
       reset();
+      dispatch(
+        showAlert({
+          status: "success",
+          title: data.msg,
+        })
+      );
     }
+  }, [isSuccess]);
 
+  useEffect(() => {
     if (isError) {
+      dispatch(closeModal());
+      setImages([]);
+      dispatch(resetSelectedCategories());
+      reset();
       dispatch(
         showAlert({
           status: "error",
@@ -58,7 +71,7 @@ export default function CategoryForm({
         })
       );
     }
-  }, [isSuccess, isError]);
+  }, [isError]);
 
   //? Form Hook
   const {
@@ -93,7 +106,7 @@ export default function CategoryForm({
       category = mainCategory + "/" + parentCategory + "/" + slug;
     }
 
-    postData({
+    createCtegory({
       url: "/api/category",
       body: { name, parent, category, slug, image: images[0] },
       token,
@@ -118,7 +131,7 @@ export default function CategoryForm({
         className={`
   ${
     isShow ? "bottom-0 lg:top-20" : "-bottom-full lg:top-28"
-  } w-full h-[90vh] lg:h-fit lg:max-w-3xl  fixed transition-all duration-700 left-0 right-0 mx-auto z-40`}
+  } w-full h-[90vh] lg:h-fit lg:max-w-3xl fixed transition-all duration-700 left-0 right-0 mx-auto z-40`}
       >
         <div className='flex flex-col h-full lg:h-[770px] pl-2 pr-4 py-3 bg-white md:rounded-lg gap-y-3 '>
           <div className='flex justify-between py-2 border-b-2 border-gray-200 '>

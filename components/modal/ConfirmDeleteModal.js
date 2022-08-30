@@ -1,113 +1,20 @@
-import { useEffect } from "react";
-
 import {
   closeModal,
-  confirmAction,
+  confirmDeleteAction,
   confirmReset,
 } from "app/slices/modal.slice";
-import { showAlert } from "app/slices/alert.slice";
-import { useDeleteDataMutation } from "app/slices/fetchApi.slice";
-import { resetDetails } from "app/slices/details.slice";
 
 import { ModalWrapper } from "components";
 
-export default function ConfirmDeleteModal({
-  title,
-  isConfirm,
-  id,
-  token,
-  type,
-  dispatch,
-  isShow,
-}) {
-  //? Config Url & Edit Store
-  let url, successAction;
-
-  if (type === "confirm-delete-user") {
-    url = `/api/user/${id}`;
-    successAction = () => {
-      dispatch(
-        showAlert({
-          status: "success",
-          title: data.msg,
-        })
-      );
-    };
-  } else if (type === "confirm-delete-details") {
-    url = `/api/details/${id}`;
-    successAction = () => {
-      dispatch(resetDetails());
-      dispatch(
-        showAlert({
-          status: "success",
-          title: data.msg,
-        })
-      );
-    };
-  } else if (type === "confirm-delete-product") {
-    url = `/api/products/${id}`;
-    successAction = () => {
-      dispatch(
-        showAlert({
-          status: "success",
-          title: data.msg,
-        })
-      );
-    };
-  } else if (type === "confirm-delete-reveiw") {
-    url = `/api/reviews/${id}`;
-    successAction = () => {
-      dispatch(
-        showAlert({
-          status: "success",
-          title: data.msg,
-        })
-      );
-    };
-  }
-
-  //? Delete Data
-  const [
-    deleteData,
-    { isSuccess, isError, error, data },
-  ] = useDeleteDataMutation();
-
-  useEffect(() => {
-    if (isConfirm && url) {
-      deleteData({
-        url,
-        token,
-      });
-      dispatch(confirmReset());
-    }
-  }, [isConfirm]);
-
-  useEffect(() => {
-    if (isSuccess) {
-      successAction();
-      dispatch(confirmReset());
-    }
-  }, [isSuccess]);
-
-  useEffect(() => {
-    if (isError) {
-      dispatch(
-        showAlert({
-          status: "error",
-          title: error?.data.err,
-        })
-      );
-      dispatch(confirmReset());
-    }
-  }, [isError]);
-
+export default function ConfirmDeleteModal({ title, dispatch, isShow }) {
   //? Handlers
   const handleConfirmClick = () => {
-    dispatch(confirmAction());
+    dispatch(confirmDeleteAction());
     dispatch(closeModal());
   };
 
   const handleCancleClick = () => {
+    dispatch(confirmReset());
     dispatch(closeModal());
   };
 

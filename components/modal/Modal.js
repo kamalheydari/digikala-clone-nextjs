@@ -13,9 +13,11 @@ import {
   CommentModal,
   SearchModal,
 } from "components";
+import { useRouter } from "next/router";
 
 export default function Modal() {
   const dispatch = useDispatch();
+  const { route } = useRouter();
 
   //? Store
   const { token } = useSelector((state) => state.user);
@@ -26,73 +28,109 @@ export default function Modal() {
   return (
     <>
       <RedirectToLogin
-        isShow={isShow && type === "redirect" }
+        isShow={isShow && type === "redirect"}
         text={text}
         title={title}
         dispatch={dispatch}
       />
-      <ConfirmDeleteModal
-        title={title}
-        isConfirm={isConfirm}
-        id={id}
-        type={type}
-        token={token}
-        dispatch={dispatch}
-        isShow={isShow && type.includes("confirm-delete")}
-      />
-      <ConfirmUpdateModal
-        title={title}
-        isConfirm={isConfirm}
-        id={id}
-        type={type}
-        token={token}
-        editedData={editedData}
-        dispatch={dispatch}
-        isShow={isShow && type.includes("confirm-update")}
-      />
-      <NameForm
-        title={title}
-        token={token}
-        dispatch={dispatch}
-        closeModal={closeModal}
-        editedData={editedData}
-        isShow={isShow && type === "edit-name"}
-      />
-      <CommentModal
-        title={title}
-        token={token}
-        dispatch={dispatch}
-        closeModal={closeModal}
-        id={id}
-        isShow={isShow && type === "comment"}
-      />
-      <CategoryForm
-        title={title}
-        token={token}
-        dispatch={dispatch}
-        closeModal={closeModal}
-        isShow={isShow && type === "edit-category"}
-      />
-      <MobileForm
-        title={title}
-        token={token}
-        dispatch={dispatch}
-        closeModal={closeModal}
-        editedData={editedData}
-        isShow={isShow && type === "edit-mobile"}
-      />
-      <AddressForm
-        title={title}
-        token={token}
-        dispatch={dispatch}
-        closeModal={closeModal}
-        isShow={isShow && type === "edit-address"}
-      />
-      <SearchModal
-        dispatch={dispatch}
-        closeModal={closeModal}
-        isShow={isShow && type === "search"}
-      />
+
+      {(route === "/admin/users" ||
+        route === "/admin/details/[id]" ||
+        route === "/admin/products" ||
+        route === "/profile/reviews") && (
+        <ConfirmDeleteModal
+          title={title}
+          isConfirm={isConfirm}
+          id={id}
+          type={type}
+          token={token}
+          dispatch={dispatch}
+          isShow={isShow}
+        />
+      )}
+
+      {(route === "/admin/product/[[...id]]" ||
+        route == "/admin/details/[id]") && (
+        <ConfirmUpdateModal
+          title={title}
+          isConfirm={isConfirm}
+          id={id}
+          type={type}
+          token={token}
+          editedData={editedData}
+          dispatch={dispatch}
+          isShow={isShow && type.includes("confirm-update")}
+        />
+      )}
+
+      {route === "/profile/personal-info" && (
+        <>
+          <NameForm
+            title={title}
+            token={token}
+            dispatch={dispatch}
+            closeModal={closeModal}
+            editedData={editedData}
+            isShow={isShow && type === "edit-name"}
+          />
+
+          <MobileForm
+            title={title}
+            token={token}
+            dispatch={dispatch}
+            closeModal={closeModal}
+            editedData={editedData}
+            isShow={isShow && type === "edit-mobile"}
+          />
+        </>
+      )}
+
+      {route === "/products/[id]" && (
+        <CommentModal
+          title={title}
+          token={token}
+          dispatch={dispatch}
+          closeModal={closeModal}
+          id={id}
+          isShow={isShow && type === "comment"}
+        />
+      )}
+
+      {route === "/admin/categories" && (
+        <CategoryForm
+          title={title}
+          token={token}
+          dispatch={dispatch}
+          closeModal={closeModal}
+          isShow={isShow && type === "edit-category"}
+        />
+      )}
+      {(route.includes("/profile/") ||
+        route.includes("/checkout/") ||
+        route === "/" ||
+        route === "/main/[category]" ||
+        route === "/products" ||
+        route === "/products/[id]") && (
+        <AddressForm
+          title={title}
+          token={token}
+          dispatch={dispatch}
+          closeModal={closeModal}
+          isShow={isShow && type === "edit-address"}
+        />
+      )}
+      {(route.includes("/profile") ||
+        route === "/checkout/cart" ||
+        route === "/" ||
+        route === "/main/[category]" ||
+        route === "/products" ||
+        route === "/products/[id]") && (
+        <SearchModal
+          dispatch={dispatch}
+          closeModal={closeModal}
+          isShow={isShow && type === "search"}
+        />
+      )}
     </>
   );
 }
