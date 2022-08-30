@@ -1,0 +1,10 @@
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
+
+const apiSlice = createApi({
+  reducerPath: "api",
+  baseQuery: fetchBaseQuery({ baseUrl: "" }),
+  tagTypes: ["User", "Review", "Details", "Order", "Product","Category"],
+  endpoints: (builder) => ({}),
+});
+
+export default apiSlice;

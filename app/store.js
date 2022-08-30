@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { setupListeners } from "@reduxjs/toolkit/dist/query";
 
-import fetchApi from "app/slices/fetchApi.slice";
 import userReducer from "app/slices/user.slice";
 import cartReducer from "app/slices/cart.slice";
 import modalReducer from "app/slices/modal.slice";
@@ -10,6 +10,7 @@ import productReducer from "app/slices/product.slice";
 import fitlerReducer from "app/slices/filter.slice";
 import reviewsReducer from "app/slices/reviews.slice";
 import alertReducer from "app/slices/alert.slice";
+import apiSlice from "app/api/api";
 
 export const store = configureStore({
   reducer: {
@@ -22,8 +23,10 @@ export const store = configureStore({
     filter: fitlerReducer,
     reviews: reviewsReducer,
     alert: alertReducer,
-    [fetchApi.reducerPath]: fetchApi.reducer,
+    [apiSlice.reducerPath]: apiSlice.reducer,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(fetchApi.middleware),
+  middleware: (gDM) => gDM().concat(apiSlice.middleware),
 });
+
+// enable listener behavior for the store
+setupListeners(store.dispatch);
