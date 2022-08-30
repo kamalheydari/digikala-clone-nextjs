@@ -105,7 +105,7 @@ export default function Modal() {
           isShow={isShow && type === "edit-category"}
         />
       )}
-      {(route.includes("/profile/") ||
+      {(route.includes("/profile") ||
         route.includes("/checkout/") ||
         route === "/" ||
         route === "/main/[category]" ||
