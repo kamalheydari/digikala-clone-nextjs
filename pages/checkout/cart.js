@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
@@ -5,17 +6,9 @@ import { clearCart } from "app/slices/cart.slice";
 import { openModal } from "app/slices/modal.slice";
 import { useDispatch, useSelector } from "react-redux";
 
-import {
-  Icons,
-  FreeShipping,
-  CartItem,
-  Buttons,
-  CartInfo,
-  Header,
-} from "components";
+import { Icons, FreeShipping, CartItem, CartInfo, Header } from "components";
 
 import { formatNumber } from "utils/formatNumber";
-import Head from "next/head";
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -49,12 +42,11 @@ export default function Cart() {
           <Head>
             <title>دیجی‌کالا | سبد خرید</title>
           </Head>
-          <Buttons.Back backRoute='/profile'>سبد خرید شما</Buttons.Back>
           <div className='section-divide-y' />
 
           <div className='py-20'>
             <div className='relative mx-auto h-52 w-52'>
-              <Image src='/icons/empty-cart.svg' layout='fill' alt="سبد خالی"/>
+              <Image src='/icons/empty-cart.svg' layout='fill' alt='سبد خالی' />
             </div>
             <p className='text-base font-bold text-center'>
               سبد خرید شما خالی است!
@@ -71,6 +63,7 @@ export default function Cart() {
         <Head>
           <title>دیجی‌کالا | سبد خرید</title>
         </Head>
+
         <div className='lg:py-4 lg:border lg:border-gray-200 lg:rounded-md lg:flex-1 h-fit'>
           {/* title */}
           <section className='flex justify-between px-4'>
@@ -123,7 +116,7 @@ export default function Cart() {
                 {formatNumber(totalPrice - totalDiscount)}
               </span>
               <div className='relative mr-1 w-7 h-7'>
-                <Image src='/icons/toman.svg' layout='fill' alt="تومان"/>
+                <Image src='/icons/toman.svg' layout='fill' alt='تومان' />
               </div>
             </div>
           </div>
