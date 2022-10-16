@@ -43,12 +43,30 @@ const categorySchema = Yup.object().shape({
   slug: Yup.string().required("نام مسیر نباید خالی باشد"),
 });
 
+const addressSchema = Yup.object().shape({
+  provinces: Yup.string().required("لطفا استان محل زندگی خود را انتخاب کنید"),
+  city: Yup.string().required("لطفا شهرستان محل زندگی خود را انتخاب کنید"),
+  street: Yup.string().required("نام خیابان نباید خالی باشد"),
+  postalCode: Yup.string().required("لطفا کد پستی خود را وارد کنید"),
+});
+
+const reviewSchema = Yup.object().shape({
+  title: Yup.string()
+    .required("عنوان نظر نباید خالی باشد")
+    .min(4, "عنوان نظر نباید کمتر از 4 حرف باشد"),
+  comment: Yup.string()
+    .required("متن نظر نباید خالی باشد")
+    .min(4, "متن نظر نباید کمتر از 4 حرف باشد"),
+});
+
 const validation = {
   registerSchema,
   logInSchema,
   nameSchema,
   mobileSchema,
   categorySchema,
+  addressSchema,
+  reviewSchema
 };
 
 export default validation;

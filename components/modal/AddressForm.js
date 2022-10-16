@@ -1,13 +1,24 @@
 import { useEffect, useState } from "react";
 
+import { useSelector } from "react-redux";
 import { updateUser } from "app/slices/user.slice";
 import { useEditUserMutation } from "app/api/userApi";
+import { showAlert } from "app/slices/alert.slice";
 
-import { Loading, CloseModal, ModalWrapper } from "components";
+import { useForm } from "react-hook-form";
+import validation from "utils/validation";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import {
+  Loading,
+  CloseModal,
+  ModalWrapper,
+  Input,
+  DisplayError,
+} from "components";
 
 import cityList from "utils/cityList";
 import { provinces } from "utils/constatns";
-import { useSelector } from "react-redux";
 
 export default function AddressForm({
   title,
@@ -21,35 +32,60 @@ export default function AddressForm({
 
   //? Local State
   const [cities, setCities] = useState([]);
-  const [address, setAddress] = useState(user?.address || {});
 
-  //? Patch Data
-  const [editUser, { data, isSuccess, isLoading }] = useEditUserMutation();
+  //? Form Hook
+  const {
+    handleSubmit,
+    register,
+    formState: { errors: formErrors },
+    setValue,
+    getValues,
+  } = useForm({
+    resolver: yupResolver(validation.addressSchema),
+    defaultValues: { ...user?.address },
+  });
 
+  //? Edit User-Info Query
+  const [
+    editUser,
+    { data, isSuccess, isLoading, isError },
+  ] = useEditUserMutation();
+
+  //? Handle Edit User-Info Response
   useEffect(() => {
     if (isSuccess) {
       dispatch(updateUser(data.user));
       dispatch(closeModal());
+      dispatch(
+        showAlert({
+          status: "success",
+          title: data.msg,
+        })
+      );
     }
   }, [isSuccess]);
 
+  useEffect(() => {
+    if (isError)
+      dispatch(
+        showAlert({
+          status: "error",
+          title: error?.data.err,
+        })
+      );
+  }, [isError]);
+
   //? Handlers
-  const submitHander = async (e) => {
-    e.preventDefault();
-    editUser({
+  const submitHander = async (address) => {
+    await editUser({
       body: { address },
       token,
     });
   };
 
-  const handleChange = (e) => {
-    setAddress({ ...address, [e.target.name]: e.target.value });
-  };
-
-  //? Handle Get Cities
   useEffect(() => {
-    setCities(cityList(address?.provinces));
-  }, [address?.provinces]);
+    setCities(cityList(getValues("provinces")));
+  }, [getValues("provinces")]);
 
   return (
     <ModalWrapper isShow={isShow}>
@@ -67,7 +103,7 @@ export default function AddressForm({
           <p>لطفا اطلاعات موقعیت مکانی خود را وارد کنید.</p>
           <form
             className='flex flex-col justify-between flex-1 gap-y-5 overflow-y-auto pl-4'
-            onSubmit={submitHander}
+            onSubmit={handleSubmit(submitHander)}
           >
             <div className='max-w-xl space-y-16 md:grid md:grid-cols-2 md:gap-x-12 md:gap-y-10 md:items-baseline '>
               <div className='flex flex-col items-start justify-between gap-y-2'>
@@ -81,9 +117,12 @@ export default function AddressForm({
                   className='border-2 rounded-sm py-0.5 px-3 outline-none w-56'
                   name='provinces'
                   id='provinces'
-                  onChange={handleChange}
-                  required={true}
-                  value={address.provinces}
+                  value={getValues("provinces")}
+                  onChange={(e) =>
+                    setValue("provinces", e.target.value, {
+                      shouldValidate: true,
+                    })
+                  }
                 >
                   {provinces.map((item, index) => (
                     <option value={item[0]} key={index}>
@@ -91,6 +130,7 @@ export default function AddressForm({
                     </option>
                   ))}
                 </select>
+                <DisplayError errors={formErrors.provinces} />
               </div>
 
               <div className='flex flex-col items-start justify-between gap-y-2'>
@@ -104,9 +144,12 @@ export default function AddressForm({
                   className='border-2 rounded-sm py-0.5 px-3 outline-none w-56'
                   name='city'
                   id='city'
-                  onChange={handleChange}
-                  required={true}
-                  value={address.city}
+                  value={getValues("city")}
+                  onChange={(e) =>
+                    setValue("city", e.target.value, {
+                      shouldValidate: true,
+                    })
+                  }
                 >
                   {cities.map((item, index) => (
                     <option value={item[0]} key={index}>
@@ -114,43 +157,24 @@ export default function AddressForm({
                     </option>
                   ))}
                 </select>
+                <DisplayError errors={formErrors.city} />
               </div>
 
-              <div className='space-y-3 '>
-                <label
-                  className='text-xs text-gray-700 lg:text-sm md:min-w-max'
-                  htmlFor='street'
-                >
-                  کوچه و خیابان
-                </label>
-                <input
-                  className='input sm:max-w-sm lg:max-w-full '
-                  type='text'
-                  name='street'
-                  id='street'
-                  value={address.street}
-                  onChange={handleChange}
-                  required={true}
-                />
-              </div>
+              <Input
+                label='کوچه و خیابان'
+                register={register}
+                errors={formErrors.street}
+                name='street'
+                type='text'
+              />
 
-              <div className='space-y-3 '>
-                <label
-                  className='text-xs text-gray-700 lg:text-sm md:min-w-max'
-                  htmlFor='postalCode'
-                >
-                  کد پستی
-                </label>
-                <input
-                  className='input sm:max-w-sm lg:max-w-full '
-                  type='text'
-                  name='postalCode'
-                  id='postalCode'
-                  value={address.postalCode}
-                  onChange={handleChange}
-                  required={true}
-                />
-              </div>
+              <Input
+                label='کد پستی'
+                register={register}
+                errors={formErrors.postalCode}
+                name='postalCode'
+                type='text'
+              />
             </div>
 
             <div className='py-3 border-t-2 border-gray-200 lg:pb-0 '>

@@ -1,9 +1,10 @@
 import { useEffect } from "react";
-
+import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
+import validation from "utils/validation";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -12,11 +13,7 @@ import { userLogin } from "app/slices/user.slice";
 import { showAlert } from "app/slices/alert.slice";
 import { useLoginMutation } from "app/api/userApi";
 
-import { DisplayError, Loading } from "components";
-
-//? Validation Schema
-import validation from "utils/validation";
-import Head from "next/head";
+import { Input, Loading } from "components";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
@@ -50,6 +47,9 @@ export default function LoginPage() {
         );
       }
     }
+  }, [isSuccess]);
+
+  useEffect(() => {
     if (isError)
       dispatch(
         showAlert({
@@ -57,7 +57,7 @@ export default function LoginPage() {
           title: error?.data.err,
         })
       );
-  }, [isSuccess, isError]);
+  }, [isError]);
 
   //? Form Hook
   const {
@@ -65,9 +65,15 @@ export default function LoginPage() {
     register,
     formState: { errors: formErrors },
     reset,
+    setFocus,
   } = useForm({
     resolver: yupResolver(validation.logInSchema),
   });
+
+  //? Focus On Mount
+  useEffect(() => {
+    setFocus("email");
+  }, []);
 
   //? Handlers
   const submitHander = async ({ email, password }) => {
@@ -93,25 +99,21 @@ export default function LoginPage() {
         </div>
         <h2>ورود</h2>
         <form className='space-y-5' onSubmit={handleSubmit(submitHander)}>
-          <div>
-            <input
-              className='input'
-              type='text'
-              placeholder='آدرس ایمیل'
-              {...register("email")}
-            />
-            <DisplayError errors={formErrors.email} />
-          </div>
+          <Input
+            register={register}
+            errors={formErrors.email}
+            type='text'
+            placeholder='آدرس ایمیل'
+            name='email'
+          />
 
-          <div>
-            <input
-              className='input'
-              type='password'
-              placeholder='رمز عبور'
-              {...register("password")}
-            />
-            <DisplayError errors={formErrors.password} />
-          </div>
+          <Input
+            register={register}
+            errors={formErrors.password}
+            type='password'
+            placeholder='رمز عبور'
+            name='password'
+          />
 
           <button
             className='btn mx-auto w-full max-w-[200px]'

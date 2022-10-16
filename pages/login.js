@@ -10,12 +10,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useLoginMutation } from "app/api/userApi";
 import { useDispatch } from "react-redux";
 import { userLogin } from "app/slices/user.slice";
-
-//? Validation Schema
 import validation from "utils/validation";
+
 import { showAlert } from "app/slices/alert.slice";
 
-import { DisplayError, Loading } from "components";
+import { Input, Loading } from "components";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
@@ -57,10 +56,15 @@ export default function LoginPage() {
     handleSubmit,
     register,
     formState: { errors: formErrors },
-    reset,
+    reset,setFocus
   } = useForm({
     resolver: yupResolver(validation.logInSchema),
   });
+
+  //? Focus On Mount
+  useEffect(() => {
+    setFocus("email");
+  }, []);
 
   //? Handlers
   const submitHander = async ({ email, password }) => {
@@ -85,25 +89,21 @@ export default function LoginPage() {
         </div>
         <h2 className='text-gray-700'>ورود</h2>
         <form className='space-y-5' onSubmit={handleSubmit(submitHander)}>
-          <div>
-            <input
-              className='input'
-              type='text'
-              placeholder='آدرس ایمیل'
-              {...register("email")}
-            />
-            <DisplayError errors={formErrors.email} />
-          </div>
+          <Input
+            register={register}
+            errors={formErrors.email}
+            type='text'
+            placeholder='آدرس ایمیل'
+            name='email'
+          />
 
-          <div>
-            <input
-              className='input'
-              type='password'
-              placeholder='رمز عبور'
-              {...register("password")}
-            />
-            <DisplayError errors={formErrors.password} />
-          </div>
+          <Input
+            register={register}
+            errors={formErrors.password}
+            type='password'
+            placeholder='رمز عبور'
+            name='password'
+          />
 
           <button
             className='mx-auto w-44 btn rounded-3xl '

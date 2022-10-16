@@ -5,10 +5,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import validation from "utils/validation";
 
 import { updateUser } from "app/slices/user.slice";
-
-import { DisplayError, Loading, CloseModal, ModalWrapper } from "components";
 import { useEditUserMutation } from "app/api/userApi";
 import { showAlert } from "app/slices/alert.slice";
+
+import { Loading, CloseModal, ModalWrapper, Input } from "components";
 
 export default function NameForm({
   title,
@@ -58,9 +58,15 @@ export default function NameForm({
     register,
     formState: { errors: formErrors },
     reset,
+    setFocus,
   } = useForm({
     resolver: yupResolver(validation.nameSchema),
   });
+
+  //? Focus On Mount
+  useEffect(() => {
+    setFocus("name");
+  }, []);
 
   //? Handlers
   const submitHander = async ({ name }) => {
@@ -92,23 +98,14 @@ export default function NameForm({
             className='flex flex-col justify-between flex-1 gap-y-5 '
             onSubmit={handleSubmit(submitHander)}
           >
-            <div className='space-y-3 '>
-              <label
-                className='text-xs text-gray-700 lg:text-sm md:min-w-max'
-                htmlFor='name'
-              >
-                نام و نام خانوادگی
-              </label>
-              <input
-                className='input sm:max-w-sm lg:max-w-full '
-                type='text'
-                name='name'
-                id='name'
-                defaultValue={editedData}
-                {...register("name")}
-              />
-              <DisplayError errors={formErrors.name} />
-            </div>
+            <Input
+              label='نام و نام خانوادگی'
+              register={register}
+              errors={formErrors.name}
+              name='name'
+              type='text'
+              defaultValue={editedData}
+            />
 
             <div className='py-3 border-t-2 border-gray-200 lg:pb-0 '>
               <button className='modal-btn' type='submit' disabled={isLoading}>

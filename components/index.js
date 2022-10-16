@@ -7,6 +7,7 @@ export { default as BigLoading } from "./loading/BigLoading";
 export { default as ShowWrapper } from "./share/ShowWrapper";
 export { default as HandleDelete } from "./share/HandleDelete";
 export { default as HandleUpdate } from "./share/HandleUpdate";
+export { default as Input } from "./share/Input";
 
 //* LOADING
 export { default as Loading } from "./share/Loading";

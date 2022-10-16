@@ -26,7 +26,7 @@ const uploadInfo = async (req, res) => {
       return sendError(res, 403, "شما اجازه انجام این عملیات را ندارید");
 
     await db.connect();
-    await User.findOneAndUpdate({ _id: result.id }, { ...req.body });
+    await User.findOneAndUpdate({ _id: result.id }, req.body);
     const newUser = await User.findOne({ _id: result.id });
     await db.disconnect();
 

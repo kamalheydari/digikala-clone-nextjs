@@ -8,7 +8,6 @@ import categoryReducer from "app/slices/category.slice";
 import detailsReducer from "app/slices/details.slice";
 import productReducer from "app/slices/product.slice";
 import fitlerReducer from "app/slices/filter.slice";
-import reviewsReducer from "app/slices/reviews.slice";
 import alertReducer from "app/slices/alert.slice";
 import apiSlice from "app/api/api";
 
@@ -21,7 +20,6 @@ export const store = configureStore({
     details: detailsReducer,
     product: productReducer,
     filter: fitlerReducer,
-    reviews: reviewsReducer,
     alert: alertReducer,
     [apiSlice.reducerPath]: apiSlice.reducer,
   },

@@ -6,18 +6,16 @@ import { useRouter } from "next/router";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import validation from "utils/validation";
 
 import { useDispatch } from "react-redux";
 import { userLogin } from "app/slices/user.slice";
 import { showAlert } from "app/slices/alert.slice";
 import { useCreateUserMutation } from "app/api/userApi";
 
-import { DisplayError, Loading } from "components";
+import { Input, Loading } from "components";
 
 import { openModal } from "app/slices/modal.slice";
-
-//? Validation Schema
-import validation from "utils/validation";
 
 export default function RegisterPage() {
   const dispatch = useDispatch();
@@ -63,9 +61,15 @@ export default function RegisterPage() {
     register,
     formState: { errors: formErrors },
     reset,
+    setFocus,
   } = useForm({
     resolver: yupResolver(validation.registerSchema),
   });
+
+  //? Focus On Mount
+  useEffect(() => {
+    setFocus("name");
+  }, []);
 
   //? Handlers
   const submitHander = async ({ name, email, password }) => {
@@ -91,46 +95,37 @@ export default function RegisterPage() {
         </div>
         <h2 className='text-gray-700'>ثبت‌نام</h2>
         <form className='space-y-5' onSubmit={handleSubmit(submitHander)}>
-          <div>
-            <input
-              className='input'
-              type='text'
-              name='name'
-              placeholder='نام و نام خانوادگی'
-              {...register("name")}
-            />
-            <DisplayError errors={formErrors.name} />
-          </div>
+          <Input
+            register={register}
+            errors={formErrors.name}
+            type='text'
+            placeholder='نام و نام خانوادگی'
+            name='name'
+          />
 
-          <div>
-            <input
-              className='input'
-              type='text'
-              placeholder='آدرس ایمیل'
-              {...register("email")}
-            />
-            <DisplayError errors={formErrors.email} />
-          </div>
+          <Input
+            register={register}
+            errors={formErrors.email}
+            type='text'
+            placeholder='آدرس ایمیل'
+            name='email'
+          />
 
-          <div>
-            <input
-              className='input'
-              type='password'
-              placeholder='رمز عبور'
-              {...register("password")}
-            />
-            <DisplayError errors={formErrors.password} />
-          </div>
+          <Input
+            register={register}
+            errors={formErrors.password}
+            type='password'
+            placeholder='رمز عبور'
+            name='password'
+          />
 
-          <div>
-            <input
-              className='input'
-              type='password'
-              placeholder='تکرار رمز عبور'
-              {...register("confirmPassword")}
-            />
-            <DisplayError errors={formErrors.confirmPassword} />
-          </div>
+          <Input
+            register={register}
+            errors={formErrors.confirmPassword}
+            type='password'
+            placeholder='تکرار رمز عبور'
+            name='confirmPassword'
+          />
 
           <button
             className='mx-auto w-44 btn rounded-3xl '

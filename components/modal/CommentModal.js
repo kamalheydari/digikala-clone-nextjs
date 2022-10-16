@@ -1,19 +1,25 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import { useSelector } from "react-redux";
+import { nanoid } from "@reduxjs/toolkit";
 import { useCreateReviewMutation } from "app/api/reviewApi";
-import {
-  addReviewsItem,
-  changeReviewsItems,
-  deleteReviewsItem,
-  resetReview,
-} from "app/slices/reviews.slice";
 import { closeModal } from "app/slices/modal.slice";
 import { showAlert } from "app/slices/alert.slice";
 
 import { ratingStatus } from "utils/constatns";
 
-import { Icons, Loading, CloseModal, ModalWrapper } from "components";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import validation from "utils/validation";
+
+import {
+  Icons,
+  Loading,
+  CloseModal,
+  ModalWrapper,
+  Input,
+  DisplayError,
+} from "components";
 
 export default function CommentModal({
   title: productTitle,
@@ -21,18 +27,27 @@ export default function CommentModal({
   id,
   isShow,
 }) {
+
+  //? Form Hook
+  const {
+    handleSubmit,
+    register,
+    formState: { errors: formErrors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(validation.reviewSchema),
+  });
+
+  //? Refs
+  const positiveRef = useRef(null);
+  const negativeRef = useRef(null);
+
   //? local State
-  const [positiveValue, setPositiveValue] = useState("");
-  const [negativeValue, setNegativeValue] = useState("");
+  const [rating, setRating] = useState(1);
+  const [positivePoints, setPositivePoints] = useState([]);
+  const [negativePoints, setNegativePoints] = useState([]);
 
   //? Store
-  const {
-    positivePoints,
-    negativePoints,
-    rating,
-    title,
-    comment,
-  } = useSelector((state) => state.reviews);
   const { token } = useSelector((state) => state.user);
 
   //? Create Review Query
@@ -45,7 +60,10 @@ export default function CommentModal({
   useEffect(() => {
     if (isSuccess) {
       dispatch(closeModal());
-      dispatch(resetReview());
+      reset();
+      setNegativePoints([]);
+      setPositivePoints([]);
+      setRating(1);
       dispatch(
         showAlert({
           status: "success",
@@ -54,11 +72,14 @@ export default function CommentModal({
       );
     }
   }, [isSuccess]);
-  
+
   useEffect(() => {
     if (isError) {
       dispatch(closeModal());
-      dispatch(resetReview());
+      reset();
+      setNegativePoints([]);
+      setPositivePoints([]);
+      setRating(1);
       dispatch(
         showAlert({
           status: "error",
@@ -69,32 +90,34 @@ export default function CommentModal({
   }, [isError]);
 
   //? Handlers
-  const handleChangeItems = (e) => {
-    dispatch(
-      changeReviewsItems({ name: e.target.name, value: e.target.value })
-    );
+  const handleAddPositivePoint = () => {
+    setPositivePoints([
+      ...positivePoints,
+      { id: nanoid(), title: positiveRef.current.value },
+    ]);
+    positiveRef.current.value = "";
   };
 
-  const handleAddItems = (type) => {
-    if (type === "positivePoints") {
-      dispatch(addReviewsItem({ type, value: positiveValue }));
-      setPositiveValue("");
-    }
-
-    if (type === "negativePoints") {
-      dispatch(addReviewsItem({ type, value: negativeValue }));
-      setNegativeValue("");
-    }
+  const handleAddNegativePoint = () => {
+    setNegativePoints([
+      ...negativePoints,
+      { id: nanoid(), title: negativeRef.current.value },
+    ]);
+    negativeRef.current.value = "";
   };
 
-  const handleDelete = (type, id) => {
-    dispatch(deleteReviewsItem({ type, id }));
+  const handleDeletePositivePoint = (id) => {
+    const tempPositivePoints = positivePoints.filter((item) => item.id !== id);
+    setPositivePoints(tempPositivePoints);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleDeleteNegativePoint = (id) => {
+    const tempNegativePoints = negativePoints.filter((item) => item.id !== id);
+    setNegativePoints(tempNegativePoints);
+  };
 
-    createReview({
+  const submitHander = async ({ title, comment }) => {
+    await createReview({
       id,
       token,
       body: { title, comment, rating, positivePoints, negativePoints },
@@ -120,7 +143,7 @@ export default function CommentModal({
 
           <form
             className='flex flex-col justify-between flex-1 gap-y-5 overflow-y-auto pl-4'
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit(submitHander)}
           >
             {/* rating */}
             <div>
@@ -136,10 +159,12 @@ export default function CommentModal({
                 type='range'
                 min='1'
                 max='5'
-                value={rating}
                 step='1'
+                value={rating}
                 className='w-full h-2 bg-gray-200 rounded-lg cursor-pointer '
-                onChange={handleChangeItems}
+                onChange={(e) => {
+                  setRating(+e.target.value);
+                }}
               />
               <div className='flex justify-between'>
                 <span className='h-1 w-1 rounded-full mx-1.5 bg-gray-300 inline-block' />
@@ -151,23 +176,14 @@ export default function CommentModal({
             </div>
 
             {/* title */}
-            <div className='space-y-3 '>
-              <label
-                className='text-xs text-gray-700 lg:text-sm md:min-w-max'
-                htmlFor='title'
-              >
-                عنوان نظر
-              </label>
-              <input
-                className='input'
-                type='text'
-                name='title'
-                id='title'
-                required={true}
-                onChange={handleChangeItems}
-              />
-            </div>
-
+            <Input
+              label='عنوان نظر'
+              register={register}
+              errors={formErrors.title}
+              name='title'
+              type='text'
+            />
+            
             {/* positivePoints */}
             <div className='space-y-3'>
               <div className='space-y-3'>
@@ -183,20 +199,16 @@ export default function CommentModal({
                     type='text'
                     name='positivePoints'
                     id='positivePoints'
-                    value={positiveValue}
-                    onChange={(e) => setPositiveValue(e.target.value)}
+                    ref={positiveRef}
                   />
-                  <button
-                    onClick={() => handleAddItems("positivePoints")}
-                    type='button'
-                  >
+                  <button onClick={handleAddPositivePoint} type='button'>
                     <Icons.Plus className='icon' />
                   </button>
                 </div>
               </div>
               {positivePoints.length > 0 && (
                 <div className='space-y-3'>
-                  {positivePoints.map((item) => (
+                  {positivePoints.map((item, index) => (
                     <div
                       key={item.id}
                       className='flex items-center px-3 gap-x-4'
@@ -206,9 +218,7 @@ export default function CommentModal({
                       <button>
                         <Icons.Delete
                           className='icon text-gray'
-                          onClick={() =>
-                            handleDelete("positivePoints", item.id)
-                          }
+                          onClick={() => handleDeletePositivePoint(item.id)}
                         />
                       </button>
                     </div>
@@ -232,13 +242,9 @@ export default function CommentModal({
                     type='text'
                     name='negativePoints'
                     id='negativePoints'
-                    value={negativeValue}
-                    onChange={(e) => setNegativeValue(e.target.value)}
+                    ref={negativeRef}
                   />
-                  <button
-                    onClick={() => handleAddItems("negativePoints")}
-                    type='button'
-                  >
+                  <button onClick={handleAddNegativePoint} type='button'>
                     <Icons.Plus className='icon' />
                   </button>
                 </div>
@@ -255,9 +261,7 @@ export default function CommentModal({
                       <button>
                         <Icons.Delete
                           className='icon text-gray'
-                          onClick={() =>
-                            handleDelete("negativePoints", item.id)
-                          }
+                          onClick={() => handleDeleteNegativePoint(item.id)}
                         />
                       </button>
                     </div>
@@ -279,9 +283,9 @@ export default function CommentModal({
                 type='text'
                 name='comment'
                 id='comment'
-                required={true}
-                onChange={handleChangeItems}
+                {...register("comment")}
               />
+              <DisplayError errors={formErrors.comment} />
             </div>
 
             <div className='py-3 border-t-2 border-gray-200 lg:pb-0 '>

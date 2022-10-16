@@ -13,11 +13,11 @@ import validation from "utils/validation";
 
 import {
   CloseModal,
-  DisplayError,
   Loading,
   SelectCategories,
   UploadImages,
   ModalWrapper,
+  Input,
 } from "components";
 import { useSelector } from "react-redux";
 
@@ -143,39 +143,21 @@ export default function CategoryForm({
             className='flex flex-col justify-between flex-1 gap-y-5 overflow-y-auto pl-4'
             onSubmit={handleSubmit(submitHander)}
           >
-            <div className='space-y-3 '>
-              <label
-                className='text-xs text-gray-700 lg:text-sm md:min-w-max'
-                htmlFor='name'
-              >
-                نام دسته‌بندی
-              </label>
-              <input
-                className='input sm:max-w-sm lg:max-w-full '
-                type='text'
-                name='name'
-                id='name'
-                {...register("name")}
-              />
-              <DisplayError errors={formErrors.name} />
-            </div>
+            <Input
+              label='نام دسته‌بندی'
+              register={register}
+              errors={formErrors.name}
+              name='name'
+              type='text'
+            />
 
-            <div className='space-y-3 '>
-              <label
-                className='text-xs text-gray-700 lg:text-sm md:min-w-max'
-                htmlFor='slug'
-              >
-                مسیر (با حروف انگلیسی)
-              </label>
-              <input
-                className='input sm:max-w-sm lg:max-w-full '
-                type='text'
-                slug='slug'
-                id='slug'
-                {...register("slug")}
-              />
-              <DisplayError errors={formErrors.slug} />
-            </div>
+            <Input
+              label='مسیر (با حروف انگلیسی)'
+              register={register}
+              errors={formErrors.slug}
+              name='slug'
+              type='text'
+            />
 
             <UploadImages
               deleteImageHandler={deleteImageHandler}
