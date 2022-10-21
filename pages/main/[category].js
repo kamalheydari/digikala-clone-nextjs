@@ -86,10 +86,15 @@ export async function getServerSideProps({ params: { category } }) {
       $options: "i",
     },
   };
+
+  const filterFilelds =
+    "-description -info -specification -sizes -colors -category -numReviews -reviews";
+
   await db.connect();
   const bestSells = await Product.find({
     ...categoryFilter,
   })
+    .select(filterFilelds)
     .sort({ sold: -1 })
     .limit(15)
     .lean();
@@ -97,6 +102,7 @@ export async function getServerSideProps({ params: { category } }) {
   const mostFavourite = await Product.find({
     ...categoryFilter,
   })
+    .select(filterFilelds)
     .sort({ rating: -1 })
     .limit(10)
     .lean();
@@ -106,6 +112,7 @@ export async function getServerSideProps({ params: { category } }) {
     discount: { $gte: 1 },
     inStock: { $gte: 1 },
   })
+    .select(filterFilelds)
     .limit(10)
     .sort({ discount: -1 })
     .lean();

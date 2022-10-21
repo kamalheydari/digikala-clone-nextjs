@@ -12,6 +12,7 @@ import {
   BestSellsSlider,
   Categories,
   DiscountSlider,
+  MostFavouraiteProducts,
   Slider,
 } from "components";
 import { useSelector } from "react-redux";
@@ -20,7 +21,7 @@ export default function Home(props) {
   //? Local State
   const [images, setImages] = useState({});
   const [childCategories, setChildCategories] = useState([]);
-
+  console.log(props);
   //? Store
   const { categories } = useSelector((state) => state.categories);
 
@@ -52,7 +53,7 @@ export default function Home(props) {
         <div className='h-52 md:h-70 lg:h-[370px] bg-gray-50' />
       )}
 
-      <div className='py-4 mx-auto space-y-12 xl:mt-28 lg:max-w-[1450px]'>
+      <div className='py-4 mx-auto space-y-24 xl:mt-28 lg:max-w-[1450px]'>
         {/* Discount Products */}
         <DiscountSlider
           products={props.discountProducts}
@@ -79,22 +80,39 @@ export default function Home(props) {
 
         {/* Banner Two */}
         {isSuccess && <BannerTwo images={images?.banner_two} />}
+
+        {/* MostFavouraiteProducts */}
+        <MostFavouraiteProducts products={props.mostFavourite} />
       </div>
     </main>
   );
 }
 
 export async function getServerSideProps() {
+  const filterFilelds =
+    "-description -info -specification -sizes -colors -category -numReviews -reviews";
+
   await db.connect();
 
-  const bestSells = await Product.find().sort({ sold: -1 }).limit(15).lean();
+  const bestSells = await Product.find()
+    .select(filterFilelds)
+    .sort({ sold: -1 })
+    .limit(15)
+    .lean();
 
   const discountProducts = await Product.find({
     discount: { $gte: 1 },
     inStock: { $gte: 1 },
   })
-    .limit(15)
+    .select(filterFilelds)
     .sort({ discount: -1 })
+    .limit(15)
+    .lean();
+
+  const mostFavourite = await Product.find()
+    .select(filterFilelds)
+    .sort({ rating: -1 })
+    .limit(10)
     .lean();
 
   await db.disconnect();
@@ -103,6 +121,7 @@ export async function getServerSideProps() {
     props: {
       bestSells: bestSells.map(db.convertDocToObj),
       discountProducts: discountProducts.map(db.convertDocToObj),
+      mostFavourite: mostFavourite.map(db.convertDocToObj),
     },
   };
 }
