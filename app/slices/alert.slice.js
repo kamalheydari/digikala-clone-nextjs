@@ -13,8 +13,6 @@ const alertSlice = createSlice({
     },
     removeAlert: (state) => {
       state.isShow = false;
-      state.title='';
-      state.status=''
     },
   },
 });
