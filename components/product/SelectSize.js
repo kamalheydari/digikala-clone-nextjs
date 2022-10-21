@@ -18,10 +18,10 @@ export default function SelectSize({ sizes }) {
   }, []);
 
   return (
-    <section className='lg:col-start-4 lg:col-end-8 lg:row-start-2 lg:row-end-4'>
+    <section className='lg:col-start-4 lg:col-end-8 lg:row-start-2 lg:row-end-4 farsi-digits'>
       <div className='flex justify-between p-4'>
-        <span className='text-sm text-gray-700'>اندازه: {tempSize?.name}</span>
-        <span className='text-sm'>{formatNumber(sizes.length)} اندازه</span>
+        <span className='text-sm text-gray-700'>اندازه: {tempSize?.size}</span>
+        <span className='text-sm '>{formatNumber(sizes.length)} اندازه</span>
       </div>
       <div className='flex flex-wrap gap-3 px-5 my-3'>
         {sizes.map((item) => (

@@ -1,12 +1,12 @@
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 import Head from "next/head";
-import { useEffect} from "react";
 
 import db from "lib/db";
 import Product from "models/Product";
 
 import { useDispatch } from "react-redux";
 import { addToLastSeen } from "app/slices/user.slice";
-
 
 import {
   FreeShipping,
@@ -21,9 +21,25 @@ import {
   OutOfStock,
   AddToCartInfo,
 } from "components";
+import { setTempColor, setTempSize } from "app/slices/cart.slice";
 
 export default function SingleProduct({ product, smilarProducts }) {
   const dispatch = useDispatch();
+  const router = useRouter();
+  
+  //? initial color & size
+  useEffect(() => {
+    if (product.colors.length > 0) {
+      dispatch(setTempColor(product.colors[0]));
+      dispatch(setTempSize(null));
+    } else if (product.sizes.length > 0) {
+      dispatch(setTempSize(product.sizes[0]));
+      dispatch(setTempColor(null));
+    } else {
+      dispatch(setTempSize(null));
+      dispatch(setTempColor(null));
+    }
+  }, [router.query.id]);
 
   //? Add To LastSeen
   useEffect(() => {
