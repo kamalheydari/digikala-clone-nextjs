@@ -1,6 +1,4 @@
-import { useEffect } from "react";
-
-import { setTempColor, setTempSize } from "app/slices/cart.slice";
+import { setTempSize } from "app/slices/cart.slice";
 import { useDispatch, useSelector } from "react-redux";
 
 import { formatNumber } from "utils/formatNumber";
@@ -11,16 +9,10 @@ export default function SelectSize({ sizes }) {
   //? Store
   const { tempSize } = useSelector((state) => state.cart);
 
-  //? Set initial size
-  useEffect(() => {
-    dispatch(setTempSize(sizes[0]));
-    dispatch(setTempColor(null));
-  }, []);
-
   return (
-    <section className='lg:col-start-4 lg:col-end-8 lg:row-start-2 lg:row-end-4'>
+    <section className='farsi-digits lg:col-start-4 lg:col-end-8 lg:row-start-2 lg:row-end-4'>
       <div className='flex justify-between p-4'>
-        <span className='text-sm text-gray-700'>اندازه: {tempSize?.name}</span>
+        <span className='text-sm text-gray-700'>اندازه: {tempSize?.size}</span>
         <span className='text-sm'>{formatNumber(sizes.length)} اندازه</span>
       </div>
       <div className='flex flex-wrap gap-3 px-5 my-3'>

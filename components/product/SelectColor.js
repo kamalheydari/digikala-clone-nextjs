@@ -1,6 +1,5 @@
-import { useEffect } from "react";
 
-import { setTempColor, setTempSize } from "app/slices/cart.slice";
+import { setTempColor } from "app/slices/cart.slice";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Icons } from "components";
@@ -11,11 +10,6 @@ export default function SelectColor({ colors }) {
   //? Store
   const { tempColor } = useSelector((state) => state.cart);
 
-  //? Set initial color
-  useEffect(() => {
-    dispatch(setTempColor(colors[0]));
-    dispatch(setTempSize(null));
-  }, []);
 
   return (
     <section className='lg:col-start-4 lg:col-end-8 lg:row-start-2 lg:row-end-4'>
