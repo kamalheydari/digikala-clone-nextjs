@@ -24,7 +24,6 @@ import {
 } from "components";
 
 export default function SingleProduct({ product, smilarProducts }) {
-  
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -80,10 +79,17 @@ export default function SingleProduct({ product, smilarProducts }) {
 
         <div className='section-divide-y' />
 
-        {product.colors.length > 0 && <SelectColor colors={product.colors} />}
+        {/* select color */}
+        {product.inStock > 0 && product.colors.length > 0 && (
+          <SelectColor colors={product.colors} />
+        )}
 
-        {product.sizes.length > 0 && <SelectSize sizes={product.sizes} />}
+        {/* select size */}
+        {product.inStock > 0 && product.sizes.length > 0 && (
+          <SelectSize sizes={product.sizes} />
+        )}
 
+        {/* out of stock */}
         {product.inStock === 0 && <OutOfStock />}
 
         {/* info */}
@@ -146,7 +152,7 @@ export async function getServerSideProps({ params: { id } }) {
   await db.connect();
   const product = await Product.findById({ _id: id }).lean();
 
-  const smilarProducts = await Product.find({
+  let smilarProducts = await Product.find({
     category: {
       $regex: product.category,
       $options: "i",
@@ -160,7 +166,9 @@ export async function getServerSideProps({ params: { id } }) {
   return {
     props: {
       product: db.convertDocToObj(product),
-      smilarProducts: smilarProducts.map(db.convertDocToObj),
+      smilarProducts: smilarProducts
+        .map(db.convertDocToObj)
+        .filter((item) => item._id !== id),
     },
   };
 }
