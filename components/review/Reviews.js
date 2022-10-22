@@ -40,7 +40,10 @@ export default function Reviews({ numReviews, prdouctID, productTitle }) {
   };
 
   return (
-    <section className='px-3 py-3 space-y-4 lg:max-w-3xl xl:max-w-5xl'>
+    <section
+      className='px-3 py-3 space-y-4 lg:max-w-3xl xl:max-w-5xl'
+      id='productReviews'
+    >
       <div className='flex items-center justify-between'>
         <h4 className='mb-3 lg:border-b-2 lg:border-red-500'>دیدگاه‌ها</h4>
         <span className='text-xs text-sky-500 farsi-digits'>
@@ -72,7 +75,6 @@ export default function Reviews({ numReviews, prdouctID, productTitle }) {
           isFetching={isFetching}
           isSuccess={isSuccess}
           dataLength={data ? data.reviewsLength : 0}
-          page={reviewsPage}
           emptyElement={<EmptyComment />}
         >
           <div className='py-3 space-y-4 divide-y-2 lg:px-6 sm:px-2'>
@@ -146,6 +148,7 @@ export default function Reviews({ numReviews, prdouctID, productTitle }) {
               hasPreviousPage={data.hasPreviousPage}
               lastPage={data.lastPage}
               setPage={setReviewsPage}
+              section='productReviews'
             />
           </div>
         )}

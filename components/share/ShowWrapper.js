@@ -1,5 +1,4 @@
 import { BigLoading } from "components";
-import { useEffect, useRef } from "react";
 
 export default function ShowWrapper({
   isError,
@@ -10,26 +9,9 @@ export default function ShowWrapper({
   isSuccess,
   emptyElement,
   children,
-  page,
-  top,
 }) {
-  //? Ref
-  const wrapperRef = useRef(null);
-
-  //? Scroll to top
-  useEffect(() => {
-    if (isSuccess && window.scrollY > 1900) {
-      if (top) {
-        window.scrollTo(0, 0);
-      } else {
-        const wrapperHeight = () => wrapperRef.current.scrollIntoView();
-        wrapperHeight();
-      }
-    }
-  }, [page, isSuccess]);
-
   return (
-    <section ref={wrapperRef}>
+    <section>
       {isError ? (
         <div className='py-20 mx-auto space-y-3 text-center w-fit'>
           <h5 className='text-xl'>خطایی رخ داده</h5>

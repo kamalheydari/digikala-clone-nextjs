@@ -45,7 +45,7 @@ export default function Reviews() {
   });
 
   return (
-    <main>
+    <main id='profileReviews'>
       <Head>
         <title>پروفایل | دیدگاه‌ها</title>
       </Head>
@@ -68,9 +68,7 @@ export default function Reviews() {
         isFetching={isFetching}
         isSuccess={isSuccess}
         dataLength={data ? data.reviewsLength : 0}
-        page={page}
         emptyElement={<EmptyCommentsList />}
-        top
       >
         <div className='px-4 py-3 space-y-3 '>
           {data?.reviews.map((item) => (
@@ -89,6 +87,8 @@ export default function Reviews() {
             hasPreviousPage={data.hasPreviousPage}
             lastPage={data.lastPage}
             setPage={setPage}
+            section='profileReviews'
+            client
           />
         </div>
       )}

@@ -124,7 +124,7 @@ export default function Products() {
           <BigLoading />
         </section>
       ) : (
-        <section className='p-3 space-y-7'>
+        <section className='p-3 space-y-7' id='adminProducts'>
           <form className='max-w-4xl mx-auto space-y-5' onSubmit={handleSubmit}>
             <div className='space-y-8  md:py-0 md:flex md:gap-x-8 lg:gap-x-0.5 xl:gap-x-10 md:items-baseline md:justify-between'>
               <SelectCategories productPage />
@@ -187,6 +187,7 @@ export default function Products() {
                   hasPreviousPage={data.hasPreviousPage}
                   lastPage={data.lastPage}
                   setPage={setPage}
+                  section='adminProducts'
                 />
               )}
             </>

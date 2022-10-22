@@ -8,7 +8,20 @@ export default function Pagination({
   hasPreviousPage,
   lastPage,
   setPage,
+  section,
+  client,
 }) {
+  const scrollToTop = () => {
+    const element = document.getElementById(section);
+    element.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+    if (client && window.innerWidth > 1024) {
+      window.scrollTo(0, 60);
+    }
+  };
+  
   return (
     <nav>
       <ul className='inline-flex items-center w-full px-10 gap-x-2 farsi-digits'>
@@ -16,7 +29,10 @@ export default function Pagination({
           {hasPreviousPage && (
             <li
               className='flex items-center p-1 text-red-500 cursor-pointer'
-              onClick={() => setPage(previousPage)}
+              onClick={() => {
+                setPage(previousPage);
+                scrollToTop();
+              }}
             >
               <Icons.ArrowRight2 className='text-red-500 icon' />
               قبلی
@@ -26,7 +42,10 @@ export default function Pagination({
         {currentPage !== 1 && previousPage !== 1 && (
           <li
             className='w-8 h-8 p-1 text-center transition-colors border-2 border-transparent cursor-pointer hover:text-red-500 hover:border-red-500 rounded-2xl'
-            onClick={() => setPage(1)}
+            onClick={() => {
+              setPage(1);
+              scrollToTop();
+            }}
           >
             1
           </li>
@@ -36,21 +55,30 @@ export default function Pagination({
         {hasPreviousPage && (
           <li
             className='w-8 h-8 p-1 text-center transition-colors border-2 border-transparent cursor-pointer hover:text-red-500 hover:border-red-500 rounded-2xl'
-            onClick={() => setPage(previousPage)}
+            onClick={() => {
+              setPage(previousPage);
+              scrollToTop();
+            }}
           >
             {previousPage}
           </li>
         )}
         <li
           className='cursor-pointer w-8 h-8 p-1.5 text-center bg-red-500 text-white rounded-2xl'
-          onClick={() => setPage(currentPage)}
+          onClick={() => {
+            setPage(currentPage);
+            scrollToTop();
+          }}
         >
           {currentPage}
         </li>
         {hasNextPage && (
           <li
             className='w-8 h-8 p-1 text-center transition-colors border-2 border-transparent cursor-pointer hover:text-red-500 hover:border-red-500 rounded-2xl'
-            onClick={() => setPage(nextPage)}
+            onClick={() => {
+              setPage(nextPage);
+              scrollToTop();
+            }}
           >
             {nextPage}
           </li>
@@ -59,7 +87,10 @@ export default function Pagination({
         {lastPage !== currentPage && lastPage !== nextPage && (
           <li
             className='w-8 h-8 p-1 text-center transition-colors border-2 border-transparent cursor-pointer hover:text-red-500 hover:border-red-500 rounded-2xl'
-            onClick={() => setPage(lastPage)}
+            onClick={() => {
+              setPage(lastPage);
+              scrollToTop();
+            }}
           >
             {lastPage}
           </li>
@@ -68,7 +99,10 @@ export default function Pagination({
           {hasNextPage && (
             <li
               className='flex items-center p-1 text-red-500 cursor-pointer'
-              onClick={() => setPage(nextPage)}
+              onClick={() => {
+                setPage(nextPage);
+                scrollToTop();
+              }}
             >
               بعدی
               <Icons.ArrowLeft className='text-red-500 icon' />

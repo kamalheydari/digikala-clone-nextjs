@@ -34,7 +34,7 @@ export default function Reviews() {
   });
 
   return (
-    <main>
+    <main id='adminReviews'>
       <Head>
         <title>مدیریت | دیدگاه‌ها</title>
       </Head>
@@ -49,8 +49,6 @@ export default function Reviews() {
         isSuccess={isSuccess}
         dataLength={data ? data.reviewsLength : 0}
         emptyElement={<EmptyCommentsList />}
-        page={page}
-        top
       >
         <section className='mx-3 overflow-x-auto mt-7 lg:mx-10'>
           <table className='w-full whitespace-nowrap'>
@@ -123,6 +121,7 @@ export default function Reviews() {
                 hasPreviousPage={data.hasPreviousPage}
                 lastPage={data.lastPage}
                 setPage={setPage}
+                section='adminReviews'
               />
             </div>
           )}

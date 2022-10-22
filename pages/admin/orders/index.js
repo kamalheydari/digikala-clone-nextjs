@@ -32,13 +32,13 @@ export default function OrdersHome() {
   });
 
   return (
-    <main>
+    <main id='adminOrders'>
       <Head>
         <title>مدیریت | سفارشات</title>
       </Head>
       <Buttons.Back backRoute='/admin'>سفارشات</Buttons.Back>
       <div className='section-divide-y' />
-      <div className='p-3 md:px-3 xl:px-8 2xl:px-10'>
+      <div className='p-3 md:px-3 xl:px-8 2xl:px-10' id='orders'>
         <ShowWrapper
           error={error}
           isError={isError}
@@ -47,7 +47,6 @@ export default function OrdersHome() {
           isSuccess={isSuccess}
           dataLength={data ? data.ordersLength : 0}
           emptyElement={<EmptyOrdersList />}
-          top
         >
           <div className='overflow-x-auto mt-7'>
             <table className='w-full whitespace-nowrap'>
@@ -104,6 +103,7 @@ export default function OrdersHome() {
               hasPreviousPage={data.hasPreviousPage}
               lastPage={data.lastPage}
               setPage={setPage}
+              section='adminOrders'
             />
           </div>
         )}

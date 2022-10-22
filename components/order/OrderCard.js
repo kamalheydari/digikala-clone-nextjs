@@ -123,7 +123,7 @@ export default function OrderCard({ order, singleOrder }) {
           </div>
         </div>
       </div>
-      <div className='flex py-5 gap-x-5 lg:border-t lg:border-gray-200 lg:px-3'>
+      <div className='flex flex-wrap py-5 gap-x-5 gap-y-3 lg:border-t lg:border-gray-200 lg:px-3'>
         {order.cart.map((cartItem, index) => (
           <Link href={`/products/${cartItem.productID}`} key={index}>
             <a>

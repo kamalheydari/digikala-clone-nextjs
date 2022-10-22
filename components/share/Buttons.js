@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 const Back = ({ children, backRoute }) => {
   const router = useRouter();
   return (
-    <div className='flex items-center px-3 pb-3 gap-x-1'>
+    <div className='flex items-center px-3 py-2 gap-x-1'>
       <button
         className='lg:hidden'
         type='button'

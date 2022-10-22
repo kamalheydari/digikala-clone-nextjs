@@ -57,7 +57,7 @@ export default function Users() {
   };
 
   return (
-    <main>
+    <main id='adminUsers'>
       <Head>
         <title>مدیریت | کاربران</title>
       </Head>
@@ -81,7 +81,6 @@ export default function Users() {
         isSuccess={isSuccess}
         dataLength={data ? data.usersLength : 0}
         emptyElement={<EmptyUsersList />}
-        top
       >
         <div className='mx-3 overflow-x-auto mt-7 lg:mx-5 xl:mx-10'>
           <table className='w-full whitespace-nowrap'>
@@ -152,6 +151,7 @@ export default function Users() {
             hasPreviousPage={data.hasPreviousPage}
             lastPage={data.lastPage}
             setPage={setPage}
+            section='adminUsers'
           />
         </div>
       )}

@@ -34,7 +34,7 @@ export default function Orders() {
   });
 
   return (
-    <main>
+    <main id='profileOrders'>
       <Head>
         <title>پروفایل | تاریخچه سفارشات</title>
       </Head>
@@ -48,8 +48,6 @@ export default function Orders() {
         isSuccess={isSuccess}
         dataLength={data ? data.ordersLength : 0}
         emptyElement={<EmptyOrdersList />}
-        page={page}
-        top
       >
         <div className='px-4 py-3 space-y-3'>
           {data?.orders.map((item) => (
@@ -68,6 +66,8 @@ export default function Orders() {
             hasPreviousPage={data.hasPreviousPage}
             lastPage={data.lastPage}
             setPage={setPage}
+            section='profileOrders'
+            client
           />
         </div>
       )}
