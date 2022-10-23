@@ -20,15 +20,9 @@ import {
 import cityList from "utils/cityList";
 import { provinces } from "utils/constatns";
 
-export default function AddressForm({
-  title,
-  token,
-  dispatch,
-  closeModal,
-  isShow,
-}) {
+export default function AddressForm({ title, dispatch, closeModal, isShow }) {
   //? Store
-  const { user } = useSelector((state) => state.user);
+  const { userInfo } = useSelector((state) => state.user);
 
   //? Local State
   const [cities, setCities] = useState([]);
@@ -42,7 +36,7 @@ export default function AddressForm({
     getValues,
   } = useForm({
     resolver: yupResolver(validation.addressSchema),
-    defaultValues: { ...user?.address },
+    defaultValues: { ...userInfo?.address },
   });
 
   //? Edit User-Info Query
@@ -79,7 +73,6 @@ export default function AddressForm({
   const submitHander = async (address) => {
     await editUser({
       body: { address },
-      token,
     });
   };
 

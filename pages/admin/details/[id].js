@@ -27,7 +27,6 @@ export default function DetailsPage() {
   const dispatch = useDispatch();
 
   //? Store
-  const { token } = useSelector((state) => state.user);
   const { isConfirm } = useSelector((state) => state.modal);
   const { categories } = useSelector((state) => state.categories);
   const {
@@ -121,7 +120,6 @@ export default function DetailsPage() {
           specification,
           optionsType,
         },
-        token,
       });
     } else {
       dispatch(

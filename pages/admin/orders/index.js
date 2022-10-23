@@ -14,9 +14,6 @@ export default function OrdersHome() {
   //? Local State
   const [page, setPage] = useState(1);
 
-  //? Store
-  const { token } = useSelector((state) => state.user);
-
   //? Get Orders Query
   const {
     data,
@@ -27,7 +24,6 @@ export default function OrdersHome() {
     refetch,
   } = useGetOrdersQuery({
     page,
-    token,
     pageSize: 5,
   });
 

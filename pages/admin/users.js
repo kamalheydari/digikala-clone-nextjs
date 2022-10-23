@@ -20,8 +20,7 @@ export default function Users() {
   //? Local State
   const [page, setPage] = useState(1);
 
-  //? Store
-  const { token } = useSelector((state) => state.user);
+
 
   //? Get User Query
   const {
@@ -31,7 +30,7 @@ export default function Users() {
     error,
     isError,
     refetch,
-  } = useGetUsersQuery({ page, token });
+  } = useGetUsersQuery({ page,});
 
   //? Delete User Query
   const [

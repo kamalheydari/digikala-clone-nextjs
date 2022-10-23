@@ -27,7 +27,6 @@ export default function CommentModal({
   id,
   isShow,
 }) {
-
   //? Form Hook
   const {
     handleSubmit,
@@ -46,9 +45,6 @@ export default function CommentModal({
   const [rating, setRating] = useState(1);
   const [positivePoints, setPositivePoints] = useState([]);
   const [negativePoints, setNegativePoints] = useState([]);
-
-  //? Store
-  const { token } = useSelector((state) => state.user);
 
   //? Create Review Query
   const [
@@ -119,7 +115,6 @@ export default function CommentModal({
   const submitHander = async ({ title, comment }) => {
     await createReview({
       id,
-      token,
       body: { title, comment, rating, positivePoints, negativePoints },
     });
   };
@@ -183,7 +178,7 @@ export default function CommentModal({
               name='title'
               type='text'
             />
-            
+
             {/* positivePoints */}
             <div className='space-y-3'>
               <div className='space-y-3'>

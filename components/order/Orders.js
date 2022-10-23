@@ -13,13 +13,8 @@ export default function Orders() {
   const [pendingOrder, setPendingOrder] = useState(0);
   const [successOrder, setSuccessOrder] = useState(0);
 
-  //? Store
-  const { token } = useSelector((state) => state.user);
-
   //? Get Order Query
-  const { data, isSuccess, refetch, isError, error } = useGetOrdersQuery({
-    token,
-  });
+  const { data, isSuccess, refetch, isError, error } = useGetOrdersQuery({});
 
   //? Handle Get Order Response
   useEffect(() => {

@@ -3,16 +3,16 @@ import { useSelector } from "react-redux";
 import { Header, ProfileAside } from "components";
 
 export default function ProfileLayout({ children }) {
-  const { user } = useSelector((state) => state.user);
+  const { userInfo } = useSelector((state) => state.user);
 
-  if (!user) return null;
+  if (!userInfo) return null;
 
   return (
     <>
       <Header />
       <div className='lg:flex lg:gap-x-4 lg:px-3 lg:container lg:max-w-7xl xl:mt-28'>
         <div className='hidden lg:block'>
-          <ProfileAside user={user} />
+          <ProfileAside user={userInfo} />
         </div>
         <div className='flex-1 py-4 lg:py-8 lg:border lg:border-gray-200 lg:rounded-md lg:mt-6 h-fit'>
           {children}

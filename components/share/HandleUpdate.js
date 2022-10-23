@@ -17,14 +17,12 @@ export default function HandleUpdate({
   const { isConfirmUpdate, id, editedData } = useSelector(
     (state) => state.modal
   );
-  const { token } = useSelector((state) => state.user);
 
   //? Send Request
   useEffect(() => {
     if (isConfirmUpdate) {
       updateFunc({
         id,
-        token,
         body: { ...editedData },
       });
     }

@@ -20,7 +20,6 @@ export default function Modal() {
   const { route } = useRouter();
 
   //? Store
-  const { token } = useSelector((state) => state.user);
   const { type, text, isShow, title, isConfirm, id, editedData } = useSelector(
     (state) => state.modal
   );
@@ -43,7 +42,6 @@ export default function Modal() {
           isConfirm={isConfirm}
           id={id}
           type={type}
-          token={token}
           dispatch={dispatch}
           isShow={isShow}
         />
@@ -56,7 +54,6 @@ export default function Modal() {
           isConfirm={isConfirm}
           id={id}
           type={type}
-          token={token}
           editedData={editedData}
           dispatch={dispatch}
           isShow={isShow && type.includes("confirm-update")}
@@ -67,7 +64,6 @@ export default function Modal() {
         <>
           <NameForm
             title={title}
-            token={token}
             dispatch={dispatch}
             closeModal={closeModal}
             editedData={editedData}
@@ -76,7 +72,6 @@ export default function Modal() {
 
           <MobileForm
             title={title}
-            token={token}
             dispatch={dispatch}
             closeModal={closeModal}
             editedData={editedData}
@@ -88,7 +83,6 @@ export default function Modal() {
       {route === "/products/[id]" && (
         <CommentModal
           title={title}
-          token={token}
           dispatch={dispatch}
           closeModal={closeModal}
           id={id}
@@ -99,7 +93,6 @@ export default function Modal() {
       {route === "/admin/categories" && (
         <CategoryForm
           title={title}
-          token={token}
           dispatch={dispatch}
           closeModal={closeModal}
           isShow={isShow && type === "edit-category"}
@@ -113,7 +106,6 @@ export default function Modal() {
         route === "/products/[id]") && (
         <AddressForm
           title={title}
-          token={token}
           dispatch={dispatch}
           closeModal={closeModal}
           isShow={isShow && type === "edit-address"}

@@ -3,10 +3,9 @@ import apiSlice from "app/api/api";
 export const reviewApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getReviews: builder.query({
-      query: ({ page, token }) => ({
+      query: ({ page }) => ({
         url: `/api/reviews?page=${page}`,
         method: "GET",
-        headers: { "Content-Type": "application/json", Authorization: token },
       }),
       providesTags: ["Review"],
     }),
@@ -16,7 +15,6 @@ export const reviewApiSlice = apiSlice.injectEndpoints({
         url: `/api/reviews/${id}`,
         method: "POST",
         body,
-        headers: { "Content-Type": "application/json", Authorization: token },
       }),
       invalidatesTags: ["Review"],
     }),
@@ -38,19 +36,17 @@ export const reviewApiSlice = apiSlice.injectEndpoints({
     }),
 
     deleteReview: builder.mutation({
-      query: ({ id, token }) => ({
+      query: ({ id }) => ({
         url: `/api/reviews/${id}`,
         method: "DELETE",
-        headers: { "Content-Type": "application/json", Authorization: token },
       }),
       invalidatesTags: ["Review"],
     }),
 
     editReview: builder.mutation({
-      query: ({ id, token, body }) => ({
+      query: ({ id, body }) => ({
         url: `/api/reviews/${id}`,
         method: "PATCH",
-        headers: { "Content-Type": "application/json", Authorization: token },
         body,
       }),
       invalidatesTags: ["Review"],

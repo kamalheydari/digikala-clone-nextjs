@@ -3,10 +3,9 @@ import apiSlice from "app/api/api";
 export const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getUsers: builder.query({
-      query: ({ page, token }) => ({
+      query: ({ page }) => ({
         url: `/api/user?page=${page}`,
         method: "GET",
-        headers: { "Content-Type": "application/json", Authorization: token },
       }),
       providesTags: ["User"],
     }),
@@ -30,22 +29,28 @@ export const userApiSlice = apiSlice.injectEndpoints({
     }),
 
     deleteUser: builder.mutation({
-      query: ({ id, token }) => ({
+      query: ({ id }) => ({
         url: `/api/user/${id}`,
         method: "DELETE",
-        headers: { "Content-Type": "application/json", Authorization: token },
       }),
       invalidatesTags: ["User"],
     }),
 
     editUser: builder.mutation({
-      query: ({token, body }) => ({
+      query: ({ body }) => ({
         url: "/api/user",
         method: "PATCH",
-        headers: { "Content-Type": "application/json", Authorization: token },
         body,
       }),
       invalidatesTags: ["User"],
+    }),
+
+    getUserInfo: builder.query({
+      query: () => ({
+        url: "/api/auth/user",
+        method: "GET",
+      }),
+      providesTags: ["User"],
     }),
   }),
 });
@@ -55,5 +60,6 @@ export const {
   useCreateUserMutation,
   useLoginMutation,
   useDeleteUserMutation,
-  useEditUserMutation
+  useEditUserMutation,
+  useGetUserInfoQuery
 } = userApiSlice;

@@ -8,16 +8,10 @@ import { useEditUserMutation } from "app/api/userApi";
 import { updateUser } from "app/slices/user.slice";
 import { showAlert } from "app/slices/alert.slice";
 
-import {
-  Loading,
-  CloseModal,
-  ModalWrapper,
-  Input,
-} from "components";
+import { Loading, CloseModal, ModalWrapper, Input } from "components";
 
 export default function MobileForm({
   title,
-  token,
   dispatch,
   closeModal,
   editedData,
@@ -62,23 +56,21 @@ export default function MobileForm({
     handleSubmit,
     register,
     formState: { errors: formErrors },
-    reset,setFocus
+    reset,
+    setFocus,
   } = useForm({
     resolver: yupResolver(validation.mobileSchema),
   });
 
-  
   //? Focus On Mount
   useEffect(() => {
     setFocus("mobile");
   }, []);
 
-
   //? Handlers
   const submitHander = async ({ mobile }) => {
-    editUser({
+    await editUser({
       body: { mobile },
-      token,
     });
   };
 

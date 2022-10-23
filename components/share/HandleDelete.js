@@ -13,16 +13,15 @@ export default function HandleDelete({
   data,
 }) {
   const dispatch = useDispatch();
+
   //? Store
   const { isConfirmDelete, id, type } = useSelector((state) => state.modal);
-  const { token } = useSelector((state) => state.user);
 
   //? Send Request
   useEffect(() => {
     if (isConfirmDelete) {
       deleteFunc({
         id,
-        token,
       });
     }
   }, [isConfirmDelete]);

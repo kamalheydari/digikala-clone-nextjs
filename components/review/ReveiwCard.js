@@ -3,21 +3,16 @@ import { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "app/slices/modal.slice";
-import {
-  useEditReviewMutation,
-} from "app/api/reviewApi";
+import { useEditReviewMutation } from "app/api/reviewApi";
 import { showAlert } from "app/slices/alert.slice";
 
-import {  Icons } from "components";
+import { Icons } from "components";
 
 export default function ReveiwCard({ item, singleComment }) {
   const dispatch = useDispatch();
 
   //? Local State
   const [status, setStatus] = useState(item.status);
-
-  //? Store
-  const { token } = useSelector((state) => state.user);
 
   //? Edit Review Query
   const [
@@ -64,7 +59,6 @@ export default function ReveiwCard({ item, singleComment }) {
   const handleChangeStatus = (statusNum) => {
     editReview({
       id: item._id,
-      token,
       body: { status: statusNum },
     });
     setStatus(statusNum);

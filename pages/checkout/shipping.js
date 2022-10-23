@@ -22,7 +22,7 @@ export default function ShippingPage() {
   const [paymentMethod, setPaymentMethod] = useState("پرداخت در محل");
 
   //? Store
-  const { user, token } = useSelector((state) => state.user);
+  const { userInfo } = useSelector((state) => state.user);
   const { cartItems, totalItems, totalDiscount, totalPrice } = useSelector(
     (state) => state.cart
   );
@@ -71,10 +71,10 @@ export default function ShippingPage() {
 
   const handleCreateOrder = () => {
     if (
-      !user.address?.city &&
-      !user.address?.provinces &&
-      !user.address?.street &&
-      !user.address?.postalCode
+      !userInfo.address?.city &&
+      !userInfo.address?.provinces &&
+      !userInfo.address?.street &&
+      !userInfo.address?.postalCode
     )
       return dispatch(
         showAlert({
@@ -84,15 +84,14 @@ export default function ShippingPage() {
       );
     postData({
       body: {
-        address: user.address,
-        mobile: user.mobile,
+        address: userInfo.address,
+        mobile: userInfo.mobile,
         cart: cartItems,
         totalItems,
         totalPrice,
         totalDiscount,
         paymentMethod,
       },
-      token,
     });
   };
 

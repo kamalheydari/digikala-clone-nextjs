@@ -21,7 +21,7 @@ export default function Home(props) {
   //? Local State
   const [images, setImages] = useState({});
   const [childCategories, setChildCategories] = useState([]);
-  console.log(props);
+
   //? Store
   const { categories } = useSelector((state) => state.categories);
 

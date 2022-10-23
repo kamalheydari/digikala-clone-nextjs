@@ -12,7 +12,6 @@ import { Loading, CloseModal, ModalWrapper, Input } from "components";
 
 export default function NameForm({
   title,
-  token,
   dispatch,
   closeModal,
   editedData,
@@ -72,7 +71,6 @@ export default function NameForm({
   const submitHander = async ({ name }) => {
     editUser({
       body: { name },
-      token,
     });
   };
 

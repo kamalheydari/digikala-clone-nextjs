@@ -17,15 +17,21 @@ import {
   PageLoading,
   Alert,
 } from "components";
+
 import { fetchCategories } from "app/slices/category.slice";
+import { fetchUser } from "app/slices/user.slice";
+
+import Cookies from "js-cookie";
 
 export default function MyApp({ Component, pageProps }) {
-  //? Fix Hydration failed & fetch Categories
+  //? Fix Hydration failed & fetch Categories & fetch user
   const [showChild, setShowChild] = useState(false);
   useEffect(() => {
     setShowChild(true);
 
     store.dispatch(fetchCategories());
+    
+    if (Cookies.get("token")) store.dispatch(fetchUser());
   }, []);
 
   if (!showChild) {

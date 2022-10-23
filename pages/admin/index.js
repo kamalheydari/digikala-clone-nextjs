@@ -10,11 +10,11 @@ export default function AdminPage() {
   const router = useRouter();
 
   //? Store
-  const { user, token } = useSelector((state) => state.user);
+  const { userInfo, token } = useSelector((state) => state.user);
 
-  if (!token || user?.role === "user") router.push("/admin/login");
+  if (!token || userInfo?.role === "user") router.push("/admin/login");
 
-  if (user?.role === "admin" || user?.root)
+  if (userInfo?.role === "admin" || userInfo?.root)
     return (
       <div className='lg:flex lg:gap-x-4 lg:px-3 lg:container lg:max-w-8xl '>
         <Head>
@@ -22,7 +22,7 @@ export default function AdminPage() {
         </Head>
 
         <div>
-          <DashboardAside user={user} />
+          <DashboardAside user={userInfo} />
         </div>
         <div className='hidden py-6 lg:inline-block lg:flex-1 lg:border lg:border-gray-300 lg:rounded-md lg:mt-6 h-fit'>
           <section className='py-20'>

@@ -11,10 +11,9 @@ export default function Header() {
   const { status: isSidebar, toggleStatus: toggleSidebar } = useToggle();
 
   //? Store
-  const { user } = useSelector((state) => state.user);
+  const { userInfo } = useSelector((state) => state.user);
 
   //? Handlers
-
   const handleClick = () => {
     dispatch(
       openModal({
@@ -48,7 +47,7 @@ export default function Header() {
         <div className='inline-flex items-center justify-between w-full py-2 border-b gap-x-10 lg:border-b-0'>
           <Search />
           <div className='inline-flex items-center gap-x-2'>
-            <User user={user} />
+            <User user={userInfo} />
             <span className='hidden lg:block bg-gray-300 w-0.5 h-8' />
             <Cart />
           </div>
@@ -59,7 +58,7 @@ export default function Header() {
           <Navbar />
         </div>
 
-        {user?.address && (
+        {userInfo && userInfo?.address ? (
           <button
             type='button'
             onClick={handleClick}
@@ -67,12 +66,11 @@ export default function Header() {
           >
             <Icons.Location2 className='icon' />
             <span>
-              ارسال به {user.address.provinces}, {user.address.city}
+              ارسال به {userInfo.address.provinces}, {userInfo.address.city}
             </span>
             <Icons.ArrowLeft className='mr-auto icon' />
           </button>
-        )}
-        {user && !user.address && (
+        ) : (
           <button
             type='button'
             onClick={handleClick}

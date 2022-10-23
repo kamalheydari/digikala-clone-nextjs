@@ -3,11 +3,10 @@ import apiSlice from "app/api/api";
 export const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createCategory: builder.mutation({
-      query: ({ body, token }) => ({
+      query: ({ body }) => ({
         url: "/api/category",
         method: "POST",
         body,
-        headers: { "Content-Type": "application/json", Authorization: token },
       }),
       invalidatesTags: ["Category"],
     }),
@@ -22,4 +21,4 @@ export const userApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const { useCreateCategoryMutation,useGetImagesQuery } = userApiSlice;
+export const { useCreateCategoryMutation, useGetImagesQuery } = userApiSlice;

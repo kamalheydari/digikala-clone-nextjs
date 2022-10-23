@@ -17,11 +17,11 @@ export default function Cart() {
   const { totalItems, cartItems, totalDiscount, totalPrice } = useSelector(
     (state) => state.cart
   );
-  const { user } = useSelector((state) => state.user);
+  const { userInfo } = useSelector((state) => state.user);
 
   //? Handlers
   const handleRoute = () => {
-    if (!user)
+    if (!userInfo)
       return dispatch(
         openModal({
           isShow: true,

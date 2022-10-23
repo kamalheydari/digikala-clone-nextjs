@@ -23,7 +23,6 @@ import { useSelector } from "react-redux";
 
 export default function CategoryForm({
   title,
-  token,
   dispatch,
   closeModal,
   isShow,
@@ -107,9 +106,7 @@ export default function CategoryForm({
     }
 
     createCtegory({
-      url: "/api/category",
       body: { name, parent, category, slug, image: images[0] },
-      token,
     });
   };
 

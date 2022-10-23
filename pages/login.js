@@ -6,15 +6,15 @@ import Head from "next/head";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import validation from "utils/validation";
 
 import { useLoginMutation } from "app/api/userApi";
 import { useDispatch } from "react-redux";
-import { userLogin } from "app/slices/user.slice";
-import validation from "utils/validation";
-
 import { showAlert } from "app/slices/alert.slice";
+import { updateUser } from "app/slices/user.slice";
 
 import { Input, Loading } from "components";
+import Cookies from "js-cookie";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
@@ -29,15 +29,19 @@ export default function LoginPage() {
   //? Handle Login Response
   useEffect(() => {
     if (isSuccess) {
-      dispatch(userLogin(data.data));
+      Cookies.set("token", data.data.access_token, { expires: 10 });
+
+      dispatch(updateUser(data.data.user));
+
       dispatch(
         showAlert({
           status: "success",
           title: data.msg,
         })
       );
-      router.push("/");
+
       reset();
+      router.push("/");
     }
   }, [isSuccess]);
 
@@ -56,7 +60,8 @@ export default function LoginPage() {
     handleSubmit,
     register,
     formState: { errors: formErrors },
-    reset,setFocus
+    reset,
+    setFocus,
   } = useForm({
     resolver: yupResolver(validation.logInSchema),
   });

@@ -14,7 +14,6 @@ export const productApiSlice = apiSlice.injectEndpoints({
       query: ({ id, token }) => ({
         url: `/api/products/${id}`,
         method: "DELETE",
-        headers: { "Content-Type": "application/json", Authorization: token },
       }),
       invalidatesTags: ["Product"],
     }),
@@ -24,7 +23,6 @@ export const productApiSlice = apiSlice.injectEndpoints({
         url: `/api/products`,
         method: "POST",
         body,
-        headers: { "Content-Type": "application/json", Authorization: token },
       }),
       invalidatesTags: ["Product"],
     }),
@@ -33,7 +31,6 @@ export const productApiSlice = apiSlice.injectEndpoints({
       query: ({ id, token, body }) => ({
         url: `/api/products/${id}`,
         method: "PUT",
-        headers: { "Content-Type": "application/json", Authorization: token },
         body,
       }),
       invalidatesTags: ["Product"],

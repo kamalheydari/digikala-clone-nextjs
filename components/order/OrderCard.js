@@ -14,8 +14,6 @@ import { useEditOrderMutation } from "app/api/orderApi";
 export default function OrderCard({ order, singleOrder }) {
   const dispatch = useDispatch();
 
-  //? Store
-  const { token } = useSelector((state) => state.user);
 
   //? Edit Order Query
   const [
@@ -50,14 +48,12 @@ export default function OrderCard({ order, singleOrder }) {
   const handleChangeToDelivered = () => {
     editOrder({
       id: order._id,
-      token,
       body: { paid: true, delivered: true },
     });
   };
   const handleChangeToInProccess = () => {
     editOrder({
       id: order._id,
-      token,
       body: { paid: false, delivered: false },
     });
   };

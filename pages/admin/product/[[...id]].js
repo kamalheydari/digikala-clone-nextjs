@@ -40,7 +40,6 @@ export default function Product() {
   const specificationTableRef = useRef(null);
 
   //? Store
-  const { token } = useSelector((state) => state.user);
   const { isConfirm } = useSelector((state) => state.modal);
   const { parentCategory, mainCategory, categories, category } = useSelector(
     (state) => state.categories
@@ -127,7 +126,6 @@ export default function Product() {
     const specificationArray = await getDetailsArray(specificationTableRef);
 
     createProduct({
-      token,
       body: {
         ...product,
         info: infoArray,

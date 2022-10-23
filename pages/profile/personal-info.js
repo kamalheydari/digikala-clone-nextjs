@@ -9,7 +9,7 @@ export default function PersonalInfo() {
   const dispatch = useDispatch();
 
   //? Store
-  const { user } = useSelector((state) => state.user);
+  const { userInfo} = useSelector((state) => state.user);
 
   //? Handlers
   const mobilEditHandler = () => {
@@ -18,7 +18,7 @@ export default function PersonalInfo() {
         isShow: true,
         type: "edit-mobile",
         title: "ثبت و ویرایش  شماره موبایل",
-        editedData: user?.mobile,
+        editedData: userInfo?.mobile,
       })
     );
   };
@@ -29,7 +29,7 @@ export default function PersonalInfo() {
         isShow: true,
         type: "edit-name",
         title: "ثبت و ویرایش اطلاعات شناسایی",
-        editedData: user?.name,
+        editedData: userInfo?.name,
       })
     );
   };
@@ -46,9 +46,9 @@ export default function PersonalInfo() {
           <div className='flex items-center justify-between py-4 border-b border-gray-200'>
             <div>
               <span className='text-xs text-gray-700'>نام و نام خانوادگی</span>
-              <p className='text-sm'>{user.name}</p>
+              <p className='text-sm'>{userInfo.name}</p>
             </div>
-            {user.name ? (
+            {userInfo.name ? (
               <Icons.Edit
                 className='cursor-pointer icon'
                 onClick={nameEditHandler}
@@ -66,9 +66,9 @@ export default function PersonalInfo() {
           <div className='flex items-center justify-between py-4 border-b border-gray-200'>
             <div>
               <span className='text-xs text-gray-700'>شماره موبایل</span>
-              <p className='text-sm'>{user.mobile ? user.mobile : "..."}</p>
+              <p className='text-sm'>{userInfo.mobile ? userInfo.mobile : "..."}</p>
             </div>
-            {user.mobile ? (
+            {userInfo.mobile ? (
               <Icons.Edit
                 className='cursor-pointer icon'
                 onClick={mobilEditHandler}

@@ -17,9 +17,6 @@ export default function Reviews() {
   //? Local State
   const [page, setPage] = useState(1);
 
-  //? Store
-  const { token } = useSelector((state) => state.user);
-
   //? Delete Review Query
   const [
     deleteReview,
@@ -41,7 +38,6 @@ export default function Reviews() {
     refetch,
   } = useGetReviewsQuery({
     page,
-    token,
   });
 
   return (

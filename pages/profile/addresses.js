@@ -10,7 +10,7 @@ export default function Addresses() {
   const dispatch = useDispatch();
 
   //? Store
-  const { user } = useSelector((state) => state.user);
+  const { userInfo } = useSelector((state) => state.user);
 
   //? Handlers
   const edditAddressHandler = () => {
@@ -30,10 +30,10 @@ export default function Addresses() {
       </Head>
       <Buttons.Back backRoute='/profile'>آدرس‌ها</Buttons.Back>
       <div className='section-divide-y' />
-      {user.address ? (
+      {userInfo.address ? (
         <section className='flex-1 px-5 '>
           <div className='flex justify-between py-4 border-b border-gray-200'>
-            <p className='text-sm'>{user.address.street}</p>
+            <p className='text-sm'>{userInfo.address.street}</p>
             <Icons.Edit
               className='cursor-pointer icon'
               onClick={edditAddressHandler}
@@ -43,24 +43,24 @@ export default function Addresses() {
             <div className='flex items-center gap-x-2 '>
               <Icons.UserLocation className='text-gray-500 icon' />
               <span className='text-xs md:text-sm'>
-                {user.address.provinces}, {user.address.city}
+                {userInfo.address.provinces}, {userInfo.address.city}
               </span>
             </div>
             <div className='flex items-center gap-x-2 '>
               <Icons.Post className='text-gray-500 icon' />
               <span className='text-xs md:text-sm'>
-                {user.address.postalCode}
+                {userInfo.address.postalCode}
               </span>
             </div>
-            {user.mobile && (
+            {userInfo.mobile && (
               <div className='flex items-center gap-x-2 '>
                 <Icons.Phone className='text-gray-500 icon' />
-                <span className='text-xs md:text-sm'>{user.mobile}</span>
+                <span className='text-xs md:text-sm'>{userInfo.mobile}</span>
               </div>
             )}
             <div className='flex items-center gap-x-2 '>
               <Icons.User className='text-gray-500 icon' />
-              <span className='text-xs md:text-sm'>{user.name}</span>
+              <span className='text-xs md:text-sm'>{userInfo.name}</span>
             </div>
           </div>
         </section>

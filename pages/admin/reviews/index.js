@@ -17,9 +17,6 @@ export default function Reviews() {
   //? Local State
   const [page, setPage] = useState(1);
 
-  //? Store
-  const { token } = useSelector((state) => state.user);
-
   //? Get Review Query
   const {
     data,
@@ -30,7 +27,6 @@ export default function Reviews() {
     isSuccess,
   } = useGetReviewsQuery({
     page,
-    token,
   });
 
   return (
