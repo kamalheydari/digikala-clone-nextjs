@@ -15,8 +15,15 @@ import {
 
 import { truncate } from "utils/truncate";
 import { useGetProductsQuery } from "app/api/productApi";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function SearchModal({ isShow, dispatch, closeModal }) {
+export default function SearchModal() {
+  const dispatch = useDispatch();
+
+  //? Store
+  const { isShow, type } = useSelector((state) => state.modal);
+
+  //? Refs
   const inputSearchRef = useRef();
 
   //? Local State
@@ -57,12 +64,12 @@ export default function SearchModal({ isShow, dispatch, closeModal }) {
   };
 
   return (
-    <ModalWrapper isShow={isShow}>
+    <ModalWrapper isShow={isShow && type === "search"}>
       <div
         className={`
   ${
     isShow ? "bottom-0 lg:top-20" : "-bottom-full lg:top-60"
-  } w-full h-[90vh] lg:h-fit lg:max-w-3xl lg:bg-white lg:py-4 lg:px-1 lg:rounded-md fixed transition-all duration-700 left-0 right-0 mx-auto z-40`}
+  } w-full h-full lg:h-fit lg:max-w-3xl lg:bg-white lg:py-4 lg:px-1 lg:rounded-md fixed transition-all duration-700 left-0 right-0 mx-auto z-40`}
       >
         <div className='h-full lg:h-[770px] px-5 py-3 bg-white md:rounded-lg gap-y-3 overflow-y-auto'>
           <div className='py-2 border-b-2 border-gray-200'>

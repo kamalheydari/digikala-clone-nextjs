@@ -1,5 +1,7 @@
+import Head from "next/head";
 import { useEffect, useState } from "react";
 
+import { useDispatch, useSelector } from "react-redux";
 import {
   addCategory,
   resetSelectedCategories,
@@ -12,21 +14,18 @@ import { useForm } from "react-hook-form";
 import validation from "utils/validation";
 
 import {
-  CloseModal,
   Loading,
   SelectCategories,
   UploadImages,
-  ModalWrapper,
   Input,
+  Buttons,
 } from "components";
-import { useSelector } from "react-redux";
 
-export default function CategoryForm({
-  title,
-  dispatch,
-  closeModal,
-  isShow,
-}) {
+
+export default function CreateCategory() {
+  const dispatch = useDispatch();
+
+  //? Local States
   const [images, setImages] = useState([]);
 
   //? Store
@@ -44,7 +43,6 @@ export default function CategoryForm({
   useEffect(() => {
     if (isSuccess) {
       dispatch(addCategory(data.newCategory));
-      dispatch(closeModal());
       setImages([]);
       dispatch(resetSelectedCategories());
       reset();
@@ -59,7 +57,6 @@ export default function CategoryForm({
 
   useEffect(() => {
     if (isError) {
-      dispatch(closeModal());
       setImages([]);
       dispatch(resetSelectedCategories());
       reset();
@@ -123,19 +120,16 @@ export default function CategoryForm({
   };
 
   return (
-    <ModalWrapper isShow={isShow}>
-      <div
-        className={`
-  ${
-    isShow ? "bottom-0 lg:top-20" : "-bottom-full lg:top-28"
-  } w-full h-[90vh] lg:h-fit lg:max-w-3xl fixed transition-all duration-700 left-0 right-0 mx-auto z-40`}
-      >
-        <div className='flex flex-col h-full lg:h-[770px] pl-2 pr-4 py-3 bg-white md:rounded-lg gap-y-3 '>
-          <div className='flex justify-between py-2 border-b-2 border-gray-200 '>
-            <h5>{title}</h5>
-            <CloseModal />
-          </div>
+    <>
+      <main>
+        <Head>
+          <title>مدیریت | دسته بندی جدید</title>
+        </Head>
 
+        <Buttons.Back backRoute='/admin'>دسته بندی جدید</Buttons.Back>
+        <div className='section-divide-y' />
+
+        <section className='p-3 md:px-3 xl:px-8 2xl:px-10'>
           <form
             className='flex flex-col justify-between flex-1 gap-y-5 overflow-y-auto pl-4'
             onSubmit={handleSubmit(submitHander)}
@@ -168,14 +162,22 @@ export default function CategoryForm({
               <div />
             </div>
 
-            <div className='py-3 border-t-2 border-gray-200 lg:pb-0 '>
-              <button className='modal-btn' type='submit' disabled={isLoading}>
+            <div className='py-3 lg:pb-0 '>
+              <button
+                className='px-6 mx-auto mt-8 bg-green-500 rounded-3xl btn'
+                type='submit'
+                disabled={isLoading}
+              >
                 {isLoading ? <Loading /> : "ثبت اطلاعات"}
               </button>
             </div>
           </form>
-        </div>
-      </div>
-    </ModalWrapper>
+        </section>
+      </main>
+    </>
   );
 }
+
+CreateCategory.getDashboardLayout = function pageLayout(page) {
+  return <>{page}</>;
+};

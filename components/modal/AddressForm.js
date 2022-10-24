@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "app/slices/user.slice";
 import { useEditUserMutation } from "app/api/userApi";
 import { showAlert } from "app/slices/alert.slice";
+import { closeModal } from "app/slices/modal.slice";
 
 import { useForm } from "react-hook-form";
 import validation from "utils/validation";
@@ -20,8 +21,11 @@ import {
 import cityList from "utils/cityList";
 import { provinces } from "utils/constatns";
 
-export default function AddressForm({ title, dispatch, closeModal, isShow }) {
+export default function AddressForm() {
+  const dispatch = useDispatch();
+
   //? Store
+  const { title, isShow, type } = useSelector((state) => state.modal);
   const { userInfo } = useSelector((state) => state.user);
 
   //? Local State
@@ -81,12 +85,12 @@ export default function AddressForm({ title, dispatch, closeModal, isShow }) {
   }, [getValues("provinces")]);
 
   return (
-    <ModalWrapper isShow={isShow}>
+    <ModalWrapper isShow={isShow && type === "edit-address"}>
       <div
         className={`
   ${
     isShow ? "bottom-0 lg:top-44" : "-bottom-full lg:top-60"
-  } w-full h-[90vh] lg:h-fit lg:max-w-3xl fixed transition-all duration-700 left-0 right-0 mx-auto z-40`}
+  } w-full h-full lg:h-fit lg:max-w-3xl fixed transition-all duration-700 left-0 right-0 mx-auto z-40`}
       >
         <div className='flex flex-col h-full pl-2 pr-4 py-3 bg-white md:rounded-lg gap-y-5'>
           <div className='flex justify-between py-2 border-b-2 border-gray-200'>

@@ -4,19 +4,22 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import validation from "utils/validation";
 
+import { useDispatch, useSelector } from "react-redux";
 import { useEditUserMutation } from "app/api/userApi";
 import { updateUser } from "app/slices/user.slice";
 import { showAlert } from "app/slices/alert.slice";
+import { closeModal } from "app/slices/modal.slice";
 
 import { Loading, CloseModal, ModalWrapper, Input } from "components";
 
-export default function MobileForm({
-  title,
-  dispatch,
-  closeModal,
-  editedData,
-  isShow,
-}) {
+export default function MobileForm() {
+  const dispatch = useDispatch();
+
+  //? Store
+  const { editedData, title, isShow, type } = useSelector(
+    (state) => state.modal
+  );
+
   //? Patch Data
   const [
     editUser,
@@ -28,7 +31,6 @@ export default function MobileForm({
     if (isSuccess) {
       dispatch(updateUser(data.user));
       dispatch(closeModal());
-      reset();
       dispatch(
         showAlert({
           status: "success",
@@ -57,15 +59,10 @@ export default function MobileForm({
     register,
     formState: { errors: formErrors },
     reset,
-    setFocus,
   } = useForm({
     resolver: yupResolver(validation.mobileSchema),
   });
 
-  //? Focus On Mount
-  useEffect(() => {
-    setFocus("mobile");
-  }, []);
 
   //? Handlers
   const submitHander = async ({ mobile }) => {
@@ -75,12 +72,12 @@ export default function MobileForm({
   };
 
   return (
-    <ModalWrapper isShow={isShow}>
+    <ModalWrapper isShow={isShow && type === "edit-mobile"}>
       <div
         className={`
   ${
     isShow ? "bottom-0 lg:top-44" : "-bottom-full lg:top-60"
-  } w-full h-[90vh] lg:h-fit lg:max-w-3xl fixed transition-all duration-700 left-0 right-0 mx-auto z-40`}
+  } w-full h-full lg:h-fit lg:max-w-3xl fixed transition-all duration-700 left-0 right-0 mx-auto z-40`}
       >
         <div className='flex flex-col h-full px-5 py-3 bg-white md:rounded-lg gap-y-5'>
           <div className='flex justify-between py-2 border-b-2 border-gray-200'>

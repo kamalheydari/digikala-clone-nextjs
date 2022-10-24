@@ -1,8 +1,15 @@
 import { closeModal } from "app/slices/modal.slice";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 export default function ModalWrapper({ isShow, children }) {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isShow) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "unset";
+  }, [isShow]);
+
   return (
     <div
       className={`${

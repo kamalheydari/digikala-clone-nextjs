@@ -11,11 +11,15 @@ import {
   ShowWrapper,
   EmptyCommentsList,
   HandleDelete,
+  ConfirmDeleteModal,
 } from "components";
 
 export default function Reviews() {
   //? Local State
   const [page, setPage] = useState(1);
+
+  //? Store
+  const { isConfirmDelete } = useSelector((state) => state.modal);
 
   //? Delete Review Query
   const [
@@ -25,6 +29,7 @@ export default function Reviews() {
       isError: isError_delete,
       error: error_delete,
       data: data_delete,
+      isLoading: isLoading_delete,
     },
   ] = useDeleteReviewMutation();
 
@@ -41,54 +46,62 @@ export default function Reviews() {
   });
 
   return (
-    <main id='profileReviews'>
-      <Head>
-        <title>پروفایل | دیدگاه‌ها</title>
-      </Head>
-
-      <HandleDelete
-        deleteFunc={deleteReview}
+    <>
+      {isConfirmDelete && (
+        <HandleDelete
+          deleteFunc={deleteReview}
+          isSuccess={isSuccess_delete}
+          isError={isError_delete}
+          error={error_delete}
+          data={data_delete}
+        />
+      )}
+      <ConfirmDeleteModal
+        isLoading={isLoading_delete}
         isSuccess={isSuccess_delete}
-        isError={isError_delete}
-        error={error_delete}
-        data={data_delete}
       />
 
-      <Buttons.Back backRoute='/profile'>دیدگاه‌ها</Buttons.Back>
-      <div className='section-divide-y' />
+      <main id='profileReviews'>
+        <Head>
+          <title>پروفایل | دیدگاه‌ها</title>
+        </Head>
 
-      <ShowWrapper
-        error={error}
-        isError={isError}
-        refetch={refetch}
-        isFetching={isFetching}
-        isSuccess={isSuccess}
-        dataLength={data ? data.reviewsLength : 0}
-        emptyElement={<EmptyCommentsList />}
-      >
-        <div className='px-4 py-3 space-y-3 '>
-          {data?.reviews.map((item) => (
-            <ReveiwCard key={item._id} item={item} />
-          ))}
-        </div>
-      </ShowWrapper>
+        <Buttons.Back backRoute='/profile'>دیدگاه‌ها</Buttons.Back>
+        <div className='section-divide-y' />
 
-      {data?.reviewsLength > 5 && (
-        <div className='py-4 mx-auto lg:max-w-5xl'>
-          <Pagination
-            currentPage={data.currentPage}
-            nextPage={data.nextPage}
-            previousPage={data.previousPage}
-            hasNextPage={data.hasNextPage}
-            hasPreviousPage={data.hasPreviousPage}
-            lastPage={data.lastPage}
-            setPage={setPage}
-            section='profileReviews'
-            client
-          />
-        </div>
-      )}
-    </main>
+        <ShowWrapper
+          error={error}
+          isError={isError}
+          refetch={refetch}
+          isFetching={isFetching}
+          isSuccess={isSuccess}
+          dataLength={data ? data.reviewsLength : 0}
+          emptyElement={<EmptyCommentsList />}
+        >
+          <div className='px-4 py-3 space-y-3 '>
+            {data?.reviews.map((item) => (
+              <ReveiwCard key={item._id} item={item} />
+            ))}
+          </div>
+        </ShowWrapper>
+
+        {data?.reviewsLength > 5 && (
+          <div className='py-4 mx-auto lg:max-w-5xl'>
+            <Pagination
+              currentPage={data.currentPage}
+              nextPage={data.nextPage}
+              previousPage={data.previousPage}
+              hasNextPage={data.hasNextPage}
+              hasPreviousPage={data.hasPreviousPage}
+              lastPage={data.lastPage}
+              setPage={setPage}
+              section='profileReviews'
+              client
+            />
+          </div>
+        )}
+      </main>
+    </>
   );
 }
 Reviews.getProfileLayout = function pageLayout(page) {

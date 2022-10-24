@@ -1,8 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Icons, User, Cart, Search, Sidebar, Navbar } from "components";
+
+
 import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "app/slices/modal.slice";
+
+import { Icons, User, Cart, Search, Sidebar, Navbar, AddressForm } from "components";
+
 import useToggle from "hooks/useToggle";
 
 export default function Header() {
@@ -25,6 +29,9 @@ export default function Header() {
   };
 
   return (
+    <>
+    <AddressForm/>
+    
     <header className='px-4 bg-white lg:shadow xl:fixed xl:z-20 xl:top-0 xl:left-0 xl:right-0'>
       <div className='container max-w-[1700px] lg:flex lg:py-2 '>
         <div className='inline-flex items-center justify-between w-full border-b lg:border-b-0 lg:max-w-min lg:ml-8'>
@@ -85,5 +92,6 @@ export default function Header() {
       </div>
       <Sidebar isSidebar={isSidebar} toggleSidebar={toggleSidebar} />
     </header>
+    </>
   );
 }

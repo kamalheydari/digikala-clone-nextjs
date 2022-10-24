@@ -19,6 +19,7 @@ const modalSlice = createSlice({
     closeModal: (state, action) => {
       state.isShow = false;
     },
+
     openModal: (state, action) => {
       state.isShow = true;
       state.type = action.payload.type || "";
@@ -27,14 +28,18 @@ const modalSlice = createSlice({
       state.text = action.payload.text || "";
       state.title = action.payload.title || "";
       state.status = action.payload.status || "";
-      state.isConfirm = action.payload.isConfirm || false;
+      state.isConfirmDelete = action.payload.isConfirmDelete || false;
+      state.isConfirmUpdate = action.payload.isConfirmUpdate || false;
     },
+
     confirmDeleteAction: (state, action) => {
       state.isConfirmDelete = true;
     },
+
     confirmUpdateAction: (state, action) => {
       state.isConfirmUpdate = true;
     },
+
     confirmReset: (state, action) => {
       state.isConfirmDelete = false;
       state.isConfirmUpdate = false;

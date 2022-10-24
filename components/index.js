@@ -57,10 +57,8 @@ export { default as DiscountCartItem } from "./cart/DiscountCartItem";
 export { default as AddToCartInfo } from "./cart/AddToCartInfo";
 
 //* MODAL COMPONENTS
-export { default as Modal } from "./modal/Modal";
 export { default as ConfirmDeleteModal } from "./modal/ConfirmDeleteModal";
 export { default as ConfirmUpdateModal } from "./modal/ConfirmUpdateModal";
-export { default as CategoryForm } from "./modal/CategoryForm";
 export { default as CloseModal } from "./modal/CloseModal";
 export { default as RedirectToLogin } from "./modal/RedirectToLogin";
 export { default as NameForm } from "./modal/NameForm";

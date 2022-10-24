@@ -25,7 +25,7 @@ export default function Alert() {
       IconSrc = "/icons/question.svg";
       break;
     default:
-      IconSrc = "/icons/exclamation.svg";
+      IconSrc = "/icons/nothing.svg";
       break;
   }
 

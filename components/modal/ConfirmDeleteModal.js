@@ -4,13 +4,19 @@ import {
   confirmReset,
 } from "app/slices/modal.slice";
 
-import { ModalWrapper } from "components";
+import { Loading, ModalWrapper } from "components";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function ConfirmDeleteModal({ title, dispatch, isShow }) {
+export default function ConfirmDeleteModal({ isLoading, isSuccess }) {
+  const dispatch = useDispatch();
+
+  //? Store
+  const { isShow, title, type } = useSelector((state) => state.modal);
+
   //? Handlers
   const handleConfirmClick = () => {
     dispatch(confirmDeleteAction());
-    dispatch(closeModal());
   };
 
   const handleCancleClick = () => {
@@ -18,12 +24,18 @@ export default function ConfirmDeleteModal({ title, dispatch, isShow }) {
     dispatch(closeModal());
   };
 
+  useEffect(() => {
+    if (isSuccess) dispatch(closeModal());
+  }, [isSuccess]);
+
   return (
-    <ModalWrapper isShow={isShow}>
+    <ModalWrapper isShow={isShow && type.includes("confirm-delete")}>
       <div
         className={`
   ${
-    isShow ? "top-40 transform scale-100" : "top-40 transform scale-50 "
+    isShow && type.includes("confirm-delete")
+      ? "top-40 transform scale-100"
+      : "top-40 transform scale-50 "
   } max-w-3xl 
    fixed transition-all duration-700 left-0 right-0 mx-auto z-40`}
       >
@@ -38,8 +50,9 @@ export default function ConfirmDeleteModal({ title, dispatch, isShow }) {
               type='button'
               className='rounded-lg btn'
               onClick={handleConfirmClick}
+              disabled={isLoading}
             >
-              حذف و ادامه
+              {isLoading ? <Loading /> : "حذف و ادامه"}
             </button>
             <button
               type='button'

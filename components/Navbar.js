@@ -25,7 +25,7 @@ export default function Navbar() {
   return (
     <div className='group'>
       <span
-        className='flex px-2 cursor-default gap-x-1'
+        className='flex items-center px-2 cursor-default gap-x-1'
         onMouseOver={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >

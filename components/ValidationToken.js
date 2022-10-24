@@ -23,6 +23,8 @@ export default function ValidationToken() {
         title: "",
       })
     );
+
+    return <RedirectToLogin />;
   }
 
   return null;

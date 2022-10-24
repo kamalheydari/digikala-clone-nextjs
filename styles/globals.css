@@ -60,7 +60,7 @@
   }
 
   .btn {
-    @apply text-white bg-red-500 py-3 px-8 rounded-md block outline-none;
+    @apply text-white bg-red-500 py-3 px-8 flex items-center justify-center rounded-md outline-none;
   }
   .icon {
     @apply w-5 h-5 md:w-6 md:h-6 text-gray-700;

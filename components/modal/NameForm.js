@@ -7,16 +7,19 @@ import validation from "utils/validation";
 import { updateUser } from "app/slices/user.slice";
 import { useEditUserMutation } from "app/api/userApi";
 import { showAlert } from "app/slices/alert.slice";
+import { useDispatch, useSelector } from "react-redux";
+import { closeModal } from "app/slices/modal.slice";
 
 import { Loading, CloseModal, ModalWrapper, Input } from "components";
 
-export default function NameForm({
-  title,
-  dispatch,
-  closeModal,
-  editedData,
-  isShow,
-}) {
+export default function NameForm() {
+  const dispatch = useDispatch();
+
+  //? Store
+  const { editedData, title, isShow, type } = useSelector(
+    (state) => state.modal
+  );
+
   //? Edit User Query
   const [
     editUser,
@@ -28,7 +31,6 @@ export default function NameForm({
     if (isSuccess) {
       dispatch(updateUser(data.user));
       dispatch(closeModal());
-      reset();
       dispatch(
         showAlert({
           status: "success",
@@ -57,15 +59,9 @@ export default function NameForm({
     register,
     formState: { errors: formErrors },
     reset,
-    setFocus,
   } = useForm({
     resolver: yupResolver(validation.nameSchema),
   });
-
-  //? Focus On Mount
-  useEffect(() => {
-    setFocus("name");
-  }, []);
 
   //? Handlers
   const submitHander = async ({ name }) => {
@@ -75,12 +71,12 @@ export default function NameForm({
   };
 
   return (
-    <ModalWrapper isShow={isShow}>
+    <ModalWrapper isShow={isShow && type === "edit-name"}>
       <div
         className={`
   ${
     isShow ? "bottom-0 lg:top-44" : "-bottom-full lg:top-60"
-  } w-full h-[90vh] lg:h-fit lg:max-w-3xl 
+  } w-full h-full lg:h-fit lg:max-w-3xl 
    fixed transition-all duration-700 left-0 right-0 mx-auto z-40`}
       >
         <div className='flex flex-col h-full px-5 py-3 bg-white md:rounded-lg gap-y-5'>

@@ -13,7 +13,6 @@ import {
   ClientLayout,
   ProfileLayout,
   ValidationToken,
-  Modal,
   PageLoading,
   Alert,
 } from "components";
@@ -30,7 +29,7 @@ export default function MyApp({ Component, pageProps }) {
     setShowChild(true);
 
     store.dispatch(fetchCategories());
-    
+
     if (Cookies.get("token")) store.dispatch(fetchUser());
   }, []);
 
@@ -46,7 +45,6 @@ export default function MyApp({ Component, pageProps }) {
           <PageLoading />
           <Component {...pageProps} />
           <ValidationToken />
-          <Modal />
           <Alert />
         </ClientLayout>
       </Provider>
@@ -61,7 +59,6 @@ export default function MyApp({ Component, pageProps }) {
           <PageLoading />
           <Component {...pageProps} />
           <ValidationToken />
-          <Modal />
           <Alert />
         </DashboardLayout>
       </Provider>
@@ -75,7 +72,7 @@ export default function MyApp({ Component, pageProps }) {
           <PageLoading />
           <Component {...pageProps} />
           <ValidationToken />
-          <Modal />
+
           <Alert />
         </ProfileLayout>
       </Provider>
@@ -86,7 +83,6 @@ export default function MyApp({ Component, pageProps }) {
     <Provider store={store}>
       <PageLoading />
       <Component {...pageProps} />
-      <Modal />
       <Alert />
     </Provider>
   );

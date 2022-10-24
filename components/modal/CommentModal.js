@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { nanoid } from "@reduxjs/toolkit";
 import { useCreateReviewMutation } from "app/api/reviewApi";
 import { closeModal } from "app/slices/modal.slice";
@@ -21,12 +21,14 @@ import {
   DisplayError,
 } from "components";
 
-export default function CommentModal({
-  title: productTitle,
-  dispatch,
-  id,
-  isShow,
-}) {
+export default function CommentModal() {
+  const dispatch = useDispatch();
+
+  //? Store
+  const { title: productTitle, id, isShow, type } = useSelector(
+    (state) => state.modal
+  );
+
   //? Form Hook
   const {
     handleSubmit,
@@ -120,12 +122,12 @@ export default function CommentModal({
   };
 
   return (
-    <ModalWrapper isShow={isShow}>
+    <ModalWrapper isShow={isShow && type === "comment"}>
       <div
         className={`
   ${
     isShow ? "bottom-0 lg:top-20" : "-bottom-full lg:top-60"
-  } w-full h-[90vh] lg:h-fit lg:max-w-3xl fixed transition-all duration-700 left-0 right-0 mx-auto z-40`}
+  } w-full h-full lg:h-fit lg:max-w-3xl fixed transition-all duration-700 left-0 right-0 mx-auto z-40`}
       >
         <div className='flex flex-col h-full lg:h-[770px] pl-2 pr-4 py-3 bg-white md:rounded-lg gap-y-3 '>
           <div className='py-2 border-b-2 border-gray-200'>

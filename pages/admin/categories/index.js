@@ -1,26 +1,13 @@
 import Head from "next/head";
 
-import { useDispatch, useSelector } from "react-redux";
-import { openModal } from "app/slices/modal.slice";
+import { useSelector } from "react-redux";
 
 import { Buttons } from "components";
+import Link from "next/link";
 
 export default function Categories() {
-  const dispatch = useDispatch();
-
   //? Store
   const { categories } = useSelector((state) => state.categories);
-
-  //? Handlers
-  const categoryEditHandler = () => {
-    dispatch(
-      openModal({
-        isShow: true,
-        type: "edit-category",
-        title: "ثبت و ویرایش دسته‌بندی",
-      })
-    );
-  };
 
   return (
     <main>
@@ -33,12 +20,12 @@ export default function Categories() {
 
       <section className='p-3'>
         <div className='space-y-8 text-white'>
-          <button
-            className='flex items-center px-3 py-2 text-red-600 border-2 border-red-600 rounded-lg gap-x-3'
-            onClick={categoryEditHandler}
-          >
-            افزودن دسته‌بندی جدید
-          </button>
+          <Link href='categories/create'>
+            <a className='flex items-center px-3 py-2 text-red-600 border-2 border-red-600 rounded-lg max-w-max gap-x-3'>
+              افزودن دسته‌بندی جدید
+            </a>
+          </Link>
+
           <div className='flex text-gray-600 gap-x-3'>
             <p className='flex items-center text-sm gap-x-1'>
               <span className='inline-block w-6 h-6 bg-red-500 rounded-md' />
@@ -54,7 +41,7 @@ export default function Categories() {
             </p>
           </div>
           <ul className='space-y-8'>
-            {categories.slice(0,2).map((mainCategory) => {
+            {categories.slice(0, 2).map((mainCategory) => {
               if (mainCategory.parent === "/") {
                 return (
                   <li

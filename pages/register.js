@@ -14,7 +14,7 @@ import { useCreateUserMutation } from "app/api/userApi";
 import { openModal } from "app/slices/modal.slice";
 import { updateUser } from "app/slices/user.slice";
 
-import { Input, Loading } from "components";
+import { Input, Loading, RedirectToLogin } from "components";
 
 import Cookies from "js-cookie";
 
@@ -86,68 +86,71 @@ export default function RegisterPage() {
   };
 
   return (
-    <main className='grid items-center min-h-screen '>
-      <Head>
-        <title>دیجی‌کالا | ثبت‌نام</title>
-      </Head>
-      <section className='container max-w-xl px-12 py-6 space-y-6 lg:border lg:border-gray-100 lg:rounded-lg lg:shadow'>
-        <div className='relative h-24 mx-auto w-44'>
-          <Link passHref href='/'>
-            <a>
-              <Image src='/icons/logo.svg' layout='fill' alt='دیجی‌کالا' />
-            </a>
-          </Link>
-        </div>
-        <h2 className='text-gray-700'>ثبت‌نام</h2>
-        <form className='space-y-5' onSubmit={handleSubmit(submitHander)}>
-          <Input
-            register={register}
-            errors={formErrors.name}
-            type='text'
-            placeholder='نام و نام خانوادگی'
-            name='name'
-          />
+    <>
+      <RedirectToLogin />
+      <main className='grid items-center min-h-screen '>
+        <Head>
+          <title>دیجی‌کالا | ثبت‌نام</title>
+        </Head>
+        <section className='container max-w-xl px-12 py-6 space-y-6 lg:border lg:border-gray-100 lg:rounded-lg lg:shadow'>
+          <div className='relative h-24 mx-auto w-44'>
+            <Link passHref href='/'>
+              <a>
+                <Image src='/icons/logo.svg' layout='fill' alt='دیجی‌کالا' />
+              </a>
+            </Link>
+          </div>
+          <h2 className='text-gray-700'>ثبت‌نام</h2>
+          <form className='space-y-5' onSubmit={handleSubmit(submitHander)}>
+            <Input
+              register={register}
+              errors={formErrors.name}
+              type='text'
+              placeholder='نام و نام خانوادگی'
+              name='name'
+            />
 
-          <Input
-            register={register}
-            errors={formErrors.email}
-            type='text'
-            placeholder='آدرس ایمیل'
-            name='email'
-          />
+            <Input
+              register={register}
+              errors={formErrors.email}
+              type='text'
+              placeholder='آدرس ایمیل'
+              name='email'
+            />
 
-          <Input
-            register={register}
-            errors={formErrors.password}
-            type='password'
-            placeholder='رمز عبور'
-            name='password'
-          />
+            <Input
+              register={register}
+              errors={formErrors.password}
+              type='password'
+              placeholder='رمز عبور'
+              name='password'
+            />
 
-          <Input
-            register={register}
-            errors={formErrors.confirmPassword}
-            type='password'
-            placeholder='تکرار رمز عبور'
-            name='confirmPassword'
-          />
+            <Input
+              register={register}
+              errors={formErrors.confirmPassword}
+              type='password'
+              placeholder='تکرار رمز عبور'
+              name='confirmPassword'
+            />
 
-          <button
-            className='mx-auto w-44 btn rounded-3xl '
-            type='submit'
-            disabled={isLoading}
-          >
-            {isLoading ? <Loading /> : "عضویت"}
-          </button>
-        </form>
+            <button
+              className='mx-auto w-44 btn rounded-3xl '
+              type='submit'
+              disabled={isLoading}
+            >
+              {isLoading ? <Loading /> : "عضویت"}
+            </button>
+          </form>
 
-        <div>
-          <p className='inline ml-2 text-gray-800'>حساب کاربری دارید؟</p>
-          <Link href='/login'>
-            <a className='text-lg text-blue-400 '>ورود</a>
-          </Link>
-        </div>
-      </section>
-    </main>
+          <div>
+            <p className='inline ml-2 text-gray-800'>حساب کاربری دارید؟</p>
+            <Link href='/login'>
+              <a className='text-lg text-blue-400 '>ورود</a>
+            </Link>
+          </div>
+        </section>
+      </main>
+    </>
   );
 }

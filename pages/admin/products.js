@@ -13,6 +13,7 @@ import {
 import {
   BigLoading,
   Buttons,
+  ConfirmDeleteModal,
   HandleDelete,
   Icons,
   Pagination,
@@ -33,6 +34,7 @@ export default function Products() {
   const { mainCategory, parentCategory, category } = useSelector(
     (state) => state.categories
   );
+  const { isConfirmDelete } = useSelector((state) => state.modal);
 
   //? Get Products Query
   const { data, isFetching, error, isError, refetch } = useGetProductsQuery({
@@ -45,10 +47,11 @@ export default function Products() {
   const [
     deleteProduct,
     {
-      isSuccess: isSuccess_product,
-      isError: isError_product,
-      error: error_product,
-      data: data_product,
+      isSuccess: isSuccess_delete,
+      isError: isError_delete,
+      error: error_delete,
+      data: data_delete,
+      isLoading: isLoading_delete,
     },
   ] = useDeleteProductMutation();
 
@@ -95,110 +98,126 @@ export default function Products() {
   };
 
   return (
-    <main>
-      <Head>
-        <title>مدیریت | محصولات</title>
-      </Head>
-
-      <HandleDelete
-        deleteFunc={deleteProduct}
-        isSuccess={isSuccess_product}
-        isError={isError_product}
-        error={error_product}
-        data={data_product}
+    <>
+      {isConfirmDelete && (
+        <HandleDelete
+          deleteFunc={deleteProduct}
+          isSuccess={isSuccess_delete}
+          isError={isError_delete}
+          error={error_delete}
+          data={data_delete}
+        />
+      )}
+      <ConfirmDeleteModal
+        isLoading={isLoading_delete}
+        isSuccess={isSuccess_delete}
       />
 
-      <Buttons.Back backRoute='/admin'>محصولات</Buttons.Back>
-      <div className='section-divide-y' />
+      <main>
+        <Head>
+          <title>مدیریت | محصولات</title>
+        </Head>
 
-      {isError ? (
-        <div className='py-20 mx-auto space-y-3 text-center w-fit'>
-          <h5 className='text-xl'>خطایی رخ داده</h5>
-          <p className='text-lg text-red-500'>{error.data.err}</p>
-          <button className='mx-auto btn' onClick={refetch}>
-            تلاش مجدد
-          </button>
-        </div>
-      ) : isFetching ? (
-        <section className='px-3 py-20'>
-          <BigLoading />
-        </section>
-      ) : (
-        <section className='p-3 space-y-7' id='adminProducts'>
-          <form className='max-w-4xl mx-auto space-y-5' onSubmit={handleSubmit}>
-            <div className='space-y-8  md:py-0 md:flex md:gap-x-8 lg:gap-x-0.5 xl:gap-x-10 md:items-baseline md:justify-between'>
-              <SelectCategories productPage />
-            </div>
+        <Buttons.Back backRoute='/admin'>محصولات</Buttons.Back>
+        <div className='section-divide-y' />
 
-            <div className='flex flex-row-reverse rounded-md bg-zinc-200/80 '>
-              <button
-                type='button'
-                className='p-2'
-                onClick={handleRemoveSearch}
-              >
-                <Icons.Close className='icon' />
-              </button>
-              <input
-                type='text'
-                placeholder='جستجو'
-                className='flex-grow p-1 text-right bg-transparent outline-none input'
-                ref={inputSearchRef}
-                defaultValue={search}
-              />
-              <button type='submit' className='p-2'>
-                <Icons.Search className='icon' />
-              </button>
-            </div>
-          </form>
+        {isError ? (
+          <div className='py-20 mx-auto space-y-3 text-center w-fit'>
+            <h5 className='text-xl'>خطایی رخ داده</h5>
+            <p className='text-lg text-red-500'>{error.data.err}</p>
+            <button className='mx-auto btn' onClick={refetch}>
+              تلاش مجدد
+            </button>
+          </div>
+        ) : isFetching ? (
+          <section className='px-3 py-20'>
+            <BigLoading />
+          </section>
+        ) : (
+          <section className='p-3 space-y-7' id='adminProducts'>
+            <form
+              className='max-w-4xl mx-auto space-y-5'
+              onSubmit={handleSubmit}
+            >
+              <div className='space-y-8  md:py-0 md:flex md:gap-x-8 lg:gap-x-0.5 xl:gap-x-10 md:items-baseline md:justify-between'>
+                <SelectCategories productPage />
+              </div>
 
-          {data?.productsLength > 0 ? (
-            <>
-              <section className='overflow-x mt-7'>
-                <table className='w-full overflow-scroll table-auto'>
-                  <thead className='bg-zinc-50 h-9'>
-                    <tr className='text-zinc-500'>
-                      <th className='w-28'></th>
-                      <th className='border-r-2 border-zinc-200'>
-                        نام محصول (تعداد: {data.productsLength})
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {data.products.map((item) => (
-                      <tr key={item._id} className='border-b-2 border-gray-100'>
-                        <td className='flex items-center justify-center p-2 gap-x-4'>
-                          <Buttons.Delete
-                            onClick={() => handleDelete(item._id)}
-                          />
-                          <Buttons.Edit onClick={() => handleEdit(item._id)} />
-                        </td>
-                        <td className='p-2'>{item.title}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </section>
-              {data?.productsLength > 10 && (
-                <Pagination
-                  currentPage={data.currentPage}
-                  nextPage={data.nextPage}
-                  previousPage={data.previousPage}
-                  hasNextPage={data.hasNextPage}
-                  hasPreviousPage={data.hasPreviousPage}
-                  lastPage={data.lastPage}
-                  setPage={setPage}
-                  section='adminProducts'
+              <div className='flex flex-row-reverse rounded-md bg-zinc-200/80 '>
+                <button
+                  type='button'
+                  className='p-2'
+                  onClick={handleRemoveSearch}
+                >
+                  <Icons.Close className='icon' />
+                </button>
+                <input
+                  type='text'
+                  placeholder='جستجو'
+                  className='flex-grow p-1 text-right bg-transparent outline-none input'
+                  ref={inputSearchRef}
+                  defaultValue={search}
                 />
-              )}
-            </>
-          ) : (
-            <div className='text-center text-red-500 lg:border lg:border-gray-200 lg:rounded-md lg:py-4'>
-              کالایی یافت نشد
-            </div>
-          )}
-        </section>
-      )}
-    </main>
+                <button type='submit' className='p-2'>
+                  <Icons.Search className='icon' />
+                </button>
+              </div>
+            </form>
+
+            {data?.productsLength > 0 ? (
+              <>
+                <section className='overflow-x mt-7'>
+                  <table className='w-full overflow-scroll table-auto'>
+                    <thead className='bg-zinc-50 h-9'>
+                      <tr className='text-zinc-500'>
+                        <th className='w-28'></th>
+                        <th className='border-r-2 border-zinc-200'>
+                          نام محصول (تعداد: {data.productsLength})
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {data.products.map((item) => (
+                        <tr
+                          key={item._id}
+                          className='border-b-2 border-gray-100'
+                        >
+                          <td className='flex items-center justify-center p-2 gap-x-4'>
+                            <Buttons.Delete
+                              onClick={() => handleDelete(item._id)}
+                            />
+                            <Buttons.Edit
+                              onClick={() => handleEdit(item._id)}
+                            />
+                          </td>
+                          <td className='p-2'>{item.title}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </section>
+                {data?.productsLength > 10 && (
+                  <Pagination
+                    currentPage={data.currentPage}
+                    nextPage={data.nextPage}
+                    previousPage={data.previousPage}
+                    hasNextPage={data.hasNextPage}
+                    hasPreviousPage={data.hasPreviousPage}
+                    lastPage={data.lastPage}
+                    setPage={setPage}
+                    section='adminProducts'
+                  />
+                )}
+              </>
+            ) : (
+              <div className='text-center text-red-500 lg:border lg:border-gray-200 lg:rounded-md lg:py-4'>
+                کالایی یافت نشد
+              </div>
+            )}
+          </section>
+        )}
+      </main>
+    </>
   );
 }
 

@@ -3,7 +3,11 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 
 import { useDispatch, useSelector } from "react-redux";
-import { addOptionsType, loadDetails } from "app/slices/details.slice";
+import {
+  addOptionsType,
+  loadDetails,
+  resetDetails,
+} from "app/slices/details.slice";
 import { openModal } from "app/slices/modal.slice";
 import { showAlert } from "app/slices/alert.slice";
 import {
@@ -15,6 +19,8 @@ import {
 
 import {
   Buttons,
+  ConfirmDeleteModal,
+  ConfirmUpdateModal,
   DetailsList,
   HandleDelete,
   HandleUpdate,
@@ -27,7 +33,9 @@ export default function DetailsPage() {
   const dispatch = useDispatch();
 
   //? Store
-  const { isConfirm } = useSelector((state) => state.modal);
+  const { isConfirmDelete, isConfirmUpdate } = useSelector(
+    (state) => state.modal
+  );
   const { categories } = useSelector((state) => state.categories);
   const {
     category,
@@ -68,8 +76,14 @@ export default function DetailsPage() {
       isError: isError_delete,
       error: error_delete,
       data: data_delete,
+      isLoading: isLoading_delete,
     },
   ] = useDeleteDetailsMutation();
+
+  //? Handle Delete Response
+  useEffect(() => {
+    if (isSuccess_delete) dispatch(resetDetails());
+  }, [isSuccess_delete]);
 
   //? Update Details Query
   const [
@@ -79,6 +93,7 @@ export default function DetailsPage() {
       isSuccess: isSuccess_update,
       isError: isError_update,
       error: error_update,
+      isLoading: isLoading_update,
     },
   ] = useUpdateDetailsMutation();
 
@@ -164,118 +179,134 @@ export default function DetailsPage() {
   };
 
   return (
-    <main>
-      <Head>
-        <title>مدیریت | مشخصات</title>
-      </Head>
+    <>
+      {isConfirmUpdate && (
+        <HandleUpdate
+          updateFunc={updateDetails}
+          isSuccess={isSuccess_update}
+          isError={isError_update}
+          error={error_update}
+          data={data_update}
+        />
+      )}
 
-      <HandleDelete
-        deleteFunc={deleteDetails}
+      {isConfirmDelete && (
+        <HandleDelete
+          deleteFunc={deleteDetails}
+          isSuccess={isSuccess_delete}
+          isError={isError_delete}
+          error={error_delete}
+          data={data_delete}
+        />
+      )}
+
+      <ConfirmDeleteModal
+        isLoading={isLoading_delete}
         isSuccess={isSuccess_delete}
-        isError={isError_delete}
-        error={error_delete}
-        data={data_delete}
       />
-      <HandleUpdate
-        updateFunc={updateDetails}
+
+      <ConfirmUpdateModal
+        isLoading={isLoading_update}
         isSuccess={isSuccess_update}
-        isError={isError_update}
-        error={error_update}
-        data={data_update}
       />
 
-      <Buttons.Back backRoute='/admin/details'>
-        مشخصات و ویژگی‌های دسته‌بندی
-        <span> {category?.name}</span>
-      </Buttons.Back>
-      <div className='section-divide-y' />
+      <main>
+        <Head>
+          <title>مدیریت | مشخصات</title>
+        </Head>
 
-      <ShowWrapper
-        error={null}
-        isError={null}
-        refetch={null}
-        isFetching={detailsIsFetching}
-        isSuccess={detailsIsSuccess}
-        dataLength={details ? 1 : 0}
-        emptyElement={null}
-      >
-        <form className='p-3 space-y-6' onSubmit={submitHandler}>
-          <div className='space-y-3'>
-            <p className='mb-2'>نوع انتخاب :</p>
-            <div className='flex items-center gap-x-1'>
-              <input
-                type='radio'
-                checked={optionsType === "none"}
-                name='optionsType'
-                id='none'
-                value='none'
-                onChange={handleOptionTypeChange}
-                className='ml-1'
-              />
-              <label htmlFor='none'>بدون حق انتخاب</label>
+        <Buttons.Back backRoute='/admin/details'>
+          مشخصات و ویژگی‌های دسته‌بندی
+          <span> {category?.name}</span>
+        </Buttons.Back>
+        <div className='section-divide-y' />
+
+        <ShowWrapper
+          error={null}
+          isError={null}
+          refetch={null}
+          isFetching={detailsIsFetching}
+          isSuccess={detailsIsSuccess}
+          dataLength={details ? 1 : 0}
+          emptyElement={null}
+        >
+          <form className='p-3 space-y-6' onSubmit={submitHandler}>
+            <div className='space-y-3'>
+              <p className='mb-2'>نوع انتخاب :</p>
+              <div className='flex items-center gap-x-1'>
+                <input
+                  type='radio'
+                  checked={optionsType === "none"}
+                  name='optionsType'
+                  id='none'
+                  value='none'
+                  onChange={handleOptionTypeChange}
+                  className='ml-1'
+                />
+                <label htmlFor='none'>بدون حق انتخاب</label>
+              </div>
+              <div className='flex items-center gap-x-1'>
+                <input
+                  type='radio'
+                  checked={optionsType === "colors"}
+                  name='optionsType'
+                  id='colors'
+                  value='colors'
+                  onChange={handleOptionTypeChange}
+                  className='ml-1'
+                />
+                <label htmlFor='colors'>بر اساس رنگ</label>
+              </div>
+              <div className='flex items-center gap-x-1'>
+                <input
+                  type='radio'
+                  checked={optionsType === "sizes"}
+                  name='optionsType'
+                  id='sizes'
+                  value='sizes'
+                  onChange={handleOptionTypeChange}
+                  className='ml-1'
+                />
+                <label htmlFor='sizes'>بر اساس سایز</label>
+              </div>
             </div>
-            <div className='flex items-center gap-x-1'>
-              <input
-                type='radio'
-                checked={optionsType === "colors"}
-                name='optionsType'
-                id='colors'
-                value='colors'
-                onChange={handleOptionTypeChange}
-                className='ml-1'
-              />
-              <label htmlFor='colors'>بر اساس رنگ</label>
-            </div>
-            <div className='flex items-center gap-x-1'>
-              <input
-                type='radio'
-                checked={optionsType === "sizes"}
-                name='optionsType'
-                id='sizes'
-                value='sizes'
-                onChange={handleOptionTypeChange}
-                className='ml-1'
-              />
-              <label htmlFor='sizes'>بر اساس سایز</label>
-            </div>
-          </div>
-          <DetailsList category={category} type='info' data={info} />
-          <DetailsList
-            category={category}
-            type='specification'
-            data={specification}
-          />
-          <div className='flex justify-center gap-x-4'>
-            {details_id ? (
-              <>
+            <DetailsList category={category} type='info' data={info} />
+            <DetailsList
+              category={category}
+              type='specification'
+              data={specification}
+            />
+            <div className='flex justify-center gap-x-4'>
+              {details_id ? (
+                <>
+                  <button
+                    className='mt-8 rounded-3xl btn bg-amber-500'
+                    type='button'
+                    onClick={updateHandler}
+                  >
+                    بروزرسانی اطلاعات
+                  </button>
+                  <button
+                    className='mt-8 bg-red-500 rounded-3xl btn'
+                    type='button'
+                    onClick={deleteHandler}
+                  >
+                    حذف اطلاعات
+                  </button>
+                </>
+              ) : (
                 <button
-                  className='mt-8 rounded-3xl btn bg-amber-500'
-                  type='button'
-                  onClick={updateHandler}
-                  disabled={isConfirm}
+                  className='mt-8 bg-green-500 rounded-3xl btn'
+                  type='submit'
                 >
-                  {isConfirm ? <Loading /> : "بروزرسانی اطلاعات"}
+                  {isLoading ? <Loading /> : "ثبت اطلاعات"}
                 </button>
-                <button
-                  className='mt-8 bg-red-500 rounded-3xl btn'
-                  type='button'
-                  onClick={deleteHandler}
-                >
-                  حذف اطلاعات
-                </button>
-              </>
-            ) : (
-              <button
-                className='mt-8 bg-green-500 rounded-3xl btn'
-                type='submit'
-              >
-                {isLoading ? <Loading /> : "ثبت اطلاعات"}
-              </button>
-            )}
-          </div>
-        </form>
-      </ShowWrapper>
-    </main>
+              )}
+            </div>
+          </form>
+        </ShowWrapper>
+      </main>
+    </>
   );
 }
 

@@ -6,7 +6,14 @@ import { clearCart } from "app/slices/cart.slice";
 import { openModal } from "app/slices/modal.slice";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Icons, FreeShipping, CartItem, CartInfo, Header } from "components";
+import {
+  Icons,
+  FreeShipping,
+  CartItem,
+  CartInfo,
+  Header,
+  RedirectToLogin,
+} from "components";
 
 import { formatNumber } from "utils/formatNumber";
 
@@ -58,6 +65,7 @@ export default function Cart() {
 
   return (
     <>
+      <RedirectToLogin />
       <Header />
       <main className='py-2 mx-auto mb-20 space-y-3 xl:mt-36 lg:py-0 lg:mb-0 lg:max-w-7xl b lg:px-5 lg:mt-6 lg:gap-x-3 lg:flex lg:flex-wrap lg:space-y-0'>
         <Head>

@@ -2,7 +2,6 @@ import { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { showAlert } from "app/slices/alert.slice";
-import { resetDetails } from "app/slices/details.slice";
 import { confirmReset } from "app/slices/modal.slice";
 
 export default function HandleDelete({
@@ -15,8 +14,7 @@ export default function HandleDelete({
   const dispatch = useDispatch();
 
   //? Store
-  const { isConfirmDelete, id, type } = useSelector((state) => state.modal);
-
+  const { isConfirmDelete, id } = useSelector((state) => state.modal);
   //? Send Request
   useEffect(() => {
     if (isConfirmDelete) {
@@ -29,7 +27,6 @@ export default function HandleDelete({
   //? Handle Response
   useEffect(() => {
     if (isSuccess) {
-      if (type === "confirm-delete-details") dispatch(resetDetails());
       dispatch(
         showAlert({
           status: "success",
