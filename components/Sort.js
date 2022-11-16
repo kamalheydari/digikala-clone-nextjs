@@ -10,12 +10,12 @@ export default function Sort({
   dispatch,
   sort,
   productsLength,
+  chaneRoute,
 }) {
   //? Handlers
-  const handleSort = (e) => {
-    dispatch(
-      updateFilter({ name: e.target.name, value: e.target.dataset.value })
-    );
+  const handleSort = (item) => {
+    dispatch(updateFilter({ name: "sort", value: item }));
+    chaneRoute({ sort: item.value });
     setShowSort(false);
   };
 
@@ -30,13 +30,12 @@ export default function Sort({
         {sorts.map((item, i) => (
           <button
             key={i}
-            className={`py-0.5 text-gray-600 text-sm ${
-              sort === item.name && "text-red-500"
+            className={`py-0.5  text-sm ${
+              sort.value === item.value ? "text-red-500" : "text-gray-600"
             }`}
             type='button'
-            data-value={item.name}
             name='sort'
-            onClick={handleSort}
+            onClick={() => handleSort(item)}
           >
             {item.name}
           </button>
@@ -71,13 +70,12 @@ export default function Sort({
                 <button
                   className='block w-full py-3 text-right text-gray-700'
                   type='button'
-                  data-value={item.name}
                   name='sort'
-                  onClick={handleSort}
+                  onClick={() => handleSort(item)}
                 >
                   {item.name}
                 </button>
-                {sort === item.name && <Icons.Check className='icon' />}
+                {sort.value === item.value && <Icons.Check className='icon' />}
               </div>
             ))}
           </div>

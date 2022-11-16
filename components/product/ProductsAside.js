@@ -5,9 +5,11 @@ import { useSelector } from "react-redux";
 
 export default function ProductsAside({
   dispatch,
-  maxPrice,
-  minPrice,
+  main_maxPrice,
+  main_minPrice,
   setShowFilters,
+  chaneRoute,
+  resetRoute
 }) {
   const { inStock, discount, max_price, min_price } = useSelector(
     (state) => state.filter
@@ -17,13 +19,15 @@ export default function ProductsAside({
   const handlefilter = (e) => {
     if (e.target.type === "checkbox") {
       dispatch(updateFilter({ name: e.target.name, value: e.target.checked }));
-    } else {
-      dispatch(updateFilter({ name: e.target.name, value: e.target.value }));
+      chaneRoute({ [e.target.name]: e.target.checked });
+    } else if (e.target.type === "number") {
+      dispatch(updateFilter({ name: e.target.name, value: +e.target.value }));
     }
   };
 
   const handleReset = () => {
-    dispatch(resetFilter({ maxPrice: maxPrice, minPrice: minPrice }));
+    dispatch(resetFilter({ maxPrice: main_maxPrice, minPrice: main_minPrice }));
+    resetRoute()
   };
 
   return (
@@ -59,11 +63,15 @@ export default function ProductsAside({
           <span>از</span>
           <input
             type='number'
-            className='w-3/4 px-1 text-xl text-left border-b border-gray-200 outline-none'
+            className='w-3/4 px-1 text-xl text-left border-b border-gray-200 outline-none farsi-digits'
             name='min_price'
-            min={minPrice}
+            min={main_minPrice}
+            max={main_maxPrice}
             value={min_price}
-            onChange={handlefilter}
+            onChange={(e) => {
+              handlefilter(e);
+              chaneRoute({ price: `${e.target.value}-${max_price}` });
+            }}
           />
           <div className='relative w-6 h-6 '>
             <Image src='/icons/toman.svg' layout='fill' alt='تومان' />
@@ -73,11 +81,15 @@ export default function ProductsAside({
           <span>تا</span>
           <input
             type='number'
-            className='w-3/4 px-1 text-xl text-left border-b border-gray-200 outline-none'
+            className='w-3/4 px-1 text-xl text-left border-b border-gray-200 outline-none farsi-digits'
             name='max_price'
             value={max_price}
-            max={maxPrice}
-            onChange={handlefilter}
+            max={main_maxPrice}
+            min={main_minPrice}
+            onChange={(e) => {
+              handlefilter(e),
+                chaneRoute({ price: `${min_price}-${e.target.value}` });
+            }}
           />
           <div className='relative w-6 h-6 '>
             <Image src='/icons/toman.svg' layout='fill' alt='تومان' />

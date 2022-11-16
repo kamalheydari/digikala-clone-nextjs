@@ -21,78 +21,68 @@ import {
 } from "components";
 
 export default function ProductsHome(props) {
-  const router = useRouter();
+  let { query, pathname, push } = useRouter();
   const dispatch = useDispatch();
 
   //? Store
-  const { sort, inStock, discount, max_price, min_price } = useSelector(
-    (state) => state.filter
-  );
+  const { sort } = useSelector((state) => state.filter);
   const { categories } = useSelector((state) => state.categories);
 
   //? local State
   const [page, setPage] = useState(1);
-  const [price, setPrice] = useState("");
   const [showFilters, setShowFilters] = useState(false);
   const [showSort, setShowSort] = useState(false);
 
   const childCategory = [
-    ...new Set(
-      categories.filter((cat) => cat.parent === "/" + router.query.category)
-    ),
+    ...new Set(categories.filter((cat) => cat.parent === "/" + query.category)),
   ];
 
   //? Handlers
-  const hanldeQuery = ({ page, sort, inStock, discount, price }) => {
-    const { query, pathname } = router;
-    if (page) query.page = page;
-    if (sort) query.sort = sort;
-    if (inStock) {
-      query.inStock = 1;
-    } else {
-      query.inStock = "";
-    }
-    if (discount) {
-      query.discount = 1;
-    } else {
-      query.discount = "";
-    }
-    if (price) query.price = price;
 
-    router.push({
-      pathname,
-      query,
-    });
-  };
-
-  //? Handle Query
-  useEffect(() => {
-    hanldeQuery({ page, sort, inStock, discount, price });
-  }, [page, sort, inStock, discount, price]);
-
-  //? Reset Page On Query Change
-  useEffect(() => {
-    setPage(1);
-  }, [sort, price, inStock, discount]);
-
-  //? Reset Filer On Category Change
+  //? Change Price Range On Filter Change
   useEffect(() => {
     dispatch(
-      resetFilter({ maxPrice: props.maxPrice, minPrice: props.minPrice })
+      updateFilter({
+        name: "min_price",
+        value: props.mainMinPrice,
+      })
     );
+    dispatch(
+      updateFilter({
+        name: "max_price",
+        value: props.mainMaxPrice,
+      })
+    );
+  }, [query.category, query.inStock, query.discount]);
 
-    dispatch(updateFilter({ name: "max_price", value: props.maxPrice }));
-    dispatch(updateFilter({ name: "min_price", value: props.minPrice }));
-  }, [router.query.category]);
+  const chaneRoute = (obj) => {
+    let url = pathname + "?";
 
-  //? Set Prices
+    query = { ...query, ...obj };
+
+    Object.keys(query).forEach((key) => (url += `${key}=${query[key]}&`));
+    push(url);
+  };
+
+  const resetRoute = () => {
+    push(`${pathname}?category=${query.category}`);
+  };
+
+  //? Change Route On Page Change
   useEffect(() => {
-    if (min_price !== 0 && max_price !== 0)
-      setPrice(min_price + "-" + max_price);
-  }, [max_price, min_price]);
+    chaneRoute({ page });
+  }, [page]);
+
+  //? Reset Page On Filter And Sort Change
+  useEffect(() => {
+    setPage(1);
+  }, [query.sort, query.inStock, query.discount, query.price]);
 
   return (
-    <main className='lg:px-3 lg:container lg:max-w-[1700px] xl:mt-32'>
+    <main
+      className='lg:px-3 lg:container lg:max-w-[1700px] xl:mt-32'
+      id='products'
+    >
       <Head>
         <title>دیجی‌کالا | فروشگاه</title>
       </Head>
@@ -133,9 +123,11 @@ export default function ProductsHome(props) {
         >
           <ProductsAside
             dispatch={dispatch}
-            maxPrice={props.maxPrice}
-            minPrice={props.minPrice}
+            main_maxPrice={props.mainMaxPrice}
+            main_minPrice={props.mainMinPrice}
             setShowFilters={setShowFilters}
+            chaneRoute={chaneRoute}
+            resetRoute={resetRoute}
           />
         </div>
         <div className='w-full p-4 mt-3 '>
@@ -156,7 +148,7 @@ export default function ProductsHome(props) {
                 onClick={() => setShowSort((prevShowSort) => !prevShowSort)}
               >
                 <Icons.Sort className='w-6 h-6 icon' />
-                <span>{sort}</span>
+                <span>{sort.name}</span>
               </button>
             </div>
             <div className='flex justify-between py-2'>
@@ -172,6 +164,7 @@ export default function ProductsHome(props) {
             dispatch={dispatch}
             sort={sort}
             productsLength={formatNumber(props.productsLength)}
+            chaneRoute={chaneRoute}
           />
 
           {/* Products */}
@@ -198,6 +191,7 @@ export default function ProductsHome(props) {
             hasPreviousPage={props.hasPreviousPage}
             lastPage={props.lastPage}
             setPage={setPage}
+            section='products'
           />
         </div>
       )}
@@ -206,47 +200,46 @@ export default function ProductsHome(props) {
 }
 
 export async function getServerSideProps({ query }) {
+  const category = query.category;
   const page = +query.page || 1;
   const page_size = +query.page_size || 10;
-  const category = query.category || "all";
-  const sort = query.sort || "all";
-  const inStock = +query.inStock || "";
-  const discount = +query.discount || "";
-  const price = query.price || "";
+  const sort = +query.sort || 1;
+  const inStock = query.inStock || null;
+  const discount = query.discount || null;
+  const price = query.price;
 
   //? Filters
-  const categoryFilter =
-    category && category !== "all"
-      ? {
-          category: {
-            $regex: category,
-            $options: "i",
-          },
-        }
-      : {};
-  const inStockFilter = inStock === 1 ? { inStock: { $gte: 1 } } : {};
+  const categoryFilter = category
+    ? {
+        category: {
+          $regex: category,
+          $options: "i",
+        },
+      }
+    : {};
+  const inStockFilter = inStock === "true" ? { inStock: { $gte: 1 } } : {};
 
-  const discountFilter = discount === 1 ? { discount: { $gte: 1 } } : {};
+  const discountFilter =
+    discount === "true" ? { discount: { $gte: 1 }, inStock: { $gte: 1 } } : {};
 
-  const priceFilter =
-    price && price !== ""
-      ? {
-          price: {
-            $gte: Number(price.split("-")[0]),
-            $lte: Number(price.split("-")[1]),
-          },
-        }
-      : {};
+  const priceFilter = price
+    ? {
+        price: {
+          $gte: +price.split("-")[0],
+          $lte: +price.split("-")[1],
+        },
+      }
+    : {};
 
   //? Sort
   const order =
-    sort === "ارزان‌ترین"
+    sort === 3
       ? { price: 1 }
-      : sort === "گران‌ترین"
+      : sort === 4
       ? { price: -1 }
-      : sort === "پرفروش‌ترین‌"
+      : sort === 2
       ? { sold: -1 }
-      : sort === "جدیدترین"
+      : sort === 1
       ? { createdAt: -1 }
       : { _id: -1 };
 
@@ -263,24 +256,36 @@ export async function getServerSideProps({ query }) {
     .limit(page_size)
     .lean();
 
-  const allProducts = await Product.find({
+  const productsLength = await Product.countDocuments({
     ...categoryFilter,
     ...inStockFilter,
     ...discountFilter,
+    ...priceFilter,
   });
 
-  const maxPrice = await Math.max(...allProducts.map((item) => item.price));
-  const minPrice = await Math.min(...allProducts.map((item) => item.price));
+  const mainMaxPrice = Math.max(
+    ...(await Product.find({
+      ...categoryFilter,
+      ...inStockFilter,
+      ...discountFilter,
+    }).distinct("price"))
+  );
+  const mainMinPrice = Math.min(
+    ...(await Product.find({
+      ...categoryFilter,
+      ...inStockFilter,
+      ...discountFilter,
+    }).distinct("price"))
+  );
 
-  const productsLength = await allProducts.length;
   await db.disconnect();
 
   return {
     props: {
       products: products.map(db.convertDocToObj),
       productsLength,
-      maxPrice,
-      minPrice,
+      mainMaxPrice,
+      mainMinPrice,
       currentPage: page,
       nextPage: page + 1,
       previousPage: page - 1,

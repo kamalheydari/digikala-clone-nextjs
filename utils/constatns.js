@@ -1,19 +1,19 @@
 export const sorts = [
   {
     name: "جدیدترین",
-    //  value: "newest"
+    value: 1,
   },
   {
     name: "پرفروش‌ترین‌",
-    //  value: "bestSeller"
+    value: 2,
   },
   {
     name: "ارزان‌ترین",
-    //  value: "lowest"
+    value: 3,
   },
   {
     name: "گران‌ترین",
-    //  value: "highest"
+    value: 4,
   },
 ];
 
