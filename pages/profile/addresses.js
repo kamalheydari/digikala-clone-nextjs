@@ -1,17 +1,16 @@
 import Head from "next/head";
 import Image from "next/image";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { openModal } from "app/slices/modal.slice";
 
 import { AddressForm, Buttons, Icons } from "components";
+import useUserInfo from "hooks/useUserInfo";
 
 export default function Addresses() {
+  const { userInfo, isLoading } = useUserInfo();
+
   const dispatch = useDispatch();
-
-  //? Store
-  const { userInfo } = useSelector((state) => state.user);
-
   //? Handlers
   const edditAddressHandler = () => {
     dispatch(
@@ -32,7 +31,32 @@ export default function Addresses() {
         </Head>
         <Buttons.Back backRoute='/profile'>آدرس‌ها</Buttons.Back>
         <div className='section-divide-y' />
-        {userInfo.address ? (
+        {isLoading ? (
+            <section className='animate-pulse flex-1 px-5 '>
+              <div className='flex justify-between py-4 border-b border-gray-200'>
+                <p className='h-5 w-52 rounded-md bg-red-200' />
+              </div>
+              <div className='my-2 space-y-3 text-gray-500'>
+                <div className='flex items-center gap-x-2 '>
+                  <Icons.UserLocation className='text-gray-500 icon' />
+                  <span className='h-5 w-44 rounded-md bg-red-200' />
+                </div>
+                <div className='flex items-center gap-x-2 '>
+                  <Icons.Post className='text-gray-500 icon' />
+                  <span className='h-5 w-44 rounded-md bg-red-200' />
+                </div>
+                <div className='flex items-center gap-x-2 '>
+                  <Icons.Phone className='text-gray-500 icon' />
+                  <span className='h-5 w-44 rounded-md bg-red-200' />
+                </div>
+
+                <div className='flex items-center gap-x-2 '>
+                  <Icons.User className='text-gray-500 icon' />
+                  <span className='h-5 w-44 rounded-md bg-red-200' />
+                </div>
+              </div>
+            </section>
+        ) : userInfo?.address ? (
           <section className='flex-1 px-5 '>
             <div className='flex justify-between py-4 border-b border-gray-200'>
               <p className='text-sm'>{userInfo.address.street}</p>
@@ -86,6 +110,7 @@ export default function Addresses() {
     </>
   );
 }
+
 Addresses.getProfileLayout = function pageLayout(page) {
   return <>{page}</>;
 };

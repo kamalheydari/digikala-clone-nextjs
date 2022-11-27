@@ -6,7 +6,6 @@ import validation from "utils/validation";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEditUserMutation } from "app/api/userApi";
-import { updateUser } from "app/slices/user.slice";
 import { showAlert } from "app/slices/alert.slice";
 import { closeModal } from "app/slices/modal.slice";
 
@@ -29,7 +28,6 @@ export default function MobileForm() {
   //? Handle Edit User Response
   useEffect(() => {
     if (isSuccess) {
-      dispatch(updateUser(data.user));
       dispatch(closeModal());
       dispatch(
         showAlert({

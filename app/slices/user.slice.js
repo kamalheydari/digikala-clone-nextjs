@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import Cookies from "js-cookie";
 import exsitItem from "utils/exsitItem";
 
@@ -9,16 +9,7 @@ const lastSeen =
 
 const token = Cookies.get("token") || "";
 
-const initialState = { userInfo: null, lastSeen, token };
-
-export const fetchUser = createAsyncThunk("user/fetchUser", async () => {
-  const res = await fetch("/api/auth/user", {
-    headers: { Authorization: token },
-  });
-  const data = await res.json();
-
-  return data?.user;
-});
+const initialState = { lastSeen, token };
 
 const userSlice = createSlice({
   name: "user",
@@ -27,12 +18,14 @@ const userSlice = createSlice({
     userLogout: (state) => {
       Cookies.remove("token");
       state.token = "";
-      state.userInfo = null;
     },
 
-    updateUser: (state, action) => {
-      state.userInfo = action.payload;
+    userLogin: (state, action) => {
+      Cookies.set("token", action.payload, { expires: 10 });
+
+      state.token = action.payload;
     },
+
     addToLastSeen: (state, action) => {
       let isItemExist = exsitItem(state.lastSeen, action.payload.productID);
 
@@ -45,13 +38,12 @@ const userSlice = createSlice({
       }
     },
   },
-  extraReducers(builder) {
-    builder.addCase(fetchUser.fulfilled, (state, action) => {
-      state.userInfo = action.payload;
-    });
-  },
 });
 
-export const { userLogout, updateUser, addToLastSeen } = userSlice.actions;
+export const {
+  userLogout,
+  userLogin,
+  addToLastSeen,
+} = userSlice.actions;
 
 export default userSlice.reducer;

@@ -40,14 +40,6 @@ const register = async (req, res) => {
       msg: "عضویت موفقیت آمیز بود",
       data: {
         access_token,
-        user: {
-          name: newUser.name,
-          email: newUser.email,
-          mobile: newUser.mobile,
-          address: newUser.address,
-          role: newUser.role,
-          root: newUser.root,
-        },
       },
     });
   } catch (error) {

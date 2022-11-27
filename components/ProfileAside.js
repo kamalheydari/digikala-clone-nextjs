@@ -3,7 +3,11 @@ import Link from "next/link";
 
 import { Icons, BoxLink, Logout, Orders } from "components";
 
-export default function ProfileAside({ user }) {
+import useUserInfo from "hooks/useUserInfo";
+
+function ProfileAside() {
+  const { userInfo, isLoading } = useUserInfo();
+
   const profilePaths = [
     {
       name: "سفارش‌ها",
@@ -37,8 +41,6 @@ export default function ProfileAside({ user }) {
     },
   ];
 
-  if (!user) return null;
-
   return (
     <aside className='sticky mt-6 lg:border lg:border-gray-200 lg:rounded-md lg:py-4 lg:top-6 xl:top-[136px]'>
       <div className='flex items-center justify-between px-5 py-2 '>
@@ -46,8 +48,21 @@ export default function ProfileAside({ user }) {
           <Image src='/icons/person.svg' layout='fill' alt='کاربر' />
         </div>
         <div className='flex flex-col ml-auto mr-3 gap-y-1'>
-          <span className='text-sm font-medium lg:text-base'>{user.name}</span>
-          <span className='text-[11px] text-gray-400'>{user?.mobile}</span>
+          {isLoading ? (
+            <>
+              <div className='animate-pulse h-5 w-32 rounded-md bg-red-200 lg:w-28 lg:h-6' />
+              <div className='animate-pulse h-5 w-24 rounded-md bg-red-200 lg:w-20 lg:h-6' />
+            </>
+          ) : (
+            <>
+              <span className='text-sm font-medium lg:text-base'>
+                {userInfo?.name}
+              </span>
+              <span className='text-[11px] text-gray-400'>
+                {userInfo?.mobile}
+              </span>
+            </>
+          )}
         </div>
         <Link href='/profile/personal-info'>
           <a>
@@ -76,3 +91,5 @@ export default function ProfileAside({ user }) {
     </aside>
   );
 }
+
+export default ProfileAside;

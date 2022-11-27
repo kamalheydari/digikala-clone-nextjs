@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { updateUser } from "app/slices/user.slice";
 import { useEditUserMutation } from "app/api/userApi";
 import { showAlert } from "app/slices/alert.slice";
 import { closeModal } from "app/slices/modal.slice";
@@ -21,12 +20,15 @@ import {
 import cityList from "utils/cityList";
 import { provinces } from "utils/constatns";
 
+import useUserInfo from "hooks/useUserInfo";
+
 export default function AddressForm() {
   const dispatch = useDispatch();
 
+  const { userInfo } = useUserInfo();
+
   //? Store
   const { title, isShow, type } = useSelector((state) => state.modal);
-  const { userInfo } = useSelector((state) => state.user);
 
   //? Local State
   const [cities, setCities] = useState([]);
@@ -52,7 +54,6 @@ export default function AddressForm() {
   //? Handle Edit User-Info Response
   useEffect(() => {
     if (isSuccess) {
-      dispatch(updateUser(data.user));
       dispatch(closeModal());
       dispatch(
         showAlert({

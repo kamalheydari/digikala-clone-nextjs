@@ -3,8 +3,17 @@ import Image from "next/image";
 
 import { Icons, Logout } from "components";
 
-export default function User({ user }) {
-  if (!user) {
+import useUserInfo from "hooks/useUserInfo";
+
+function User() {
+  const { userInfo, isVerify, isLoading } = useUserInfo();
+
+  if (isLoading)
+    return (
+      <div className='animate-pulse h-8 w-7 rounded-md bg-red-200 lg:w-12' />
+    );
+
+  if (!isVerify) {
     return (
       <div className='flex items-center text-sm gap-x-2 lg:border lg:border-gray-300 lg:rounded-md lg:py-2 lg:px-3'>
         <Link href='/login'>
@@ -26,7 +35,7 @@ export default function User({ user }) {
       <div className='lg:hidden'>
         <Link href='/profile'>
           <a>
-            <Icons.User className='icon' />
+            <Icons.User className='icon h-7 w-7' />
           </a>
         </Link>
       </div>
@@ -43,7 +52,9 @@ export default function User({ user }) {
                 <div className='relative w-6 h-6'>
                   <Image src='/icons/person.svg' layout='fill' alt='کاربر' />
                 </div>
-                <span className='ml-auto mr-3 text-gray-700'>{user.name}</span>
+                <span className='ml-auto mr-3 text-gray-700'>
+                  {userInfo?.name}
+                </span>
                 <Icons.ArrowLeft className='text-gray-700 icon lg:mr-3' />
               </a>
             </Link>
@@ -54,3 +65,5 @@ export default function User({ user }) {
     </>
   );
 }
+
+export default User;

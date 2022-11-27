@@ -1,15 +1,14 @@
-import { useSelector } from "react-redux";
-
 import { DashboardAside } from "components";
 import { useRouter } from "next/router";
+
+import useUserInfo from "hooks/useUserInfo";
 
 export default function DashboardLayout({ children }) {
   const router = useRouter();
 
-  //? Store
-  const { userInfo, token } = useSelector((state) => state.user);
+  const { userInfo, isVerify } = useUserInfo();
 
-  if (!token || userInfo?.role === "user") router.push("/admin/login");
+  if (!isVerify || userInfo?.role === "user") router.push("/admin/login");
 
   if (userInfo?.role === "admin" || userInfo?.root)
     return (

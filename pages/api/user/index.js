@@ -27,19 +27,10 @@ const uploadInfo = async (req, res) => {
 
     await db.connect();
     await User.findOneAndUpdate({ _id: result.id }, req.body);
-    const newUser = await User.findOne({ _id: result.id });
     await db.disconnect();
 
     res.status(201).json({
       msg: "اطلاعات کاربری با موفقیت به روز رسانی شد",
-      user: {
-        name: newUser.name,
-        mobile: newUser.mobile,
-        email: newUser.email,
-        address: newUser.address,
-        role: newUser.role,
-        root: newUser.root,
-      },
     });
   } catch (error) {
     sendError(res, 500, error.message);

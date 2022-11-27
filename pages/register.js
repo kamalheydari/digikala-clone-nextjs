@@ -12,11 +12,10 @@ import { useDispatch } from "react-redux";
 import { showAlert } from "app/slices/alert.slice";
 import { useCreateUserMutation } from "app/api/userApi";
 import { openModal } from "app/slices/modal.slice";
-import { updateUser } from "app/slices/user.slice";
+import { userLogin } from "app/slices/user.slice";
 
 import { Input, Loading, RedirectToLogin } from "components";
 
-import Cookies from "js-cookie";
 
 export default function RegisterPage() {
   const dispatch = useDispatch();
@@ -31,9 +30,7 @@ export default function RegisterPage() {
   //? Handle Create User Response
   useEffect(() => {
     if (isSuccess) {
-      Cookies.set("token", data.data.access_token, { expires: 10 });
-
-      dispatch(updateUser(data.data.user));
+      dispatch(userLogin(data.data.access_token));
 
       dispatch(
         showAlert({

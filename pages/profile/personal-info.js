@@ -1,15 +1,16 @@
 import Head from "next/head";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { openModal } from "app/slices/modal.slice";
 
 import { Buttons, Icons, MobileForm, NameForm } from "components";
 
+import useUserInfo from "hooks/useUserInfo";
+
 export default function PersonalInfo() {
   const dispatch = useDispatch();
 
-  //? Store
-  const { userInfo } = useSelector((state) => state.user);
+  const { userInfo, isLoading } = useUserInfo();
 
   //? Handlers
   const mobilEditHandler = () => {
@@ -34,11 +35,32 @@ export default function PersonalInfo() {
     );
   };
 
+  //? Local Component
+  const InfoField = ({ label, info, editHandler, isLoading }) => (
+    <div className='flex-1 px-5'>
+      <div className='flex items-center justify-between py-4 border-b border-gray-200'>
+        <div>
+          <span className='text-xs text-gray-700'>{label}</span>
+          {isLoading ? (
+            <div className='animate-pulse h-5 w-44 rounded-md bg-red-200' />
+          ) : (
+            <p className='text-sm'>{info}</p>
+          )}
+        </div>
+        {isLoading ? null : info ? (
+          <Icons.Edit className='cursor-pointer icon' onClick={editHandler} />
+        ) : (
+          <Icons.Plus className='cursor-pointer icon' onClick={editHandler} />
+        )}
+      </div>
+    </div>
+  );
+
   return (
     <>
       <NameForm />
       <MobileForm />
-      
+
       <main>
         <Head>
           <title>پروفایل | اطلاعات حساب کاربری</title>
@@ -46,54 +68,24 @@ export default function PersonalInfo() {
         <Buttons.Back backRoute='/profile'>اطلاعات حساب کاربری</Buttons.Back>
         <div className='section-divide-y' />
         <section className='lg:flex'>
-          <div className='flex-1 px-5'>
-            <div className='flex items-center justify-between py-4 border-b border-gray-200'>
-              <div>
-                <span className='text-xs text-gray-700'>
-                  نام و نام خانوادگی
-                </span>
-                <p className='text-sm'>{userInfo.name}</p>
-              </div>
-              {userInfo.name ? (
-                <Icons.Edit
-                  className='cursor-pointer icon'
-                  onClick={nameEditHandler}
-                />
-              ) : (
-                <Icons.Plus
-                  className='cursor-pointer icon'
-                  onClick={nameEditHandler}
-                />
-              )}
-            </div>
-          </div>
-
-          <div className='flex-1 px-5'>
-            <div className='flex items-center justify-between py-4 border-b border-gray-200'>
-              <div>
-                <span className='text-xs text-gray-700'>شماره موبایل</span>
-                <p className='text-sm'>
-                  {userInfo.mobile ? userInfo.mobile : "..."}
-                </p>
-              </div>
-              {userInfo.mobile ? (
-                <Icons.Edit
-                  className='cursor-pointer icon'
-                  onClick={mobilEditHandler}
-                />
-              ) : (
-                <Icons.Plus
-                  className='cursor-pointer icon'
-                  onClick={mobilEditHandler}
-                />
-              )}
-            </div>
-          </div>
+          <InfoField
+            label='نام و نام خانوادگی'
+            info={userInfo?.name}
+            editHandler={nameEditHandler}
+            isLoading={isLoading}
+          />
+          <InfoField
+            label='شماره موبایل'
+            info={userInfo?.mobile}
+            editHandler={mobilEditHandler}
+            isLoading={isLoading}
+          />
         </section>
       </main>
     </>
   );
 }
+
 PersonalInfo.getProfileLayout = function pageLayout(page) {
   return <>{page}</>;
 };

@@ -11,10 +11,9 @@ import validation from "utils/validation";
 import { useLoginMutation } from "app/api/userApi";
 import { useDispatch } from "react-redux";
 import { showAlert } from "app/slices/alert.slice";
-import { updateUser } from "app/slices/user.slice";
+import {  userLogin } from "app/slices/user.slice";
 
 import { Input, Loading } from "components";
-import Cookies from "js-cookie";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
@@ -29,9 +28,8 @@ export default function LoginPage() {
   //? Handle Login Response
   useEffect(() => {
     if (isSuccess) {
-      Cookies.set("token", data.data.access_token, { expires: 10 });
 
-      dispatch(updateUser(data.data.user));
+      dispatch(userLogin(data.data.access_token));
 
       dispatch(
         showAlert({

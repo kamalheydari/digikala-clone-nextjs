@@ -4,6 +4,7 @@ import { userLogout } from "app/slices/user.slice";
 import verifyToken from "utils/verifyToken";
 
 import { openModal } from "app/slices/modal.slice";
+import RedirectToLogin from "./modal/RedirectToLogin";
 
 export default function ValidationToken() {
   const dispatch = useDispatch();

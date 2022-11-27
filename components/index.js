@@ -96,6 +96,7 @@ export { default as ProfileAside } from "./ProfileAside";
 export { default as DashboardAside } from "./DashboardAside";
 export { default as SelectCategories } from "./SelectCategories";
 export { default as DetailsList } from "./DetailsList";
+export { default as AddressBar } from "./AddressBar";
 
 export { default as UploadImages } from "./UploadImages";
 export { default as Pagination } from "./Pagination";

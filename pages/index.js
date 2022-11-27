@@ -61,17 +61,12 @@ export default function Home(props) {
         />
 
         {/* Categories */}
-        <Categories childCategories={childCategories} homePage>
-          خرید بر اساس دسته‌بندهای{" "}
-          <span
-            className='text-xl'
-            style={{
-              color: `${images.colors ? `${images?.colors[0]}` : "#212121"}`,
-            }}
-          >
-            دیجی‌کالا
-          </span>
-        </Categories>
+        <Categories
+          childCategories={childCategories}
+          name='دیجی‌کالا'
+          color={`${images.colors ? `${images?.colors[0]}` : "#212121"}`}
+          homePage
+        />
 
         {/* Banner One */}
         {isSuccess && <BannerOne images={images?.banner_one} />}

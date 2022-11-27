@@ -9,19 +9,22 @@ import { openModal } from "app/slices/modal.slice";
 
 import { Icons, ArrowLink, CartItem, RedirectToLogin } from "components";
 
+import useUserInfo from "hooks/useUserInfo";
+
 export default function Cart() {
   const router = useRouter();
   const dispatch = useDispatch();
+
+  const { isVerify } = useUserInfo();
 
   //? Store
   const { totalItems, cartItems, totalDiscount, totalPrice } = useSelector(
     (state) => state.cart
   );
-  const { userInfo } = useSelector((state) => state.user);
 
   //? Handlers
   const handleRoute = () => {
-    if (!userInfo)
+    if (!isVerify)
       return dispatch(
         openModal({
           isShow: true,

@@ -23,7 +23,6 @@ export default function MainCategory(props) {
 
   //? Local State
   const [images, setImages] = useState({});
-  const [category, setCategory] = useState(props.currentCategory);
 
   //? Get Slider Images Query
   const { data, isSuccess } = useGetImagesQuery();
@@ -35,7 +34,7 @@ export default function MainCategory(props) {
   return (
     <main className='space-y-12 xl:mt-28'>
       <Head>
-        <title>{`دیجی‌کالا | ${category?.name}`}</title>
+        <title>{`دیجی‌کالا | ${props.currentCategory.name}`}</title>
       </Head>
       {/* Slider */}
       {isSuccess ? (
@@ -47,22 +46,16 @@ export default function MainCategory(props) {
         {/* Discount Products */}
         <DiscountSlider
           products={props.discountProducts}
-          categoryImage={category?.image}
+          categoryImage={props.currentCategory?.image}
           colors={images.colors}
         />
 
         {/* Categories */}
-        <Categories childCategories={props.childCategories}>
-          خرید بر اساس دسته‌بندهای{" "}
-          <span
-            className='text-xl'
-            style={{
-              color: `${images.colors ? `${images?.colors[0]}` : "#212121"}`,
-            }}
-          >
-            {category?.name}
-          </span>
-        </Categories>
+        <Categories
+          childCategories={props.childCategories}
+          name={props.currentCategory.name}
+          color={`${images.colors ? `${images?.colors[0]}` : "#212121"}`}
+        />
 
         {/* Banner One */}
         {isSuccess && <BannerOne images={images?.banner_one} />}

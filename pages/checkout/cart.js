@@ -17,15 +17,18 @@ import {
 
 import { formatNumber } from "utils/formatNumber";
 
+import useUserInfo from "hooks/useUserInfo";
+
 export default function Cart() {
   const dispatch = useDispatch();
   const router = useRouter();
+
+  const { userInfo } = useUserInfo();
 
   //? Store
   const { cartItems, totalItems, totalPrice, totalDiscount } = useSelector(
     (state) => state.cart
   );
-  const { userInfo } = useSelector((state) => state.user);
 
   //? Handlers
   const handleRoute = () => {

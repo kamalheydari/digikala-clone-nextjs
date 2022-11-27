@@ -1,16 +1,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import Head from "next/head";
-import { useRouter } from "next/router";
 
-import { useSelector } from "react-redux";
 import { useGetOrdersQuery } from "app/api/orderApi";
 
 import { Buttons, Pagination, ShowWrapper, EmptyOrdersList } from "components";
 
 export default function OrdersHome() {
-  const router = useRouter();
-
   //? Local State
   const [page, setPage] = useState(1);
 

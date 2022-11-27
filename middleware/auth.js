@@ -8,7 +8,7 @@ export default async function auth(req, res) {
 
   if (!token) sendError(res, 403, "توکن احراز هویت نامعتبر است");
 
-  const decoded = await jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+  const decoded =  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 
   if (!decoded) sendError(res, 403, "توکن احراز هویت نامعتبر است");
 

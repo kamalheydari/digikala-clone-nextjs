@@ -13,16 +13,18 @@ import { AddressForm, CartInfo, Icons, Loading } from "components";
 
 import { formatNumber } from "utils/formatNumber";
 import Head from "next/head";
+import useUserInfo from "hooks/useUserInfo";
 
 export default function ShippingPage() {
   const router = useRouter();
   const dispatch = useDispatch();
 
+  const { userInfo } = useUserInfo();
+
   //? Local State
   const [paymentMethod, setPaymentMethod] = useState("پرداخت در محل");
 
   //? Store
-  const { userInfo } = useSelector((state) => state.user);
   const { cartItems, totalItems, totalDiscount, totalPrice } = useSelector(
     (state) => state.cart
   );
@@ -140,7 +142,9 @@ export default function ShippingPage() {
               <Icons.Location2 className='text-black w-7 h-7' />
               <div className='space-y-2'>
                 <span className=''>آدرس تحویل سفارش</span>
-                <p className='text-base text-black'>{userInfo?.address?.street}</p>
+                <p className='text-base text-black'>
+                  {userInfo?.address?.street}
+                </p>
                 <span className='text-sm'>{userInfo?.name}</span>
               </div>
               <button

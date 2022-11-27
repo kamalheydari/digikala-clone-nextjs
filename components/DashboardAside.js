@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { Icons, BoxLink, Logout, Orders } from "components";
 
-export default function ProfileAside({ user }) {
+export default function ProfileAside() {
   const profilePaths = [
     {
       name: "محصول جدید",
@@ -42,14 +42,12 @@ export default function ProfileAside({ user }) {
     },
   ];
 
-  if (!user) return null;
-
   return (
     <aside className='sticky mt-6 lg:border lg:border-gray-200 lg:rounded-md lg:py-4 min-w-max top-6'>
       <div className='relative w-40 h-12 mx-auto'>
         <Link passHref href='/'>
           <a>
-            <Image src='/icons/logo.svg' layout='fill' alt="دیجی‌کالا" />
+            <Image src='/icons/logo.svg' layout='fill' alt='دیجی‌کالا' />
           </a>
         </Link>
       </div>

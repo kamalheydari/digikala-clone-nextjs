@@ -2,17 +2,17 @@ import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
-import { useSelector } from "react-redux";
 
 import { DashboardAside } from "components";
+
+import useUserInfo from "hooks/useUserInfo";
 
 export default function AdminPage() {
   const router = useRouter();
 
-  //? Store
-  const { userInfo, token } = useSelector((state) => state.user);
+  const { userInfo, isVerify } = useUserInfo();
 
-  if (!token || userInfo?.role === "user") router.push("/admin/login");
+  if (!isVerify || userInfo?.role === "user") router.push("/admin/login");
 
   if (userInfo?.role === "admin" || userInfo?.root)
     return (
@@ -27,7 +27,7 @@ export default function AdminPage() {
         <div className='hidden py-6 lg:inline-block lg:flex-1 lg:border lg:border-gray-300 lg:rounded-md lg:mt-6 h-fit'>
           <section className='py-20'>
             <div className='relative mx-auto mb-8 h-52 w-52'>
-              <Image src='/icons/chart.png' layout='fill' alt="نمودار"/>
+              <Image src='/icons/chart.png' layout='fill' alt='نمودار' />
             </div>
 
             <p className='text-center'>آنالیز وضعیت</p>

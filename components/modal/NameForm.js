@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import validation from "utils/validation";
 
-import { updateUser } from "app/slices/user.slice";
 import { useEditUserMutation } from "app/api/userApi";
 import { showAlert } from "app/slices/alert.slice";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,7 +28,6 @@ export default function NameForm() {
   //? Handle Edit User Response
   useEffect(() => {
     if (isSuccess) {
-      dispatch(updateUser(data.user));
       dispatch(closeModal());
       dispatch(
         showAlert({

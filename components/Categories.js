@@ -1,10 +1,20 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Categories({ children, childCategories, homePage }) {
+export default function Categories({ childCategories, homePage, color, name }) {
   return (
     <section className='px-3'>
-      <h4 className='mb-3 text-xl text-center'>{children}</h4>
+      <h4 className='mb-3 text-xl text-center'>
+        خرید بر اساس دسته‌بندهای{" "}
+        <span
+          className='text-xl'
+          style={{
+            color,
+          }}
+        >
+          {name}
+        </span>
+      </h4>
       <div className='flex flex-wrap justify-center gap-4 mx-auto space-x-4 w-fit'>
         {childCategories.map((item, index) => {
           if (index < 2) {
