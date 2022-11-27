@@ -1,11 +1,11 @@
-import useToggle from "hooks/useToggle";
+import useDisclosure from "hooks/useDisclosure";
 
 import { Icons } from "components";
 
 import { truncate } from "utils/truncate";
 
 export default function Description({ description }) {
-  const { status: isShowDesc, toggleStatus: toggleShowDesc } = useToggle();
+  const [isShowDesc, showDescHandlers] = useDisclosure();
 
   return (
     <section>
@@ -18,7 +18,7 @@ export default function Description({ description }) {
           <button
             type='button'
             className='flex items-center py-2 text-sm text-sky-400'
-            onClick={toggleShowDesc}
+            onClick={showDescHandlers.toggle}
           >
             {isShowDesc ? "بستن" : "مشاهده بیشتر"}
             <Icons.ArrowLeft className='icon text-sky-400' />

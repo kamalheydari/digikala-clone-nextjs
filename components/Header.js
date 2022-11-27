@@ -11,23 +11,13 @@ import {
   AddressBar,
 } from "components";
 
-import useToggle from "hooks/useToggle";
-
 export default function Header() {
-  const { status: isSidebar, toggleStatus: toggleSidebar } = useToggle();
-
   return (
     <>
       <header className='px-4 bg-white lg:shadow xl:fixed xl:z-20 xl:top-0 xl:left-0 xl:right-0'>
         <div className='container max-w-[1700px] lg:flex lg:py-2 '>
           <div className='inline-flex items-center justify-between w-full border-b lg:border-b-0 lg:max-w-min lg:ml-8'>
-            <button
-              className='p-1 lg:hidden'
-              type='button'
-              onClick={toggleSidebar}
-            >
-              <Icons.Bars className='icon' />
-            </button>
+            <Sidebar />
             <div className='relative w-24 h-14 '>
               <Link passHref href='/'>
                 <a>
@@ -52,7 +42,6 @@ export default function Header() {
           </div>
           <AddressBar />
         </div>
-        <Sidebar isSidebar={isSidebar} toggleSidebar={toggleSidebar} />
       </header>
     </>
   );

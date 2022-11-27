@@ -1,9 +1,9 @@
-import useToggle from "hooks/useToggle";
+import useDisclosure from "hooks/useDisclosure";
 
 import { Icons } from "components";
 
 export default function Specification({ specification }) {
-  const { status: isShowSpec, toggleStatus: toggleShowSpec } = useToggle();
+  const [isShowSpec, showSpecHandlers] = useDisclosure();
 
   let renderSpecification = isShowSpec
     ? specification
@@ -33,7 +33,7 @@ export default function Specification({ specification }) {
         <button
           type='button'
           className='flex items-center py-2 text-sm text-sky-400'
-          onClick={toggleShowSpec}
+          onClick={showSpecHandlers.toggle}
         >
           {isShowSpec ? "بستن" : "مشاهده بیشتر"}
           <Icons.ArrowLeft className='icon text-sky-400' />
