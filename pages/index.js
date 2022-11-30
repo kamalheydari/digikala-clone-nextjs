@@ -15,20 +15,10 @@ import {
   MostFavouraiteProducts,
   Slider,
 } from "components";
-import { useSelector } from "react-redux";
 
 export default function Home(props) {
   //? Local State
   const [images, setImages] = useState({});
-  const [childCategories, setChildCategories] = useState([]);
-
-  //? Store
-  const { categories } = useSelector((state) => state.categories);
-
-  //? Set Categories
-  useEffect(() => {
-    setChildCategories(categories.filter((cat) => cat.parent === "/"));
-  }, [categories]);
 
   //? Get Slider Images Query
   const { data, isSuccess } = useGetImagesQuery();
@@ -62,7 +52,7 @@ export default function Home(props) {
 
         {/* Categories */}
         <Categories
-          childCategories={childCategories}
+          parent='/'
           name='دیجی‌کالا'
           color={`${images.colors ? `${images?.colors[0]}` : "#212121"}`}
           homePage

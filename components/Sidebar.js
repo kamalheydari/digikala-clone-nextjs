@@ -1,29 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { useDispatch, useSelector } from "react-redux";
-import {
-  resetParentCategory,
-  resetSelectedCategories,
-} from "app/slices/category.slice";
+import { useDispatch } from "react-redux";
 
 import { Icons } from "components";
 
 import useDisclosure from "hooks/useDisclosure";
+import useCategory from "hooks/useCategory";
 
 export default function Sidebar() {
-  const [isSidebar, sidebarHandlers] = useDisclosure();
-
   const dispatch = useDispatch();
 
-  //? Local States
+  const [isSidebar, sidebarHandlers] = useDisclosure();
+
+  useEffect(() => {
+    if (isSidebar) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "unset";
+  }, [isSidebar]);
+
+  //? States
   const [mainExpandCat, setMainExpandCat] = useState("");
   const [parentExpandCat, setParentExpandCat] = useState("");
 
-  //? Store
-  const { categories } = useSelector((state) => state.categories);
-
+  const { categories } = useCategory();
   const parents = [...new Set(categories.map((item) => item.parent))];
 
   //? Handlers
@@ -40,8 +40,8 @@ export default function Sidebar() {
 
   const hanldeClose = () => {
     sidebarHandlers.close();
-    dispatch(resetParentCategory());
-    dispatch(resetSelectedCategories());
+    setMainExpandCat("");
+    setParentExpandCat("");
   };
 
   return (
@@ -95,7 +95,7 @@ export default function Sidebar() {
                         </a>
                       </Link>
 
-                      {parents.includes(mainCategory.category) && (
+                      {parents?.includes(mainCategory.category) && (
                         <button onClick={() => handleClick(mainCategory)}>
                           {mainCategory.category === mainExpandCat ? (
                             <Icons.ArrowUp className='text-red-400 w-7 h-7 bg-gray-50 rounded-2xl' />
@@ -133,7 +133,7 @@ export default function Sidebar() {
                                     {parentCategory.name}
                                   </a>
                                 </Link>
-                                {parents.includes(
+                                {parents?.includes(
                                   "/" + parentCategory.slug
                                 ) && (
                                   <button

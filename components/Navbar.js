@@ -2,17 +2,16 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 
-import { useSelector } from "react-redux";
 
 import { Icons } from "components";
+import useCategory from "hooks/useCategory";
 
 export default function Navbar() {
-  //? Local State
+  const { categories } = useCategory();
+
+  //? State
   const [activeMinCat, setActiveMinCat] = useState("/electronic-devices");
   const [hover, setHover] = useState(false);
-
-  //? Store
-  const { categories } = useSelector((state) => state.categories);
 
   //? Handlers
   const handleActive = (cat) => {

@@ -27,16 +27,18 @@ import {
   Loading,
   ShowWrapper,
 } from "components";
+import useCategory from "hooks/useCategory";
 
 export default function DetailsPage() {
   const router = useRouter();
   const dispatch = useDispatch();
 
+  const { categories } = useCategory();
+
   //? Store
   const { isConfirmDelete, isConfirmUpdate } = useSelector(
     (state) => state.modal
   );
-  const { categories } = useSelector((state) => state.categories);
   const {
     category,
     info,

@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { resetSelectedCategories } from "app/slices/category.slice";
 import { openModal } from "app/slices/modal.slice";
 import {
   useDeleteProductMutation,
@@ -25,15 +24,14 @@ export default function Products() {
   const router = useRouter();
   const inputSearchRef = useRef();
 
-  //? Local State
+  //?  State
   const [page, setPage] = useState(1);
   const [filterCategory, setFilterCategory] = useState("all");
   const [search, setSearch] = useState("");
+  // const [selectedCategories, setSelectedCategories] = useState({});
+
 
   //? Store
-  const { mainCategory, parentCategory, category } = useSelector(
-    (state) => state.categories
-  );
   const { isConfirmDelete } = useSelector((state) => state.modal);
 
   //? Get Products Query
@@ -55,21 +53,18 @@ export default function Products() {
     },
   ] = useDeleteProductMutation();
 
-  //? Reset Category
-  useEffect(() => {
-    return () => dispatch(resetSelectedCategories());
-  }, []);
-
   //? Filter Category
-  useEffect(() => {
-    setPage(1);
-    if (mainCategory.length > 0) setFilterCategory(mainCategory);
-    if (parentCategory.length > 0)
-      setFilterCategory((filterCategory) =>
-        filterCategory.concat("/").concat(parentCategory)
-      );
-    if (category.length > 0) setFilterCategory(category);
-  }, [mainCategory, parentCategory, category, search]);
+  // useEffect(() => {
+  //   setPage(1);
+  //   if (selectedCategories?.lvlOneCategory?._id)
+  //     setFilterCategory(selectedCategories?.lvlOneCategory.category);
+
+  //   if (selectedCategories?.lvlTwoCategory?._id)
+  //     setFilterCategory(selectedCategories?.lvlTwoCategory.category);
+
+  //   if (selectedCategories?.lvlTwoCategory?._id)
+  //     setFilterCategory(selectedCategories?.lvlThreeCategory.category);
+  // }, [selectedCategories, search]);
 
   //? Handlers
   const handleDelete = (id) => {
@@ -139,9 +134,10 @@ export default function Products() {
               className='max-w-4xl mx-auto space-y-5'
               onSubmit={handleSubmit}
             >
-              <div className='space-y-8  md:py-0 md:flex md:gap-x-8 lg:gap-x-0.5 xl:gap-x-10 md:items-baseline md:justify-between'>
-                <SelectCategories productPage />
-              </div>
+                {/* <SelectCategories
+                  setSelectedCategories={setSelectedCategories}
+                  show={["lvlOne", "lvlTwo", "lvlThree"]}
+                /> */}
 
               <div className='flex flex-row-reverse rounded-md bg-zinc-200/80 '>
                 <button

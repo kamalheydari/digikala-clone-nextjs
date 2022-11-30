@@ -5,8 +5,8 @@ import { sorts } from "utils/constatns";
 import { Icons } from "components";
 
 export default function Sort({
-  showSort,
-  setShowSort,
+  isSort,
+  sortHandlers,
   dispatch,
   sort,
   productsLength,
@@ -16,7 +16,7 @@ export default function Sort({
   const handleSort = (item) => {
     dispatch(updateFilter({ name: "sort", value: item }));
     chaneRoute({ sort: item.value });
-    setShowSort(false);
+    sortHandlers.close();
   };
 
   return (
@@ -46,21 +46,21 @@ export default function Sort({
 
       <div
         className={`${
-          showSort ? "opacity-100 visible" : "opacity-0 invisible "
+          isSort ? "opacity-100 visible" : "opacity-0 invisible "
         } transition-all duration-300 fixed inset-0 z-40`}
       >
         <div
           className='fixed inset-0 z-20 bg-gray-50/50'
-          onClick={() => setShowSort(false)}
+          onClick={sortHandlers.close}
         />
         <section
           className={`xl:hidden fixed transition-all duration-300 left-0 right-0 mx-auto z-30  w-full max-w-xl shadow-3xl border-t border-gray-200 rounded-xl px-5 py-3 bg-white h-fit md:rounded-lg  ${
-            showSort ? "bottom-0" : "-bottom-full"
+            isSort ? "bottom-0" : "-bottom-full"
           }`}
         >
           <div className='flex justify-between py-3'>
             <h5>مرتب سازی بر اساس</h5>
-            <button type='button' onClick={() => setShowSort(false)}>
+            <button type='button' onClick={sortHandlers.close}>
               <Icons.Close className='icon' />
             </button>
           </div>

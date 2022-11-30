@@ -1,13 +1,12 @@
 import Head from "next/head";
-
-import { useSelector } from "react-redux";
-
-import { Buttons } from "components";
 import Link from "next/link";
 
+import { Buttons } from "components";
+
+import useCategory from "hooks/useCategory";
+
 export default function Categories() {
-  //? Store
-  const { categories } = useSelector((state) => state.categories);
+  const { categories } = useCategory();
 
   return (
     <main>

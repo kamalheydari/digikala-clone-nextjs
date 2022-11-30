@@ -2,10 +2,6 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addCategory,
-  resetSelectedCategories,
-} from "app/slices/category.slice";
 import { useCreateCategoryMutation } from "app/api/categoryApi";
 import { showAlert } from "app/slices/alert.slice";
 
@@ -21,17 +17,12 @@ import {
   Buttons,
 } from "components";
 
-
 export default function CreateCategory() {
   const dispatch = useDispatch();
 
-  //? Local States
+  //?  States
   const [images, setImages] = useState([]);
-
-  //? Store
-  const { parentCategory, mainCategory } = useSelector(
-    (state) => state.categories
-  );
+  const [selectedCategories, setSelectedCategories] = useState({});
 
   //? Create Category Query
   const [
@@ -42,9 +33,7 @@ export default function CreateCategory() {
   //? Handle Create Category Response
   useEffect(() => {
     if (isSuccess) {
-      dispatch(addCategory(data.newCategory));
       setImages([]);
-      dispatch(resetSelectedCategories());
       reset();
       dispatch(
         showAlert({
@@ -57,9 +46,6 @@ export default function CreateCategory() {
 
   useEffect(() => {
     if (isError) {
-      setImages([]);
-      dispatch(resetSelectedCategories());
-      reset();
       dispatch(
         showAlert({
           status: "error",
@@ -86,20 +72,33 @@ export default function CreateCategory() {
     name = name.trim();
     slug = slug.trim().split(" ").join("-");
 
-    //? Set main category
-    parent = "/";
-    category = parent + slug;
+    if (
+      selectedCategories?.lvlOneCategory?._id &&
+      !selectedCategories?.lvlTwoCategory?._id
+    ) {
+      //? Set LvlTwo category
 
-    //? Set parent category
-    if (mainCategory.length !== 0) {
-      parent = mainCategory;
+      parent = selectedCategories?.lvlOneCategory.category;
       category = parent + "/" + slug;
-    }
+    } else if (
+      selectedCategories?.lvlOneCategory?._id &&
+      selectedCategories?.lvlTwoCategory?._id
+    ) {
+      //? Set lvlThree category
 
-    //? Set child category
-    if (parentCategory.length !== 0) {
-      parent = "/" + parentCategory;
-      category = mainCategory + "/" + parentCategory + "/" + slug;
+      parent = "/" + selectedCategories?.lvlTwoCategory.slug;
+      category =
+        "/" +
+        selectedCategories?.lvlOneCategory.slug +
+        "/" +
+        selectedCategories?.lvlTwoCategory.slug +
+        "/" +
+        slug;
+    } else {
+      //? Set LvlOne category
+
+      parent = "/";
+      category = parent + slug;
     }
 
     createCtegory({
@@ -107,7 +106,7 @@ export default function CreateCategory() {
     });
   };
 
-  const deleteImageHandler = (index) => {
+  const deleteImageHandler = () => {
     setImages([]);
   };
 
@@ -157,10 +156,10 @@ export default function CreateCategory() {
               getUploadedImages={getUploadedImagesHandler}
             />
 
-            <div className='flex-1 max-w-xl space-y-16 md:grid md:grid-cols-2 md:gap-x-12 md:gap-y-10 md:items-baseline'>
-              <SelectCategories />
-              <div />
-            </div>
+            <SelectCategories
+              setSelectedCategories={setSelectedCategories}
+              show={["lvlOne", "lvlTwo"]}
+            />
 
             <div className='py-3 lg:pb-0 '>
               <button

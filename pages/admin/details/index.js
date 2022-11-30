@@ -1,18 +1,20 @@
 import Head from "next/head";
-import { useEffect } from "react";
+import { useRouter } from "next/router";
 
-import { resetSelectedCategories } from "app/slices/category.slice";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
 
 import { Buttons, SelectCategories } from "components";
 
 export default function DetailsHome() {
-  const dispatch = useDispatch();
+  const router = useRouter();
 
-  //? Reset Category
+  //? States
+  const [selectedCategories, setSelectedCategories] = useState({});
+
   useEffect(() => {
-    return () => dispatch(resetSelectedCategories());
-  }, []);
+    if (selectedCategories?.lvlTwoCategory?._id)
+      router.push("/admin/details/" + selectedCategories?.lvlTwoCategory._id);
+  }, [selectedCategories?.lvlTwoCategory?._id]);
 
   return (
     <main>
@@ -23,7 +25,10 @@ export default function DetailsHome() {
       <Buttons.Back backRoute='/admin'>مشخصات</Buttons.Back>
       <div className='section-divide-y' />
       <section className='flex-1 p-3 mx-auto mb-10 space-y-8 w-fit md:w-full md:grid md:grid-cols-2 md:gap-x-12 md:items-baseline'>
-        <SelectCategories detailsHome />
+        <SelectCategories
+          setSelectedCategories={setSelectedCategories}
+          show={["lvlOne", "lvlTwo"]}
+        />
       </section>
     </main>
   );

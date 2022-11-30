@@ -7,9 +7,9 @@ export default function ProductsAside({
   dispatch,
   main_maxPrice,
   main_minPrice,
-  setShowFilters,
+  filtersHandlers,
   chaneRoute,
-  resetRoute
+  resetRoute,
 }) {
   const { inStock, discount, max_price, min_price } = useSelector(
     (state) => state.filter
@@ -27,7 +27,7 @@ export default function ProductsAside({
 
   const handleReset = () => {
     dispatch(resetFilter({ maxPrice: main_maxPrice, minPrice: main_minPrice }));
-    resetRoute()
+    resetRoute();
   };
 
   return (
@@ -35,7 +35,7 @@ export default function ProductsAside({
       <div className='flex items-center pb-4'>
         <button
           type='button'
-          onClick={() => setShowFilters(false)}
+          onClick={filtersHandlers.close}
           className='ml-4 xl:hidden'
         >
           <Icons.Close className='icon' />

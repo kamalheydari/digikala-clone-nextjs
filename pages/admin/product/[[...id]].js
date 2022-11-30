@@ -3,7 +3,6 @@ import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
 
 import { useDispatch, useSelector } from "react-redux";
-import { resetSelectedCategories } from "app/slices/category.slice";
 import { openModal } from "app/slices/modal.slice";
 import { showAlert } from "app/slices/alert.slice";
 import {
@@ -36,8 +35,8 @@ export default function Product() {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  //? Local State
-  const [categoryID, setCategoryID] = useState(null);
+  //? State
+  const [selectedCategories, setSelectedCategories] = useState({});
 
   //? TABLE Refs
   const infoTableRef = useRef(null);
@@ -45,26 +44,16 @@ export default function Product() {
 
   //? Store
   const { isConfirmUpdate } = useSelector((state) => state.modal);
-  const { parentCategory, mainCategory, categories, category } = useSelector(
-    (state) => state.categories
-  );
   const { infoArray, specificationArray, optionsType, product } = useSelector(
     (state) => state.product
   );
 
   //? Select Category To Fetch Details
   useEffect(() => {
-    if (parentCategory.length > 0) {
-      const { _id } = categories.find((cat) => cat.slug === parentCategory);
-      setCategoryID(_id);
+    if (selectedCategories?.lvlTwoCategory?._id) {
+      dispatch(fetchDetails(selectedCategories?.lvlTwoCategory?._id));
     }
-  }, [parentCategory]);
-
-  useEffect(() => {
-    if (categoryID) {
-      dispatch(fetchDetails(categoryID));
-    }
-  }, [categoryID]);
+  }, [selectedCategories?.lvlTwoCategory?._id]);
 
   //? Create Product Query
   const [
@@ -94,7 +83,6 @@ export default function Product() {
         })
       );
       router.push("/admin/products");
-      dispatch(resetSelectedCategories());
       dispatch(resetProduct());
     }
     if (isError) {
@@ -106,11 +94,6 @@ export default function Product() {
       );
     }
   }, [isSuccess, isError]);
-
-  //? Reset Category
-  useEffect(() => {
-    return () => dispatch(resetSelectedCategories());
-  }, []);
 
   //? Edit Product
   const { id } = router.query;
@@ -127,22 +110,22 @@ export default function Product() {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    const infoArray = await getDetailsArray(infoTableRef);
-    const specificationArray = await getDetailsArray(specificationTableRef);
+    const infoArray = getDetailsArray(infoTableRef);
+    const specificationArray = getDetailsArray(specificationTableRef);
 
     createProduct({
       body: {
         ...product,
         info: infoArray,
         specification: specificationArray,
-        category: category ? category : mainCategory + "/" + parentCategory,
+        category: selectedCategories.lvlThreeCategory.category,
       },
     });
   };
 
   const updateHandler = async () => {
-    const infoArray = await getDetailsArray(infoTableRef);
-    const specificationArray = await getDetailsArray(specificationTableRef);
+    const infoArray = getDetailsArray(infoTableRef);
+    const specificationArray = getDetailsArray(specificationTableRef);
 
     dispatch(
       openModal({
@@ -306,9 +289,14 @@ export default function Product() {
                 />
               </div>
             </div>
-            <div className='py-3 mx-auto space-y-8 w-fit md:w-full md:py-0 md:flex md:items-baseline md:justify-between'>
-              {!id && <SelectCategories productPage />}
-            </div>
+
+            {!id && (
+              <SelectCategories
+                setSelectedCategories={setSelectedCategories}
+                show={["lvlOne", "lvlTwo", "lvlThree"]}
+              />
+            )}
+
             {optionsType === "colors" || product.colors.length > 0 ? (
               <AddColors />
             ) : optionsType === "sizes" || product.sizes.length > 0 ? (

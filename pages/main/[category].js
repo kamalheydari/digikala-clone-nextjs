@@ -21,7 +21,7 @@ import {
 export default function MainCategory(props) {
   const router = useRouter();
 
-  //? Local State
+  //? State
   const [images, setImages] = useState({});
 
   //? Get Slider Images Query
@@ -52,7 +52,7 @@ export default function MainCategory(props) {
 
         {/* Categories */}
         <Categories
-          childCategories={props.childCategories}
+          parent={props.currentCategory.category}
           name={props.currentCategory.name}
           color={`${images.colors ? `${images?.colors[0]}` : "#212121"}`}
         />
@@ -110,10 +110,6 @@ export async function getServerSideProps({ params: { category } }) {
     .sort({ discount: -1 })
     .lean();
 
-  const childCategories = await Category.find({
-    parent: "/" + category,
-  }).lean();
-
   const currentCategory = await Category.findOne({
     slug: category,
   }).lean();
@@ -125,7 +121,6 @@ export async function getServerSideProps({ params: { category } }) {
       bestSells: bestSells.map(db.convertDocToObj),
       mostFavourite: mostFavourite.map(db.convertDocToObj),
       discountProducts: discountProducts.map(db.convertDocToObj),
-      childCategories: childCategories.map(db.convertDocToObj),
       currentCategory: db.convertDocToObj(currentCategory),
     },
   };
