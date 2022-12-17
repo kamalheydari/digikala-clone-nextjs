@@ -1,8 +1,14 @@
 module.exports = {
   env: {
+    // local
     // MONGODB_URL: "mongodb://localhost:27017/digikala-clone-nextjs",
+    // atlas
+    // MONGODB_URL:
+    //   "mongodb+srv://digikala-clone-nextjs:digikala-clone-nextjs123456@cluster0.k5i8lxq.mongodb.net/?retryWrites=true&w=majority",
+    // liara
     MONGODB_URL:
-      "mongodb://root:3F6NVtZZctS0lfIzeWUJsjuT@finn.iran.liara.ir:34423/digikala-clone-nexjs?authSource=admin",
+      "mongodb://root:9ngLaLUZFjnpylPPd85w98i0@esme.iran.liara.ir:31506/digikala-clone-nextjs?authSource=admin",
+    
     NEXT_PUBLIC_ACCESS_TOKEN_SECRET:
       "h1n0U6LHJtCZuWitwjn3oLd5qCRIgUFtemnjTrpfZLzVZ3ff0f",
     ACCESS_TOKEN_SECRET: "h1n0U6LHJtCZuWitwjn3oLd5qCRIgUFtemnjTrpfZLzVZ3ff0f",
