@@ -13,8 +13,44 @@ A advance clone of digikala includes products page, single product  page, catego
 See demo on vercel
 [Nextjs Digikala Clone](https://digikala-clone-nextjs-p.vercel.app/)
 
-![demo](demo.png)
+### Home Page
+![demo](demo_01.png)
 
 
+### Category Page
+![demo](demo_02.png)
+
+### Products Page
+![demo](demo_03.png)
+
+### Product Page
+![demo](demo_04.png)
+
+### Cart Page
+![demo](demo_05.png)
+
+### Shipping Page
+![demo](demo_06.png)
+
+### Profile Page
+![demo](demo_07.png)
+
+### Adrress Page
+![demo](demo_08.png)
+
+### Orders Page
+![demo](demo_09.png)
+
+### Admin/Products Page
+![demo](demo_10.png)
+
+### Admin/Edit Page
+![demo](demo_11.png)
+
+### Admin/Details Page
+![demo](demo_12.png)
+
+### Admin/Categories Page
+![demo](demo_13.png)
 
 
