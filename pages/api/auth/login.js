@@ -31,6 +31,8 @@ export default async (req, res) => {
           msg: "ورود موفقیت آمیز بود",
           data: {
             access_token,
+            root:user.root,
+            role:user.role
           },
         });
       } catch (error) {

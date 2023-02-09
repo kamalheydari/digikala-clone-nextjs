@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import { useDispatch } from "react-redux";
-import {  userLogin } from "app/slices/user.slice";
+import { userLogin } from "app/slices/user.slice";
 import { showAlert } from "app/slices/alert.slice";
 import { useLoginMutation } from "app/api/userApi";
 
@@ -19,7 +19,7 @@ export default function LoginPage() {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  //? Login User 
+  //? Login User
   const [
     login,
     { data, isSuccess, isError, isLoading, error },
@@ -28,7 +28,7 @@ export default function LoginPage() {
   //? Handle Login User Response
   useEffect(() => {
     if (isSuccess) {
-      if (data.data.user.root || data.data.user.role === "admin") {
+      if (data.data.root || data.data.role === "admin") {
         dispatch(userLogin(data.data.access_token));
 
         dispatch(
@@ -47,6 +47,7 @@ export default function LoginPage() {
           })
         );
       }
+      console.log(data);
     }
   }, [isSuccess]);
 
