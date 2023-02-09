@@ -1,17 +1,18 @@
 //* SHARE COMPONENTS
-export { default as Icons } from "./share/Icons";
-export { default as ArrowLink } from "./share/ArrowLink";
-export { default as BoxLink } from "./share/BoxLink";
-export { default as DisplayError } from "./share/DisplayError";
+export { default as Icons } from "./common/Icons";
+export { default as ArrowLink } from "./common/ArrowLink";
+export { default as BoxLink } from "./common/BoxLink";
+export { default as DisplayError } from "./common/DisplayError";
 export { default as BigLoading } from "./loading/BigLoading";
-export { default as ShowWrapper } from "./share/ShowWrapper";
-export { default as HandleDelete } from "./share/HandleDelete";
-export { default as HandleUpdate } from "./share/HandleUpdate";
-export { default as Input } from "./share/Input";
+export { default as ShowWrapper } from "./common/ShowWrapper";
+export { default as HandleDelete } from "./common/HandleDelete";
+export { default as HandleUpdate } from "./common/HandleUpdate";
+export { default as Input } from "./common/Input";
+export { default as PageContainer } from "./common/PageContainer";
+export * from "./common/IconBtns";
 
 //* LOADING
-export { default as Loading } from "./share/Loading";
-export { default as Buttons } from "./share/Buttons";
+export { default as Loading } from "./common/Loading";
 export { default as PageLoading } from "./loading/PageLoading";
 
 //* LAYOUT COMPONENTS

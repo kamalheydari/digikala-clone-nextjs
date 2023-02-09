@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 import { useGetSingleOrderQuery } from "app/api/orderApi";
 
-import { Buttons, OrderCard, ShowWrapper } from "components";
+import { OrderCard, PageContainer, ShowWrapper } from "components";
 
 export default function SingleOrder() {
   const router = useRouter();
@@ -26,21 +26,22 @@ export default function SingleOrder() {
       <Head>
         <title>مدیریت | سفارش</title>
       </Head>
-      <Buttons.Back backRoute='/admin/orders'>سفارشات</Buttons.Back>
-      <div className='section-divide-y' />
-      <ShowWrapper
-        error={error}
-        isError={isError}
-        refetch={refetch}
-        isFetching={isFetching}
-        isSuccess={isSuccess}
-        dataLength={data ? 1 : 0}
-        emptyElement={null}
-      >
-        <section className='max-w-5xl px-3 py-3 mx-auto lg:px-8'>
-          <OrderCard singleOrder order={data?.order} />
-        </section>
-      </ShowWrapper>
+
+      <PageContainer title='سفارشات'>
+        <ShowWrapper
+          error={error}
+          isError={isError}
+          refetch={refetch}
+          isFetching={isFetching}
+          isSuccess={isSuccess}
+          dataLength={data ? 1 : 0}
+          emptyElement={null}
+        >
+          <section className='max-w-5xl px-3 py-3 mx-auto lg:px-8'>
+            <OrderCard singleOrder order={data?.order} />
+          </section>
+        </ShowWrapper>
+      </PageContainer>
     </main>
   );
 }

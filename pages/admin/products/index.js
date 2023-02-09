@@ -11,8 +11,9 @@ import {
 
 import {
   BigLoading,
-  Buttons,
   ConfirmDeleteModal,
+  DeleteIconBtn,
+  EditIconBtn,
   HandleDelete,
   Icons,
   PageContainer,
@@ -41,7 +42,7 @@ export default function Products() {
     search,
   });
 
-  //? Delete Product 
+  //? Delete Product
   const [
     deleteProduct,
     {
@@ -91,7 +92,6 @@ export default function Products() {
     inputSearchRef.current.value = "";
     setSearch("");
   };
-
 
   //? Render
   return (
@@ -178,10 +178,10 @@ export default function Products() {
                             className='border-b-2 border-gray-100'
                           >
                             <td className='flex items-center justify-center p-2 gap-x-4'>
-                              <Buttons.Delete
+                              <DeleteIconBtn
                                 onClick={() => handleDelete(item._id)}
                               />
-                              <Buttons.Edit
+                              <EditIconBtn
                                 onClick={() => handleEdit(item._id)}
                               />
                             </td>

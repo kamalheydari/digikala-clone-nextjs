@@ -4,7 +4,7 @@ import Head from "next/head";
 
 import { useGetOrdersQuery } from "app/api/orderApi";
 
-import { Buttons, Pagination, ShowWrapper, EmptyOrdersList, PageContainer } from "components";
+import { Buttons, Pagination, ShowWrapper, EmptyOrdersList, PageContainer, EditIconBtn } from "components";
 
 export default function OrdersHome() {
   //? Local State
@@ -74,7 +74,7 @@ export default function OrdersHome() {
                     <td className='p-2'>
                       <Link href={`/admin/orders/${order._id}`}>
                         <a>
-                          <Buttons.Edit />
+                          <EditIconBtn />
                         </a>
                       </Link>
                     </td>

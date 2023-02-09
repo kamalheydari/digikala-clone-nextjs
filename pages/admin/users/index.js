@@ -7,13 +7,13 @@ import { openModal } from "app/slices/modal.slice";
 import { useDeleteUserMutation, useGetUsersQuery } from "app/api/userApi";
 
 import {
-  Buttons,
   Pagination,
   ShowWrapper,
   EmptyUsersList,
   HandleDelete,
   ConfirmDeleteModal,
   PageContainer,
+  DeleteIconBtn,
 } from "components";
 
 export default function Users() {
@@ -138,7 +138,7 @@ export default function Users() {
                       <td className='px-2 py-4'>{user.name}</td>
                       <td className='px-2 py-4'>{user.email}</td>
                       <td className='px-2 py-4'>
-                        <Buttons.Delete
+                        <DeleteIconBtn
                           onClick={() => deleteUserHandler(user._id)}
                         />
                       </td>

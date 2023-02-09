@@ -8,7 +8,7 @@ import {
 } from "app/slices/details.slice";
 import { useDispatch } from "react-redux";
 
-import { Buttons } from "components";
+import { AddIconBtn, DeleteIconBtn, EditIconBtn } from "components";
 
 export default function DetailsList({ category, type, data }) {
   const dispatch = useDispatch();
@@ -75,8 +75,8 @@ export default function DetailsList({ category, type, data }) {
           {data.map((item) => (
             <tr key={item.id} className='border-b-2 border-gray-100'>
               <td className='flex items-center p-2 gap-x-2'>
-                <Buttons.Delete onClick={() => handleDelete(item.id)} />
-                <Buttons.Edit onClick={() => handleEdit(item.id)} />
+                <DeleteIconBtn onClick={() => handleDelete(item.id)} />
+                <EditIconBtn onClick={() => handleEdit(item.id)} />
 
                 {item.name}
               </td>
@@ -91,7 +91,7 @@ export default function DetailsList({ category, type, data }) {
           ))}
           <tr className='border-b-2 border-green-50'>
             <td className='flex p-2'>
-              <Buttons.Add onClick={handleAddToStore} />
+              <AddIconBtn onClick={handleAddToStore} />
               <input
                 type='text'
                 onChange={(e) => setName(e.target.value)}

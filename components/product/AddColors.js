@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, deleteItem, editItem } from "app/slices/product.slice";
 
-import { Buttons } from "components";
+import { AddIconBtn, DeleteIconBtn, EditIconBtn } from "components";
 
 export default function AddColors() {
   const dispatch = useDispatch();
@@ -50,7 +50,7 @@ export default function AddColors() {
       <span>اندازه ها</span>
       <div className='w-full max-w-2xl mx-auto space-y-3'>
         <div className='flex items-center gap-x-2'>
-          <Buttons.Add onClick={handleAddToStore} />
+          <AddIconBtn onClick={handleAddToStore} />
           <input
             type='text'
             onChange={(e) =>
@@ -78,8 +78,8 @@ export default function AddColors() {
               key={item.id}
               className='shadow rounded flex gap-x-2 items-center px-1.5 py-2 bg-gray-50'
             >
-              <Buttons.Delete onClick={() => handleDelete(item.id)} />
-              <Buttons.Edit onClick={() => handleEdit(item.id)} />
+              <DeleteIconBtn onClick={() => handleDelete(item.id)} />
+              <EditIconBtn onClick={() => handleEdit(item.id)} />
               {item.name}
               <span
                 className='w-6 h-6 mr-3 rounded-sm shadow '

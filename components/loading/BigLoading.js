@@ -1,4 +1,4 @@
-import Loading from "components/share/Loading";
+import Loading from "components/common/Loading";
 import Image from "next/image";
 
 export default function BigLoading() {

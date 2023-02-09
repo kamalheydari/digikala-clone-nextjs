@@ -4,14 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { useGetReviewsQuery } from "app/api/reviewApi";
-import { useSelector } from "react-redux";
 
 import {
-  Buttons,
   Pagination,
   ShowWrapper,
   EmptyCommentsList,
   PageContainer,
+  EditIconBtn,
 } from "components";
 
 export default function Reviews() {
@@ -99,7 +98,7 @@ export default function Reviews() {
                     <td className='p-2'>
                       <Link href={`/admin/reviews/${review._id}`}>
                         <a>
-                          <Buttons.Edit />
+                          <EditIconBtn />
                         </a>
                       </Link>
                     </td>
