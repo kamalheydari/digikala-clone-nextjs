@@ -4,7 +4,7 @@ import Head from "next/head";
 
 import { useGetOrdersQuery } from "app/api/orderApi";
 
-import { Buttons, Pagination, ShowWrapper, EmptyOrdersList } from "components";
+import { Buttons, Pagination, ShowWrapper, EmptyOrdersList, PageContainer } from "components";
 
 export default function OrdersHome() {
   //? Local State
@@ -28,9 +28,9 @@ export default function OrdersHome() {
       <Head>
         <title>مدیریت | سفارشات</title>
       </Head>
-      <Buttons.Back backRoute='/admin'>سفارشات</Buttons.Back>
-      <div className='section-divide-y' />
-      <div className='p-3 md:px-3 xl:px-8 2xl:px-10' id='orders'>
+      <PageContainer title='سفارشات'>
+
+      <section className='p-3 md:px-3 xl:px-8 2xl:px-10' id='orders'>
         <ShowWrapper
           error={error}
           isError={isError}
@@ -99,7 +99,8 @@ export default function OrdersHome() {
             />
           </div>
         )}
-      </div>
+      </section>
+      </PageContainer>
     </main>
   );
 }

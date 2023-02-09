@@ -3,12 +3,12 @@ import { useRouter } from "next/router";
 
 import { useGetSingleReviewQuery } from "app/api/reviewApi";
 
-import { Buttons, ReveiwCard, ShowWrapper } from "components";
+import { PageContainer, ReveiwCard, ShowWrapper } from "components";
 
 export default function SingleComment() {
   const router = useRouter();
 
-  //? Get Single Review Query
+  //? Get Single Review Data
   const {
     data,
     isError,
@@ -20,26 +20,27 @@ export default function SingleComment() {
     id: router.query.id,
   });
 
+  //? Render
   return (
     <main>
       <Head>
         <title>مدیریت | دیدگاه‌</title>
       </Head>
-      <Buttons.Back backRoute='/admin/reviews'>دیدگاه</Buttons.Back>
-      <div className='section-divide-y' />
-      <ShowWrapper
-        error={error}
-        isError={isError}
-        refetch={refetch}
-        isFetching={isFetching}
-        isSuccess={isSuccess}
-        dataLength={data ? 1 : 0}
-        emptyElement={null}
-      >
-        <section className='max-w-5xl px-3 py-3 mx-auto lg:px-8'>
-          <ReveiwCard singleComment item={data?.review} />
-        </section>
-      </ShowWrapper>
+      <PageContainer title='دیدگاه'>
+        <ShowWrapper
+          error={error}
+          isError={isError}
+          refetch={refetch}
+          isFetching={isFetching}
+          isSuccess={isSuccess}
+          dataLength={data ? 1 : 0}
+          emptyElement={null}
+        >
+          <section className='max-w-5xl px-3 py-3 mx-auto lg:px-8'>
+            <ReveiwCard singleComment item={data?.review} />
+          </section>
+        </ShowWrapper>
+      </PageContainer>
     </main>
   );
 }

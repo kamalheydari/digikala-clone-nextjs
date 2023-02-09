@@ -19,7 +19,6 @@ import {
 } from "app/api/productApi";
 
 import {
-  Buttons,
   AddColors,
   SelectCategories,
   AddSizes,
@@ -27,6 +26,7 @@ import {
   Loading,
   HandleUpdate,
   ConfirmUpdateModal,
+  PageContainer,
 } from "components";
 
 import getDetailsArray from "utils/getDetailsArray";
@@ -156,6 +156,7 @@ export default function Product() {
     );
   };
 
+  //? Render
   return (
     <>
       {isConfirmUpdate && (
@@ -178,68 +179,17 @@ export default function Product() {
           <title>مدیریت | {id ? "بروزرسانی محصول" : "محصول جدید"}</title>
         </Head>
 
-        <Buttons.Back backRoute='/admin'>
-          {id ? "بروزرسانی محصول" : "محصول جدید"}
-        </Buttons.Back>
-        <div className='section-divide-y' />
-
-        <section className='p-3 md:px-3 xl:px-8 2xl:px-10'>
-          <form onSubmit={submitHandler} className='space-y-10'>
-            <div className='space-y-1.5'>
-              <label htmlFor='title'>عنوان</label>
-              <input
-                type='text'
-                className='text-right input'
-                name='title'
-                id='title'
-                value={product.title}
-                onChange={(e) =>
-                  dispatch(
-                    changeProductItems({
-                      name: e.target.name,
-                      value: e.target.value,
-                    })
-                  )
-                }
-              />
-            </div>
-            <div className='space-y-1.5'>
-              <label htmlFor='description'>معرفی</label>
-              <textarea
-                cols='30'
-                rows='4'
-                type='text'
-                className='text-right input'
-                name='description'
-                id='description'
-                value={product.description}
-                onChange={(e) =>
-                  dispatch(
-                    changeProductItems({
-                      name: e.target.name,
-                      value: e.target.value,
-                    })
-                  )
-                }
-              />
-            </div>
-            <UploadImages
-              multiple
-              deleteImageHandler={deleteImageHandler}
-              images={product.images}
-              addImage={addImageHandler}
-              getUploadedImages={getUploadedImagesHandler}
-            />
-            <div className='space-y-4 md:flex md:gap-x-2 md:items-baseline md:justify-evenly'>
+        <PageContainer title={id ? "بروزرسانی محصول" : "محصول جدید"}>
+          <section className='p-3 md:px-3 xl:px-8 2xl:px-10'>
+            <form onSubmit={submitHandler} className='space-y-10'>
               <div className='space-y-1.5'>
-                <label htmlFor='price'>قیمت برحسب تومان</label>
+                <label htmlFor='title'>عنوان</label>
                 <input
-                  type='number'
-                  name='price'
-                  id='price'
-                  className='input'
-                  placeholder='0'
-                  value={product.price}
+                  type='text'
+                  className='text-right input'
+                  name='title'
+                  id='title'
+                  value={product.title}
                   onChange={(e) =>
                     dispatch(
                       changeProductItems({
@@ -251,14 +201,15 @@ export default function Product() {
                 />
               </div>
               <div className='space-y-1.5'>
-                <label htmlFor='inStock'>موجودی</label>
-                <input
-                  type='number'
-                  name='inStock'
-                  id='inStock'
-                  className='input'
-                  placeholder='0'
-                  value={product.inStock}
+                <label htmlFor='description'>معرفی</label>
+                <textarea
+                  cols='30'
+                  rows='4'
+                  type='text'
+                  className='text-right input'
+                  name='description'
+                  id='description'
+                  value={product.description}
                   onChange={(e) =>
                     dispatch(
                       changeProductItems({
@@ -269,137 +220,184 @@ export default function Product() {
                   }
                 />
               </div>
-              <div className='space-y-1.5'>
-                <label htmlFor='discount'>تخفیف برحسب درصد</label>
-                <input
-                  type='number'
-                  name='discount'
-                  id='discount'
-                  className='input'
-                  placeholder='0%'
-                  value={product.discount}
-                  onChange={(e) =>
-                    dispatch(
-                      changeProductItems({
-                        name: e.target.name,
-                        value: e.target.value,
-                      })
-                    )
-                  }
-                />
-              </div>
-            </div>
-
-            {!id && (
-              <SelectCategories
-                setSelectedCategories={setSelectedCategories}
-                show={["lvlOne", "lvlTwo", "lvlThree"]}
+              <UploadImages
+                multiple
+                deleteImageHandler={deleteImageHandler}
+                images={product.images}
+                addImage={addImageHandler}
+                getUploadedImages={getUploadedImagesHandler}
               />
-            )}
+              <div className='space-y-4 md:flex md:gap-x-2 md:items-baseline md:justify-evenly'>
+                <div className='space-y-1.5'>
+                  <label htmlFor='price'>قیمت برحسب تومان</label>
+                  <input
+                    type='number'
+                    name='price'
+                    id='price'
+                    className='input'
+                    placeholder='0'
+                    value={product.price}
+                    onChange={(e) =>
+                      dispatch(
+                        changeProductItems({
+                          name: e.target.name,
+                          value: e.target.value,
+                        })
+                      )
+                    }
+                  />
+                </div>
+                <div className='space-y-1.5'>
+                  <label htmlFor='inStock'>موجودی</label>
+                  <input
+                    type='number'
+                    name='inStock'
+                    id='inStock'
+                    className='input'
+                    placeholder='0'
+                    value={product.inStock}
+                    onChange={(e) =>
+                      dispatch(
+                        changeProductItems({
+                          name: e.target.name,
+                          value: e.target.value,
+                        })
+                      )
+                    }
+                  />
+                </div>
+                <div className='space-y-1.5'>
+                  <label htmlFor='discount'>تخفیف برحسب درصد</label>
+                  <input
+                    type='number'
+                    name='discount'
+                    id='discount'
+                    className='input'
+                    placeholder='0%'
+                    value={product.discount}
+                    onChange={(e) =>
+                      dispatch(
+                        changeProductItems({
+                          name: e.target.name,
+                          value: e.target.value,
+                        })
+                      )
+                    }
+                  />
+                </div>
+              </div>
 
-            {optionsType === "colors" || product.colors.length > 0 ? (
-              <AddColors />
-            ) : optionsType === "sizes" || product.sizes.length > 0 ? (
-              <AddSizes />
-            ) : (
-              ""
-            )}
-            <div className='text-sm space-y-1.5'>
-              <span>ویژگی‌ها</span>
-              <table className='w-full max-w-2xl mx-auto' ref={infoTableRef}>
-                <thead className='bg-emerald-50 text-emerald-500'>
-                  <tr className=''>
-                    <th className='w-1/3  p-2.5'>نام</th>
-                    <th>مقدار</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {!id &&
-                    infoArray?.map((item, index) => (
-                      <tr key={index} className='border-b-2 border-gray-100'>
-                        <td className='p-2'>{item}</td>
-                        <td
-                          contentEditable='true'
-                          suppressContentEditableWarning='true'
-                          className='input my-0.5 text-right'
-                        ></td>
-                      </tr>
-                    ))}
-                  {id &&
-                    product.info.map((item, index) => (
-                      <tr key={index} className='border-b-2 border-gray-100'>
-                        <td className='p-2'>{item[0]}</td>
-                        <td
-                          contentEditable='true'
-                          suppressContentEditableWarning='true'
-                          className='input my-0.5 text-right'
-                        >
-                          {item[1]}
-                        </td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
-            </div>
-            <div className='text-sm space-y-1.5'>
-              <span>مشخصات</span>
-              <table
-                className='w-full max-w-2xl mx-auto'
-                ref={specificationTableRef}
-              >
-                <thead className='bg-fuchsia-50 text-fuchsia-500 '>
-                  <tr>
-                    <th className='w-1/3 p-2.5'>نام</th>
-                    <th>مقدار</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {!id &&
-                    specificationArray?.map((item, index) => (
-                      <tr key={index} className='border-b-2 border-gray-100'>
-                        <td className='p-2'>{item}</td>
-                        <td
-                          contentEditable='true'
-                          suppressContentEditableWarning='true'
-                          className='input my-0.5 text-right'
-                        ></td>
-                      </tr>
-                    ))}
-                  {id &&
-                    product.specification.map((item, index) => (
-                      <tr key={index} className='border-b-2 border-gray-100'>
-                        <td className='p-2'>{item[0]}</td>
-                        <td
-                          contentEditable='true'
-                          suppressContentEditableWarning='true'
-                          className='input my-0.5 text-right'
-                        >
-                          {item[1]}
-                        </td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
-            </div>
-            {id ? (
-              <button
-                className='px-6 mx-auto mt-8 rounded-3xl btn bg-amber-500'
-                type='button'
-                onClick={updateHandler}
-              >
-                بروزرسانی اطلاعات
-              </button>
-            ) : (
-              <button
-                className='px-6 mx-auto mt-8 bg-green-500 rounded-3xl btn'
-                type='submit'
-                disabled={isLoading}
-              >
-                {isLoading ? <Loading /> : "ثبت اطلاعات"}
-              </button>
-            )}
-          </form>
-        </section>
+              {!id && (
+                <SelectCategories
+                  setSelectedCategories={setSelectedCategories}
+                  show={["lvlOne", "lvlTwo", "lvlThree"]}
+                />
+              )}
+
+              {optionsType === "colors" || product.colors.length > 0 ? (
+                <AddColors />
+              ) : optionsType === "sizes" || product.sizes.length > 0 ? (
+                <AddSizes />
+              ) : (
+                ""
+              )}
+              <div className='text-sm space-y-1.5'>
+                <span>ویژگی‌ها</span>
+                <table className='w-full max-w-2xl mx-auto' ref={infoTableRef}>
+                  <thead className='bg-emerald-50 text-emerald-500'>
+                    <tr className=''>
+                      <th className='w-1/3  p-2.5'>نام</th>
+                      <th>مقدار</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {!id &&
+                      infoArray?.map((item, index) => (
+                        <tr key={index} className='border-b-2 border-gray-100'>
+                          <td className='p-2'>{item}</td>
+                          <td
+                            contentEditable='true'
+                            suppressContentEditableWarning='true'
+                            className='input my-0.5 text-right'
+                          ></td>
+                        </tr>
+                      ))}
+                    {id &&
+                      product.info.map((item, index) => (
+                        <tr key={index} className='border-b-2 border-gray-100'>
+                          <td className='p-2'>{item[0]}</td>
+                          <td
+                            contentEditable='true'
+                            suppressContentEditableWarning='true'
+                            className='input my-0.5 text-right'
+                          >
+                            {item[1]}
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className='text-sm space-y-1.5'>
+                <span>مشخصات</span>
+                <table
+                  className='w-full max-w-2xl mx-auto'
+                  ref={specificationTableRef}
+                >
+                  <thead className='bg-fuchsia-50 text-fuchsia-500 '>
+                    <tr>
+                      <th className='w-1/3 p-2.5'>نام</th>
+                      <th>مقدار</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {!id &&
+                      specificationArray?.map((item, index) => (
+                        <tr key={index} className='border-b-2 border-gray-100'>
+                          <td className='p-2'>{item}</td>
+                          <td
+                            contentEditable='true'
+                            suppressContentEditableWarning='true'
+                            className='input my-0.5 text-right'
+                          ></td>
+                        </tr>
+                      ))}
+                    {id &&
+                      product.specification.map((item, index) => (
+                        <tr key={index} className='border-b-2 border-gray-100'>
+                          <td className='p-2'>{item[0]}</td>
+                          <td
+                            contentEditable='true'
+                            suppressContentEditableWarning='true'
+                            className='input my-0.5 text-right'
+                          >
+                            {item[1]}
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
+              </div>
+              {id ? (
+                <button
+                  className='px-6 mx-auto mt-8 rounded-3xl btn bg-amber-500'
+                  type='button'
+                  onClick={updateHandler}
+                >
+                  بروزرسانی اطلاعات
+                </button>
+              ) : (
+                <button
+                  className='px-6 mx-auto mt-8 bg-green-500 rounded-3xl btn'
+                  type='submit'
+                  disabled={isLoading}
+                >
+                  {isLoading ? <Loading /> : "ثبت اطلاعات"}
+                </button>
+              )}
+            </form>
+          </section>
+        </PageContainer>
       </main>
     </>
   );

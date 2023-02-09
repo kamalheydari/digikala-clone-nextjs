@@ -3,13 +3,19 @@ import Head from "next/head";
 import { useDispatch } from "react-redux";
 import { openModal } from "app/slices/modal.slice";
 
-import { Buttons, Icons, MobileForm, NameForm } from "components";
+import {
+  Icons,
+  MobileForm,
+  NameForm,
+  PageContainer,
+} from "components";
 
 import useUserInfo from "hooks/useUserInfo";
 
 export default function PersonalInfo() {
   const dispatch = useDispatch();
 
+  //? Get User Data
   const { userInfo, isLoading } = useUserInfo();
 
   //? Handlers
@@ -56,6 +62,7 @@ export default function PersonalInfo() {
     </div>
   );
 
+  //? Render
   return (
     <>
       <NameForm />
@@ -65,22 +72,22 @@ export default function PersonalInfo() {
         <Head>
           <title>پروفایل | اطلاعات حساب کاربری</title>
         </Head>
-        <Buttons.Back backRoute='/profile'>اطلاعات حساب کاربری</Buttons.Back>
-        <div className='section-divide-y' />
-        <section className='lg:flex'>
-          <InfoField
-            label='نام و نام خانوادگی'
-            info={userInfo?.name}
-            editHandler={nameEditHandler}
-            isLoading={isLoading}
-          />
-          <InfoField
-            label='شماره موبایل'
-            info={userInfo?.mobile}
-            editHandler={mobilEditHandler}
-            isLoading={isLoading}
-          />
-        </section>
+        <PageContainer title='اطلاعات حساب کاربری'>
+          <section className='lg:flex'>
+            <InfoField
+              label='نام و نام خانوادگی'
+              info={userInfo?.name}
+              editHandler={nameEditHandler}
+              isLoading={isLoading}
+            />
+            <InfoField
+              label='شماره موبایل'
+              info={userInfo?.mobile}
+              editHandler={mobilEditHandler}
+              isLoading={isLoading}
+            />
+          </section>
+        </PageContainer>
       </main>
     </>
   );

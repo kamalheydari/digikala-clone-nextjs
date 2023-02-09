@@ -17,15 +17,16 @@ import {
 } from "components";
 
 export default function Home(props) {
-  //? Local State
+  //? State
   const [images, setImages] = useState({});
 
-  //? Get Slider Images Query
+  //? Get Slider Images
   const { data, isSuccess } = useGetImagesQuery();
   useEffect(() => {
     if (isSuccess) setImages(data.root);
   }, [isSuccess]);
 
+  //? Render
   return (
     <main className='space-y-12 xl:mt-28'>
       <Head>

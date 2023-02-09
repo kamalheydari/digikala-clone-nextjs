@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Head from "next/head";
 
-import { Buttons } from "components";
+import {  PageContainer } from "components";
 
 export default function Lists() {
   return (
@@ -9,19 +9,22 @@ export default function Lists() {
       <Head>
         <title>پروفایل | لیست‌ها</title>
       </Head>
-      <Buttons.Back backRoute='/profile'>لیست‌ها</Buttons.Back>
-      <div className='section-divide-y' />
+      <PageContainer title='لیست‌ها'>
+        <section className='py-20'>
+          <div className='relative mx-auto h-52 w-52'>
+            <Image
+              src='/icons/favorites-list-empty.svg'
+              layout='fill'
+              alt='لیست خالی'
+            />
+          </div>
 
-      <section className='py-20'>
-        <div className='relative mx-auto h-52 w-52'>
-          <Image src='/icons/favorites-list-empty.svg' layout='fill' alt='لیست خالی' />
-        </div>
-
-        <p className='text-center'>لیست علاقه‌مندی‌های شما خالی است.</p>
-        <span className='block my-3 text-base text-center text-amber-500'>
-          (بزودی)
-        </span>
-      </section>
+          <p className='text-center'>لیست علاقه‌مندی‌های شما خالی است.</p>
+          <span className='block my-3 text-base text-center text-amber-500'>
+            (بزودی)
+          </span>
+        </section>
+      </PageContainer>
     </main>
   );
 }

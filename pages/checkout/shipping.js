@@ -19,9 +19,10 @@ export default function ShippingPage() {
   const router = useRouter();
   const dispatch = useDispatch();
 
+  //? Get User Data
   const { userInfo } = useUserInfo();
 
-  //? Local State
+  //? States
   const [paymentMethod, setPaymentMethod] = useState("پرداخت در محل");
 
   //? Store
@@ -97,6 +98,7 @@ export default function ShippingPage() {
     });
   };
 
+  //? Render
   return (
     <>
       <AddressForm />

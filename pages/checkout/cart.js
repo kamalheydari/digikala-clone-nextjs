@@ -23,6 +23,7 @@ export default function Cart() {
   const dispatch = useDispatch();
   const router = useRouter();
 
+  //? Get User Data
   const { userInfo } = useUserInfo();
 
   //? Store
@@ -44,6 +45,7 @@ export default function Cart() {
     router.push("/checkout/shipping");
   };
 
+  //? Render
   if (cartItems.length === 0)
     return (
       <>

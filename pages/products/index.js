@@ -29,16 +29,17 @@ export default function ProductsHome(props) {
   const [isFilters, filtersHandlers] = useDisclosure();
   const [isSort, sortHandlers] = useDisclosure();
 
+  //? State
+  const [page, setPage] = useState(1);
+
   //? Store
   const { sort } = useSelector((state) => state.filter);
 
-  //? local State
-  const [page, setPage] = useState(1);
-
+  //? Get Category Data 
   const { childCategories, isLoading } = useCategory("/" + query.category);
-  //? Handlers
 
-  //? Change Price Range On Filter Change
+  //? Handlers
+  //* Change Price Range On Filter Change
   useEffect(() => {
     dispatch(
       updateFilter({
@@ -67,12 +68,12 @@ export default function ProductsHome(props) {
     push(`${pathname}?category=${query.category}`);
   };
 
-  //? Change Route On Page Change
+  //* Change Route On Page Change
   useEffect(() => {
     chaneRoute({ page });
   }, [page]);
 
-  //? Reset Page On Filter And Sort Change
+  //* Reset Page On Filter And Sort Change
   useEffect(() => {
     setPage(1);
   }, [query.sort, query.inStock, query.discount, query.price]);

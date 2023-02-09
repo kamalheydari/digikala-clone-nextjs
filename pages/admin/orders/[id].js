@@ -8,7 +8,7 @@ import { Buttons, OrderCard, ShowWrapper } from "components";
 export default function SingleOrder() {
   const router = useRouter();
 
-  //? Get Order Query
+  //? Get Order Data
   const {
     data,
     isError,
@@ -20,6 +20,7 @@ export default function SingleOrder() {
     id: router.query.id,
   });
 
+  //? Render
   return (
     <main>
       <Head>

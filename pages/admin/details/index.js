@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 import { useEffect, useState } from "react";
 
-import { Buttons, SelectCategories } from "components";
+import {  PageContainer, SelectCategories } from "components";
 
 export default function DetailsHome() {
   const router = useRouter();
@@ -22,14 +22,14 @@ export default function DetailsHome() {
         <title>مدیریت | مشخصات</title>
       </Head>
 
-      <Buttons.Back backRoute='/admin'>مشخصات</Buttons.Back>
-      <div className='section-divide-y' />
-      <section className='flex-1 p-3 mx-auto mb-10 space-y-8 w-fit md:w-full md:grid md:grid-cols-2 md:gap-x-12 md:items-baseline'>
-        <SelectCategories
-          setSelectedCategories={setSelectedCategories}
-          show={["lvlOne", "lvlTwo"]}
-        />
-      </section>
+      <PageContainer title='مشخصات'>
+        <section className='flex-1 p-3 mx-auto mb-10 space-y-8 w-fit md:w-full md:grid md:grid-cols-2 md:gap-x-12 md:items-baseline'>
+          <SelectCategories
+            setSelectedCategories={setSelectedCategories}
+            show={["lvlOne", "lvlTwo"]}
+          />
+        </section>
+      </PageContainer>
     </main>
   );
 }

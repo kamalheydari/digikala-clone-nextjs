@@ -1,17 +1,17 @@
 import { useEffect } from "react";
+import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import Head from "next/head";
 
+import validation from "utils/validation";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import validation from "utils/validation";
 
-import { useLoginMutation } from "app/api/userApi";
 import { useDispatch } from "react-redux";
-import { showAlert } from "app/slices/alert.slice";
 import {  userLogin } from "app/slices/user.slice";
+import { showAlert } from "app/slices/alert.slice";
+import { useLoginMutation } from "app/api/userApi";
 
 import { Input, Loading } from "components";
 
@@ -19,27 +19,34 @@ export default function LoginPage() {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  //? Login User Query
+  //? Login User 
   const [
     login,
     { data, isSuccess, isError, isLoading, error },
   ] = useLoginMutation();
 
-  //? Handle Login Response
+  //? Handle Login User Response
   useEffect(() => {
     if (isSuccess) {
+      if (data.data.user.root || data.data.user.role === "admin") {
+        dispatch(userLogin(data.data.access_token));
 
-      dispatch(userLogin(data.data.access_token));
-
-      dispatch(
-        showAlert({
-          status: "success",
-          title: data.msg,
-        })
-      );
-
-      reset();
-      router.push("/");
+        dispatch(
+          showAlert({
+            status: "success",
+            title: data.msg,
+          })
+        );
+        router.push("/admin");
+        reset();
+      } else {
+        dispatch(
+          showAlert({
+            status: "error",
+            title: "شما اجازه دسترسی به پنل ادمین را ندارید",
+          })
+        );
+      }
     }
   }, [isSuccess]);
 
@@ -77,10 +84,12 @@ export default function LoginPage() {
       });
     }
   };
+
+  //? Render
   return (
     <main className='grid items-center min-h-screen '>
       <Head>
-        <title>دیجی‌کالا | ورود</title>
+        <title>مدیریت | ورود</title>
       </Head>
       <section className='container max-w-xl px-12 py-6 space-y-6 lg:border lg:border-gray-100 lg:rounded-lg lg:shadow'>
         <div className='relative h-24 mx-auto w-44'>
@@ -90,7 +99,7 @@ export default function LoginPage() {
             </a>
           </Link>
         </div>
-        <h2 className='text-gray-700'>ورود</h2>
+        <h2>ورود</h2>
         <form className='space-y-5' onSubmit={handleSubmit(submitHander)}>
           <Input
             register={register}
@@ -109,7 +118,7 @@ export default function LoginPage() {
           />
 
           <button
-            className='mx-auto w-44 btn rounded-3xl '
+            className='btn mx-auto w-full max-w-[200px]'
             type='submit'
             disabled={isLoading}
           >
@@ -118,12 +127,24 @@ export default function LoginPage() {
         </form>
 
         <div>
-          <p className='inline ml-2 text-gray-800'>هنوز ثبت‌نام نکردی؟</p>
+          <p className='inline ml-2'>هنوز ثبت‌نام نکردی؟</p>
           <Link href='/register'>
             <a className='text-lg text-blue-400 '>ثبت‌نام</a>
           </Link>
         </div>
       </section>
+
+      <div className='fixed max-w-xs px-2 py-3 bg-white border rounded-lg shadow-lg top-5 right-5'>
+        <h5 className='mb-2 text-amber-600'>
+          برای مشاهده داشبورد مدیریت میتوانید از آدرس ایمیل و رمز عبور زیر
+          استفاده کنید.
+        </h5>
+        <div className='text-left'>
+          <span className='text-sm text-zinc-500'>Email: admin@gmail.com</span>
+          <br />
+          <span className='text-sm text-zinc-500'>Password: 123456</span>
+        </div>
+      </div>
     </main>
   );
 }

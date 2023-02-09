@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useEffect, useState } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useCreateCategoryMutation } from "app/api/categoryApi";
 import { showAlert } from "app/slices/alert.slice";
 
@@ -14,7 +14,7 @@ import {
   SelectCategories,
   UploadImages,
   Input,
-  Buttons,
+  PageContainer,
 } from "components";
 
 export default function CreateCategory() {
@@ -24,7 +24,7 @@ export default function CreateCategory() {
   const [images, setImages] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState({});
 
-  //? Create Category Query
+  //? Create Category 
   const [
     createCtegory,
     { data, isSuccess, isLoading, error, isError },
@@ -76,7 +76,7 @@ export default function CreateCategory() {
       selectedCategories?.lvlOneCategory?._id &&
       !selectedCategories?.lvlTwoCategory?._id
     ) {
-      //? Set LvlTwo category
+      //* Set LvlTwo category
 
       parent = selectedCategories?.lvlOneCategory.category;
       category = parent + "/" + slug;
@@ -84,7 +84,7 @@ export default function CreateCategory() {
       selectedCategories?.lvlOneCategory?._id &&
       selectedCategories?.lvlTwoCategory?._id
     ) {
-      //? Set lvlThree category
+      //* Set lvlThree category
 
       parent = "/" + selectedCategories?.lvlTwoCategory.slug;
       category =
@@ -95,7 +95,7 @@ export default function CreateCategory() {
         "/" +
         slug;
     } else {
-      //? Set LvlOne category
+      //* Set LvlOne category
 
       parent = "/";
       category = parent + slug;
@@ -118,6 +118,8 @@ export default function CreateCategory() {
     setImages([...media, ...imgOldURL]);
   };
 
+
+  //? Render
   return (
     <>
       <main>
@@ -125,53 +127,52 @@ export default function CreateCategory() {
           <title>مدیریت | دسته بندی جدید</title>
         </Head>
 
-        <Buttons.Back backRoute='/admin'>دسته بندی جدید</Buttons.Back>
-        <div className='section-divide-y' />
+        <PageContainer title='دسته بندی جدید'>
+          <section className='p-3 md:px-3 xl:px-8 2xl:px-10'>
+            <form
+              className='flex flex-col justify-between flex-1 gap-y-5 overflow-y-auto pl-4'
+              onSubmit={handleSubmit(submitHander)}
+            >
+              <Input
+                label='نام دسته‌بندی'
+                register={register}
+                errors={formErrors.name}
+                name='name'
+                type='text'
+              />
 
-        <section className='p-3 md:px-3 xl:px-8 2xl:px-10'>
-          <form
-            className='flex flex-col justify-between flex-1 gap-y-5 overflow-y-auto pl-4'
-            onSubmit={handleSubmit(submitHander)}
-          >
-            <Input
-              label='نام دسته‌بندی'
-              register={register}
-              errors={formErrors.name}
-              name='name'
-              type='text'
-            />
+              <Input
+                label='مسیر (با حروف انگلیسی)'
+                register={register}
+                errors={formErrors.slug}
+                name='slug'
+                type='text'
+              />
 
-            <Input
-              label='مسیر (با حروف انگلیسی)'
-              register={register}
-              errors={formErrors.slug}
-              name='slug'
-              type='text'
-            />
+              <UploadImages
+                deleteImageHandler={deleteImageHandler}
+                images={images}
+                addImage={addImageHandler}
+                getUploadedImages={getUploadedImagesHandler}
+              />
 
-            <UploadImages
-              deleteImageHandler={deleteImageHandler}
-              images={images}
-              addImage={addImageHandler}
-              getUploadedImages={getUploadedImagesHandler}
-            />
+              <SelectCategories
+                setSelectedCategories={setSelectedCategories}
+                show={["lvlOne", "lvlTwo"]}
+              />
 
-            <SelectCategories
-              setSelectedCategories={setSelectedCategories}
-              show={["lvlOne", "lvlTwo"]}
-            />
-
-            <div className='py-3 lg:pb-0 '>
-              <button
-                className='px-6 mx-auto mt-8 bg-green-500 rounded-3xl btn'
-                type='submit'
-                disabled={isLoading}
-              >
-                {isLoading ? <Loading /> : "ثبت اطلاعات"}
-              </button>
-            </div>
-          </form>
-        </section>
+              <div className='py-3 lg:pb-0 '>
+                <button
+                  className='px-6 mx-auto mt-8 bg-green-500 rounded-3xl btn'
+                  type='submit'
+                  disabled={isLoading}
+                >
+                  {isLoading ? <Loading /> : "ثبت اطلاعات"}
+                </button>
+              </div>
+            </form>
+          </section>
+        </PageContainer>
       </main>
     </>
   );

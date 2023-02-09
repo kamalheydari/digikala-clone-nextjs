@@ -21,7 +21,7 @@ export default function RegisterPage() {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  //? Create User Query
+  //? Create User
   const [
     createUser,
     { data, isSuccess, isError, isLoading, error },

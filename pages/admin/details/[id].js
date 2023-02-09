@@ -18,21 +18,23 @@ import {
 } from "app/api/detailsApi";
 
 import {
-  Buttons,
   ConfirmDeleteModal,
   ConfirmUpdateModal,
   DetailsList,
   HandleDelete,
   HandleUpdate,
   Loading,
+  PageContainer,
   ShowWrapper,
 } from "components";
+
 import useCategory from "hooks/useCategory";
 
 export default function DetailsPage() {
   const router = useRouter();
   const dispatch = useDispatch();
 
+  //? Get Categories Data
   const { categories } = useCategory();
 
   //? Store
@@ -47,7 +49,7 @@ export default function DetailsPage() {
     optionsType,
   } = useSelector((state) => state.details);
 
-  //? Get Details Query
+  //? Get Details Data
   const {
     data: details,
     isFetching: detailsIsFetching,
@@ -70,7 +72,7 @@ export default function DetailsPage() {
     );
   }, [getCtegory, detailsIsSuccess]);
 
-  //? Delete Details Query
+  //? Delete Details
   const [
     deleteDetails,
     {
@@ -87,7 +89,7 @@ export default function DetailsPage() {
     if (isSuccess_delete) dispatch(resetDetails());
   }, [isSuccess_delete]);
 
-  //? Update Details Query
+  //? Update Details
   const [
     updateDetails,
     {
@@ -99,7 +101,7 @@ export default function DetailsPage() {
     },
   ] = useUpdateDetailsMutation();
 
-  //? Create Details Query
+  //? Create Details
   const [
     createDetails,
     { data, isSuccess, isError, isLoading, error },
@@ -180,6 +182,7 @@ export default function DetailsPage() {
     dispatch(addOptionsType(e.target.value));
   };
 
+  //? Render
   return (
     <>
       {isConfirmUpdate && (
@@ -217,96 +220,94 @@ export default function DetailsPage() {
           <title>مدیریت | مشخصات</title>
         </Head>
 
-        <Buttons.Back backRoute='/admin/details'>
-          مشخصات و ویژگی‌های دسته‌بندی
-          <span> {category?.name}</span>
-        </Buttons.Back>
-        <div className='section-divide-y' />
-
-        <ShowWrapper
-          error={null}
-          isError={null}
-          refetch={null}
-          isFetching={detailsIsFetching}
-          isSuccess={detailsIsSuccess}
-          dataLength={details ? 1 : 0}
-          emptyElement={null}
+        <PageContainer
+          title={` مشخصات و ویژگی‌های دسته‌بندی ${category?.name}`}
         >
-          <form className='p-3 space-y-6' onSubmit={submitHandler}>
-            <div className='space-y-3'>
-              <p className='mb-2'>نوع انتخاب :</p>
-              <div className='flex items-center gap-x-1'>
-                <input
-                  type='radio'
-                  checked={optionsType === "none"}
-                  name='optionsType'
-                  id='none'
-                  value='none'
-                  onChange={handleOptionTypeChange}
-                  className='ml-1'
-                />
-                <label htmlFor='none'>بدون حق انتخاب</label>
+          <ShowWrapper
+            error={null}
+            isError={null}
+            refetch={null}
+            isFetching={detailsIsFetching}
+            isSuccess={detailsIsSuccess}
+            dataLength={details ? 1 : 0}
+            emptyElement={null}
+          >
+            <form className='p-3 space-y-6' onSubmit={submitHandler}>
+              <div className='space-y-3'>
+                <p className='mb-2'>نوع انتخاب :</p>
+                <div className='flex items-center gap-x-1'>
+                  <input
+                    type='radio'
+                    checked={optionsType === "none"}
+                    name='optionsType'
+                    id='none'
+                    value='none'
+                    onChange={handleOptionTypeChange}
+                    className='ml-1'
+                  />
+                  <label htmlFor='none'>بدون حق انتخاب</label>
+                </div>
+                <div className='flex items-center gap-x-1'>
+                  <input
+                    type='radio'
+                    checked={optionsType === "colors"}
+                    name='optionsType'
+                    id='colors'
+                    value='colors'
+                    onChange={handleOptionTypeChange}
+                    className='ml-1'
+                  />
+                  <label htmlFor='colors'>بر اساس رنگ</label>
+                </div>
+                <div className='flex items-center gap-x-1'>
+                  <input
+                    type='radio'
+                    checked={optionsType === "sizes"}
+                    name='optionsType'
+                    id='sizes'
+                    value='sizes'
+                    onChange={handleOptionTypeChange}
+                    className='ml-1'
+                  />
+                  <label htmlFor='sizes'>بر اساس سایز</label>
+                </div>
               </div>
-              <div className='flex items-center gap-x-1'>
-                <input
-                  type='radio'
-                  checked={optionsType === "colors"}
-                  name='optionsType'
-                  id='colors'
-                  value='colors'
-                  onChange={handleOptionTypeChange}
-                  className='ml-1'
-                />
-                <label htmlFor='colors'>بر اساس رنگ</label>
-              </div>
-              <div className='flex items-center gap-x-1'>
-                <input
-                  type='radio'
-                  checked={optionsType === "sizes"}
-                  name='optionsType'
-                  id='sizes'
-                  value='sizes'
-                  onChange={handleOptionTypeChange}
-                  className='ml-1'
-                />
-                <label htmlFor='sizes'>بر اساس سایز</label>
-              </div>
-            </div>
-            <DetailsList category={category} type='info' data={info} />
-            <DetailsList
-              category={category}
-              type='specification'
-              data={specification}
-            />
-            <div className='flex justify-center gap-x-4'>
-              {details_id ? (
-                <>
+              <DetailsList category={category} type='info' data={info} />
+              <DetailsList
+                category={category}
+                type='specification'
+                data={specification}
+              />
+              <div className='flex justify-center gap-x-4'>
+                {details_id ? (
+                  <>
+                    <button
+                      className='mt-8 rounded-3xl btn bg-amber-500'
+                      type='button'
+                      onClick={updateHandler}
+                    >
+                      بروزرسانی اطلاعات
+                    </button>
+                    <button
+                      className='mt-8 bg-red-500 rounded-3xl btn'
+                      type='button'
+                      onClick={deleteHandler}
+                    >
+                      حذف اطلاعات
+                    </button>
+                  </>
+                ) : (
                   <button
-                    className='mt-8 rounded-3xl btn bg-amber-500'
-                    type='button'
-                    onClick={updateHandler}
+                    className='mt-8 bg-green-500 rounded-3xl btn'
+                    type='submit'
                   >
-                    بروزرسانی اطلاعات
+                    {isLoading ? <Loading /> : "ثبت اطلاعات"}
                   </button>
-                  <button
-                    className='mt-8 bg-red-500 rounded-3xl btn'
-                    type='button'
-                    onClick={deleteHandler}
-                  >
-                    حذف اطلاعات
-                  </button>
-                </>
-              ) : (
-                <button
-                  className='mt-8 bg-green-500 rounded-3xl btn'
-                  type='submit'
-                >
-                  {isLoading ? <Loading /> : "ثبت اطلاعات"}
-                </button>
-              )}
-            </div>
-          </form>
-        </ShowWrapper>
+                )}
+              </div>
+            </form>
+          </ShowWrapper>
+        </PageContainer>
       </main>
     </>
   );

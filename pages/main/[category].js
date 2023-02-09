@@ -24,13 +24,14 @@ export default function MainCategory(props) {
   //? State
   const [images, setImages] = useState({});
 
-  //? Get Slider Images Query
+  //? Get Slider Images
   const { data, isSuccess } = useGetImagesQuery();
 
   useEffect(() => {
     if (isSuccess) setImages(data[router.query.category]);
   }, [isSuccess, router.query.category]);
 
+  //? Render
   return (
     <main className='space-y-12 xl:mt-28'>
       <Head>
