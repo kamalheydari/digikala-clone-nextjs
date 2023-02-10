@@ -39,7 +39,7 @@ const getDetails = async (req, res) => {
 const updateDetails = async (req, res) => {
   try {
     const result = await auth(req, res);
-    if (!result)
+    if (!result.root)
       return sendError(res, 403, "شما اجازه انجام این عملیات را ندارید");
 
     const { id } = req.query;
