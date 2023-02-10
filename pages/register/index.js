@@ -14,8 +14,7 @@ import { useCreateUserMutation } from "app/api/userApi";
 import { openModal } from "app/slices/modal.slice";
 import { userLogin } from "app/slices/user.slice";
 
-import { Input, Loading, RedirectToLogin } from "components";
-
+import { Input, Loading, LoginBtn, RedirectToLogin } from "components";
 
 export default function RegisterPage() {
   const dispatch = useDispatch();
@@ -131,13 +130,7 @@ export default function RegisterPage() {
               name='confirmPassword'
             />
 
-            <button
-              className='mx-auto w-44 btn rounded-3xl '
-              type='submit'
-              disabled={isLoading}
-            >
-              {isLoading ? <Loading /> : "عضویت"}
-            </button>
+            <LoginBtn isLoading={isLoading}>عضویت</LoginBtn>
           </form>
 
           <div>

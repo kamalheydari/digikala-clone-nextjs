@@ -19,6 +19,7 @@ import {
   ModalWrapper,
   Input,
   DisplayError,
+  SubmitModalBtn,
 } from "components";
 
 export default function CommentModal() {
@@ -286,9 +287,7 @@ export default function CommentModal() {
             </div>
 
             <div className='py-3 border-t-2 border-gray-200 lg:pb-0 '>
-              <button className='modal-btn' type='submit' disabled={isLoading}>
-                {isLoading ? <Loading /> : "ثبت دیدگاه"}
-              </button>
+              <SubmitModalBtn isLoading={isLoading}>ثبت دیدگاه</SubmitModalBtn>
             </div>
           </form>
         </div>

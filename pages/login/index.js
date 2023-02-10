@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux";
 import { showAlert } from "app/slices/alert.slice";
 import { userLogin } from "app/slices/user.slice";
 
-import { Input, Loading } from "components";
+import { Input, LoginBtn } from "components";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
@@ -113,13 +113,7 @@ export default function LoginPage() {
             name='password'
           />
 
-          <button
-            className='mx-auto w-44 btn rounded-3xl '
-            type='submit'
-            disabled={isLoading}
-          >
-            {isLoading ? <Loading /> : "ورود"}
-          </button>
+          <LoginBtn isLoading={isLoading}>ورود</LoginBtn>
         </form>
 
         <div>

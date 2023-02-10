@@ -4,6 +4,8 @@ import { formatNumber } from "utils/formatNumber";
 
 import Image from "next/image";
 
+import { Button } from "components";
+
 export default function CartInfo({ handleRoute, cart }) {
   //? Store
   const { totalItems, totalPrice, totalDiscount } = useSelector(
@@ -21,7 +23,7 @@ export default function CartInfo({ handleRoute, cart }) {
             {formatNumber(totalPrice)}
           </span>
           <div className='relative mr-1 w-7 h-7'>
-            <Image src='/icons/toman.svg' layout='fill'  alt="تومان" />
+            <Image src='/icons/toman.svg' layout='fill' alt='تومان' />
           </div>
         </div>
       </div>
@@ -34,7 +36,7 @@ export default function CartInfo({ handleRoute, cart }) {
             {formatNumber(totalPrice - totalDiscount)}
           </span>
           <div className='relative mr-1 w-7 h-7'>
-            <Image src='/icons/toman.svg' layout='fill'  alt="تومان"/>
+            <Image src='/icons/toman.svg' layout='fill' alt='تومان' />
           </div>
         </div>
       </div>
@@ -54,15 +56,15 @@ export default function CartInfo({ handleRoute, cart }) {
             {formatNumber(totalDiscount)}
           </span>
           <div className='relative mr-1 w-7 h-7'>
-            <Image src='/icons/tomanRed.svg' layout='fill'  alt="تومان"/>
+            <Image src='/icons/tomanRed.svg' layout='fill' alt='تومان' />
           </div>
         </div>
       </div>
 
       {cart && (
-        <button onClick={handleRoute} className='hidden w-full lg:block btn'>
+        <Button onClick={handleRoute} className='hidden w-full lg:block'>
           ادامه
-        </button>
+        </Button>
       )}
     </div>
   );

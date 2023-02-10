@@ -10,5 +10,9 @@ export default function CloseModal() {
   const handleClick = () => {
     dispatch(closeModal());
   };
-  return <Icons.Close className='cursor-pointer icon' onClick={handleClick} />;
+  return (
+    <button onClick={handleClick} className='p-1'>
+      <Icons.Close className='icon' />
+    </button>
+  );
 }

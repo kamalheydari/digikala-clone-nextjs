@@ -10,6 +10,7 @@ export { default as HandleUpdate } from "./common/HandleUpdate";
 export { default as Input } from "./common/Input";
 export { default as PageContainer } from "./common/PageContainer";
 export * from "./common/IconBtns";
+export * from "./common/Buttons";
 
 //* LOADING
 export { default as Loading } from "./common/Loading";

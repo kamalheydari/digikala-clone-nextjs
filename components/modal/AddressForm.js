@@ -10,11 +10,11 @@ import validation from "utils/validation";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import {
-  Loading,
   CloseModal,
   ModalWrapper,
   Input,
   DisplayError,
+  SubmitModalBtn,
 } from "components";
 
 import cityList from "utils/cityList";
@@ -176,9 +176,7 @@ export default function AddressForm() {
             </div>
 
             <div className='py-3 border-t-2 border-gray-200 lg:pb-0 '>
-              <button className='modal-btn' type='submit' disabled={isLoading}>
-                {isLoading ? <Loading /> : "ثبت اطلاعات"}
-              </button>
+              <SubmitModalBtn isLoading={isLoading}>ثبت اطلاعات</SubmitModalBtn>
             </div>
           </form>
         </div>

@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 import { closeModal } from "app/slices/modal.slice";
 
-import { ModalWrapper } from "components";
+import { Button, ModalWrapper } from "components";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function RedirectToLogin() {
@@ -34,9 +34,9 @@ export default function RedirectToLogin() {
           </div>
           <p className='text-xl font-bold'>{title}</p>
           <p className='text-red-600'>{text}</p>
-          <button type='button' className='mx-auto btn' onClick={handleClick}>
+          <Button className='mx-auto' onClick={handleClick}>
             انتقال به صفحه ورود
-          </button>
+          </Button>
         </div>
       </div>
     </ModalWrapper>

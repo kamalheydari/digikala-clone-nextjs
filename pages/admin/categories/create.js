@@ -15,6 +15,7 @@ import {
   UploadImages,
   Input,
   PageContainer,
+  Button,
 } from "components";
 
 export default function CreateCategory() {
@@ -24,7 +25,7 @@ export default function CreateCategory() {
   const [images, setImages] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState({});
 
-  //? Create Category 
+  //? Create Category
   const [
     createCtegory,
     { data, isSuccess, isLoading, error, isError },
@@ -118,7 +119,6 @@ export default function CreateCategory() {
     setImages([...media, ...imgOldURL]);
   };
 
-
   //? Render
   return (
     <>
@@ -162,13 +162,14 @@ export default function CreateCategory() {
               />
 
               <div className='py-3 lg:pb-0 '>
-                <button
-                  className='px-6 mx-auto mt-8 bg-green-500 rounded-3xl btn'
+                <Button
                   type='submit'
-                  disabled={isLoading}
+                  className='mx-auto !bg-green-500 '
+                  isLoading={isLoading}
+                  rounded
                 >
-                  {isLoading ? <Loading /> : "ثبت اطلاعات"}
-                </button>
+                  ثبت اطلاعات
+                </Button>
               </div>
             </form>
           </section>

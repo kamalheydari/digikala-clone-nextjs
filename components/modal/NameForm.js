@@ -9,7 +9,12 @@ import { showAlert } from "app/slices/alert.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "app/slices/modal.slice";
 
-import { Loading, CloseModal, ModalWrapper, Input } from "components";
+import {
+  CloseModal,
+  ModalWrapper,
+  Input,
+  SubmitModalBtn,
+} from "components";
 
 export default function NameForm() {
   const dispatch = useDispatch();
@@ -100,9 +105,7 @@ export default function NameForm() {
             />
 
             <div className='py-3 border-t-2 border-gray-200 lg:pb-0 '>
-              <button className='modal-btn' type='submit' disabled={isLoading}>
-                {isLoading ? <Loading /> : "ثبت اطلاعات"}
-              </button>
+              <SubmitModalBtn isLoading={isLoading}>ثبت اطلاعات</SubmitModalBtn>
             </div>
           </form>
         </div>

@@ -7,7 +7,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { formatNumber } from "utils/formatNumber";
 import { openModal } from "app/slices/modal.slice";
 
-import { Icons, ArrowLink, CartItem, RedirectToLogin } from "components";
+import {
+  Icons,
+  ArrowLink,
+  CartItem,
+  RedirectToLogin,
+  Button,
+} from "components";
 
 import useUserInfo from "hooks/useUserInfo";
 
@@ -77,9 +83,8 @@ export default function Cart() {
                   </div>
                 </div>
               </div>
-              <button className='btn' type='button' onClick={handleRoute}>
-                ثبت سفارش
-              </button>
+         
+              <Button onClick={handleRoute}>ثبت سفارش</Button>
             </div>
           </div>
         )}

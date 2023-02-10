@@ -4,7 +4,7 @@ import {
   confirmReset,
 } from "app/slices/modal.slice";
 
-import { Loading, ModalWrapper } from "components";
+import { Button, ModalWrapper } from "components";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -46,21 +46,13 @@ export default function ConfirmDeleteModal({ isLoading, isSuccess }) {
             هستید؟
           </p>
           <div className='flex justify-center gap-x-20'>
-            <button
-              type='button'
-              className='rounded-lg btn'
-              onClick={handleConfirmClick}
-              disabled={isLoading}
-            >
-              {isLoading ? <Loading /> : "حذف و ادامه"}
-            </button>
-            <button
-              type='button'
-              className='bg-green-500 rounded-lg btn'
-              onClick={handleCancleClick}
-            >
+            <Button onClick={handleConfirmClick} isLoading={isLoading}>
+              حذف و ادامه
+            </Button>
+
+            <Button className='!bg-green-500' onClick={handleCancleClick}>
               لغو
-            </button>
+            </Button>
           </div>
         </div>
       </div>

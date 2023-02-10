@@ -13,7 +13,7 @@ import { userLogin } from "app/slices/user.slice";
 import { showAlert } from "app/slices/alert.slice";
 import { useLoginMutation } from "app/api/userApi";
 
-import { Input, Loading } from "components";
+import { Input, LoginBtn } from "components";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
@@ -47,7 +47,6 @@ export default function LoginPage() {
           })
         );
       }
-      console.log(data);
     }
   }, [isSuccess]);
 
@@ -118,13 +117,7 @@ export default function LoginPage() {
             name='password'
           />
 
-          <button
-            className='btn mx-auto w-full max-w-[200px]'
-            type='submit'
-            disabled={isLoading}
-          >
-            {isLoading ? <Loading /> : "ورود"}
-          </button>
+          <LoginBtn isLoading={isLoading}>ورود</LoginBtn>
         </form>
 
         <div>

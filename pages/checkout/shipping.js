@@ -9,7 +9,7 @@ import { openModal } from "app/slices/modal.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { showAlert } from "app/slices/alert.slice";
 
-import { AddressForm, CartInfo, Icons, Loading } from "components";
+import { AddressForm, Button, CartInfo, Icons } from "components";
 
 import { formatNumber } from "utils/formatNumber";
 import Head from "next/head";
@@ -251,14 +251,13 @@ export default function ShippingPage() {
                   زرین پال (بزودی)
                 </label>
               </div>
-              <button
+              <Button
                 onClick={handleCreateOrder}
-                className='w-full max-w-5xl mx-auto btn'
-                type='button'
-                disabled={isLoading}
+                isLoading={isLoading}
+                className='w-full max-w-5xl mx-auto'
               >
-                {isLoading ? <Loading /> : "نهایی کردن خرید"}
-              </button>
+                نهایی کردن خرید
+              </Button>
             </div>
           </section>
         </div>

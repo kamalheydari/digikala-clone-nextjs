@@ -13,6 +13,7 @@ import {
   CartInfo,
   Header,
   RedirectToLogin,
+  Button,
 } from "components";
 
 import { formatNumber } from "utils/formatNumber";
@@ -119,9 +120,9 @@ export default function Cart() {
 
         {/* to Shipping */}
         <section className='fixed bottom-0 left-0 right-0 z-10 flex items-center justify-between px-3 py-3 bg-white border-t border-gray-300 shadow-3xl lg:hidden'>
-          <button onClick={handleRoute} className='w-1/2 btn'>
+          <Button className='w-1/2' onClick={handleRoute}>
             ادامه
-          </button>
+          </Button>
           <div>
             <span className='font-thin'>جمع سبد خرید</span>
             <div className='flex items-center'>

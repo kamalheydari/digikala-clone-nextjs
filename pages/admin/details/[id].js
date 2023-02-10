@@ -18,6 +18,7 @@ import {
 } from "app/api/detailsApi";
 
 import {
+  Button,
   ConfirmDeleteModal,
   ConfirmUpdateModal,
   DetailsList,
@@ -279,30 +280,32 @@ export default function DetailsPage() {
                 data={specification}
               />
               <div className='flex justify-center gap-x-4'>
-                {details_id ? (
+                {details_id  ? (
                   <>
-                    <button
-                      className='mt-8 rounded-3xl btn bg-amber-500'
-                      type='button'
+                    <Button
+                      className='bg-amber-500 rounded-3xl'
                       onClick={updateHandler}
+                      isLoading={isLoading_update}
                     >
                       بروزرسانی اطلاعات
-                    </button>
-                    <button
-                      className='mt-8 bg-red-500 rounded-3xl btn'
-                      type='button'
+                    </Button>
+                    <Button
+                      className='rounded-3xl'
+                      isLoading={isLoading_delete}
                       onClick={deleteHandler}
                     >
                       حذف اطلاعات
-                    </button>
+                    </Button>
                   </>
                 ) : (
-                  <button
-                    className='mt-8 bg-green-500 rounded-3xl btn'
+                  <Button
+                    className=' bg-green-500'
+                    rounded
                     type='submit'
+                    isLoading={isLoading}
                   >
-                    {isLoading ? <Loading /> : "ثبت اطلاعات"}
-                  </button>
+                    ثبت اطلاعات
+                  </Button>
                 )}
               </div>
             </form>

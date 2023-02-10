@@ -5,7 +5,7 @@ import { showAlert } from "app/slices/alert.slice";
 
 import { imageUpload } from "utils/imageUpload";
 
-import { Icons, Loading } from "components";
+import { Button, Icons, Loading } from "components";
 
 export default function UploadImages({
   multiple,
@@ -105,14 +105,14 @@ export default function UploadImages({
               </div>
             ))}
           </div>
-          <button
-            className='mx-auto bg-green-500 btn rounded-3xl'
-            type='button'
+          <Button
+            className='mx-auto !bg-green-500'
             onClick={handleUploadImages}
-            disabled={uploadLoading}
+            isLoading={uploadLoading}
+            rounded
           >
-            {uploadLoading ? <Loading /> : "آپلود تصاویر"}
-          </button>
+            آپلود تصاویر
+          </Button>
         </div>
       )}
     </section>

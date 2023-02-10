@@ -27,6 +27,7 @@ import {
   HandleUpdate,
   ConfirmUpdateModal,
   PageContainer,
+  Button,
 } from "components";
 
 import getDetailsArray from "utils/getDetailsArray";
@@ -379,21 +380,23 @@ export default function Product() {
                 </table>
               </div>
               {id ? (
-                <button
-                  className='px-6 mx-auto mt-8 rounded-3xl btn bg-amber-500'
-                  type='button'
+                <Button
+                  className='bg-amber-500 mx-auto'
+                  rounded
                   onClick={updateHandler}
+                  isLoading={isLoading_update}
                 >
                   بروزرسانی اطلاعات
-                </button>
+                </Button>
               ) : (
-                <button
-                  className='px-6 mx-auto mt-8 bg-green-500 rounded-3xl btn'
+                <Button
+                  className='bg-green-500 mx-auto'
+                  rounded
                   type='submit'
-                  disabled={isLoading}
+                  isLoading={isLoading}
                 >
-                  {isLoading ? <Loading /> : "ثبت اطلاعات"}
-                </button>
+                  ثبت اطلاعات
+                </Button>
               )}
             </form>
           </section>
