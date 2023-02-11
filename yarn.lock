@@ -694,6 +694,11 @@ ip@^1.1.5:
   resolved "https://registry.npmjs.org/ip/-/ip-1.1.8.tgz"
   integrity sha512-PuExPYUiu6qMBQb4l06ecm6T6ujzhmh+MeJcW9wa89PoAz5pvd4zPgN5WJV104mb6S2T1AwNIAaB70JNrLQWhg==
 
+iran-city@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/iran-city/-/iran-city-1.1.4.tgz#43e5378457973812b17d24b7b5e8b91d7df6e3ad"
+  integrity sha512-BP+fdBse+W6Zl8WzEoJ5QjhFhVOP48pbcNjBHW1owoAP+4IU1VndGoIWNC3LDuA5AHVQhn4mFghXgvj71wX98A==
+
 is-arrayish@^0.3.1:
   version "0.3.2"
   resolved "https://registry.npmjs.org/is-arrayish/-/is-arrayish-0.3.2.tgz"

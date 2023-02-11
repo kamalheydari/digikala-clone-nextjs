@@ -13,6 +13,7 @@
     "@hookform/resolvers": "^2.9.0",
     "@reduxjs/toolkit": "^1.8.2",
     "bcrypt": "^5.0.1",
+    "iran-city": "^1.1.4",
     "js-cookie": "^3.0.1",
     "jsonwebtoken": "^8.5.1",
     "moment-jalaali": "^0.9.6",
