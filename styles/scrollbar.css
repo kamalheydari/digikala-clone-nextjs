@@ -26,33 +26,8 @@
 }
 
 *::-webkit-scrollbar-thumb {
-  background: #ef4056;
+  background: #b7bdc2;
   border-radius: 14px;
 }
 
-@media (min-width: 1024px) {
-  *::-webkit-scrollbar-track {
-    background: #e8e8e8;
-    border-radius: 14px;
-  }
-
-  *::-webkit-scrollbar-thumb {
-    background: #b7bdc2;
-    border-radius: 14px;
-  }
-}
 /* Chrome, Edge, Safari */
-
-.swiper-button-prev,
-.swiper-button-next {
-  color: #0ea5e9 !important;
-  background: #f2f2f2;
-  opacity: 50%;
-  border-radius: 50%;
-  width: 2rem !important;
-  height: 2rem !important;
-}
-.swiper-button-next::after,
-.swiper-button-prev::after {
-  font-size: 20px !important;
-}

@@ -1,0 +1,32 @@
+@import "tailwindcss/base";
+@import "/fonts/vazir.css";
+@import "/abstracts";
+
+@import "tailwindcss/components";
+@import "/components";
+
+@import "tailwindcss/utilities";
+
+@layer components {
+  .input {
+    @apply block w-full px-3 py-1.5 text-base transition-colors border border-gray-200 rounded-md outline-none bg-zinc-50/30 lg:text-lg focus:border-blue-600;
+  }
+
+  .modal-btn {
+    @apply w-full max-w-xl mx-auto rounded-md btn lg:w-64 lg:ml-0;
+  }
+
+  .error-msg {
+    @apply mt-1.5 inline-flex gap-x-1 justify-center text-sm text-red-600;
+  }
+
+  .btn {
+    @apply text-white bg-red-500 py-3 px-8 flex items-center justify-center rounded-md outline-none;
+  }
+  .icon {
+    @apply w-5 h-5 md:w-6 md:h-6 text-gray-700;
+  }
+  .order-badge {
+    @apply bottom-0 left-1 bg-slate-200 p-1 rounded-md w-5 h-5  text-center text-xs  text-black/80 lg:hidden;
+  }
+}

@@ -1,0 +1,16 @@
+@layer components {
+  .farsi-digits {
+    font-feature-settings: "ss01";
+  }
+
+  .section-divide-y {
+    @apply h-2 bg-gray-100 lg:hidden;
+  }
+
+  .section-divide-x {
+    @apply w-0.5 bg-gray-200;
+  }
+  .bbb {
+    @apply border border-red-600;
+  }
+}
