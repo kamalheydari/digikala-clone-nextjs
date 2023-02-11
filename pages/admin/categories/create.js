@@ -10,10 +10,9 @@ import { useForm } from "react-hook-form";
 import validation from "utils/validation";
 
 import {
-  Loading,
   SelectCategories,
   UploadImages,
-  Input,
+  TextField,
   PageContainer,
   Button,
 } from "components";
@@ -59,7 +58,7 @@ export default function CreateCategory() {
   //? Form Hook
   const {
     handleSubmit,
-    register,
+    control,
     formState: { errors: formErrors },
     reset,
   } = useForm({
@@ -133,17 +132,17 @@ export default function CreateCategory() {
               className='flex flex-col justify-between flex-1 gap-y-5 overflow-y-auto pl-4'
               onSubmit={handleSubmit(submitHander)}
             >
-              <Input
+              <TextField
                 label='نام دسته‌بندی'
-                register={register}
+                control={control}
                 errors={formErrors.name}
                 name='name'
                 type='text'
               />
 
-              <Input
+              <TextField
                 label='مسیر (با حروف انگلیسی)'
-                register={register}
+                control={control}
                 errors={formErrors.slug}
                 name='slug'
                 type='text'

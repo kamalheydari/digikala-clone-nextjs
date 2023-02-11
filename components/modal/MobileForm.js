@@ -9,7 +9,12 @@ import { useEditUserMutation } from "app/api/userApi";
 import { showAlert } from "app/slices/alert.slice";
 import { closeModal } from "app/slices/modal.slice";
 
-import { CloseModal, ModalWrapper, Input, SubmitModalBtn } from "components";
+import {
+  CloseModal,
+  ModalWrapper,
+  TextField,
+  SubmitModalBtn,
+} from "components";
 
 export default function MobileForm() {
   const dispatch = useDispatch();
@@ -54,7 +59,7 @@ export default function MobileForm() {
   //? Form Hook
   const {
     handleSubmit,
-    register,
+    control,
     formState: { errors: formErrors },
     reset,
   } = useForm({
@@ -86,9 +91,9 @@ export default function MobileForm() {
             className='flex flex-col justify-between flex-1 gap-y-5'
             onSubmit={handleSubmit(submitHander)}
           >
-            <Input
+            <TextField
               label='شماره موبایل'
-              register={register}
+              control={control}
               errors={formErrors.mobile}
               name='mobile'
               type='text'

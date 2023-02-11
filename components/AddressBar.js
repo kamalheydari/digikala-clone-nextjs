@@ -37,7 +37,7 @@ function AddressBar() {
         >
           <Icons.Location2 className='icon' />
           <span>
-            ارسال به {userInfo.address.provinces}, {userInfo.address.city}
+            ارسال به {userInfo.address.province.name}, {userInfo.address.city.name}
           </span>
           <Icons.ArrowLeft className='mr-auto icon' />
         </button>

@@ -14,7 +14,7 @@ import { useCreateUserMutation } from "app/api/userApi";
 import { openModal } from "app/slices/modal.slice";
 import { userLogin } from "app/slices/user.slice";
 
-import { Input, Loading, LoginBtn, RedirectToLogin } from "components";
+import { TextField, LoginBtn, RedirectToLogin } from "components";
 
 export default function RegisterPage() {
   const dispatch = useDispatch();
@@ -59,12 +59,13 @@ export default function RegisterPage() {
   //? Form Hook
   const {
     handleSubmit,
-    register,
     formState: { errors: formErrors },
     reset,
     setFocus,
+    control,
   } = useForm({
     resolver: yupResolver(validation.registerSchema),
+    defaultValues: { name: "", email: "", password: "", confirmPassword: "" },
   });
 
   //? Focus On Mount
@@ -97,33 +98,37 @@ export default function RegisterPage() {
             </Link>
           </div>
           <h2 className='text-gray-700'>ثبت‌نام</h2>
-          <form className='space-y-5' onSubmit={handleSubmit(submitHander)}>
-            <Input
-              register={register}
+          <form
+            className='space-y-4'
+            onSubmit={handleSubmit(submitHander)}
+            autoComplete='off'
+          >
+            <TextField
+              control={control}
               errors={formErrors.name}
               type='text'
               placeholder='نام و نام خانوادگی'
               name='name'
             />
 
-            <Input
-              register={register}
+            <TextField
+              control={control}
               errors={formErrors.email}
               type='text'
               placeholder='آدرس ایمیل'
               name='email'
             />
 
-            <Input
-              register={register}
+            <TextField
+              control={control}
               errors={formErrors.password}
               type='password'
               placeholder='رمز عبور'
               name='password'
             />
 
-            <Input
-              register={register}
+            <TextField
+              control={control}
               errors={formErrors.confirmPassword}
               type='password'
               placeholder='تکرار رمز عبور'

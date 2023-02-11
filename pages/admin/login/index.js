@@ -13,7 +13,7 @@ import { userLogin } from "app/slices/user.slice";
 import { showAlert } from "app/slices/alert.slice";
 import { useLoginMutation } from "app/api/userApi";
 
-import { Input, LoginBtn } from "components";
+import { TextField, LoginBtn } from "components";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
@@ -63,12 +63,13 @@ export default function LoginPage() {
   //? Form Hook
   const {
     handleSubmit,
-    register,
+    control,
     formState: { errors: formErrors },
     reset,
     setFocus,
   } = useForm({
     resolver: yupResolver(validation.logInSchema),
+    defaultValues: { name: "", password: "" },
   });
 
   //? Focus On Mount
@@ -100,17 +101,17 @@ export default function LoginPage() {
           </Link>
         </div>
         <h2>ورود</h2>
-        <form className='space-y-5' onSubmit={handleSubmit(submitHander)}>
-          <Input
-            register={register}
+        <form className='space-y-4' onSubmit={handleSubmit(submitHander)}>
+          <TextField
+            control={control}
             errors={formErrors.email}
             type='text'
             placeholder='آدرس ایمیل'
             name='email'
           />
 
-          <Input
-            register={register}
+          <TextField
+            control={control}
             errors={formErrors.password}
             type='password'
             placeholder='رمز عبور'
@@ -119,13 +120,6 @@ export default function LoginPage() {
 
           <LoginBtn isLoading={isLoading}>ورود</LoginBtn>
         </form>
-
-        <div>
-          <p className='inline ml-2'>هنوز ثبت‌نام نکردی؟</p>
-          <Link href='/register'>
-            <a className='text-lg text-blue-400 '>ثبت‌نام</a>
-          </Link>
-        </div>
       </section>
 
       <div className='fixed max-w-xs px-2 py-3 bg-white border rounded-lg shadow-lg top-5 right-5'>

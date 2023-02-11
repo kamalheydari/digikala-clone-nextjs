@@ -12,7 +12,7 @@ import { closeModal } from "app/slices/modal.slice";
 import {
   CloseModal,
   ModalWrapper,
-  Input,
+  TextField,
   SubmitModalBtn,
 } from "components";
 
@@ -59,7 +59,7 @@ export default function NameForm() {
   //? Form Hook
   const {
     handleSubmit,
-    register,
+    control,
     formState: { errors: formErrors },
     reset,
   } = useForm({
@@ -95,9 +95,9 @@ export default function NameForm() {
             className='flex flex-col justify-between flex-1 gap-y-5 '
             onSubmit={handleSubmit(submitHander)}
           >
-            <Input
+            <TextField
               label='نام و نام خانوادگی'
-              register={register}
+              control={control}
               errors={formErrors.name}
               name='name'
               type='text'

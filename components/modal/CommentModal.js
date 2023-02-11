@@ -14,10 +14,9 @@ import validation from "utils/validation";
 
 import {
   Icons,
-  Loading,
   CloseModal,
   ModalWrapper,
-  Input,
+  TextField,
   DisplayError,
   SubmitModalBtn,
 } from "components";
@@ -34,6 +33,7 @@ export default function CommentModal() {
   const {
     handleSubmit,
     register,
+    control,
     formState: { errors: formErrors },
     reset,
   } = useForm({
@@ -174,9 +174,9 @@ export default function CommentModal() {
             </div>
 
             {/* title */}
-            <Input
+            <TextField
               label='عنوان نظر'
-              register={register}
+              control={control}
               errors={formErrors.title}
               name='title'
               type='text'

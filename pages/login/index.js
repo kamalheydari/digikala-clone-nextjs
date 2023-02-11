@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux";
 import { showAlert } from "app/slices/alert.slice";
 import { userLogin } from "app/slices/user.slice";
 
-import { Input, LoginBtn } from "components";
+import { TextField, LoginBtn } from "components";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
@@ -55,12 +55,16 @@ export default function LoginPage() {
   //? Form Hook
   const {
     handleSubmit,
-    register,
     formState: { errors: formErrors },
     reset,
     setFocus,
+    control,
   } = useForm({
     resolver: yupResolver(validation.logInSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
   });
 
   //? Focus On Mount
@@ -93,24 +97,24 @@ export default function LoginPage() {
         </div>
         <h2 className='text-gray-700'>ورود</h2>
         <form
-          className='space-y-5'
+          className='space-y-4'
           onSubmit={handleSubmit(submitHander)}
           autoComplete='off'
         >
-          <Input
-            register={register}
+          <TextField
             errors={formErrors.email}
             type='text'
             placeholder='آدرس ایمیل'
             name='email'
+            control={control}
           />
 
-          <Input
-            register={register}
+          <TextField
             errors={formErrors.password}
             type='password'
             placeholder='رمز عبور'
             name='password'
+            control={control}
           />
 
           <LoginBtn isLoading={isLoading}>ورود</LoginBtn>
