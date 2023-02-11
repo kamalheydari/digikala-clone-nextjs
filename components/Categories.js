@@ -4,7 +4,6 @@ import Link from "next/link";
 
 export default function Categories({ parent, homePage, color, name }) {
   const { childCategories, isLoading } = useCategory(parent);
-console.log({parent,childCategories, isLoading})
   return (
     <section className='px-3'>
       <h4 className='mb-3 text-xl text-center'>
@@ -20,7 +19,7 @@ console.log({parent,childCategories, isLoading})
       </h4>
       <div className='flex flex-wrap justify-center gap-4 mx-auto space-x-4 w-fit'>
         {isLoading
-          ? [1, 2, 3, 4, 5, 6, ].map((index) => (
+          ? [1, 2, 3, 4, 5, 6].map((index) => (
               <div className='animate-pulse' key={index}>
                 <div className='rounded-full h-32 w-32 bg-red-200 mx-auto mb-3' />
                 <div className='h-5 w-40 rounded-md bg-red-200' />
