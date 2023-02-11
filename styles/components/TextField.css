@@ -1,0 +1,8 @@
+@layer components {
+  .text-field__input {
+    @apply block w-full px-3 py-1.5 text-base transition-colors border border-gray-200 rounded-md outline-none bg-zinc-50/30 lg:text-lg focus:border-blue-600;
+  }
+  .text-field__label {
+    @apply text-xs text-gray-700 lg:text-sm md:min-w-max;
+  }
+}
