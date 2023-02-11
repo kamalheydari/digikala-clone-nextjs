@@ -7,8 +7,9 @@ export { default as BigLoading } from "./loading/BigLoading";
 export { default as ShowWrapper } from "./common/ShowWrapper";
 export { default as HandleDelete } from "./common/HandleDelete";
 export { default as HandleUpdate } from "./common/HandleUpdate";
-export { default as Input } from "./common/Input";
+export { default as TextField } from "./common/TextField";
 export { default as PageContainer } from "./common/PageContainer";
+export { default as Combobox } from "./common/Combobox";
 export * from "./common/IconBtns";
 export * from "./common/Buttons";
 
