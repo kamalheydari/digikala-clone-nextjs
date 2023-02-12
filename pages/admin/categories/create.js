@@ -137,7 +137,6 @@ export default function CreateCategory() {
                 control={control}
                 errors={formErrors.name}
                 name='name'
-                type='text'
               />
 
               <TextField
@@ -145,7 +144,6 @@ export default function CreateCategory() {
                 control={control}
                 errors={formErrors.slug}
                 name='slug'
-                type='text'
               />
 
               <UploadImages

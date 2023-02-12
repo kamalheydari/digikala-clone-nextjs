@@ -96,7 +96,6 @@ export default function MobileForm() {
               control={control}
               errors={formErrors.mobile}
               name='mobile'
-              type='text'
               defaultValue={editedData}
             />
 

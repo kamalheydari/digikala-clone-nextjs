@@ -100,7 +100,6 @@ export default function NameForm() {
               control={control}
               errors={formErrors.name}
               name='name'
-              type='text'
               defaultValue={editedData}
             />
 

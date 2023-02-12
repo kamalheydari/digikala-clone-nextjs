@@ -106,7 +106,6 @@ export default function RegisterPage() {
             <TextField
               control={control}
               errors={formErrors.name}
-              type='text'
               placeholder='نام و نام خانوادگی'
               name='name'
             />
@@ -114,7 +113,7 @@ export default function RegisterPage() {
             <TextField
               control={control}
               errors={formErrors.email}
-              type='text'
+              type='email'
               placeholder='آدرس ایمیل'
               name='email'
             />

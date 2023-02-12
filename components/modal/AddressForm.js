@@ -142,7 +142,6 @@ export default function AddressForm() {
                 control={control}
                 errors={formErrors.street}
                 name='street'
-                type='text'
               />
 
               <TextField
@@ -150,7 +149,7 @@ export default function AddressForm() {
                 control={control}
                 errors={formErrors.postalCode}
                 name='postalCode'
-                type='text'
+                type='number'
               />
             </div>
 

@@ -103,10 +103,10 @@ export default function LoginPage() {
         >
           <TextField
             errors={formErrors.email}
-            type='text'
             placeholder='آدرس ایمیل'
             name='email'
             control={control}
+            type='email'
           />
 
           <TextField

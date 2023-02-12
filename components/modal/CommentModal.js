@@ -179,7 +179,6 @@ export default function CommentModal() {
               control={control}
               errors={formErrors.title}
               name='title'
-              type='text'
             />
 
             {/* positivePoints */}
