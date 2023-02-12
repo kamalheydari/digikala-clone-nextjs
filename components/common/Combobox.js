@@ -26,7 +26,7 @@ export default function Combobox({ list, name, control, placeholder }) {
         <div className='combobox__header'>
           <HUICombobox.Input
             className='combobox__input'
-            displayValue={(person) => person.name}
+            displayValue={(item) => item.name}
             onChange={(event) => setQuery(event.target.value)}
             placeholder={placeholder}
             autoComplete='off'
