@@ -18,13 +18,16 @@ export default function Header() {
         <div className='container max-w-[1700px] lg:flex lg:py-2 '>
           <div className='inline-flex items-center justify-between w-full border-b lg:border-b-0 lg:max-w-min lg:ml-8'>
             <Sidebar />
-            <div className='relative w-24 h-14 '>
-              <Link passHref href='/'>
-                <a>
-                  <Image src='/icons/logo.svg' layout='fill' alt='دیجی‌کالا' />
-                </a>
-              </Link>
-            </div>
+            <Link passHref href='/'>
+              <a >
+                <Image
+                  src='/icons/logo.svg'
+                  width={96}
+                  height={56}
+                  alt='دیجی‌کالا'
+                />
+              </a>
+            </Link>
             <Icons.Question className='icon lg:hidden' />
           </div>
           <div className='inline-flex items-center justify-between w-full py-2 border-b gap-x-10 lg:border-b-0'>
