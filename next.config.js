@@ -22,4 +22,7 @@ module.exports = {
       "digikala-clone-heydari-db.storage.iran.liara.space",
     ],
   },
+  experimental: {
+    outputStandalone: true,
+  },
 };
