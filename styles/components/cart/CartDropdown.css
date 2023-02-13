@@ -1,0 +1,18 @@
+@layer components {
+  .cart-dropdown {
+    @apply relative;
+  }
+
+  .cart-dropdown__items {
+    @apply absolute left-2 py-2 mt-2 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-3xl ring-1 ring-black  ring-opacity-5 focus:outline-none z-50 w-[440px];
+  }
+  .cart-dropdown__content__header {
+    @apply flex items-center justify-between px-2 py-1;
+  }
+  .cart-dropdown__content__header span {
+    @apply farsi-digits;
+  }
+  .cart-dropdown__content__footer {
+    @apply px-3 pt-1.5 flex justify-between items-center border-t;
+  }
+}

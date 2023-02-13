@@ -5,9 +5,9 @@ import { Icons } from "components";
 const ArrowLink = ({ children, path }) => {
   return (
     <Link href={path}>
-      <a className='inline-flex items-center text-sm text-blue-400 max-w-max '>
+      <a className='arrow-link'>
         <span className='text-sky-500'>{children}</span>
-        <Icons.ArrowLeft className='text-sky-500 icon' />
+        <Icons.ArrowLeft className='icon text-sky-500 ' />
       </a>
     </Link>
   );

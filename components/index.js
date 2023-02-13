@@ -10,6 +10,7 @@ export { default as HandleUpdate } from "./common/HandleUpdate";
 export { default as TextField } from "./common/TextField";
 export { default as PageContainer } from "./common/PageContainer";
 export { default as Combobox } from "./common/Combobox";
+export { default as Skeleton } from "./common/Skeleton";
 export * from "./common/IconBtns";
 export * from "./common/Buttons";
 
@@ -58,6 +59,8 @@ export { default as CartInfo } from "./cart/CartInfo";
 export { default as CartItem } from "./cart/CartItem";
 export { default as DiscountCartItem } from "./cart/DiscountCartItem";
 export { default as AddToCartInfo } from "./cart/AddToCartInfo";
+export { default as CartDropdown } from "./cart/CartDropdown";
+export { default as CartTotalItems } from "./cart/CartTotalItems";
 
 //* MODAL COMPONENTS
 export { default as ConfirmDeleteModal } from "./modal/ConfirmDeleteModal";
@@ -91,7 +94,7 @@ export { default as Alert } from "./Alert";
 export { default as Header } from "./Header";
 export { default as Navbar } from "./Navbar";
 export { default as Categories } from "./Categories";
-export { default as User } from "./User";
+export { default as Signup } from "./Signup";
 export { default as Search } from "./Search";
 export { default as ValidationToken } from "./ValidationToken";
 export { default as Logout } from "./Logout";
@@ -108,3 +111,4 @@ export { default as Sort } from "./Sort";
 export { default as Services } from "./Services";
 export { default as FreeShipping } from "./FreeShipping";
 export { default as Footer } from "./Footer";
+export { default as UserDropdown } from "./UserDropdown";

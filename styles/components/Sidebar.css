@@ -1,0 +1,14 @@
+@layer components {
+  .sidebar {
+    @apply w-full h-screen fixed duration-200 z-10 top-0 lg:hidden;
+  }
+  .sidebar__content {
+    @apply absolute p-4 top-0 right-0 z-20 w-3/4 h-screen max-w-sm space-y-4 bg-white;
+  }
+  .sidebar__title {
+    @apply p-3 border-t-2  border-gray-200;
+  }
+  .sidebar__category {
+    @apply flex items-center justify-between px-4 py-2;
+  }
+}

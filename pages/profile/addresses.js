@@ -72,7 +72,8 @@ export default function Addresses() {
                 <div className='flex items-center gap-x-2 '>
                   <Icons.UserLocation className='text-gray-500 icon' />
                   <span className='text-xs md:text-sm'>
-                    {userInfo.address.province.name}, {userInfo.address.city.name}
+                    {userInfo.address.province?.name},{" "}
+                    {userInfo.address.city?.name}
                   </span>
                 </div>
                 <div className='flex items-center gap-x-2 '>

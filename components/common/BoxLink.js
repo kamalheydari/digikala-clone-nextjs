@@ -7,17 +7,15 @@ export default function BoxLink({ children, path, name }) {
   const router = useRouter();
   return (
     <div
-      className={`transition-colors hover:bg-gray-200 px-3 ${
-        router.asPath === path
-          ? "border-r-4 border-red-600"
-          : "border-r-4 border-white"
+      className={`box-link ${
+        router.asPath === path ? "box-link--active" : "box-link--deactive"
       }`}
     >
       <Link href={path}>
-        <a className='flex items-center justify-between py-4 mx-4 text-xs font-medium text-gray-700 border-t border-gray-300 gap-x-1 md:text-sm '>
+        <a className='box-link__anchor'>
           {children}
-          <span className='ml-auto mr-3 text-gray-700'>{name}</span>
-          <Icons.ArrowLeft className='text-gray-700 icon lg:mr-3' />
+          <span className='box-link__text'>{name}</span>
+          <Icons.ArrowLeft className='box-link__icon' />
         </a>
       </Link>
     </div>

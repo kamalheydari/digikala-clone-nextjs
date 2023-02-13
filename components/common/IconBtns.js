@@ -5,9 +5,7 @@ import { useRouter } from "next/router";
 const IconButton = ({ title, iconColor, icon: Icon, bg, ...restPorps }) => {
   return (
     <button type='button' title={title} className='mx-3 my-2' {...restPorps}>
-      <Icon
-        className={`rounded-2xl w-8 h-8 p-1 lg:w-9 lg:h-9 lg:p-1.5 ${bg} ${iconColor}`}
-      />
+      <Icon className={`icon-button ${bg} ${iconColor}`} />
     </button>
   );
 };

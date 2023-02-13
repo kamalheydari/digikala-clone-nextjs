@@ -2,12 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 
-
-import { Icons } from "components";
+import { Icons, Skeleton } from "components";
 import useCategory from "hooks/useCategory";
 
 export default function Navbar() {
-  const { categories } = useCategory();
+  const { categories, isLoading } = useCategory();
 
   //? State
   const [activeMinCat, setActiveMinCat] = useState("/electronic-devices");
@@ -21,24 +20,36 @@ export default function Navbar() {
     setActiveMinCat("/electronic-devices");
   };
 
+  //? Local Components
+  const MainCategorySkeleton = () => (
+    <Skeleton count={4}>
+      <Skeleton.Items className='h-16 flex-center justify-between px-4'>
+        <Skeleton.Item
+          height='h-7'
+          width='w-7'
+          animated='background'
+          className='rounded-full'
+        />
+        <Skeleton.Item height='h-5' width='w-32' animated='background' />
+      </Skeleton.Items>
+    </Skeleton>
+  );
+
+  //? Render
   return (
-    <div className='group'>
-      <span
-        className='flex items-center px-2 cursor-default gap-x-1'
+    <div className='navbar group'>
+      <button
+        className='navbar__button'
         onMouseOver={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
         <Icons.Bars className='icon' />
         دسته‌بندی کالاها
-      </span>
-      <div
-        className={`fixed left-0 z-10 w-full h-screen top-28 bg-gray-400/50 ${
-          hover ? "block" : "hidden"
-        }`}
-      />
+      </button>
+      <div className={`navbar__dropshadow ${hover ? "block" : "hidden"}`} />
 
       <div
-        className='absolute z-40 hidden w-full bg-white rounded-md shadow top-8 group-hover:block '
+        className='navbar__content '
         onMouseOver={() => setHover(true)}
         onMouseLeave={() => {
           hanldeDeactive();
@@ -46,69 +57,77 @@ export default function Navbar() {
         }}
       >
         <div className='flex'>
-          <ul className='border-l-2 border-gray-100 w-72'>
-            {categories.slice(0, 2).map((mainCategory) => {
-              if (mainCategory.parent === "/") {
-                return (
-                  <li
-                    key={mainCategory._id}
-                    className='w-full px-2 py-0.5 text-sm hover:bg-gray-100 group'
-                    onMouseOver={() => handleActive(mainCategory)}
-                  >
-                    <Link href={`/main/${mainCategory.slug}`}>
-                      <a className='px-3 py-3 flex gap-x-1.5 items-center'>
-                        <div className='relative h-7 w-7 grayscale '>
-                          <Image
-                            src={mainCategory.image.url}
-                            layout='fill'
-                            alt={mainCategory.name}
-                            placeholder='blur'
-                            blurDataURL='/placeholder.png'
-                          />
-                        </div>
-                        <span>{mainCategory.name}</span>
-                      </a>
-                    </Link>
-                  </li>
-                );
-              }
-            })}
+          <ul className='navbar__content__main-categories'>
+            {isLoading ? (
+              <MainCategorySkeleton />
+            ) : (
+              categories.slice(0, 2).map((mainCategory) => {
+                if (mainCategory.parent === "/") {
+                  return (
+                    <li
+                      key={mainCategory._id}
+                      className='main-category group'
+                      onMouseOver={() => handleActive(mainCategory)}
+                    >
+                      <Link href={`/main/${mainCategory.slug}`}>
+                        <a>
+                          <div className='relative h-7 w-7 grayscale '>
+                            <Image
+                              src={mainCategory.image.url}
+                              layout='fill'
+                              alt={mainCategory.name}
+                              placeholder='blur'
+                              blurDataURL='/placeholder.png'
+                            />
+                          </div>
+                          <span>{mainCategory.name}</span>
+                        </a>
+                      </Link>
+                    </li>
+                  );
+                }
+              })
+            )}
           </ul>
-          <ul className='flex flex-wrap w-full gap-10 px-2 py-4'>
-            {categories.map((parentCategory) => {
-              if (parentCategory.parent === activeMinCat) {
-                return (
-                  <li key={parentCategory._id} className='h-fit'>
-                    <Link href={`/products?category=${parentCategory.slug}`}>
-                      <a className='flex items-center px-2 mb-1 text-sm font-semibold tracking-wider text-gray-700 border-r-2 border-red-500'>
-                        {parentCategory.name}
-                        <Icons.ArrowLeft className='icon' />
-                      </a>
-                    </Link>
-                    <ul className='space-y-1'>
-                      {categories.map((childCategory) => {
-                        if (
-                          childCategory.parent ===
-                          "/" + parentCategory.slug
-                        ) {
-                          return (
-                            <li key={childCategory._id} className=''>
-                              <Link
-                                href={`/products?category=${childCategory.slug}`}
-                              >
-                                <a className='px-1 text-xs font-medium text-gray-700'>
-                                  {childCategory.name}
-                                </a>
-                              </Link>
-                            </li>
-                          );
-                        }
-                      })}
-                    </ul>
-                  </li>
-                );
-              }
-            })}
+          <ul className='navbar__content__sub-categories'>
+            {isLoading
+              ? null
+              : categories.map((parentCategory) => {
+                  if (parentCategory.parent === activeMinCat) {
+                    return (
+                      <li key={parentCategory._id} className='sub-category'>
+                        <Link
+                          href={`/products?category=${parentCategory.slug}`}
+                        >
+                          <a className='lvl-two_category'>
+                            {parentCategory.name}
+                            <Icons.ArrowLeft className='icon' />
+                          </a>
+                        </Link>
+                        <ul className='space-y-1'>
+                          {categories.map((childCategory) => {
+                            if (
+                              childCategory.parent ===
+                              "/" + parentCategory.slug
+                            ) {
+                              return (
+                                <li key={childCategory._id} className=''>
+                                  <Link
+                                    href={`/products?category=${childCategory.slug}`}
+                                  >
+                                    <a className='lvl-three_category'>
+                                      {childCategory.name}
+                                    </a>
+                                  </Link>
+                                </li>
+                              );
+                            }
+                          })}
+                        </ul>
+                      </li>
+                    );
+                  }
+                })}
           </ul>
         </div>
       </div>

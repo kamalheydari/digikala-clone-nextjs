@@ -1,0 +1,24 @@
+@layer components {
+  .box-link {
+    @apply transition-colors hover:bg-gray-200 px-3;
+  }
+
+  .box-link--active {
+    @apply border-r-4 border-red-600;
+  }
+
+  .box-link--deactive {
+    @apply border-r-4 border-white;
+  }
+
+  .box-link__anchor {
+    @apply flex-center py-4 mx-4 text-xs font-medium text-gray-700 border-t border-gray-300 gap-x-1 md:text-sm;
+  }
+
+  .box-link__text {
+    @apply ml-auto mr-3 text-gray-700;
+  }
+  .box-link__icon {
+    @apply icon text-gray-700  lg:mr-3;
+  }
+}

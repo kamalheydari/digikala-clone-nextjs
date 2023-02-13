@@ -12,7 +12,7 @@
   }
 
   .combobox__button {
-    @apply absolute inset-y-0 right-0 flex items-center px-2;
+    @apply absolute inset-y-0 right-0 flex-center px-2;
   }
 
   .combobox__options {
@@ -24,7 +24,7 @@
   }
 
   .combobox__option--active-icon {
-    @apply absolute inset-y-0 left-0 flex items-center pl-3;
+    @apply absolute inset-y-0 left-0 flex-center pl-3;
   }
 
   .combobox__not-found {

@@ -1,0 +1,5 @@
+@layer components {
+  .icon-button {
+    @apply rounded-2xl w-8 h-8 p-1 lg:w-9 lg:h-9 lg:p-1.5 active:scale-95;
+  }
+}

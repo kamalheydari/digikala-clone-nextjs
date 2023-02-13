@@ -22,15 +22,9 @@ export default function Logout() {
   };
 
   return (
-    <div className='px-3 transition-colors hover:bg-gray-200'>
-      <div
-        role='button'
-        className='flex justify-between py-4 mx-4 text-xs text-gray-700 border-t border-gray-300 cursor-pointer gap-x-2 md:text-sm'
-        onClick={() => handleLogout()}
-      >
-        <Icons.Logout className='text-black icon' />
-        <span className='ml-auto mr-3 text-gray-700'>خروج از حساب کاربری</span>
-      </div>
-    </div>
+    <button type='button' className='logout' onClick={() => handleLogout()}>
+      <Icons.Logout className='text-black icon' />
+      <span>خروج از حساب کاربری</span>
+    </button>
   );
 }
