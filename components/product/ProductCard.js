@@ -73,11 +73,15 @@ export default function ProductCard({ product, slide }) {
                     <DiscountProduct discount={product.discount} />
                   )}
                 </div>
-                <ProductPrice
-                  inStock={product.inStock}
-                  discount={product.discount}
-                  price={product.price}
-                />
+                {product.inStock !== 0 ? (
+                  <ProductPrice
+                    inStock={product.inStock}
+                    discount={product.discount}
+                    price={product.price}
+                  />
+                ) : (
+                  <span className='h-12 my-0.5'>ناموجود</span>
+                )}
               </div>
             </div>
           </div>

@@ -20,7 +20,7 @@ import {
   SelectColor,
   SelectSize,
   OutOfStock,
-  AddToCartInfo,
+  AddToCart,
 } from "components";
 
 export default function SingleProduct({ product, smilarProducts }) {
@@ -112,7 +112,7 @@ export default function SingleProduct({ product, smilarProducts }) {
         </section>
 
         {/* Add To Cart */}
-        {product.inStock > 0 && <AddToCartInfo product={product} />}
+        {product.inStock > 0 && <AddToCart product={product} />}
       </div>
 
       <Services />
@@ -142,7 +142,7 @@ export default function SingleProduct({ product, smilarProducts }) {
           />
         </div>
         <div className='hidden w-full px-3 lg:block lg:max-w-xs xl:max-w-sm'>
-          {product.inStock > 0 && <AddToCartInfo product={product} second />}
+          {product.inStock > 0 && <AddToCart product={product} second />}
         </div>
       </div>
     </main>

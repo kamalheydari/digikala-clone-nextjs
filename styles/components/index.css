@@ -8,6 +8,7 @@
 @import "/common/PageContainer.css";
 
 @import "/cart/CartDropdown.css";
+@import "/cart/AddToCart.css";
 
 @import "/Header.css";
 @import "/Sidebar.css";

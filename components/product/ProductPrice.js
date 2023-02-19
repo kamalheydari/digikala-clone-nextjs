@@ -8,29 +8,25 @@ export default function ProductPrice({
   discount,
   price,
 }) {
-  if (inStock !== 0) {
-    return (
-      <div className={`${singleProduct && "flex flex-col-reverse"}`}>
-        <div className={`flex items-center ${discount === 0 && "h-12 my-0.5"}`}>
-          <span className='text-sm text-gray-700 farsi-digits'>
-            {formatNumber(price - (discount * price) / 100)}
-          </span>
-          <Toman className='mr-1 w-7 h-7' />
-        </div>
-
-        {discount > 0 && (
-          <div className=''>
-            <span className='ml-2 text-sm text-gray-500 line-through farsi-digits'>
-              {formatNumber(price)}
-            </span>
-            {singleProduct && discount > 0 && inStock !== 0 && (
-              <DiscountProduct discount={discount} />
-            )}
-          </div>
-        )}
+  return (
+    <div className={`${singleProduct && "flex flex-col-reverse"}`}>
+      <div className='flex items-center'>
+        <span className='farsi-digits text-sm text-gray-700'>
+          {formatNumber(price - (discount * price) / 100)}
+        </span>
+        <Toman className='mr-1 w-7 h-7' />
       </div>
-    );
-  } else {
-    return <span className='h-12 my-0.5'>ناموجود</span>;
-  }
+
+      {discount > 0 && (
+        <div>
+          <span className='ml-2 text-sm text-gray-500 line-through farsi-digits'>
+            {formatNumber(price)}
+          </span>
+          {singleProduct && discount > 0 && inStock !== 0 && (
+            <DiscountProduct discount={discount} />
+          )}
+        </div>
+      )}
+    </div>
+  );
 }

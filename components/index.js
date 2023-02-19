@@ -53,12 +53,12 @@ export { default as OutOfStock } from "./product/OutOfStock";
 
 //* CART COMPONENTS
 export { default as Cart } from "./cart/Cart";
-export { default as AddToCart } from "./cart/AddToCart";
+export { default as AddToCartOperation } from "./cart/AddToCartOperation";
 export { default as CartButtons } from "./cart/CartButtons";
 export { default as CartInfo } from "./cart/CartInfo";
 export { default as CartItem } from "./cart/CartItem";
 export { default as DiscountCartItem } from "./cart/DiscountCartItem";
-export { default as AddToCartInfo } from "./cart/AddToCartInfo";
+export { default as AddToCart } from "./cart/AddToCart";
 export { default as CartDropdown } from "./cart/CartDropdown";
 export { default as CartTotalItems } from "./cart/CartTotalItems";
 

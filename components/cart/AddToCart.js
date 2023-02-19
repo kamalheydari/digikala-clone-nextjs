@@ -1,88 +1,86 @@
-import { useState, useEffect } from "react";
+import Image from "next/image";
 
-import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "app/slices/cart.slice";
-import { showAlert } from "app/slices/alert.slice";
+import { useSelector } from "react-redux";
 
-import exsitItem from "utils/exsitItem";
+import { AddToCartOperation, Depot, Icons } from "components";
 
-import { ArrowLink, ProductPrice, CartButtons } from "components";
+import { formatNumber } from "utils/formatNumber";
 
-export default function AddToCart({ product }) {
-  const dispatch = useDispatch();
-
+export default function AddToCart({ second, product }) {
   //? Store
   const { tempColor, tempSize } = useSelector((state) => state.cart);
+  return (
+    <>
+      {/* mobile */}
+      <div className='add-to-cart__mobile'>
+        <AddToCartOperation product={product} />
+      </div>
 
-  //? Local State
-  const [currentItemInCart, setCurrentItemInCart] = useState(null);
-
-  //? Store
-  const { cartItems } = useSelector((state) => state.cart);
-
-  useEffect(() => {
-    setCurrentItemInCart(
-      exsitItem(cartItems, product._id, tempColor, tempSize)
-    );
-  }, [tempColor, tempSize, cartItems]);
-
-  //? handlers
-  const handleAddItem = () => {
-    if (product.inStock === 0)
-      return dispatch(
-        showAlert({
-          status: "error",
-          title: "موجودی این محصول به اتمام رسیده",
-        })
-      );
-
-    dispatch(
-      addToCart({
-        productID: product._id,
-        name: product.title,
-        price: product.price,
-        discount: product.discount,
-        inStock: product.inStock,
-        sold: product.sold,
-        color: tempColor,
-        size: tempSize,
-        img: product.images[0],
-        quantity: 1,
-      })
-    );
-  };
-
-  if (product.inStock !== 0)
-    return (
-      <div className='fixed bottom-0 left-0 right-0 z-20 flex items-baseline justify-between px-3 py-4 bg-white border-t border-gray-300 sm:px-5 lg:py-3 lg:p-0 shadow-3xl lg:sticky lg:flex-col-reverse lg:top-32 lg:bg-gray-100 lg:gap-y-4 lg:border-t-0 lg:shadow-none'>
-        {currentItemInCart ? (
-          <div className='flex w-full gap-x-4'>
-            <div className='w-44 lg:w-1/2 '>
-              <CartButtons item={currentItemInCart} />
+      {/* desktop */}
+      <div
+        className={`add-to-cart__desktop ${
+          second ? "lg:top-4 xl:top-32" : "lg:top-60 xl:top-[260px]"
+        } `}
+      >
+        <div className='add-to-cart__desktop__header'>
+          <span className='text-base text-black'>فروشنده :</span>
+          <div className='flex gap-x-2'>
+            <div className='relative w-6 h-6'>
+              <Image src='/icons/mini-logo.png' layout='fill' alt='دیجی‌کالا' />
             </div>
-            <div className='hidden lg:block'>
-              <ArrowLink path='/checkout/cart'>مشاهده سبد خرید</ArrowLink>
-            </div>
+            <span>دیجی‌کالا</span>
           </div>
-        ) : (
-          <button
-            onClick={handleAddItem}
-            className='px-12 text-sm btn lg:w-full'
-          >
-            افزودن به سبد
-          </button>
+        </div>
+        {second && (
+          <>
+            <div className='flex py-3 gap-x-4 '>
+              <div className='relative w-28 h-28'>
+                <Image
+                  src={product.images[0].url}
+                  layout='fill'
+                  alt={product.title}
+                  placeholder='blur'
+                  blurDataURL='/placeholder.png'
+                />
+              </div>
+              <span className='flex-1 text-justify'>{product.title}</span>
+            </div>
+
+            {tempColor && (
+              <div className='add-to-cart__desktop__item'>
+                <span
+                  className='inline-block w-5 h-5 shadow rounded-xl'
+                  style={{ background: tempColor.hashCode }}
+                />
+                <span>{tempColor.name}</span>
+              </div>
+            )}
+            {tempSize && (
+              <div className='add-to-cart__desktop__item'>
+                <Icons.Rule className='icon' />
+                <span className='farsi-digits'>{tempSize.size}</span>
+              </div>
+            )}
+          </>
         )}
 
-        <div className='lg:self-end min-w-fit'>
-          <ProductPrice
-            inStock={product.inStock}
-            discount={product.discount}
-            price={product.price}
-            singleProduct
-          />
+        <div className='py-3 lg:items-center lg:gap-x-2 lg:flex'>
+          <Icons.ShieldCheck className='icon' />
+          <span className='font-light'>گارانتی اصالت و ضمانت تحویل</span>
         </div>
-      </div>
-    );
 
-  return null;
+        <div className='lg:block lg:py-3 '>
+          <Depot inStock={product.inStock} />
+        </div>
+
+        <div className='lg:flex lg:items-center lg:gap-x-1 lg:py-3'>
+          <Icons.Check className='icon' />
+          <span> فروش :</span>
+          <span className='farsi-digits'>{formatNumber(product.sold)}</span>
+        </div>
+
+        <AddToCartOperation product={product} />
+      </div>
+    </>
+  );
 }
