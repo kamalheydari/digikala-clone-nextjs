@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import moment from "moment-jalaali";
 
-import { Icons } from "components";
+import { Icons,Toman } from "components";
 
 import { formatNumber } from "utils/formatNumber";
 import { useEffect } from "react";

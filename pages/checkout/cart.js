@@ -14,6 +14,7 @@ import {
   RedirectToLogin,
   Button,
   EmptyCart,
+  Toman
 } from "components";
 
 import { formatNumber } from "utils/formatNumber";
