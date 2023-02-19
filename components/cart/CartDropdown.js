@@ -12,6 +12,7 @@ import {
   Button,
   CartTotalItems,
   Toman,
+  EmptyCart,
 } from "components";
 
 import useUserInfo from "hooks/useUserInfo";
@@ -65,7 +66,7 @@ export default function CartDropdown() {
             className='cart-dropdown__items
        '
           >
-            {totalItems > 0 && (
+            {totalItems > 0 ? (
               <>
                 {/* Header */}
                 <div className='cart-dropdown__content__header'>
@@ -92,6 +93,13 @@ export default function CartDropdown() {
 
                   <Button onClick={handleRoute}>ثبت سفارش</Button>
                 </div>
+              </>
+            ) : (
+              <>
+                <EmptyCart className='mx-auto h-44 w-44' />
+                <p className='text-base font-bold text-center pt-2'>
+                  سبد خرید شما خالی است!
+                </p>
               </>
             )}
           </Menu.Items>
