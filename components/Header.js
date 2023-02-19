@@ -9,6 +9,7 @@ import {
   Sidebar,
   Navbar,
   AddressBar,
+  Logo,
 } from "components";
 
 export default function Header() {
@@ -20,28 +21,13 @@ export default function Header() {
             <Sidebar />
             <Link passHref href='/'>
               <a>
-                <Image
-                  src='/icons/logo.svg'
-                  width={96}
-                  height={56}
-                  alt='دیجی‌کالا'
-                />
+                <Logo className='w-24 h-14' />
               </a>
             </Link>
             <Icons.Question className='icon lg:hidden' />
           </div>
           <div className='header__middle'>
             <div className='flex gap-x-7 flex-grow'>
-              <Link passHref href='/'>
-                <a className='hidden lg:block relative top-1'>
-                  <Image
-                    src='/icons/logo.svg'
-                    width={96}
-                    height={35}
-                    alt='دیجی‌کالا'
-                  />
-                </a>
-              </Link>
               <Search />
             </div>
             <div className='inline-flex items-center gap-x-4'>

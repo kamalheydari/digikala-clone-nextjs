@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 
 import { truncate } from "utils/truncate";
 
-import {  PageContainer } from "components";
+import { EmptyCart, PageContainer } from "components";
 
 export default function UserHistory() {
   //? Store
@@ -47,9 +47,7 @@ export default function UserHistory() {
           </div>
         ) : (
           <section className='py-20'>
-            <div className='relative mx-auto h-52 w-52'>
-              <Image src='/icons/empty-cart.svg' layout='fill' />
-            </div>
+            <EmptyCart className='mx-auto h-52 w-52' />
             <p className='text-center'>لیست بازدید‌های اخیر شما خالی است.</p>
           </section>
         )}

@@ -1,3 +1,4 @@
+import { Toman, TomanRed } from "components";
 import Image from "next/image";
 
 import { formatNumber } from "utils/formatNumber";
@@ -11,18 +12,16 @@ export default function DiscountCartItem({ item }) {
         <span className='text-red-500 farsi-digits'>
           {formatNumber((item.price * discount).toFixed())}
         </span>
-        <div className='relative w-6 h-6'>
-          <Image src='/icons/tomanRed.svg' layout='fill' alt="تومان"/>
-        </div>
+
+        <TomanRed className='w-6 h-6' />
+
         <span className='text-red-500'>تخفیف</span>
       </div>
       <div className='flex items-center gap-x-2'>
         <span className='text-sm text-gray-700 farsi-digits'>
           {formatNumber(item.price - (item.discount * item.price) / 100)}
         </span>
-        <div className='relative w-6 h-6'>
-          <Image src='/icons/toman.svg' layout='fill' alt="تومان"/>
-        </div>
+        <Toman className='w-6 h-6' />
       </div>
     </div>
   );

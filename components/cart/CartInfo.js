@@ -2,9 +2,7 @@ import { useSelector } from "react-redux";
 
 import { formatNumber } from "utils/formatNumber";
 
-import Image from "next/image";
-
-import { Button } from "components";
+import { Button, Toman, TomanRed } from "components";
 
 export default function CartInfo({ handleRoute, cart }) {
   //? Store
@@ -22,9 +20,7 @@ export default function CartInfo({ handleRoute, cart }) {
           <span className='text-sm farsi-digits'>
             {formatNumber(totalPrice)}
           </span>
-          <div className='relative mr-1 w-7 h-7'>
-            <Image src='/icons/toman.svg' layout='fill' alt='تومان' />
-          </div>
+          <Toman className='mr-1 w-7 h-7' />
         </div>
       </div>
 
@@ -35,9 +31,7 @@ export default function CartInfo({ handleRoute, cart }) {
           <span className='text-sm farsi-digits'>
             {formatNumber(totalPrice - totalDiscount)}
           </span>
-          <div className='relative mr-1 w-7 h-7'>
-            <Image src='/icons/toman.svg' layout='fill' alt='تومان' />
-          </div>
+          <Toman className='mr-1 w-7 h-7' />
         </div>
       </div>
 
@@ -55,9 +49,7 @@ export default function CartInfo({ handleRoute, cart }) {
           <span className='text-sm text-red-500 farsi-digits'>
             {formatNumber(totalDiscount)}
           </span>
-          <div className='relative mr-1 w-7 h-7'>
-            <Image src='/icons/tomanRed.svg' layout='fill' alt='تومان' />
-          </div>
+          <TomanRed className='mr-1 w-7 h-7' />
         </div>
       </div>
 

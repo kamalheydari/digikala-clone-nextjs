@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { Icons, BoxLink, Logout, Orders } from "components";
+import { Icons, BoxLink, Logout, Orders, Person } from "components";
 
 import useUserInfo from "hooks/useUserInfo";
 
@@ -44,9 +44,7 @@ function ProfileAside() {
   return (
     <aside className='sticky mt-6 lg:border lg:border-gray-200 lg:rounded-md lg:py-4 lg:top-6 xl:top-[136px]'>
       <div className='flex items-center justify-between px-5 py-2 '>
-        <div className='relative w-12 h-12'>
-          <Image src='/icons/person.svg' layout='fill' alt='کاربر' />
-        </div>
+        <Person className='w-12 h-12' />
         <div className='flex flex-col ml-auto mr-3 gap-y-1'>
           {isLoading ? (
             <>

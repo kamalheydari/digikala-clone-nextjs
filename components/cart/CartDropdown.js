@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { useRouter } from "next/router";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +11,7 @@ import {
   RedirectToLogin,
   Button,
   CartTotalItems,
+  Toman,
 } from "components";
 
 import useUserInfo from "hooks/useUserInfo";
@@ -86,13 +86,7 @@ export default function CartDropdown() {
                       <span className='text-sm farsi-digits'>
                         {formatNumber(totalPrice - totalDiscount)}
                       </span>
-                      <div className='relative mr-1 w-7 h-7'>
-                        <Image
-                          src='/icons/toman.svg'
-                          layout='fill'
-                          alt='تومان'
-                        />
-                      </div>
+                      <Toman className='mr-1 w-7 h-7' />
                     </div>
                   </div>
 

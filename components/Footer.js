@@ -1,6 +1,14 @@
 import Image from "next/image";
 
-import { Icons, Services } from "components";
+import {
+  AppCoffeBazzar,
+  AppGooglePlay,
+  AppMyket,
+  AppSib,
+  Icons,
+  LogoPersian,
+  Services,
+} from "components";
 
 export default function Footer() {
   return (
@@ -9,15 +17,7 @@ export default function Footer() {
         {/* Logo & scroll to top */}
         <div className='flex justify-between'>
           <div>
-            <div className='relative w-32 h-10 mb-6'>
-              <Image
-                placeholder='blur'
-                blurDataURL='/placeholder.png'
-                src='/icons/logoPersian.svg'
-                layout='fill'
-                alt='دیجی‌کالا'
-              />
-            </div>
+            <LogoPersian className='w-32 h-10 mb-6' />
             <div className='flex flex-col gap-y-2 lg:flex-row lg:gap-x-5'>
               <span>تلفن پشتیبانی ۶۱۹۳۰۰۰۰ - ۰۲۱</span>
               <span className='hidden lg:block bg-gray-300 w-[2px]' />
@@ -84,42 +84,10 @@ export default function Footer() {
           </div>
 
           <div className='grid grid-cols-2 sm:grid-cols-4 gap-x-3'>
-            <div className='relative w-32 h-12 mb-1 sm:w-36 lg:w-44 lg:mb-0'>
-              <Image
-                placeholder='blur'
-                blurDataURL='/placeholder.png'
-                src='/icons/app-coffe-bazzar.svg'
-                layout='fill'
-                alt='کافه بازار'
-              />
-            </div>
-            <div className='relative w-32 h-12 sm:w-36 lg:w-44'>
-              <Image
-                placeholder='blur'
-                blurDataURL='/placeholder.png'
-                src='/icons/app-google-play.svg'
-                layout='fill'
-                alt='گوگل استور'
-              />
-            </div>
-            <div className='relative w-32 h-12 mb-1 sm:w-36 lg:w-44 lg:mb-0'>
-              <Image
-                placeholder='blur'
-                blurDataURL='/placeholder.png'
-                src='/icons/app-myket.svg'
-                layout='fill'
-                alt='متیکن'
-              />
-            </div>
-            <div className='relative w-32 h-12 sm:w-36 lg:w-44'>
-              <Image
-                placeholder='blur'
-                blurDataURL='/placeholder.png'
-                src='/icons/app-sib.svg'
-                layout='fill'
-                alt='سیب'
-              />
-            </div>
+            <AppCoffeBazzar className=' w-32 h-12 mb-1 sm:w-36 lg:w-44 lg:mb-0' />
+            <AppGooglePlay className=' w-32 h-12 mb-1 sm:w-36 lg:w-44 lg:mb-0' />
+            <AppMyket className=' w-32 h-12 mb-1 sm:w-36 lg:w-44 lg:mb-0' />
+            <AppSib className=' w-32 h-12 mb-1 sm:w-36 lg:w-44 lg:mb-0' />
           </div>
         </div>
 

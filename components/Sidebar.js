@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import { Icons, Skeleton } from "components";
+import { Icons, LogoPersian, Skeleton } from "components";
 
 import useDisclosure from "hooks/useDisclosure";
 import useCategory from "hooks/useCategory";
@@ -76,12 +76,7 @@ export default function Sidebar() {
         />
 
         <div className='sidebar__content'>
-          <Image
-            src='/icons/logoPersian.svg'
-            height={40}
-            width={112}
-            alt='دیجی‌کالا'
-          />
+          <LogoPersian className='h-10 w-28' />
           <h5 className='sidebar__title'>دسته‌بندی کالاها</h5>
           {isLoading ? (
             <CategorySkeleton />

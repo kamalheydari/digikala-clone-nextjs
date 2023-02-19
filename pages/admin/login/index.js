@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/router";
 
 import validation from "utils/validation";
@@ -93,13 +92,11 @@ export default function LoginPage() {
         <title>مدیریت | ورود</title>
       </Head>
       <section className='container max-w-xl px-12 py-6 space-y-6 lg:border lg:border-gray-100 lg:rounded-lg lg:shadow'>
-        <div className='relative h-24 mx-auto w-44'>
-          <Link passHref href='/'>
-            <a>
-              <Image src='/icons/logo.svg' layout='fill' alt='دیجی‌کالا' />
-            </a>
-          </Link>
-        </div>
+        <Link passHref href='/'>
+          <a>
+            <Logo className='h-24 mx-auto w-44' />
+          </a>
+        </Link>
         <h2>ورود</h2>
         <form className='space-y-4' onSubmit={handleSubmit(submitHander)}>
           <TextField

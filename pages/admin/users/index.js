@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 import { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +13,7 @@ import {
   ConfirmDeleteModal,
   PageContainer,
   DeleteIconBtn,
+  Person,
 } from "components";
 
 export default function Users() {
@@ -59,7 +59,7 @@ export default function Users() {
     );
   };
 
-//? Render
+  //? Render
   return (
     <>
       {isConfirmDelete && (
@@ -109,13 +109,7 @@ export default function Users() {
                       key={user._id}
                     >
                       <td className='px-2 py-4'>
-                        <div className='relative mx-auto w-7 h-7'>
-                          <Image
-                            src='/icons/person.svg'
-                            layout='fill'
-                            alt='کاربر'
-                          />
-                        </div>
+                        <Person className='mx-auto w-7 h-7' />
                       </td>
                       <td className='px-2 py-4'>{user._id}</td>
                       <td className='px-2 py-4 font-bold'>

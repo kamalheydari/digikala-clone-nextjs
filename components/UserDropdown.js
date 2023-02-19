@@ -2,7 +2,7 @@ import { Fragment } from "react";
 
 import { Menu, Transition } from "@headlessui/react";
 
-import { Icons, Logout } from "components";
+import { Icons, Logout, Person } from "components";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -27,12 +27,7 @@ export default function UserDropdown({ name }) {
             <div className='user-dropdown__item'>
               <Link href='/profile'>
                 <a className='user-dropdown__item__anchor'>
-                  <Image
-                    src='/icons/person.svg'
-                    height={24}
-                    width={24}
-                    alt='کاربر'
-                  />
+                  <Person className='h-6 w-6' />
                   <span>{name}</span>
                   <Icons.ArrowLeft className='text-gray-700 icon lg:mr-3' />
                 </a>

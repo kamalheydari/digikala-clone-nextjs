@@ -3,7 +3,13 @@ import Image from "next/image";
 
 import { formatNumber } from "utils/formatNumber";
 
-import { SpecialSell, CartButtons, Icons, DiscountCartItem } from "components";
+import {
+  SpecialSell,
+  CartButtons,
+  Icons,
+  DiscountCartItem,
+  Toman,
+} from "components";
 
 export default function CartItem({ item }) {
   return (
@@ -65,9 +71,7 @@ export default function CartItem({ item }) {
               <span className='text-sm text-gray-700 farsi-digits'>
                 {formatNumber(item.price)}
               </span>
-              <div className='relative w-6 h-6'>
-                <Image src='/icons/toman.svg' layout='fill' alt='تومان' />
-              </div>
+              <Toman className='w-6 h-6' />
             </div>
           )}
         </div>

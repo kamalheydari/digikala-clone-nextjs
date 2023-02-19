@@ -1,7 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 
-import { Icons, BoxLink, Logout, Orders } from "components";
+import { Icons, BoxLink, Logout, Logo } from "components";
 
 export default function ProfileAside() {
   const profilePaths = [
@@ -44,13 +43,11 @@ export default function ProfileAside() {
 
   return (
     <aside className='sticky mt-6 lg:border lg:border-gray-200 lg:rounded-md lg:py-4 min-w-max top-6'>
-      <div className='relative w-40 h-12 mx-auto'>
-        <Link passHref href='/'>
-          <a>
-            <Image src='/icons/logo.svg' layout='fill' alt='دیجی‌کالا' />
-          </a>
-        </Link>
-      </div>
+      <Link passHref href='/'>
+        <a>
+          <Logo className='w-40 h-12 mx-auto' />
+        </a>
+      </Link>
 
       <div className='mt-4'>
         {profilePaths.map((item, index) => (

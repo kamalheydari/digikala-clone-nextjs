@@ -9,7 +9,7 @@ import { openModal } from "app/slices/modal.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { showAlert } from "app/slices/alert.slice";
 
-import { AddressForm, Button, CartInfo, Icons } from "components";
+import { AddressForm, Button, CartInfo, Icons, LogoPersian } from "components";
 
 import { formatNumber } from "utils/formatNumber";
 import Head from "next/head";
@@ -110,13 +110,7 @@ export default function ShippingPage() {
         <header className='lg:border lg:border-gray-200 lg:rounded-lg'>
           <Link href='/'>
             <a>
-              <div className='relative w-24 h-12 mx-auto'>
-                <Image
-                  src='/icons/logoPersian.svg'
-                  layout='fill'
-                  alt='دیجی‌کالا'
-                />
-              </div>
+              <LogoPersian className='w-24 h-12 mx-auto' />
             </a>
           </Link>
           <div className='flex items-center justify-evenly'>

@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 import { useRouter } from "next/router";
 
 import { clearCart } from "app/slices/cart.slice";
@@ -14,6 +13,7 @@ import {
   Header,
   RedirectToLogin,
   Button,
+  EmptyCart,
 } from "components";
 
 import { formatNumber } from "utils/formatNumber";
@@ -58,9 +58,7 @@ export default function Cart() {
           <div className='section-divide-y' />
 
           <div className='py-20'>
-            <div className='relative mx-auto h-52 w-52'>
-              <Image src='/icons/empty-cart.svg' layout='fill' alt='سبد خالی' />
-            </div>
+            <EmptyCart className='mx-auto h-52 w-52' />
             <p className='text-base font-bold text-center'>
               سبد خرید شما خالی است!
             </p>
@@ -129,9 +127,7 @@ export default function Cart() {
               <span className='text-sm farsi-digits'>
                 {formatNumber(totalPrice - totalDiscount)}
               </span>
-              <div className='relative mr-1 w-7 h-7'>
-                <Image src='/icons/toman.svg' layout='fill' alt='تومان' />
-              </div>
+              <Toman className='mr-1 w-7 h-7' />
             </div>
           </div>
         </section>

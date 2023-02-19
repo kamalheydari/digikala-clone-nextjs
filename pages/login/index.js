@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import Head from "next/head";
 
@@ -13,7 +12,7 @@ import { useDispatch } from "react-redux";
 import { showAlert } from "app/slices/alert.slice";
 import { userLogin } from "app/slices/user.slice";
 
-import { TextField, LoginBtn } from "components";
+import { TextField, LoginBtn, Logo } from "components";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
@@ -88,13 +87,11 @@ export default function LoginPage() {
         <title>دیجی‌کالا | ورود</title>
       </Head>
       <section className='container max-w-xl px-12 py-6 space-y-6 lg:border lg:border-gray-100 lg:rounded-lg lg:shadow'>
-        <div className='relative h-24 mx-auto w-44'>
-          <Link passHref href='/'>
-            <a>
-              <Image src='/icons/logo.svg' layout='fill' alt='دیجی‌کالا' />
-            </a>
-          </Link>
-        </div>
+        <Link passHref href='/'>
+          <a>
+            <Logo className='h-24 mx-auto w-44' />
+          </a>
+        </Link>
         <h2 className='text-gray-700'>ورود</h2>
         <form
           className='space-y-4'

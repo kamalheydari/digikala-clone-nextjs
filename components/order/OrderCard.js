@@ -14,7 +14,6 @@ import { useEditOrderMutation } from "app/api/orderApi";
 export default function OrderCard({ order, singleOrder }) {
   const dispatch = useDispatch();
 
-
   //? Edit Order Query
   const [
     editOrder,
@@ -114,9 +113,7 @@ export default function OrderCard({ order, singleOrder }) {
           <span className='text-black farsi-digits'>
             {formatNumber(order.totalPrice - order.totalDiscount)}
           </span>
-          <div className='relative w-6 h-6'>
-            <Image src='/icons/toman.svg' layout='fill' alt='تومان' />
-          </div>
+          <Toman className='w-6 h-6' />
         </div>
       </div>
       <div className='flex flex-wrap py-5 gap-x-5 gap-y-3 lg:border-t lg:border-gray-200 lg:px-3'>

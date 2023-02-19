@@ -1,7 +1,6 @@
-import Image from "next/image";
 import Head from "next/head";
 
-import {  PageContainer } from "components";
+import { FavoritesListEmpty, PageContainer } from "components";
 
 export default function Lists() {
   return (
@@ -11,14 +10,7 @@ export default function Lists() {
       </Head>
       <PageContainer title='لیست‌ها'>
         <section className='py-20'>
-          <div className='relative mx-auto h-52 w-52'>
-            <Image
-              src='/icons/favorites-list-empty.svg'
-              layout='fill'
-              alt='لیست خالی'
-            />
-          </div>
-
+          <FavoritesListEmpty className='mx-auto h-52 w-52' />
           <p className='text-center'>لیست علاقه‌مندی‌های شما خالی است.</p>
           <span className='block my-3 text-base text-center text-amber-500'>
             (بزودی)

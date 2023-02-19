@@ -1,8 +1,6 @@
-import Image from "next/image";
-
 import { formatNumber } from "utils/formatNumber";
 
-import { DiscountProduct } from "components";
+import { DiscountProduct, Toman } from "components";
 
 export default function ProductPrice({
   singleProduct,
@@ -17,9 +15,7 @@ export default function ProductPrice({
           <span className='text-sm text-gray-700 farsi-digits'>
             {formatNumber(price - (discount * price) / 100)}
           </span>
-          <div className='relative mr-1 w-7 h-7'>
-            <Image src='/icons/toman.svg' layout='fill' alt='تومان' />
-          </div>
+          <Toman className='mr-1 w-7 h-7' />
         </div>
 
         {discount > 0 && (

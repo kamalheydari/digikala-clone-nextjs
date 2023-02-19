@@ -1,6 +1,5 @@
 import { resetFilter, updateFilter } from "app/slices/filter.slice";
-import { Checkbox, Icons } from "components";
-import Image from "next/image";
+import { Checkbox, Icons, Toman } from "components";
 import { useSelector } from "react-redux";
 
 export default function ProductsAside({
@@ -73,9 +72,7 @@ export default function ProductsAside({
               chaneRoute({ price: `${e.target.value}-${max_price}` });
             }}
           />
-          <div className='relative w-6 h-6 '>
-            <Image src='/icons/toman.svg' layout='fill' alt='تومان' />
-          </div>
+          <Toman className='w-6 h-6' />
         </div>
         <div className='flex items-center justify-between mt-2 mb-4 gap-x-1'>
           <span>تا</span>
@@ -91,9 +88,7 @@ export default function ProductsAside({
                 chaneRoute({ price: `${min_price}-${e.target.value}` });
             }}
           />
-          <div className='relative w-6 h-6 '>
-            <Image src='/icons/toman.svg' layout='fill' alt='تومان' />
-          </div>
+          <Toman className='w-6 h-6' />
         </div>
       </div>
     </aside>

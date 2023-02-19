@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { FreeShippingSvg } from "components";
 
 export default function FreeShipping() {
   return (
@@ -10,9 +10,7 @@ export default function FreeShipping() {
             برای سفارش‌ بالای ۵۰۰ هزار تومان
           </p>
         </div>
-        <div className='relative w-32 h-20 px-4'>
-          <Image src='/icons/freeShipping.svg' layout='fill' alt="ارسال رایگان"/>
-        </div>
+        <FreeShippingSvg className='w-32 h-20 px-4' />
       </div>
     </div>
   );

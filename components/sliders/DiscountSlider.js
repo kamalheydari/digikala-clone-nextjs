@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 
-import { DiscountProduct, ProductPrice } from "components";
+import { AmazingTypo, DiscountProduct, ProductPrice } from "components";
 
 export default function DiscountSlider({ products, colors, categoryImage }) {
   return (
@@ -22,13 +22,7 @@ export default function DiscountSlider({ products, colors, categoryImage }) {
         }}
       >
         <SwiperSlide className='py-10 '>
-          <div className='relative w-20 h-20 mx-auto'>
-            <Image
-              src='/icons/amazing-typo.svg'
-              layout='fill'
-              alt='پیشنهاد شگفت انگیز'
-            />
-          </div>
+          <AmazingTypo className='w-20 h-20 mx-auto' />
           <div className='relative w-20 h-20 mx-auto'>
             <Image
               src={categoryImage?.url || "/icons/general.png"}

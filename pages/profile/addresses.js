@@ -1,10 +1,9 @@
 import Head from "next/head";
-import Image from "next/image";
 
 import { useDispatch } from "react-redux";
 import { openModal } from "app/slices/modal.slice";
 
-import { AddressForm, Icons, PageContainer } from "components";
+import { Address, AddressForm, Icons, PageContainer } from "components";
 import useUserInfo from "hooks/useUserInfo";
 
 export default function Addresses() {
@@ -98,11 +97,8 @@ export default function Addresses() {
             </section>
           ) : (
             <section className='flex flex-col items-center py-20 gap-y-4'>
-              <div className='relative h-52 w-52'>
-                <Image src='/icons/address.svg' layout='fill' alt='آدرس' />
-              </div>
+              <Address className='h-52 w-52' />
               <p>هنوز آدرس ثبت نکرده‌اید.</p>
-
               <button
                 className='flex items-center px-3 py-2 text-red-600 border-2 border-red-600 rounded-lg gap-x-3'
                 onClick={edditAddressHandler}

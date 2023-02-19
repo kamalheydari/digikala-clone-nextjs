@@ -1,6 +1,5 @@
 import Head from "next/head";
 import { useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -14,7 +13,7 @@ import { useCreateUserMutation } from "app/api/userApi";
 import { openModal } from "app/slices/modal.slice";
 import { userLogin } from "app/slices/user.slice";
 
-import { TextField, LoginBtn, RedirectToLogin } from "components";
+import { TextField, LoginBtn, RedirectToLogin, Logo } from "components";
 
 export default function RegisterPage() {
   const dispatch = useDispatch();
@@ -90,13 +89,11 @@ export default function RegisterPage() {
           <title>دیجی‌کالا | ثبت‌نام</title>
         </Head>
         <section className='container max-w-xl px-12 py-6 space-y-6 lg:border lg:border-gray-100 lg:rounded-lg lg:shadow'>
-          <div className='relative h-24 mx-auto w-44'>
-            <Link passHref href='/'>
-              <a>
-                <Image src='/icons/logo.svg' layout='fill' alt='دیجی‌کالا' />
-              </a>
-            </Link>
-          </div>
+          <Link passHref href='/'>
+            <a>
+              <Logo className='h-24 mx-auto w-44' />
+            </a>
+          </Link>
           <h2 className='text-gray-700'>ثبت‌نام</h2>
           <form
             className='space-y-4'
