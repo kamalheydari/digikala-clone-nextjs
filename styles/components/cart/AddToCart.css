@@ -3,7 +3,7 @@
     @apply fixed bottom-0 left-0 right-0 z-20 lg:hidden;
   }
   .add-to-cart__desktop {
-    @apply divide-y lg:col-start-8 lg:col-end-10 lg:row-start-2 lg:row-end-5 lg:rounded-lg lg:bg-gray-100 lg:flex lg:flex-col   xl:row-end-5 lg:px-3 lg:py-1.5 lg:border lg:border-gray-200 lg:shadow lg:sticky;
+    @apply hidden divide-y lg:col-start-8 lg:col-end-10 lg:row-start-2 lg:row-end-5 lg:rounded-lg lg:bg-gray-100 lg:flex lg:flex-col   xl:row-end-5 lg:px-3 lg:py-1.5 lg:border lg:border-gray-200 lg:shadow lg:sticky;
   }
   .add-to-cart__desktop__header {
     @apply items-center justify-between hidden space-y-2 lg:py-3 lg:flex;
