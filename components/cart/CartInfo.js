@@ -10,27 +10,21 @@ export default function CartInfo({ handleRoute, cart }) {
     (state) => state.cart
   );
   return (
-    <div className='px-4 py-2 mt-10 space-y-5 lg:mt-0 lg:h-fit lg:py-4 '>
+    <div className='cart-info'>
       {/* total cart price */}
-      <div className='flex justify-between pb-2 border-b border-gray-200'>
-        <span className='text-sm font-thin farsi-digits'>
-          قیمت کالاها ({formatNumber(totalItems)})
-        </span>
-        <div className='flex items-center'>
-          <span className='text-sm farsi-digits'>
-            {formatNumber(totalPrice)}
-          </span>
+      <div className='cart-info__item pb-2 border-b border-gray-200'>
+        <span>قیمت کالاها ({formatNumber(totalItems)})</span>
+        <div className='flex-center'>
+          <span>{formatNumber(totalPrice)}</span>
           <Toman className='mr-1 w-7 h-7' />
         </div>
       </div>
 
       {/* total cart items */}
-      <div className='flex justify-between'>
-        <span className='text-sm font-thin'>جمع سبد خرید</span>
-        <div className='flex items-center'>
-          <span className='text-sm farsi-digits'>
-            {formatNumber(totalPrice - totalDiscount)}
-          </span>
+      <div className='cart-info__item'>
+        <span>جمع سبد خرید</span>
+        <div className='flex-center'>
+          <span>{formatNumber(totalPrice - totalDiscount)}</span>
           <Toman className='mr-1 w-7 h-7' />
         </div>
       </div>
@@ -40,15 +34,13 @@ export default function CartInfo({ handleRoute, cart }) {
       </span>
 
       {/* total cart profit */}
-      <div className='flex justify-between'>
-        <span className='text-sm font-thin text-red-500'>سود شما از خرید</span>
-        <div className='flex items-center gap-x-1'>
-          <span className='text-sm text-red-500 farsi-digits'>
+      <div className='cart-info__item'>
+        <span className='text-red-500'>سود شما از خرید</span>
+        <div className='flex-center gap-x-1'>
+          <span className='text-red-500 '>
             (% {((totalDiscount / totalPrice) * 100).toFixed(1)})
           </span>
-          <span className='text-sm text-red-500 farsi-digits'>
-            {formatNumber(totalDiscount)}
-          </span>
+          <span className='text-red-500'>{formatNumber(totalDiscount)}</span>
           <TomanRed className='mr-1 w-7 h-7' />
         </div>
       </div>

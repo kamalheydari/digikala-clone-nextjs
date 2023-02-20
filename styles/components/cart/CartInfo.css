@@ -1,0 +1,11 @@
+@layer components {
+  .cart-info {
+    @apply px-4 py-2 mt-10 space-y-5 lg:mt-0 lg:h-fit lg:py-4;
+  }
+  .cart-info__item {
+    @apply flex justify-between;
+  }
+  .cart-info__item span {
+    @apply text-sm farsi-digits;
+  }
+}

@@ -35,7 +35,7 @@ export default function ProductsHome(props) {
   //? Store
   const { sort } = useSelector((state) => state.filter);
 
-  //? Get Category Data 
+  //? Get Category Data
   const { childCategories, isLoading } = useCategory("/" + query.category);
 
   //? Handlers
@@ -105,7 +105,7 @@ export default function ProductsHome(props) {
       ) : (
         childCategories.length > 0 && (
           <section className='px-4 my-7'>
-            <h4 className='mb-4 text-base text-black'>دسته‌بندی‌ها</h4>
+            <h4 className='mb-4 text-base text-black lg:pt-4'>دسته‌بندی‌ها</h4>
             <div className='flex gap-3 pb-3 overflow-x-auto'>
               {childCategories.map((item) => (
                 <div

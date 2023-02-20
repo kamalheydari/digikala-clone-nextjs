@@ -9,6 +9,8 @@
 
 @import "/cart/CartDropdown.css";
 @import "/cart/AddToCart.css";
+@import "/cart/CartButtons.css";
+@import "/cart/CartInfo.css";
 
 @import "/Header.css";
 @import "/Sidebar.css";
