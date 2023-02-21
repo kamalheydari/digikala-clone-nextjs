@@ -5,12 +5,11 @@ export { default as BoxLink } from "./common/BoxLink";
 export { default as DisplayError } from "./common/DisplayError";
 export { default as BigLoading } from "./loading/BigLoading";
 export { default as ShowWrapper } from "./common/ShowWrapper";
-export { default as HandleDelete } from "./common/HandleDelete";
-export { default as HandleUpdate } from "./common/HandleUpdate";
 export { default as TextField } from "./common/TextField";
 export { default as PageContainer } from "./common/PageContainer";
 export { default as Combobox } from "./common/Combobox";
 export { default as Skeleton } from "./common/Skeleton";
+export { default as Modal } from "./common/Modal";
 export * from "./common/IconBtns";
 export * from "./common/Buttons";
 
@@ -63,16 +62,14 @@ export { default as CartDropdown } from "./cart/CartDropdown";
 export { default as CartTotalItems } from "./cart/CartTotalItems";
 
 //* MODAL COMPONENTS
-export { default as ConfirmDeleteModal } from "./modal/ConfirmDeleteModal";
-export { default as ConfirmUpdateModal } from "./modal/ConfirmUpdateModal";
-export { default as CloseModal } from "./modal/CloseModal";
-export { default as RedirectToLogin } from "./modal/RedirectToLogin";
-export { default as NameForm } from "./modal/NameForm";
-export { default as MobileForm } from "./modal/MobileForm";
-export { default as AddressForm } from "./modal/AddressForm";
-export { default as CommentModal } from "./modal/CommentModal";
-export { default as SearchModal } from "./modal/SearchModal";
-export { default as ModalWrapper } from "./modal/ModalWrapper";
+export { default as ConfirmDeleteModal } from "./modals/ConfirmDeleteModal";
+export { default as ConfirmUpdateModal } from "./modals/ConfirmUpdateModal";
+export { default as RedirectToLogin } from "./modals/RedirectToLogin";
+export { default as UserNameModal } from "./modals/UserNameModal";
+export { default as UserMobileForm } from "./modals/UserMobileForm";
+export { default as AddressForm } from "./modals/AddressForm";
+export { default as ReviewModal } from "./modals/ReviewModal";
+export { default as SearchModal } from "./modals/SearchModal";
 
 //* EMPTY LIST COMPONENTS
 export { default as EmptyCommentsList } from "./emptyList/EmptyCommentsList";
@@ -112,7 +109,6 @@ export { default as FreeShipping } from "./FreeShipping";
 export { default as Footer } from "./Footer";
 export { default as UserDropdown } from "./UserDropdown";
 
-
 //* SVGs
 export { default as Logo } from "./svgs/logo.svg";
 export { default as Toman } from "./svgs/toman.svg";
@@ -136,6 +132,3 @@ export { default as Support } from "./svgs/support.svg";
 export { default as CashOnDelivery } from "./svgs/cash-on-delivery.svg";
 export { default as Daysreturn } from "./svgs/days-return.svg";
 export { default as OriginalProducts } from "./svgs/original-products.svg";
-
-
-

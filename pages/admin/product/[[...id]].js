@@ -3,7 +3,6 @@ import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
 
 import { useDispatch, useSelector } from "react-redux";
-import { openModal } from "app/slices/modal.slice";
 import { showAlert } from "app/slices/alert.slice";
 import {
   addItem,
@@ -23,8 +22,6 @@ import {
   SelectCategories,
   AddSizes,
   UploadImages,
-  Loading,
-  HandleUpdate,
   ConfirmUpdateModal,
   PageContainer,
   Button,
@@ -32,19 +29,30 @@ import {
 
 import getDetailsArray from "utils/getDetailsArray";
 
+import useDisclosure from "hooks/useDisclosure";
+
 export default function Product() {
+  //? Assets
+  const [
+    isShowConfirmUpdateModal,
+    confirmUpdateModalHandlers,
+  ] = useDisclosure();
   const dispatch = useDispatch();
   const router = useRouter();
 
   //? State
   const [selectedCategories, setSelectedCategories] = useState({});
+  const [updateInfo, setUpdateInfo] = useState({
+    id: "",
+    isConfirmUpdate: false,
+    editedData: {},
+  });
 
   //? TABLE Refs
   const infoTableRef = useRef(null);
   const specificationTableRef = useRef(null);
 
   //? Store
-  const { isConfirmUpdate } = useSelector((state) => state.modal);
   const { infoArray, specificationArray, optionsType, product } = useSelector(
     (state) => state.product
   );
@@ -128,19 +136,17 @@ export default function Product() {
     const infoArray = getDetailsArray(infoTableRef);
     const specificationArray = getDetailsArray(specificationTableRef);
 
-    dispatch(
-      openModal({
-        isShow: true,
-        id,
-        type: "confirm-update-product",
-        title: "مشخصات و ویژگی های",
-        editedData: {
-          ...product,
-          info: infoArray,
-          specification: specificationArray,
-        },
-      })
-    );
+    setUpdateInfo({
+      ...updateInfo,
+      id,
+      editedData: {
+        ...product,
+        info: infoArray,
+        specification: specificationArray,
+      },
+    });
+
+    confirmUpdateModalHandlers.open();
   };
 
   const deleteImageHandler = (index) => {
@@ -160,19 +166,18 @@ export default function Product() {
   //? Render
   return (
     <>
-      {isConfirmUpdate && (
-        <HandleUpdate
-          updateFunc={updateProduct}
-          isSuccess={isSuccess_update}
-          isError={isError_update}
-          error={error_update}
-          data={data_update}
-        />
-      )}
-
       <ConfirmUpdateModal
+        title='مشخصات و ویژگی های'
+        updateFunc={updateProduct}
         isLoading={isLoading_update}
         isSuccess={isSuccess_update}
+        isError={isError_update}
+        error={error_update}
+        data={data_update}
+        isShow={isShowConfirmUpdateModal}
+        onClose={confirmUpdateModalHandlers.close}
+        updateInfo={updateInfo}
+        setUpdateInfo={setUpdateInfo}
       />
 
       <main>

@@ -2,8 +2,6 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
-import { openModal } from "app/slices/modal.slice";
 import {
   useDeleteProductMutation,
   useGetProductsQuery,
@@ -14,26 +12,33 @@ import {
   ConfirmDeleteModal,
   DeleteIconBtn,
   EditIconBtn,
-  HandleDelete,
   Icons,
   PageContainer,
   Pagination,
   SelectCategories,
 } from "components";
+import useDisclosure from "hooks/useDisclosure";
 
 export default function Products() {
-  const dispatch = useDispatch();
+  //? Assets
+  const [
+    isShowConfirmDeleteModal,
+    confirmDeleteModalHandlers,
+  ] = useDisclosure();
   const router = useRouter();
+
+  //? Refs
   const inputSearchRef = useRef();
 
   //?  State
+  const [deleteInfo, setDeleteInfo] = useState({
+    id: "",
+    isConfirmDelete: false,
+  });
   const [page, setPage] = useState(1);
   const [filterCategory, setFilterCategory] = useState("all");
   const [search, setSearch] = useState("");
   // const [selectedCategories, setSelectedCategories] = useState({});
-
-  //? Store
-  const { isConfirmDelete } = useSelector((state) => state.modal);
 
   //? Get Products Data
   const { data, isFetching, error, isError, refetch } = useGetProductsQuery({
@@ -69,14 +74,8 @@ export default function Products() {
 
   //? Handlers
   const handleDelete = (id) => {
-    dispatch(
-      openModal({
-        isShow: true,
-        id,
-        type: "confirm-delete-product",
-        title: "محصول",
-      })
-    );
+    setDeleteInfo({ ...deleteInfo, id });
+    confirmDeleteModalHandlers.open();
   };
 
   const handleEdit = (id) => {
@@ -96,18 +95,18 @@ export default function Products() {
   //? Render
   return (
     <>
-      {isConfirmDelete && (
-        <HandleDelete
-          deleteFunc={deleteProduct}
-          isSuccess={isSuccess_delete}
-          isError={isError_delete}
-          error={error_delete}
-          data={data_delete}
-        />
-      )}
       <ConfirmDeleteModal
+        title='محصول'
+        deleteFunc={deleteProduct}
         isLoading={isLoading_delete}
         isSuccess={isSuccess_delete}
+        isError={isError_delete}
+        error={error_delete}
+        data={data_delete}
+        isShow={isShowConfirmDeleteModal}
+        onClose={confirmDeleteModalHandlers.close}
+        deleteInfo={deleteInfo}
+        setDeleteInfo={setDeleteInfo}
       />
 
       <main>

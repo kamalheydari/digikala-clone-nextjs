@@ -4,24 +4,20 @@ import Image from "next/image";
 import Link from "next/link";
 
 import {
-  CloseModal,
   Icons,
   DiscountProduct,
   ProductPrice,
   EmptySearchList,
   ShowWrapper,
-  ModalWrapper,
+  Modal,
 } from "components";
 
 import { truncate } from "utils/truncate";
 import { useGetProductsQuery } from "app/api/productApi";
-import { useDispatch, useSelector } from "react-redux";
 
-export default function SearchModal() {
-  const dispatch = useDispatch();
-
-  //? Store
-  const { isShow, type } = useSelector((state) => state.modal);
+export default function SearchModal(props) {
+  //? Props
+  const { isShow, onClose } = props;
 
   //? Refs
   const inputSearchRef = useRef();
@@ -44,7 +40,8 @@ export default function SearchModal() {
     filterCategory: "all",
   });
 
-  //? Reset Search
+  //? Re-Renders
+  //* Reset Search
   useEffect(() => {
     if (!isShow) {
       inputSearchRef.current.value = "";
@@ -63,22 +60,12 @@ export default function SearchModal() {
     setSearch("");
   };
 
+  //? Render(s)
   return (
-    <ModalWrapper isShow={isShow && type === "search"}>
-      <div
-        className={`
-  ${
-    isShow ? "bottom-0 lg:top-20" : "-bottom-full lg:top-60"
-  } w-full h-full lg:h-fit lg:max-w-3xl lg:bg-white lg:py-4 lg:px-1 lg:rounded-md fixed transition-all duration-700 left-0 right-0 mx-auto z-40`}
-      >
-        <div className='h-full lg:h-[770px] px-5 py-3 bg-white md:rounded-lg gap-y-3 overflow-y-auto'>
-          <div className='py-2 border-b-2 border-gray-200'>
-            <div className='flex justify-between '>
-              <span className='text-sm text-black'>جستجو</span>
-              <CloseModal />
-            </div>
-          </div>
-
+    <Modal isShow={isShow} onClose={onClose} effect='bottom-to-top'>
+      <Modal.Content className='flex flex-col h-full px-5 py-3 bg-white md:rounded-lg gap-y-5 '>
+        <Modal.Header>جستسجو</Modal.Header>
+        <Modal.Body>
           <form
             className='flex flex-row-reverse my-3 rounded-md bg-zinc-200/80'
             onSubmit={handleSubmit}
@@ -119,10 +106,7 @@ export default function SearchModal() {
                       />
                     </div>
                     <Link href={`/products/${item._id}`}>
-                      <a
-                        onClick={() => dispatch(closeModal())}
-                        className='py-1 text-sm'
-                      >
+                      <a onClick={() => onClose()} className='py-1 text-sm'>
                         {truncate(item.title, 70)}
                       </a>
                     </Link>
@@ -142,8 +126,8 @@ export default function SearchModal() {
                 ))}
             </div>
           </ShowWrapper>
-        </div>
-      </div>
-    </ModalWrapper>
+        </Modal.Body>
+      </Modal.Content>
+    </Modal>
   );
 }

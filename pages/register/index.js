@@ -10,12 +10,14 @@ import validation from "utils/validation";
 import { useDispatch } from "react-redux";
 import { showAlert } from "app/slices/alert.slice";
 import { useCreateUserMutation } from "app/api/userApi";
-import { openModal } from "app/slices/modal.slice";
 import { userLogin } from "app/slices/user.slice";
 
 import { TextField, LoginBtn, RedirectToLogin, Logo } from "components";
+import useDisclosure from "hooks/useDisclosure";
 
 export default function RegisterPage() {
+  //? Assets
+  const [isShowRedirectModal, redirectModalHandlers] = useDisclosure();
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -44,14 +46,7 @@ export default function RegisterPage() {
 
   useEffect(() => {
     if (isError) {
-      dispatch(
-        openModal({
-          isShow: true,
-          type: "redirect",
-          title: "مشکلی در ثبت‌نام شما وجود دارد",
-          text: error?.data.err,
-        })
-      );
+      redirectModalHandlers.open();
     }
   }, [isError]);
 
@@ -83,7 +78,12 @@ export default function RegisterPage() {
 
   return (
     <>
-      <RedirectToLogin />
+      <RedirectToLogin
+        title='مشکلی در ثبت‌نام شما وجود دارد'
+        text={error?.data.err}
+        onClose={redirectModalHandlers.close}
+        isShow={isShowRedirectModal}
+      />
       <main className='grid items-center min-h-screen '>
         <Head>
           <title>دیجی‌کالا | ثبت‌نام</title>

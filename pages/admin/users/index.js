@@ -1,29 +1,34 @@
 import Head from "next/head";
+
 import { useState } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
-import { openModal } from "app/slices/modal.slice";
 import { useDeleteUserMutation, useGetUsersQuery } from "app/api/userApi";
 
 import {
   Pagination,
   ShowWrapper,
   EmptyUsersList,
-  HandleDelete,
   ConfirmDeleteModal,
   PageContainer,
   DeleteIconBtn,
   Person,
 } from "components";
 
+import useDisclosure from "hooks/useDisclosure";
+
 export default function Users() {
-  const dispatch = useDispatch();
+  //? Assets
+  const [
+    isShowConfirmDeleteModal,
+    confirmDeleteModalHandlers,
+  ] = useDisclosure();
 
   //? State
   const [page, setPage] = useState(1);
-
-  //? Store
-  const { isConfirmDelete } = useSelector((state) => state.modal);
+  const [deleteInfo, setDeleteInfo] = useState({
+    id: "",
+    isConfirmDelete: false,
+  });
 
   //? Get User Data
   const {
@@ -35,7 +40,7 @@ export default function Users() {
     refetch,
   } = useGetUsersQuery({ page });
 
-  //? Delete User
+  //? Delete User Query
   const [
     deleteUser,
     {
@@ -48,32 +53,26 @@ export default function Users() {
   ] = useDeleteUserMutation();
 
   //? Handlers
-  const deleteUserHandler = async (id) => {
-    dispatch(
-      openModal({
-        isShow: true,
-        id,
-        type: "confirm-delete-user",
-        title: "کاربر",
-      })
-    );
+  const deleteUserHandler = (id) => {
+    setDeleteInfo({ ...deleteInfo, id });
+    confirmDeleteModalHandlers.open();
   };
 
-  //? Render
+  //? Render(s)
   return (
     <>
-      {isConfirmDelete && (
-        <HandleDelete
-          deleteFunc={deleteUser}
-          isSuccess={isSuccess_delete}
-          isError={isError_delete}
-          error={error_delete}
-          data={data_delete}
-        />
-      )}
       <ConfirmDeleteModal
+        title='کاربر'
+        deleteFunc={deleteUser}
         isLoading={isLoading_delete}
         isSuccess={isSuccess_delete}
+        isError={isError_delete}
+        error={error_delete}
+        data={data_delete}
+        isShow={isShowConfirmDeleteModal}
+        onClose={confirmDeleteModalHandlers.close}
+        deleteInfo={deleteInfo}
+        setDeleteInfo={setDeleteInfo}
       />
 
       <main id='adminUsers'>
@@ -163,6 +162,7 @@ export default function Users() {
   );
 }
 
+//? Layout
 Users.getDashboardLayout = function pageLayout(page) {
   return <>{page}</>;
 };

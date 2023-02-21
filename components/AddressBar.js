@@ -1,26 +1,14 @@
-import { useDispatch } from "react-redux";
-import { AddressForm, Icons, Skeleton } from "components";
+import { Icons, Skeleton } from "components";
 
-import { openModal } from "app/slices/modal.slice";
+import { withAddressModal } from "HOCs/withAddressModal";
+
 import useUserInfo from "hooks/useUserInfo";
 
-function AddressBar() {
+function AddressBar({ openAddressModal }) {
+  //? Get User Data
   const { userInfo, isVerify, isLoading } = useUserInfo();
 
-  const dispatch = useDispatch();
-
-  //? Handlers
-  const handleClick = () => {
-    dispatch(
-      openModal({
-        isShow: true,
-        type: "edit-address",
-        title: "ثبت و ویرایش آدرس",
-      })
-    );
-  };
-  
-  //? Render
+  //? Render(s)
   if (!isVerify) {
     return null;
   } else if (isLoading) {
@@ -33,41 +21,33 @@ function AddressBar() {
     );
   } else if (!userInfo.address) {
     return (
-      <>
-        <AddressForm />
+      <button
+        type='button'
+        onClick={openAddressModal}
+        className='flex items-center w-full gap-x-1 lg:w-fit'
+      >
+        <Icons.Location2 className='icon' />
+        <span>لطفا شهر خود را انتخاب کنید</span>
 
-        <button
-          type='button'
-          onClick={handleClick}
-          className='flex items-center w-full gap-x-1 lg:w-fit'
-        >
-          <Icons.Location2 className='icon' />
-          <span>لطفا شهر خود را انتخاب کنید</span>
-
-          <Icons.ArrowLeft className='mr-auto icon' />
-        </button>
-      </>
+        <Icons.ArrowLeft className='mr-auto icon' />
+      </button>
     );
   } else if (userInfo?.address) {
     return (
-      <>
-        <AddressForm />
-
-        <button
-          type='button'
-          onClick={handleClick}
-          className='flex items-center w-full gap-x-1 lg:w-fit'
-        >
-          <Icons.Location2 className='icon' />
-          <span>
-            ارسال به {userInfo.address.province.name},{" "}
-            {userInfo.address.city.name}
-          </span>
-          <Icons.ArrowLeft className='mr-auto icon' />
-        </button>
-      </>
+      <button
+        type='button'
+        onClick={openAddressModal}
+        className='flex items-center w-full gap-x-1 lg:w-fit'
+      >
+        <Icons.Location2 className='icon' />
+        <span>
+          ارسال به {userInfo.address.province.name},{" "}
+          {userInfo.address.city.name}
+        </span>
+        <Icons.ArrowLeft className='mr-auto icon' />
+      </button>
     );
   }
 }
 
-export default AddressBar;
+export default withAddressModal(AddressBar);

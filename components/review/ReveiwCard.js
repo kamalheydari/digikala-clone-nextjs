@@ -1,14 +1,17 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
-import { openModal } from "app/slices/modal.slice";
+import { useDispatch } from "react-redux";
 import { useEditReviewMutation } from "app/api/reviewApi";
 import { showAlert } from "app/slices/alert.slice";
 
 import { Icons } from "components";
 
-export default function ReveiwCard({ item, singleComment }) {
+export default function ReveiwCard({
+  item,
+  singleComment,
+  deleteReviewHandler,
+}) {
   const dispatch = useDispatch();
 
   //? Local State
@@ -45,17 +48,6 @@ export default function ReveiwCard({ item, singleComment }) {
   }, [isError]);
 
   //? Handlers
-  const handleDelete = () => {
-    dispatch(
-      openModal({
-        isShow: true,
-        id: item._id,
-        type: "confirm-delete-review",
-        title: "دیدگاه‌",
-      })
-    );
-  };
-
   const handleChangeStatus = (statusNum) => {
     editReview({
       id: item._id,
@@ -154,7 +146,7 @@ export default function ReveiwCard({ item, singleComment }) {
                   <button
                     type='button'
                     className='flex items-center gap-x-2 w-36'
-                    onClick={handleDelete}
+                    onClick={() => deleteReviewHandler(item._id)}
                   >
                     <Icons.Delete className='icon' />
                     <span>حذف دیدگاه‌</span>

@@ -1,25 +1,19 @@
-import { useDispatch } from "react-redux";
-
 import { Icons, SearchModal } from "components";
-import { openModal } from "app/slices/modal.slice";
+
+import useDisclosure from "hooks/useDisclosure";
 
 export default function Search() {
-  const dispatch = useDispatch();
+  //? Assets
+  const [isShowSearchModal, searchModalHanlders] = useDisclosure();
 
-  //? Handlers
-  const handleOpenModal = () => {
-    dispatch(
-      openModal({
-        isShow: true,
-        type: "search",
-      })
-    );
-  };
   return (
     <>
-      <SearchModal />
+      <SearchModal
+        isShow={isShowSearchModal}
+        onClose={searchModalHanlders.close}
+      />
       <div
-        onClick={handleOpenModal}
+        onClick={searchModalHanlders.open}
         className='flex flex-row-reverse flex-grow max-w-3xl rounded-md bg-zinc-200/80 '
       >
         <input

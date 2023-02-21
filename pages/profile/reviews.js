@@ -14,12 +14,24 @@ import {
   PageContainer,
 } from "components";
 
+import useDisclosure from "hooks/useDisclosure";
+
 export default function Reviews() {
+  //? Assets
+  const [
+    isShowConfirmDeleteModal,
+    confirmDeleteModalHandlers,
+  ] = useDisclosure();
+
   //? State
+  const [deleteInfo, setDeleteInfo] = useState({
+    id: "",
+    isConfirmDelete: false,
+  });
   const [page, setPage] = useState(1);
 
   //? Store
-  const { isConfirmDelete } = useSelector((state) => state.modal);
+  // const { isConfirmDelete } = useSelector((state) => state.modal);
 
   //? Delete Review
   const [
@@ -45,21 +57,27 @@ export default function Reviews() {
     page,
   });
 
+  //? Handlers
+  const deleteReviewHandler = (id) => {
+    setDeleteInfo({ ...deleteInfo, id });
+    confirmDeleteModalHandlers.open();
+  };
+
   //? Render
   return (
     <>
-      {isConfirmDelete && (
-        <HandleDelete
-          deleteFunc={deleteReview}
-          isSuccess={isSuccess_delete}
-          isError={isError_delete}
-          error={error_delete}
-          data={data_delete}
-        />
-      )}
       <ConfirmDeleteModal
+        title='دیدگاه‌'
+        deleteFunc={deleteReview}
         isLoading={isLoading_delete}
         isSuccess={isSuccess_delete}
+        isError={isError_delete}
+        error={error_delete}
+        data={data_delete}
+        isShow={isShowConfirmDeleteModal}
+        onClose={confirmDeleteModalHandlers.close}
+        deleteInfo={deleteInfo}
+        setDeleteInfo={setDeleteInfo}
       />
 
       <main id='profileReviews'>
@@ -79,7 +97,11 @@ export default function Reviews() {
           >
             <div className='px-4 py-3 space-y-3 '>
               {data?.reviews.map((item) => (
-                <ReveiwCard key={item._id} item={item} />
+                <ReveiwCard
+                  deleteReviewHandler={deleteReviewHandler}
+                  key={item._id}
+                  item={item}
+                />
               ))}
             </div>
           </ShowWrapper>

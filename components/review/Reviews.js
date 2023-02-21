@@ -1,23 +1,24 @@
 import { useState } from "react";
 
-import { useDispatch } from "react-redux";
 import { useGetProductReviewsQuery } from "app/api/reviewApi";
-import { openModal } from "app/slices/modal.slice";
 
 import {
   Pagination,
   Icons,
   ShowWrapper,
   EmptyComment,
-  CommentModal,
+  ReviewModal,
 } from "components";
 
 import moment from "moment-jalaali";
 
-export default function Reviews({ numReviews, prdouctID, productTitle }) {
-  const dispatch = useDispatch();
+import useDisclosure from "hooks/useDisclosure";
 
-  //? Local State
+export default function Reviews({ numReviews, prdouctID, productTitle }) {
+  //? Assets
+  const [isShowReviewModal, reviewModalHandlers] = useDisclosure();
+
+  //? States
   const [reviewsPage, setReviewsPage] = useState(1);
 
   //? Get Product-Reviews Query
@@ -34,20 +35,17 @@ export default function Reviews({ numReviews, prdouctID, productTitle }) {
   });
 
   //? Handlers
-  const handleOpenCommentModal = () => {
-    dispatch(
-      openModal({
-        isShow: true,
-        type: "comment",
-        title: productTitle,
-        id: prdouctID,
-      })
-    );
-  };
+  const handleOpenCommentModal = () => reviewModalHandlers.open();
 
+  //? Render(s)
   return (
     <>
-      <CommentModal />
+      <ReviewModal
+        isShow={isShowReviewModal}
+        onClose={reviewModalHandlers.close}
+        productTitle={productTitle}
+        prdouctID={prdouctID}
+      />
       <section
         className='px-3 py-3 space-y-4 lg:max-w-3xl xl:max-w-5xl'
         id='productReviews'

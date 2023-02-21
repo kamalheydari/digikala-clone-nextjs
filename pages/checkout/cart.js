@@ -2,7 +2,6 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 
 import { clearCart } from "app/slices/cart.slice";
-import { openModal } from "app/slices/modal.slice";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -14,14 +13,17 @@ import {
   RedirectToLogin,
   Button,
   EmptyCart,
-  Toman
+  Toman,
 } from "components";
 
 import { formatNumber } from "utils/formatNumber";
 
 import useUserInfo from "hooks/useUserInfo";
+import useDisclosure from "hooks/useDisclosure";
 
 export default function Cart() {
+  //? Assets
+  const [isShowRedirectModal, redirectModalHandlers] = useDisclosure();
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -35,14 +37,7 @@ export default function Cart() {
 
   //? Handlers
   const handleRoute = () => {
-    if (!userInfo)
-      return dispatch(
-        openModal({
-          isShow: true,
-          type: "redirect",
-          title: "شما هنوز وارد نشدید",
-        })
-      );
+    if (!userInfo) return redirectModalHandlers.open();
 
     router.push("/checkout/shipping");
   };
@@ -70,7 +65,12 @@ export default function Cart() {
 
   return (
     <>
-      <RedirectToLogin />
+      <RedirectToLogin
+        title='شما هنوز وارد نشدید'
+        text=''
+        onClose={redirectModalHandlers.close}
+        isShow={isShowRedirectModal}
+      />
       <Header />
       <main className='py-2 mx-auto mb-20 space-y-3 xl:mt-36 lg:py-0 lg:mb-0 lg:max-w-7xl b lg:px-5 lg:mt-6 lg:gap-x-3 lg:flex lg:flex-wrap lg:space-y-0'>
         <Head>

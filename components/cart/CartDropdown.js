@@ -1,9 +1,8 @@
 import { useRouter } from "next/router";
 
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 
 import { formatNumber } from "utils/formatNumber";
-import { openModal } from "app/slices/modal.slice";
 
 import {
   ArrowLink,
@@ -18,12 +17,15 @@ import {
 import useUserInfo from "hooks/useUserInfo";
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
+import useDisclosure from "hooks/useDisclosure";
 
 export default function CartDropdown() {
+  //? Assets
   const router = useRouter();
-  const dispatch = useDispatch();
 
   const { isVerify } = useUserInfo();
+
+  const [isShowRedirectModal, redirectModalHandlers] = useDisclosure();
 
   //? Store
   const { totalItems, cartItems, totalDiscount, totalPrice } = useSelector(
@@ -32,21 +34,19 @@ export default function CartDropdown() {
 
   //? Handlers
   const handleRoute = () => {
-    if (!isVerify)
-      return dispatch(
-        openModal({
-          isShow: true,
-          type: "redirect",
-          title: "شما هنوز وارد نشدید",
-        })
-      );
+    if (!isVerify) return redirectModalHandlers.open();
 
     router.push("/checkout/shipping");
   };
 
   return (
     <>
-      <RedirectToLogin />
+      <RedirectToLogin
+        title='شما هنوز وارد نشدید'
+        text=''
+        onClose={redirectModalHandlers.close}
+        isShow={isShowRedirectModal}
+      />
 
       <Menu as='div' className='cart-dropdown'>
         <Menu.Button>

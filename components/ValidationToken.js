@@ -3,10 +3,12 @@ import { userLogout } from "app/slices/user.slice";
 
 import verifyToken from "utils/verifyToken";
 
-import { openModal } from "app/slices/modal.slice";
-import RedirectToLogin from "./modal/RedirectToLogin";
+import RedirectToLogin from "./modals/RedirectToLogin";
+import useDisclosure from "hooks/useDisclosure";
 
 export default function ValidationToken() {
+  const [isShowRedirectModal, redirectModalHandlers] = useDisclosure();
+
   const dispatch = useDispatch();
 
   const { token } = useSelector((state) => state.user);
@@ -16,16 +18,16 @@ export default function ValidationToken() {
 
   if (!isverify && token) {
     dispatch(userLogout());
-    dispatch(
-      openModal({
-        isShow: true,
-        type: "redirect",
-        text: "توکن احراز هویت نادرست است یا منقضی شده است",
-        title: "",
-      })
-    );
+    redirectModalHandlers.open();
 
-    return <RedirectToLogin />;
+    return (
+      <RedirectToLogin
+        title=''
+        text='توکن احراز هویت نادرست است یا منقضی شده است'
+        onClose={redirectModalHandlers.close}
+        isShow={isShowRedirectModal}
+      />
+    );
   }
 
   return null;

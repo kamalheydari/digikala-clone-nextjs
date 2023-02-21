@@ -4,25 +4,18 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import validation from "utils/validation";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEditUserMutation } from "app/api/userApi";
 import { showAlert } from "app/slices/alert.slice";
-import { closeModal } from "app/slices/modal.slice";
 
-import {
-  CloseModal,
-  ModalWrapper,
-  TextField,
-  SubmitModalBtn,
-} from "components";
+import { TextField, SubmitModalBtn, Modal } from "components";
 
-export default function MobileForm() {
+export default function MobileForm(props) {
+  //? Props
+  const { isShow, onClose, editedData } = props;
+
+  //? Assets
   const dispatch = useDispatch();
-
-  //? Store
-  const { editedData, title, isShow, type } = useSelector(
-    (state) => state.modal
-  );
 
   //? Patch Data
   const [
@@ -30,10 +23,29 @@ export default function MobileForm() {
     { data, isSuccess, isLoading, error, isError },
   ] = useEditUserMutation();
 
-  //? Handle Edit User Response
+  //? Form Hook
+  const {
+    handleSubmit,
+    control,
+    formState: { errors: formErrors },
+    reset,
+  } = useForm({
+    resolver: yupResolver(validation.mobileSchema),
+    defaultValues: { mobile: editedData ? editedData : "" },
+  });
+
+  //? Handlers
+  const submitHander = async ({ mobile }) => {
+    await editUser({
+      body: { mobile },
+    });
+  };
+
+  //? Re-Renders
+  //* Handle Edit User Response
   useEffect(() => {
     if (isSuccess) {
-      dispatch(closeModal());
+      onClose();
       dispatch(
         showAlert({
           status: "success",
@@ -45,8 +57,6 @@ export default function MobileForm() {
 
   useEffect(() => {
     if (isError) {
-      dispatch(closeModal());
-      reset();
       dispatch(
         showAlert({
           status: "error",
@@ -56,36 +66,12 @@ export default function MobileForm() {
     }
   }, [isError]);
 
-  //? Form Hook
-  const {
-    handleSubmit,
-    control,
-    formState: { errors: formErrors },
-    reset,
-  } = useForm({
-    resolver: yupResolver(validation.mobileSchema),
-  });
-
-  //? Handlers
-  const submitHander = async ({ mobile }) => {
-    await editUser({
-      body: { mobile },
-    });
-  };
-
+  //? Render(s)
   return (
-    <ModalWrapper isShow={isShow && type === "edit-mobile"}>
-      <div
-        className={`
-  ${
-    isShow ? "bottom-0 lg:top-44" : "-bottom-full lg:top-60"
-  } w-full h-full lg:h-fit lg:max-w-3xl fixed transition-all duration-700 left-0 right-0 mx-auto z-40`}
-      >
-        <div className='flex flex-col h-full px-5 py-3 bg-white md:rounded-lg gap-y-5'>
-          <div className='flex justify-between py-2 border-b-2 border-gray-200'>
-            <span className='text-sm'>{title}</span>
-            <CloseModal />
-          </div>
+    <Modal isShow={isShow} onClose={onClose} effect='bottom-to-top'>
+      <Modal.Content className='flex flex-col h-full px-5 py-3 bg-white md:rounded-lg gap-y-5 '>
+        <Modal.Header>ثبت و ویرایش شماره موبایل</Modal.Header>
+        <Modal.Body>
           <p className='text-sm'>لطفا شماره تلفن همراه خود را وارد کنید.</p>
           <form
             className='flex flex-col justify-between flex-1 gap-y-5'
@@ -96,15 +82,14 @@ export default function MobileForm() {
               control={control}
               errors={formErrors.mobile}
               name='mobile'
-              defaultValue={editedData}
             />
 
             <div className='py-3 border-t-2 border-gray-200 lg:pb-0 '>
               <SubmitModalBtn isLoading={isLoading}>ثبت اطلاعات</SubmitModalBtn>
             </div>
           </form>
-        </div>
-      </div>
-    </ModalWrapper>
+        </Modal.Body>
+      </Modal.Content>
+    </Modal>
   );
 }

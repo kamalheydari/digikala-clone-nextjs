@@ -6,7 +6,7 @@
     @apply flex-center p-1.5 transition-colors rounded-md hover:bg-red-100;
   }
   .user-dropdown__items {
-    @apply absolute left-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-3xl ring-1 ring-black  ring-opacity-5 focus:outline-none z-50;
+    @apply absolute left-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-3xl ring-1 ring-black  ring-opacity-5 focus:outline-none z-40;
   }
   .user-dropdown__item {
     @apply transition-colors hover:bg-gray-100 px-3;

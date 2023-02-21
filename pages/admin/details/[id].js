@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -8,7 +8,6 @@ import {
   loadDetails,
   resetDetails,
 } from "app/slices/details.slice";
-import { openModal } from "app/slices/modal.slice";
 import { showAlert } from "app/slices/alert.slice";
 import {
   useCreateDetailsMutation,
@@ -22,26 +21,42 @@ import {
   ConfirmDeleteModal,
   ConfirmUpdateModal,
   DetailsList,
-  HandleDelete,
-  HandleUpdate,
-  Loading,
   PageContainer,
   ShowWrapper,
 } from "components";
 
 import useCategory from "hooks/useCategory";
+import useDisclosure from "hooks/useDisclosure";
 
 export default function DetailsPage() {
+  //? Assets
   const router = useRouter();
   const dispatch = useDispatch();
+
+  const [
+    isShowConfirmDeleteModal,
+    confirmDeleteModalHandlers,
+  ] = useDisclosure();
+  const [
+    isShowConfirmUpdateModal,
+    confirmUpdateModalHandlers,
+  ] = useDisclosure();
+
+  //? State
+  const [deleteInfo, setDeleteInfo] = useState({
+    id: "",
+    isConfirmDelete: false,
+  });
+  const [updateInfo, setUpdateInfo] = useState({
+    id: "",
+    isConfirmUpdate: false,
+    editedData: {},
+  });
 
   //? Get Categories Data
   const { categories } = useCategory();
 
   //? Store
-  const { isConfirmDelete, isConfirmUpdate } = useSelector(
-    (state) => state.modal
-  );
   const {
     category,
     info,
@@ -152,31 +167,23 @@ export default function DetailsPage() {
   };
 
   const deleteHandler = () => {
-    dispatch(
-      openModal({
-        isShow: true,
-        id: details_id,
-        type: "confirm-delete-details",
-        title: "مشخصات و ویژگی ها",
-      })
-    );
+    setDeleteInfo({ ...deleteInfo, id: details_id });
+    confirmDeleteModalHandlers.open();
   };
 
   const updateHandler = () => {
-    dispatch(
-      openModal({
-        isShow: true,
-        id: details_id,
-        type: "confirm-update-details",
-        title: "مشخصات و ویژگی های",
-        editedData: {
-          category_id: category._id,
-          info,
-          specification,
-          optionsType,
-        },
-      })
-    );
+    setUpdateInfo({
+      ...updateInfo,
+      id: details_id,
+      editedData: {
+        category_id: category._id,
+        info,
+        specification,
+        optionsType,
+      },
+    });
+
+    confirmUpdateModalHandlers.open();
   };
 
   const handleOptionTypeChange = (e) => {
@@ -186,34 +193,32 @@ export default function DetailsPage() {
   //? Render
   return (
     <>
-      {isConfirmUpdate && (
-        <HandleUpdate
-          updateFunc={updateDetails}
-          isSuccess={isSuccess_update}
-          isError={isError_update}
-          error={error_update}
-          data={data_update}
-        />
-      )}
-
-      {isConfirmDelete && (
-        <HandleDelete
-          deleteFunc={deleteDetails}
-          isSuccess={isSuccess_delete}
-          isError={isError_delete}
-          error={error_delete}
-          data={data_delete}
-        />
-      )}
-
       <ConfirmDeleteModal
+        deleteFunc={deleteDetails}
+        title='مشخصات و ویژگی ها'
         isLoading={isLoading_delete}
         isSuccess={isSuccess_delete}
+        isError={isError_delete}
+        error={error_delete}
+        data={data_delete}
+        isShow={isShowConfirmDeleteModal}
+        onClose={confirmDeleteModalHandlers.close}
+        deleteInfo={deleteInfo}
+        setDeleteInfo={setDeleteInfo}
       />
 
       <ConfirmUpdateModal
+        title='مشخصات و ویژگی های'
+        updateFunc={updateDetails}
         isLoading={isLoading_update}
         isSuccess={isSuccess_update}
+        isError={isError_update}
+        error={error_update}
+        data={data_update}
+        isShow={isShowConfirmUpdateModal}
+        onClose={confirmUpdateModalHandlers.close}
+        updateInfo={updateInfo}
+        setUpdateInfo={setUpdateInfo}
       />
 
       <main>
@@ -280,7 +285,7 @@ export default function DetailsPage() {
                 data={specification}
               />
               <div className='flex justify-center gap-x-4'>
-                {details_id  ? (
+                {details_id ? (
                   <>
                     <Button
                       className='bg-amber-500 rounded-3xl'

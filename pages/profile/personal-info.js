@@ -1,45 +1,22 @@
 import Head from "next/head";
 
-import { useDispatch } from "react-redux";
-import { openModal } from "app/slices/modal.slice";
-
 import {
   Icons,
-  MobileForm,
-  NameForm,
+  UserMobileForm,
+  UserNameModal,
   PageContainer,
 } from "components";
 
 import useUserInfo from "hooks/useUserInfo";
+import useDisclosure from "hooks/useDisclosure";
 
 export default function PersonalInfo() {
-  const dispatch = useDispatch();
+  //? Assets
+  const [isShowNameModal, nameModalHandlers] = useDisclosure();
+  const [isShowPhoneModal, phoneModalHandlers] = useDisclosure();
 
   //? Get User Data
   const { userInfo, isLoading } = useUserInfo();
-
-  //? Handlers
-  const mobilEditHandler = () => {
-    dispatch(
-      openModal({
-        isShow: true,
-        type: "edit-mobile",
-        title: "ثبت و ویرایش  شماره موبایل",
-        editedData: userInfo?.mobile,
-      })
-    );
-  };
-
-  const nameEditHandler = () => {
-    dispatch(
-      openModal({
-        isShow: true,
-        type: "edit-name",
-        title: "ثبت و ویرایش اطلاعات شناسایی",
-        editedData: userInfo?.name,
-      })
-    );
-  };
 
   //? Local Component
   const InfoField = ({ label, info, editHandler, isLoading }) => (
@@ -62,11 +39,23 @@ export default function PersonalInfo() {
     </div>
   );
 
-  //? Render
+  //? Render(s)
   return (
     <>
-      <NameForm />
-      <MobileForm />
+      {!isLoading && (
+        <>
+          <UserNameModal
+            isShow={isShowNameModal}
+            onClose={nameModalHandlers.close}
+            editedData={userInfo?.name}
+          />
+          <UserMobileForm
+            isShow={isShowPhoneModal}
+            onClose={phoneModalHandlers.close}
+            editedData={userInfo?.mobile}
+          />
+        </>
+      )}
 
       <main>
         <Head>
@@ -77,13 +66,13 @@ export default function PersonalInfo() {
             <InfoField
               label='نام و نام خانوادگی'
               info={userInfo?.name}
-              editHandler={nameEditHandler}
+              editHandler={nameModalHandlers.open}
               isLoading={isLoading}
             />
             <InfoField
               label='شماره موبایل'
               info={userInfo?.mobile}
-              editHandler={mobilEditHandler}
+              editHandler={phoneModalHandlers.open}
               isLoading={isLoading}
             />
           </section>
@@ -93,6 +82,7 @@ export default function PersonalInfo() {
   );
 }
 
+//? Layout
 PersonalInfo.getProfileLayout = function pageLayout(page) {
   return <>{page}</>;
 };
