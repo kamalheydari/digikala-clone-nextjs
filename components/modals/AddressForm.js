@@ -22,7 +22,7 @@ import useUserInfo from "hooks/useUserInfo";
 
 export default function AddressForm(props) {
   //? Porps
-  const { isShow, onClose } = props;
+  const { isShow, onClose,address } = props;
 
   //? Assets
   const dispatch = useDispatch();
@@ -44,9 +44,7 @@ export default function AddressForm(props) {
     watch,
   } = useForm({
     resolver: yupResolver(validation.addressSchema),
-    defaultValues: userInfo?.address
-      ? { ...userInfo?.address }
-      : { city: {}, province: {}, postalCode: "", street: "" },
+    defaultValues: address
   });
 
   //? Edit User-Info Query

@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import { Address, Icons, PageContainer } from "components";
+import { Address, Icons, PageContainer, Skeleton } from "components";
 
 import { withAddressModal } from "HOCs/withAddressModal";
 
@@ -29,27 +29,43 @@ export default function Addresses() {
 
       <PageContainer title='آدرس‌ها'>
         {isLoading ? (
-          <section className='animate-pulse flex-1 px-5 '>
+          <section className='flex-1 px-5 '>
             <div className='flex justify-between py-4 border-b border-gray-200'>
-              <p className='h-5 w-52 rounded-md bg-red-200' />
+              <Skeleton.Item animated='background' height='h-5' width='w-52' />
             </div>
             <div className='my-2 space-y-3 text-gray-500'>
               <div className='flex items-center gap-x-2 '>
                 <Icons.UserLocation className='text-gray-500 icon' />
-                <span className='h-5 w-44 rounded-md bg-red-200' />
+                <Skeleton.Item
+                  animated='background'
+                  height='h-5'
+                  width='w-40'
+                />
               </div>
               <div className='flex items-center gap-x-2 '>
                 <Icons.Post className='text-gray-500 icon' />
-                <span className='h-5 w-44 rounded-md bg-red-200' />
+                <Skeleton.Item
+                  animated='background'
+                  height='h-5'
+                  width='w-40'
+                />
               </div>
               <div className='flex items-center gap-x-2 '>
                 <Icons.Phone className='text-gray-500 icon' />
-                <span className='h-5 w-44 rounded-md bg-red-200' />
+                <Skeleton.Item
+                  animated='background'
+                  height='h-5'
+                  width='w-40'
+                />
               </div>
 
               <div className='flex items-center gap-x-2 '>
                 <Icons.User className='text-gray-500 icon' />
-                <span className='h-5 w-44 rounded-md bg-red-200' />
+                <Skeleton.Item
+                  animated='background'
+                  height='h-5'
+                  width='w-40'
+                />
               </div>
             </div>
           </section>

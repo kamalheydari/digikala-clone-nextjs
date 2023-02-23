@@ -2,11 +2,11 @@ import { Icons, Skeleton } from "components";
 
 import { withAddressModal } from "HOCs/withAddressModal";
 
-import useUserInfo from "hooks/useUserInfo";
+function AddressBar(props) {
+  //? Props
+  const { openAddressModal, isVerify, isLoading, address } = props;
 
-function AddressBar({ openAddressModal }) {
-  //? Get User Data
-  const { userInfo, isVerify, isLoading } = useUserInfo();
+  console.log({ address, isVerify, isLoading });
 
   //? Render(s)
   if (!isVerify) {
@@ -19,7 +19,7 @@ function AddressBar({ openAddressModal }) {
         width='w-3/4 lg:w-1/4'
       />
     );
-  } else if (!userInfo.address) {
+  } else if (!address) {
     return (
       <button
         type='button'
@@ -32,7 +32,7 @@ function AddressBar({ openAddressModal }) {
         <Icons.ArrowLeft className='mr-auto icon' />
       </button>
     );
-  } else if (userInfo?.address) {
+  } else if (address) {
     return (
       <button
         type='button'
@@ -41,8 +41,7 @@ function AddressBar({ openAddressModal }) {
       >
         <Icons.Location2 className='icon' />
         <span>
-          ارسال به {userInfo.address.province.name},{" "}
-          {userInfo.address.city.name}
+          ارسال به {address.province.name}, {address.city.name}
         </span>
         <Icons.ArrowLeft className='mr-auto icon' />
       </button>
