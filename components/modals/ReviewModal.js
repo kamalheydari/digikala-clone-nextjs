@@ -1,9 +1,7 @@
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 
-import { useDispatch } from "react-redux";
 import { nanoid } from "@reduxjs/toolkit";
 import { useCreateReviewMutation } from "app/api/reviewApi";
-import { showAlert } from "app/slices/alert.slice";
 
 import { ratingStatus } from "utils/constatns";
 
@@ -17,14 +15,12 @@ import {
   DisplayError,
   SubmitModalBtn,
   Modal,
+  HandleResponse,
 } from "components";
 
 export default function ReviewModal(props) {
   //? Props
   const { isShow, onClose, productTitle, prdouctID } = props;
-
-  //? Assets
-  const dispatch = useDispatch();
 
   //? Refs
   const positiveRef = useRef(null);
@@ -93,39 +89,29 @@ export default function ReviewModal(props) {
     });
   };
 
-  //? Re-Renders
-  //* Handle Create Review Response
-  useEffect(() => {
-    if (isSuccess) {
-      onClose();
-      reset();
-      setRating(1);
-      dispatch(
-        showAlert({
-          status: "success",
-          title: data.msg,
-        })
-      );
-    }
-  }, [isSuccess]);
-
-  useEffect(() => {
-    if (isError) {
-      onClose();
-      reset();
-      setRating(1);
-      dispatch(
-        showAlert({
-          status: "error",
-          title: error?.data.err,
-        })
-      );
-    }
-  }, [isError]);
-
   //? Render(s)
   return (
     <>
+      {/* Handle Create Review Response */}
+      {(isSuccess || isError) && (
+        <HandleResponse
+          isError={isError}
+          isSuccess={isSuccess}
+          error={error?.data?.err}
+          message={data?.msg}
+          onSuccess={() => {
+            onClose();
+            reset();
+            setRating(1);
+          }}
+          onError={() => {
+            onClose();
+            reset();
+            setRating(1);
+          }}
+        />
+      )}
+
       <Modal isShow={isShow} onClose={onClose} effect='bottom-to-top'>
         <Modal.Content className='flex flex-col h-full lg:h-[770px] pl-2 pr-4 py-3 bg-white md:rounded-lg gap-y-3'>
           <Modal.Header>دیدگاه شما در مورد {productTitle}</Modal.Header>

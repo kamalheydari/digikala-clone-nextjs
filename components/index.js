@@ -1,4 +1,4 @@
-//* SHARE COMPONENTS
+//* COMMON COMPONENTS
 export { default as Icons } from "./common/Icons";
 export { default as ArrowLink } from "./common/ArrowLink";
 export { default as BoxLink } from "./common/BoxLink";
@@ -10,6 +10,7 @@ export { default as PageContainer } from "./common/PageContainer";
 export { default as Combobox } from "./common/Combobox";
 export { default as Skeleton } from "./common/Skeleton";
 export { default as Modal } from "./common/Modal";
+export { default as HandleResponse } from "./common/HandleResponse";
 export * from "./common/IconBtns";
 export * from "./common/Buttons";
 
@@ -66,7 +67,7 @@ export { default as ConfirmDeleteModal } from "./modals/ConfirmDeleteModal";
 export { default as ConfirmUpdateModal } from "./modals/ConfirmUpdateModal";
 export { default as RedirectToLogin } from "./modals/RedirectToLogin";
 export { default as UserNameModal } from "./modals/UserNameModal";
-export { default as UserMobileForm } from "./modals/UserMobileForm";
+export { default as UserMobileModal } from "./modals/UserMobileModal";
 export { default as AddressForm } from "./modals/AddressForm";
 export { default as ReviewModal } from "./modals/ReviewModal";
 export { default as SearchModal } from "./modals/SearchModal";

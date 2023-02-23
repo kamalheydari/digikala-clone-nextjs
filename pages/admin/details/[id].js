@@ -21,6 +21,7 @@ import {
   ConfirmDeleteModal,
   ConfirmUpdateModal,
   DetailsList,
+  HandleResponse,
   PageContainer,
   ShowWrapper,
 } from "components";
@@ -123,26 +124,6 @@ export default function DetailsPage() {
     { data, isSuccess, isError, isLoading, error },
   ] = useCreateDetailsMutation();
 
-  //? Handle Create Details Response
-  useEffect(() => {
-    if (isSuccess) {
-      dispatch(
-        showAlert({
-          status: "success",
-          title: data.msg,
-        })
-      );
-      router.push("/admin/details");
-    }
-    if (isError)
-      dispatch(
-        showAlert({
-          status: "error",
-          title: error?.data.err,
-        })
-      );
-  }, [isSuccess, isLoading]);
-
   //? Handlers
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -206,7 +187,6 @@ export default function DetailsPage() {
         deleteInfo={deleteInfo}
         setDeleteInfo={setDeleteInfo}
       />
-
       <ConfirmUpdateModal
         title='مشخصات و ویژگی های'
         updateFunc={updateDetails}
@@ -220,7 +200,16 @@ export default function DetailsPage() {
         updateInfo={updateInfo}
         setUpdateInfo={setUpdateInfo}
       />
-
+      /* Handle Create Details Response */
+      {(isSuccess || isError) && (
+        <HandleResponse
+          isError={isError}
+          isSuccess={isSuccess}
+          error={error?.data?.err}
+          message={data?.msg}
+          onSuccess={() => router.push("/admin/details")}
+        />
+      )}
       <main>
         <Head>
           <title>مدیریت | مشخصات</title>

@@ -3,18 +3,17 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import validation from "utils/validation";
 
 import { useEditUserMutation } from "app/api/userApi";
-import { useDispatch } from "react-redux";
 
 import { TextField, SubmitModalBtn, Modal, HandleResponse } from "components";
 
-export default function UserNameModal(props) {
+export default function UserMobileModal(props) {
   //? Props
   const { isShow, onClose, editedData } = props;
 
-  //? Edit User Query
+  //? Patch Data
   const [
     editUser,
-    { data, isSuccess, isLoading, isError, error },
+    { data, isSuccess, isLoading, error, isError },
   ] = useEditUserMutation();
 
   //? Form Hook
@@ -23,14 +22,14 @@ export default function UserNameModal(props) {
     control,
     formState: { errors: formErrors },
   } = useForm({
-    resolver: yupResolver(validation.nameSchema),
-    defaultValues: { name: editedData ? editedData : "" },
+    resolver: yupResolver(validation.mobileSchema),
+    defaultValues: { mobile: editedData ? editedData : "" },
   });
 
   //? Handlers
-  const submitHander = async ({ name }) => {
-    editUser({
-      body: { name },
+  const submitHander = async ({ mobile }) => {
+    await editUser({
+      body: { mobile },
     });
   };
 
@@ -47,23 +46,21 @@ export default function UserNameModal(props) {
           onSuccess={onClose}
         />
       )}
+
       <Modal isShow={isShow} onClose={onClose} effect='bottom-to-top'>
         <Modal.Content className='flex flex-col h-full px-5 py-3 bg-white md:rounded-lg gap-y-5 '>
-          <Modal.Header>ثبت و ویرایش اطلاعات شناسایی</Modal.Header>
+          <Modal.Header>ثبت و ویرایش شماره موبایل</Modal.Header>
           <Modal.Body>
-            <p className='text-sm'>
-              لطفا اطلاعات شناسایی شامل نام و نام خانوادگی را وارد کنید.
-            </p>
-
+            <p className='text-sm'>لطفا شماره تلفن همراه خود را وارد کنید.</p>
             <form
-              className='flex flex-col justify-between flex-1 gap-y-5 '
+              className='flex flex-col justify-between flex-1 gap-y-5'
               onSubmit={handleSubmit(submitHander)}
             >
               <TextField
-                label='نام و نام خانوادگی'
+                label='شماره موبایل'
                 control={control}
-                errors={formErrors.name}
-                name='name'
+                errors={formErrors.mobile}
+                name='mobile'
               />
 
               <div className='py-3 border-t-2 border-gray-200 lg:pb-0 '>

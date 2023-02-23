@@ -6,8 +6,6 @@ function AddressBar(props) {
   //? Props
   const { openAddressModal, isVerify, isLoading, address } = props;
 
-  console.log({ address, isVerify, isLoading });
-
   //? Render(s)
   if (!isVerify) {
     return null;

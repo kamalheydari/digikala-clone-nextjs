@@ -1,9 +1,6 @@
 import { useEffect } from "react";
 
-import { useDispatch } from "react-redux";
-
-import { Button, Modal } from "components";
-import { showAlert } from "app/slices/alert.slice";
+import { Button, HandleResponse, Modal } from "components";
 
 export default function ConfirmUpdateModal(props) {
   //? Props
@@ -20,8 +17,6 @@ export default function ConfirmUpdateModal(props) {
     updateInfo,
     setUpdateInfo,
   } = props;
-
-  const dispatch = useDispatch();
 
   //? Send Request
   useEffect(() => {
@@ -43,57 +38,47 @@ export default function ConfirmUpdateModal(props) {
     onClose();
   };
 
-  //? Handle Response
-  useEffect(() => {
-    if (isSuccess) {
-      setUpdateInfo({ id: "", isConfirmUpdate: false, editedData: {} });
-      onClose();
-
-      dispatch(
-        showAlert({
-          status: "success",
-          title: data.msg,
-        })
-      );
-    }
-  }, [isSuccess]);
-
-  useEffect(() => {
-    if (isError) {
-      setUpdateInfo({ id: "", isConfirmUpdate: false, editedData: {} });
-      onClose();
-
-      dispatch(
-        showAlert({
-          status: "error",
-          title: error.data.err,
-        })
-      );
-    }
-  }, [isError]);
-
   return (
-    <Modal isShow={isShow} onClose={onClose} effect='ease-out'>
-      <Modal.Content>
-        <Modal.Body>
-          <div className='px-3 py-6 space-y-4 text-center bg-white md:rounded-lg'>
-            <p>
-              آیا موافق بروزرسانی{" "}
-              <span className='font-bold text-green-500'>{title}</span> تغییر
-              داده شده هستید؟
-            </p>
-            <div className='flex justify-center gap-x-20'>
-              <Button onClick={handleConfirmClick} isLoading={isLoading}>
-                بروزرسانی و ادامه
-              </Button>
+    <>
+      {/* Handle Update Response */}
+      {(isSuccess || isError) && (
+        <HandleResponse
+          isError={isError}
+          isSuccess={isSuccess}
+          error={error?.data?.err}
+          message={data?.msg}
+          onSuccess={() => {
+            setUpdateInfo({ id: "", isConfirmUpdate: false, editedData: {} });
+            onClose();
+          }}
+          onError={() => {
+            setUpdateInfo({ id: "", isConfirmUpdate: false, editedData: {} });
+            onClose();
+          }}
+        />
+      )}
+      <Modal isShow={isShow} onClose={onClose} effect='ease-out'>
+        <Modal.Content>
+          <Modal.Body>
+            <div className='px-3 py-6 space-y-4 text-center bg-white md:rounded-lg'>
+              <p>
+                آیا موافق بروزرسانی{" "}
+                <span className='font-bold text-green-500'>{title}</span> تغییر
+                داده شده هستید؟
+              </p>
+              <div className='flex justify-center gap-x-20'>
+                <Button onClick={handleConfirmClick} isLoading={isLoading}>
+                  بروزرسانی و ادامه
+                </Button>
 
-              <Button className='!bg-green-500' onClick={handleCancleClick}>
-                لغو
-              </Button>
+                <Button className='!bg-green-500' onClick={handleCancleClick}>
+                  لغو
+                </Button>
+              </div>
             </div>
-          </div>
-        </Modal.Body>
-      </Modal.Content>
-    </Modal>
+          </Modal.Body>
+        </Modal.Content>
+      </Modal>
+    </>
   );
 }

@@ -3,7 +3,6 @@ import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
 
 import { useDispatch, useSelector } from "react-redux";
-import { showAlert } from "app/slices/alert.slice";
 import {
   addItem,
   changeProductItems,
@@ -25,6 +24,7 @@ import {
   ConfirmUpdateModal,
   PageContainer,
   Button,
+  HandleResponse,
 } from "components";
 
 import getDetailsArray from "utils/getDetailsArray";
@@ -81,28 +81,6 @@ export default function Product() {
       isLoading: isLoading_update,
     },
   ] = useUpdateProductMutation();
-
-  //? Handle Create Product Response
-  useEffect(() => {
-    if (isSuccess) {
-      dispatch(
-        showAlert({
-          status: "success",
-          title: data.msg,
-        })
-      );
-      router.push("/admin/products");
-      dispatch(resetProduct());
-    }
-    if (isError) {
-      dispatch(
-        showAlert({
-          status: "error",
-          title: error?.data.err,
-        })
-      );
-    }
-  }, [isSuccess, isError]);
 
   //? Edit Product
   const { id } = router.query;
@@ -179,6 +157,20 @@ export default function Product() {
         updateInfo={updateInfo}
         setUpdateInfo={setUpdateInfo}
       />
+
+      {/* Handle Create Product Response */}
+      {(isSuccess || isError) && (
+        <HandleResponse
+          isError={isError}
+          isSuccess={isSuccess}
+          error={error?.data?.err}
+          message={data?.msg}
+          onSuccess={() => {
+            router.push("/admin/products");
+            dispatch(resetProduct());
+          }}
+        />
+      )}
 
       <main>
         <Head>

@@ -2,7 +2,7 @@ import Head from "next/head";
 
 import {
   Icons,
-  UserMobileForm,
+  UserMobileModal,
   UserNameModal,
   PageContainer,
 } from "components";
@@ -49,7 +49,7 @@ export default function PersonalInfo() {
             onClose={nameModalHandlers.close}
             editedData={userInfo?.name}
           />
-          <UserMobileForm
+          <UserMobileModal
             isShow={isShowPhoneModal}
             onClose={phoneModalHandlers.close}
             editedData={userInfo?.mobile}

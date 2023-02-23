@@ -9,10 +9,9 @@ import validation from "utils/validation";
 
 import { useLoginMutation } from "app/api/userApi";
 import { useDispatch } from "react-redux";
-import { showAlert } from "app/slices/alert.slice";
 import { userLogin } from "app/slices/user.slice";
 
-import { TextField, LoginBtn, Logo } from "components";
+import { TextField, LoginBtn, Logo, HandleResponse } from "components";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
@@ -23,33 +22,6 @@ export default function LoginPage() {
     login,
     { data, isSuccess, isError, isLoading, error },
   ] = useLoginMutation();
-
-  //? Handle Login Response
-  useEffect(() => {
-    if (isSuccess) {
-      dispatch(userLogin(data.data.access_token));
-
-      dispatch(
-        showAlert({
-          status: "success",
-          title: data.msg,
-        })
-      );
-
-      reset();
-      router.push("/");
-    }
-  }, [isSuccess]);
-
-  useEffect(() => {
-    if (isError)
-      dispatch(
-        showAlert({
-          status: "error",
-          title: error?.data.err,
-        })
-      );
-  }, [isError]);
 
   //? Form Hook
   const {
@@ -82,48 +54,64 @@ export default function LoginPage() {
 
   //? Render
   return (
-    <main className='grid items-center min-h-screen '>
-      <Head>
-        <title>دیجی‌کالا | ورود</title>
-      </Head>
-      <section className='container max-w-xl px-12 py-6 space-y-6 lg:border lg:border-gray-100 lg:rounded-lg lg:shadow'>
-        <Link passHref href='/'>
-          <a>
-            <Logo className='h-24 mx-auto w-44' />
-          </a>
-        </Link>
-        <h2 className='text-gray-700'>ورود</h2>
-        <form
-          className='space-y-4'
-          onSubmit={handleSubmit(submitHander)}
-          autoComplete='off'
-        >
-          <TextField
-            errors={formErrors.email}
-            placeholder='آدرس ایمیل'
-            name='email'
-            control={control}
-            type='email'
-          />
-
-          <TextField
-            errors={formErrors.password}
-            type='password'
-            placeholder='رمز عبور'
-            name='password'
-            control={control}
-          />
-
-          <LoginBtn isLoading={isLoading}>ورود</LoginBtn>
-        </form>
-
-        <div>
-          <p className='inline ml-2 text-gray-800'>هنوز ثبت‌نام نکردی؟</p>
-          <Link href='/register'>
-            <a className='text-lg text-blue-400 '>ثبت‌نام</a>
+    <>
+      {/*  Handle Login Response */}
+      {(isSuccess || isError) && (
+        <HandleResponse
+          isError={isError}
+          isSuccess={isSuccess}
+          error={error?.data?.err}
+          message={data?.msg}
+          onSuccess={() => {
+            dispatch(userLogin(data.data.access_token));
+            reset();
+            router.push("/");
+          }}
+        />
+      )}
+      <main className='grid items-center min-h-screen '>
+        <Head>
+          <title>دیجی‌کالا | ورود</title>
+        </Head>
+        <section className='container max-w-xl px-12 py-6 space-y-6 lg:border lg:border-gray-100 lg:rounded-lg lg:shadow'>
+          <Link passHref href='/'>
+            <a>
+              <Logo className='h-24 mx-auto w-44' />
+            </a>
           </Link>
-        </div>
-      </section>
-    </main>
+          <h2 className='text-gray-700'>ورود</h2>
+          <form
+            className='space-y-4'
+            onSubmit={handleSubmit(submitHander)}
+            autoComplete='off'
+          >
+            <TextField
+              errors={formErrors.email}
+              placeholder='آدرس ایمیل'
+              name='email'
+              control={control}
+              type='email'
+            />
+
+            <TextField
+              errors={formErrors.password}
+              type='password'
+              placeholder='رمز عبور'
+              name='password'
+              control={control}
+            />
+
+            <LoginBtn isLoading={isLoading}>ورود</LoginBtn>
+          </form>
+
+          <div>
+            <p className='inline ml-2 text-gray-800'>هنوز ثبت‌نام نکردی؟</p>
+            <Link href='/register'>
+              <a className='text-lg text-blue-400 '>ثبت‌نام</a>
+            </Link>
+          </div>
+        </section>
+      </main>
+    </>
   );
 }

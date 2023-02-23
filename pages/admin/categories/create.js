@@ -1,9 +1,7 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-import { useDispatch } from "react-redux";
 import { useCreateCategoryMutation } from "app/api/categoryApi";
-import { showAlert } from "app/slices/alert.slice";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
@@ -15,10 +13,10 @@ import {
   TextField,
   PageContainer,
   Button,
+  HandleResponse,
 } from "components";
 
 export default function CreateCategory() {
-  const dispatch = useDispatch();
 
   //?  States
   const [images, setImages] = useState([]);
@@ -29,31 +27,6 @@ export default function CreateCategory() {
     createCtegory,
     { data, isSuccess, isLoading, error, isError },
   ] = useCreateCategoryMutation();
-
-  //? Handle Create Category Response
-  useEffect(() => {
-    if (isSuccess) {
-      setImages([]);
-      reset();
-      dispatch(
-        showAlert({
-          status: "success",
-          title: data.msg,
-        })
-      );
-    }
-  }, [isSuccess]);
-
-  useEffect(() => {
-    if (isError) {
-      dispatch(
-        showAlert({
-          status: "error",
-          title: error?.data.err,
-        })
-      );
-    }
-  }, [isError]);
 
   //? Form Hook
   const {
@@ -121,6 +94,20 @@ export default function CreateCategory() {
   //? Render
   return (
     <>
+      {/* Handle Create Category Response */}
+      {(isSuccess || isError) && (
+        <HandleResponse
+          isError={isError}
+          isSuccess={isSuccess}
+          error={error?.data?.err}
+          message={data?.msg}
+          onSuccess={() => {
+            setImages([]);
+            reset();
+          }}
+        />
+      )}
+
       <main>
         <Head>
           <title>مدیریت | دسته بندی جدید</title>
