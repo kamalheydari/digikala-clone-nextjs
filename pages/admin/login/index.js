@@ -12,7 +12,7 @@ import { userLogin } from "app/slices/user.slice";
 import { showAlert } from "app/slices/alert.slice";
 import { useLoginMutation } from "app/api/userApi";
 
-import { TextField, LoginBtn } from "components";
+import { TextField, LoginBtn, Logo } from "components";
 
 export default function LoginPage() {
   const dispatch = useDispatch();
