@@ -63,7 +63,7 @@ export default function SearchModal(props) {
   //? Render(s)
   return (
     <Modal isShow={isShow} onClose={onClose} effect='bottom-to-top'>
-      <Modal.Content className='flex flex-col h-full px-5 py-3 bg-white md:rounded-lg gap-y-5 '>
+      <Modal.Content className='flex flex-col h-screen lg:h-fit  pl-2 pr-4 py-3 bg-white md:rounded-lg gap-y-3'>
         <Modal.Header>جستسجو</Modal.Header>
         <Modal.Body>
           <form
@@ -84,48 +84,50 @@ export default function SearchModal(props) {
               <Icons.Search className='icon' />
             </button>
           </form>
-          <ShowWrapper
-            error={error}
-            isError={isError}
-            refetch={refetch}
-            isFetching={isFetching}
-            isSuccess={isSuccess}
-            dataLength={data ? data.productsLength : 0}
-            emptyElement={<EmptySearchList />}
-          >
-            <div className='px-4 py-3 divide-y'>
-              {data?.productsLength > 0 &&
-                search.length > 0 &&
-                data?.products.map((item) => (
-                  <article key={item._id} className='pt-1'>
-                    <div className='relative w-12 h-12'>
-                      <Image
-                        src={item.images[0].url}
-                        layout='fill'
-                        alt={item.name}
-                      />
-                    </div>
-                    <Link href={`/products/${item._id}`}>
-                      <a onClick={() => onClose()} className='py-1 text-sm'>
-                        {truncate(item.title, 70)}
-                      </a>
-                    </Link>
-                    <div className='flex justify-between'>
-                      <div>
-                        {item.discount > 0 && (
-                          <DiscountProduct discount={item.discount} />
-                        )}
+          <div className='overflow-y-auto lg:max-h-[500px]'>
+            <ShowWrapper
+              error={error}
+              isError={isError}
+              refetch={refetch}
+              isFetching={isFetching}
+              isSuccess={isSuccess}
+              dataLength={data ? data.productsLength : 0}
+              emptyElement={<EmptySearchList />}
+            >
+              <div className='px-4 py-3 divide-y'>
+                {data?.productsLength > 0 &&
+                  search.length > 0 &&
+                  data?.products.map((item) => (
+                    <article key={item._id} className='pt-1'>
+                      <div className='relative w-12 h-12'>
+                        <Image
+                          src={item.images[0].url}
+                          layout='fill'
+                          alt={item.name}
+                        />
                       </div>
-                      <ProductPrice
-                        inStock={item.inStock}
-                        discount={item.discount}
-                        price={item.price}
-                      />
-                    </div>
-                  </article>
-                ))}
-            </div>
-          </ShowWrapper>
+                      <Link href={`/products/${item._id}`}>
+                        <a onClick={() => onClose()} className='py-1 text-sm'>
+                          {truncate(item.title, 70)}
+                        </a>
+                      </Link>
+                      <div className='flex justify-between'>
+                        <div>
+                          {item.discount > 0 && (
+                            <DiscountProduct discount={item.discount} />
+                          )}
+                        </div>
+                        <ProductPrice
+                          inStock={item.inStock}
+                          discount={item.discount}
+                          price={item.price}
+                        />
+                      </div>
+                    </article>
+                  ))}
+              </div>
+            </ShowWrapper>
+          </div>
         </Modal.Body>
       </Modal.Content>
     </Modal>
