@@ -30,7 +30,7 @@ const getDetails = async (req, res) => {
     const details = await Details.findOne({ category_id: id });
     await db.disconnect();
 
-    res.status(200).json({ details });
+    res.status(200).json( details );
   } catch (error) {
     sendError(res, 500, error.message);
   }

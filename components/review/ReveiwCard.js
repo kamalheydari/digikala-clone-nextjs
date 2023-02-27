@@ -1,9 +1,10 @@
 import Image from "next/image";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 
 import { useEditReviewMutation } from "app/api/reviewApi";
 
 import { HandleResponse, Icons } from "components";
+import { Menu, Transition } from "@headlessui/react";
 
 export default function ReveiwCard({
   item,
@@ -28,6 +29,65 @@ export default function ReveiwCard({
     setStatus(statusNum);
   };
 
+  //? Local Components
+
+  const DropdownReview = ({ openConfirmDeleteModal }) => (
+    <Menu as='div' className='relative inline-block text-left'>
+      <Menu.Button className='flex-center p-1.5 transition-colors rounded-md hover:bg-red-100'>
+        <Icons.More className='cursor-pointer icon' />
+      </Menu.Button>
+
+      <Transition
+        as={Fragment}
+        enter='transition ease-out duration-100'
+        enterFrom='transform opacity-0 scale-95'
+        enterTo='transform opacity-100 scale-100'
+        leave='transition ease-in duration-75'
+        leaveFrom='transform opacity-100 scale-100'
+        leaveTo='transform opacity-0 scale-95'
+      >
+        <Menu.Items className='absolute left-0 mt-2 origin-top-right space-y-2 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
+          {singleComment ? (
+            <>
+              <Menu.Item>
+                <button
+                  className='flex items-center w-48 gap-x-3 px-1.5 py-3 cursor-pointer '
+                  type='button'
+                  onClick={() => handleChangeStatus(2)}
+                  disabled={status === 2}
+                >
+                  <Icons.Check className='text-white rounded-full p-0.5 icon bg-green-500 ' />
+                  <span className='block'>تغییر وضعیت به تایید شده</span>
+                </button>
+              </Menu.Item>
+              <Menu.Item>
+                <button
+                  className='flex items-center w-48 gap-x-3 px-1.5 py-3 cursor-pointer '
+                  type='button'
+                  onClick={() => handleChangeStatus(3)}
+                  disabled={status === 3}
+                >
+                  <Icons.Cross className='text-white rounded-full p-0.5 icon bg-red-500 ' />
+                  <span className='block'>تغییر وضعیت به رد شده</span>
+                </button>
+              </Menu.Item>
+            </>
+          ) : (
+            <Menu.Item>
+              <button
+                type='button'
+                className='flex items-center w-48 gap-x-3 px-1.5 py-3 cursor-pointer '
+                onClick={() => deleteReviewHandler(item._id)}
+              >
+                <Icons.Delete className='icon' />
+                <span>حذف دیدگاه‌</span>
+              </button>
+            </Menu.Item>
+          )}
+        </Menu.Items>
+      </Transition>
+    </Menu>
+  );
   return (
     <>
       {/* Handle Edit Review Response */}
@@ -101,42 +161,7 @@ export default function ReveiwCard({
                     : "رد شده"}
                 </span>
               </div>
-              <div className='relative h-fit px-1.5 group self-end'>
-                <Icons.More className='cursor-pointer icon' />
-                <div className='absolute left-0 hidden px-4 py-3 bg-white rounded shadow-3xl top-5 group-hover:flex'>
-                  {singleComment ? (
-                    <div className='space-y-4'>
-                      <button
-                        type='button'
-                        className='flex items-center w-48 gap-x-3'
-                        onClick={() => handleChangeStatus(2)}
-                        disabled={status === 2}
-                      >
-                        <Icons.Check className='text-white rounded-full p-0.5 icon bg-green-500 ' />
-                        <span className='block'>تغییر وضعیت به تایید شده</span>
-                      </button>
-                      <button
-                        type='button'
-                        className='flex items-center w-48 gap-x-3'
-                        onClick={() => handleChangeStatus(3)}
-                        disabled={status === 3}
-                      >
-                        <Icons.Cross className='text-white rounded-full p-0.5 icon bg-red-500 ' />
-                        <span className='block'>تغییر وضعیت به رد شده</span>
-                      </button>
-                    </div>
-                  ) : (
-                    <button
-                      type='button'
-                      className='flex items-center gap-x-2 w-36'
-                      onClick={() => deleteReviewHandler(item._id)}
-                    >
-                      <Icons.Delete className='icon' />
-                      <span>حذف دیدگاه‌</span>
-                    </button>
-                  )}
-                </div>
-              </div>
+              <DropdownReview />
             </div>
             <p className='pt-2 lg:ml-auto'>{item.title}</p>
           </div>

@@ -19,11 +19,11 @@ export default function Specification({ specification }) {
           {renderSpecification.map((item, i) => (
             <li key={i} className='flex'>
               <span className='py-2 ml-3 font-light leading-5 tracking-wide text-gray-500 w-36'>
-                {item[0]}
+                {item.title}
               </span>
               <span
                 className='w-full py-2 font-normal leading-5 tracking-wide text-gray-600 break-all border-b border-gray-100 md:break-normal '
-                dangerouslySetInnerHTML={{ __html: item[1] }}
+                dangerouslySetInnerHTML={{ __html: item.value }}
               ></span>
             </li>
           ))}

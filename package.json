@@ -11,7 +11,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.10",
     "@hookform/resolvers": "^2.9.0",
-    "@reduxjs/toolkit": "^1.8.2",
+    "@reduxjs/toolkit": "^1.9.3",
     "bcrypt": "^5.0.1",
     "iran-city": "^1.1.4",
     "js-cookie": "^3.0.1",

@@ -2,19 +2,13 @@ import Head from "next/head";
 import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/router";
 
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addItem,
-  changeProductItems,
-  deleteImage,
-  fetchDetails,
-  fetchProduct,
-  resetProduct,
-} from "app/slices/product.slice";
 import {
   useCreateProductMutation,
+  useGetSingleProductQuery,
   useUpdateProductMutation,
 } from "app/api/productApi";
+
+import { useGetDetailsQuery } from "app/api/detailsApi";
 
 import {
   AddColors,
@@ -25,52 +19,75 @@ import {
   PageContainer,
   Button,
   HandleResponse,
+  TextField,
+  BigLoading,
 } from "components";
 
-import getDetailsArray from "utils/getDetailsArray";
-
 import useDisclosure from "hooks/useDisclosure";
+import { useForm } from "react-hook-form";
 
 export default function Product() {
   //? Assets
+  const router = useRouter();
+  const { id } = router.query;
+
+  //? Modals
   const [
     isShowConfirmUpdateModal,
     confirmUpdateModalHandlers,
   ] = useDisclosure();
-  const dispatch = useDispatch();
-  const router = useRouter();
 
   //? State
+  const [isEdit, setIsEdit] = useState(false);
+  const [images, setImages] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState({});
   const [updateInfo, setUpdateInfo] = useState({
     id: "",
-    isConfirmUpdate: false,
     editedData: {},
   });
+  const [isDetailsSkip, setIsDetailsSkip] = useState(true);
 
-  //? TABLE Refs
-  const infoTableRef = useRef(null);
-  const specificationTableRef = useRef(null);
+  //? Form Hook
+  const {
+    handleSubmit,
+    register,
+    reset,
+    control,
+    getValues,
+    watch,
+    setValue,
+  } = useForm({
+    defaultValues: {
+      title: "",
+      price: 0,
+      discount: 0,
+      description: "",
+      images: [],
+      sizes: [],
+      colors: [],
+      category: "",
+      inStock: 0,
+      info: [],
+      specification: [],
+    },
+  });
 
-  //? Store
-  const { infoArray, specificationArray, optionsType, product } = useSelector(
-    (state) => state.product
+  //? Queries
+  //*   Get Details
+  const { data: details, isFetching: isFetching_get } = useGetDetailsQuery(
+    {
+      id: selectedCategories?.lvlTwoCategory?._id,
+    },
+    { skip: isDetailsSkip }
   );
 
-  //? Select Category To Fetch Details
-  useEffect(() => {
-    if (selectedCategories?.lvlTwoCategory?._id) {
-      dispatch(fetchDetails(selectedCategories?.lvlTwoCategory?._id));
-    }
-  }, [selectedCategories?.lvlTwoCategory?._id]);
-
-  //? Create Product Query
+  //*   Create Product
   const [
     createProduct,
     { data, isSuccess, isLoading, isError, error },
   ] = useCreateProductMutation();
 
-  //? Update Product Query
+  //*   Update Product
   const [
     updateProduct,
     {
@@ -82,81 +99,133 @@ export default function Product() {
     },
   ] = useUpdateProductMutation();
 
-  //? Edit Product
-  const { id } = router.query;
+  //*    Edit Product
+  const { data: data_product_get } = useGetSingleProductQuery(
+    { id },
+    { skip: !isEdit }
+  );
+
+  //? Re-Renders
+  //*   Select Category To Fetch Details
+  useEffect(() => {
+    if (selectedCategories?.lvlTwoCategory?._id) {
+      setIsDetailsSkip(false);
+    }
+  }, [selectedCategories?.lvlTwoCategory?._id]);
+
+  //*   Set Details
+  useEffect(() => {
+    if (details) {
+      setValue("info", details.info);
+      setValue("specification", details.specification);
+      setValue("optionsType", details.optionsType);
+    }
+  }, [details]);
+
+  //*   Execute Get Product Query
   useEffect(() => {
     if (id) {
-      dispatch(resetProduct());
-      dispatch(fetchProduct(id));
-    } else {
-      dispatch(resetProduct());
+      setIsEdit(true);
     }
-  }, [id]);
+  }, []);
+
+  //*   Set Product Details On Edit Mode
+  useEffect(() => {
+    if (data_product_get) {
+      const {
+        title,
+        price,
+        discount,
+        description,
+        images,
+        sizes,
+        colors,
+        category,
+        inStock,
+        info,
+        specification,
+      } = data_product_get.product;
+      reset({
+        title,
+        price,
+        discount,
+        description,
+        sizes,
+        colors,
+        category,
+        inStock,
+        info,
+        specification,
+      });
+      setImages(images);
+    }
+  }, [data_product_get]);
 
   //? Hanlders
-  const submitHandler = async (e) => {
-    e.preventDefault();
-
-    const infoArray = getDetailsArray(infoTableRef);
-    const specificationArray = getDetailsArray(specificationTableRef);
-
+  const submitHandler = (data) => {
     createProduct({
       body: {
-        ...product,
-        info: infoArray,
-        specification: specificationArray,
+        ...data,
         category: selectedCategories.lvlThreeCategory.category,
       },
     });
   };
 
   const updateHandler = async () => {
-    const infoArray = getDetailsArray(infoTableRef);
-    const specificationArray = getDetailsArray(specificationTableRef);
-
     setUpdateInfo({
       ...updateInfo,
       id,
       editedData: {
-        ...product,
-        info: infoArray,
-        specification: specificationArray,
+        ...data_product_get.product,
+        ...watch(),
       },
     });
-
     confirmUpdateModalHandlers.open();
   };
 
-  const deleteImageHandler = (index) => {
-    dispatch(deleteImage(index));
+  const deleteImageHandler = (selected) => {
+    setImages(images.filter((item) => item.url !== selected.url));
   };
 
   const addImageHandler = (newImages) => {
-    dispatch(addItem({ type: "images", value: newImages }));
+    setImages([...newImages]);
   };
 
   const getUploadedImagesHandler = (media, imgOldURL) => {
-    dispatch(
-      addItem({ type: "uploaded-images", value: [...media, ...imgOldURL] })
-    );
+    setImages([...media, ...imgOldURL]);
   };
 
-  //? Render
+  //? Render(s)
+
   return (
     <>
       <ConfirmUpdateModal
         title='مشخصات و ویژگی های'
         updateFunc={updateProduct}
         isLoading={isLoading_update}
-        isSuccess={isSuccess_update}
-        isError={isError_update}
-        error={error_update}
-        data={data_update}
         isShow={isShowConfirmUpdateModal}
         onClose={confirmUpdateModalHandlers.close}
         updateInfo={updateInfo}
         setUpdateInfo={setUpdateInfo}
       />
+
+      {/* Handle Update Response */}
+      {(isSuccess_update || isError_update) && (
+        <HandleResponse
+          isError={isError_update}
+          isSuccess={isSuccess_update}
+          error={error_update?.data?.err}
+          message={data_update?.msg}
+          onSuccess={() => {
+            setUpdateInfo({ id: "", editedData: {} });
+            confirmUpdateModalHandlers.close();
+          }}
+          onError={() => {
+            setUpdateInfo({ id: "", editedData: {} });
+            confirmUpdateModalHandlers.close();
+          }}
+        />
+      )}
 
       {/* Handle Create Product Response */}
       {(isSuccess || isError) && (
@@ -167,7 +236,6 @@ export default function Product() {
           message={data?.msg}
           onSuccess={() => {
             router.push("/admin/products");
-            dispatch(resetProduct());
           }}
         />
       )}
@@ -179,25 +247,8 @@ export default function Product() {
 
         <PageContainer title={id ? "بروزرسانی محصول" : "محصول جدید"}>
           <section className='p-3 md:px-3 xl:px-8 2xl:px-10'>
-            <form onSubmit={submitHandler} className='space-y-10'>
-              <div className='space-y-1.5'>
-                <label htmlFor='title'>عنوان</label>
-                <input
-                  type='text'
-                  className='text-right input'
-                  name='title'
-                  id='title'
-                  value={product.title}
-                  onChange={(e) =>
-                    dispatch(
-                      changeProductItems({
-                        name: e.target.name,
-                        value: e.target.value,
-                      })
-                    )
-                  }
-                />
-              </div>
+            <form onSubmit={handleSubmit(submitHandler)} className='space-y-10'>
+              <TextField label='عنوان' name='title' control={control} />
               <div className='space-y-1.5'>
                 <label htmlFor='description'>معرفی</label>
                 <textarea
@@ -207,172 +258,116 @@ export default function Product() {
                   className='text-right input'
                   name='description'
                   id='description'
-                  value={product.description}
-                  onChange={(e) =>
-                    dispatch(
-                      changeProductItems({
-                        name: e.target.name,
-                        value: e.target.value,
-                      })
-                    )
-                  }
+                  {...register("description")}
                 />
               </div>
               <UploadImages
                 multiple
                 deleteImageHandler={deleteImageHandler}
-                images={product.images}
+                images={images}
                 addImage={addImageHandler}
                 getUploadedImages={getUploadedImagesHandler}
               />
-              <div className='space-y-4 md:flex md:gap-x-2 md:items-baseline md:justify-evenly'>
-                <div className='space-y-1.5'>
-                  <label htmlFor='price'>قیمت برحسب تومان</label>
-                  <input
-                    type='number'
-                    name='price'
-                    id='price'
-                    className='input'
-                    placeholder='0'
-                    value={product.price}
-                    onChange={(e) =>
-                      dispatch(
-                        changeProductItems({
-                          name: e.target.name,
-                          value: e.target.value,
-                        })
-                      )
-                    }
-                  />
-                </div>
-                <div className='space-y-1.5'>
-                  <label htmlFor='inStock'>موجودی</label>
-                  <input
-                    type='number'
-                    name='inStock'
-                    id='inStock'
-                    className='input'
-                    placeholder='0'
-                    value={product.inStock}
-                    onChange={(e) =>
-                      dispatch(
-                        changeProductItems({
-                          name: e.target.name,
-                          value: e.target.value,
-                        })
-                      )
-                    }
-                  />
-                </div>
-                <div className='space-y-1.5'>
-                  <label htmlFor='discount'>تخفیف برحسب درصد</label>
-                  <input
-                    type='number'
-                    name='discount'
-                    id='discount'
-                    className='input'
-                    placeholder='0%'
-                    value={product.discount}
-                    onChange={(e) =>
-                      dispatch(
-                        changeProductItems({
-                          name: e.target.name,
-                          value: e.target.value,
-                        })
-                      )
-                    }
-                  />
-                </div>
-              </div>
 
+              <div className='space-y-4 md:flex md:gap-x-2 md:items-baseline md:justify-evenly'>
+                <TextField
+                  label='قیمت'
+                  name='price'
+                  control={control}
+                  type='number'
+                />
+                <TextField
+                  label='موجودی'
+                  name='inStock'
+                  control={control}
+                  type='number'
+                />
+
+                <TextField
+                  label='تخفیف برحسب درصد'
+                  name='discount'
+                  control={control}
+                  type='number'
+                />
+              </div>
               {!id && (
                 <SelectCategories
                   setSelectedCategories={setSelectedCategories}
                   show={["lvlOne", "lvlTwo", "lvlThree"]}
                 />
               )}
-
-              {optionsType === "colors" || product.colors.length > 0 ? (
-                <AddColors />
-              ) : optionsType === "sizes" || product.sizes.length > 0 ? (
-                <AddSizes />
+              {getValues("optionsType") === "colors" ||
+              getValues("colors").length > 0 ? (
+                <AddColors
+                  name='colors'
+                  control={control}
+                  register={register}
+                />
+              ) : getValues("optionsType") === "sizes" ||
+                getValues("sizes").length > 0 ? (
+                <AddSizes name='sizes' control={control} register={register} />
               ) : (
                 ""
               )}
               <div className='text-sm space-y-1.5'>
                 <span>ویژگی‌ها</span>
-                <table className='w-full max-w-2xl mx-auto' ref={infoTableRef}>
+                <table className='w-full max-w-2xl mx-auto'>
                   <thead className='bg-emerald-50 text-emerald-500'>
                     <tr className=''>
-                      <th className='w-1/3  p-2.5'>نام</th>
+                      <th className='w-2/5  p-2.5'>نام</th>
                       <th>مقدار</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {!id &&
-                      infoArray?.map((item, index) => (
-                        <tr key={index} className='border-b-2 border-gray-100'>
-                          <td className='p-2'>{item}</td>
-                          <td
-                            contentEditable='true'
-                            suppressContentEditableWarning='true'
-                            className='input my-0.5 text-right'
-                          ></td>
-                        </tr>
-                      ))}
-                    {id &&
-                      product.info.map((item, index) => (
-                        <tr key={index} className='border-b-2 border-gray-100'>
-                          <td className='p-2'>{item[0]}</td>
-                          <td
-                            contentEditable='true'
-                            suppressContentEditableWarning='true'
-                            className='input my-0.5 text-right'
-                          >
-                            {item[1]}
-                          </td>
-                        </tr>
-                      ))}
+                    {getValues("info").map((item, index) => (
+                      <tr key={index} className='border-b-2 border-gray-100'>
+                        <td className='my-0.5 text-right'>
+                          <input
+                            type='text'
+                            className='text-field__input'
+                            {...register(`info.${index}.title`)}
+                          />
+                        </td>
+                        <td className='p-2'>
+                          <textarea
+                            type='text'
+                            className='text-field__input'
+                            {...register(`info.${index}.value`)}
+                          />
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>
               <div className='text-sm space-y-1.5'>
                 <span>مشخصات</span>
-                <table
-                  className='w-full max-w-2xl mx-auto'
-                  ref={specificationTableRef}
-                >
+                <table className='w-full max-w-2xl mx-auto'>
                   <thead className='bg-fuchsia-50 text-fuchsia-500 '>
                     <tr>
-                      <th className='w-1/3 p-2.5'>نام</th>
+                      <th className='w-2/5 p-2.5'>نام</th>
                       <th>مقدار</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {!id &&
-                      specificationArray?.map((item, index) => (
-                        <tr key={index} className='border-b-2 border-gray-100'>
-                          <td className='p-2'>{item}</td>
-                          <td
-                            contentEditable='true'
-                            suppressContentEditableWarning='true'
-                            className='input my-0.5 text-right'
-                          ></td>
-                        </tr>
-                      ))}
-                    {id &&
-                      product.specification.map((item, index) => (
-                        <tr key={index} className='border-b-2 border-gray-100'>
-                          <td className='p-2'>{item[0]}</td>
-                          <td
-                            contentEditable='true'
-                            suppressContentEditableWarning='true'
-                            className='input my-0.5 text-right'
-                          >
-                            {item[1]}
-                          </td>
-                        </tr>
-                      ))}
+                    {getValues("specification").map((item, index) => (
+                      <tr key={index} className='border-b-2 border-gray-100'>
+                        <td className='my-0.5 text-right'>
+                          <input
+                            type='text'
+                            className='text-field__input'
+                            {...register(`specification.${index}.title`)}
+                          />
+                        </td>
+                        <td className='p-2'>
+                          <textarea
+                            type='text'
+                            className='text-field__input'
+                            {...register(`specification.${index}.value`)}
+                          />
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </div>

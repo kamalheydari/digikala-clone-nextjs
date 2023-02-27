@@ -2,12 +2,8 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addOptionsType,
-  loadDetails,
-  resetDetails,
-} from "app/slices/details.slice";
+import { useDispatch } from "react-redux";
+
 import { showAlert } from "app/slices/alert.slice";
 import {
   useCreateDetailsMutation,
@@ -17,23 +13,26 @@ import {
 } from "app/api/detailsApi";
 
 import {
+  BigLoading,
   Button,
   ConfirmDeleteModal,
   ConfirmUpdateModal,
   DetailsList,
   HandleResponse,
   PageContainer,
-  ShowWrapper,
 } from "components";
 
 import useCategory from "hooks/useCategory";
 import useDisclosure from "hooks/useDisclosure";
+
+import { useForm } from "react-hook-form";
 
 export default function DetailsPage() {
   //? Assets
   const router = useRouter();
   const dispatch = useDispatch();
 
+  //? Modals
   const [
     isShowConfirmDeleteModal,
     confirmDeleteModalHandlers,
@@ -43,53 +42,54 @@ export default function DetailsPage() {
     confirmUpdateModalHandlers,
   ] = useDisclosure();
 
-  //? State
+  //? States
   const [deleteInfo, setDeleteInfo] = useState({
     id: "",
-    isConfirmDelete: false,
   });
   const [updateInfo, setUpdateInfo] = useState({
     id: "",
-    isConfirmUpdate: false,
     editedData: {},
   });
 
-  //? Get Categories Data
+  //? Queries
+  //*   Get Category
   const { categories } = useCategory();
+  const category = categories.find((item) => item._id === router.query.id);
 
-  //? Store
-  const {
-    category,
-    info,
-    specification,
-    details_id,
-    optionsType,
-  } = useSelector((state) => state.details);
-
-  //? Get Details Data
+  //*   Get Details
   const {
     data: details,
-    isFetching: detailsIsFetching,
-    isSuccess: detailsIsSuccess,
+    isFetching: isFetching_get,
+    isSuccess: isSuccess_get,
+    isLoading: isLoading_get,
   } = useGetDetailsQuery({
     id: router.query.id,
   });
 
-  //? Load Details Store
-  const getCtegory = categories.find((item) => item._id === router.query.id);
-  useEffect(() => {
-    dispatch(
-      loadDetails({
-        category: getCtegory,
-        details_id: details?.details?._id,
-        info: details?.details?.info,
-        specification: details?.details?.specification,
-        optionsType: details?.details?.optionsType,
-      })
-    );
-  }, [getCtegory, detailsIsSuccess]);
+  //*   Update Details
+  const [
+    updateDetails,
+    {
+      data: data_update,
+      isSuccess: isSuccess_update,
+      isError: isError_update,
+      error: error_update,
+      isLoading: isLoading_update,
+    },
+  ] = useUpdateDetailsMutation();
+  //*   Create Details
+  const [
+    createDetails,
+    {
+      data: data_creacte,
+      isSuccess: isSuccess_create,
+      isError: isError_create,
+      isLoading: isLoading_create,
+      error: error_create,
+    },
+  ] = useCreateDetailsMutation();
 
-  //? Delete Details
+  //*   Delete Details
   const [
     deleteDetails,
     {
@@ -101,32 +101,32 @@ export default function DetailsPage() {
     },
   ] = useDeleteDetailsMutation();
 
-  //? Handle Delete Response
-  useEffect(() => {
-    if (isSuccess_delete) dispatch(resetDetails());
-  }, [isSuccess_delete]);
-
-  //? Update Details
-  const [
-    updateDetails,
-    {
-      data: data_update,
-      isSuccess: isSuccess_update,
-      isError: isError_update,
-      error: error_update,
-      isLoading: isLoading_update,
+  //? Hook Form
+  const { handleSubmit, register, reset, control, getValues } = useForm({
+    defaultValues: {
+      optionsType: "none",
+      info: [],
+      specification: [],
     },
-  ] = useUpdateDetailsMutation();
+  });
 
-  //? Create Details
-  const [
-    createDetails,
-    { data, isSuccess, isError, isLoading, error },
-  ] = useCreateDetailsMutation();
+  //? Re-Renders
+  useEffect(() => {
+    if (details)
+      reset({
+        optionsType: details.optionsType,
+        info: details.info,
+        specification: details.specification,
+      });
+  }, [details]);
 
   //? Handlers
-  const submitHandler = async (e) => {
-    e.preventDefault();
+  const deleteHandler = () => {
+    setDeleteInfo({ ...deleteInfo, id: details?._id });
+    confirmDeleteModalHandlers.open();
+  };
+
+  const submitHander = async ({ info, specification, optionsType }) => {
     if (info.length !== 0 && specification.length !== 0) {
       await createDetails({
         body: {
@@ -147,28 +147,19 @@ export default function DetailsPage() {
     }
   };
 
-  const deleteHandler = () => {
-    setDeleteInfo({ ...deleteInfo, id: details_id });
-    confirmDeleteModalHandlers.open();
-  };
-
   const updateHandler = () => {
     setUpdateInfo({
       ...updateInfo,
-      id: details_id,
+      id: details?._id,
       editedData: {
-        category_id: category._id,
-        info,
-        specification,
-        optionsType,
+        category_id: category?._id,
+        info: getValues("info"),
+        specification: getValues("specification"),
+        optionsType: getValues("optionsType"),
       },
     });
 
     confirmUpdateModalHandlers.open();
-  };
-
-  const handleOptionTypeChange = (e) => {
-    dispatch(addOptionsType(e.target.value));
   };
 
   //? Render
@@ -178,36 +169,69 @@ export default function DetailsPage() {
         deleteFunc={deleteDetails}
         title='مشخصات و ویژگی ها'
         isLoading={isLoading_delete}
-        isSuccess={isSuccess_delete}
-        isError={isError_delete}
-        error={error_delete}
-        data={data_delete}
         isShow={isShowConfirmDeleteModal}
         onClose={confirmDeleteModalHandlers.close}
         deleteInfo={deleteInfo}
         setDeleteInfo={setDeleteInfo}
       />
+
+      {/* Handle Delete Response */}
+      {(isSuccess_delete || isError_delete) && (
+        <HandleResponse
+          isError={isError_delete}
+          isSuccess={isSuccess_delete}
+          error={error_delete?.data?.err}
+          message={data_delete?.msg}
+          onSuccess={() => {
+            reset({
+              optionsType: "none",
+              info: [],
+              specification: [],
+            });
+            confirmDeleteModalHandlers.close();
+          }}
+          onError={() => {
+            confirmDeleteModalHandlers.close();
+            setDeleteInfo({ id: "" });
+          }}
+        />
+      )}
+
       <ConfirmUpdateModal
         title='مشخصات و ویژگی های'
         updateFunc={updateDetails}
         isLoading={isLoading_update}
-        isSuccess={isSuccess_update}
-        isError={isError_update}
-        error={error_update}
-        data={data_update}
         isShow={isShowConfirmUpdateModal}
         onClose={confirmUpdateModalHandlers.close}
         updateInfo={updateInfo}
         setUpdateInfo={setUpdateInfo}
       />
-      /* Handle Create Details Response */
-      {(isSuccess || isError) && (
+
+      {/* Handle Update Response */}
+      {(isSuccess_update || isError_update) && (
         <HandleResponse
-          isError={isError}
-          isSuccess={isSuccess}
-          error={error?.data?.err}
-          message={data?.msg}
-          onSuccess={() => router.push("/admin/details")}
+          isError={isError_update}
+          isSuccess={isSuccess_update}
+          error={error_update?.data?.err}
+          message={data_update?.msg}
+          onSuccess={() => {
+            setUpdateInfo({ id: "", editedData: {} });
+            confirmUpdateModalHandlers.close();
+          }}
+          onError={() => {
+            setUpdateInfo({ id: "", editedData: {} });
+            confirmUpdateModalHandlers.close();
+          }}
+        />
+      )}
+
+      {/* Handle Create Details Response  */}
+      {(isSuccess_create || isError_create) && (
+        <HandleResponse
+          isError={isError_create}
+          isSuccess={isSuccess_create}
+          error={error_create?.data?.err}
+          message={data_creacte?.msg}
         />
       )}
       <main>
@@ -216,65 +240,69 @@ export default function DetailsPage() {
         </Head>
 
         <PageContainer
-          title={` مشخصات و ویژگی‌های دسته‌بندی ${category?.name}`}
+          title={` مشخصات و ویژگی‌های دسته‌بندی ${
+            category?.name ? category?.name : ""
+          }`}
         >
-          <ShowWrapper
-            error={null}
-            isError={null}
-            refetch={null}
-            isFetching={detailsIsFetching}
-            isSuccess={detailsIsSuccess}
-            dataLength={details ? 1 : 0}
-            emptyElement={null}
-          >
-            <form className='p-3 space-y-6' onSubmit={submitHandler}>
+          {isLoading_get ? (
+            <div className='px-3 py-20'>
+              <BigLoading />
+            </div>
+          ) : (
+            <form
+              onSubmit={handleSubmit(submitHander)}
+              className='p-3 space-y-6'
+            >
               <div className='space-y-3'>
                 <p className='mb-2'>نوع انتخاب :</p>
                 <div className='flex items-center gap-x-1'>
                   <input
                     type='radio'
-                    checked={optionsType === "none"}
                     name='optionsType'
                     id='none'
                     value='none'
-                    onChange={handleOptionTypeChange}
                     className='ml-1'
+                    {...register("optionsType")}
                   />
                   <label htmlFor='none'>بدون حق انتخاب</label>
                 </div>
                 <div className='flex items-center gap-x-1'>
                   <input
                     type='radio'
-                    checked={optionsType === "colors"}
                     name='optionsType'
                     id='colors'
                     value='colors'
-                    onChange={handleOptionTypeChange}
                     className='ml-1'
+                    {...register("optionsType")}
                   />
                   <label htmlFor='colors'>بر اساس رنگ</label>
                 </div>
                 <div className='flex items-center gap-x-1'>
                   <input
                     type='radio'
-                    checked={optionsType === "sizes"}
                     name='optionsType'
                     id='sizes'
                     value='sizes'
-                    onChange={handleOptionTypeChange}
                     className='ml-1'
+                    {...register("optionsType")}
                   />
                   <label htmlFor='sizes'>بر اساس سایز</label>
                 </div>
               </div>
-              <DetailsList category={category} type='info' data={info} />
               <DetailsList
+                name='info'
+                control={control}
+                register={register}
                 category={category}
-                type='specification'
-                data={specification}
+              />
+              <DetailsList
+                name='specification'
+                control={control}
+                register={register}
+                category={category}
               />
               <div className='flex justify-center gap-x-4'>
-                {details_id ? (
+                {details ? (
                   <>
                     <Button
                       className='bg-amber-500 rounded-3xl'
@@ -283,6 +311,7 @@ export default function DetailsPage() {
                     >
                       بروزرسانی اطلاعات
                     </Button>
+
                     <Button
                       className='rounded-3xl'
                       isLoading={isLoading_delete}
@@ -296,14 +325,14 @@ export default function DetailsPage() {
                     className=' bg-green-500'
                     rounded
                     type='submit'
-                    isLoading={isLoading}
+                    isLoading={isLoading_create}
                   >
                     ثبت اطلاعات
                   </Button>
                 )}
               </div>
             </form>
-          </ShowWrapper>
+          )}
         </PageContainer>
       </main>
     </>

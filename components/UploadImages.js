@@ -5,7 +5,7 @@ import { showAlert } from "app/slices/alert.slice";
 
 import { imageUpload } from "utils/imageUpload";
 
-import { Button, Icons, Loading } from "components";
+import { Button, Icons} from "components";
 
 export default function UploadImages({
   multiple,
@@ -99,7 +99,7 @@ export default function UploadImages({
                   className='rounded-md w-44 h-36 '
                   alt='product img'
                 />
-                <button type='button' onClick={() => deleteImageHandler(index)}>
+                <button type='button' onClick={() => deleteImageHandler(img)}>
                   <Icons.Delete className='absolute top-0 right-0 z-10 p-1 text-red-500 bg-red-100 icon w-7 h-7 rounded-2xl' />
                 </button>
               </div>

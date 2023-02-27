@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { Button, HandleResponse, Modal } from "components";
+import { Button, Modal } from "components";
 
 export default function ConfirmDeleteModal(props) {
   //? Props
@@ -8,55 +8,27 @@ export default function ConfirmDeleteModal(props) {
     title,
     deleteFunc,
     isLoading,
-    isSuccess,
-    isError,
-    error,
-    data,
     isShow,
     onClose,
     deleteInfo,
     setDeleteInfo,
   } = props;
 
-  //? Send Request
-  useEffect(() => {
-    if (deleteInfo.isConfirmDelete) {
-      deleteFunc({
-        id: deleteInfo.id,
-      });
-    }
-  }, [deleteInfo.isConfirmDelete]);
-
   //? Handlers
   const handleConfirmClick = () => {
-    setDeleteInfo({ ...deleteInfo, isConfirmDelete: true });
+    deleteFunc({
+      id: deleteInfo.id,
+    });
   };
 
   const handleCancleClick = () => {
-    setDeleteInfo({ id: "", isConfirmDelete: false });
+    setDeleteInfo({ id: "" });
     onClose();
   };
 
   //? Render(s)
   return (
     <>
-      {/* Handle Delete Response */}
-      {(isSuccess || isError) && (
-        <HandleResponse
-          isError={isError}
-          isSuccess={isSuccess}
-          error={error?.data?.err}
-          message={data?.msg}
-          onSuccess={() => {
-            onClose();
-            setDeleteInfo({ id: "", isConfirmDelete: false });
-          }}
-          onError={() => {
-            onClose();
-            setDeleteInfo({ id: "", isConfirmDelete: false });
-          }}
-        />
-      )}
 
       <Modal isShow={isShow} onClose={onClose} effect='ease-out'>
         <Modal.Content>

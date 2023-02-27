@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { useState } from "react";
 
-import { useSelector } from "react-redux";
 import { useDeleteReviewMutation, useGetReviewsQuery } from "app/api/reviewApi";
 
 import {
@@ -9,31 +8,28 @@ import {
   ReveiwCard,
   ShowWrapper,
   EmptyCommentsList,
-  HandleDelete,
   ConfirmDeleteModal,
   PageContainer,
+  HandleResponse,
 } from "components";
 
 import useDisclosure from "hooks/useDisclosure";
 
 export default function Reviews() {
-  //? Assets
+  //? Modals
   const [
     isShowConfirmDeleteModal,
     confirmDeleteModalHandlers,
   ] = useDisclosure();
 
-  //? State
+  //? States
   const [deleteInfo, setDeleteInfo] = useState({
     id: "",
-    isConfirmDelete: false,
   });
   const [page, setPage] = useState(1);
 
-  //? Store
-  // const { isConfirmDelete } = useSelector((state) => state.modal);
-
-  //? Delete Review
+  //? Queries
+  //*    Delete Review
   const [
     deleteReview,
     {
@@ -45,7 +41,7 @@ export default function Reviews() {
     },
   ] = useDeleteReviewMutation();
 
-  //? Get Reviews
+  //*   Get Reviews
   const {
     data,
     isSuccess,
@@ -59,26 +55,40 @@ export default function Reviews() {
 
   //? Handlers
   const deleteReviewHandler = (id) => {
-    setDeleteInfo({ ...deleteInfo, id });
+    setDeleteInfo({ id });
     confirmDeleteModalHandlers.open();
   };
 
-  //? Render
+  //? Render(s)
   return (
     <>
       <ConfirmDeleteModal
         title='دیدگاه‌'
         deleteFunc={deleteReview}
         isLoading={isLoading_delete}
-        isSuccess={isSuccess_delete}
-        isError={isError_delete}
-        error={error_delete}
-        data={data_delete}
         isShow={isShowConfirmDeleteModal}
         onClose={confirmDeleteModalHandlers.close}
         deleteInfo={deleteInfo}
         setDeleteInfo={setDeleteInfo}
       />
+
+      {/* Handle Delete Response */}
+      {(isSuccess_delete || isError_delete) && (
+        <HandleResponse
+          isError={isError_delete}
+          isSuccess={isSuccess_delete}
+          error={error_delete?.data?.err}
+          message={data_delete?.msg}
+          onSuccess={() => {
+            confirmDeleteModalHandlers.close();
+            setDeleteInfo({ id: "" });
+          }}
+          onError={() => {
+            confirmDeleteModalHandlers.close();
+            setDeleteInfo({ id: "" });
+          }}
+        />
+      )}
 
       <main id='profileReviews'>
         <Head>
@@ -126,6 +136,8 @@ export default function Reviews() {
     </>
   );
 }
+
+//? Layout
 Reviews.getProfileLayout = function pageLayout(page) {
   return <>{page}</>;
 };

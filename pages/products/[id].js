@@ -99,8 +99,8 @@ export default function SingleProduct({ product, smilarProducts }) {
           <ul className='mr-6 space-y-2 list-disc'>
             {product.info.map((item, i) => (
               <li key={i} className='tracking-wide text-gray-500'>
-                <span className='ml-2 font-light'>{item[0]} :</span>
-                <span className='text-gray-900'>{item[1]}</span>
+                <span className='ml-2 font-light'>{item.title} :</span>
+                <span className='text-gray-900'>{item.value}</span>
               </li>
             ))}
           </ul>

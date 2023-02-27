@@ -1,75 +1,53 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
-import { addItem, deleteItem, editItem } from "app/slices/product.slice";
+import { useFieldArray } from "react-hook-form";
 
-import { AddIconBtn,  DeleteIconBtn, EditIconBtn } from "components";
+import { AddIconBtn, DeleteIconBtn } from "components";
 
-export default function AddSizes() {
-  const dispatch = useDispatch();
-
+export default function AddSizes({ name, control, register }) {
   //? Refs
   const inputRef = useRef();
 
-  //? Local States
-  const [size, setSize] = useState();
-  const [onEdit, setOnEdit] = useState(false);
-  const [editId, setEditId] = useState();
-
-  //? Store
-  const {
-    product: { sizes },
-  } = useSelector((state) => state.product);
+  //? Form Hook
+  const { fields, append, remove } = useFieldArray({
+    name,
+    control,
+  });
 
   //? Handlers
-  const handleAddToStore = () => {
-    if (size.trim() === "") return;
-    if (!onEdit) {
-      dispatch(addItem({ type: "sizes", value: size }));
-      setSize("");
-    } else {
-      dispatch(editItem({ id: editId, type: "sizes", value: size }));
-      setSize("");
-      setEditId();
-      setOnEdit(false);
-    }
+  const handleAddSize = () => {
+    if (inputRef.current.value.trim() === "") return;
+    append({ size: +inputRef.current.value });
+    inputRef.current.value = "";
   };
 
-  const handleEdit = (id) => {
-    setOnEdit(true);
-    const item = sizes.find((item) => item.id === id);
-    setSize(item.size);
-    setEditId(item.id);
-    inputRef.current.focus();
-  };
-  const handleDelete = (id) => {
-    dispatch(deleteItem({ id, type: "sizes" }));
-  };
-
+  //? Render
   return (
     <div className='text-sm space-y-1.5'>
       <span>اندازه ها</span>
       <div className='w-full max-w-2xl mx-auto space-y-3'>
         <div className='flex items-center gap-x-2'>
-          <AddIconBtn onClick={handleAddToStore} />
+          <AddIconBtn onClick={handleAddSize} />
           <input
-            type='text'
-            onChange={(e) => setSize(e.target.value)}
+            type='number'
             className='inline-block outline-none input w-44'
-            value={size}
             placeholder='...'
             ref={inputRef}
           />
         </div>
-        <div className='flex flex-wrap justify-center gap-x-5 gap-y-3'>
-          {sizes.map((item) => (
+        <div className='space-y-4 space-x-3 flex flex-wrap items-baseline justify-evenly'>
+          {fields.map((field, index) => (
             <div
-              key={item.id}
-              className='shadow rounded flex items-center gap-x-3 px-1.5 py-2'
+              key={field.id}
+              className='shadow rounded flex items-center gap-x-3 w-1/4 px-1.5 py-2'
             >
-              <DeleteIconBtn onClick={() => handleDelete(item.id)} />
-              <EditIconBtn onClick={() => handleEdit(item.id)} />
-              {item.size}
+              <DeleteIconBtn onClick={() => remove(index)} />
+              <input
+                className='text-field__input '
+                {...register(`${name}.${index}.size`, {
+                  valueAsNumber: true,
+                })}
+              />
             </div>
           ))}
         </div>

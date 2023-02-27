@@ -1,58 +1,36 @@
-import { useState } from "react";
+import { useRef } from "react";
 
-import {
-  addInfo,
-  addSpecification,
-  deleteItem,
-  editItem,
-} from "app/slices/details.slice";
-import { useDispatch } from "react-redux";
+import { useFieldArray } from "react-hook-form";
 
-import { AddIconBtn, DeleteIconBtn, EditIconBtn } from "components";
+import { AddIconBtn, DeleteIconBtn } from "components";
 
-export default function DetailsList({ category, type, data }) {
-  const dispatch = useDispatch();
+export default function DetailsList(props) {
+  //? Props
+  const { category, type, name, control, register } = props;
 
-  //? Local state
-  const [name, setName] = useState("");
-  const [onEdit, setOnEdit] = useState(false);
-  const [editId, setEditId] = useState();
+  //? Refs
+  const newDetailRef = useRef(null);
+
+  //? Form
+  const { fields, append, remove } = useFieldArray({
+    name,
+    control,
+  });
 
   //? Handlers
-  const handleAddToStore = () => {
-    if (name.trim() === "") return;
-    if (!onEdit) {
-      if (type === "info") {
-        dispatch(addInfo(name));
-      } else {
-        dispatch(addSpecification(name));
-      }
-    } else {
-      dispatch(editItem({ id: editId, type, name }));
-      setName("");
-      setOnEdit(false);
-    }
-    setName("");
+  const handleAddNewDetail = () => {
+    append({ title: newDetailRef.current.value });
+    newDetailRef.current.value = "";
   };
 
-  const handleDelete = (id) => {
-    dispatch(deleteItem({ id, type }));
-  };
-
-  const handleEdit = (id) => {
-    setOnEdit(true);
-    const item = data.find((item) => item.id === id);
-    setName(item.name);
-    setEditId(item.id);
-  };
-
+  //? Render
   return (
     <section>
       <div className='mb-2 text-sm lg:text-base'>
-        {type === "info" ? <span> ویژگی‌های</span> : <span> مشخصات</span>}{" "}
+        {name === "info" ? <span>ویژگی‌ها</span> : <span> مشخصات</span>}{" "}
         <span
           className={
-            type === "info" ? " text-emerald-600" : " text-fuchsia-600"
+            name === "info" ? " text-emerald-600" : " text-fuchsia-600"
           }
         >
           {category?.name}
@@ -61,7 +39,7 @@ export default function DetailsList({ category, type, data }) {
       <table className='w-full'>
         <thead
           className={
-            type === "info"
+            name === "info"
               ? "bg-emerald-50 text-emerald-500"
               : "bg-fuchsia-50 text-fuchsia-500"
           }
@@ -72,13 +50,14 @@ export default function DetailsList({ category, type, data }) {
           </tr>
         </thead>
         <tbody>
-          {data.map((item) => (
-            <tr key={item.id} className='border-b-2 border-gray-100'>
+          {fields.map((field, index) => (
+            <tr key={field.id} className='border-b-2 border-gray-100'>
               <td className='flex items-center p-2 gap-x-2'>
-                <DeleteIconBtn onClick={() => handleDelete(item.id)} />
-                <EditIconBtn onClick={() => handleEdit(item.id)} />
-
-                {item.name}
+                <DeleteIconBtn onClick={() => remove(index)} />
+                <input
+                  className='text-field__input'
+                  {...register(`${name}.${index}.title`)}
+                />
               </td>
               <td
                 className={
@@ -91,12 +70,11 @@ export default function DetailsList({ category, type, data }) {
           ))}
           <tr className='border-b-2 border-green-50'>
             <td className='flex p-2'>
-              <AddIconBtn onClick={handleAddToStore} />
+              <AddIconBtn onClick={handleAddNewDetail} />
               <input
                 type='text'
-                onChange={(e) => setName(e.target.value)}
-                className='inline-block w-full mr-2 outline-none'
-                value={name}
+                className='text-field__input '
+                ref={newDetailRef}
                 placeholder='...'
               />
             </td>

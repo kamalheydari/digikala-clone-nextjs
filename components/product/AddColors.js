@@ -1,48 +1,29 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
-import { addItem, deleteItem, editItem } from "app/slices/product.slice";
+import { AddIconBtn, DeleteIconBtn } from "components";
 
-import { AddIconBtn, DeleteIconBtn, EditIconBtn } from "components";
+import { useFieldArray } from "react-hook-form";
 
-export default function AddColors() {
-  const dispatch = useDispatch();
-  const inputRef = useRef();
+export default function AddColors({ control, register, name }) {
+  //? Refs
+  const inputTextRef = useRef();
+  const inputColorRef = useRef();
 
-  //? Local State
-  const [color, setColor] = useState({ name: "", hashCode: "#2fd13c" });
-  const [onEdit, setOnEdit] = useState(false);
-  const [editId, setEditId] = useState();
-
-  //? Store
-  const {
-    product: { colors },
-  } = useSelector((state) => state.product);
+  //? Form Hook
+  const { fields, append, remove } = useFieldArray({
+    name,
+    control,
+  });
 
   //? Handlers
-  const handleAddToStore = () => {
-    if (color.name.trim() === "") return;
-
-    if (!onEdit) {
-      dispatch(addItem({ type: "colors", value: color }));
-      setColor({ name: "", hashCode: "#2fd13c" });
-    } else {
-      dispatch(editItem({ id: editId, type: "colors", value: color }));
-      setColor({ name: "", hashCode: "#2fd13c" });
-      setEditId();
-      setOnEdit(false);
-    }
-  };
-
-  const handleEdit = (id) => {
-    setOnEdit(true);
-    const item = colors.find((item) => item.id === id);
-    setColor({ name: item.name, hashCode: item.hashCode });
-    setEditId(item.id);
-    inputRef.current.focus();
-  };
-  const handleDelete = (id) => {
-    dispatch(deleteItem({ id, type: "colors" }));
+  const handleAddToColor = () => {
+    if (inputTextRef.current.value.trim() === "") return;
+    append({
+      name: inputTextRef.current.value,
+      hashCode: inputColorRef.current.value,
+    });
+    inputTextRef.current.value = "";
+    inputColorRef.current.value = "#bc203f";
   };
 
   return (
@@ -50,41 +31,39 @@ export default function AddColors() {
       <span>اندازه ها</span>
       <div className='w-full max-w-2xl mx-auto space-y-3'>
         <div className='flex items-center gap-x-2'>
-          <AddIconBtn onClick={handleAddToStore} />
+          <AddIconBtn onClick={handleAddToColor} />
           <input
             type='text'
-            onChange={(e) =>
-              setColor((color) => ({ ...color, name: e.target.value }))
-            }
             className='inline-block outline-none input w-44'
             name='name'
-            value={color.name}
             placeholder='نام رنگ'
-            ref={inputRef}
+            ref={inputTextRef}
           />
           <input
             type='color'
             name='hashCode'
-            value={color.hashCode}
-            onChange={(e) =>
-              setColor((color) => ({ ...color, hashCode: e.target.value }))
-            }
             className='w-24 h-9'
+            ref={inputColorRef}
+            defaultValue='#bc203f'
           />
         </div>
         <div className='flex flex-wrap justify-center gap-x-5 gap-y-3'>
-          {colors.map((item) => (
+          {fields.map((field, index) => (
             <div
-              key={item.id}
+              key={field.id}
               className='shadow rounded flex gap-x-2 items-center px-1.5 py-2 bg-gray-50'
             >
-              <DeleteIconBtn onClick={() => handleDelete(item.id)} />
-              <EditIconBtn onClick={() => handleEdit(item.id)} />
-              {item.name}
-              <span
-                className='w-6 h-6 mr-3 rounded-sm shadow '
-                style={{ background: item.hashCode }}
-              ></span>
+              <DeleteIconBtn onClick={() => remove(index)} />
+              <input
+                className='text-field__input w-28'
+                {...register(`${name}.${index}.name`)}
+              />
+              <input
+                type='color'
+                name='hashCode'
+                className='w-8 h-8 mr-3 shadow-lg '
+                {...register(`${name}.${index}.hashCode`)}
+              />
             </div>
           ))}
         </div>

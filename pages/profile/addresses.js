@@ -28,76 +28,75 @@ export default function Addresses() {
       </Head>
 
       <PageContainer title='آدرس‌ها'>
-        {isLoading ? (
+        {userInfo?.adderss || isLoading ? (
           <section className='flex-1 px-5 '>
             <div className='flex justify-between py-4 border-b border-gray-200'>
-              <Skeleton.Item animated='background' height='h-5' width='w-52' />
-            </div>
-            <div className='my-2 space-y-3 text-gray-500'>
-              <div className='flex items-center gap-x-2 '>
-                <Icons.UserLocation className='text-gray-500 icon' />
+              {isLoading ? (
                 <Skeleton.Item
                   animated='background'
                   height='h-5'
-                  width='w-40'
+                  width='w-52'
                 />
-              </div>
-              <div className='flex items-center gap-x-2 '>
-                <Icons.Post className='text-gray-500 icon' />
-                <Skeleton.Item
-                  animated='background'
-                  height='h-5'
-                  width='w-40'
-                />
-              </div>
-              <div className='flex items-center gap-x-2 '>
-                <Icons.Phone className='text-gray-500 icon' />
-                <Skeleton.Item
-                  animated='background'
-                  height='h-5'
-                  width='w-40'
-                />
-              </div>
-
-              <div className='flex items-center gap-x-2 '>
-                <Icons.User className='text-gray-500 icon' />
-                <Skeleton.Item
-                  animated='background'
-                  height='h-5'
-                  width='w-40'
-                />
-              </div>
-            </div>
-          </section>
-        ) : userInfo?.address ? (
-          <section className='flex-1 px-5 '>
-            <div className='flex justify-between py-4 border-b border-gray-200'>
-              <p className='text-sm'>{userInfo.address.street}</p>
+              ) : userInfo?.address ? (
+                <p className='text-sm'>{userInfo?.address?.street}</p>
+              ) : null}
               <ChangeAddress />
             </div>
             <div className='my-2 space-y-3 text-gray-500'>
               <div className='flex items-center gap-x-2 '>
                 <Icons.UserLocation className='text-gray-500 icon' />
-                <span className='text-xs md:text-sm'>
-                  {userInfo.address.province?.name},{" "}
-                  {userInfo.address.city?.name}
-                </span>
+                {isLoading ? (
+                  <Skeleton.Item
+                    animated='background'
+                    height='h-5'
+                    width='w-40'
+                  />
+                ) : userInfo?.address ? (
+                  <span className='text-xs md:text-sm'>
+                    {userInfo.address.province?.name},{" "}
+                    {userInfo.address.city?.name}
+                  </span>
+                ) : null}
               </div>
               <div className='flex items-center gap-x-2 '>
                 <Icons.Post className='text-gray-500 icon' />
-                <span className='text-xs md:text-sm'>
-                  {userInfo.address.postalCode}
-                </span>
+                {isLoading ? (
+                  <Skeleton.Item
+                    animated='background'
+                    height='h-5'
+                    width='w-40'
+                  />
+                ) : userInfo?.address ? (
+                  <span className='text-xs md:text-sm'>
+                    {userInfo.address.postalCode}
+                  </span>
+                ) : null}
               </div>
-              {userInfo.mobile && (
-                <div className='flex items-center gap-x-2 '>
-                  <Icons.Phone className='text-gray-500 icon' />
+
+              <div className='flex items-center gap-x-2 '>
+                <Icons.Phone className='text-gray-500 icon' />
+                {isLoading ? (
+                  <Skeleton.Item
+                    animated='background'
+                    height='h-5'
+                    width='w-40'
+                  />
+                ) : userInfo?.mobile ? (
                   <span className='text-xs md:text-sm'>{userInfo.mobile}</span>
-                </div>
-              )}
+                ) : null}
+              </div>
+
               <div className='flex items-center gap-x-2 '>
                 <Icons.User className='text-gray-500 icon' />
-                <span className='text-xs md:text-sm'>{userInfo.name}</span>
+                {isLoading ? (
+                  <Skeleton.Item
+                    animated='background'
+                    height='h-5'
+                    width='w-40'
+                  />
+                ) : userInfo?.name ? (
+                  <span className='text-xs md:text-sm'>{userInfo.name}</span>
+                ) : null}
               </div>
             </div>
           </section>

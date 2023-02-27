@@ -18,6 +18,7 @@ import {
   Icons,
   Sort,
   ProductsAside,
+  Skeleton,
 } from "components";
 import useCategory from "hooks/useCategory";
 import useDisclosure from "hooks/useDisclosure";
@@ -78,6 +79,36 @@ export default function ProductsHome(props) {
     setPage(1);
   }, [query.sort, query.inStock, query.discount, query.price]);
 
+  //? Local Components
+  const CategorySkeleton = () => (
+    <div className='px-4 my-7'>
+      <Skeleton.Item
+        animated='background'
+        height='h-5'
+        width='w-24'
+        className='mb-4'
+      />
+      <div className=' flex gap-3 pb-3 overflow-x-auto'>
+        <Skeleton count={5}>
+          <Skeleton.Items className='border-4 border-red-200 rounded-md p-3'>
+            <Skeleton.Item
+              animated='background'
+              height='h-24 md:h-28 xl:h-36'
+              width='w-24 md:w-28 lg:w-36 xl:w-36'
+              className='rounded-full mb-2'
+            />
+            <Skeleton.Item
+              animated='background'
+              height='h-5'
+              width='w-20'
+              className=' rounded-md  mx-auto'
+            />
+          </Skeleton.Items>
+        </Skeleton>
+      </div>
+    </div>
+  );
+
   return (
     <main
       className='lg:px-3 lg:container lg:max-w-[1700px] xl:mt-32'
@@ -88,20 +119,7 @@ export default function ProductsHome(props) {
       </Head>
       {/* Categories */}
       {isLoading ? (
-        <div className='animate-pulse px-4 my-7'>
-          <div className='h-5 w-24 rounded-md bg-red-200 mb-4' />
-          <div className=' flex gap-3 pb-3 overflow-x-auto'>
-            {[1, 2, 3, 4, 5].map((index) => (
-              <div
-                className='border-4 border-red-200 rounded-md p-3 '
-                key={index}
-              >
-                <div className='w-24 h-24 md:h-28 md:w-28 lg:w-36 xl:w-36 xl:h-36 rounded-full bg-red-200 mb-2' />
-                <div className='h-5 w-20 rounded-md bg-red-200 mx-auto' />
-              </div>
-            ))}
-          </div>
-        </div>
+        <CategorySkeleton />
       ) : (
         childCategories.length > 0 && (
           <section className='px-4 my-7'>

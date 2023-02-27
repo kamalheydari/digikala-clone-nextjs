@@ -12,12 +12,13 @@ import {
   PageContainer,
   DeleteIconBtn,
   Person,
+  HandleResponse,
 } from "components";
 
 import useDisclosure from "hooks/useDisclosure";
 
 export default function Users() {
-  //? Assets
+  //? Modals
   const [
     isShowConfirmDeleteModal,
     confirmDeleteModalHandlers,
@@ -27,7 +28,6 @@ export default function Users() {
   const [page, setPage] = useState(1);
   const [deleteInfo, setDeleteInfo] = useState({
     id: "",
-    isConfirmDelete: false,
   });
 
   //? Get User Data
@@ -54,7 +54,7 @@ export default function Users() {
 
   //? Handlers
   const deleteUserHandler = (id) => {
-    setDeleteInfo({ ...deleteInfo, id });
+    setDeleteInfo({ id });
     confirmDeleteModalHandlers.open();
   };
 
@@ -65,15 +65,28 @@ export default function Users() {
         title='کاربر'
         deleteFunc={deleteUser}
         isLoading={isLoading_delete}
-        isSuccess={isSuccess_delete}
-        isError={isError_delete}
-        error={error_delete}
-        data={data_delete}
         isShow={isShowConfirmDeleteModal}
         onClose={confirmDeleteModalHandlers.close}
         deleteInfo={deleteInfo}
         setDeleteInfo={setDeleteInfo}
       />
+      {/* Handle Delete Response */}
+      {(isSuccess_delete || isError_delete) && (
+        <HandleResponse
+          isError={isError_delete}
+          isSuccess={isSuccess_delete}
+          error={error_delete?.data?.err}
+          message={data_delete?.msg}
+          onSuccess={() => {
+            confirmDeleteModalHandlers.close();
+            setDeleteInfo({ id: "" });
+          }}
+          onError={() => {
+            confirmDeleteModalHandlers.close();
+            setDeleteInfo({ id: "" });
+          }}
+        />
+      )}
 
       <main id='adminUsers'>
         <Head>
