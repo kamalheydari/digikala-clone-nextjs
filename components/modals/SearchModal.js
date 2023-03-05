@@ -1,7 +1,7 @@
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react"
 
-import Image from "next/image";
-import Link from "next/link";
+import Image from "next/image"
+import Link from "next/link"
 
 import {
   Icons,
@@ -10,55 +10,49 @@ import {
   EmptySearchList,
   ShowWrapper,
   Modal,
-} from "components";
+} from "components"
 
-import { truncate } from "utils/truncate";
-import { useGetProductsQuery } from "app/api/productApi";
+import { truncate } from "utils/truncate"
+import { useGetProductsQuery } from "app/api/productApi"
+import useDebounce from "hooks/useDebounce"
 
 export default function SearchModal(props) {
   //? Props
-  const { isShow, onClose } = props;
+  const { isShow, onClose } = props
 
-  //? Refs
-  const inputSearchRef = useRef();
+  //? States
+  const [search, setSearch] = useState("")
 
-  //? Local State
-  const [search, setSearch] = useState("");
+  //? Assets
+  const debouncedSearch = useDebounce(search, 1200)
 
   //? Search Products Query
-  const {
-    data,
-    isSuccess,
-    isFetching,
-    error,
-    isError,
-    refetch,
-  } = useGetProductsQuery({
-    url: `/api/products?page_size=5&page=1&category=all&search=${search}`,
-    search,
-    page: 1,
-    filterCategory: "all",
-  });
+  const { data, isSuccess, isFetching, error, isError, refetch } =
+    useGetProductsQuery(
+      {
+        search,
+        page: 1,
+        filterCategory: "all",
+      },
+      { skip: !Boolean(debouncedSearch) }
+    )
 
   //? Re-Renders
   //* Reset Search
   useEffect(() => {
     if (!isShow) {
-      inputSearchRef.current.value = "";
-      setSearch("");
+      setSearch("")
     }
-  }, [isShow]);
+  }, [isShow])
 
   //? Handlers
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSearch(inputSearchRef.current.value);
-  };
+  const handleChange = (e) => {
+    setSearch(e.target.value)
+  }
 
   const handleRemoveSearch = () => {
-    inputSearchRef.current.value = "";
-    setSearch("");
-  };
+    setSearch("")
+  }
 
   //? Render(s)
   return (
@@ -66,10 +60,7 @@ export default function SearchModal(props) {
       <Modal.Content className='flex flex-col h-screen lg:h-fit  pl-2 pr-4 py-3 bg-white md:rounded-lg gap-y-3'>
         <Modal.Header>جستسجو</Modal.Header>
         <Modal.Body>
-          <form
-            className='flex flex-row-reverse my-3 rounded-md bg-zinc-200/80'
-            onSubmit={handleSubmit}
-          >
+          <div className='flex flex-row-reverse my-3 rounded-md bg-zinc-200/80'>
             <button type='button' className='p-2' onClick={handleRemoveSearch}>
               <Icons.Close className='icon' />
             </button>
@@ -77,13 +68,13 @@ export default function SearchModal(props) {
               type='text'
               placeholder='جستجو'
               className='flex-grow p-1 text-right bg-transparent outline-none input'
-              ref={inputSearchRef}
-              defaultValue={search}
+              value={search}
+              onChange={handleChange}
             />
-            <button type='submit' className='p-2'>
-              <Icons.Search className='icon' />
-            </button>
-          </form>
+            <div className='p-2'>
+              <Icons.Search className='icon ' />
+            </div>
+          </div>
           <div className='overflow-y-auto lg:max-h-[500px]'>
             <ShowWrapper
               error={error}
@@ -131,5 +122,5 @@ export default function SearchModal(props) {
         </Modal.Body>
       </Modal.Content>
     </Modal>
-  );
+  )
 }
