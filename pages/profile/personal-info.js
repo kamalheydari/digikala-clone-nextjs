@@ -1,22 +1,23 @@
-import Head from "next/head";
+import Head from "next/head"
 
 import {
   Icons,
   UserMobileModal,
   UserNameModal,
   PageContainer,
-} from "components";
+  Skeleton,
+} from "components"
 
-import useUserInfo from "hooks/useUserInfo";
-import useDisclosure from "hooks/useDisclosure";
+import useUserInfo from "hooks/useUserInfo"
+import useDisclosure from "hooks/useDisclosure"
 
 export default function PersonalInfo() {
   //? Assets
-  const [isShowNameModal, nameModalHandlers] = useDisclosure();
-  const [isShowPhoneModal, phoneModalHandlers] = useDisclosure();
+  const [isShowNameModal, nameModalHandlers] = useDisclosure()
+  const [isShowPhoneModal, phoneModalHandlers] = useDisclosure()
 
   //? Get User Data
-  const { userInfo, isLoading } = useUserInfo();
+  const { userInfo, isLoading } = useUserInfo()
 
   //? Local Component
   const InfoField = ({ label, info, editHandler, isLoading }) => (
@@ -25,9 +26,9 @@ export default function PersonalInfo() {
         <div>
           <span className='text-xs text-gray-700'>{label}</span>
           {isLoading ? (
-            <div className='animate-pulse h-5 w-44 rounded-md bg-red-200' />
+            <Skeleton.Item animated='background' height='h-5' width='w-44' />
           ) : (
-            <p className='text-sm'>{info}</p>
+            <p className='text-sm h-5'>{info}</p>
           )}
         </div>
         {isLoading ? null : info ? (
@@ -37,7 +38,7 @@ export default function PersonalInfo() {
         )}
       </div>
     </div>
-  );
+  )
 
   //? Render(s)
   return (
@@ -79,10 +80,10 @@ export default function PersonalInfo() {
         </PageContainer>
       </main>
     </>
-  );
+  )
 }
 
 //? Layout
 PersonalInfo.getProfileLayout = function pageLayout(page) {
-  return <>{page}</>;
-};
+  return <>{page}</>
+}
