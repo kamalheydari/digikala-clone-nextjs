@@ -1,21 +1,18 @@
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import validation from "utils/validation";
+import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { nameSchema } from "utils/validation"
 
-import { useEditUserMutation } from "app/api/userApi";
-import { useDispatch } from "react-redux";
+import { useEditUserMutation } from "app/api/userApi"
 
-import { TextField, SubmitModalBtn, Modal, HandleResponse } from "components";
+import { TextField, SubmitModalBtn, Modal, HandleResponse } from "components"
 
 export default function UserNameModal(props) {
   //? Props
-  const { isShow, onClose, editedData } = props;
+  const { isShow, onClose, editedData } = props
 
   //? Edit User Query
-  const [
-    editUser,
-    { data, isSuccess, isLoading, isError, error },
-  ] = useEditUserMutation();
+  const [editUser, { data, isSuccess, isLoading, isError, error }] =
+    useEditUserMutation()
 
   //? Form Hook
   const {
@@ -23,16 +20,16 @@ export default function UserNameModal(props) {
     control,
     formState: { errors: formErrors },
   } = useForm({
-    resolver: yupResolver(validation.nameSchema),
+    resolver: yupResolver(nameSchema),
     defaultValues: { name: editedData ? editedData : "" },
-  });
+  })
 
   //? Handlers
   const submitHander = async ({ name }) => {
     editUser({
       body: { name },
-    });
-  };
+    })
+  }
 
   //? Render(s)
   return (
@@ -76,5 +73,5 @@ export default function UserNameModal(props) {
         </Modal.Content>
       </Modal>
     </>
-  );
+  )
 }

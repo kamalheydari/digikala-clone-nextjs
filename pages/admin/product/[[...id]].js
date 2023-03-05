@@ -217,12 +217,12 @@ export default function Product() {
           error={error_update?.data?.err}
           message={data_update?.msg}
           onSuccess={() => {
-            setUpdateInfo({ id: "", editedData: {} });
-            confirmUpdateModalHandlers.close();
+            setUpdateInfo({ id: "", editedData: {} })
+            confirmUpdateModalHandlers.close()
           }}
           onError={() => {
-            setUpdateInfo({ id: "", editedData: {} });
-            confirmUpdateModalHandlers.close();
+            setUpdateInfo({ id: "", editedData: {} })
+            confirmUpdateModalHandlers.close()
           }}
         />
       )}
@@ -235,7 +235,7 @@ export default function Product() {
           error={error?.data?.err}
           message={data?.msg}
           onSuccess={() => {
-            router.push("/admin/products");
+            router.push("/admin/products")
           }}
         />
       )}
@@ -275,12 +275,14 @@ export default function Product() {
                   name='price'
                   control={control}
                   type='number'
+                  direction='ltr'
                 />
                 <TextField
                   label='موجودی'
                   name='inStock'
                   control={control}
                   type='number'
+                  direction='ltr'
                 />
 
                 <TextField
@@ -288,6 +290,7 @@ export default function Product() {
                   name='discount'
                   control={control}
                   type='number'
+                  direction='ltr'
                 />
               </div>
               {!id && (
@@ -395,7 +398,7 @@ export default function Product() {
         </PageContainer>
       </main>
     </>
-  );
+  )
 }
 
 Product.getDashboardLayout = function pageLayout(page) {

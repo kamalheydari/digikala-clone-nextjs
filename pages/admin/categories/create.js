@@ -5,7 +5,7 @@ import { useCreateCategoryMutation } from "app/api/categoryApi";
 
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import validation from "utils/validation";
+import { categorySchema } from "utils/validation";
 
 import {
   SelectCategories,
@@ -35,7 +35,7 @@ export default function CreateCategory() {
     formState: { errors: formErrors },
     reset,
   } = useForm({
-    resolver: yupResolver(validation.categorySchema),
+    resolver: yupResolver(categorySchema),
   });
 
   //? Handlers
@@ -131,6 +131,7 @@ export default function CreateCategory() {
                 control={control}
                 errors={formErrors.slug}
                 name='slug'
+                direction='ltr'
               />
 
               <UploadImages

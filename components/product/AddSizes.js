@@ -29,6 +29,7 @@ export default function AddSizes({ name, control, register }) {
         <div className='flex items-center gap-x-2'>
           <AddIconBtn onClick={handleAddSize} />
           <input
+            style={{ direction: "ltr" }}
             type='number'
             className='inline-block outline-none input w-44'
             placeholder='...'
@@ -43,6 +44,7 @@ export default function AddSizes({ name, control, register }) {
             >
               <DeleteIconBtn onClick={() => remove(index)} />
               <input
+                style={{ direction: "ltr" }}
                 className='text-field__input '
                 {...register(`${name}.${index}.size`, {
                   valueAsNumber: true,
@@ -53,5 +55,5 @@ export default function AddSizes({ name, control, register }) {
         </div>
       </div>
     </div>
-  );
+  )
 }

@@ -7,7 +7,7 @@ import { ratingStatus } from "utils/constatns";
 
 import { useFieldArray, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import validation from "utils/validation";
+import { reviewSchema } from "utils/validation";
 
 import {
   Icons,
@@ -37,7 +37,7 @@ export default function ReviewModal(props) {
     reset,
     control,
   } = useForm({
-    resolver: yupResolver(validation.reviewSchema),
+    resolver: yupResolver(reviewSchema),
   });
   const {
     fields: positivePointsFields,

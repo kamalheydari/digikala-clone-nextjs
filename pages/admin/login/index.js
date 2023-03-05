@@ -3,7 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import validation from "utils/validation";
+import { logInSchema } from "utils/validation";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -67,7 +67,7 @@ export default function LoginPage() {
     reset,
     setFocus,
   } = useForm({
-    resolver: yupResolver(validation.logInSchema),
+    resolver: yupResolver(logInSchema),
     defaultValues: { name: "", password: "" },
   });
 

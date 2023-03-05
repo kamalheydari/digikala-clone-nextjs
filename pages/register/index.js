@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import validation from "utils/validation";
+import  { registerSchema } from "utils/validation";
 
 import { useDispatch } from "react-redux";
 import { showAlert } from "app/slices/alert.slice";
@@ -58,7 +58,7 @@ export default function RegisterPage() {
     setFocus,
     control,
   } = useForm({
-    resolver: yupResolver(validation.registerSchema),
+    resolver: yupResolver(registerSchema),
     defaultValues: { name: "", email: "", password: "", confirmPassword: "" },
   });
 

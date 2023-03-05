@@ -1,20 +1,18 @@
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import validation from "utils/validation";
+import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { mobileSchema } from "utils/validation"
 
-import { useEditUserMutation } from "app/api/userApi";
+import { useEditUserMutation } from "app/api/userApi"
 
-import { TextField, SubmitModalBtn, Modal, HandleResponse } from "components";
+import { TextField, SubmitModalBtn, Modal, HandleResponse } from "components"
 
 export default function UserMobileModal(props) {
   //? Props
-  const { isShow, onClose, editedData } = props;
+  const { isShow, onClose, editedData } = props
 
   //? Patch Data
-  const [
-    editUser,
-    { data, isSuccess, isLoading, error, isError },
-  ] = useEditUserMutation();
+  const [editUser, { data, isSuccess, isLoading, error, isError }] =
+    useEditUserMutation()
 
   //? Form Hook
   const {
@@ -22,16 +20,16 @@ export default function UserMobileModal(props) {
     control,
     formState: { errors: formErrors },
   } = useForm({
-    resolver: yupResolver(validation.mobileSchema),
+    resolver: yupResolver(mobileSchema),
     defaultValues: { mobile: editedData ? editedData : "" },
-  });
+  })
 
   //? Handlers
   const submitHander = async ({ mobile }) => {
     await editUser({
       body: { mobile },
-    });
-  };
+    })
+  }
 
   //? Render(s)
   return (
@@ -61,6 +59,7 @@ export default function UserMobileModal(props) {
                 control={control}
                 errors={formErrors.mobile}
                 name='mobile'
+                direction='ltr'
               />
 
               <div className='py-3 border-t-2 border-gray-200 lg:pb-0 '>
@@ -73,5 +72,5 @@ export default function UserMobileModal(props) {
         </Modal.Content>
       </Modal>
     </>
-  );
+  )
 }

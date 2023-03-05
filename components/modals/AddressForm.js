@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useEditUserMutation } from "app/api/userApi";
 
 import { useForm } from "react-hook-form";
-import validation from "utils/validation";
+import { addressSchema } from "utils/validation";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 let iranCity = require("iran-city");
@@ -41,7 +41,7 @@ export default function AddressForm(props) {
     getValues,
     watch,
   } = useForm({
-    resolver: yupResolver(validation.addressSchema),
+    resolver: yupResolver(addressSchema),
     defaultValues: address,
   });
 

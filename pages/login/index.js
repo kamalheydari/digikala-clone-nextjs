@@ -1,27 +1,25 @@
-import { useEffect } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import Head from "next/head";
+import { useEffect } from "react"
+import Link from "next/link"
+import { useRouter } from "next/router"
+import Head from "next/head"
 
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import validation from "utils/validation";
+import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import  { logInSchema } from "utils/validation"
 
-import { useLoginMutation } from "app/api/userApi";
-import { useDispatch } from "react-redux";
-import { userLogin } from "app/slices/user.slice";
+import { useLoginMutation } from "app/api/userApi"
+import { useDispatch } from "react-redux"
+import { userLogin } from "app/slices/user.slice"
 
-import { TextField, LoginBtn, Logo, HandleResponse } from "components";
+import { TextField, LoginBtn, Logo, HandleResponse } from "components"
 
 export default function LoginPage() {
-  const dispatch = useDispatch();
-  const router = useRouter();
+  const dispatch = useDispatch()
+  const router = useRouter()
 
   //? Login User
-  const [
-    login,
-    { data, isSuccess, isError, isLoading, error },
-  ] = useLoginMutation();
+  const [login, { data, isSuccess, isError, isLoading, error }] =
+    useLoginMutation()
 
   //? Form Hook
   const {
@@ -31,26 +29,26 @@ export default function LoginPage() {
     setFocus,
     control,
   } = useForm({
-    resolver: yupResolver(validation.logInSchema),
+    resolver: yupResolver(logInSchema),
     defaultValues: {
       email: "",
       password: "",
     },
-  });
+  })
 
   //? Focus On Mount
   useEffect(() => {
-    setFocus("email");
-  }, []);
+    setFocus("email")
+  }, [])
 
   //? Handlers
   const submitHander = async ({ email, password }) => {
     if (email && password) {
       await login({
         body: { email, password },
-      });
+      })
     }
-  };
+  }
 
   //? Render
   return (
@@ -63,9 +61,9 @@ export default function LoginPage() {
           error={error?.data?.err}
           message={data?.msg}
           onSuccess={() => {
-            dispatch(userLogin(data.data.access_token));
-            reset();
-            router.push("/");
+            dispatch(userLogin(data.data.access_token))
+            reset()
+            router.push("/")
           }}
         />
       )}
@@ -113,5 +111,5 @@ export default function LoginPage() {
         </section>
       </main>
     </>
-  );
+  )
 }
