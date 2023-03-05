@@ -126,6 +126,7 @@ export default function AddressForm(props) {
                   errors={formErrors.postalCode}
                   name='postalCode'
                   type='number'
+                  direction='ltr'
                 />
               </div>
 
