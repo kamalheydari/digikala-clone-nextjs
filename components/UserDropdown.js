@@ -4,12 +4,11 @@ import { Menu, Transition } from '@headlessui/react'
 
 import { Icons, Logout, Person } from 'components'
 import Link from 'next/link'
-import Image from 'next/image'
 
 export default function UserDropdown({ name }) {
   return (
-    <Menu as='div' className='user-dropdown'>
-      <Menu.Button className='user-dropdown__button'>
+    <Menu as='div' className='dropdown'>
+      <Menu.Button className='dropdown__button'>
         <Icons.User className='icon' />
         <Icons.ArrowDown className='icon' />
       </Menu.Button>
@@ -22,13 +21,13 @@ export default function UserDropdown({ name }) {
         leaveFrom='transform opacity-100 scale-100'
         leaveTo='transform opacity-0 scale-95'
       >
-        <Menu.Items className='user-dropdown__items'>
+        <Menu.Items className='dropdown__items w-56'>
           <Menu.Item>
-            <div className='user-dropdown__item'>
+            <div className='transition-colors hover:bg-gray-100 px-3'>
               <Link href='/profile'>
-                <a className='user-dropdown__item__anchor'>
+                <a className='flex-center py-4 mx-4 text-xs font-medium text-gray-700  gap-x-1 md:text-sm'>
                   <Person className='h-6 w-6' />
-                  <span>{name}</span>
+                  <span className='ml-auto mr-4 text-gray-700'>{name}</span>
                   <Icons.ArrowLeft className='text-gray-700 icon lg:mr-3' />
                 </a>
               </Link>

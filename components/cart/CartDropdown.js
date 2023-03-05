@@ -48,8 +48,8 @@ export default function CartDropdown() {
         isShow={isShowRedirectModal}
       />
 
-      <Menu as='div' className='cart-dropdown'>
-        <Menu.Button>
+      <Menu as='div' className='dropdown'>
+        <Menu.Button className='dropdown__button'>
           <CartTotalItems />
         </Menu.Button>
 
@@ -63,24 +63,24 @@ export default function CartDropdown() {
           leaveTo='transform opacity-0 scale-95'
         >
           <Menu.Items
-            className='cart-dropdown__items
+            className='dropdown__items w-[440px]
        '
           >
             {totalItems > 0 ? (
               <>
                 {/* Header */}
-                <div className='cart-dropdown__content__header'>
-                  <span>{totalItems} کالا</span>
+                <div className='flex items-center justify-between px-3 py-4'>
+                  <span className='farsi-digits'>{totalItems} کالا</span>
                   <ArrowLink path='/checkout/cart'>مشاهده‌ی سبد خرید</ArrowLink>
                 </div>
                 {/* Itmes */}
-                <div className='overflow-y-auto h-80'>
+                <div className='overflow-y-auto h-80 mx-1'>
                   {cartItems.map((item) => (
                     <CartItem item={item} key={item.itemID} />
                   ))}
                 </div>
                 {/* Footer */}
-                <div className='cart-dropdown__content__footer'>
+                <div className='px-3 py-2 flex justify-between items-center border-t'>
                   <div>
                     <span>مبلغ قابل پرداخت</span>
                     <div className='flex-center'>

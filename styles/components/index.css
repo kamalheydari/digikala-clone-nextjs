@@ -6,8 +6,8 @@
 @import '/common/Buttons.css';
 @import '/common/IconBtns.css';
 @import '/common/PageContainer.css';
+@import '/common/Dropdown.css';
 
-@import '/cart/CartDropdown.css';
 @import '/cart/AddToCart.css';
 @import '/cart/CartButtons.css';
 @import '/cart/CartInfo.css';
@@ -15,6 +15,5 @@
 @import '/Header.css';
 @import '/Sidebar.css';
 @import '/Signup.css';
-@import '/UserDropdown.css';
 @import '/Logout.css';
 @import '/Navbar.css';
