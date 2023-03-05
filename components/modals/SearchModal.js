@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from 'react'
 
-import Image from "next/image"
-import Link from "next/link"
+import Image from 'next/image'
+import Link from 'next/link'
 
 import {
   Icons,
@@ -10,18 +10,18 @@ import {
   EmptySearchList,
   ShowWrapper,
   Modal,
-} from "components"
+} from 'components'
 
-import { truncate } from "utils/truncate"
-import { useGetProductsQuery } from "app/api/productApi"
-import useDebounce from "hooks/useDebounce"
+import { truncate } from 'utils/truncate'
+import { useGetProductsQuery } from 'app/api/productApi'
+import useDebounce from 'hooks/useDebounce'
 
 export default function SearchModal(props) {
   //? Props
   const { isShow, onClose } = props
 
   //? States
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState('')
 
   //? Assets
   const debouncedSearch = useDebounce(search, 1200)
@@ -32,7 +32,7 @@ export default function SearchModal(props) {
       {
         search,
         page: 1,
-        filterCategory: "all",
+        filterCategory: 'all',
       },
       { skip: !Boolean(debouncedSearch) }
     )
@@ -41,7 +41,7 @@ export default function SearchModal(props) {
   //* Reset Search
   useEffect(() => {
     if (!isShow) {
-      setSearch("")
+      setSearch('')
     }
   }, [isShow])
 
@@ -51,7 +51,7 @@ export default function SearchModal(props) {
   }
 
   const handleRemoveSearch = () => {
-    setSearch("")
+    setSearch('')
   }
 
   //? Render(s)

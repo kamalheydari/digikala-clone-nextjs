@@ -1,5 +1,5 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image'
+import Link from 'next/link'
 
 import {
   Icons,
@@ -7,9 +7,9 @@ import {
   DiscountProduct,
   ProductPrice,
   Depot,
-} from "components";
+} from 'components'
 
-import { truncate } from "utils/truncate";
+import { truncate } from 'utils/truncate'
 
 export default function ProductCard({ product, slide }) {
   return (
@@ -17,7 +17,7 @@ export default function ProductCard({ product, slide }) {
       <a>
         <article
           className={`pt-2 pb-3 border-b border-gray-100 sm:px-3 ${
-            !slide && "sm:border sm:hover:shadow-3xl"
+            !slide && 'sm:border sm:hover:shadow-3xl'
           }`}
         >
           <SpecialSell discount={product.discount} inStock={product.inStock} />
@@ -88,5 +88,5 @@ export default function ProductCard({ product, slide }) {
         </article>
       </a>
     </Link>
-  );
+  )
 }

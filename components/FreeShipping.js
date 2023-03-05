@@ -1,4 +1,4 @@
-import { FreeShippingSvg } from "components";
+import { FreeShippingSvg } from 'components'
 
 export default function FreeShipping() {
   return (
@@ -13,5 +13,5 @@ export default function FreeShipping() {
         <FreeShippingSvg className='w-32 h-20 px-4' />
       </div>
     </div>
-  );
+  )
 }

@@ -1,8 +1,8 @@
-import Head from "next/head";
-import { useRouter } from "next/router";
+import Head from 'next/head'
+import { useRouter } from 'next/router'
 
-import { clearCart } from "app/slices/cart.slice";
-import { useDispatch, useSelector } from "react-redux";
+import { clearCart } from 'app/slices/cart.slice'
+import { useDispatch, useSelector } from 'react-redux'
 
 import {
   Icons,
@@ -14,33 +14,33 @@ import {
   Button,
   EmptyCart,
   Toman,
-} from "components";
+} from 'components'
 
-import { formatNumber } from "utils/formatNumber";
+import { formatNumber } from 'utils/formatNumber'
 
-import useUserInfo from "hooks/useUserInfo";
-import useDisclosure from "hooks/useDisclosure";
+import useUserInfo from 'hooks/useUserInfo'
+import useDisclosure from 'hooks/useDisclosure'
 
 export default function Cart() {
   //? Assets
-  const [isShowRedirectModal, redirectModalHandlers] = useDisclosure();
-  const dispatch = useDispatch();
-  const router = useRouter();
+  const [isShowRedirectModal, redirectModalHandlers] = useDisclosure()
+  const dispatch = useDispatch()
+  const router = useRouter()
 
   //? Get User Data
-  const { userInfo } = useUserInfo();
+  const { userInfo } = useUserInfo()
 
   //? Store
   const { cartItems, totalItems, totalPrice, totalDiscount } = useSelector(
     (state) => state.cart
-  );
+  )
 
   //? Handlers
   const handleRoute = () => {
-    if (!userInfo) return redirectModalHandlers.open();
+    if (!userInfo) return redirectModalHandlers.open()
 
-    router.push("/checkout/shipping");
-  };
+    router.push('/checkout/shipping')
+  }
 
   //? Render
   if (cartItems.length === 0)
@@ -61,7 +61,7 @@ export default function Cart() {
           </div>
         </section>
       </>
-    );
+    )
 
   return (
     <>
@@ -134,5 +134,5 @@ export default function Cart() {
         </section>
       </main>
     </>
-  );
+  )
 }

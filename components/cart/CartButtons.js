@@ -1,12 +1,12 @@
-import { decrease, increase, removeFromCart } from "app/slices/cart.slice";
-import { useDispatch } from "react-redux";
+import { decrease, increase, removeFromCart } from 'app/slices/cart.slice'
+import { useDispatch } from 'react-redux'
 
-import { Icons } from "components";
+import { Icons } from 'components'
 
-import { formatNumber } from "utils/formatNumber";
+import { formatNumber } from 'utils/formatNumber'
 
 export default function CartButtons({ item }) {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   return (
     <div className='cart-buttons'>
@@ -35,5 +35,5 @@ export default function CartButtons({ item }) {
         </button>
       )}
     </div>
-  );
+  )
 }

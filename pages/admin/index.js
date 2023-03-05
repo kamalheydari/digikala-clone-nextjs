@@ -1,20 +1,19 @@
-import Head from "next/head";
-import Image from "next/image";
-import { useRouter } from "next/router";
+import Head from 'next/head'
+import Image from 'next/image'
+import { useRouter } from 'next/router'
 
+import { DashboardAside } from 'components'
 
-import { DashboardAside } from "components";
-
-import useUserInfo from "hooks/useUserInfo";
+import useUserInfo from 'hooks/useUserInfo'
 
 export default function AdminPage() {
-  const router = useRouter();
+  const router = useRouter()
 
-  const { userInfo, isVerify } = useUserInfo();
+  const { userInfo, isVerify } = useUserInfo()
 
-  if (!isVerify || userInfo?.role === "user") router.push("/admin/login");
+  if (!isVerify || userInfo?.role === 'user') router.push('/admin/login')
 
-  if (userInfo?.role === "admin" || userInfo?.root)
+  if (userInfo?.role === 'admin' || userInfo?.root)
     return (
       <div className='lg:flex lg:gap-x-4 lg:px-3 lg:container lg:max-w-8xl '>
         <Head>
@@ -37,5 +36,5 @@ export default function AdminPage() {
           </section>
         </div>
       </div>
-    );
+    )
 }

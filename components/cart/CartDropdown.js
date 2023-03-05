@@ -1,8 +1,8 @@
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router'
 
-import {  useSelector } from "react-redux";
+import { useSelector } from 'react-redux'
 
-import { formatNumber } from "utils/formatNumber";
+import { formatNumber } from 'utils/formatNumber'
 
 import {
   ArrowLink,
@@ -12,32 +12,32 @@ import {
   CartTotalItems,
   Toman,
   EmptyCart,
-} from "components";
+} from 'components'
 
-import useUserInfo from "hooks/useUserInfo";
-import { Menu, Transition } from "@headlessui/react";
-import { Fragment } from "react";
-import useDisclosure from "hooks/useDisclosure";
+import useUserInfo from 'hooks/useUserInfo'
+import { Menu, Transition } from '@headlessui/react'
+import { Fragment } from 'react'
+import useDisclosure from 'hooks/useDisclosure'
 
 export default function CartDropdown() {
   //? Assets
-  const router = useRouter();
+  const router = useRouter()
 
-  const { isVerify } = useUserInfo();
+  const { isVerify } = useUserInfo()
 
-  const [isShowRedirectModal, redirectModalHandlers] = useDisclosure();
+  const [isShowRedirectModal, redirectModalHandlers] = useDisclosure()
 
   //? Store
   const { totalItems, cartItems, totalDiscount, totalPrice } = useSelector(
     (state) => state.cart
-  );
+  )
 
   //? Handlers
   const handleRoute = () => {
-    if (!isVerify) return redirectModalHandlers.open();
+    if (!isVerify) return redirectModalHandlers.open()
 
-    router.push("/checkout/shipping");
-  };
+    router.push('/checkout/shipping')
+  }
 
   return (
     <>
@@ -106,5 +106,5 @@ export default function CartDropdown() {
         </Transition>
       </Menu>
     </>
-  );
+  )
 }

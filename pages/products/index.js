@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react";
-import Head from "next/head";
-import { useRouter } from "next/router";
-import Image from "next/image";
-import Link from "next/link";
+import { useEffect, useState } from 'react'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import Image from 'next/image'
+import Link from 'next/link'
 
-import db from "lib/db";
-import Product from "models/Product";
+import db from 'lib/db'
+import Product from 'models/Product'
 
-import { useDispatch, useSelector } from "react-redux";
-import { updateFilter } from "app/slices/filter.slice";
+import { useDispatch, useSelector } from 'react-redux'
+import { updateFilter } from 'app/slices/filter.slice'
 
-import { formatNumber } from "utils/formatNumber";
+import { formatNumber } from 'utils/formatNumber'
 
 import {
   ProductCard,
@@ -19,65 +19,65 @@ import {
   Sort,
   ProductsAside,
   Skeleton,
-} from "components";
-import useCategory from "hooks/useCategory";
-import useDisclosure from "hooks/useDisclosure";
+} from 'components'
+import useCategory from 'hooks/useCategory'
+import useDisclosure from 'hooks/useDisclosure'
 
 export default function ProductsHome(props) {
-  let { query, pathname, push } = useRouter();
-  const dispatch = useDispatch();
+  let { query, pathname, push } = useRouter()
+  const dispatch = useDispatch()
 
-  const [isFilters, filtersHandlers] = useDisclosure();
-  const [isSort, sortHandlers] = useDisclosure();
+  const [isFilters, filtersHandlers] = useDisclosure()
+  const [isSort, sortHandlers] = useDisclosure()
 
   //? State
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(1)
 
   //? Store
-  const { sort } = useSelector((state) => state.filter);
+  const { sort } = useSelector((state) => state.filter)
 
   //? Get Category Data
-  const { childCategories, isLoading } = useCategory("/" + query.category);
+  const { childCategories, isLoading } = useCategory('/' + query.category)
 
   //? Handlers
   //* Change Price Range On Filter Change
   useEffect(() => {
     dispatch(
       updateFilter({
-        name: "min_price",
+        name: 'min_price',
         value: props.mainMinPrice,
       })
-    );
+    )
     dispatch(
       updateFilter({
-        name: "max_price",
+        name: 'max_price',
         value: props.mainMaxPrice,
       })
-    );
-  }, [query.category, query.inStock, query.discount]);
+    )
+  }, [query.category, query.inStock, query.discount])
 
   const chaneRoute = (obj) => {
-    let url = pathname + "?";
+    let url = pathname + '?'
 
-    query = { ...query, ...obj };
+    query = { ...query, ...obj }
 
-    Object.keys(query).forEach((key) => (url += `${key}=${query[key]}&`));
-    push(url);
-  };
+    Object.keys(query).forEach((key) => (url += `${key}=${query[key]}&`))
+    push(url)
+  }
 
   const resetRoute = () => {
-    push(`${pathname}?category=${query.category}`);
-  };
+    push(`${pathname}?category=${query.category}`)
+  }
 
   //* Change Route On Page Change
   useEffect(() => {
-    chaneRoute({ page });
-  }, [page]);
+    chaneRoute({ page })
+  }, [page])
 
   //* Reset Page On Filter And Sort Change
   useEffect(() => {
-    setPage(1);
-  }, [query.sort, query.inStock, query.discount, query.price]);
+    setPage(1)
+  }, [query.sort, query.inStock, query.discount, query.price])
 
   //? Local Components
   const CategorySkeleton = () => (
@@ -107,7 +107,7 @@ export default function ProductsHome(props) {
         </Skeleton>
       </div>
     </div>
-  );
+  )
 
   return (
     <main
@@ -153,7 +153,7 @@ export default function ProductsHome(props) {
       <div className='px-1 lg:flex lg:gap-x-0 xl:gap-x-3'>
         <div
           className={`fixed transition-all duration-700 left-0 right-0 mx-auto z-40 bg-white w-full h-screen mt-1 xl:sticky xl:top-28 xl:z-0 xl:h-fit xl:w-fit  ${
-            isFilters ? "top-0" : "top-full"
+            isFilters ? 'top-0' : 'top-full'
           }`}
         >
           <ProductsAside
@@ -231,40 +231,40 @@ export default function ProductsHome(props) {
         </div>
       )}
     </main>
-  );
+  )
 }
 
 export async function getServerSideProps({ query }) {
-  const category = query.category;
-  const page = +query.page || 1;
-  const page_size = +query.page_size || 10;
-  const sort = +query.sort || 1;
-  const inStock = query.inStock || null;
-  const discount = query.discount || null;
-  const price = query.price;
+  const category = query.category
+  const page = +query.page || 1
+  const page_size = +query.page_size || 10
+  const sort = +query.sort || 1
+  const inStock = query.inStock || null
+  const discount = query.discount || null
+  const price = query.price
 
   //? Filters
   const categoryFilter = category
     ? {
         category: {
           $regex: category,
-          $options: "i",
+          $options: 'i',
         },
       }
-    : {};
-  const inStockFilter = inStock === "true" ? { inStock: { $gte: 1 } } : {};
+    : {}
+  const inStockFilter = inStock === 'true' ? { inStock: { $gte: 1 } } : {}
 
   const discountFilter =
-    discount === "true" ? { discount: { $gte: 1 }, inStock: { $gte: 1 } } : {};
+    discount === 'true' ? { discount: { $gte: 1 }, inStock: { $gte: 1 } } : {}
 
   const priceFilter = price
     ? {
         price: {
-          $gte: +price.split("-")[0],
-          $lte: +price.split("-")[1],
+          $gte: +price.split('-')[0],
+          $lte: +price.split('-')[1],
         },
       }
-    : {};
+    : {}
 
   //? Sort
   const order =
@@ -276,44 +276,44 @@ export async function getServerSideProps({ query }) {
       ? { sold: -1 }
       : sort === 1
       ? { createdAt: -1 }
-      : { _id: -1 };
+      : { _id: -1 }
 
-  await db.connect();
+  await db.connect()
   const products = await Product.find({
     ...categoryFilter,
     ...inStockFilter,
     ...discountFilter,
     ...priceFilter,
   })
-    .select("-description -info -specification -sizes -reviews")
+    .select('-description -info -specification -sizes -reviews')
     .sort(order)
     .skip((page - 1) * page_size)
     .limit(page_size)
-    .lean();
+    .lean()
 
   const productsLength = await Product.countDocuments({
     ...categoryFilter,
     ...inStockFilter,
     ...discountFilter,
     ...priceFilter,
-  });
+  })
 
   const mainMaxPrice = Math.max(
     ...(await Product.find({
       ...categoryFilter,
       ...inStockFilter,
       ...discountFilter,
-    }).distinct("price"))
-  );
+    }).distinct('price'))
+  )
   const mainMinPrice = Math.min(
     ...(await Product.find({
       ...categoryFilter,
       ...inStockFilter,
       ...discountFilter,
-    }).distinct("price"))
-  );
+    }).distinct('price'))
+  )
 
-  await db.disconnect();
+  await db.disconnect()
 
   return {
     props: {
@@ -328,9 +328,9 @@ export async function getServerSideProps({ query }) {
       hasPreviousPage: page > 1,
       lastPage: Math.ceil(productsLength / page_size),
     },
-  };
+  }
 }
 
 ProductsHome.getClientLayout = function pageLayout(page) {
-  return <>{page}</>;
-};
+  return <>{page}</>
+}

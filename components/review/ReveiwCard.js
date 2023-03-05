@@ -1,10 +1,10 @@
-import Image from "next/image";
-import { Fragment, useState } from "react";
+import Image from 'next/image'
+import { Fragment, useState } from 'react'
 
-import { useEditReviewMutation } from "app/api/reviewApi";
+import { useEditReviewMutation } from 'app/api/reviewApi'
 
-import { HandleResponse, Icons } from "components";
-import { Menu, Transition } from "@headlessui/react";
+import { HandleResponse, Icons } from 'components'
+import { Menu, Transition } from '@headlessui/react'
 
 export default function ReveiwCard({
   item,
@@ -12,22 +12,20 @@ export default function ReveiwCard({
   deleteReviewHandler,
 }) {
   //? Local State
-  const [status, setStatus] = useState(item.status);
+  const [status, setStatus] = useState(item.status)
 
   //? Edit Review Query
-  const [
-    editReview,
-    { data, isSuccess, isError, error },
-  ] = useEditReviewMutation();
+  const [editReview, { data, isSuccess, isError, error }] =
+    useEditReviewMutation()
 
   //? Handlers
   const handleChangeStatus = (statusNum) => {
     editReview({
       id: item._id,
       body: { status: statusNum },
-    });
-    setStatus(statusNum);
-  };
+    })
+    setStatus(statusNum)
+  }
 
   //? Local Components
 
@@ -87,7 +85,7 @@ export default function ReveiwCard({
         </Menu.Items>
       </Transition>
     </Menu>
-  );
+  )
   return (
     <>
       {/* Handle Edit Review Response */}
@@ -115,10 +113,10 @@ export default function ReveiwCard({
           <span
             className={`farsi-digits w-5 h-5 text-center pt-0.5 inline-block rounded-md text-white  mr-10 lg:mr-20 ${
               item.rating <= 2
-                ? "bg-red-500"
+                ? 'bg-red-500'
                 : item.rating === 3
-                ? "bg-amber-500"
-                : "bg-green-500"
+                ? 'bg-amber-500'
+                : 'bg-green-500'
             }`}
           >
             {item.rating}
@@ -132,10 +130,10 @@ export default function ReveiwCard({
               <div
                 className={`flex w-fit items-center gap-x-2 px-1.5 py-0.5 rounded-md ${
                   status === 1
-                    ? "bg-amber-100 "
+                    ? 'bg-amber-100 '
                     : status === 2
-                    ? "bg-green-100 "
-                    : "bg-red-100 "
+                    ? 'bg-green-100 '
+                    : 'bg-red-100 '
                 } `}
               >
                 {status === 1 ? (
@@ -148,17 +146,17 @@ export default function ReveiwCard({
                 <span
                   className={`${
                     status === 1
-                      ? "text-amber-500"
+                      ? 'text-amber-500'
                       : status === 2
-                      ? "text-green-500"
-                      : "text-red-500"
+                      ? 'text-green-500'
+                      : 'text-red-500'
                   }`}
                 >
                   {status === 1
-                    ? "در انتظار تایید"
+                    ? 'در انتظار تایید'
                     : status === 2
-                    ? "تایید شده"
-                    : "رد شده"}
+                    ? 'تایید شده'
+                    : 'رد شده'}
                 </span>
               </div>
               <DropdownReview />
@@ -189,5 +187,5 @@ export default function ReveiwCard({
         </div>
       </div>
     </>
-  );
+  )
 }

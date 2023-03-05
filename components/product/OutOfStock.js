@@ -11,5 +11,5 @@ export default function OutOfStock() {
         شدن، به شما خبر دهیم
       </p>
     </section>
-  );
+  )
 }

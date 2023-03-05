@@ -1,14 +1,14 @@
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router'
 
-import { Header, ProfileAside } from "components";
+import { Header, ProfileAside } from 'components'
 
-import useVerify from "hooks/useVerify";
+import useVerify from 'hooks/useVerify'
 
 export default function ProfileLayout({ children }) {
-  const isVerify = useVerify(false);
-  const router = useRouter();
+  const isVerify = useVerify(false)
+  const router = useRouter()
 
-  if (!isVerify) router.push("/");
+  if (!isVerify) router.push('/')
   else
     return (
       <>
@@ -22,5 +22,5 @@ export default function ProfileLayout({ children }) {
           </div>
         </div>
       </>
-    );
+    )
 }

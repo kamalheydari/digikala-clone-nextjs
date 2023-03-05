@@ -1,43 +1,43 @@
-import db from "lib/db";
-import Review from "models/Review";
+import db from 'lib/db'
+import Review from 'models/Review'
 
-import sendError from "utils/sendError";
+import sendError from 'utils/sendError'
 
 export default async function (req, res) {
   switch (req.method) {
-    case "GET":
-      await getReviews(req, res);
-      break;
+    case 'GET':
+      await getReviews(req, res)
+      break
 
     default:
-      break;
+      break
   }
 }
 
 const getReviews = async (req, res) => {
-  const page = +req.query.page || 1;
-  const page_size = +req.query.page_size || 5;
+  const page = +req.query.page || 1
+  const page_size = +req.query.page_size || 5
 
   try {
-    await db.connect();
+    await db.connect()
 
     const reviews = await Review.find({
       product: req.query.id,
       status: 2,
     })
-      .populate("user", "name")
+      .populate('user', 'name')
       .skip((page - 1) * page_size)
       .limit(page_size)
       .sort({
-        createdAt: "desc",
-      });
+        createdAt: 'desc',
+      })
 
     const reviewsLength = await Review.countDocuments({
       product: req.query.id,
       status: 2,
-    });
+    })
 
-    await db.disconnect();
+    await db.disconnect()
 
     res.status(200).json({
       reviews,
@@ -48,8 +48,8 @@ const getReviews = async (req, res) => {
       hasNextPage: page_size * page < reviewsLength,
       hasPreviousPage: page > 1,
       lastPage: Math.ceil(reviewsLength / page_size),
-    });
+    })
   } catch (error) {
-    sendError(res, 500, error.message);
+    sendError(res, 500, error.message)
   }
-};
+}

@@ -1,15 +1,15 @@
-import Image from "next/image";
-import { SpecialSell } from "components";
-import { useState } from "react";
+import Image from 'next/image'
+import { SpecialSell } from 'components'
+import { useState } from 'react'
 
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from 'swiper/react'
 
 // Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
+import 'swiper/css'
+import 'swiper/css/pagination'
 
 // import required modules
-import { Pagination } from "swiper";
+import { Pagination } from 'swiper'
 
 export default function ImageGallery({
   images,
@@ -17,7 +17,7 @@ export default function ImageGallery({
   inStock,
   productName,
 }) {
-  const [currentImage, setCurrentImage] = useState(0);
+  const [currentImage, setCurrentImage] = useState(0)
 
   return (
     <>
@@ -37,7 +37,7 @@ export default function ImageGallery({
             <div
               key={index}
               className={`relative h-20 w-24  cursor-pointer border-2 border-transparent rounded-md overflow-hidden ${
-                index === currentImage && "border-gray-300 shadow-3xl"
+                index === currentImage && 'border-gray-300 shadow-3xl'
               }`}
               onClick={() => setCurrentImage(index)}
             >
@@ -69,5 +69,5 @@ export default function ImageGallery({
         </Swiper>
       </div>
     </>
-  );
+  )
 }

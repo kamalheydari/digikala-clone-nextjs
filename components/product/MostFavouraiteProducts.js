@@ -1,7 +1,7 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image'
+import Link from 'next/link'
 
-import { DiscountProduct, ProductPrice, Icons } from "components";
+import { DiscountProduct, ProductPrice, Icons } from 'components'
 
 export default function MostFavouraiteProducts({ products }) {
   return (
@@ -46,5 +46,5 @@ export default function MostFavouraiteProducts({ products }) {
         ))}
       </div>
     </section>
-  );
+  )
 }

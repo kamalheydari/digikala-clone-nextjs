@@ -1,17 +1,17 @@
-import { Icons } from "components";
+import { Icons } from 'components'
 
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router'
 
 const IconButton = ({ title, icon, ...restPorps }) => {
   return (
     <button type='button' title={title} className='mx-3 my-2' {...restPorps}>
       {icon}
     </button>
-  );
-};
+  )
+}
 
 export const BackIconBtn = (props) => {
-  const { back } = useRouter();
+  const { back } = useRouter()
   return (
     <IconButton
       title='برگشت'
@@ -21,8 +21,8 @@ export const BackIconBtn = (props) => {
       onClick={() => back()}
       {...props}
     />
-  );
-};
+  )
+}
 
 export const EditIconBtn = (props) => (
   <IconButton
@@ -30,7 +30,7 @@ export const EditIconBtn = (props) => (
     icon={<Icons.Edit className='icon-button text-amber-500 bg-amber-100' />}
     {...props}
   />
-);
+)
 
 export const DeleteIconBtn = (props) => (
   <IconButton
@@ -38,7 +38,7 @@ export const DeleteIconBtn = (props) => (
     icon={<Icons.Delete className='icon-button text-red-500 bg-red-100' />}
     {...props}
   />
-);
+)
 
 export const AddIconBtn = (props) => (
   <IconButton
@@ -46,4 +46,4 @@ export const AddIconBtn = (props) => (
     icon={<Icons.Plus className='icon-button text-green-500 bg-green-100' />}
     {...props}
   />
-);
+)

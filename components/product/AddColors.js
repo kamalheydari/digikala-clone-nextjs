@@ -1,30 +1,30 @@
-import { useRef } from "react";
+import { useRef } from 'react'
 
-import { AddIconBtn, DeleteIconBtn } from "components";
+import { AddIconBtn, DeleteIconBtn } from 'components'
 
-import { useFieldArray } from "react-hook-form";
+import { useFieldArray } from 'react-hook-form'
 
 export default function AddColors({ control, register, name }) {
   //? Refs
-  const inputTextRef = useRef();
-  const inputColorRef = useRef();
+  const inputTextRef = useRef()
+  const inputColorRef = useRef()
 
   //? Form Hook
   const { fields, append, remove } = useFieldArray({
     name,
     control,
-  });
+  })
 
   //? Handlers
   const handleAddToColor = () => {
-    if (inputTextRef.current.value.trim() === "") return;
+    if (inputTextRef.current.value.trim() === '') return
     append({
       name: inputTextRef.current.value,
       hashCode: inputColorRef.current.value,
-    });
-    inputTextRef.current.value = "";
-    inputColorRef.current.value = "#bc203f";
-  };
+    })
+    inputTextRef.current.value = ''
+    inputColorRef.current.value = '#bc203f'
+  }
 
   return (
     <div className='text-sm space-y-1.5'>
@@ -69,5 +69,5 @@ export default function AddColors({ control, register, name }) {
         </div>
       </div>
     </div>
-  );
+  )
 }

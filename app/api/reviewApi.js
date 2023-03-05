@@ -1,58 +1,58 @@
-import apiSlice from "app/api/api";
+import apiSlice from 'app/api/api'
 
 export const reviewApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getReviews: builder.query({
       query: ({ page }) => ({
         url: `/api/reviews?page=${page}`,
-        method: "GET",
+        method: 'GET',
       }),
-      providesTags: ["Review"],
+      providesTags: ['Review'],
     }),
 
     createReview: builder.mutation({
       query: ({ body, token, id }) => ({
         url: `/api/reviews/${id}`,
-        method: "POST",
+        method: 'POST',
         body,
       }),
-      invalidatesTags: ["Review"],
+      invalidatesTags: ['Review'],
     }),
 
     getProductReviews: builder.query({
       query: ({ id, page }) => ({
         url: `/api/reviews/product/${id}?page=${page}&page_size=5`,
-        method: "GET",
+        method: 'GET',
       }),
-      providesTags: ["Review"],
+      providesTags: ['Review'],
     }),
 
     getSingleReview: builder.query({
       query: ({ id }) => ({
         url: `/api/reviews/${id}`,
-        method: "GET",
+        method: 'GET',
       }),
-      providesTags: ["Review"],
+      providesTags: ['Review'],
     }),
 
     deleteReview: builder.mutation({
       query: ({ id }) => ({
         url: `/api/reviews/${id}`,
-        method: "DELETE",
+        method: 'DELETE',
       }),
-      invalidatesTags: ["Review"],
+      invalidatesTags: ['Review'],
     }),
 
     editReview: builder.mutation({
       query: ({ id, body }) => ({
         url: `/api/reviews/${id}`,
-        method: "PATCH",
+        method: 'PATCH',
         body,
       }),
-      invalidatesTags: ["Review"],
+      invalidatesTags: ['Review'],
     }),
   }),
-});
+})
 
 export const {
   useGetReviewsQuery,
@@ -61,4 +61,4 @@ export const {
   useGetProductReviewsQuery,
   useEditReviewMutation,
   useCreateReviewMutation,
-} = reviewApiSlice;
+} = reviewApiSlice

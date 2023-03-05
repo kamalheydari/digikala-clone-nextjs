@@ -1,18 +1,18 @@
-import Link from "next/link";
+import Link from 'next/link'
 
-import { Icons, Skeleton, UserDropdown } from "components";
+import { Icons, Skeleton, UserDropdown } from 'components'
 
-import useUserInfo from "hooks/useUserInfo";
+import useUserInfo from 'hooks/useUserInfo'
 
 function Signup() {
-  const { userInfo, isVerify, isLoading } = useUserInfo();
+  const { userInfo, isVerify, isLoading } = useUserInfo()
 
   //? Render
 
   if (isLoading)
     return (
       <Skeleton.Item height='h-8' width='w-7 lg:w-12' animated='background' />
-    );
+    )
   else if (!isVerify) {
     return (
       <div className='user-signup'>
@@ -27,7 +27,7 @@ function Signup() {
           <a className='hidden px-2 lg:block'>ثبت‌نام</a>
         </Link>
       </div>
-    );
+    )
   } else if (userInfo) {
     return (
       <>
@@ -42,8 +42,8 @@ function Signup() {
           <UserDropdown name={userInfo.name} />
         </div>
       </>
-    );
+    )
   }
 }
 
-export default Signup;
+export default Signup

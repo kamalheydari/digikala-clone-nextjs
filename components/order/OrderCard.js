@@ -1,33 +1,31 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image'
+import Link from 'next/link'
 
-import moment from "moment-jalaali";
+import moment from 'moment-jalaali'
 
-import { HandleResponse, Icons, Toman } from "components";
+import { HandleResponse, Icons, Toman } from 'components'
 
-import { formatNumber } from "utils/formatNumber";
-import { useEditOrderMutation } from "app/api/orderApi";
+import { formatNumber } from 'utils/formatNumber'
+import { useEditOrderMutation } from 'app/api/orderApi'
 
 export default function OrderCard({ order, singleOrder }) {
   //? Edit Order Query
-  const [
-    editOrder,
-    { data, isSuccess, isError, error },
-  ] = useEditOrderMutation();
+  const [editOrder, { data, isSuccess, isError, error }] =
+    useEditOrderMutation()
 
   //? Handlers
   const handleChangeToDelivered = () => {
     editOrder({
       id: order._id,
       body: { paid: true, delivered: true },
-    });
-  };
+    })
+  }
   const handleChangeToInProccess = () => {
     editOrder({
       id: order._id,
       body: { paid: false, delivered: false },
-    });
-  };
+    })
+  }
 
   return (
     <>
@@ -49,13 +47,13 @@ export default function OrderCard({ order, singleOrder }) {
               <Icons.Clock2 className='p-0.5 w-6 h-6 bg-amber-500 text-white rounded-full' />
             )}
             <span className='text-sm text-black'>
-              {order.delivered ? "تحویل شده" : "در حال پردازش"}
+              {order.delivered ? 'تحویل شده' : 'در حال پردازش'}
             </span>
           </div>
           {/* <Icons.ArrowLeft className='icon w-7 h-7' /> */}
           {order.delivered && (
             <span className='farsi-digits'>
-              {moment(order.updatedAt).format("jYYYY/jM/jD")}
+              {moment(order.updatedAt).format('jYYYY/jM/jD')}
             </span>
           )}
           {singleOrder && (
@@ -117,5 +115,5 @@ export default function OrderCard({ order, singleOrder }) {
         </div>
       </div>
     </>
-  );
+  )
 }

@@ -1,16 +1,16 @@
-import Head from "next/head";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import Head from 'next/head'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 
-import { useDispatch } from "react-redux";
+import { useDispatch } from 'react-redux'
 
-import { showAlert } from "app/slices/alert.slice";
+import { showAlert } from 'app/slices/alert.slice'
 import {
   useCreateDetailsMutation,
   useDeleteDetailsMutation,
   useGetDetailsQuery,
   useUpdateDetailsMutation,
-} from "app/api/detailsApi";
+} from 'app/api/detailsApi'
 
 import {
   BigLoading,
@@ -20,41 +20,35 @@ import {
   DetailsList,
   HandleResponse,
   PageContainer,
-} from "components";
+} from 'components'
 
-import useCategory from "hooks/useCategory";
-import useDisclosure from "hooks/useDisclosure";
+import useCategory from 'hooks/useCategory'
+import useDisclosure from 'hooks/useDisclosure'
 
-import { useForm } from "react-hook-form";
+import { useForm } from 'react-hook-form'
 
 export default function DetailsPage() {
   //? Assets
-  const router = useRouter();
-  const dispatch = useDispatch();
+  const router = useRouter()
+  const dispatch = useDispatch()
 
   //? Modals
-  const [
-    isShowConfirmDeleteModal,
-    confirmDeleteModalHandlers,
-  ] = useDisclosure();
-  const [
-    isShowConfirmUpdateModal,
-    confirmUpdateModalHandlers,
-  ] = useDisclosure();
+  const [isShowConfirmDeleteModal, confirmDeleteModalHandlers] = useDisclosure()
+  const [isShowConfirmUpdateModal, confirmUpdateModalHandlers] = useDisclosure()
 
   //? States
   const [deleteInfo, setDeleteInfo] = useState({
-    id: "",
-  });
+    id: '',
+  })
   const [updateInfo, setUpdateInfo] = useState({
-    id: "",
+    id: '',
     editedData: {},
-  });
+  })
 
   //? Queries
   //*   Get Category
-  const { categories } = useCategory();
-  const category = categories.find((item) => item._id === router.query.id);
+  const { categories } = useCategory()
+  const category = categories.find((item) => item._id === router.query.id)
 
   //*   Get Details
   const {
@@ -64,7 +58,7 @@ export default function DetailsPage() {
     isLoading: isLoading_get,
   } = useGetDetailsQuery({
     id: router.query.id,
-  });
+  })
 
   //*   Update Details
   const [
@@ -76,7 +70,7 @@ export default function DetailsPage() {
       error: error_update,
       isLoading: isLoading_update,
     },
-  ] = useUpdateDetailsMutation();
+  ] = useUpdateDetailsMutation()
   //*   Create Details
   const [
     createDetails,
@@ -87,7 +81,7 @@ export default function DetailsPage() {
       isLoading: isLoading_create,
       error: error_create,
     },
-  ] = useCreateDetailsMutation();
+  ] = useCreateDetailsMutation()
 
   //*   Delete Details
   const [
@@ -99,16 +93,16 @@ export default function DetailsPage() {
       data: data_delete,
       isLoading: isLoading_delete,
     },
-  ] = useDeleteDetailsMutation();
+  ] = useDeleteDetailsMutation()
 
   //? Hook Form
   const { handleSubmit, register, reset, control, getValues } = useForm({
     defaultValues: {
-      optionsType: "none",
+      optionsType: 'none',
       info: [],
       specification: [],
     },
-  });
+  })
 
   //? Re-Renders
   useEffect(() => {
@@ -117,14 +111,14 @@ export default function DetailsPage() {
         optionsType: details.optionsType,
         info: details.info,
         specification: details.specification,
-      });
-  }, [details]);
+      })
+  }, [details])
 
   //? Handlers
   const deleteHandler = () => {
-    setDeleteInfo({ ...deleteInfo, id: details?._id });
-    confirmDeleteModalHandlers.open();
-  };
+    setDeleteInfo({ ...deleteInfo, id: details?._id })
+    confirmDeleteModalHandlers.open()
+  }
 
   const submitHander = async ({ info, specification, optionsType }) => {
     if (info.length !== 0 && specification.length !== 0) {
@@ -136,16 +130,16 @@ export default function DetailsPage() {
           specification,
           optionsType,
         },
-      });
+      })
     } else {
       dispatch(
         showAlert({
-          status: "error",
-          title: "لطفا مشخصات و ویژگی ها را وارد کنید",
+          status: 'error',
+          title: 'لطفا مشخصات و ویژگی ها را وارد کنید',
         })
-      );
+      )
     }
-  };
+  }
 
   const updateHandler = () => {
     setUpdateInfo({
@@ -153,14 +147,14 @@ export default function DetailsPage() {
       id: details?._id,
       editedData: {
         category_id: category?._id,
-        info: getValues("info"),
-        specification: getValues("specification"),
-        optionsType: getValues("optionsType"),
+        info: getValues('info'),
+        specification: getValues('specification'),
+        optionsType: getValues('optionsType'),
       },
-    });
+    })
 
-    confirmUpdateModalHandlers.open();
-  };
+    confirmUpdateModalHandlers.open()
+  }
 
   //? Render
   return (
@@ -184,15 +178,15 @@ export default function DetailsPage() {
           message={data_delete?.msg}
           onSuccess={() => {
             reset({
-              optionsType: "none",
+              optionsType: 'none',
               info: [],
               specification: [],
-            });
-            confirmDeleteModalHandlers.close();
+            })
+            confirmDeleteModalHandlers.close()
           }}
           onError={() => {
-            confirmDeleteModalHandlers.close();
-            setDeleteInfo({ id: "" });
+            confirmDeleteModalHandlers.close()
+            setDeleteInfo({ id: '' })
           }}
         />
       )}
@@ -215,12 +209,12 @@ export default function DetailsPage() {
           error={error_update?.data?.err}
           message={data_update?.msg}
           onSuccess={() => {
-            setUpdateInfo({ id: "", editedData: {} });
-            confirmUpdateModalHandlers.close();
+            setUpdateInfo({ id: '', editedData: {} })
+            confirmUpdateModalHandlers.close()
           }}
           onError={() => {
-            setUpdateInfo({ id: "", editedData: {} });
-            confirmUpdateModalHandlers.close();
+            setUpdateInfo({ id: '', editedData: {} })
+            confirmUpdateModalHandlers.close()
           }}
         />
       )}
@@ -241,7 +235,7 @@ export default function DetailsPage() {
 
         <PageContainer
           title={` مشخصات و ویژگی‌های دسته‌بندی ${
-            category?.name ? category?.name : ""
+            category?.name ? category?.name : ''
           }`}
         >
           {isLoading_get ? (
@@ -262,7 +256,7 @@ export default function DetailsPage() {
                     id='none'
                     value='none'
                     className='ml-1'
-                    {...register("optionsType")}
+                    {...register('optionsType')}
                   />
                   <label htmlFor='none'>بدون حق انتخاب</label>
                 </div>
@@ -273,7 +267,7 @@ export default function DetailsPage() {
                     id='colors'
                     value='colors'
                     className='ml-1'
-                    {...register("optionsType")}
+                    {...register('optionsType')}
                   />
                   <label htmlFor='colors'>بر اساس رنگ</label>
                 </div>
@@ -284,7 +278,7 @@ export default function DetailsPage() {
                     id='sizes'
                     value='sizes'
                     className='ml-1'
-                    {...register("optionsType")}
+                    {...register('optionsType')}
                   />
                   <label htmlFor='sizes'>بر اساس سایز</label>
                 </div>
@@ -336,9 +330,9 @@ export default function DetailsPage() {
         </PageContainer>
       </main>
     </>
-  );
+  )
 }
 
 DetailsPage.getDashboardLayout = function pageLayout(page) {
-  return <>{page}</>;
-};
+  return <>{page}</>
+}

@@ -1,10 +1,10 @@
-import { Icons, SearchModal } from "components";
+import { Icons, SearchModal } from 'components'
 
-import useDisclosure from "hooks/useDisclosure";
+import useDisclosure from 'hooks/useDisclosure'
 
 export default function Search() {
   //? Assets
-  const [isShowSearchModal, searchModalHanlders] = useDisclosure();
+  const [isShowSearchModal, searchModalHanlders] = useDisclosure()
 
   return (
     <>

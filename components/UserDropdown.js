@@ -1,10 +1,10 @@
-import { Fragment } from "react";
+import { Fragment } from 'react'
 
-import { Menu, Transition } from "@headlessui/react";
+import { Menu, Transition } from '@headlessui/react'
 
-import { Icons, Logout, Person } from "components";
-import Link from "next/link";
-import Image from "next/image";
+import { Icons, Logout, Person } from 'components'
+import Link from 'next/link'
+import Image from 'next/image'
 
 export default function UserDropdown({ name }) {
   return (
@@ -41,5 +41,5 @@ export default function UserDropdown({ name }) {
         </Menu.Items>
       </Transition>
     </Menu>
-  );
+  )
 }

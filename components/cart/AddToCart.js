@@ -1,14 +1,14 @@
-import Image from "next/image";
+import Image from 'next/image'
 
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux'
 
-import { AddToCartOperation, Depot, Icons } from "components";
+import { AddToCartOperation, Depot, Icons } from 'components'
 
-import { formatNumber } from "utils/formatNumber";
+import { formatNumber } from 'utils/formatNumber'
 
 export default function AddToCart({ second, product }) {
   //? Store
-  const { tempColor, tempSize } = useSelector((state) => state.cart);
+  const { tempColor, tempSize } = useSelector((state) => state.cart)
   return (
     <>
       {/* mobile */}
@@ -19,7 +19,7 @@ export default function AddToCart({ second, product }) {
       {/* desktop */}
       <div
         className={`add-to-cart__desktop ${
-          second ? "lg:top-4 xl:top-32" : "lg:top-60 xl:top-[260px]"
+          second ? 'lg:top-4 xl:top-32' : 'lg:top-60 xl:top-[260px]'
         } `}
       >
         <div className='add-to-cart__desktop__header'>
@@ -82,5 +82,5 @@ export default function AddToCart({ second, product }) {
         <AddToCartOperation product={product} />
       </div>
     </>
-  );
+  )
 }

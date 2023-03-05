@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import Head from "next/head";
+import { useEffect, useState } from 'react'
+import Head from 'next/head'
 
-import db from "lib/db";
-import Product from "models/Product";
-import Category from "models/Category";
+import db from 'lib/db'
+import Product from 'models/Product'
+import Category from 'models/Category'
 
-import { useGetImagesQuery } from "app/api/categoryApi";
-import { useRouter } from "next/router";
+import { useGetImagesQuery } from 'app/api/categoryApi'
+import { useRouter } from 'next/router'
 
 import {
   BannerOne,
@@ -16,20 +16,20 @@ import {
   DiscountSlider,
   MostFavouraiteProducts,
   Slider,
-} from "components";
+} from 'components'
 
 export default function MainCategory(props) {
-  const router = useRouter();
+  const router = useRouter()
 
   //? State
-  const [images, setImages] = useState({});
+  const [images, setImages] = useState({})
 
   //? Get Slider Images
-  const { data, isSuccess } = useGetImagesQuery();
+  const { data, isSuccess } = useGetImagesQuery()
 
   useEffect(() => {
-    if (isSuccess) setImages(data[router.query.category]);
-  }, [isSuccess, router.query.category]);
+    if (isSuccess) setImages(data[router.query.category])
+  }, [isSuccess, router.query.category])
 
   //? Render
   return (
@@ -55,7 +55,7 @@ export default function MainCategory(props) {
         <Categories
           parent={props.currentCategory.category}
           name={props.currentCategory.name}
-          color={`${images.colors ? `${images?.colors[0]}` : "#212121"}`}
+          color={`${images.colors ? `${images?.colors[0]}` : '#212121'}`}
         />
 
         {/* Banner One */}
@@ -70,28 +70,28 @@ export default function MainCategory(props) {
         <MostFavouraiteProducts products={props.mostFavourite} />
       </div>
     </main>
-  );
+  )
 }
 
 export async function getServerSideProps({ params: { category } }) {
   const categoryFilter = {
     category: {
       $regex: category,
-      $options: "i",
+      $options: 'i',
     },
-  };
+  }
 
   const filterFilelds =
-    "-description -info -specification -sizes -colors -category -numReviews -reviews";
+    '-description -info -specification -sizes -colors -category -numReviews -reviews'
 
-  await db.connect();
+  await db.connect()
   const bestSells = await Product.find({
     ...categoryFilter,
   })
     .select(filterFilelds)
     .sort({ sold: -1 })
     .limit(15)
-    .lean();
+    .lean()
 
   const mostFavourite = await Product.find({
     ...categoryFilter,
@@ -99,7 +99,7 @@ export async function getServerSideProps({ params: { category } }) {
     .select(filterFilelds)
     .sort({ rating: -1 })
     .limit(10)
-    .lean();
+    .lean()
 
   const discountProducts = await Product.find({
     ...categoryFilter,
@@ -109,13 +109,13 @@ export async function getServerSideProps({ params: { category } }) {
     .select(filterFilelds)
     .limit(10)
     .sort({ discount: -1 })
-    .lean();
+    .lean()
 
   const currentCategory = await Category.findOne({
     slug: category,
-  }).lean();
+  }).lean()
 
-  await db.disconnect();
+  await db.disconnect()
 
   return {
     props: {
@@ -124,9 +124,9 @@ export async function getServerSideProps({ params: { category } }) {
       discountProducts: discountProducts.map(db.convertDocToObj),
       currentCategory: db.convertDocToObj(currentCategory),
     },
-  };
+  }
 }
 
 MainCategory.getClientLayout = function pageLayout(page) {
-  return <>{page}</>;
-};
+  return <>{page}</>
+}

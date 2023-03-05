@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import { useEffect } from 'react'
 
-import { Button, Modal } from "components";
+import { Button, Modal } from 'components'
 
 export default function ConfirmDeleteModal(props) {
   //? Props
@@ -12,30 +12,29 @@ export default function ConfirmDeleteModal(props) {
     onClose,
     deleteInfo,
     setDeleteInfo,
-  } = props;
+  } = props
 
   //? Handlers
   const handleConfirmClick = () => {
     deleteFunc({
       id: deleteInfo.id,
-    });
-  };
+    })
+  }
 
   const handleCancleClick = () => {
-    setDeleteInfo({ id: "" });
-    onClose();
-  };
+    setDeleteInfo({ id: '' })
+    onClose()
+  }
 
   //? Render(s)
   return (
     <>
-
       <Modal isShow={isShow} onClose={onClose} effect='ease-out'>
         <Modal.Content>
           <Modal.Body>
             <div className='px-3 py-6 space-y-4 text-center bg-white md:rounded-lg'>
               <p>
-                آیا موافق حذف{" "}
+                آیا موافق حذف{' '}
                 <span className='font-bold text-red-500'>{title}</span> انتخاب
                 شده هستید؟
               </p>
@@ -53,5 +52,5 @@ export default function ConfirmDeleteModal(props) {
         </Modal.Content>
       </Modal>
     </>
-  );
+  )
 }

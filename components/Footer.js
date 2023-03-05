@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image'
 
 import {
   AppCoffeBazzar,
@@ -8,7 +8,7 @@ import {
   Icons,
   LogoPersian,
   Services,
-} from "components";
+} from 'components'
 
 export default function Footer() {
   return (
@@ -157,7 +157,7 @@ export default function Footer() {
           />
         </div>
         <p className='text-white'>
-          توسعه داده شده توسط{" "}
+          توسعه داده شده توسط{' '}
           <a
             href='http://heydari-dev.ir'
             target='_blank'
@@ -168,5 +168,5 @@ export default function Footer() {
         </p>
       </div>
     </footer>
-  );
+  )
 }

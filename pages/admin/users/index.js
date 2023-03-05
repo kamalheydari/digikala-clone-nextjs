@@ -1,8 +1,8 @@
-import Head from "next/head";
+import Head from 'next/head'
 
-import { useState } from "react";
+import { useState } from 'react'
 
-import { useDeleteUserMutation, useGetUsersQuery } from "app/api/userApi";
+import { useDeleteUserMutation, useGetUsersQuery } from 'app/api/userApi'
 
 import {
   Pagination,
@@ -13,32 +13,23 @@ import {
   DeleteIconBtn,
   Person,
   HandleResponse,
-} from "components";
+} from 'components'
 
-import useDisclosure from "hooks/useDisclosure";
+import useDisclosure from 'hooks/useDisclosure'
 
 export default function Users() {
   //? Modals
-  const [
-    isShowConfirmDeleteModal,
-    confirmDeleteModalHandlers,
-  ] = useDisclosure();
+  const [isShowConfirmDeleteModal, confirmDeleteModalHandlers] = useDisclosure()
 
   //? State
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(1)
   const [deleteInfo, setDeleteInfo] = useState({
-    id: "",
-  });
+    id: '',
+  })
 
   //? Get User Data
-  const {
-    data,
-    isSuccess,
-    isFetching,
-    error,
-    isError,
-    refetch,
-  } = useGetUsersQuery({ page });
+  const { data, isSuccess, isFetching, error, isError, refetch } =
+    useGetUsersQuery({ page })
 
   //? Delete User Query
   const [
@@ -50,13 +41,13 @@ export default function Users() {
       error: error_delete,
       data: data_delete,
     },
-  ] = useDeleteUserMutation();
+  ] = useDeleteUserMutation()
 
   //? Handlers
   const deleteUserHandler = (id) => {
-    setDeleteInfo({ id });
-    confirmDeleteModalHandlers.open();
-  };
+    setDeleteInfo({ id })
+    confirmDeleteModalHandlers.open()
+  }
 
   //? Render(s)
   return (
@@ -78,12 +69,12 @@ export default function Users() {
           error={error_delete?.data?.err}
           message={data_delete?.msg}
           onSuccess={() => {
-            confirmDeleteModalHandlers.close();
-            setDeleteInfo({ id: "" });
+            confirmDeleteModalHandlers.close()
+            setDeleteInfo({ id: '' })
           }}
           onError={() => {
-            confirmDeleteModalHandlers.close();
-            setDeleteInfo({ id: "" });
+            confirmDeleteModalHandlers.close()
+            setDeleteInfo({ id: '' })
           }}
         />
       )}
@@ -128,13 +119,13 @@ export default function Users() {
                         <span
                           className={`py-1.5 px-2 rounded-lg font-bold inline-block
               ${
-                user.role === "admin"
-                  ? "text-blue-600 bg-blue-50"
-                  : user.role === "user"
-                  ? "text-amber-600 bg-amber-50"
+                user.role === 'admin'
+                  ? 'text-blue-600 bg-blue-50'
+                  : user.role === 'user'
+                  ? 'text-amber-600 bg-amber-50'
                   : user.root
-                  ? "text-green-600 bg-green-50"
-                  : ""
+                  ? 'text-green-600 bg-green-50'
+                  : ''
               }
               `}
                         >
@@ -172,10 +163,10 @@ export default function Users() {
         </PageContainer>
       </main>
     </>
-  );
+  )
 }
 
 //? Layout
 Users.getDashboardLayout = function pageLayout(page) {
-  return <>{page}</>;
-};
+  return <>{page}</>
+}

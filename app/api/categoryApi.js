@@ -1,36 +1,36 @@
-import apiSlice from "app/api/api";
+import apiSlice from 'app/api/api'
 
 export const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getCategories: builder.query({
       query: () => ({
-        url: "/api/category",
-        method: "GET",
+        url: '/api/category',
+        method: 'GET',
       }),
-      providesTags: ["Category"],
+      providesTags: ['Category'],
     }),
 
     createCategory: builder.mutation({
       query: ({ body }) => ({
-        url: "/api/category",
-        method: "POST",
+        url: '/api/category',
+        method: 'POST',
         body,
       }),
-      invalidatesTags: ["Category"],
+      invalidatesTags: ['Category'],
     }),
 
     getImages: builder.query({
       query: () => ({
-        url: "/api/images",
-        method: "GET",
+        url: '/api/images',
+        method: 'GET',
       }),
-      providesTags: ["Category"],
+      providesTags: ['Category'],
     }),
   }),
-});
+})
 
 export const {
   useCreateCategoryMutation,
   useGetImagesQuery,
   useGetCategoriesQuery,
-} = userApiSlice;
+} = userApiSlice

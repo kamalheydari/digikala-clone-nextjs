@@ -1,27 +1,27 @@
-import Router from "next/router";
-import { useEffect, useState } from "react";
-import NProgress from "nprogress";
+import Router from 'next/router'
+import { useEffect, useState } from 'react'
+import NProgress from 'nprogress'
 
-import "nprogress/nprogress.css";
+import 'nprogress/nprogress.css'
 
-import { BigLoading } from "components";
+import { BigLoading } from 'components'
 
-NProgress.configure({ showSpinner: false });
+NProgress.configure({ showSpinner: false })
 
 export default function PageLoading() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    Router.events.on("routeChangeStart", () => {
-      setLoading(true);
-      NProgress.start();
-    });
-    Router.events.on("routeChangeComplete", () => {
-      setLoading(false);
-      NProgress.done();
-      NProgress.remove();
-    });
-  });
+    Router.events.on('routeChangeStart', () => {
+      setLoading(true)
+      NProgress.start()
+    })
+    Router.events.on('routeChangeComplete', () => {
+      setLoading(false)
+      NProgress.done()
+      NProgress.remove()
+    })
+  })
 
   return (
     loading && (
@@ -31,5 +31,5 @@ export default function PageLoading() {
         </div>
       </div>
     )
-  );
+  )
 }

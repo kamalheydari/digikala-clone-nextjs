@@ -1,8 +1,8 @@
-import { updateFilter } from "app/slices/filter.slice";
+import { updateFilter } from 'app/slices/filter.slice'
 
-import { sorts } from "utils/constatns";
+import { sorts } from 'utils/constatns'
 
-import { Icons } from "components";
+import { Icons } from 'components'
 
 export default function Sort({
   isSort,
@@ -14,10 +14,10 @@ export default function Sort({
 }) {
   //? Handlers
   const handleSort = (item) => {
-    dispatch(updateFilter({ name: "sort", value: item }));
-    chaneRoute({ sort: item.value });
-    sortHandlers.close();
-  };
+    dispatch(updateFilter({ name: 'sort', value: item }))
+    chaneRoute({ sort: item.value })
+    sortHandlers.close()
+  }
 
   return (
     <>
@@ -31,7 +31,7 @@ export default function Sort({
           <button
             key={i}
             className={`py-0.5  text-sm ${
-              sort.value === item.value ? "text-red-500" : "text-gray-600"
+              sort.value === item.value ? 'text-red-500' : 'text-gray-600'
             }`}
             type='button'
             name='sort'
@@ -46,7 +46,7 @@ export default function Sort({
 
       <div
         className={`${
-          isSort ? "opacity-100 visible" : "opacity-0 invisible "
+          isSort ? 'opacity-100 visible' : 'opacity-0 invisible '
         } transition-all duration-300 fixed inset-0 z-40`}
       >
         <div
@@ -55,7 +55,7 @@ export default function Sort({
         />
         <section
           className={`xl:hidden fixed transition-all duration-300 left-0 right-0 mx-auto z-30  w-full max-w-xl shadow-3xl border-t border-gray-200 rounded-xl px-5 py-3 bg-white h-fit md:rounded-lg  ${
-            isSort ? "bottom-0" : "-bottom-full"
+            isSort ? 'bottom-0' : '-bottom-full'
           }`}
         >
           <div className='flex justify-between py-3'>
@@ -82,5 +82,5 @@ export default function Sort({
         </section>
       </div>
     </>
-  );
+  )
 }

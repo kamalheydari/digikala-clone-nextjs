@@ -1,16 +1,16 @@
-import Image from "next/image";
-import Head from "next/head";
-import Link from "next/link";
+import Image from 'next/image'
+import Head from 'next/head'
+import Link from 'next/link'
 
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux'
 
-import { truncate } from "utils/truncate";
+import { truncate } from 'utils/truncate'
 
-import { EmptyCart, PageContainer } from "components";
+import { EmptyCart, PageContainer } from 'components'
 
 export default function UserHistory() {
   //? Store
-  const { lastSeen } = useSelector((state) => state.user);
+  const { lastSeen } = useSelector((state) => state.user)
 
   //? selector
   return (
@@ -53,9 +53,9 @@ export default function UserHistory() {
         )}
       </PageContainer>
     </main>
-  );
+  )
 }
 
 UserHistory.getProfileLayout = function pageLayout(page) {
-  return <>{page}</>;
-};
+  return <>{page}</>
+}

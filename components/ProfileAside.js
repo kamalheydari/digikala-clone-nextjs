@@ -1,45 +1,45 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image'
+import Link from 'next/link'
 
-import { Icons, BoxLink, Logout, Orders, Person } from "components";
+import { Icons, BoxLink, Logout, Orders, Person } from 'components'
 
-import useUserInfo from "hooks/useUserInfo";
+import useUserInfo from 'hooks/useUserInfo'
 
 function ProfileAside() {
-  const { userInfo, isLoading } = useUserInfo();
+  const { userInfo, isLoading } = useUserInfo()
 
   const profilePaths = [
     {
-      name: "سفارش‌ها",
+      name: 'سفارش‌ها',
       icon: <Icons.Bag className='text-black icon' />,
-      path: "/profile/orders",
+      path: '/profile/orders',
     },
     {
-      name: "لیست‌های من",
+      name: 'لیست‌های من',
       icon: <Icons.Heart className='text-black icon' />,
-      path: "/profile/lists",
+      path: '/profile/lists',
     },
     {
-      name: "دیدگاه‌ها",
+      name: 'دیدگاه‌ها',
       icon: <Icons.Comment className='text-black icon' />,
-      path: "/profile/reviews",
+      path: '/profile/reviews',
     },
     {
-      name: "آدرس‌ها",
+      name: 'آدرس‌ها',
       icon: <Icons.Location className='text-black icon' />,
-      path: "/profile/addresses",
+      path: '/profile/addresses',
     },
     {
-      name: "بازدید‌های اخیر",
+      name: 'بازدید‌های اخیر',
       icon: <Icons.Clock className='text-black icon' />,
-      path: "/profile/user-history",
+      path: '/profile/user-history',
     },
     {
-      name: "اطلاعات حساب کاربری",
+      name: 'اطلاعات حساب کاربری',
       icon: <Icons.User className='text-black icon' />,
-      path: "/profile/personal-info",
+      path: '/profile/personal-info',
     },
-  ];
+  ]
 
   return (
     <aside className='sticky mt-6 lg:border lg:border-gray-200 lg:rounded-md lg:py-4 lg:top-6 xl:top-[136px]'>
@@ -87,7 +87,7 @@ function ProfileAside() {
         <Logout />
       </div>
     </aside>
-  );
+  )
 }
 
-export default ProfileAside;
+export default ProfileAside

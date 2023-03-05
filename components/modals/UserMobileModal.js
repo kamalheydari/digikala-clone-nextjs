@@ -1,10 +1,10 @@
-import { useForm } from "react-hook-form"
-import { yupResolver } from "@hookform/resolvers/yup"
-import { mobileSchema } from "utils/validation"
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { mobileSchema } from 'utils/validation'
 
-import { useEditUserMutation } from "app/api/userApi"
+import { useEditUserMutation } from 'app/api/userApi'
 
-import { TextField, SubmitModalBtn, Modal, HandleResponse } from "components"
+import { TextField, SubmitModalBtn, Modal, HandleResponse } from 'components'
 
 export default function UserMobileModal(props) {
   //? Props
@@ -21,7 +21,7 @@ export default function UserMobileModal(props) {
     formState: { errors: formErrors },
   } = useForm({
     resolver: yupResolver(mobileSchema),
-    defaultValues: { mobile: editedData ? editedData : "" },
+    defaultValues: { mobile: editedData ? editedData : '' },
   })
 
   //? Handlers

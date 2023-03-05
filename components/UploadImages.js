@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState } from 'react'
 
-import { useDispatch } from "react-redux";
-import { showAlert } from "app/slices/alert.slice";
+import { useDispatch } from 'react-redux'
+import { showAlert } from 'app/slices/alert.slice'
 
-import { imageUpload } from "utils/imageUpload";
+import { imageUpload } from 'utils/imageUpload'
 
-import { Button, Icons} from "components";
+import { Button, Icons } from 'components'
 
 export default function UploadImages({
   multiple,
@@ -14,62 +14,62 @@ export default function UploadImages({
   addImage,
   getUploadedImages,
 }) {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   //? Local State
-  const [uploadLoading, setUploadLoading] = useState(false);
+  const [uploadLoading, setUploadLoading] = useState(false)
 
   //? Store
 
   //? Handlers
   const handleAddImages = (e) => {
-    let newImages = [];
-    let err = "";
-    const files = [...e.target.files];
+    let newImages = []
+    let err = ''
+    const files = [...e.target.files]
 
-    if (files.length === 0) err = "باید حداقل یک تصویر انتخاب کنید";
+    if (files.length === 0) err = 'باید حداقل یک تصویر انتخاب کنید'
 
     files.forEach((file) => {
       if (file.size > 1024 * 1024)
-        return (err = "حجم تصویر نباید بیشتر از 1 مگابایت باشد");
+        return (err = 'حجم تصویر نباید بیشتر از 1 مگابایت باشد')
 
-      if (file.type !== "image/jpeg" && file.type !== "image/png")
-        return (err = "فرمت تصویر انتخاب شده مناسب نیست");
+      if (file.type !== 'image/jpeg' && file.type !== 'image/png')
+        return (err = 'فرمت تصویر انتخاب شده مناسب نیست')
 
-      newImages.push(file);
-    });
+      newImages.push(file)
+    })
 
-    addImage(newImages);
+    addImage(newImages)
 
     if (err)
       return dispatch(
         showAlert({
-          status: "error",
+          status: 'error',
           title: err,
         })
-      );
-  };
+      )
+  }
 
   const handleUploadImages = async () => {
-    let media = [];
+    let media = []
 
-    const imgNewURL = images.filter((img) => !img.url);
-    const imgOldURL = images.filter((img) => img.url);
+    const imgNewURL = images.filter((img) => !img.url)
+    const imgOldURL = images.filter((img) => img.url)
 
-    setUploadLoading(true);
-    if (imgNewURL.length > 0) media = await imageUpload(imgNewURL);
-    setUploadLoading(false);
+    setUploadLoading(true)
+    if (imgNewURL.length > 0) media = await imageUpload(imgNewURL)
+    setUploadLoading(false)
 
-    getUploadedImages(media, imgOldURL);
+    getUploadedImages(media, imgOldURL)
 
     if (media[0]?.url && multiple)
       dispatch(
         showAlert({
-          status: "success",
-          title: "تصاویر با موفقیت آپلود شدند",
+          status: 'success',
+          title: 'تصاویر با موفقیت آپلود شدند',
         })
-      );
-  };
+      )
+  }
 
   return (
     <section>
@@ -116,5 +116,5 @@ export default function UploadImages({
         </div>
       )}
     </section>
-  );
+  )
 }

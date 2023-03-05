@@ -1,4 +1,4 @@
-import { Icons } from "components";
+import { Icons } from 'components'
 
 export default function EmptyUsersList() {
   return (
@@ -6,5 +6,5 @@ export default function EmptyUsersList() {
       <Icons.Users className='w-10 h-10 text-red-400' />
       <p className='text-center'>هنوز هیچ کاربری ندارید</p>
     </div>
-  );
+  )
 }

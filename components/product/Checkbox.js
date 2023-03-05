@@ -13,5 +13,5 @@ export default function Checkbox({ children, name, onChange, value }) {
         <label className='block h-6 overflow-hidden bg-gray-300 rounded-full cursor-pointer'></label>
       </div>
     </div>
-  );
+  )
 }

@@ -1,40 +1,38 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react'
 
-import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "app/slices/cart.slice";
-import { showAlert } from "app/slices/alert.slice";
+import { useDispatch, useSelector } from 'react-redux'
+import { addToCart } from 'app/slices/cart.slice'
+import { showAlert } from 'app/slices/alert.slice'
 
-import exsitItem from "utils/exsitItem";
+import exsitItem from 'utils/exsitItem'
 
-import { ArrowLink, ProductPrice, CartButtons } from "components";
+import { ArrowLink, ProductPrice, CartButtons } from 'components'
 
 export default function AddToCartOperation({ product }) {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   //? Store
-  const { tempColor, tempSize } = useSelector((state) => state.cart);
+  const { tempColor, tempSize } = useSelector((state) => state.cart)
 
   //? Local State
-  const [currentItemInCart, setCurrentItemInCart] = useState(null);
+  const [currentItemInCart, setCurrentItemInCart] = useState(null)
 
   //? Store
-  const { cartItems } = useSelector((state) => state.cart);
+  const { cartItems } = useSelector((state) => state.cart)
 
   useEffect(() => {
-    setCurrentItemInCart(
-      exsitItem(cartItems, product._id, tempColor, tempSize)
-    );
-  }, [tempColor, tempSize, cartItems]);
+    setCurrentItemInCart(exsitItem(cartItems, product._id, tempColor, tempSize))
+  }, [tempColor, tempSize, cartItems])
 
   //? handlers
   const handleAddItem = () => {
     if (product.inStock === 0)
       return dispatch(
         showAlert({
-          status: "error",
-          title: "موجودی این محصول به اتمام رسیده",
+          status: 'error',
+          title: 'موجودی این محصول به اتمام رسیده',
         })
-      );
+      )
 
     dispatch(
       addToCart({
@@ -49,8 +47,8 @@ export default function AddToCartOperation({ product }) {
         img: product.images[0],
         quantity: 1,
       })
-    );
-  };
+    )
+  }
 
   return (
     <div className='add-to-cart-operation'>
@@ -78,5 +76,5 @@ export default function AddToCartOperation({ product }) {
         />
       </div>
     </div>
-  );
+  )
 }

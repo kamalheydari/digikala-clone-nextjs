@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState } from 'react'
 
-import { useGetProductReviewsQuery } from "app/api/reviewApi";
+import { useGetProductReviewsQuery } from 'app/api/reviewApi'
 
 import {
   Pagination,
@@ -8,34 +8,28 @@ import {
   ShowWrapper,
   EmptyComment,
   ReviewModal,
-} from "components";
+} from 'components'
 
-import moment from "moment-jalaali";
+import moment from 'moment-jalaali'
 
-import useDisclosure from "hooks/useDisclosure";
+import useDisclosure from 'hooks/useDisclosure'
 
 export default function Reviews({ numReviews, prdouctID, productTitle }) {
   //? Assets
-  const [isShowReviewModal, reviewModalHandlers] = useDisclosure();
+  const [isShowReviewModal, reviewModalHandlers] = useDisclosure()
 
   //? States
-  const [reviewsPage, setReviewsPage] = useState(1);
+  const [reviewsPage, setReviewsPage] = useState(1)
 
   //? Get Product-Reviews Query
-  const {
-    data,
-    isSuccess,
-    isFetching,
-    error,
-    isError,
-    refetch,
-  } = useGetProductReviewsQuery({
-    id: prdouctID,
-    page: reviewsPage,
-  });
+  const { data, isSuccess, isFetching, error, isError, refetch } =
+    useGetProductReviewsQuery({
+      id: prdouctID,
+      page: reviewsPage,
+    })
 
   //? Handlers
-  const handleOpenCommentModal = () => reviewModalHandlers.open();
+  const handleOpenCommentModal = () => reviewModalHandlers.open()
 
   //? Render(s)
   return (
@@ -90,10 +84,10 @@ export default function Reviews({ numReviews, prdouctID, productTitle }) {
                     <span
                       className={`farsi-digits w-5 h-5 text-center pt-0.5 inline-block rounded-md text-white  ${
                         item.rating <= 2
-                          ? "bg-red-500"
+                          ? 'bg-red-500'
                           : item.rating === 3
-                          ? "bg-amber-500"
-                          : "bg-green-500"
+                          ? 'bg-amber-500'
+                          : 'bg-green-500'
                       }`}
                     >
                       {item.rating}
@@ -103,7 +97,7 @@ export default function Reviews({ numReviews, prdouctID, productTitle }) {
                     <div className='w-full border-b border-gray-100'>
                       <p className='mb-1'>{item.title}</p>
                       <span className='text-xs farsi-digits'>
-                        {moment(item.updatedAt).format("jYYYY/jM/jD")}
+                        {moment(item.updatedAt).format('jYYYY/jM/jD')}
                       </span>
                       <span className='inline-block w-1 h-1 mx-3 bg-gray-400 rounded-full' />
                       <span className='text-xs'>{item.user.name}</span>
@@ -161,5 +155,5 @@ export default function Reviews({ numReviews, prdouctID, productTitle }) {
         </div>
       </section>
     </>
-  );
+  )
 }

@@ -1,6 +1,6 @@
-import Link from "next/link";
+import Link from 'next/link'
 
-import { CartDropdown, CartTotalItems } from "components";
+import { CartDropdown, CartTotalItems } from 'components'
 
 export default function Cart() {
   return (
@@ -10,10 +10,10 @@ export default function Cart() {
           <CartTotalItems />
         </a>
       </Link>
-      
+
       <div className=' hidden lg:block'>
         <CartDropdown />
       </div>
     </>
-  );
+  )
 }

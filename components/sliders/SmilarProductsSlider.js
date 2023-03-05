@@ -1,14 +1,14 @@
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from 'swiper/react'
 
 // Import Swiper styles
 // Import Swiper styles
-import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/navigation";
+import 'swiper/css'
+import 'swiper/css/free-mode'
+import 'swiper/css/navigation'
 
 // import required modules
-import { Navigation, FreeMode } from "swiper";
-import { ProductCard } from "components";
+import { Navigation, FreeMode } from 'swiper'
+import { ProductCard } from 'components'
 
 export default function SmilarProductsSlider({ products }) {
   return (
@@ -31,5 +31,5 @@ export default function SmilarProductsSlider({ products }) {
         ))}
       </Swiper>
     </section>
-  );
+  )
 }

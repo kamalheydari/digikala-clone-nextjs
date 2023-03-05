@@ -1,13 +1,13 @@
-import { useRouter } from "next/router";
-import Head from "next/head";
-import { useEffect } from "react";
+import { useRouter } from 'next/router'
+import Head from 'next/head'
+import { useEffect } from 'react'
 
-import db from "lib/db";
-import Product from "models/Product";
+import db from 'lib/db'
+import Product from 'models/Product'
 
-import { useDispatch } from "react-redux";
-import { addToLastSeen } from "app/slices/user.slice";
-import { setTempColor, setTempSize } from "app/slices/cart.slice";
+import { useDispatch } from 'react-redux'
+import { addToLastSeen } from 'app/slices/user.slice'
+import { setTempColor, setTempSize } from 'app/slices/cart.slice'
 
 import {
   FreeShipping,
@@ -21,25 +21,25 @@ import {
   SelectSize,
   OutOfStock,
   AddToCart,
-} from "components";
+} from 'components'
 
 export default function SingleProduct({ product, smilarProducts }) {
-  const dispatch = useDispatch();
-  const router = useRouter();
+  const dispatch = useDispatch()
+  const router = useRouter()
 
   //? initial color and size
   useEffect(() => {
     if (product.colors.length > 0) {
-      dispatch(setTempColor(product.colors[0]));
-      dispatch(setTempSize(null));
+      dispatch(setTempColor(product.colors[0]))
+      dispatch(setTempSize(null))
     } else if (product.sizes.length > 0) {
-      dispatch(setTempSize(product.sizes[0]));
-      dispatch(setTempColor(null));
+      dispatch(setTempSize(product.sizes[0]))
+      dispatch(setTempColor(null))
     } else {
-      dispatch(setTempColor(null));
-      dispatch(setTempSize(null));
+      dispatch(setTempColor(null))
+      dispatch(setTempSize(null))
     }
-  }, [router.query.id]);
+  }, [router.query.id])
 
   //? Add To LastSeen
   useEffect(() => {
@@ -49,8 +49,8 @@ export default function SingleProduct({ product, smilarProducts }) {
         image: product.images[0],
         title: product.title,
       })
-    );
-  }, [product._id]);
+    )
+  }, [product._id])
 
   //? Render
   return (
@@ -146,23 +146,23 @@ export default function SingleProduct({ product, smilarProducts }) {
         </div>
       </div>
     </main>
-  );
+  )
 }
 
 export async function getServerSideProps({ params: { id } }) {
-  await db.connect();
-  const product = await Product.findById({ _id: id }).lean();
+  await db.connect()
+  const product = await Product.findById({ _id: id }).lean()
 
   let smilarProducts = await Product.find({
     category: {
       $regex: product.category,
-      $options: "i",
+      $options: 'i',
     },
     inStock: { $gte: 1 },
   })
     .limit(10)
-    .lean();
-  await db.disconnect();
+    .lean()
+  await db.disconnect()
 
   return {
     props: {
@@ -171,9 +171,9 @@ export async function getServerSideProps({ params: { id } }) {
         .map(db.convertDocToObj)
         .filter((item) => item._id !== id),
     },
-  };
+  }
 }
 
 SingleProduct.getClientLayout = function pageLayout(page) {
-  return <>{page}</>;
-};
+  return <>{page}</>
+}

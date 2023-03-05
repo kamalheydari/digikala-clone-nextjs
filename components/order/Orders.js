@@ -1,31 +1,31 @@
-import { useState, useEffect } from "react";
-import Image from "next/image";
+import { useState, useEffect } from 'react'
+import Image from 'next/image'
 
-import { useSelector } from "react-redux";
-import { useGetOrdersQuery } from "app/api/orderApi";
+import { useSelector } from 'react-redux'
+import { useGetOrdersQuery } from 'app/api/orderApi'
 
-import { formatNumber } from "utils/formatNumber";
+import { formatNumber } from 'utils/formatNumber'
 
-import { ArrowLink } from "components";
+import { ArrowLink } from 'components'
 
 export default function Orders() {
   //? Local State
-  const [pendingOrder, setPendingOrder] = useState(0);
-  const [successOrder, setSuccessOrder] = useState(0);
+  const [pendingOrder, setPendingOrder] = useState(0)
+  const [successOrder, setSuccessOrder] = useState(0)
 
   //? Get Order Query
-  const { data, isSuccess, refetch, isError, error } = useGetOrdersQuery({});
+  const { data, isSuccess, refetch, isError, error } = useGetOrdersQuery({})
 
   //? Handle Get Order Response
   useEffect(() => {
     if (isSuccess) {
-      const pending = data?.orders.filter((item) => item.delivered === false);
-      const success = data?.orders.filter((item) => item.delivered === true);
+      const pending = data?.orders.filter((item) => item.delivered === false)
+      const success = data?.orders.filter((item) => item.delivered === true)
 
-      setPendingOrder(pending.length);
-      setSuccessOrder(success.length);
+      setPendingOrder(pending.length)
+      setSuccessOrder(success.length)
     }
-  }, [isSuccess]);
+  }, [isSuccess])
 
   return (
     <section>
@@ -109,5 +109,5 @@ export default function Orders() {
       )}
       <div className='section-divide-y' />
     </section>
-  );
+  )
 }

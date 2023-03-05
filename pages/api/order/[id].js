@@ -1,56 +1,56 @@
-import db from "lib/db";
-import auth from "middleware/auth";
-import Order from "models/Order";
-import sendError from "utils/sendError";
+import db from 'lib/db'
+import auth from 'middleware/auth'
+import Order from 'models/Order'
+import sendError from 'utils/sendError'
 
 export default async function (req, res) {
   switch (req.method) {
-    case "GET":
-      getOrder(req, res);
-      break;
-    case "PATCH":
-      await updateOrder(req, res);
+    case 'GET':
+      getOrder(req, res)
+      break
+    case 'PATCH':
+      await updateOrder(req, res)
     default:
-      break;
+      break
   }
 }
 
 const getOrder = async (req, res) => {
   try {
-    await db.connect();
-    console.log(req.query.id);
-    const order = await Order.findOne({ _id: req.query.id });
+    await db.connect()
+    console.log(req.query.id)
+    const order = await Order.findOne({ _id: req.query.id })
 
-    if (!order) return sendError(res, 404, "این سفارش وجود ندارد");
+    if (!order) return sendError(res, 404, 'این سفارش وجود ندارد')
 
-    await db.disconnect();
+    await db.disconnect()
 
-    res.status(200).json({ order });
+    res.status(200).json({ order })
   } catch (error) {
-    sendError(res, 500, error.message);
+    sendError(res, 500, error.message)
   }
-};
+}
 
 const updateOrder = async (req, res) => {
   try {
-    const result = await auth(req, res);
+    const result = await auth(req, res)
 
     if (!result.root)
-      return sendError(res, 403, "شما اجازه انجام این عملیات را ندارید");
+      return sendError(res, 403, 'شما اجازه انجام این عملیات را ندارید')
 
-    await db.connect();
+    await db.connect()
     await Order.findOneAndUpdate(
       { _id: req.query.id },
       {
         ...req.body,
       }
-    );
-    await db.disconnect();
+    )
+    await db.disconnect()
 
     res.status(200).json({
-      msg: "وضعیت سفارش بروزرسانی شد",
-    });
+      msg: 'وضعیت سفارش بروزرسانی شد',
+    })
   } catch (error) {
-    sendError(res, 500, error.message);
+    sendError(res, 500, error.message)
   }
-};
+}

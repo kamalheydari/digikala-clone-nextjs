@@ -1,24 +1,18 @@
-import Head from "next/head";
-import { useRouter } from "next/router";
+import Head from 'next/head'
+import { useRouter } from 'next/router'
 
-import { useGetSingleReviewQuery } from "app/api/reviewApi";
+import { useGetSingleReviewQuery } from 'app/api/reviewApi'
 
-import { PageContainer, ReveiwCard, ShowWrapper } from "components";
+import { PageContainer, ReveiwCard, ShowWrapper } from 'components'
 
 export default function SingleComment() {
-  const router = useRouter();
+  const router = useRouter()
 
   //? Get Single Review Data
-  const {
-    data,
-    isError,
-    error,
-    isFetching,
-    refetch,
-    isSuccess,
-  } = useGetSingleReviewQuery({
-    id: router.query.id,
-  });
+  const { data, isError, error, isFetching, refetch, isSuccess } =
+    useGetSingleReviewQuery({
+      id: router.query.id,
+    })
 
   //? Render
   return (
@@ -42,9 +36,9 @@ export default function SingleComment() {
         </ShowWrapper>
       </PageContainer>
     </main>
-  );
+  )
 }
 
 SingleComment.getDashboardLayout = function pageLayout(page) {
-  return <>{page}</>;
-};
+  return <>{page}</>
+}

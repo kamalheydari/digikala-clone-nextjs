@@ -1,14 +1,14 @@
-import { AddressForm } from "components";
+import { AddressForm } from 'components'
 
-import useDisclosure from "hooks/useDisclosure";
-import useUserInfo from "hooks/useUserInfo";
+import useDisclosure from 'hooks/useDisclosure'
+import useUserInfo from 'hooks/useUserInfo'
 
 export const withAddressModal = (Component) => {
   return (props) => {
     //? Assets
-    const [isShowAddressModal, addressModalHandlers] = useDisclosure();
+    const [isShowAddressModal, addressModalHandlers] = useDisclosure()
 
-    const { userInfo, isVerify, isLoading } = useUserInfo();
+    const { userInfo, isVerify, isLoading } = useUserInfo()
 
     return (
       <>
@@ -26,11 +26,11 @@ export const withAddressModal = (Component) => {
             address={
               userInfo?.address
                 ? { ...userInfo?.address }
-                : { city: {}, province: {}, postalCode: "", street: "" }
+                : { city: {}, province: {}, postalCode: '', street: '' }
             }
           />
         ) : null}
       </>
-    );
-  };
-};
+    )
+  }
+}

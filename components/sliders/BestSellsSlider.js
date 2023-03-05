@@ -1,7 +1,7 @@
-import { Icons } from "components";
-import Image from "next/image";
-import Link from "next/link";
-import { truncate } from "utils/truncate";
+import { Icons } from 'components'
+import Image from 'next/image'
+import Link from 'next/link'
+import { truncate } from 'utils/truncate'
 
 export default function BestSellsSlider({ products }) {
   return (
@@ -39,5 +39,5 @@ export default function BestSellsSlider({ products }) {
         ))}
       </div>
     </section>
-  );
+  )
 }

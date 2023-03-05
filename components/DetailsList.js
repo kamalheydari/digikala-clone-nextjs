@@ -1,36 +1,36 @@
-import { useRef } from "react";
+import { useRef } from 'react'
 
-import { useFieldArray } from "react-hook-form";
+import { useFieldArray } from 'react-hook-form'
 
-import { AddIconBtn, DeleteIconBtn } from "components";
+import { AddIconBtn, DeleteIconBtn } from 'components'
 
 export default function DetailsList(props) {
   //? Props
-  const { category, type, name, control, register } = props;
+  const { category, type, name, control, register } = props
 
   //? Refs
-  const newDetailRef = useRef(null);
+  const newDetailRef = useRef(null)
 
   //? Form
   const { fields, append, remove } = useFieldArray({
     name,
     control,
-  });
+  })
 
   //? Handlers
   const handleAddNewDetail = () => {
-    append({ title: newDetailRef.current.value });
-    newDetailRef.current.value = "";
-  };
+    append({ title: newDetailRef.current.value })
+    newDetailRef.current.value = ''
+  }
 
   //? Render
   return (
     <section>
       <div className='mb-2 text-sm lg:text-base'>
-        {name === "info" ? <span>ویژگی‌ها</span> : <span> مشخصات</span>}{" "}
+        {name === 'info' ? <span>ویژگی‌ها</span> : <span> مشخصات</span>}{' '}
         <span
           className={
-            name === "info" ? " text-emerald-600" : " text-fuchsia-600"
+            name === 'info' ? ' text-emerald-600' : ' text-fuchsia-600'
           }
         >
           {category?.name}
@@ -39,9 +39,9 @@ export default function DetailsList(props) {
       <table className='w-full'>
         <thead
           className={
-            name === "info"
-              ? "bg-emerald-50 text-emerald-500"
-              : "bg-fuchsia-50 text-fuchsia-500"
+            name === 'info'
+              ? 'bg-emerald-50 text-emerald-500'
+              : 'bg-fuchsia-50 text-fuchsia-500'
           }
         >
           <tr className=''>
@@ -61,9 +61,9 @@ export default function DetailsList(props) {
               </td>
               <td
                 className={
-                  type === "info"
-                    ? "bg-emerald-50 text-emerald-500"
-                    : "bg-fuchsia-50 text-fuchsia-500"
+                  type === 'info'
+                    ? 'bg-emerald-50 text-emerald-500'
+                    : 'bg-fuchsia-50 text-fuchsia-500'
                 }
               ></td>
             </tr>
@@ -80,14 +80,14 @@ export default function DetailsList(props) {
             </td>
             <td
               className={
-                type === "info"
-                  ? "bg-emerald-50 text-emerald-500"
-                  : "bg-fuchsia-50 text-fuchsia-500"
+                type === 'info'
+                  ? 'bg-emerald-50 text-emerald-500'
+                  : 'bg-fuchsia-50 text-fuchsia-500'
               }
             ></td>
           </tr>
         </tbody>
       </table>
     </section>
-  );
+  )
 }

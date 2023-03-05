@@ -1,14 +1,14 @@
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux'
 
-import { formatNumber } from "utils/formatNumber";
+import { formatNumber } from 'utils/formatNumber'
 
-import { Button, Toman, TomanRed } from "components";
+import { Button, Toman, TomanRed } from 'components'
 
 export default function CartInfo({ handleRoute, cart }) {
   //? Store
   const { totalItems, totalPrice, totalDiscount } = useSelector(
     (state) => state.cart
-  );
+  )
   return (
     <div className='cart-info'>
       {/* total cart price */}
@@ -51,5 +51,5 @@ export default function CartInfo({ handleRoute, cart }) {
         </Button>
       )}
     </div>
-  );
+  )
 }

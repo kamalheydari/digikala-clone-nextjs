@@ -1,10 +1,10 @@
-import Link from "next/link";
-import Image from "next/image";
+import Link from 'next/link'
+import Image from 'next/image'
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
 
-import { AmazingTypo, DiscountProduct, ProductPrice } from "components";
+import { AmazingTypo, DiscountProduct, ProductPrice } from 'components'
 
 export default function DiscountSlider({ products, colors, categoryImage }) {
   return (
@@ -25,7 +25,7 @@ export default function DiscountSlider({ products, colors, categoryImage }) {
           <AmazingTypo className='w-20 h-20 mx-auto' />
           <div className='relative w-20 h-20 mx-auto'>
             <Image
-              src={categoryImage?.url || "/icons/general.png"}
+              src={categoryImage?.url || '/icons/general.png'}
               layout='fill'
               alt='icon'
               placeholder='blur'
@@ -37,7 +37,7 @@ export default function DiscountSlider({ products, colors, categoryImage }) {
           <SwiperSlide
             key={product._id}
             className={`w-fit  bg-white mx-0.5 py-6 ${
-              index === 0 ? "rounded-r-lg" : index === 9 ? "rounded-l-lg" : ""
+              index === 0 ? 'rounded-r-lg' : index === 9 ? 'rounded-l-lg' : ''
             } `}
           >
             <Link href={`/products/${product._id}`}>
@@ -69,5 +69,5 @@ export default function DiscountSlider({ products, colors, categoryImage }) {
         ))}
       </Swiper>
     </section>
-  );
+  )
 }

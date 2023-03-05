@@ -1,6 +1,6 @@
-import Head from "next/head";
+import Head from 'next/head'
 
-import { FavoritesListEmpty, PageContainer } from "components";
+import { FavoritesListEmpty, PageContainer } from 'components'
 
 export default function Lists() {
   return (
@@ -18,8 +18,8 @@ export default function Lists() {
         </section>
       </PageContainer>
     </main>
-  );
+  )
 }
 Lists.getProfileLayout = function pageLayout(page) {
-  return <>{page}</>;
-};
+  return <>{page}</>
+}

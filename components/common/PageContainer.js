@@ -1,4 +1,4 @@
-import { BackIconBtn } from "components";
+import { BackIconBtn } from 'components'
 
 const PageContainer = ({ title, children }) => {
   return (
@@ -13,7 +13,7 @@ const PageContainer = ({ title, children }) => {
 
       {children}
     </>
-  );
-};
+  )
+}
 
-export default PageContainer;
+export default PageContainer

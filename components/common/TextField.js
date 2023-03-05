@@ -1,5 +1,5 @@
-import { DisplayError } from "components"
-import { useController } from "react-hook-form"
+import { DisplayError } from 'components'
+import { useController } from 'react-hook-form'
 
 export default function TextField({
   label,
@@ -13,7 +13,7 @@ export default function TextField({
   const { field } = useController({ name, control, rules: { required: true } })
 
   const onChangeHandler = (e) => {
-    if (type === "number") {
+    if (type === 'number') {
       field.onChange(parseInt(e.target.value))
     } else {
       field.onChange(e.target.value)
@@ -21,17 +21,17 @@ export default function TextField({
   }
 
   return (
-    <div className={`${label ? "space-y-3" : ""}`}>
+    <div className={`${label ? 'space-y-3' : ''}`}>
       {label && (
         <label className='text-field__label' htmlFor={name}>
           {label}
         </label>
       )}
       <input
-        style={{ direction: `${direction === "ltr" ? "ltr" : ""}` }}
+        style={{ direction: `${direction === 'ltr' ? 'ltr' : ''}` }}
         className='text-field__input'
         id={name}
-        type={type === "password" ? "password" : "text"}
+        type={type === 'password' ? 'password' : 'text'}
         value={field?.value}
         name={field.name}
         onBlur={field.onBlur}

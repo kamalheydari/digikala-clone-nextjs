@@ -1,9 +1,9 @@
-import { useState } from "react";
-import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
+import { useState } from 'react'
+import Head from 'next/head'
+import Image from 'next/image'
+import Link from 'next/link'
 
-import { useGetReviewsQuery } from "app/api/reviewApi";
+import { useGetReviewsQuery } from 'app/api/reviewApi'
 
 import {
   Pagination,
@@ -11,23 +11,17 @@ import {
   EmptyCommentsList,
   PageContainer,
   EditIconBtn,
-} from "components";
+} from 'components'
 
 export default function Reviews() {
   //? State
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(1)
 
   //? Get Review Data
-  const {
-    data,
-    isError,
-    error,
-    isFetching,
-    refetch,
-    isSuccess,
-  } = useGetReviewsQuery({
-    page,
-  });
+  const { data, isError, error, isFetching, refetch, isSuccess } =
+    useGetReviewsQuery({
+      page,
+    })
 
   //? Render
   return (
@@ -79,18 +73,18 @@ export default function Reviews() {
                         className={`py-1.5 px-2 rounded-lg font-bold inline-block
                       ${
                         review.status === 1
-                          ? "bg-amber-100 text-amber-500 "
+                          ? 'bg-amber-100 text-amber-500 '
                           : review.status === 2
-                          ? "bg-green-100 text-green-500 "
-                          : "bg-red-100 text-red-500 "
+                          ? 'bg-green-100 text-green-500 '
+                          : 'bg-red-100 text-red-500 '
                       }
                     `}
                       >
                         {review.status === 1
-                          ? "در انتظار تایید"
+                          ? 'در انتظار تایید'
                           : review.status === 2
-                          ? "تایید شده"
-                          : "رد شده"}
+                          ? 'تایید شده'
+                          : 'رد شده'}
                       </span>
                     </td>
                     <td className='p-2'>{review.user.name}</td>
@@ -124,9 +118,9 @@ export default function Reviews() {
         </ShowWrapper>
       </PageContainer>
     </main>
-  );
+  )
 }
 
 Reviews.getDashboardLayout = function pageLayout(page) {
-  return <>{page}</>;
-};
+  return <>{page}</>
+}

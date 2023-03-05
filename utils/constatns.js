@@ -1,21 +1,20 @@
 export const sorts = [
   {
-    name: "جدیدترین",
+    name: 'جدیدترین',
     value: 1,
   },
   {
-    name: "پرفروش‌ترین‌",
+    name: 'پرفروش‌ترین‌',
     value: 2,
   },
   {
-    name: "ارزان‌ترین",
+    name: 'ارزان‌ترین',
     value: 3,
   },
   {
-    name: "گران‌ترین",
+    name: 'گران‌ترین',
     value: 4,
   },
-];
+]
 
-export const ratingStatus = ["", "خیلی بد", "بد", "معمولی", "خوب", "عالی"];
-
+export const ratingStatus = ['', 'خیلی بد', 'بد', 'معمولی', 'خوب', 'عالی']

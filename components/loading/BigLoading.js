@@ -1,5 +1,5 @@
-import { Logo } from "components";
-import Loading from "components/common/Loading";
+import { Logo } from 'components'
+import Loading from 'components/common/Loading'
 
 export default function BigLoading() {
   return (
@@ -7,5 +7,5 @@ export default function BigLoading() {
       <Logo className=' w-40 h-12 mx-auto' />
       <Loading />
     </div>
-  );
+  )
 }

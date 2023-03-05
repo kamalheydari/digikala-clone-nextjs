@@ -1,37 +1,37 @@
-import { showAlert } from "app/slices/alert.slice";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { showAlert } from 'app/slices/alert.slice'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 
 export default function HandleResponse(props) {
   //? Porps
-  const { isSuccess, isError, error, message, onSuccess, onError } = props;
+  const { isSuccess, isError, error, message, onSuccess, onError } = props
 
   //? Assets
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (isSuccess) {
-      if (onSuccess) onSuccess();
+      if (onSuccess) onSuccess()
 
       dispatch(
         showAlert({
-          status: "success",
+          status: 'success',
           title: message,
         })
-      );
+      )
     }
 
     if (isError) {
-      if (onError) onError();
+      if (onError) onError()
 
       dispatch(
         showAlert({
-          status: "error",
+          status: 'error',
           title: error,
         })
-      );
+      )
     }
-  }, []);
+  }, [])
 
-  return null;
+  return null
 }

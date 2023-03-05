@@ -1,11 +1,11 @@
-import Head from "next/head";
-import { useRouter } from "next/router";
-import { useEffect, useRef, useState } from "react";
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { useEffect, useRef, useState } from 'react'
 
 import {
   useDeleteProductMutation,
   useGetProductsQuery,
-} from "app/api/productApi";
+} from 'app/api/productApi'
 
 import {
   BigLoading,
@@ -17,27 +17,24 @@ import {
   PageContainer,
   Pagination,
   SelectCategories,
-} from "components";
-import useDisclosure from "hooks/useDisclosure";
+} from 'components'
+import useDisclosure from 'hooks/useDisclosure'
 
 export default function Products() {
   //? Modals
-  const [
-    isShowConfirmDeleteModal,
-    confirmDeleteModalHandlers,
-  ] = useDisclosure();
-  const router = useRouter();
+  const [isShowConfirmDeleteModal, confirmDeleteModalHandlers] = useDisclosure()
+  const router = useRouter()
 
   //? Refs
-  const inputSearchRef = useRef();
+  const inputSearchRef = useRef()
 
   //?  State
   const [deleteInfo, setDeleteInfo] = useState({
-    id: "",
-  });
-  const [page, setPage] = useState(1);
-  const [filterCategory, setFilterCategory] = useState("all");
-  const [search, setSearch] = useState("");
+    id: '',
+  })
+  const [page, setPage] = useState(1)
+  const [filterCategory, setFilterCategory] = useState('all')
+  const [search, setSearch] = useState('')
   // const [selectedCategories, setSelectedCategories] = useState({});
 
   //? Get Products Data
@@ -45,7 +42,7 @@ export default function Products() {
     page,
     filterCategory,
     search,
-  });
+  })
 
   //? Delete Product
   const [
@@ -57,7 +54,7 @@ export default function Products() {
       data: data_delete,
       isLoading: isLoading_delete,
     },
-  ] = useDeleteProductMutation();
+  ] = useDeleteProductMutation()
 
   //? Filter Category
   // useEffect(() => {
@@ -74,23 +71,23 @@ export default function Products() {
 
   //? Handlers
   const handleDelete = (id) => {
-    setDeleteInfo({ id });
-    confirmDeleteModalHandlers.open();
-  };
+    setDeleteInfo({ id })
+    confirmDeleteModalHandlers.open()
+  }
 
   const handleEdit = (id) => {
-    router.push(`/admin/product/${id}`);
-  };
+    router.push(`/admin/product/${id}`)
+  }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    setSearch(inputSearchRef.current.value);
-  };
+    e.preventDefault()
+    setSearch(inputSearchRef.current.value)
+  }
 
   const handleRemoveSearch = () => {
-    inputSearchRef.current.value = "";
-    setSearch("");
-  };
+    inputSearchRef.current.value = ''
+    setSearch('')
+  }
 
   //? Render
   return (
@@ -113,12 +110,12 @@ export default function Products() {
           error={error_delete?.data?.err}
           message={data_delete?.msg}
           onSuccess={() => {
-            confirmDeleteModalHandlers.close();
-            setDeleteInfo({ id: "" });
+            confirmDeleteModalHandlers.close()
+            setDeleteInfo({ id: '' })
           }}
           onError={() => {
-            confirmDeleteModalHandlers.close();
-            setDeleteInfo({ id: "" });
+            confirmDeleteModalHandlers.close()
+            setDeleteInfo({ id: '' })
           }}
         />
       )}
@@ -227,9 +224,9 @@ export default function Products() {
         </PageContainer>
       </main>
     </>
-  );
+  )
 }
 
 Products.getDashboardLayout = function pageLayout(page) {
-  return <>{page}</>;
-};
+  return <>{page}</>
+}

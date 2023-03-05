@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 
-import { useEditUserMutation } from "app/api/userApi";
+import { useEditUserMutation } from 'app/api/userApi'
 
-import { useForm } from "react-hook-form";
-import { addressSchema } from "utils/validation";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from 'react-hook-form'
+import { addressSchema } from 'utils/validation'
+import { yupResolver } from '@hookform/resolvers/yup'
 
-let iranCity = require("iran-city");
+let iranCity = require('iran-city')
 
 import {
   TextField,
@@ -15,22 +15,22 @@ import {
   Combobox,
   Modal,
   HandleResponse,
-} from "components";
+} from 'components'
 
-import useUserInfo from "hooks/useUserInfo";
+import useUserInfo from 'hooks/useUserInfo'
 
 export default function AddressForm(props) {
   //? Porps
-  const { isShow, onClose, address } = props;
+  const { isShow, onClose, address } = props
 
   //? Assets
-  let AllProvinces = iranCity.allProvinces();
+  let AllProvinces = iranCity.allProvinces()
 
   //? Get User Data
-  const { userInfo } = useUserInfo();
+  const { userInfo } = useUserInfo()
 
   //? State
-  const [cities, setCities] = useState([]);
+  const [cities, setCities] = useState([])
 
   //? Form Hook
   const {
@@ -43,33 +43,31 @@ export default function AddressForm(props) {
   } = useForm({
     resolver: yupResolver(addressSchema),
     defaultValues: address,
-  });
+  })
 
   //? Edit User-Info Query
-  const [
-    editUser,
-    { data, isSuccess, isLoading, isError, error },
-  ] = useEditUserMutation();
+  const [editUser, { data, isSuccess, isLoading, isError, error }] =
+    useEditUserMutation()
 
   //? Re-Renders
   //* Change cities beside on province
   useEffect(() => {
-    setValue("city", {});
+    setValue('city', {})
 
-    setCities(iranCity.citiesOfProvince(getValues("province")?.id));
-    watch("province");
-  }, [getValues("province")?.id]);
+    setCities(iranCity.citiesOfProvince(getValues('province')?.id))
+    watch('province')
+  }, [getValues('province')?.id])
 
   useEffect(() => {
-    if (userInfo?.address) setValue("city", userInfo.address.city);
-  }, []);
+    if (userInfo?.address) setValue('city', userInfo.address.city)
+  }, [])
 
   //? Handlers
   const submitHander = (address) => {
     editUser({
       body: { address },
-    });
-  };
+    })
+  }
 
   //? Render(s)
   return (
@@ -141,5 +139,5 @@ export default function AddressForm(props) {
         </Modal.Content>
       </Modal>
     </>
-  );
+  )
 }

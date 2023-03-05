@@ -1,5 +1,5 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from 'next/image'
+import Link from 'next/link'
 
 import {
   Icons,
@@ -10,7 +10,7 @@ import {
   Navbar,
   AddressBar,
   Logo,
-} from "components";
+} from 'components'
 
 export default function Header() {
   return (
@@ -43,5 +43,5 @@ export default function Header() {
         </div>
       </header>
     </>
-  );
+  )
 }

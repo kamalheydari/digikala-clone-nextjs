@@ -1,6 +1,6 @@
-import { resetFilter, updateFilter } from "app/slices/filter.slice";
-import { Checkbox, Icons, Toman } from "components";
-import { useSelector } from "react-redux";
+import { resetFilter, updateFilter } from 'app/slices/filter.slice'
+import { Checkbox, Icons, Toman } from 'components'
+import { useSelector } from 'react-redux'
 
 export default function ProductsAside({
   dispatch,
@@ -12,22 +12,22 @@ export default function ProductsAside({
 }) {
   const { inStock, discount, max_price, min_price } = useSelector(
     (state) => state.filter
-  );
+  )
 
   //? Handlers
   const handlefilter = (e) => {
-    if (e.target.type === "checkbox") {
-      dispatch(updateFilter({ name: e.target.name, value: e.target.checked }));
-      chaneRoute({ [e.target.name]: e.target.checked });
-    } else if (e.target.type === "number") {
-      dispatch(updateFilter({ name: e.target.name, value: +e.target.value }));
+    if (e.target.type === 'checkbox') {
+      dispatch(updateFilter({ name: e.target.name, value: e.target.checked }))
+      chaneRoute({ [e.target.name]: e.target.checked })
+    } else if (e.target.type === 'number') {
+      dispatch(updateFilter({ name: e.target.name, value: +e.target.value }))
     }
-  };
+  }
 
   const handleReset = () => {
-    dispatch(resetFilter({ maxPrice: main_maxPrice, minPrice: main_minPrice }));
-    resetRoute();
-  };
+    dispatch(resetFilter({ maxPrice: main_maxPrice, minPrice: main_minPrice }))
+    resetRoute()
+  }
 
   return (
     <aside className='px-6 mt-6 divide-y xl:w-60 2xl:w-64 xl:border xl:border-gray-200 xl:rounded-md xl:py-4 xl:px-3'>
@@ -68,8 +68,8 @@ export default function ProductsAside({
             max={main_maxPrice}
             value={min_price}
             onChange={(e) => {
-              handlefilter(e);
-              chaneRoute({ price: `${e.target.value}-${max_price}` });
+              handlefilter(e)
+              chaneRoute({ price: `${e.target.value}-${max_price}` })
             }}
           />
           <Toman className='w-6 h-6' />
@@ -85,12 +85,12 @@ export default function ProductsAside({
             min={main_minPrice}
             onChange={(e) => {
               handlefilter(e),
-                chaneRoute({ price: `${min_price}-${e.target.value}` });
+                chaneRoute({ price: `${min_price}-${e.target.value}` })
             }}
           />
           <Toman className='w-6 h-6' />
         </div>
       </div>
     </aside>
-  );
+  )
 }

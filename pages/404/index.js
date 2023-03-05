@@ -1,7 +1,7 @@
-import Head from "next/head";
-import Image from "next/image";
+import Head from 'next/head'
+import Image from 'next/image'
 
-import { ArrowLink } from "components";
+import { ArrowLink } from 'components'
 
 export default function NotFoundPage() {
   return (
@@ -17,9 +17,9 @@ export default function NotFoundPage() {
         <Image src='/icons/page-not-found.png' layout='fill' alt='404' />
       </div>
     </main>
-  );
+  )
 }
 
 NotFoundPage.getClientLayout = function pageLayout(page) {
-  return <>{page}</>;
-};
+  return <>{page}</>
+}

@@ -1,13 +1,13 @@
-import useDisclosure from "hooks/useDisclosure";
+import useDisclosure from 'hooks/useDisclosure'
 
-import { Icons } from "components";
+import { Icons } from 'components'
 
 export default function Specification({ specification }) {
-  const [isShowSpec, showSpecHandlers] = useDisclosure();
+  const [isShowSpec, showSpecHandlers] = useDisclosure()
 
   let renderSpecification = isShowSpec
     ? specification
-    : specification.slice(0, 7);
+    : specification.slice(0, 7)
 
   return (
     <section className='px-4 '>
@@ -35,10 +35,10 @@ export default function Specification({ specification }) {
           className='flex items-center py-2 text-sm text-sky-400'
           onClick={showSpecHandlers.toggle}
         >
-          {isShowSpec ? "بستن" : "مشاهده بیشتر"}
+          {isShowSpec ? 'بستن' : 'مشاهده بیشتر'}
           <Icons.ArrowLeft className='icon text-sky-400' />
         </button>
       )}
     </section>
-  );
+  )
 }

@@ -1,10 +1,10 @@
-import { Toman, TomanRed } from "components";
-import Image from "next/image";
+import { Toman, TomanRed } from 'components'
+import Image from 'next/image'
 
-import { formatNumber } from "utils/formatNumber";
+import { formatNumber } from 'utils/formatNumber'
 
 export default function DiscountCartItem({ item }) {
-  const discount = item.discount / 100;
+  const discount = item.discount / 100
 
   return (
     <div>
@@ -24,5 +24,5 @@ export default function DiscountCartItem({ item }) {
         <Toman className='w-6 h-6' />
       </div>
     </div>
-  );
+  )
 }

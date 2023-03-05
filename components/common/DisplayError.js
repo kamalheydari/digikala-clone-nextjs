@@ -1,5 +1,5 @@
-import { Transition } from "@headlessui/react";
-import Icons from "./Icons";
+import { Transition } from '@headlessui/react'
+import Icons from './Icons'
 
 export default function DisplayError({ errors }) {
   return (
@@ -19,5 +19,5 @@ export default function DisplayError({ errors }) {
         </div>
       </Transition>
     </div>
-  );
+  )
 }

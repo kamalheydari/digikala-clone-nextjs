@@ -1,4 +1,4 @@
-import { BigLoading, Button } from "components";
+import { BigLoading, Button } from 'components'
 
 export default function ShowWrapper({
   isError,
@@ -30,5 +30,5 @@ export default function ShowWrapper({
         <>{emptyElement}</>
       ) : null}
     </section>
-  );
+  )
 }

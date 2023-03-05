@@ -1,4 +1,4 @@
-import { OrderEmpty } from "components";
+import { OrderEmpty } from 'components'
 
 export default function EmptyOrdersList() {
   return (
@@ -7,5 +7,5 @@ export default function EmptyOrdersList() {
 
       <p className='text-center'>هنوز هیچ سفارشی ندادید</p>
     </div>
-  );
+  )
 }

@@ -1,46 +1,46 @@
-import apiSlice from "app/api/api";
+import apiSlice from 'app/api/api'
 
 export const detailsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getDetails: builder.query({
       query: ({ id }) => ({
         url: `/api/details/${id}`,
-        method: "GET",
+        method: 'GET',
       }),
-      providesTags: ["Details"],
+      providesTags: ['Details'],
     }),
 
     deleteDetails: builder.mutation({
       query: ({ id }) => ({
         url: `/api/details/${id}`,
-        method: "DELETE",
+        method: 'DELETE',
       }),
-      invalidatesTags: ["Details"],
+      invalidatesTags: ['Details'],
     }),
 
     createDetails: builder.mutation({
       query: ({ body }) => ({
-        url: "/api/details",
-        method: "POST",
+        url: '/api/details',
+        method: 'POST',
         body,
       }),
-      invalidatesTags: ["Details"],
+      invalidatesTags: ['Details'],
     }),
 
     updateDetails: builder.mutation({
       query: ({ id, body }) => ({
         url: `/api/details/${id}`,
-        method: "PUT",
+        method: 'PUT',
         body,
       }),
-      invalidatesTags: ["Details"],
+      invalidatesTags: ['Details'],
     }),
   }),
-});
+})
 
 export const {
   useDeleteDetailsMutation,
   useGetDetailsQuery,
   useCreateDetailsMutation,
   useUpdateDetailsMutation,
-} = detailsApiSlice;
+} = detailsApiSlice

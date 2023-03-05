@@ -1,4 +1,4 @@
-import { OrderEmpty } from "components";
+import { OrderEmpty } from 'components'
 
 export default function EmptyCommentsList() {
   return (
@@ -7,5 +7,5 @@ export default function EmptyCommentsList() {
 
       <p className='text-center'>هنوز هیچ نظری ندارید</p>
     </div>
-  );
+  )
 }

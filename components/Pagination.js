@@ -1,4 +1,4 @@
-import { Icons } from "components";
+import { Icons } from 'components'
 
 export default function Pagination({
   currentPage,
@@ -12,16 +12,16 @@ export default function Pagination({
   client,
 }) {
   const scrollToTop = () => {
-    const element = document.getElementById(section);
+    const element = document.getElementById(section)
     element.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+      behavior: 'smooth',
+      block: 'start',
+    })
     if (client && window.innerWidth > 1024) {
-      window.scrollTo(0, 60);
+      window.scrollTo(0, 60)
     }
-  };
-  
+  }
+
   return (
     <nav>
       <ul className='inline-flex items-center w-full px-10 gap-x-2 farsi-digits'>
@@ -30,8 +30,8 @@ export default function Pagination({
             <li
               className='flex items-center p-1 text-red-500 cursor-pointer'
               onClick={() => {
-                setPage(previousPage);
-                scrollToTop();
+                setPage(previousPage)
+                scrollToTop()
               }}
             >
               <Icons.ArrowRight2 className='text-red-500 icon' />
@@ -43,8 +43,8 @@ export default function Pagination({
           <li
             className='w-8 h-8 p-1 text-center transition-colors border-2 border-transparent cursor-pointer hover:text-red-500 hover:border-red-500 rounded-2xl'
             onClick={() => {
-              setPage(1);
-              scrollToTop();
+              setPage(1)
+              scrollToTop()
             }}
           >
             1
@@ -56,8 +56,8 @@ export default function Pagination({
           <li
             className='w-8 h-8 p-1 text-center transition-colors border-2 border-transparent cursor-pointer hover:text-red-500 hover:border-red-500 rounded-2xl'
             onClick={() => {
-              setPage(previousPage);
-              scrollToTop();
+              setPage(previousPage)
+              scrollToTop()
             }}
           >
             {previousPage}
@@ -66,8 +66,8 @@ export default function Pagination({
         <li
           className='cursor-pointer w-8 h-8 p-1.5 text-center bg-red-500 text-white rounded-2xl'
           onClick={() => {
-            setPage(currentPage);
-            scrollToTop();
+            setPage(currentPage)
+            scrollToTop()
           }}
         >
           {currentPage}
@@ -76,8 +76,8 @@ export default function Pagination({
           <li
             className='w-8 h-8 p-1 text-center transition-colors border-2 border-transparent cursor-pointer hover:text-red-500 hover:border-red-500 rounded-2xl'
             onClick={() => {
-              setPage(nextPage);
-              scrollToTop();
+              setPage(nextPage)
+              scrollToTop()
             }}
           >
             {nextPage}
@@ -88,8 +88,8 @@ export default function Pagination({
           <li
             className='w-8 h-8 p-1 text-center transition-colors border-2 border-transparent cursor-pointer hover:text-red-500 hover:border-red-500 rounded-2xl'
             onClick={() => {
-              setPage(lastPage);
-              scrollToTop();
+              setPage(lastPage)
+              scrollToTop()
             }}
           >
             {lastPage}
@@ -100,8 +100,8 @@ export default function Pagination({
             <li
               className='flex items-center p-1 text-red-500 cursor-pointer'
               onClick={() => {
-                setPage(nextPage);
-                scrollToTop();
+                setPage(nextPage)
+                scrollToTop()
               }}
             >
               بعدی
@@ -111,5 +111,5 @@ export default function Pagination({
         </div>
       </ul>
     </nav>
-  );
+  )
 }

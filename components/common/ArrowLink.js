@@ -1,6 +1,6 @@
-import Link from "next/link";
+import Link from 'next/link'
 
-import { Icons } from "components";
+import { Icons } from 'components'
 
 const ArrowLink = ({ children, path }) => {
   return (
@@ -10,7 +10,7 @@ const ArrowLink = ({ children, path }) => {
         <Icons.ArrowLeft className='icon text-sky-500 ' />
       </a>
     </Link>
-  );
-};
+  )
+}
 
-export default ArrowLink;
+export default ArrowLink

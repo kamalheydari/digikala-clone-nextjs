@@ -1,51 +1,51 @@
-import apiSlice from "app/api/api";
+import apiSlice from 'app/api/api'
 
 export const orderApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getOrders: builder.query({
       query: ({ page, pageSize }) => ({
         url: `/api/order?page=${page}&page_size=${pageSize}`,
-        method: "GET",
+        method: 'GET',
       }),
-      providesTags: ["Order"],
+      providesTags: ['Order'],
     }),
 
     getSingleOrder: builder.query({
       query: ({ id }) => ({
         url: `/api/order/${id}`,
-        method: "GET",
+        method: 'GET',
       }),
-      providesTags: ["Order"],
+      providesTags: ['Order'],
     }),
 
     updateOrder: builder.mutation({
       query: ({ id, body }) => ({
         url: `/api/order/delivered/${id}`,
-        method: "PUT",
+        method: 'PUT',
         body,
       }),
-      invalidatesTags: ["Order"],
+      invalidatesTags: ['Order'],
     }),
 
     editOrder: builder.mutation({
       query: ({ id, body }) => ({
         url: `/api/order/${id}`,
-        method: "PATCH",
+        method: 'PATCH',
         body,
       }),
-      invalidatesTags: ["Order"],
+      invalidatesTags: ['Order'],
     }),
 
     createOrder: builder.mutation({
       query: ({ body }) => ({
-        url: "/api/order",
-        method: "POST",
+        url: '/api/order',
+        method: 'POST',
         body,
       }),
-      invalidatesTags: ["Order"],
+      invalidatesTags: ['Order'],
     }),
   }),
-});
+})
 
 export const {
   useGetOrdersQuery,
@@ -53,4 +53,4 @@ export const {
   useUpdateOrderMutation,
   useEditOrderMutation,
   useCreateOrderMutation,
-} = orderApiSlice;
+} = orderApiSlice

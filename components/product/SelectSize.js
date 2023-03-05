@@ -1,13 +1,13 @@
-import { setTempSize } from "app/slices/cart.slice";
-import { useDispatch, useSelector } from "react-redux";
+import { setTempSize } from 'app/slices/cart.slice'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { formatNumber } from "utils/formatNumber";
+import { formatNumber } from 'utils/formatNumber'
 
 export default function SelectSize({ sizes }) {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   //? Store
-  const { tempSize } = useSelector((state) => state.cart);
+  const { tempSize } = useSelector((state) => state.cart)
 
   return (
     <section className='farsi-digits lg:col-start-4 lg:col-end-8 lg:row-start-2 lg:row-end-4'>
@@ -23,8 +23,8 @@ export default function SelectSize({ sizes }) {
             onClick={() => dispatch(setTempSize(item))}
             className={`rounded-full py-1.5 px-2 flex items-center cursor-pointer  ${
               tempSize?.id === item.id
-                ? "border-2 border-sky-500"
-                : " border-2 border-gray-300"
+                ? 'border-2 border-sky-500'
+                : ' border-2 border-gray-300'
             }`}
           >
             <span>{item.size}</span>
@@ -33,5 +33,5 @@ export default function SelectSize({ sizes }) {
       </div>
       <div className='section-divide-y' />
     </section>
-  );
+  )
 }

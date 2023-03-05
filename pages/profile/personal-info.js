@@ -1,4 +1,4 @@
-import Head from "next/head"
+import Head from 'next/head'
 
 import {
   Icons,
@@ -6,10 +6,10 @@ import {
   UserNameModal,
   PageContainer,
   Skeleton,
-} from "components"
+} from 'components'
 
-import useUserInfo from "hooks/useUserInfo"
-import useDisclosure from "hooks/useDisclosure"
+import useUserInfo from 'hooks/useUserInfo'
+import useDisclosure from 'hooks/useDisclosure'
 
 export default function PersonalInfo() {
   //? Assets

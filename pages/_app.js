@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 
-import "/styles/main.css";
-import "/styles/browser-styles.css"
-import "/styles/swiper.css";
+import '/styles/main.css'
+import '/styles/browser-styles.css'
+import '/styles/swiper.css'
 
 //? Store
-import { store } from "app/store";
-import { Provider } from "react-redux";
+import { store } from 'app/store'
+import { Provider } from 'react-redux'
 
 //? Layouts & Components
 import {
@@ -16,17 +16,17 @@ import {
   ValidationToken,
   PageLoading,
   Alert,
-} from "components";
+} from 'components'
 
 export default function MyApp({ Component, pageProps }) {
   //? Fix Hydration failed
-  const [showChild, setShowChild] = useState(false);
+  const [showChild, setShowChild] = useState(false)
   useEffect(() => {
-    setShowChild(true);
-  }, []);
+    setShowChild(true)
+  }, [])
 
   if (!showChild) {
-    return null;
+    return null
   }
 
   //? Lyout Config
@@ -40,7 +40,7 @@ export default function MyApp({ Component, pageProps }) {
           <Alert />
         </ClientLayout>
       </Provider>
-    );
+    )
   }
 
   //? Lyout Config
@@ -54,7 +54,7 @@ export default function MyApp({ Component, pageProps }) {
           <Alert />
         </DashboardLayout>
       </Provider>
-    );
+    )
   }
   //? Lyout Config
   if (Component.getProfileLayout) {
@@ -68,7 +68,7 @@ export default function MyApp({ Component, pageProps }) {
           <Alert />
         </ProfileLayout>
       </Provider>
-    );
+    )
   }
 
   return (
@@ -77,5 +77,5 @@ export default function MyApp({ Component, pageProps }) {
       <Component {...pageProps} />
       <Alert />
     </Provider>
-  );
+  )
 }

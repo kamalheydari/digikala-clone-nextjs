@@ -1,10 +1,10 @@
-import { Skeleton } from "components";
-import useCategory from "hooks/useCategory";
-import Image from "next/image";
-import Link from "next/link";
+import { Skeleton } from 'components'
+import useCategory from 'hooks/useCategory'
+import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Categories({ parent, homePage, color, name }) {
-  const { childCategories, isLoading } = useCategory(parent);
+  const { childCategories, isLoading } = useCategory(parent)
 
   //? Local Components
   const CategorySkeleton = () => (
@@ -24,12 +24,12 @@ export default function Categories({ parent, homePage, color, name }) {
         />
       </Skeleton.Items>
     </Skeleton>
-  );
+  )
 
   return (
     <section className='px-3'>
       <h4 className='mb-3 text-xl text-center'>
-        خرید بر اساس دسته‌بندهای{" "}
+        خرید بر اساس دسته‌بندهای{' '}
         <span
           className='text-xl'
           style={{
@@ -68,7 +68,7 @@ export default function Categories({ parent, homePage, color, name }) {
                     </a>
                   </Link>
                 </div>
-              );
+              )
             } else {
               return (
                 <div key={index} className='text-center grayscale'>
@@ -83,11 +83,11 @@ export default function Categories({ parent, homePage, color, name }) {
                   </div>
                   <span className='text-sm'>{item.name}</span>
                 </div>
-              );
+              )
             }
           })
         )}
       </div>
     </section>
-  );
+  )
 }

@@ -1,5 +1,5 @@
-import { EmptySearch } from "components";
-import Image from "next/image";
+import { EmptySearch } from 'components'
+import Image from 'next/image'
 
 export default function EmptySearchList() {
   return (
@@ -22,5 +22,5 @@ export default function EmptySearchList() {
         </p>
       </div>
     </div>
-  );
+  )
 }

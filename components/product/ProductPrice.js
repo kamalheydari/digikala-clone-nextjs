@@ -1,6 +1,6 @@
-import { formatNumber } from "utils/formatNumber";
+import { formatNumber } from 'utils/formatNumber'
 
-import { DiscountProduct, Toman } from "components";
+import { DiscountProduct, Toman } from 'components'
 
 export default function ProductPrice({
   singleProduct,
@@ -9,7 +9,7 @@ export default function ProductPrice({
   price,
 }) {
   return (
-    <div className={`${singleProduct && "flex flex-col-reverse"}`}>
+    <div className={`${singleProduct && 'flex flex-col-reverse'}`}>
       <div className='flex items-center'>
         <span className='farsi-digits text-sm text-gray-700'>
           {formatNumber(price - (discount * price) / 100)}
@@ -28,5 +28,5 @@ export default function ProductPrice({
         </div>
       )}
     </div>
-  );
+  )
 }

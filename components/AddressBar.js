@@ -1,14 +1,14 @@
-import { Icons, Skeleton } from "components";
+import { Icons, Skeleton } from 'components'
 
-import { withAddressModal } from "HOCs/withAddressModal";
+import { withAddressModal } from 'HOCs/withAddressModal'
 
 function AddressBar(props) {
   //? Props
-  const { openAddressModal, isVerify, isLoading, address } = props;
+  const { openAddressModal, isVerify, isLoading, address } = props
 
   //? Render(s)
   if (!isVerify) {
-    return null;
+    return null
   } else if (isLoading) {
     return (
       <Skeleton.Item
@@ -16,7 +16,7 @@ function AddressBar(props) {
         height='h-5 lg:h-6'
         width='w-3/4 lg:w-1/4'
       />
-    );
+    )
   } else if (!address) {
     return (
       <button
@@ -29,7 +29,7 @@ function AddressBar(props) {
 
         <Icons.ArrowLeft className='mr-auto icon' />
       </button>
-    );
+    )
   } else if (address) {
     return (
       <button
@@ -43,8 +43,8 @@ function AddressBar(props) {
         </span>
         <Icons.ArrowLeft className='mr-auto icon' />
       </button>
-    );
+    )
   }
 }
 
-export default withAddressModal(AddressBar);
+export default withAddressModal(AddressBar)

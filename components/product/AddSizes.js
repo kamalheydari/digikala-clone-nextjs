@@ -1,25 +1,25 @@
-import { useRef } from "react";
+import { useRef } from 'react'
 
-import { useFieldArray } from "react-hook-form";
+import { useFieldArray } from 'react-hook-form'
 
-import { AddIconBtn, DeleteIconBtn } from "components";
+import { AddIconBtn, DeleteIconBtn } from 'components'
 
 export default function AddSizes({ name, control, register }) {
   //? Refs
-  const inputRef = useRef();
+  const inputRef = useRef()
 
   //? Form Hook
   const { fields, append, remove } = useFieldArray({
     name,
     control,
-  });
+  })
 
   //? Handlers
   const handleAddSize = () => {
-    if (inputRef.current.value.trim() === "") return;
-    append({ size: +inputRef.current.value });
-    inputRef.current.value = "";
-  };
+    if (inputRef.current.value.trim() === '') return
+    append({ size: +inputRef.current.value })
+    inputRef.current.value = ''
+  }
 
   //? Render
   return (
@@ -29,7 +29,7 @@ export default function AddSizes({ name, control, register }) {
         <div className='flex items-center gap-x-2'>
           <AddIconBtn onClick={handleAddSize} />
           <input
-            style={{ direction: "ltr" }}
+            style={{ direction: 'ltr' }}
             type='number'
             className='inline-block outline-none input w-44'
             placeholder='...'
@@ -44,7 +44,7 @@ export default function AddSizes({ name, control, register }) {
             >
               <DeleteIconBtn onClick={() => remove(index)} />
               <input
-                style={{ direction: "ltr" }}
+                style={{ direction: 'ltr' }}
                 className='text-field__input '
                 {...register(`${name}.${index}.size`, {
                   valueAsNumber: true,

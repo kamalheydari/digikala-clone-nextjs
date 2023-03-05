@@ -1,11 +1,11 @@
-import Head from "next/head";
-import { useState } from "react";
+import Head from 'next/head'
+import { useState } from 'react'
 
-import { useCreateCategoryMutation } from "app/api/categoryApi";
+import { useCreateCategoryMutation } from 'app/api/categoryApi'
 
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
-import { categorySchema } from "utils/validation";
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useForm } from 'react-hook-form'
+import { categorySchema } from 'utils/validation'
 
 import {
   SelectCategories,
@@ -14,19 +14,16 @@ import {
   PageContainer,
   Button,
   HandleResponse,
-} from "components";
+} from 'components'
 
 export default function CreateCategory() {
-
   //?  States
-  const [images, setImages] = useState([]);
-  const [selectedCategories, setSelectedCategories] = useState({});
+  const [images, setImages] = useState([])
+  const [selectedCategories, setSelectedCategories] = useState({})
 
   //? Create Category
-  const [
-    createCtegory,
-    { data, isSuccess, isLoading, error, isError },
-  ] = useCreateCategoryMutation();
+  const [createCtegory, { data, isSuccess, isLoading, error, isError }] =
+    useCreateCategoryMutation()
 
   //? Form Hook
   const {
@@ -36,14 +33,14 @@ export default function CreateCategory() {
     reset,
   } = useForm({
     resolver: yupResolver(categorySchema),
-  });
+  })
 
   //? Handlers
   const submitHander = ({ name, slug }) => {
-    let parent, category;
+    let parent, category
 
-    name = name.trim();
-    slug = slug.trim().split(" ").join("-");
+    name = name.trim()
+    slug = slug.trim().split(' ').join('-')
 
     if (
       selectedCategories?.lvlOneCategory?._id &&
@@ -51,45 +48,45 @@ export default function CreateCategory() {
     ) {
       //* Set LvlTwo category
 
-      parent = selectedCategories?.lvlOneCategory.category;
-      category = parent + "/" + slug;
+      parent = selectedCategories?.lvlOneCategory.category
+      category = parent + '/' + slug
     } else if (
       selectedCategories?.lvlOneCategory?._id &&
       selectedCategories?.lvlTwoCategory?._id
     ) {
       //* Set lvlThree category
 
-      parent = "/" + selectedCategories?.lvlTwoCategory.slug;
+      parent = '/' + selectedCategories?.lvlTwoCategory.slug
       category =
-        "/" +
+        '/' +
         selectedCategories?.lvlOneCategory.slug +
-        "/" +
+        '/' +
         selectedCategories?.lvlTwoCategory.slug +
-        "/" +
-        slug;
+        '/' +
+        slug
     } else {
       //* Set LvlOne category
 
-      parent = "/";
-      category = parent + slug;
+      parent = '/'
+      category = parent + slug
     }
 
     createCtegory({
       body: { name, parent, category, slug, image: images[0] },
-    });
-  };
+    })
+  }
 
   const deleteImageHandler = () => {
-    setImages([]);
-  };
+    setImages([])
+  }
 
   const addImageHandler = (newImages) => {
-    setImages([...newImages]);
-  };
+    setImages([...newImages])
+  }
 
   const getUploadedImagesHandler = (media, imgOldURL) => {
-    setImages([...media, ...imgOldURL]);
-  };
+    setImages([...media, ...imgOldURL])
+  }
 
   //? Render
   return (
@@ -102,8 +99,8 @@ export default function CreateCategory() {
           error={error?.data?.err}
           message={data?.msg}
           onSuccess={() => {
-            setImages([]);
-            reset();
+            setImages([])
+            reset()
           }}
         />
       )}
@@ -143,7 +140,7 @@ export default function CreateCategory() {
 
               <SelectCategories
                 setSelectedCategories={setSelectedCategories}
-                show={["lvlOne", "lvlTwo"]}
+                show={['lvlOne', 'lvlTwo']}
               />
 
               <div className='py-3 lg:pb-0 '>
@@ -161,9 +158,9 @@ export default function CreateCategory() {
         </PageContainer>
       </main>
     </>
-  );
+  )
 }
 
 CreateCategory.getDashboardLayout = function pageLayout(page) {
-  return <>{page}</>;
-};
+  return <>{page}</>
+}

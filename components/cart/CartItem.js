@@ -1,7 +1,7 @@
-import Link from "next/link";
-import Image from "next/image";
+import Link from 'next/link'
+import Image from 'next/image'
 
-import { formatNumber } from "utils/formatNumber";
+import { formatNumber } from 'utils/formatNumber'
 
 import {
   SpecialSell,
@@ -9,7 +9,7 @@ import {
   Icons,
   DiscountCartItem,
   Toman,
-} from "components";
+} from 'components'
 
 export default function CartItem({ item }) {
   return (
@@ -77,5 +77,5 @@ export default function CartItem({ item }) {
         </div>
       </div>
     </article>
-  );
+  )
 }

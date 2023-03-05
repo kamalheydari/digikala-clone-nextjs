@@ -1,63 +1,61 @@
-import { useEffect } from "react";
-import Head from "next/head";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import { useEffect } from 'react'
+import Head from 'next/head'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
-import { logInSchema } from "utils/validation";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { logInSchema } from 'utils/validation'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
 
-import { useDispatch } from "react-redux";
-import { userLogin } from "app/slices/user.slice";
-import { showAlert } from "app/slices/alert.slice";
-import { useLoginMutation } from "app/api/userApi";
+import { useDispatch } from 'react-redux'
+import { userLogin } from 'app/slices/user.slice'
+import { showAlert } from 'app/slices/alert.slice'
+import { useLoginMutation } from 'app/api/userApi'
 
-import { TextField, LoginBtn, Logo } from "components";
+import { TextField, LoginBtn, Logo } from 'components'
 
 export default function LoginPage() {
-  const dispatch = useDispatch();
-  const router = useRouter();
+  const dispatch = useDispatch()
+  const router = useRouter()
 
   //? Login User
-  const [
-    login,
-    { data, isSuccess, isError, isLoading, error },
-  ] = useLoginMutation();
+  const [login, { data, isSuccess, isError, isLoading, error }] =
+    useLoginMutation()
 
   //? Handle Login User Response
   useEffect(() => {
     if (isSuccess) {
-      if (data.data.root || data.data.role === "admin") {
-        dispatch(userLogin(data.data.access_token));
+      if (data.data.root || data.data.role === 'admin') {
+        dispatch(userLogin(data.data.access_token))
 
         dispatch(
           showAlert({
-            status: "success",
+            status: 'success',
             title: data.msg,
           })
-        );
-        router.push("/admin");
-        reset();
+        )
+        router.push('/admin')
+        reset()
       } else {
         dispatch(
           showAlert({
-            status: "error",
-            title: "شما اجازه دسترسی به پنل ادمین را ندارید",
+            status: 'error',
+            title: 'شما اجازه دسترسی به پنل ادمین را ندارید',
           })
-        );
+        )
       }
     }
-  }, [isSuccess]);
+  }, [isSuccess])
 
   useEffect(() => {
     if (isError)
       dispatch(
         showAlert({
-          status: "error",
+          status: 'error',
           title: error?.data.err,
         })
-      );
-  }, [isError]);
+      )
+  }, [isError])
 
   //? Form Hook
   const {
@@ -68,22 +66,22 @@ export default function LoginPage() {
     setFocus,
   } = useForm({
     resolver: yupResolver(logInSchema),
-    defaultValues: { name: "", password: "" },
-  });
+    defaultValues: { name: '', password: '' },
+  })
 
   //? Focus On Mount
   useEffect(() => {
-    setFocus("email");
-  }, []);
+    setFocus('email')
+  }, [])
 
   //? Handlers
   const submitHander = async ({ email, password }) => {
     if (email && password) {
       await login({
         body: { email, password },
-      });
+      })
     }
-  };
+  }
 
   //? Render
   return (
@@ -131,5 +129,5 @@ export default function LoginPage() {
         </div>
       </div>
     </main>
-  );
+  )
 }

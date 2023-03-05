@@ -1,13 +1,13 @@
-import Head from "next/head";
-import Link from "next/link";
+import Head from 'next/head'
+import Link from 'next/link'
 
-import { PageContainer } from "components";
+import { PageContainer } from 'components'
 
-import useCategory from "hooks/useCategory";
+import useCategory from 'hooks/useCategory'
 
 export default function Categories() {
   //? Get Categories Data
-  const { categories } = useCategory();
+  const { categories } = useCategory()
 
   return (
     <main>
@@ -40,7 +40,7 @@ export default function Categories() {
             </div>
             <ul className='space-y-8'>
               {categories.slice(0, 2).map((mainCategory) => {
-                if (mainCategory.parent === "/") {
+                if (mainCategory.parent === '/') {
                   return (
                     <li
                       key={mainCategory._id}
@@ -61,7 +61,7 @@ export default function Categories() {
                                   {categories.map((childCategory) => {
                                     if (
                                       childCategory.parent ===
-                                      "/" + parentCategory.slug
+                                      '/' + parentCategory.slug
                                     ) {
                                       return (
                                         <li
@@ -72,17 +72,17 @@ export default function Categories() {
                                             {childCategory.name}
                                           </div>
                                         </li>
-                                      );
+                                      )
                                     }
                                   })}
                                 </ul>
                               </li>
-                            );
+                            )
                           }
                         })}
                       </ul>
                     </li>
-                  );
+                  )
                 }
               })}
             </ul>
@@ -90,9 +90,9 @@ export default function Categories() {
         </section>
       </PageContainer>
     </main>
-  );
+  )
 }
 
 Categories.getDashboardLayout = function pageLayout(page) {
-  return <>{page}</>;
-};
+  return <>{page}</>
+}

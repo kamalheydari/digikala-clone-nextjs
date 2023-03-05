@@ -1,11 +1,11 @@
-import Icons from "components/common/Icons";
+import Icons from 'components/common/Icons'
 
-import { useSelector } from "react-redux";
+import { useSelector } from 'react-redux'
 
-import { formatNumber } from "utils/formatNumber";
+import { formatNumber } from 'utils/formatNumber'
 
 export default function CartTotalItems() {
-  const { totalItems } = useSelector((state) => state.cart);
+  const { totalItems } = useSelector((state) => state.cart)
 
   return (
     <div className='relative p-1 lg:pr-4 hover:bg-red-100 lg:rounded lg:m-1.5 lg:transition'>
@@ -15,5 +15,5 @@ export default function CartTotalItems() {
 
       <Icons.Cart className='icon h-7 w-7' />
     </div>
-  );
+  )
 }

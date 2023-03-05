@@ -1,20 +1,19 @@
-import Image from "next/image";
-import { useRouter } from "next/router";
+import Image from 'next/image'
+import { useRouter } from 'next/router'
 
-
-import { Button, Modal } from "components";
+import { Button, Modal } from 'components'
 
 export default function RedirectToLogin(props) {
   //? Props
-  const { isShow, onClose, title, text } = props;
-  const router = useRouter();
+  const { isShow, onClose, title, text } = props
+  const router = useRouter()
 
   //? Handlers
   const handleClick = () => {
-    router.push("/login");
+    router.push('/login')
 
-    onClose();
-  };
+    onClose()
+  }
 
   return (
     <Modal isShow={isShow} onClose={onClose} effect='ease-out'>
@@ -33,5 +32,5 @@ export default function RedirectToLogin(props) {
         </Modal.Body>
       </Modal.Content>
     </Modal>
-  );
+  )
 }

@@ -9,12 +9,12 @@ import {
   BsSortDown,
   BsShieldCheck,
   BsFillXCircleFill,
-} from "react-icons/bs";
-import { FiLogIn, FiLogOut, FiEdit, FiPlus, FiMinus } from "react-icons/fi";
-import { VscThreeBars, VscLocation } from "react-icons/vsc";
-import { HiOutlineUser, HiOutlineUsers } from "react-icons/hi";
-import { IoSearch } from "react-icons/io5";
-import { BiAbacus, BiCategory } from "react-icons/bi";
+} from 'react-icons/bs'
+import { FiLogIn, FiLogOut, FiEdit, FiPlus, FiMinus } from 'react-icons/fi'
+import { VscThreeBars, VscLocation } from 'react-icons/vsc'
+import { HiOutlineUser, HiOutlineUsers } from 'react-icons/hi'
+import { IoSearch } from 'react-icons/io5'
+import { BiAbacus, BiCategory } from 'react-icons/bi'
 
 import {
   RiArrowDownSFill,
@@ -43,9 +43,9 @@ import {
   RiLinkedinFill,
   RiInstagramFill,
   RiYoutubeFill,
-} from "react-icons/ri";
+} from 'react-icons/ri'
 
-import { CgSandClock } from "react-icons/cg";
+import { CgSandClock } from 'react-icons/cg'
 
 const Icons = {
   Twitter: RiTwitterFill,
@@ -97,6 +97,6 @@ const Icons = {
   Post: BsSignpost,
   Phone: RiPhoneFill,
   Delete: RiDeleteBinLine,
-};
+}
 
-export default Icons;
+export default Icons

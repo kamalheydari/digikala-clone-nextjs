@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import Head from "next/head";
+import { useEffect, useState } from 'react'
+import Head from 'next/head'
 
-import db from "lib/db";
-import Product from "models/Product";
+import db from 'lib/db'
+import Product from 'models/Product'
 
-import { useGetImagesQuery } from "app/api/categoryApi";
+import { useGetImagesQuery } from 'app/api/categoryApi'
 
 import {
   BannerOne,
@@ -14,17 +14,17 @@ import {
   DiscountSlider,
   MostFavouraiteProducts,
   Slider,
-} from "components";
+} from 'components'
 
 export default function Home(props) {
   //? State
-  const [images, setImages] = useState({});
+  const [images, setImages] = useState({})
 
   //? Get Slider Images
-  const { data, isSuccess } = useGetImagesQuery();
+  const { data, isSuccess } = useGetImagesQuery()
   useEffect(() => {
-    if (isSuccess) setImages(data.root);
-  }, [isSuccess]);
+    if (isSuccess) setImages(data.root)
+  }, [isSuccess])
 
   //? Render
   return (
@@ -55,7 +55,7 @@ export default function Home(props) {
         <Categories
           parent='/'
           name='دیجی‌کالا'
-          color={`${images.colors ? `${images?.colors[0]}` : "#212121"}`}
+          color={`${images.colors ? `${images?.colors[0]}` : '#212121'}`}
           homePage
         />
 
@@ -71,20 +71,20 @@ export default function Home(props) {
         <MostFavouraiteProducts products={props.mostFavourite} />
       </div>
     </main>
-  );
+  )
 }
 
 export async function getServerSideProps() {
   const filterFilelds =
-    "-description -info -specification -sizes -colors -category -numReviews -reviews";
+    '-description -info -specification -sizes -colors -category -numReviews -reviews'
 
-  await db.connect();
+  await db.connect()
 
   const bestSells = await Product.find()
     .select(filterFilelds)
     .sort({ sold: -1 })
     .limit(15)
-    .lean();
+    .lean()
 
   const discountProducts = await Product.find({
     discount: { $gte: 1 },
@@ -93,15 +93,15 @@ export async function getServerSideProps() {
     .select(filterFilelds)
     .sort({ discount: -1 })
     .limit(15)
-    .lean();
+    .lean()
 
   const mostFavourite = await Product.find()
     .select(filterFilelds)
     .sort({ rating: -1 })
     .limit(10)
-    .lean();
+    .lean()
 
-  await db.disconnect();
+  await db.disconnect()
 
   return {
     props: {
@@ -109,9 +109,9 @@ export async function getServerSideProps() {
       discountProducts: discountProducts.map(db.convertDocToObj),
       mostFavourite: mostFavourite.map(db.convertDocToObj),
     },
-  };
+  }
 }
 
 Home.getClientLayout = function pageLayout(page) {
-  return <>{page}</>;
-};
+  return <>{page}</>
+}

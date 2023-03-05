@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image'
 
 export default function Bannertwo({ images = [] }) {
   return (
@@ -18,5 +18,5 @@ export default function Bannertwo({ images = [] }) {
         </div>
       ))}
     </section>
-  );
+  )
 }

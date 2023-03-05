@@ -1,24 +1,24 @@
-import Head from "next/head";
+import Head from 'next/head'
 
-import { Address, Icons, PageContainer, Skeleton } from "components";
+import { Address, Icons, PageContainer, Skeleton } from 'components'
 
-import { withAddressModal } from "HOCs/withAddressModal";
+import { withAddressModal } from 'HOCs/withAddressModal'
 
-import useUserInfo from "hooks/useUserInfo";
+import useUserInfo from 'hooks/useUserInfo'
 
 export default function Addresses() {
   //? Get User Data
-  const { userInfo, isLoading } = useUserInfo();
+  const { userInfo, isLoading } = useUserInfo()
 
   //? Handlers
-  const edditAddressHandler = () => addressModalHandlers.open();
+  const edditAddressHandler = () => addressModalHandlers.open()
 
   //? Local Components
   const ChangeAddress = withAddressModal(({ openAddressModal }) => (
     <button onClick={openAddressModal}>
       <Icons.Edit className='cursor-pointer icon' />
     </button>
-  ));
+  ))
 
   //? Render(s)
   return (
@@ -79,7 +79,7 @@ export default function Addresses() {
               <div className='flex items-center gap-x-2 '>
                 <Icons.UserLocation className='text-gray-500 icon' />
                 <span className='text-xs md:text-sm'>
-                  {userInfo.address.province?.name},{" "}
+                  {userInfo.address.province?.name},{' '}
                   {userInfo.address.city?.name}
                 </span>
               </div>
@@ -116,9 +116,9 @@ export default function Addresses() {
         )}
       </PageContainer>
     </main>
-  );
+  )
 }
 
 Addresses.getProfileLayout = function pageLayout(page) {
-  return <>{page}</>;
-};
+  return <>{page}</>
+}

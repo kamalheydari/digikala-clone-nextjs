@@ -1,24 +1,18 @@
-import Head from "next/head";
-import { useRouter } from "next/router";
+import Head from 'next/head'
+import { useRouter } from 'next/router'
 
-import { useGetSingleOrderQuery } from "app/api/orderApi";
+import { useGetSingleOrderQuery } from 'app/api/orderApi'
 
-import { OrderCard, PageContainer, ShowWrapper } from "components";
+import { OrderCard, PageContainer, ShowWrapper } from 'components'
 
 export default function SingleOrder() {
-  const router = useRouter();
+  const router = useRouter()
 
   //? Get Order Data
-  const {
-    data,
-    isError,
-    error,
-    isFetching,
-    refetch,
-    isSuccess,
-  } = useGetSingleOrderQuery({
-    id: router.query.id,
-  });
+  const { data, isError, error, isFetching, refetch, isSuccess } =
+    useGetSingleOrderQuery({
+      id: router.query.id,
+    })
 
   //? Render
   return (
@@ -43,9 +37,9 @@ export default function SingleOrder() {
         </ShowWrapper>
       </PageContainer>
     </main>
-  );
+  )
 }
 
 SingleOrder.getDashboardLayout = function pageLayout(page) {
-  return <>{page}</>;
-};
+  return <>{page}</>
+}

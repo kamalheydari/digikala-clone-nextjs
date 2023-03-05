@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 
-import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import Head from 'next/head'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
-import { clearCart } from "app/slices/cart.slice";
-import { useCreateOrderMutation } from "app/api/orderApi";
-import { useDispatch, useSelector } from "react-redux";
-import { showAlert } from "app/slices/alert.slice";
+import { clearCart } from 'app/slices/cart.slice'
+import { useCreateOrderMutation } from 'app/api/orderApi'
+import { useDispatch, useSelector } from 'react-redux'
+import { showAlert } from 'app/slices/alert.slice'
 
 import {
   Button,
@@ -16,34 +16,32 @@ import {
   HandleResponse,
   Icons,
   LogoPersian,
-} from "components";
+} from 'components'
 
-import { withAddressModal } from "HOCs/withAddressModal";
+import { withAddressModal } from 'HOCs/withAddressModal'
 
-import { formatNumber } from "utils/formatNumber";
-import useUserInfo from "hooks/useUserInfo";
+import { formatNumber } from 'utils/formatNumber'
+import useUserInfo from 'hooks/useUserInfo'
 
 export default function ShippingPage() {
   //? Assets
-  const router = useRouter();
-  const dispatch = useDispatch();
+  const router = useRouter()
+  const dispatch = useDispatch()
 
   //? Get User Data
-  const { userInfo } = useUserInfo();
+  const { userInfo } = useUserInfo()
 
   //? States
-  const [paymentMethod, setPaymentMethod] = useState("پرداخت در محل");
+  const [paymentMethod, setPaymentMethod] = useState('پرداخت در محل')
 
   //? Store
   const { cartItems, totalItems, totalDiscount, totalPrice } = useSelector(
     (state) => state.cart
-  );
+  )
 
   //? Create Order Query
-  const [
-    postData,
-    { data, isSuccess, isError, isLoading, error },
-  ] = useCreateOrderMutation();
+  const [postData, { data, isSuccess, isError, isLoading, error }] =
+    useCreateOrderMutation()
 
   //? Handlers
   const handleCreateOrder = () => {
@@ -55,10 +53,10 @@ export default function ShippingPage() {
     )
       return dispatch(
         showAlert({
-          status: "error",
-          title: "لطفا آدرس خود را تکمیل کنید",
+          status: 'error',
+          title: 'لطفا آدرس خود را تکمیل کنید',
         })
-      );
+      )
     postData({
       body: {
         address: userInfo.address,
@@ -69,8 +67,8 @@ export default function ShippingPage() {
         totalDiscount,
         paymentMethod,
       },
-    });
-  };
+    })
+  }
 
   //? Local Components
   const ChangeAddress = withAddressModal(({ openAddressModal }) => (
@@ -82,7 +80,7 @@ export default function ShippingPage() {
       <span className='text-base text-sky-500'>تغییر | ویرایش</span>
       <Icons.ArrowLeft className='icon text-sky-500' />
     </button>
-  ));
+  ))
 
   //? Render
   return (
@@ -95,8 +93,8 @@ export default function ShippingPage() {
           error={error?.data?.err}
           message={data?.msg}
           onSuccess={() => {
-            dispatch(clearCart());
-            router.push("/profile");
+            dispatch(clearCart())
+            router.push('/profile')
           }}
         />
       )}
@@ -216,7 +214,7 @@ export default function ShippingPage() {
                   name='cash'
                   id='cash'
                   value='پرداخت در محل'
-                  checked={paymentMethod === "پرداخت در محل"}
+                  checked={paymentMethod === 'پرداخت در محل'}
                   onChange={(e) => setPaymentMethod(e.target.value)}
                 />
                 <label className='text-sm' htmlFor='cash'>
@@ -230,7 +228,7 @@ export default function ShippingPage() {
                   id='zarinPal'
                   value='زرین پال'
                   disabled={true}
-                  checked={paymentMethod === "زرین پال"}
+                  checked={paymentMethod === 'زرین پال'}
                   onChange={(e) => setPaymentMethod(e.target.value)}
                 />
                 <label className='text-sm' htmlFor='zarinPal'>
@@ -249,5 +247,5 @@ export default function ShippingPage() {
         </div>
       </main>
     </>
-  );
+  )
 }

@@ -1,14 +1,14 @@
-import Head from "next/head";
+import Head from 'next/head'
 
-import { Header, Orders, ProfileAside } from "components";
-import useVerify from "hooks/useVerify";
-import { useRouter } from "next/router";
+import { Header, Orders, ProfileAside } from 'components'
+import useVerify from 'hooks/useVerify'
+import { useRouter } from 'next/router'
 
 export default function ProfilePage() {
-  const isVerify = useVerify(false);
-  const router = useRouter();
+  const isVerify = useVerify(false)
+  const router = useRouter()
 
-  if (!isVerify) router.push("/");
+  if (!isVerify) router.push('/')
   else
     return (
       <>
@@ -25,5 +25,5 @@ export default function ProfilePage() {
           </div>
         </div>
       </>
-    );
+    )
 }

@@ -1,54 +1,52 @@
-import Head from "next/head";
-import { useEffect } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import Head from 'next/head'
+import { useEffect } from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import  { registerSchema } from "utils/validation";
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { registerSchema } from 'utils/validation'
 
-import { useDispatch } from "react-redux";
-import { showAlert } from "app/slices/alert.slice";
-import { useCreateUserMutation } from "app/api/userApi";
-import { userLogin } from "app/slices/user.slice";
+import { useDispatch } from 'react-redux'
+import { showAlert } from 'app/slices/alert.slice'
+import { useCreateUserMutation } from 'app/api/userApi'
+import { userLogin } from 'app/slices/user.slice'
 
-import { TextField, LoginBtn, RedirectToLogin, Logo } from "components";
-import useDisclosure from "hooks/useDisclosure";
+import { TextField, LoginBtn, RedirectToLogin, Logo } from 'components'
+import useDisclosure from 'hooks/useDisclosure'
 
 export default function RegisterPage() {
   //? Assets
-  const [isShowRedirectModal, redirectModalHandlers] = useDisclosure();
-  const dispatch = useDispatch();
-  const router = useRouter();
+  const [isShowRedirectModal, redirectModalHandlers] = useDisclosure()
+  const dispatch = useDispatch()
+  const router = useRouter()
 
   //? Create User
-  const [
-    createUser,
-    { data, isSuccess, isError, isLoading, error },
-  ] = useCreateUserMutation();
+  const [createUser, { data, isSuccess, isError, isLoading, error }] =
+    useCreateUserMutation()
 
   //? Handle Create User Response
   useEffect(() => {
     if (isSuccess) {
-      dispatch(userLogin(data.data.access_token));
+      dispatch(userLogin(data.data.access_token))
 
       dispatch(
         showAlert({
-          status: "success",
+          status: 'success',
           title: data.msg,
         })
-      );
+      )
 
-      reset();
-      router.push("/");
+      reset()
+      router.push('/')
     }
-  }, [isSuccess]);
+  }, [isSuccess])
 
   useEffect(() => {
     if (isError) {
-      redirectModalHandlers.open();
+      redirectModalHandlers.open()
     }
-  }, [isError]);
+  }, [isError])
 
   //? Form Hook
   const {
@@ -59,22 +57,22 @@ export default function RegisterPage() {
     control,
   } = useForm({
     resolver: yupResolver(registerSchema),
-    defaultValues: { name: "", email: "", password: "", confirmPassword: "" },
-  });
+    defaultValues: { name: '', email: '', password: '', confirmPassword: '' },
+  })
 
   //? Focus On Mount
   useEffect(() => {
-    setFocus("name");
-  }, []);
+    setFocus('name')
+  }, [])
 
   //? Handlers
   const submitHander = async ({ name, email, password }) => {
     if (name && email && password) {
       await createUser({
         body: { name, email, password },
-      });
+      })
     }
-  };
+  }
 
   return (
     <>
@@ -143,5 +141,5 @@ export default function RegisterPage() {
         </section>
       </main>
     </>
-  );
+  )
 }

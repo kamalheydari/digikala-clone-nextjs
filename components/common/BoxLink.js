@@ -1,14 +1,14 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 
-import { Icons } from "components";
+import { Icons } from 'components'
 
 export default function BoxLink({ children, path, name }) {
-  const router = useRouter();
+  const router = useRouter()
   return (
     <div
       className={`box-link ${
-        router.asPath === path ? "box-link--active" : "box-link--deactive"
+        router.asPath === path ? 'box-link--active' : 'box-link--deactive'
       }`}
     >
       <Link href={path}>
@@ -19,5 +19,5 @@ export default function BoxLink({ children, path, name }) {
         </a>
       </Link>
     </div>
-  );
+  )
 }

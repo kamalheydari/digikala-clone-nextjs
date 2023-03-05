@@ -1,19 +1,19 @@
-import { Fragment, useState } from "react";
-import { Combobox as HUICombobox, Transition } from "@headlessui/react";
-import { HiCheck, HiChevronDown } from "react-icons/hi";
-import { useController } from "react-hook-form";
+import { Fragment, useState } from 'react'
+import { Combobox as HUICombobox, Transition } from '@headlessui/react'
+import { HiCheck, HiChevronDown } from 'react-icons/hi'
+import { useController } from 'react-hook-form'
 
 export default function Combobox({ list, name, control, placeholder }) {
-  const { field } = useController({ name, control });
+  const { field } = useController({ name, control })
 
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('')
 
   const filteredList =
-    query === ""
+    query === ''
       ? list
       : list.filter((item) => {
-          return item.name.toLowerCase().includes(query.toLowerCase());
-        });
+          return item.name.toLowerCase().includes(query.toLowerCase())
+        })
 
   return (
     <HUICombobox
@@ -40,17 +40,17 @@ export default function Combobox({ list, name, control, placeholder }) {
           leave='transition ease-in duration-100'
           leaveFrom='opacity-100'
           leaveTo='opacity-0'
-          afterLeave={() => setQuery("")}
+          afterLeave={() => setQuery('')}
         >
           <HUICombobox.Options className='combobox__options'>
-            {filteredList.length === 0 && query !== "" ? (
+            {filteredList.length === 0 && query !== '' ? (
               <div className='combobox__not-found'>هیچ موردی پیدا نشد!</div>
             ) : (
               filteredList.map((item) => (
                 <HUICombobox.Option
                   key={item.id}
                   className={`combobox__option
-                  ${field.value.id === item.id ? "bg-teal-50" : ""}
+                  ${field.value.id === item.id ? 'bg-teal-50' : ''}
                   `}
                   value={item}
                 >
@@ -59,8 +59,8 @@ export default function Combobox({ list, name, control, placeholder }) {
                       <span
                         className={`block truncate lg:text-sm ${
                           field.value.id === item.id
-                            ? "font-semibold"
-                            : "font-normal"
+                            ? 'font-semibold'
+                            : 'font-normal'
                         }`}
                       >
                         {item.name}
@@ -68,7 +68,7 @@ export default function Combobox({ list, name, control, placeholder }) {
                       {field.value.id === item.id ? (
                         <span
                           className={`combobox__option--active-icon  ${
-                            active ? "text-white" : "text-teal-600"
+                            active ? 'text-white' : 'text-teal-600'
                           }`}
                         >
                           <HiCheck
@@ -86,5 +86,5 @@ export default function Combobox({ list, name, control, placeholder }) {
         </Transition>
       </div>
     </HUICombobox>
-  );
+  )
 }

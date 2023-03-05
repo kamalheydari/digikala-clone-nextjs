@@ -1,11 +1,11 @@
-@import "tailwindcss/base";
-@import "/fonts/vazir.css";
-@import "/abstracts";
+@import 'tailwindcss/base';
+@import '/fonts/vazir.css';
+@import '/abstracts';
 
-@import "tailwindcss/components";
-@import "/components";
+@import 'tailwindcss/components';
+@import '/components';
 
-@import "tailwindcss/utilities";
+@import 'tailwindcss/utilities';
 
 @layer components {
   .input {

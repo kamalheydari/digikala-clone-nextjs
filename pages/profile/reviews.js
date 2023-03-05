@@ -1,7 +1,7 @@
-import Head from "next/head";
-import { useState } from "react";
+import Head from 'next/head'
+import { useState } from 'react'
 
-import { useDeleteReviewMutation, useGetReviewsQuery } from "app/api/reviewApi";
+import { useDeleteReviewMutation, useGetReviewsQuery } from 'app/api/reviewApi'
 
 import {
   Pagination,
@@ -11,22 +11,19 @@ import {
   ConfirmDeleteModal,
   PageContainer,
   HandleResponse,
-} from "components";
+} from 'components'
 
-import useDisclosure from "hooks/useDisclosure";
+import useDisclosure from 'hooks/useDisclosure'
 
 export default function Reviews() {
   //? Modals
-  const [
-    isShowConfirmDeleteModal,
-    confirmDeleteModalHandlers,
-  ] = useDisclosure();
+  const [isShowConfirmDeleteModal, confirmDeleteModalHandlers] = useDisclosure()
 
   //? States
   const [deleteInfo, setDeleteInfo] = useState({
-    id: "",
-  });
-  const [page, setPage] = useState(1);
+    id: '',
+  })
+  const [page, setPage] = useState(1)
 
   //? Queries
   //*    Delete Review
@@ -39,25 +36,19 @@ export default function Reviews() {
       data: data_delete,
       isLoading: isLoading_delete,
     },
-  ] = useDeleteReviewMutation();
+  ] = useDeleteReviewMutation()
 
   //*   Get Reviews
-  const {
-    data,
-    isSuccess,
-    isFetching,
-    error,
-    isError,
-    refetch,
-  } = useGetReviewsQuery({
-    page,
-  });
+  const { data, isSuccess, isFetching, error, isError, refetch } =
+    useGetReviewsQuery({
+      page,
+    })
 
   //? Handlers
   const deleteReviewHandler = (id) => {
-    setDeleteInfo({ id });
-    confirmDeleteModalHandlers.open();
-  };
+    setDeleteInfo({ id })
+    confirmDeleteModalHandlers.open()
+  }
 
   //? Render(s)
   return (
@@ -80,12 +71,12 @@ export default function Reviews() {
           error={error_delete?.data?.err}
           message={data_delete?.msg}
           onSuccess={() => {
-            confirmDeleteModalHandlers.close();
-            setDeleteInfo({ id: "" });
+            confirmDeleteModalHandlers.close()
+            setDeleteInfo({ id: '' })
           }}
           onError={() => {
-            confirmDeleteModalHandlers.close();
-            setDeleteInfo({ id: "" });
+            confirmDeleteModalHandlers.close()
+            setDeleteInfo({ id: '' })
           }}
         />
       )}
@@ -134,10 +125,10 @@ export default function Reviews() {
         </PageContainer>
       </main>
     </>
-  );
+  )
 }
 
 //? Layout
 Reviews.getProfileLayout = function pageLayout(page) {
-  return <>{page}</>;
-};
+  return <>{page}</>
+}

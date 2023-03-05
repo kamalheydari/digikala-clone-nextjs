@@ -1,11 +1,11 @@
-import useDisclosure from "hooks/useDisclosure";
+import useDisclosure from 'hooks/useDisclosure'
 
-import { Icons } from "components";
+import { Icons } from 'components'
 
-import { truncate } from "utils/truncate";
+import { truncate } from 'utils/truncate'
 
 export default function Description({ description }) {
-  const [isShowDesc, showDescHandlers] = useDisclosure();
+  const [isShowDesc, showDescHandlers] = useDisclosure()
 
   return (
     <section>
@@ -20,12 +20,12 @@ export default function Description({ description }) {
             className='flex items-center py-2 text-sm text-sky-400'
             onClick={showDescHandlers.toggle}
           >
-            {isShowDesc ? "بستن" : "مشاهده بیشتر"}
+            {isShowDesc ? 'بستن' : 'مشاهده بیشتر'}
             <Icons.ArrowLeft className='icon text-sky-400' />
           </button>
         )}
       </div>
       <div className='section-divide-y ' />
     </section>
-  );
+  )
 }

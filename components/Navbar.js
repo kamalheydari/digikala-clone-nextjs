@@ -1,24 +1,24 @@
-import Link from "next/link";
-import Image from "next/image";
-import { useState } from "react";
+import Link from 'next/link'
+import Image from 'next/image'
+import { useState } from 'react'
 
-import { Icons, Skeleton } from "components";
-import useCategory from "hooks/useCategory";
+import { Icons, Skeleton } from 'components'
+import useCategory from 'hooks/useCategory'
 
 export default function Navbar() {
-  const { categories, isLoading } = useCategory();
+  const { categories, isLoading } = useCategory()
 
   //? State
-  const [activeMinCat, setActiveMinCat] = useState("/electronic-devices");
-  const [hover, setHover] = useState(false);
+  const [activeMinCat, setActiveMinCat] = useState('/electronic-devices')
+  const [hover, setHover] = useState(false)
 
   //? Handlers
   const handleActive = (cat) => {
-    setActiveMinCat(cat.category);
-  };
+    setActiveMinCat(cat.category)
+  }
   const hanldeDeactive = () => {
-    setActiveMinCat("/electronic-devices");
-  };
+    setActiveMinCat('/electronic-devices')
+  }
 
   //? Local Components
   const MainCategorySkeleton = () => (
@@ -33,7 +33,7 @@ export default function Navbar() {
         <Skeleton.Item height='h-5' width='w-32' animated='background' />
       </Skeleton.Items>
     </Skeleton>
-  );
+  )
 
   //? Render
   return (
@@ -46,14 +46,14 @@ export default function Navbar() {
         <Icons.Bars className='icon' />
         دسته‌بندی کالاها
       </button>
-      <div className={`navbar__dropshadow ${hover ? "block" : "hidden"}`} />
+      <div className={`navbar__dropshadow ${hover ? 'block' : 'hidden'}`} />
 
       <div
         className='navbar__content '
         onMouseOver={() => setHover(true)}
         onMouseLeave={() => {
-          hanldeDeactive();
-          setHover(false);
+          hanldeDeactive()
+          setHover(false)
         }}
       >
         <div className='flex'>
@@ -62,7 +62,7 @@ export default function Navbar() {
               <MainCategorySkeleton />
             ) : (
               categories.slice(0, 2).map((mainCategory) => {
-                if (mainCategory.parent === "/") {
+                if (mainCategory.parent === '/') {
                   return (
                     <li
                       key={mainCategory._id}
@@ -84,7 +84,7 @@ export default function Navbar() {
                         </a>
                       </Link>
                     </li>
-                  );
+                  )
                 }
               })
             )}
@@ -108,7 +108,7 @@ export default function Navbar() {
                           {categories.map((childCategory) => {
                             if (
                               childCategory.parent ===
-                              "/" + parentCategory.slug
+                              '/' + parentCategory.slug
                             ) {
                               return (
                                 <li key={childCategory._id} className=''>
@@ -120,17 +120,17 @@ export default function Navbar() {
                                     </a>
                                   </Link>
                                 </li>
-                              );
+                              )
                             }
                           })}
                         </ul>
                       </li>
-                    );
+                    )
                   }
                 })}
           </ul>
         </div>
       </div>
     </div>
-  );
+  )
 }

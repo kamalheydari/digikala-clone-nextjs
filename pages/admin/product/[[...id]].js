@@ -1,14 +1,14 @@
-import Head from "next/head";
-import { useEffect, useState, useRef } from "react";
-import { useRouter } from "next/router";
+import Head from 'next/head'
+import { useEffect, useState, useRef } from 'react'
+import { useRouter } from 'next/router'
 
 import {
   useCreateProductMutation,
   useGetSingleProductQuery,
   useUpdateProductMutation,
-} from "app/api/productApi";
+} from 'app/api/productApi'
 
-import { useGetDetailsQuery } from "app/api/detailsApi";
+import { useGetDetailsQuery } from 'app/api/detailsApi'
 
 import {
   AddColors,
@@ -21,56 +21,46 @@ import {
   HandleResponse,
   TextField,
   BigLoading,
-} from "components";
+} from 'components'
 
-import useDisclosure from "hooks/useDisclosure";
-import { useForm } from "react-hook-form";
+import useDisclosure from 'hooks/useDisclosure'
+import { useForm } from 'react-hook-form'
 
 export default function Product() {
   //? Assets
-  const router = useRouter();
-  const { id } = router.query;
+  const router = useRouter()
+  const { id } = router.query
 
   //? Modals
-  const [
-    isShowConfirmUpdateModal,
-    confirmUpdateModalHandlers,
-  ] = useDisclosure();
+  const [isShowConfirmUpdateModal, confirmUpdateModalHandlers] = useDisclosure()
 
   //? State
-  const [isEdit, setIsEdit] = useState(false);
-  const [images, setImages] = useState([]);
-  const [selectedCategories, setSelectedCategories] = useState({});
+  const [isEdit, setIsEdit] = useState(false)
+  const [images, setImages] = useState([])
+  const [selectedCategories, setSelectedCategories] = useState({})
   const [updateInfo, setUpdateInfo] = useState({
-    id: "",
+    id: '',
     editedData: {},
-  });
-  const [isDetailsSkip, setIsDetailsSkip] = useState(true);
+  })
+  const [isDetailsSkip, setIsDetailsSkip] = useState(true)
 
   //? Form Hook
-  const {
-    handleSubmit,
-    register,
-    reset,
-    control,
-    getValues,
-    watch,
-    setValue,
-  } = useForm({
-    defaultValues: {
-      title: "",
-      price: 0,
-      discount: 0,
-      description: "",
-      images: [],
-      sizes: [],
-      colors: [],
-      category: "",
-      inStock: 0,
-      info: [],
-      specification: [],
-    },
-  });
+  const { handleSubmit, register, reset, control, getValues, watch, setValue } =
+    useForm({
+      defaultValues: {
+        title: '',
+        price: 0,
+        discount: 0,
+        description: '',
+        images: [],
+        sizes: [],
+        colors: [],
+        category: '',
+        inStock: 0,
+        info: [],
+        specification: [],
+      },
+    })
 
   //? Queries
   //*   Get Details
@@ -79,13 +69,11 @@ export default function Product() {
       id: selectedCategories?.lvlTwoCategory?._id,
     },
     { skip: isDetailsSkip }
-  );
+  )
 
   //*   Create Product
-  const [
-    createProduct,
-    { data, isSuccess, isLoading, isError, error },
-  ] = useCreateProductMutation();
+  const [createProduct, { data, isSuccess, isLoading, isError, error }] =
+    useCreateProductMutation()
 
   //*   Update Product
   const [
@@ -97,37 +85,37 @@ export default function Product() {
       error: error_update,
       isLoading: isLoading_update,
     },
-  ] = useUpdateProductMutation();
+  ] = useUpdateProductMutation()
 
   //*    Edit Product
   const { data: data_product_get } = useGetSingleProductQuery(
     { id },
     { skip: !isEdit }
-  );
+  )
 
   //? Re-Renders
   //*   Select Category To Fetch Details
   useEffect(() => {
     if (selectedCategories?.lvlTwoCategory?._id) {
-      setIsDetailsSkip(false);
+      setIsDetailsSkip(false)
     }
-  }, [selectedCategories?.lvlTwoCategory?._id]);
+  }, [selectedCategories?.lvlTwoCategory?._id])
 
   //*   Set Details
   useEffect(() => {
     if (details) {
-      setValue("info", details.info);
-      setValue("specification", details.specification);
-      setValue("optionsType", details.optionsType);
+      setValue('info', details.info)
+      setValue('specification', details.specification)
+      setValue('optionsType', details.optionsType)
     }
-  }, [details]);
+  }, [details])
 
   //*   Execute Get Product Query
   useEffect(() => {
     if (id) {
-      setIsEdit(true);
+      setIsEdit(true)
     }
-  }, []);
+  }, [])
 
   //*   Set Product Details On Edit Mode
   useEffect(() => {
@@ -144,7 +132,7 @@ export default function Product() {
         inStock,
         info,
         specification,
-      } = data_product_get.product;
+      } = data_product_get.product
       reset({
         title,
         price,
@@ -156,10 +144,10 @@ export default function Product() {
         inStock,
         info,
         specification,
-      });
-      setImages(images);
+      })
+      setImages(images)
     }
-  }, [data_product_get]);
+  }, [data_product_get])
 
   //? Hanlders
   const submitHandler = (data) => {
@@ -168,8 +156,8 @@ export default function Product() {
         ...data,
         category: selectedCategories.lvlThreeCategory.category,
       },
-    });
-  };
+    })
+  }
 
   const updateHandler = async () => {
     setUpdateInfo({
@@ -179,21 +167,21 @@ export default function Product() {
         ...data_product_get.product,
         ...watch(),
       },
-    });
-    confirmUpdateModalHandlers.open();
-  };
+    })
+    confirmUpdateModalHandlers.open()
+  }
 
   const deleteImageHandler = (selected) => {
-    setImages(images.filter((item) => item.url !== selected.url));
-  };
+    setImages(images.filter((item) => item.url !== selected.url))
+  }
 
   const addImageHandler = (newImages) => {
-    setImages([...newImages]);
-  };
+    setImages([...newImages])
+  }
 
   const getUploadedImagesHandler = (media, imgOldURL) => {
-    setImages([...media, ...imgOldURL]);
-  };
+    setImages([...media, ...imgOldURL])
+  }
 
   //? Render(s)
 
@@ -217,11 +205,11 @@ export default function Product() {
           error={error_update?.data?.err}
           message={data_update?.msg}
           onSuccess={() => {
-            setUpdateInfo({ id: "", editedData: {} })
+            setUpdateInfo({ id: '', editedData: {} })
             confirmUpdateModalHandlers.close()
           }}
           onError={() => {
-            setUpdateInfo({ id: "", editedData: {} })
+            setUpdateInfo({ id: '', editedData: {} })
             confirmUpdateModalHandlers.close()
           }}
         />
@@ -235,17 +223,17 @@ export default function Product() {
           error={error?.data?.err}
           message={data?.msg}
           onSuccess={() => {
-            router.push("/admin/products")
+            router.push('/admin/products')
           }}
         />
       )}
 
       <main>
         <Head>
-          <title>مدیریت | {id ? "بروزرسانی محصول" : "محصول جدید"}</title>
+          <title>مدیریت | {id ? 'بروزرسانی محصول' : 'محصول جدید'}</title>
         </Head>
 
-        <PageContainer title={id ? "بروزرسانی محصول" : "محصول جدید"}>
+        <PageContainer title={id ? 'بروزرسانی محصول' : 'محصول جدید'}>
           <section className='p-3 md:px-3 xl:px-8 2xl:px-10'>
             <form onSubmit={handleSubmit(submitHandler)} className='space-y-10'>
               <TextField label='عنوان' name='title' control={control} />
@@ -258,7 +246,7 @@ export default function Product() {
                   className='text-right input'
                   name='description'
                   id='description'
-                  {...register("description")}
+                  {...register('description')}
                 />
               </div>
               <UploadImages
@@ -296,21 +284,21 @@ export default function Product() {
               {!id && (
                 <SelectCategories
                   setSelectedCategories={setSelectedCategories}
-                  show={["lvlOne", "lvlTwo", "lvlThree"]}
+                  show={['lvlOne', 'lvlTwo', 'lvlThree']}
                 />
               )}
-              {getValues("optionsType") === "colors" ||
-              getValues("colors").length > 0 ? (
+              {getValues('optionsType') === 'colors' ||
+              getValues('colors').length > 0 ? (
                 <AddColors
                   name='colors'
                   control={control}
                   register={register}
                 />
-              ) : getValues("optionsType") === "sizes" ||
-                getValues("sizes").length > 0 ? (
+              ) : getValues('optionsType') === 'sizes' ||
+                getValues('sizes').length > 0 ? (
                 <AddSizes name='sizes' control={control} register={register} />
               ) : (
-                ""
+                ''
               )}
               <div className='text-sm space-y-1.5'>
                 <span>ویژگی‌ها</span>
@@ -322,7 +310,7 @@ export default function Product() {
                     </tr>
                   </thead>
                   <tbody>
-                    {getValues("info").map((item, index) => (
+                    {getValues('info').map((item, index) => (
                       <tr key={index} className='border-b-2 border-gray-100'>
                         <td className='my-0.5 text-right'>
                           <input
@@ -353,7 +341,7 @@ export default function Product() {
                     </tr>
                   </thead>
                   <tbody>
-                    {getValues("specification").map((item, index) => (
+                    {getValues('specification').map((item, index) => (
                       <tr key={index} className='border-b-2 border-gray-100'>
                         <td className='my-0.5 text-right'>
                           <input
@@ -402,5 +390,5 @@ export default function Product() {
 }
 
 Product.getDashboardLayout = function pageLayout(page) {
-  return <>{page}</>;
-};
+  return <>{page}</>
+}

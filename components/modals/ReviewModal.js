@@ -1,13 +1,13 @@
-import { useState, useRef } from "react";
+import { useState, useRef } from 'react'
 
-import { nanoid } from "@reduxjs/toolkit";
-import { useCreateReviewMutation } from "app/api/reviewApi";
+import { nanoid } from '@reduxjs/toolkit'
+import { useCreateReviewMutation } from 'app/api/reviewApi'
 
-import { ratingStatus } from "utils/constatns";
+import { ratingStatus } from 'utils/constatns'
 
-import { useFieldArray, useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { reviewSchema } from "utils/validation";
+import { useFieldArray, useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { reviewSchema } from 'utils/validation'
 
 import {
   Icons,
@@ -16,18 +16,18 @@ import {
   SubmitModalBtn,
   Modal,
   HandleResponse,
-} from "components";
+} from 'components'
 
 export default function ReviewModal(props) {
   //? Props
-  const { isShow, onClose, productTitle, prdouctID } = props;
+  const { isShow, onClose, productTitle, prdouctID } = props
 
   //? Refs
-  const positiveRef = useRef(null);
-  const negativeRef = useRef(null);
+  const positiveRef = useRef(null)
+  const negativeRef = useRef(null)
 
   //? State
-  const [rating, setRating] = useState(1);
+  const [rating, setRating] = useState(1)
 
   //? Form Hook
   const {
@@ -38,56 +38,54 @@ export default function ReviewModal(props) {
     control,
   } = useForm({
     resolver: yupResolver(reviewSchema),
-  });
+  })
   const {
     fields: positivePointsFields,
     append: appentPositivePoint,
     remove: removePositivePoint,
   } = useFieldArray({
-    name: "positivePoints",
+    name: 'positivePoints',
     control,
-  });
+  })
 
   const {
     fields: negativePointsFields,
     append: appendNegativePoint,
     remove: removeNegativePoint,
   } = useFieldArray({
-    name: "negativePoints",
+    name: 'negativePoints',
     control,
-  });
+  })
 
   //? Create Review Query
-  const [
-    createReview,
-    { isSuccess, isLoading, data, isError, error },
-  ] = useCreateReviewMutation();
+  const [createReview, { isSuccess, isLoading, data, isError, error }] =
+    useCreateReviewMutation()
 
   //? Handlers
   const handleAddPositivePoint = () => {
-    appentPositivePoint({ id: nanoid(), title: positiveRef.current.value });
-    positiveRef.current.value = "";
-  };
+    appentPositivePoint({ id: nanoid(), title: positiveRef.current.value })
+    positiveRef.current.value = ''
+  }
 
   const handleAddNegativePoint = () => {
-    appendNegativePoint({ id: nanoid(), title: negativeRef.current.value });
-    negativeRef.current.value = "";
-  };
+    appendNegativePoint({ id: nanoid(), title: negativeRef.current.value })
+    negativeRef.current.value = ''
+  }
 
   const handleDeletePositivePoint = (index) => {
-    removePositivePoint(index);
-  };
+    removePositivePoint(index)
+  }
 
   const handleDeleteNegativePoint = (index) => {
-    removeNegativePoint(index);
-  };
+    removeNegativePoint(index)
+  }
 
   const submitHander = async (data) => {
     await createReview({
       id: prdouctID,
       body: { rating, ...data },
-    });
-  };
+    })
+  }
 
   //? Render(s)
   return (
@@ -100,14 +98,14 @@ export default function ReviewModal(props) {
           error={error?.data?.err}
           message={data?.msg}
           onSuccess={() => {
-            onClose();
-            reset();
-            setRating(1);
+            onClose()
+            reset()
+            setRating(1)
           }}
           onError={() => {
-            onClose();
-            reset();
-            setRating(1);
+            onClose()
+            reset()
+            setRating(1)
           }}
         />
       )}
@@ -138,7 +136,7 @@ export default function ReviewModal(props) {
                   value={rating}
                   className='w-full h-2 bg-gray-200 rounded-lg cursor-pointer '
                   onChange={(e) => {
-                    setRating(+e.target.value);
+                    setRating(+e.target.value)
                   }}
                 />
                 <div className='flex justify-between'>
@@ -258,7 +256,7 @@ export default function ReviewModal(props) {
                   type='text'
                   name='comment'
                   id='comment'
-                  {...register("comment")}
+                  {...register('comment')}
                 />
                 <DisplayError errors={formErrors.comment} />
               </div>
@@ -273,5 +271,5 @@ export default function ReviewModal(props) {
         </Modal.Content>
       </Modal>
     </>
-  );
+  )
 }

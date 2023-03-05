@@ -1,56 +1,56 @@
-import db from "lib/db";
-import Review from "models/Review";
+import db from 'lib/db'
+import Review from 'models/Review'
 
-import auth from "middleware/auth";
-import sendError from "utils/sendError";
+import auth from 'middleware/auth'
+import sendError from 'utils/sendError'
 
 export default async function (req, res) {
   switch (req.method) {
-    case "GET":
-      getReviews(req, res);
-      break;
+    case 'GET':
+      getReviews(req, res)
+      break
 
     default:
-      break;
+      break
   }
 }
 
 const getReviews = async (req, res) => {
-  const page = +req.query.page || 1;
-  const page_size = +req.query.page_size || 5;
+  const page = +req.query.page || 1
+  const page_size = +req.query.page_size || 5
 
   try {
-    const result = await auth(req, res);
+    const result = await auth(req, res)
 
-    let reviews, reviewsLength;
+    let reviews, reviewsLength
 
-    await db.connect();
+    await db.connect()
 
     if (!result.root) {
       reviews = await Review.find({ user: result.id })
-        .populate("product", "images")
-        .populate("user", "name")
+        .populate('product', 'images')
+        .populate('user', 'name')
         .skip((page - 1) * page_size)
         .limit(page_size)
         .sort({
-          createdAt: "desc",
-        });
+          createdAt: 'desc',
+        })
 
-      reviewsLength = await Review.countDocuments({ user: result.id });
+      reviewsLength = await Review.countDocuments({ user: result.id })
     } else {
       reviews = await Review.find()
-        .populate("product", "images")
-        .populate("user", "name")
+        .populate('product', 'images')
+        .populate('user', 'name')
         .skip((page - 1) * page_size)
         .limit(page_size)
         .sort({
-          createdAt: "desc",
-        });
+          createdAt: 'desc',
+        })
 
-      reviewsLength = await Review.countDocuments();
+      reviewsLength = await Review.countDocuments()
     }
 
-    await db.disconnect();
+    await db.disconnect()
 
     res.status(200).json({
       reviews,
@@ -61,8 +61,8 @@ const getReviews = async (req, res) => {
       hasNextPage: page_size * page < reviewsLength,
       hasPreviousPage: page > 1,
       lastPage: Math.ceil(reviewsLength / page_size),
-    });
+    })
   } catch (error) {
-    sendError(res, 500, error.message);
+    sendError(res, 500, error.message)
   }
-};
+}

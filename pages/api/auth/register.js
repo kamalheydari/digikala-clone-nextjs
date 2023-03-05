@@ -1,48 +1,48 @@
-import bcrypt from "bcrypt";
+import bcrypt from 'bcrypt'
 
-import db from "lib/db";
-import User from "models/User";
+import db from 'lib/db'
+import User from 'models/User'
 
-import sendError from "utils/sendError";
-import { createAccessToken } from "utils/generateToken";
+import sendError from 'utils/sendError'
+import { createAccessToken } from 'utils/generateToken'
 
 export default async (req, res) => {
   switch (req.method) {
-    case "POST":
-      await register(req, res);
-      break;
+    case 'POST':
+      await register(req, res)
+      break
 
     default:
-      break;
+      break
   }
-};
+}
 
 const register = async (req, res) => {
   try {
-    await db.connect();
-    const { name, email, password } = req.body;
+    await db.connect()
+    const { name, email, password } = req.body
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email })
 
     if (user)
-      return sendError(res, 422, "شما قبلا با این آدرس ایمیل ثیت نام کردید");
+      return sendError(res, 422, 'شما قبلا با این آدرس ایمیل ثیت نام کردید')
 
-    const hashPassword = await bcrypt.hash(password, 12);
+    const hashPassword = await bcrypt.hash(password, 12)
 
-    const newUser = new User({ name, email, password: hashPassword });
+    const newUser = new User({ name, email, password: hashPassword })
 
-    await newUser.save();
-    await db.disconnect();
+    await newUser.save()
+    await db.disconnect()
 
-    const access_token = createAccessToken({ id: newUser._id });
+    const access_token = createAccessToken({ id: newUser._id })
 
     res.status(201).json({
-      msg: "عضویت موفقیت آمیز بود",
+      msg: 'عضویت موفقیت آمیز بود',
       data: {
         access_token,
       },
-    });
+    })
   } catch (error) {
-    sendError(res, 500, error.message);
+    sendError(res, 500, error.message)
   }
-};
+}

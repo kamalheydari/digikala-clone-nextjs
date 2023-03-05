@@ -1,5 +1,5 @@
-import Head from "next/head";
-import { useState } from "react";
+import Head from 'next/head'
+import { useState } from 'react'
 
 import {
   OrderCard,
@@ -7,25 +7,19 @@ import {
   ShowWrapper,
   EmptyOrdersList,
   PageContainer,
-} from "components";
-import { useGetOrdersQuery } from "app/api/orderApi";
+} from 'components'
+import { useGetOrdersQuery } from 'app/api/orderApi'
 
 export default function Orders() {
   //? State
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(1)
 
   //? Get Orders Data
-  const {
-    data,
-    isSuccess,
-    isFetching,
-    error,
-    isError,
-    refetch,
-  } = useGetOrdersQuery({
-    pageSize: 5,
-    page,
-  });
+  const { data, isSuccess, isFetching, error, isError, refetch } =
+    useGetOrdersQuery({
+      pageSize: 5,
+      page,
+    })
 
   //? Render
   return (
@@ -67,8 +61,8 @@ export default function Orders() {
         )}
       </PageContainer>
     </main>
-  );
+  )
 }
 Orders.getProfileLayout = function pageLayout(page) {
-  return <>{page}</>;
-};
+  return <>{page}</>
+}
