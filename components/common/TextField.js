@@ -13,7 +13,7 @@ export default function TextField({
   const { field } = useController({ name, control, rules: { required: true } })
 
   const onChangeHandler = (e) => {
-    if (type === 'number') {
+    if (type === 'number' && e.target.value.length !== 0) {
       field.onChange(parseInt(e.target.value))
     } else {
       field.onChange(e.target.value)
