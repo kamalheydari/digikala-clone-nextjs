@@ -17,6 +17,7 @@ import {
   PageLoading,
   Alert,
 } from 'components'
+import { useRouter } from 'next/router'
 
 export default function MyApp({ Component, pageProps }) {
   //? Fix Hydration failed
@@ -29,13 +30,15 @@ export default function MyApp({ Component, pageProps }) {
     return null
   }
 
+  const router = useRouter()
+
   //? Lyout Config
   if (Component.getClientLayout) {
     return Component.getClientLayout(
       <Provider store={store}>
         <ClientLayout>
           <PageLoading />
-          <Component {...pageProps} />
+          <Component key={router.asPath} {...pageProps} />
           <ValidationToken />
           <Alert />
         </ClientLayout>
@@ -49,7 +52,7 @@ export default function MyApp({ Component, pageProps }) {
       <Provider store={store}>
         <DashboardLayout>
           <PageLoading />
-          <Component {...pageProps} />
+          <Component key={router.asPath} {...pageProps} />
           <ValidationToken />
           <Alert />
         </DashboardLayout>
@@ -62,7 +65,7 @@ export default function MyApp({ Component, pageProps }) {
       <Provider store={store}>
         <ProfileLayout>
           <PageLoading />
-          <Component {...pageProps} />
+          <Component key={router.asPath} {...pageProps} />
           <ValidationToken />
 
           <Alert />
@@ -74,7 +77,7 @@ export default function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <PageLoading />
-      <Component {...pageProps} />
+      <Component key={router.asPath} {...pageProps} />
       <Alert />
     </Provider>
   )
