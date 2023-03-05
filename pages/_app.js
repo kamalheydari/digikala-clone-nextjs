@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import "/styles/main.css";
-import "/styles/scrollbar.css";
+import "/styles/browser-styles.css"
 import "/styles/swiper.css";
 
 //? Store
