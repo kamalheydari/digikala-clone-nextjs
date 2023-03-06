@@ -52,7 +52,7 @@ export default function MyApp({ Component, pageProps }) {
       <Provider store={store}>
         <DashboardLayout>
           <PageLoading />
-          <Component key={router.asPath} {...pageProps} />
+          <Component {...pageProps} />
           <ValidationToken />
           <Alert />
         </DashboardLayout>
@@ -65,9 +65,8 @@ export default function MyApp({ Component, pageProps }) {
       <Provider store={store}>
         <ProfileLayout>
           <PageLoading />
-          <Component key={router.asPath} {...pageProps} />
+          <Component {...pageProps} />
           <ValidationToken />
-
           <Alert />
         </ProfileLayout>
       </Provider>
@@ -77,7 +76,7 @@ export default function MyApp({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <PageLoading />
-      <Component key={router.asPath} {...pageProps} />
+      <Component {...pageProps} />
       <Alert />
     </Provider>
   )
