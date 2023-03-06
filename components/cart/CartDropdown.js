@@ -74,14 +74,14 @@ export default function CartDropdown() {
                   <ArrowLink path='/checkout/cart'>مشاهده‌ی سبد خرید</ArrowLink>
                 </div>
                 {/* Itmes */}
-                <div className='overflow-y-auto h-80 mx-1'>
+                <div className='divide-y divide-gray-50 overflow-y-auto h-80 mx-1'>
                   {cartItems.map((item) => (
                     <CartItem item={item} key={item.itemID} />
                   ))}
                 </div>
                 {/* Footer */}
                 <div className='px-3 py-2 flex justify-between items-center border-t'>
-                  <div>
+                  <div>revie
                     <span>مبلغ قابل پرداخت</span>
                     <div className='flex-center'>
                       <span className='text-sm farsi-digits'>

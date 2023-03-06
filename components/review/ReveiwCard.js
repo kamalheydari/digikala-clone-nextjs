@@ -30,9 +30,9 @@ export default function ReveiwCard({
   //? Local Components
 
   const DropdownReview = ({ openConfirmDeleteModal }) => (
-    <Menu as='div' className='relative inline-block text-left'>
-      <Menu.Button className='flex-center p-1.5 transition-colors rounded-md hover:bg-red-100'>
-        <Icons.More className='cursor-pointer icon' />
+    <Menu as='div' className='dropdown'>
+      <Menu.Button className='dropdown__button'>
+        <Icons.More className='icon' />
       </Menu.Button>
 
       <Transition
@@ -44,7 +44,7 @@ export default function ReveiwCard({
         leaveFrom='transform opacity-100 scale-100'
         leaveTo='transform opacity-0 scale-95'
       >
-        <Menu.Items className='absolute left-0 mt-2 origin-top-right space-y-2 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
+        <Menu.Items className='dropdown__items'>
           {singleComment ? (
             <>
               <Menu.Item>
