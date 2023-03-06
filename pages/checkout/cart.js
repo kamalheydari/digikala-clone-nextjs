@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
@@ -15,6 +16,7 @@ import {
   EmptyCart,
   Toman,
 } from 'components'
+import { Menu, Transition } from '@headlessui/react'
 
 import { formatNumber } from 'utils/formatNumber'
 
@@ -42,7 +44,41 @@ export default function Cart() {
     router.push('/checkout/shipping')
   }
 
-  //? Render
+  //? Local Components
+  const DeleteAllDropDown = () => (
+    <Menu as='div' className='dropdown'>
+      <Menu.Button className='dropdown__button'>
+        <Icons.More className='icon' />
+      </Menu.Button>
+
+      <Transition
+        as={Fragment}
+        enter='transition ease-out duration-100'
+        enterFrom='transform opacity-0 scale-95'
+        enterTo='transform opacity-100 scale-100'
+        leave='transition ease-in duration-75'
+        leaveFrom='transform opacity-100 scale-100'
+        leaveTo='transform opacity-0 scale-95'
+      >
+        <Menu.Items
+          className='dropdown__items w-32
+       '
+        >
+          <Menu.Item>
+            <button
+              onClick={() => dispatch(clearCart())}
+              className='px-4 py-3 flex-center gap-x-2'
+            >
+              <Icons.Delete className='icon' />
+              <span>حذف همه</span>
+            </button>
+          </Menu.Item>
+        </Menu.Items>
+      </Transition>
+    </Menu>
+  )
+
+  //? Render(s)
   if (cartItems.length === 0)
     return (
       <>
@@ -86,17 +122,7 @@ export default function Cart() {
                 {formatNumber(totalItems)} کالا
               </span>
             </div>
-
-            <div className='relative h-fit px-1.5 group'>
-              <Icons.More className='cursor-pointer icon' />
-              <button
-                onClick={() => dispatch(clearCart())}
-                className='absolute left-0 items-center hidden px-4 py-3 bg-white rounded shadow-3xl top-5 w-36 gap-x-2 group-hover:flex '
-              >
-                <Icons.Delete className='icon' />
-                <span>حذف همه</span>
-              </button>
-            </div>
+            <DeleteAllDropDown />
           </section>
 
           {/* carts */}
