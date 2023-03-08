@@ -60,7 +60,7 @@ export { default as CartItem } from './cart/CartItem'
 export { default as DiscountCartItem } from './cart/DiscountCartItem'
 export { default as AddToCart } from './cart/AddToCart'
 export { default as CartDropdown } from './cart/CartDropdown'
-export { default as CartTotalItems } from './cart/CartTotalItems'
+export { default as CartBadge } from './cart/CartBadge'
 
 //* MODAL COMPONENTS
 export { default as ConfirmDeleteModal } from './modals/ConfirmDeleteModal'

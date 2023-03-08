@@ -1,13 +1,13 @@
 import Link from 'next/link'
 
-import { CartDropdown, CartTotalItems } from 'components'
+import { CartDropdown, CartBadge } from 'components'
 
 export default function Cart() {
   return (
     <>
       <Link href='/checkout/cart'>
         <a className='lg:hidden'>
-          <CartTotalItems />
+          <CartBadge />
         </a>
       </Link>
 

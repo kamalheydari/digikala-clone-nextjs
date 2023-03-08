@@ -9,7 +9,7 @@ import {
   CartItem,
   RedirectToLogin,
   Button,
-  CartTotalItems,
+  CartBadge,
   Toman,
   EmptyCart,
 } from 'components'
@@ -50,7 +50,7 @@ export default function CartDropdown() {
 
       <Menu as='div' className='dropdown'>
         <Menu.Button className='dropdown__button'>
-          <CartTotalItems />
+          <CartBadge />
         </Menu.Button>
 
         <Transition

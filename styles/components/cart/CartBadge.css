@@ -1,0 +1,8 @@
+@layer components {
+  .cart-badge {
+    @apply relative;
+  }
+  .cart-badge span {
+    @apply absolute outline outline-2 bottom-3.5 left-5 bg-red-500 rounded-md w-5 h-5 p-0.5 text-center text-xs text-white farsi-digits;
+  }
+}
