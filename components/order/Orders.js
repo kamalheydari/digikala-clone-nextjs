@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 
 import { useSelector } from 'react-redux'
-import { useGetOrdersQuery } from 'app/api/orderApi'
+import { useGetOrdersQuery } from 'services'
 
 import { formatNumber } from 'utils/formatNumber'
 

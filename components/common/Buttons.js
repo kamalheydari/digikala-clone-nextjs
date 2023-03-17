@@ -24,7 +24,7 @@ export const Button = ({
 }
 
 export const LoginBtn = ({ children, ...restPropps }) => (
-  <Button type='submit' className='rounded-3xl w-44 mx-auto' {...restPropps}>
+  <Button type='submit' className='mx-auto rounded-3xl w-44' {...restPropps}>
     {children}
   </Button>
 )

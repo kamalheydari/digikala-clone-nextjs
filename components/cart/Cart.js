@@ -11,7 +11,7 @@ export default function Cart() {
         </a>
       </Link>
 
-      <div className=' hidden lg:block'>
+      <div className='hidden lg:block'>
         <CartDropdown />
       </div>
     </>

@@ -63,12 +63,14 @@ const getUsers = async (req, res) => {
     res.status(200).json({
       users,
       usersLength,
-      currentPage: page,
-      nextPage: page + 1,
-      previousPage: page - 1,
-      hasNextPage: page_size * page < usersLength,
-      hasPreviousPage: page > 1,
-      lastPage: Math.ceil(usersLength / page_size),
+      pagination: {
+        currentPage: page,
+        nextPage: page + 1,
+        previousPage: page - 1,
+        hasNextPage: page_size * page < usersLength,
+        hasPreviousPage: page > 1,
+        lastPage: Math.ceil(usersLength / page_size),
+      },
     })
   } catch (error) {
     sendError(res, 500, error.message)

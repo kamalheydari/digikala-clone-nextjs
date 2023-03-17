@@ -25,15 +25,11 @@ const getProducts = async (req, res) => {
   const { category, search } = req.query
 
   //? Filters
-  const categoryFilter =
-    category && category !== 'all'
-      ? {
-          category: {
-            $regex: category,
-            $options: 'i',
-          },
-        }
-      : {}
+  const categoryFilter = category
+    ? {
+        category: { $in: category },
+      }
+    : {}
 
   const searchFilter =
     search && search !== 'all'
@@ -65,12 +61,14 @@ const getProducts = async (req, res) => {
     res.status(200).json({
       productsLength,
       products,
-      currentPage: page,
-      nextPage: page + 1,
-      previousPage: page - 1,
-      hasNextPage: page_size * page < productsLength,
-      hasPreviousPage: page > 1,
-      lastPage: Math.ceil(productsLength / page_size),
+      pagination: {
+        currentPage: page,
+        nextPage: page + 1,
+        previousPage: page - 1,
+        hasNextPage: page_size * page < productsLength,
+        hasPreviousPage: page > 1,
+        lastPage: Math.ceil(productsLength / page_size),
+      },
     })
   } catch (error) {
     sendError(res, 500, error.message)
@@ -95,6 +93,7 @@ const createProduct = async (req, res) => {
       inStock,
       info,
       specification,
+      category_levels,
     } = req.body
 
     if (
@@ -120,6 +119,7 @@ const createProduct = async (req, res) => {
       inStock,
       info,
       specification,
+      category_levels,
     })
     await newProduct.save()
     await db.disconnect()

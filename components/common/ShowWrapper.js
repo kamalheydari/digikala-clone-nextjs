@@ -7,7 +7,8 @@ export default function ShowWrapper({
   isFetching,
   dataLength,
   isSuccess,
-  emptyElement,
+  emptyComponent,
+  loadingComponent,
   children,
 }) {
   return (
@@ -22,12 +23,12 @@ export default function ShowWrapper({
         </div>
       ) : isFetching ? (
         <div className='px-3 py-20'>
-          <BigLoading />
+          {loadingComponent ? loadingComponent : <BigLoading />}
         </div>
       ) : isSuccess && dataLength > 0 ? (
         <>{children}</>
       ) : isSuccess && dataLength === 0 ? (
-        <>{emptyElement}</>
+        <>{emptyComponent}</>
       ) : null}
     </section>
   )

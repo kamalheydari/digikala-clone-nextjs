@@ -1,4 +1,4 @@
-import { decrease, increase, removeFromCart } from 'app/slices/cart.slice'
+import { decrease, increase, removeFromCart } from 'store'
 import { useDispatch } from 'react-redux'
 
 import { Icons } from 'components'
@@ -13,7 +13,7 @@ export default function CartButtons({ item }) {
       <button type='button'>
         <Icons.Plus
           onClick={() => dispatch(increase(item.itemID))}
-          className='icon text-red-500'
+          className='text-red-500 icon'
         />
       </button>
 
@@ -23,14 +23,14 @@ export default function CartButtons({ item }) {
         <button type='button'>
           <Icons.Delete
             onClick={() => dispatch(removeFromCart(item.itemID))}
-            className='icon text-red-500'
+            className='text-red-500 icon'
           />
         </button>
       ) : (
         <button type='button'>
           <Icons.Minus
             onClick={() => dispatch(decrease(item.itemID))}
-            className='icon text-red-500'
+            className='text-red-500 icon'
           />
         </button>
       )}

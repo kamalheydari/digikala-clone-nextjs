@@ -2,10 +2,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
 
-import {
-  useDeleteProductMutation,
-  useGetProductsQuery,
-} from 'app/api/productApi'
+import { useDeleteProductMutation, useGetProductsQuery } from 'services'
 
 import {
   BigLoading,
@@ -19,32 +16,48 @@ import {
   SelectCategories,
 } from 'components'
 import useDisclosure from 'hooks/useDisclosure'
+import useChangeRoute from 'hooks/useChangeRoute'
+import useCategory from 'hooks/useCategory'
 
 export default function Products() {
+  //? Assets
+  const router = useRouter()
+  const changeRoute = useChangeRoute({
+    shallow: true,
+  })
+  const { categories } = useCategory()
+
   //? Modals
   const [isShowConfirmDeleteModal, confirmDeleteModalHandlers] = useDisclosure()
-  const router = useRouter()
 
   //? Refs
   const inputSearchRef = useRef()
 
   //?  State
+  const [skip, setSkip] = useState(false)
   const [deleteInfo, setDeleteInfo] = useState({
     id: '',
   })
-  const [page, setPage] = useState(1)
-  const [filterCategory, setFilterCategory] = useState('all')
-  const [search, setSearch] = useState('')
-  // const [selectedCategories, setSelectedCategories] = useState({});
-
-  //? Get Products Data
-  const { data, isFetching, error, isError, refetch } = useGetProductsQuery({
-    page,
-    filterCategory,
-    search,
+  const [filterCategory, setFilterCategory] = useState('')
+  const [search, setSearch] = useState(router.query?.search || '')
+  const [selectedCategories, setSelectedCategories] = useState({
+    level_one: {},
+    level_two: {},
+    level_three: {},
   })
 
-  //? Delete Product
+  //? Querirs
+  //*    Get Products Data
+  const { data, isFetching, error, isError, refetch } = useGetProductsQuery(
+    {
+      page: router.query?.page || 1,
+      filterCategory: router.query?.filterCategory || filterCategory,
+      search: router.query?.search || search,
+    },
+    { skip }
+  )
+
+  //*    Delete Product
   const [
     deleteProduct,
     {
@@ -56,19 +69,6 @@ export default function Products() {
     },
   ] = useDeleteProductMutation()
 
-  //? Filter Category
-  // useEffect(() => {
-  //   setPage(1);
-  //   if (selectedCategories?.lvlOneCategory?._id)
-  //     setFilterCategory(selectedCategories?.lvlOneCategory.category);
-
-  //   if (selectedCategories?.lvlTwoCategory?._id)
-  //     setFilterCategory(selectedCategories?.lvlTwoCategory.category);
-
-  //   if (selectedCategories?.lvlTwoCategory?._id)
-  //     setFilterCategory(selectedCategories?.lvlThreeCategory.category);
-  // }, [selectedCategories, search]);
-
   //? Handlers
   const handleDelete = (id) => {
     setDeleteInfo({ id })
@@ -76,18 +76,79 @@ export default function Products() {
   }
 
   const handleEdit = (id) => {
-    router.push(`/admin/product/${id}`)
+    router.push(`/admin/products/edit?id=${id}`)
   }
-
   const handleSubmit = (e) => {
     e.preventDefault()
-    setSearch(inputSearchRef.current.value)
+
+    if (selectedCategories?.level_three?._id) {
+      setFilterCategory(selectedCategories?.level_three._id)
+      changeRoute({
+        filterCategory: selectedCategories?.level_three._id,
+        level_one: selectedCategories?.level_one._id,
+        level_two: selectedCategories?.level_two._id,
+        level_three: selectedCategories?.level_three._id,
+      })
+    } else if (selectedCategories?.level_two?._id) {
+      setFilterCategory(selectedCategories?.level_two._id)
+      changeRoute({
+        filterCategory: selectedCategories?.level_two?._id,
+        level_one: selectedCategories?.level_one._id,
+        level_two: selectedCategories?.level_two._id,
+      })
+    } else if (selectedCategories?.level_one?._id) {
+      setFilterCategory(selectedCategories?.level_one._id)
+      changeRoute({
+        filterCategory: selectedCategories?.level_one._id,
+        level_one: selectedCategories?.level_one._id,
+      })
+    }
+
+    if (inputSearchRef.current.value) {
+      setSearch(inputSearchRef.current.value)
+      changeRoute({ search: inputSearchRef.current.value })
+    }
+    changeRoute({ page: 1 })
+    setSkip(false)
   }
 
   const handleRemoveSearch = () => {
     inputSearchRef.current.value = ''
     setSearch('')
+    setSelectedCategories({
+      level_one: {},
+      level_two: {},
+      level_three: {},
+    })
+    setFilterCategory('')
+    refetch()
+    router.push('/admin/products', undefined, { shallow: true })
   }
+
+  const findCategory = (id) => categories.find((cat) => cat._id === id)
+
+  //? Re-Render
+  useEffect(() => {
+    if (categories) {
+      if (router.query?.level_three)
+        setSelectedCategories({
+          level_one: findCategory(router.query.level_one),
+          level_three: findCategory(router.query.level_three),
+          level_two: findCategory(router.query.level_two),
+        })
+      else if (router.query?.level_two)
+        setSelectedCategories({
+          ...selectedCategories,
+          level_one: findCategory(router.query.level_one),
+          level_two: findCategory(router.query.level_two),
+        })
+      else if (router.query?.level_one)
+        setSelectedCategories({
+          ...selectedCategories,
+          level_one: findCategory(router.query.level_one),
+        })
+    }
+  }, [categories])
 
   //? Render
   return (
@@ -143,27 +204,32 @@ export default function Products() {
                 className='max-w-4xl mx-auto space-y-5'
                 onSubmit={handleSubmit}
               >
-                {/* <SelectCategories
+                <SelectCategories
                   setSelectedCategories={setSelectedCategories}
-                  show={["lvlOne", "lvlTwo", "lvlThree"]}
-                /> */}
+                  selectedCategories={selectedCategories}
+                />
 
-                <div className='flex flex-row-reverse rounded-md bg-zinc-200/80 '>
+                <div className='flex flex-row-reverse rounded-md gap-x-2 '>
                   <button
                     type='button'
-                    className='p-2'
+                    className='p-2 text-white border flex-center gap-x-2 min-w-max'
                     onClick={handleRemoveSearch}
                   >
+                    <span>حذف فیلترها</span>
                     <Icons.Close className='icon' />
                   </button>
                   <input
                     type='text'
-                    placeholder='جستجو'
-                    className='flex-grow p-1 text-right bg-transparent outline-none input'
+                    placeholder='نام محصول ...'
+                    className='flex-grow p-1 text-right input'
                     ref={inputSearchRef}
                     defaultValue={search}
                   />
-                  <button type='submit' className='p-2'>
+                  <button
+                    type='submit'
+                    className='p-2 border flex-center gap-x-2 min-w-max'
+                  >
+                    <span>اعمال فیلتر</span>
                     <Icons.Search className='icon' />
                   </button>
                 </div>
@@ -203,13 +269,8 @@ export default function Products() {
                   </section>
                   {data?.productsLength > 10 && (
                     <Pagination
-                      currentPage={data.currentPage}
-                      nextPage={data.nextPage}
-                      previousPage={data.previousPage}
-                      hasNextPage={data.hasNextPage}
-                      hasPreviousPage={data.hasPreviousPage}
-                      lastPage={data.lastPage}
-                      setPage={setPage}
+                      pagination={data.pagination}
+                      changeRoute={changeRoute}
                       section='adminProducts'
                     />
                   )}

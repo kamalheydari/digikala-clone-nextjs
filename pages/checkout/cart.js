@@ -2,7 +2,7 @@ import { Fragment } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-import { clearCart } from 'app/slices/cart.slice'
+import { clearCart } from 'store'
 import { useDispatch, useSelector } from 'react-redux'
 
 import {
@@ -60,10 +60,7 @@ export default function Cart() {
         leaveFrom='transform opacity-100 scale-100'
         leaveTo='transform opacity-0 scale-95'
       >
-        <Menu.Items
-          className='dropdown__items w-32
-       '
-        >
+        <Menu.Items className='w-32 dropdown__items '>
           <Menu.Item>
             <button
               onClick={() => dispatch(clearCart())}

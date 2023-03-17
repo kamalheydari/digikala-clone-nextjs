@@ -56,12 +56,14 @@ const getOrders = async (req, res) => {
     res.status(200).json({
       orders,
       ordersLength,
-      currentPage: page,
-      nextPage: page + 1,
-      previousPage: page - 1,
-      hasNextPage: page_size * page < ordersLength,
-      hasPreviousPage: page > 1,
-      lastPage: Math.ceil(ordersLength / page_size),
+      pagination: {
+        currentPage: page,
+        nextPage: page + 1,
+        previousPage: page - 1,
+        hasNextPage: page_size * page < ordersLength,
+        hasPreviousPage: page > 1,
+        lastPage: Math.ceil(ordersLength / page_size),
+      },
     })
   } catch (error) {
     sendError(res, 500, error.message)

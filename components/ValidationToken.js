@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { userLogout } from 'app/slices/user.slice'
+import { userLogout } from 'store'
 
 import verifyToken from 'utils/verifyToken'
 

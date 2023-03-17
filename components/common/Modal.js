@@ -22,6 +22,10 @@ const Modal = (props) => {
     isShow ? 'top-40 transform scale-100' : 'top-40 transform scale-50 '
   } max-w-3xl 
    fixed transition-all duration-700 left-0 right-0 mx-auto`
+      : effect === 'buttom-to-fit'
+      ? `
+  ${isShow ? 'bottom-0' : '-bottom-full'} w-full h-fit lg:max-w-3xl 
+   fixed transition-all duration-700 left-0 right-0 mx-auto`
       : ''
 
   return (
@@ -60,7 +64,7 @@ const Content = ({ onClose, children, ...restProps }) => {
 
 const Header = ({ onClose, children }) => {
   return (
-    <div className='flex justify-between pb-2 border-b-2 border-gray-200'>
+    <div className='flex items-center justify-between pb-2 border-b-2 border-gray-200'>
       <span className='text-sm'>{children}</span>
       <button onClick={onClose} className='p-1'>
         <Icons.Close className='icon' />

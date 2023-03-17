@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { clearCart } from 'app/slices/cart.slice'
-import { useCreateOrderMutation } from 'app/api/orderApi'
+import { clearCart, showAlert } from 'store'
 import { useDispatch, useSelector } from 'react-redux'
-import { showAlert } from 'app/slices/alert.slice'
+
+import { useCreateOrderMutation } from 'services'
 
 import {
   Button,

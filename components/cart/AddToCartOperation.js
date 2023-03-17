@@ -1,25 +1,24 @@
 import { useState, useEffect } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { addToCart } from 'app/slices/cart.slice'
-import { showAlert } from 'app/slices/alert.slice'
+import { addToCart, showAlert } from 'store'
 
 import exsitItem from 'utils/exsitItem'
 
 import { ArrowLink, ProductPrice, CartButtons } from 'components'
 
 export default function AddToCartOperation({ product }) {
+  //? Assets
   const dispatch = useDispatch()
 
   //? Store
   const { tempColor, tempSize } = useSelector((state) => state.cart)
+  const { cartItems } = useSelector((state) => state.cart)
 
   //? Local State
   const [currentItemInCart, setCurrentItemInCart] = useState(null)
 
-  //? Store
-  const { cartItems } = useSelector((state) => state.cart)
-
+  //? Re-Renders
   useEffect(() => {
     setCurrentItemInCart(exsitItem(cartItems, product._id, tempColor, tempSize))
   }, [tempColor, tempSize, cartItems])
@@ -62,7 +61,7 @@ export default function AddToCartOperation({ product }) {
           </div>
         </div>
       ) : (
-        <button onClick={handleAddItem} className='px-12 text-sm btn lg:w-full'>
+        <button onClick={handleAddItem} className='px-12 text-sm lg:w-full btn'>
           افزودن به سبد
         </button>
       )}

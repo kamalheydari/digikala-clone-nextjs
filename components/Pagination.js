@@ -1,16 +1,19 @@
 import { Icons } from 'components'
+import { useEffect, useState } from 'react'
 
-export default function Pagination({
-  currentPage,
-  nextPage,
-  previousPage,
-  hasNextPage,
-  hasPreviousPage,
-  lastPage,
-  setPage,
-  section,
-  client,
-}) {
+export default function Pagination(props) {
+  //? Props
+  const { pagination, changeRoute, section, client } = props
+
+  const {
+    currentPage,
+    nextPage,
+    previousPage,
+    hasNextPage,
+    hasPreviousPage,
+    lastPage,
+  } = pagination
+
   const scrollToTop = () => {
     const element = document.getElementById(section)
     element.scrollIntoView({
@@ -30,7 +33,7 @@ export default function Pagination({
             <li
               className='flex items-center p-1 text-red-500 cursor-pointer'
               onClick={() => {
-                setPage(previousPage)
+                changeRoute({ page: previousPage })
                 scrollToTop()
               }}
             >
@@ -43,7 +46,7 @@ export default function Pagination({
           <li
             className='w-8 h-8 p-1 text-center transition-colors border-2 border-transparent cursor-pointer hover:text-red-500 hover:border-red-500 rounded-2xl'
             onClick={() => {
-              setPage(1)
+              changeRoute({ page: 1 })
               scrollToTop()
             }}
           >
@@ -56,7 +59,7 @@ export default function Pagination({
           <li
             className='w-8 h-8 p-1 text-center transition-colors border-2 border-transparent cursor-pointer hover:text-red-500 hover:border-red-500 rounded-2xl'
             onClick={() => {
-              setPage(previousPage)
+              changeRoute({ page: previousPage })
               scrollToTop()
             }}
           >
@@ -66,7 +69,7 @@ export default function Pagination({
         <li
           className='cursor-pointer w-8 h-8 p-1.5 text-center bg-red-500 text-white rounded-2xl'
           onClick={() => {
-            setPage(currentPage)
+            changeRoute({ page: currentPage })
             scrollToTop()
           }}
         >
@@ -76,7 +79,7 @@ export default function Pagination({
           <li
             className='w-8 h-8 p-1 text-center transition-colors border-2 border-transparent cursor-pointer hover:text-red-500 hover:border-red-500 rounded-2xl'
             onClick={() => {
-              setPage(nextPage)
+              changeRoute({ page: nextPage })
               scrollToTop()
             }}
           >
@@ -88,7 +91,7 @@ export default function Pagination({
           <li
             className='w-8 h-8 p-1 text-center transition-colors border-2 border-transparent cursor-pointer hover:text-red-500 hover:border-red-500 rounded-2xl'
             onClick={() => {
-              setPage(lastPage)
+              changeRoute({ page: lastPage })
               scrollToTop()
             }}
           >
@@ -100,7 +103,7 @@ export default function Pagination({
             <li
               className='flex items-center p-1 text-red-500 cursor-pointer'
               onClick={() => {
-                setPage(nextPage)
+                changeRoute({ page: nextPage })
                 scrollToTop()
               }}
             >

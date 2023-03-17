@@ -30,6 +30,6 @@
     @apply flex-center px-2 mb-1 text-sm font-semibold tracking-wider text-gray-700 border-r-2 border-red-500;
   }
   .navbar__content__sub-categories .sub-category .lvl-three_category {
-    @apply px-1 text-xs font-medium text-gray-700;
+    @apply px-3 text-xs font-medium text-gray-700;
   }
 }

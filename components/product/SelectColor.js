@@ -1,4 +1,4 @@
-import { setTempColor } from 'app/slices/cart.slice'
+import { setTempColor } from 'store'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { Icons } from 'components'
@@ -10,7 +10,7 @@ export default function SelectColor({ colors }) {
   const { tempColor } = useSelector((state) => state.cart)
 
   return (
-    <section className='lg:col-start-4 lg:col-end-8 lg:row-start-2 lg:row-end-4'>
+    <section className=''>
       <div className='flex justify-between p-4'>
         <span className='text-sm text-gray-700'>رنگ: {tempColor?.name}</span>
         <span className='text-sm farsi-digits'>{colors.length} رنگ</span>

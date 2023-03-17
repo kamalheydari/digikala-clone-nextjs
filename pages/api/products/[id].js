@@ -28,7 +28,12 @@ const getProduct = async (req, res) => {
     const { id } = req.query
 
     await db.connect()
+
     const product = await Products.findById(id)
+      .populate('category_levels.level_one')
+      .populate('category_levels.level_two')
+      .populate('category_levels.Level_three')
+
     await db.disconnect()
 
     if (!product) return sendError(res, 404, 'این محصول موجود نمیباشد')

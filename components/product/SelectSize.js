@@ -1,4 +1,4 @@
-import { setTempSize } from 'app/slices/cart.slice'
+import { setTempSize } from 'store'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { formatNumber } from 'utils/formatNumber'
@@ -10,7 +10,7 @@ export default function SelectSize({ sizes }) {
   const { tempSize } = useSelector((state) => state.cart)
 
   return (
-    <section className='farsi-digits lg:col-start-4 lg:col-end-8 lg:row-start-2 lg:row-end-4'>
+    <section className='farsi-digits'>
       <div className='flex justify-between p-4'>
         <span className='text-sm text-gray-700'>اندازه: {tempSize?.size}</span>
         <span className='text-sm'>{formatNumber(sizes.length)} اندازه</span>

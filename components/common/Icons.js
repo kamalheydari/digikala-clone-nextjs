@@ -13,8 +13,9 @@ import {
 import { FiLogIn, FiLogOut, FiEdit, FiPlus, FiMinus } from 'react-icons/fi'
 import { VscThreeBars, VscLocation } from 'react-icons/vsc'
 import { HiOutlineUser, HiOutlineUsers } from 'react-icons/hi'
-import { IoSearch } from 'react-icons/io5'
+import { IoSearch, IoImagesOutline } from 'react-icons/io5'
 import { BiAbacus, BiCategory } from 'react-icons/bi'
+import { TfiLayoutSlider } from 'react-icons/tfi'
 
 import {
   RiArrowDownSFill,
@@ -97,6 +98,8 @@ const Icons = {
   Post: BsSignpost,
   Phone: RiPhoneFill,
   Delete: RiDeleteBinLine,
+  Slider: TfiLayoutSlider,
+  Image: IoImagesOutline,
 }
 
 export default Icons

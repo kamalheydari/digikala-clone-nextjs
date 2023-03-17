@@ -55,12 +55,14 @@ const getReviews = async (req, res) => {
     res.status(200).json({
       reviews,
       reviewsLength,
-      currentPage: page,
-      nextPage: page + 1,
-      previousPage: page - 1,
-      hasNextPage: page_size * page < reviewsLength,
-      hasPreviousPage: page > 1,
-      lastPage: Math.ceil(reviewsLength / page_size),
+      pagination: {
+        currentPage: page,
+        nextPage: page + 1,
+        previousPage: page - 1,
+        hasNextPage: page_size * page < reviewsLength,
+        hasPreviousPage: page > 1,
+        lastPage: Math.ceil(reviewsLength / page_size),
+      },
     })
   } catch (error) {
     sendError(res, 500, error.message)

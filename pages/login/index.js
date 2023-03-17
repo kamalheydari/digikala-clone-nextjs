@@ -7,9 +7,9 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { logInSchema } from 'utils/validation'
 
-import { useLoginMutation } from 'app/api/userApi'
+import { useLoginMutation } from 'services'
 import { useDispatch } from 'react-redux'
-import { userLogin } from 'app/slices/user.slice'
+import { userLogin } from 'store'
 
 import { TextField, LoginBtn, Logo, HandleResponse } from 'components'
 

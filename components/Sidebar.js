@@ -1,59 +1,54 @@
-import { useState, useEffect } from 'react'
-import Image from 'next/image'
+import { useEffect } from 'react'
 import Link from 'next/link'
 
-import { Icons, LogoPersian, Skeleton } from 'components'
+import { Disclosure } from '@headlessui/react'
+import { Icons, LogoPersian, SidebarSkeleton } from 'components'
 
 import useDisclosure from 'hooks/useDisclosure'
 import useCategory from 'hooks/useCategory'
 
 export default function Sidebar() {
+  //? Assets
   const [isSidebar, sidebarHandlers] = useDisclosure()
+  const { categories, isLoading } = useCategory()
 
+  //? Create Category List
+  const categoryList = categories
+    .filter((category) => category.level === 1)
+    .map((levelOne) => {
+      let children = categories.filter(
+        (category) => category.parent === levelOne._id
+      )
+      if (children.length > 0)
+        return {
+          ...levelOne,
+          children,
+        }
+      else return levelOne
+    })
+    .map((levelOne) => {
+      if (levelOne.children) {
+        let newLevelTwo = levelOne.children.map((levelTwo) => {
+          let children = categories.filter(
+            (category) => category.parent === levelTwo._id
+          )
+
+          if (children.length > 0) return { ...levelTwo, children }
+          else return levelTwo
+        })
+        return { ...levelOne, children: newLevelTwo }
+      } else return levelOne
+    })
+
+  //? Handlers
+  const handleClose = () => sidebarHandlers.close()
+
+  //? Re-Renders
+  //*    prevent scroll
   useEffect(() => {
     if (isSidebar) document.body.style.overflow = 'hidden'
     else document.body.style.overflow = 'unset'
   }, [isSidebar])
-
-  //? States
-  const [mainExpandCat, setMainExpandCat] = useState('')
-  const [parentExpandCat, setParentExpandCat] = useState('')
-
-  const { categories, isLoading } = useCategory()
-  const parents = [...new Set(categories.map((item) => item.parent))]
-
-  //? Handlers
-  const handleClick = (cat) => {
-    if (cat.parent === '/') {
-      setMainExpandCat(cat.category)
-    } else {
-      setParentExpandCat('/' + cat.slug)
-    }
-
-    if (cat.category === mainExpandCat) setMainExpandCat('')
-    if ('/' + cat.slug === parentExpandCat) setParentExpandCat('')
-  }
-
-  const hanldeClose = () => {
-    sidebarHandlers.close()
-    setMainExpandCat('')
-    setParentExpandCat('')
-  }
-
-  //? Local Components
-  const CategorySkeleton = () => (
-    <Skeleton count={4}>
-      <Skeleton.Items className='h-10 flex-center justify-between '>
-        <Skeleton.Item animated='background' height='h-6' width='w-40' />
-        <Skeleton.Item
-          animated='background'
-          height='h-7'
-          width='w-7'
-          className='rounded-full'
-        />
-      </Skeleton.Items>
-    </Skeleton>
-  )
 
   //? Render
   return (
@@ -72,135 +67,110 @@ export default function Sidebar() {
               ? 'opacity-100 visible duration-300 delay-200'
               : 'opacity-0 invisible '
           }  bg-gray-100/50  z-10 w-full h-full`}
-          onClick={hanldeClose}
+          onClick={sidebarHandlers.close}
         />
 
-        <div className='sidebar__content'>
-          <LogoPersian className='h-10 w-28' />
+        <div className='overflow-y-auto sidebar__content'>
+          <LogoPersian className='h-10 mr-3 w-28' />
           <h5 className='sidebar__title'>دسته‌بندی کالاها</h5>
           {isLoading ? (
-            <CategorySkeleton />
-          ) : (
-            <ul>
-              {categories.slice(0, 2).map((mainCategory) => {
-                if (mainCategory.parent === '/') {
-                  return (
-                    <li
-                      key={mainCategory._id}
-                      className='space-y-4 overflow-hidden text-sm md:text-base '
-                    >
-                      <div
-                        className={`sidebar__category text-gray-600 ${
-                          mainCategory.category === mainExpandCat &&
-                          'text-red-400'
-                        }`}
-                      >
-                        <Link href={`/main/${mainCategory.slug}`}>
+            <SidebarSkeleton />
+          ) : categories ? (
+            <div>
+              {categoryList.map((category) => (
+                <Disclosure key={category._id}>
+                  {({ open }) => (
+                    <>
+                      <Disclosure.Button className='sidebar__category'>
+                        <span
+                          className={`pl-3 font-semibold tracking-wide ${
+                            open ? 'text-red-400' : 'text-gray-600'
+                          }`}
+                        >
+                          {category.name}
+                        </span>
+
+                        <Icons.ArrowDown
+                          className={` ${
+                            open
+                              ? 'rotate-180 transform text-red-400 '
+                              : 'text-gray-700'
+                          } w-7 h-7 bg-gray-50 rounded-2xl`}
+                        />
+                      </Disclosure.Button>
+                      <Disclosure.Panel className=' text-sm bg-gray-100 text-gray-500 !mt-0'>
+                        <Link href={`/main/${category.slug}`}>
                           <a
-                            className='px-1 font-semibold tracking-wide'
-                            onClick={hanldeClose}
+                            className='py-2 text-gray-500 arrow-link pr-7'
+                            onClick={handleClose}
                           >
-                            {mainCategory.name}
+                            تمام موارد این دسته
+                            <Icons.ArrowLeft className='text-gray-500 icon' />
                           </a>
                         </Link>
-
-                        {parents?.includes(mainCategory.category) && (
-                          <button onClick={() => handleClick(mainCategory)}>
-                            {mainCategory.category === mainExpandCat ? (
-                              <Icons.ArrowUp className='text-red-400 w-7 h-7 bg-gray-50 rounded-2xl' />
-                            ) : (
-                              <Icons.ArrowDown className='text-gray-700 w-7 h-7 bg-gray-50 rounded-2xl' />
-                            )}
-                          </button>
-                        )}
-                      </div>
-                      <ul>
-                        {categories.map((parentCategory) => {
-                          if (parentCategory.parent === mainCategory.category) {
-                            return (
-                              <li
-                                key={parentCategory._id}
-                                className={`overflow-hidden ${
-                                  parentCategory.parent === mainExpandCat
-                                    ? 'h-auto'
-                                    : 'h-0'
-                                }`}
-                              >
-                                <div
-                                  className={` sidebar__category px-6 bg-gray-100  text-gray-500 ${
-                                    '/' + parentCategory.slug ===
-                                      parentExpandCat && 'text-red-400'
-                                  }`}
-                                >
-                                  <Link
-                                    href={`/products?category=${parentCategory.slug}`}
+                        {category?.children &&
+                          category.children.map((category) => (
+                            <Disclosure key={category._id}>
+                              {({ open }) => (
+                                <>
+                                  <Disclosure.Button className='sidebar__category pr-7'>
+                                    <span
+                                      className={`font-medium text-md ${
+                                        open ? 'text-red-400' : 'text-gray-600'
+                                      }`}
+                                    >
+                                      {category.name}
+                                    </span>
+                                    <Icons.ArrowDown
+                                      className={` ${
+                                        open
+                                          ? 'rotate-180 transform text-red-400 '
+                                          : 'text-gray-700'
+                                      } w-7 h-7 bg-gray-50 rounded-2xl`}
+                                    />
+                                  </Disclosure.Button>
+                                  <Disclosure.Panel
+                                    className={`px-4 pt-2 pb-1 text-sm text-gray-500 !mt-0 
+                                     ${open ? 'border-b border-gray-50' : ''}
+                                    `}
                                   >
-                                    <a
-                                      className='px-1 font-medium'
-                                      onClick={hanldeClose}
+                                    <Link
+                                      href={`/products?category=${category.slug}`}
                                     >
-                                      {parentCategory.name}
-                                    </a>
-                                  </Link>
-                                  {parents?.includes(
-                                    '/' + parentCategory.slug
-                                  ) && (
-                                    <button
-                                      onClick={() =>
-                                        handleClick(parentCategory)
-                                      }
-                                    >
-                                      {'/' + parentCategory.slug ===
-                                      parentExpandCat ? (
-                                        <Icons.ArrowUp className='text-red-400 bg-gray-200 w-7 h-7 rounded-2xl' />
-                                      ) : (
-                                        <Icons.ArrowDown className='text-gray-700 bg-gray-200 w-7 h-7 rounded-2xl' />
-                                      )}
-                                    </button>
-                                  )}
-                                </div>
-                                <ul>
-                                  {categories.map((childCategory) => {
-                                    if (
-                                      childCategory.parent ===
-                                      '/' + parentCategory.slug
-                                    ) {
-                                      return (
-                                        <li
-                                          key={childCategory._id}
-                                          className={`${
-                                            childCategory.parent ===
-                                            parentExpandCat
-                                              ? 'h-auto bg-gray-100 px-8 py-2'
-                                              : 'h-0'
-                                          }`}
+                                      <a
+                                        className='py-2 text-gray-500 arrow-link pr-9'
+                                        onClick={handleClose}
+                                      >
+                                        تمام موارد این دسته
+                                        <Icons.ArrowLeft className='text-gray-500 icon' />
+                                      </a>
+                                    </Link>
+                                    {category.children &&
+                                      category.children.map((category) => (
+                                        <Link
+                                          key={category._id}
+                                          href={`/products?category=${category.slug}`}
                                         >
-                                          <Link
-                                            href={`/products?category=${childCategory.slug}`}
+                                          <a
+                                            className='pr-9 py-2.5 my-2 font-normal tracking-wide block'
+                                            onClick={handleClose}
                                           >
-                                            <a
-                                              className='inline-block p-1 font-light text-gray-500'
-                                              onClick={hanldeClose}
-                                            >
-                                              {childCategory.name}
-                                            </a>
-                                          </Link>
-                                        </li>
-                                      )
-                                    }
-                                  })}
-                                </ul>
-                              </li>
-                            )
-                          }
-                        })}
-                      </ul>
-                    </li>
-                  )
-                }
-              })}
-            </ul>
-          )}
+                                            {category.name}
+                                          </a>
+                                        </Link>
+                                      ))}
+                                  </Disclosure.Panel>
+                                </>
+                              )}
+                            </Disclosure>
+                          ))}
+                      </Disclosure.Panel>
+                    </>
+                  )}
+                </Disclosure>
+              ))}
+            </div>
+          ) : null}
         </div>
       </div>
     </>

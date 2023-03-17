@@ -36,7 +36,7 @@ export default function AddSizes({ name, control, register }) {
             ref={inputRef}
           />
         </div>
-        <div className='space-y-4 space-x-3 flex flex-wrap items-baseline justify-evenly'>
+        <div className='flex flex-wrap items-baseline space-x-3 space-y-4 justify-evenly'>
           {fields.map((field, index) => (
             <div
               key={field.id}

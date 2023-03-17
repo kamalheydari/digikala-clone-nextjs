@@ -20,10 +20,10 @@ export default function ImageGallery({
   const [currentImage, setCurrentImage] = useState(0)
 
   return (
-    <>
+    <section className='mb-5 lg:col-span-3 '>
       <div className='hidden lg:block'>
         <SpecialSell discount={discount} inStock={inStock} />
-        <div className='relative w-full h-[95vw] lg:h-[350px] xl:h-[510px] max-w-6xl px-4 mx-auto'>
+        <div className='relative lg:h-[320px] lg:w-[320px] xl:h-[420px] xl:w-[420px] 2xl:h-[500px] 2xl:w-[500px] mx-auto'>
           <Image
             src={images[currentImage].url}
             layout='fill'
@@ -36,7 +36,7 @@ export default function ImageGallery({
           {images.map((image, index) => (
             <div
               key={index}
-              className={`relative h-20 w-24  cursor-pointer border-2 border-transparent rounded-md overflow-hidden ${
+              className={`relative h-24 w-24 cursor-pointer border-2 border-transparent rounded-md overflow-hidden ${
                 index === currentImage && 'border-gray-300 shadow-3xl'
               }`}
               onClick={() => setCurrentImage(index)}
@@ -68,6 +68,6 @@ export default function ImageGallery({
           ))}
         </Swiper>
       </div>
-    </>
+    </section>
   )
 }

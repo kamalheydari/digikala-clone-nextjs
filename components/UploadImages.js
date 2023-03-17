@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { useDispatch } from 'react-redux'
-import { showAlert } from 'app/slices/alert.slice'
+import { showAlert } from 'store'
 
 import { imageUpload } from 'utils/imageUpload'
 

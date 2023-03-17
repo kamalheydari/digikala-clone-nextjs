@@ -26,11 +26,20 @@ const createCategory = async (req, res) => {
     if (!result.root)
       return sendError(res, 403, 'شما اجازه انجام این عملیات را ندارید')
 
-    const { name } = req.body
-    if (!name) return sendError(res, 204, 'نام دسته بندی نباید خالی باشد')
-
     await db.connect()
-    const newCategory = new Category({ ...req.body })
+    let newCategory
+    if (req.body.parent)
+      newCategory = new Category({
+        ...req.body,
+      })
+    else
+      newCategory = new Category({
+        name: req.body.name,
+        slug: req.body.slug,
+        image: req.body.image,
+        colors: req.body.colors,
+        level:req.body.level
+      })
     await newCategory.save()
     await db.disconnect()
 

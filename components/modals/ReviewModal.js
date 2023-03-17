@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react'
 
 import { nanoid } from '@reduxjs/toolkit'
-import { useCreateReviewMutation } from 'app/api/reviewApi'
+import { useCreateReviewMutation } from 'services'
 
 import { ratingStatus } from 'utils/constatns'
 
@@ -115,7 +115,7 @@ export default function ReviewModal(props) {
           <Modal.Header>دیدگاه شما در مورد {productTitle}</Modal.Header>
           <Modal.Body>
             <form
-              className='flex flex-col justify-between flex-1 gap-y-5 overflow-y-auto pl-4'
+              className='flex flex-col justify-between flex-1 pl-4 overflow-y-auto gap-y-5'
               onSubmit={handleSubmit(submitHander)}
             >
               {/* rating */}

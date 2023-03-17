@@ -1,5 +1,7 @@
+import { useRouter } from 'next/router'
 import Head from 'next/head'
-import { useState } from 'react'
+
+import useChangeRoute from 'hooks/useChangeRoute'
 
 import {
   OrderCard,
@@ -7,18 +9,22 @@ import {
   ShowWrapper,
   EmptyOrdersList,
   PageContainer,
+  OrderSkeleton,
 } from 'components'
-import { useGetOrdersQuery } from 'app/api/orderApi'
+import { useGetOrdersQuery } from 'services'
 
 export default function Orders() {
-  //? State
-  const [page, setPage] = useState(1)
+  //? Assets
+  const { query } = useRouter()
+  const changeRoute = useChangeRoute({
+    shallow: true,
+  })
 
   //? Get Orders Data
   const { data, isSuccess, isFetching, error, isError, refetch } =
     useGetOrdersQuery({
       pageSize: 5,
-      page,
+      page: query?.page || 1,
     })
 
   //? Render
@@ -35,7 +41,8 @@ export default function Orders() {
           isFetching={isFetching}
           isSuccess={isSuccess}
           dataLength={data ? data.ordersLength : 0}
-          emptyElement={<EmptyOrdersList />}
+          emptyComponent={<EmptyOrdersList />}
+          loadingComponent={<OrderSkeleton />}
         >
           <div className='px-4 py-3 space-y-3'>
             {data?.orders.map((item) => (
@@ -47,13 +54,8 @@ export default function Orders() {
         {data?.ordersLength > 5 && (
           <div className='py-4 mx-auto lg:max-w-5xl'>
             <Pagination
-              currentPage={data.currentPage}
-              nextPage={data.nextPage}
-              previousPage={data.previousPage}
-              hasNextPage={data.hasNextPage}
-              hasPreviousPage={data.hasPreviousPage}
-              lastPage={data.lastPage}
-              setPage={setPage}
+              pagination={data.pagination}
+              changeRoute={changeRoute}
               section='profileOrders'
               client
             />

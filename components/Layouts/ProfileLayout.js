@@ -14,7 +14,7 @@ export default function ProfileLayout({ children }) {
       <>
         <Header />
         <div className='profile-layout'>
-          <div className='profile-layout__aside hidden lg:block'>
+          <div className='hidden profile-layout__aside lg:block'>
             <ProfileAside />
           </div>
           <div className='profile-layout__content'>{children}</div>

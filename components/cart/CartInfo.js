@@ -12,7 +12,7 @@ export default function CartInfo({ handleRoute, cart }) {
   return (
     <div className='cart-info'>
       {/* total cart price */}
-      <div className='cart-info__item pb-2 border-b border-gray-200'>
+      <div className='pb-2 border-b border-gray-200 cart-info__item'>
         <span>قیمت کالاها ({formatNumber(totalItems)})</span>
         <div className='flex-center'>
           <span>{formatNumber(totalPrice)}</span>

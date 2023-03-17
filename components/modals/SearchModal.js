@@ -13,7 +13,7 @@ import {
 } from 'components'
 
 import { truncate } from 'utils/truncate'
-import { useGetProductsQuery } from 'app/api/productApi'
+import { useGetProductsQuery } from 'services'
 import useDebounce from 'hooks/useDebounce'
 
 export default function SearchModal(props) {
@@ -57,7 +57,7 @@ export default function SearchModal(props) {
   //? Render(s)
   return (
     <Modal isShow={isShow} onClose={onClose} effect='bottom-to-top'>
-      <Modal.Content className='flex flex-col h-screen lg:h-fit  pl-2 pr-4 py-3 bg-white md:rounded-lg gap-y-3'>
+      <Modal.Content className='flex flex-col h-screen py-3 pl-2 pr-4 bg-white lg:h-fit md:rounded-lg gap-y-3'>
         <Modal.Header>جستسجو</Modal.Header>
         <Modal.Body>
           <div className='flex flex-row-reverse my-3 rounded-md bg-zinc-200/80'>

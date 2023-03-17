@@ -12,7 +12,7 @@ export default function Depot({ inStock }) {
   } else if (inStock > 10) {
     return (
       <div className='flex text-teal-400 gap-x-1'>
-        <Icons.Save className='icon text-teal-400' />
+        <Icons.Save className='text-teal-400 icon' />
         <span className='text-teal-700'>موجود در انبار دیجی کالا</span>
       </div>
     )

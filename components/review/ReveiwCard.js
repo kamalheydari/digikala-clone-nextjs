@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { Fragment, useState } from 'react'
 
-import { useEditReviewMutation } from 'app/api/reviewApi'
+import { useEditReviewMutation } from 'services'
 
 import { HandleResponse, Icons } from 'components'
 import { Menu, Transition } from '@headlessui/react'

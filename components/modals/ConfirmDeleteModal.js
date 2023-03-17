@@ -1,5 +1,3 @@
-import { useEffect } from 'react'
-
 import { Button, Modal } from 'components'
 
 export default function ConfirmDeleteModal(props) {

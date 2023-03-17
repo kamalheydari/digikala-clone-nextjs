@@ -7,7 +7,7 @@ export default function ProfileAside() {
     {
       name: 'محصول جدید',
       icon: <Icons.Plus className='text-black icon' />,
-      path: '/admin/product',
+      path: '/admin/products/create',
     },
     {
       name: 'محصولات',
@@ -39,11 +39,21 @@ export default function ProfileAside() {
       icon: <Icons.Comment className='text-black icon' />,
       path: '/admin/reviews',
     },
+    {
+      name: 'اسلایدرها',
+      icon: <Icons.Slider className='text-black icon' />,
+      path: '/admin/sliders',
+    },
+    {
+      name: 'بنرها',
+      icon: <Icons.Image className='text-black icon' />,
+      path: '/admin/banners',
+    },
   ]
 
   return (
-    <aside className='sticky mt-6 lg:border lg:border-gray-200 lg:rounded-md lg:py-4 min-w-max top-6'>
-      <Link passHref href='/'>
+    <aside className='sticky mt-6 lg:border lg:border-gray-200 lg:rounded-md lg:pt-4 min-w-max top-6'>
+      <Link passHref href='/admin'>
         <a>
           <Logo className='w-40 h-12 mx-auto' />
         </a>

@@ -1,20 +1,19 @@
+import Link from 'next/link'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 
-import { useEffect, useState } from 'react'
-
-import { PageContainer, SelectCategories } from 'components'
+import { BigLoading, PageContainer } from 'components'
+import useCategory from 'hooks/useCategory'
 
 export default function DetailsHome() {
-  const router = useRouter()
+  const { categories, isLoading } = useCategory()
 
-  //? States
-  const [selectedCategories, setSelectedCategories] = useState({})
-
-  useEffect(() => {
-    if (selectedCategories?.lvlTwoCategory?._id)
-      router.push('/admin/details/' + selectedCategories?.lvlTwoCategory._id)
-  }, [selectedCategories?.lvlTwoCategory?._id])
+  //? Render(s)
+  if (isLoading)
+    return (
+      <div className='px-3 py-20'>
+        <BigLoading />
+      </div>
+    )
 
   return (
     <main>
@@ -23,11 +22,41 @@ export default function DetailsHome() {
       </Head>
 
       <PageContainer title='مشخصات'>
-        <section className='flex-1 p-3 mx-auto mb-10 space-y-8 w-fit md:w-full md:grid md:grid-cols-2 md:gap-x-12 md:items-baseline'>
-          <SelectCategories
-            setSelectedCategories={setSelectedCategories}
-            show={['lvlOne', 'lvlTwo']}
-          />
+        <section className='p-3 mx-auto mb-10 space-y-8'>
+          <div className='mx-3 overflow-x-auto mt-7 lg:mx-5 xl:mx-10'>
+            <table className='w-full whitespace-nowrap'>
+              <thead className='h-9 bg-emerald-50'>
+                <tr className='text-emerald-500'>
+                  <th className='px-2 text-right border-gray-100 border-x-2'>
+                    نام
+                  </th>
+                  <th className='border-gray-100 border-x-2'>بیشتر</th>
+                </tr>
+              </thead>
+              <tbody className='text-gray-600'>
+                {categories &&
+                  categories
+                    .filter((cat) => cat.level === 2)
+                    .map((category) => (
+                      <tr
+                        className='text-xs text-center transition-colors border-b border-gray-100 md:text-sm hover:bg-gray-50'
+                        key={category._id}
+                      >
+                        <td className='w-3/4 px-2 py-4 text-right'>
+                          {category.name}
+                        </td>
+                        <td className='px-2 py-4'>
+                          <Link href={`/admin/details/${category._id}`}>
+                            <a className='bg-blue-50 text-blue-500 rounded-sm py-1 px-1.5 mx-1.5 inline-block'>
+                              مشخصات و ویژگی ها
+                            </a>
+                          </Link>
+                        </td>
+                      </tr>
+                    ))}
+              </tbody>
+            </table>
+          </div>
         </section>
       </PageContainer>
     </main>

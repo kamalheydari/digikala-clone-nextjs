@@ -1,125 +1,85 @@
 import { useEffect, useState } from 'react'
-import { useGetCategoriesQuery } from 'app/api/categoryApi'
 
-export default function SelectCategories({ show, setSelectedCategories }) {
-  const [categories, setCategories] = useState([])
+import { SelectBox } from 'components'
+import useCategory from 'hooks/useCategory'
 
-  const [lvlOneCategories, setLvlOneCategories] = useState([])
-  const [lvlTwoCategories, setLvlTwoCategories] = useState([])
-  const [lvlThreeCategories, setlvlThreeCategories] = useState([])
+export default function SelectCategories(props) {
+  //? Props
+  const { selectedCategories, setSelectedCategories } = props
 
-  const [lvlOneCategory, setLvlOneCategory] = useState({})
-  const [lvlTwoCategory, setLvlTwoCategory] = useState({})
-  const [lvlThreeCategory, setLvlThreeCategory] = useState({})
+  //? Assets
+  const { categories } = useCategory()
 
-  const { data } = useGetCategoriesQuery()
+  //? States
+  const [levelTwoCategories, setLevelTwoCategories] = useState([])
+  const [levelThreeCategories, setlevelThreeCategories] = useState([])
 
+  //? Re-Renders
   useEffect(() => {
-    setSelectedCategories({ lvlOneCategory, lvlTwoCategory, lvlThreeCategory })
-  }, [lvlOneCategory, lvlTwoCategory, lvlThreeCategory])
-
-  useEffect(() => {
-    if (data && data.categories.length) {
-      setCategories(data.categories)
-      setLvlOneCategories(data.categories.filter((cat) => cat.parent === '/'))
-    }
-  }, [data])
-
-  useEffect(() => {
-    setLvlTwoCategories(
-      categories.filter(
-        (category) => category.parent === lvlOneCategory.category
+    if (categories && selectedCategories.level_one?._id)
+      setLevelTwoCategories(
+        categories.filter(
+          (cat) => cat.parent === selectedCategories.level_one._id
+        )
       )
-    )
-  }, [lvlOneCategory])
 
-  useEffect(() => {
-    setlvlThreeCategories(
-      categories.filter(
-        (category) => category.parent === '/' + lvlTwoCategory.slug
+    if (categories && selectedCategories.level_two?._id)
+      setlevelThreeCategories(
+        categories.filter(
+          (cat) => cat.parent === selectedCategories.level_two._id
+        )
       )
-    )
-  }, [lvlTwoCategory])
+  }, [categories, selectedCategories])
 
-  const handleChangeCategory = (e) => {
-    if (e.target.name === 'lvlOneCategory') {
-      setLvlOneCategory(
-        lvlOneCategories.find((cat) => cat._id === e.target.value)
-      )
-      setLvlTwoCategory({})
-      setLvlThreeCategory({})
-    }
-
-    if (e.target.name === 'lvlTwoCategory') {
-      setLvlTwoCategory(
-        lvlTwoCategories.find((cat) => cat._id === e.target.value)
-      )
-      setLvlThreeCategory({})
-    }
-
-    if (e.target.name === 'lvlThreeCategory') {
-      setLvlThreeCategory(
-        lvlThreeCategories.find((cat) => cat._id === e.target.value)
-      )
-    }
+  //? Handlers
+  const handleLevelOneChange = (category) => {
+    setSelectedCategories({
+      level_one: category,
+      level_two: {},
+      level_three: {},
+    })
   }
 
-  const Select = ({ title, data, name, handleChange, value }) => {
-    return (
-      <div className='flex flex-col items-start justify-between gap-y-2'>
-        <label htmlFor='lvlOneCategory'>{title}</label>
-        <select
-          className='border-2 rounded-sm py-0.5 px-3 outline-none w-56 text-gray-800'
-          name={name}
-          id={name}
-          onChange={handleChange}
-          value={value}
-        >
-          <option value='0' selected disabled></option>
-          {data.length &&
-            data.map((item, index) => (
-              <option key={index} value={item._id} className='text-gray-700'>
-                {item.name}
-              </option>
-            ))}
-        </select>
-      </div>
-    )
+  const handleLevelTwoChange = (category) => {
+    setSelectedCategories({
+      ...selectedCategories,
+      level_two: category,
+      level_three: {},
+    })
+  }
+
+  const handleLevelThreeChange = (category) => {
+    setSelectedCategories({
+      ...selectedCategories,
+      level_three: category,
+    })
   }
 
   return (
-    data &&
-    categories?.length > 0 && (
-      <div className='py-3 mx-auto space-y-8 w-fit flex-wrap md:w-full md:py-0 md:flex md:items-baseline md:justify-center md:gap-5'>
-        {show.includes('lvlOne') && (
-          <Select
-            title='دسته‌بندی سطح اول'
-            data={lvlOneCategories}
-            name='lvlOneCategory'
-            value={lvlOneCategory?._id}
-            handleChange={handleChangeCategory}
-          />
-        )}
-        {show.includes('lvlTwo') && (
-          <Select
-            title='دسته‌بندی سطح دوم'
-            data={lvlTwoCategories}
-            name='lvlTwoCategory'
-            value={lvlTwoCategory?._id}
-            handleChange={handleChangeCategory}
-          />
-        )}
+    <div className='flex flex-wrap justify-evenly gap-y-6'>
+      <SelectBox
+        name='level_one'
+        value={selectedCategories.level_one}
+        list={categories.filter((cat) => cat.level === 1)}
+        onChange={handleLevelOneChange}
+        placeholder='دسته بندی سطح اول'
+      />
 
-        {show.includes('lvlThree') && (
-          <Select
-            title='دسته‌بندی سطح سوم'
-            data={lvlThreeCategories}
-            name='lvlThreeCategory'
-            value={lvlThreeCategory?._id}
-            handleChange={handleChangeCategory}
-          />
-        )}
-      </div>
-    )
+      <SelectBox
+        name='level_two'
+        value={selectedCategories.level_two}
+        list={levelTwoCategories}
+        onChange={handleLevelTwoChange}
+        placeholder='دسته بندی سطح دوم'
+      />
+
+      <SelectBox
+        name='level_three'
+        value={selectedCategories.level_three}
+        list={levelThreeCategories}
+        onChange={handleLevelThreeChange}
+        placeholder='دسته بندی سطح سوم'
+      />
+    </div>
   )
 }

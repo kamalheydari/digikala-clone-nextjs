@@ -84,10 +84,10 @@ export default function Footer() {
           </div>
 
           <div className='grid grid-cols-2 sm:grid-cols-4 gap-x-3'>
-            <AppCoffeBazzar className=' w-32 h-12 mb-1 sm:w-36 lg:w-44 lg:mb-0' />
-            <AppGooglePlay className=' w-32 h-12 mb-1 sm:w-36 lg:w-44 lg:mb-0' />
-            <AppMyket className=' w-32 h-12 mb-1 sm:w-36 lg:w-44 lg:mb-0' />
-            <AppSib className=' w-32 h-12 mb-1 sm:w-36 lg:w-44 lg:mb-0' />
+            <AppCoffeBazzar className='w-32 h-12 mb-1  sm:w-36 lg:w-44 lg:mb-0' />
+            <AppGooglePlay className='w-32 h-12 mb-1  sm:w-36 lg:w-44 lg:mb-0' />
+            <AppMyket className='w-32 h-12 mb-1  sm:w-36 lg:w-44 lg:mb-0' />
+            <AppSib className='w-32 h-12 mb-1  sm:w-36 lg:w-44 lg:mb-0' />
           </div>
         </div>
 

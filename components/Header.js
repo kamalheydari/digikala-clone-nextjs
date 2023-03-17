@@ -27,7 +27,7 @@ export default function Header() {
             <Icons.Question className='icon lg:hidden' />
           </div>
           <div className='header__middle'>
-            <div className='flex gap-x-7 flex-grow'>
+            <div className='flex flex-grow gap-x-7'>
               <Search />
             </div>
             <div className='inline-flex items-center gap-x-4'>

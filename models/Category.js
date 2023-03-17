@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 const CategorySchema = new mongoose.Schema(
   {
@@ -15,22 +15,20 @@ const CategorySchema = new mongoose.Schema(
       unique: true,
     },
     parent: {
-      type: String,
-      trim: true,
-    },
-    category: {
-      type: String,
-      trim: true,
+      type: mongoose.Types.ObjectId,
+      ref: 'category',
     },
     image: {
-      type: Object,
+      type: String,
       required: true,
     },
+    colors: { type: Object },
+    level: { type: Number, required: true },
   },
   { timestamps: true }
-);
+)
 
 const Category =
-  mongoose.models.category || mongoose.model("category", CategorySchema);
+  mongoose.models.category || mongoose.model('category', CategorySchema)
 
-export default Category;
+export default Category

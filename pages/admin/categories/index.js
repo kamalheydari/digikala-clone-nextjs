@@ -1,13 +1,27 @@
 import Head from 'next/head'
 import Link from 'next/link'
 
-import { PageContainer } from 'components'
+import { BigLoading, PageContainer } from 'components'
 
 import useCategory from 'hooks/useCategory'
+import { useRouter } from 'next/router'
 
 export default function Categories() {
+  //? Assets
+  const router = useRouter()
+
   //? Get Categories Data
-  const { categories } = useCategory()
+  const { childCategories, isLoading } = useCategory({
+    parent: router.query.parent_id ? router.query.parent_id : 'main',
+  })
+
+  //? Render(s)
+  if (isLoading)
+    return (
+      <div className='px-3 py-20'>
+        <BigLoading />
+      </div>
+    )
 
   return (
     <main>
@@ -18,74 +32,103 @@ export default function Categories() {
       <PageContainer title='دسته بندی ها'>
         <section className='p-3'>
           <div className='space-y-8 text-white'>
-            <Link href='categories/create'>
-              <a className='flex items-center px-3 py-2 text-red-600 border-2 border-red-600 rounded-lg max-w-max gap-x-3'>
-                افزودن دسته‌بندی جدید
-              </a>
-            </Link>
+            <div className='flex justify-between'>
+              <Link
+                href={`categories/create${
+                  router.query.parent_id
+                    ? `?parent_id=${router.query.parent_id}`
+                    : ''
+                }`}
+              >
+                <a className='flex items-center px-3 py-2 text-red-600 border-2 border-red-600 rounded-lg max-w-max gap-x-3'>
+                  افزودن دسته‌بندی جدید
+                </a>
+              </Link>
 
-            <div className='flex text-gray-600 gap-x-3'>
-              <p className='flex items-center text-sm gap-x-1'>
-                <span className='inline-block w-6 h-6 bg-red-500 rounded-md' />
-                دسته‌بندی اصلی
-              </p>
-              <p className='flex items-center text-sm gap-x-1'>
-                <span className='inline-block w-6 h-6 bg-green-500 rounded-md' />
-                دسته‌بندی والد
-              </p>
-              <p className='flex items-center text-sm gap-x-1'>
-                <span className='inline-block w-6 h-6 bg-blue-500 rounded-md' />
-                دسته‌بندی فرزند
-              </p>
+              <Link href='/admin/categories/tree'>
+                <a className='flex items-center px-3 py-2 text-red-600 border-2 border-red-600 rounded-lg max-w-max gap-x-3'>
+                  نمودار دسته بندی ها
+                </a>
+              </Link>
             </div>
-            <ul className='space-y-8'>
-              {categories.slice(0, 2).map((mainCategory) => {
-                if (mainCategory.parent === '/') {
-                  return (
-                    <li
-                      key={mainCategory._id}
-                      className='p-2 border border-gray-100 rounded-md shadow'
-                    >
-                      <div className='p-2 text-center bg-red-500 rounded'>
-                        {mainCategory.name}
-                      </div>
-                      <ul className='flex flex-wrap gap-x-4'>
-                        {categories.map((parentCategory) => {
-                          if (parentCategory.parent === mainCategory.category) {
-                            return (
-                              <li key={parentCategory._id} className='flex-1'>
-                                <div className='p-2 mt-2 text-center bg-green-500 rounded'>
-                                  {parentCategory.name}
-                                </div>
-                                <ul className='flex flex-wrap gap-x-4'>
-                                  {categories.map((childCategory) => {
-                                    if (
-                                      childCategory.parent ===
-                                      '/' + parentCategory.slug
-                                    ) {
-                                      return (
-                                        <li
-                                          key={childCategory._id}
-                                          className='flex-1'
-                                        >
-                                          <div className='flex-1 p-2 mt-2 text-center bg-blue-500 rounded'>
-                                            {childCategory.name}
-                                          </div>
-                                        </li>
-                                      )
-                                    }
-                                  })}
-                                </ul>
-                              </li>
-                            )
-                          }
-                        })}
-                      </ul>
-                    </li>
-                  )
-                }
-              })}
-            </ul>
+
+            <div className='mx-3 overflow-x-auto mt-7 lg:mx-5 xl:mx-10'>
+              <table className='w-full whitespace-nowrap'>
+                <thead className='h-9 bg-emerald-50'>
+                  <tr className='text-emerald-500'>
+                    <th className='px-2 text-right border-gray-100 border-x-2'>
+                      نام
+                    </th>
+                    <th className='border-gray-100 border-x-2'>بیشتر</th>
+                  </tr>
+                </thead>
+                <tbody className='text-gray-600'>
+                  {childCategories && childCategories.length > 0 ? (
+                    childCategories?.map((category) => (
+                      <tr
+                        className='text-xs text-center transition-colors border-b border-gray-100 md:text-sm hover:bg-gray-50/50 '
+                        key={category._id}
+                      >
+                        <td className='w-3/4 px-2 py-4 text-right'>
+                          {category.name}
+                        </td>
+                        <td className='flex flex-col items-center gap-3 px-2 py-4'>
+                          {category.level !== 3 && (
+                            <Link
+                              href={`/admin/categories?parent_id=${category._id}`}
+                            >
+                              <a className='bg-green-50 text-green-500 rounded-sm py-1 px-1.5 max-w-min'>
+                                زیردسته ها
+                              </a>
+                            </Link>
+                          )}
+                          <Link
+                            href={`/admin/categories/edit?id=${category._id}${
+                              router.query.parent_id
+                                ? `&parent_id=${router.query.parent_id}`
+                                : ''
+                            }`}
+                          >
+                            <a className='bg-amber-50 text-amber-500 rounded-sm py-1 px-1.5 max-w-min'>
+                              ویرایش
+                            </a>
+                          </Link>
+                          {category.level === 2 && (
+                            <Link href={`/admin/details/${category._id}`}>
+                              <a className='bg-blue-50 text-blue-500 rounded-sm py-1 px-1.5 max-w-min'>
+                                مشخصات و ویژگی ها
+                              </a>
+                            </Link>
+                          )}
+                          {category.level < 2 && (
+                            <>
+                              <Link href={`/admin/sliders/${category._id}`}>
+                                <a className='bg-fuchsia-50 text-fuchsia-500 rounded-sm py-1 px-1.5 max-w-min'>
+                                  اسلایدرها
+                                </a>
+                              </Link>
+                              <Link href={`/admin/banners/${category._id}`}>
+                                <a className='bg-rose-50 text-rose-500 rounded-sm py-1 px-1.5 max-w-min'>
+                                  بنرها
+                                </a>
+                              </Link>
+                            </>
+                          )}
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td>
+                        <p className='py-4 text-xl text-center text-red-700'>
+                          زیردسته ای وجود ندارد
+                        </p>
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
           </div>
         </section>
       </PageContainer>

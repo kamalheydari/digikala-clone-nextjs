@@ -4,13 +4,13 @@ import { useRouter } from 'next/router'
 
 import { useDispatch } from 'react-redux'
 
-import { showAlert } from 'app/slices/alert.slice'
+import { showAlert } from 'store'
 import {
   useCreateDetailsMutation,
   useDeleteDetailsMutation,
   useGetDetailsQuery,
   useUpdateDetailsMutation,
-} from 'app/api/detailsApi'
+} from 'services'
 
 import {
   BigLoading,
@@ -47,8 +47,9 @@ export default function DetailsPage() {
 
   //? Queries
   //*   Get Category
-  const { categories } = useCategory()
-  const category = categories.find((item) => item._id === router.query.id)
+  const { categories, selectedCategory: category } = useCategory({
+    catID: router.query.id,
+  })
 
   //*   Get Details
   const {
@@ -75,7 +76,7 @@ export default function DetailsPage() {
   const [
     createDetails,
     {
-      data: data_creacte,
+      data: data_create,
       isSuccess: isSuccess_create,
       isError: isError_create,
       isLoading: isLoading_create,
@@ -225,7 +226,7 @@ export default function DetailsPage() {
           isError={isError_create}
           isSuccess={isSuccess_create}
           error={error_create?.data?.err}
-          message={data_creacte?.msg}
+          message={data_create?.msg}
         />
       )}
       <main>
@@ -316,7 +317,7 @@ export default function DetailsPage() {
                   </>
                 ) : (
                   <Button
-                    className=' bg-green-500'
+                    className='bg-green-500 '
                     rounded
                     type='submit'
                     isLoading={isLoading_create}

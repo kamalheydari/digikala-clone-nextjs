@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-import { useGetSingleOrderQuery } from 'app/api/orderApi'
+import { useGetSingleOrderQuery } from 'services'
 
 import { OrderCard, PageContainer, ShowWrapper } from 'components'
 
@@ -29,7 +29,7 @@ export default function SingleOrder() {
           isFetching={isFetching}
           isSuccess={isSuccess}
           dataLength={data ? 1 : 0}
-          emptyElement={null}
+          emptyComponent={null}
         >
           <section className='max-w-5xl px-3 py-3 mx-auto lg:px-8'>
             <OrderCard singleOrder order={data?.order} />

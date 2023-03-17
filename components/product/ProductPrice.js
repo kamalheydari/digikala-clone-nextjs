@@ -11,7 +11,7 @@ export default function ProductPrice({
   return (
     <div className={`${singleProduct && 'flex flex-col-reverse'}`}>
       <div className='flex items-center'>
-        <span className='farsi-digits text-sm text-gray-700'>
+        <span className='text-sm text-gray-700 farsi-digits'>
           {formatNumber(price - (discount * price) / 100)}
         </span>
         <Toman className='mr-1 w-7 h-7' />

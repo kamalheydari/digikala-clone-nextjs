@@ -5,7 +5,7 @@ import '/styles/browser-styles.css'
 import '/styles/swiper.css'
 
 //? Store
-import { store } from 'app/store'
+import { store } from 'store'
 import { Provider } from 'react-redux'
 
 //? Layouts & Components
@@ -50,9 +50,9 @@ export default function MyApp({ Component, pageProps }) {
   if (Component.getDashboardLayout) {
     return Component.getDashboardLayout(
       <Provider store={store}>
+
         <DashboardLayout>
-          <PageLoading />
-          <Component {...pageProps} />
+          <Component key={router.asPath} {...pageProps} />
           <ValidationToken />
           <Alert />
         </DashboardLayout>

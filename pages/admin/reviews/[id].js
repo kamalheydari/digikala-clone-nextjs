@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-import { useGetSingleReviewQuery } from 'app/api/reviewApi'
+import { useGetSingleReviewQuery } from 'services'
 
 import { PageContainer, ReveiwCard, ShowWrapper } from 'components'
 

@@ -1,6 +1,9 @@
 import { Fragment, useState } from 'react'
+
 import { Combobox as HUICombobox, Transition } from '@headlessui/react'
+
 import { HiCheck, HiChevronDown } from 'react-icons/hi'
+
 import { useController } from 'react-hook-form'
 
 export default function Combobox({ list, name, control, placeholder }) {
@@ -72,7 +75,7 @@ export default function Combobox({ list, name, control, placeholder }) {
                           }`}
                         >
                           <HiCheck
-                            className='icon text-teal-600'
+                            className='text-teal-600 icon'
                             aria-hidden='true'
                           />
                         </span>

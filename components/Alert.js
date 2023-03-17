@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import Image from 'next/image'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { removeAlert } from 'app/slices/alert.slice'
+import { removeAlert } from 'store'
 
 export default function Alert() {
   const dispatch = useDispatch()

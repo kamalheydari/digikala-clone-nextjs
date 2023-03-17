@@ -1,12 +1,8 @@
-import { useEffect, useState } from 'react'
 import Head from 'next/head'
 
 import db from 'lib/db'
 import Product from 'models/Product'
 import Category from 'models/Category'
-
-import { useGetImagesQuery } from 'app/api/categoryApi'
-import { useRouter } from 'next/router'
 
 import {
   BannerOne,
@@ -19,83 +15,65 @@ import {
 } from 'components'
 
 export default function MainCategory(props) {
-  const router = useRouter()
-
-  //? State
-  const [images, setImages] = useState({})
-
-  //? Get Slider Images
-  const { data, isSuccess } = useGetImagesQuery()
-
-  useEffect(() => {
-    if (isSuccess) setImages(data[router.query.category])
-  }, [isSuccess, router.query.category])
+  //? Props
+  const { bestSells, mostFavourite, discountProducts, currentCategory } = props
 
   //? Render
   return (
-    <main className='space-y-12 xl:mt-28'>
+    <main className='min-h-screen space-y-12 xl:mt-28'>
       <Head>
-        <title>{`دیجی‌کالا | ${props.currentCategory.name}`}</title>
+        <title>{`دیجی‌کالا | ${currentCategory.name}`}</title>
       </Head>
-      {/* Slider */}
-      {isSuccess ? (
-        <Slider images={images?.slider} />
-      ) : (
-        <div className='h-52 md:h-70 lg:h-[370px] bg-gray-50' />
-      )}
+
+      <Slider id={currentCategory._id} />
+
       <div className='py-4 mx-auto space-y-12 xl:mt-28 lg:max-w-[1450px]'>
-        {/* Discount Products */}
         <DiscountSlider
-          products={props.discountProducts}
-          categoryImage={props.currentCategory?.image}
-          colors={images.colors}
+          discountProducts={discountProducts}
+          currentCategory={currentCategory}
         />
 
-        {/* Categories */}
         <Categories
-          parent={props.currentCategory.category}
-          name={props.currentCategory.name}
-          color={`${images.colors ? `${images?.colors[0]}` : '#212121'}`}
+          parent={currentCategory._id}
+          color={currentCategory.colors?.start}
+          name={currentCategory.name}
         />
 
-        {/* Banner One */}
-        {isSuccess && <BannerOne images={images?.banner_one} />}
+        <BannerOne id={currentCategory._id} />
 
-        <BestSellsSlider products={props.bestSells} />
+        <BestSellsSlider bestSells={bestSells} />
 
-        {/* Banner Two */}
-        {isSuccess && <BannerTwo images={images?.banner_two} />}
+        <BannerTwo id={currentCategory._id} />
 
-        {/* MostFavouraiteProducts */}
-        <MostFavouraiteProducts products={props.mostFavourite} />
+        <MostFavouraiteProducts mostFavourite={mostFavourite} />
       </div>
     </main>
   )
 }
 
-export async function getServerSideProps({ params: { category } }) {
-  const categoryFilter = {
-    category: {
-      $regex: category,
-      $options: 'i',
-    },
-  }
-
+export async function getStaticProps({ params: { category } }) {
   const filterFilelds =
-    '-description -info -specification -sizes -colors -category -numReviews -reviews'
+    '-description -info -specification -sizes -colors -category -category_levels -numReviews -reviews'
 
   await db.connect()
-  const bestSells = await Product.find({
-    ...categoryFilter,
-  })
+
+  const currentCategory = await Category.findOne({
+    slug: category,
+  }).lean()
+
+  const currentCategoryID = JSON.parse(JSON.stringify(currentCategory._id))
+
+  const categoryFilter = {
+    category: { $in: currentCategoryID },
+  }
+
+  const bestSells = await Product.find(categoryFilter)
     .select(filterFilelds)
     .sort({ sold: -1 })
     .limit(15)
     .lean()
 
-  const mostFavourite = await Product.find({
-    ...categoryFilter,
-  })
+  const mostFavourite = await Product.find(categoryFilter)
     .select(filterFilelds)
     .sort({ rating: -1 })
     .limit(10)
@@ -111,22 +89,45 @@ export async function getServerSideProps({ params: { category } }) {
     .sort({ discount: -1 })
     .lean()
 
-  const currentCategory = await Category.findOne({
-    slug: category,
-  }).lean()
-
   await db.disconnect()
 
   return {
+    revalidate: 180,
     props: {
-      bestSells: bestSells.map(db.convertDocToObj),
-      mostFavourite: mostFavourite.map(db.convertDocToObj),
-      discountProducts: discountProducts.map(db.convertDocToObj),
-      currentCategory: db.convertDocToObj(currentCategory),
+      bestSells: {
+        title: 'پرفروش‌ترین کالاها',
+        products: JSON.parse(JSON.stringify(bestSells)),
+      },
+      discountProducts: {
+        title: 'بیشترین تخیف',
+        products: JSON.parse(JSON.stringify(discountProducts)),
+      },
+      mostFavourite: {
+        title: ' محبوب ترین کالاها',
+        products: JSON.parse(JSON.stringify(mostFavourite)),
+      },
+      currentCategory: JSON.parse(JSON.stringify(currentCategory)),
     },
   }
 }
 
+export async function getStaticPaths() {
+  await db.connect()
+
+  const categories = await Category.find({
+    level: 1,
+  }).lean()
+
+  await db.disconnect()
+
+  const paths = categories.map((cat) => ({ params: { category: cat.slug } }))
+  return {
+    paths,
+    fallback: false,
+  }
+}
+
+//? Layout
 MainCategory.getClientLayout = function pageLayout(page) {
   return <>{page}</>
 }

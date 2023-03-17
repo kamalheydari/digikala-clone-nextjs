@@ -40,6 +40,20 @@ export const mobileSchema = Yup.object().shape({
 export const categorySchema = Yup.object().shape({
   name: Yup.string().required('نام دسته‌بندی نباید خالی باشد'),
   slug: Yup.string().required('نام مسیر نباید خالی باشد'),
+  image: Yup.string().required('آدرس تصویر را وارد کنید'),
+})
+
+export const sliderSchema = Yup.object().shape({
+  title: Yup.string().required('نام اسلایدر نباید خالی باشد'),
+  image: Yup.object().shape({
+    url: Yup.string()
+      .required('آدرس تصویر را وارد کنید')
+      .matches(
+        /(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|gif|png)/,
+        'آدرس تصویر اشتباه است'
+      ),
+  }),
+  uri: Yup.string().required('آدرس تصویر را وارد کنید'),
 })
 
 export const addressSchema = Yup.object().shape({

@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { mobileSchema } from 'utils/validation'
 
-import { useEditUserMutation } from 'app/api/userApi'
+import { useEditUserMutation } from 'services'
 
 import { TextField, SubmitModalBtn, Modal, HandleResponse } from 'components'
 

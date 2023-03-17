@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { useEditUserMutation } from 'app/api/userApi'
+import { useEditUserMutation } from 'services'
 
 import { useForm } from 'react-hook-form'
 import { addressSchema } from 'utils/validation'
@@ -89,7 +89,7 @@ export default function AddressForm(props) {
           <Modal.Body>
             <p>لطفا اطلاعات موقعیت مکانی خود را وارد کنید.</p>
             <form
-              className='flex flex-col justify-between flex-1 overflow-y-auto pl-4'
+              className='flex flex-col justify-between flex-1 pl-4 overflow-y-auto'
               onSubmit={handleSubmit(submitHander)}
             >
               <div className='max-w-xl space-y-12 md:grid md:grid-cols-2 md:gap-x-12 md:gap-y-5 md:items-baseline '>

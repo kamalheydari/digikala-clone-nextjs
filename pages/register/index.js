@@ -8,9 +8,9 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { registerSchema } from 'utils/validation'
 
 import { useDispatch } from 'react-redux'
-import { showAlert } from 'app/slices/alert.slice'
-import { useCreateUserMutation } from 'app/api/userApi'
-import { userLogin } from 'app/slices/user.slice'
+import { showAlert, userLogin } from 'store'
+
+import { useCreateUserMutation } from 'services'
 
 import { TextField, LoginBtn, RedirectToLogin, Logo } from 'components'
 import useDisclosure from 'hooks/useDisclosure'

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 const productSchema = new mongoose.Schema(
   {
@@ -21,8 +21,22 @@ const productSchema = new mongoose.Schema(
     sizes: { type: Array },
     colors: { type: Array },
     category: {
-      type: String,
+      type: Array,
       required: true,
+    },
+    category_levels: {
+      level_one: {
+        type: mongoose.Types.ObjectId,
+        ref: 'category',
+      },
+      level_two: {
+        type: mongoose.Types.ObjectId,
+        ref: 'category',
+      },
+      Level_three: {
+        type: mongoose.Types.ObjectId,
+        ref: 'category',
+      },
     },
     inStock: {
       type: Number,
@@ -40,8 +54,8 @@ const productSchema = new mongoose.Schema(
   {
     timestamps: true,
   }
-);
+)
 
 const Product =
-  mongoose.models.product || mongoose.model("product", productSchema);
-export default Product;
+  mongoose.models.product || mongoose.model('product', productSchema)
+export default Product

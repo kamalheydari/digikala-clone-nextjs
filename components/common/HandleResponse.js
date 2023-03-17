@@ -1,5 +1,6 @@
-import { showAlert } from 'app/slices/alert.slice'
 import { useEffect } from 'react'
+
+import { showAlert } from 'store'
 import { useDispatch } from 'react-redux'
 
 export default function HandleResponse(props) {

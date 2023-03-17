@@ -1,4 +1,4 @@
-import { useGetUserInfoQuery } from 'app/api/userApi'
+import { useGetUserInfoQuery } from 'services'
 import useVerify from './useVerify'
 
 export default function useUserInfo() {

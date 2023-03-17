@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { useState } from 'react'
 
-import { useDeleteReviewMutation, useGetReviewsQuery } from 'app/api/reviewApi'
+import { useDeleteReviewMutation, useGetReviewsQuery } from 'services'
 
 import {
   Pagination,
@@ -11,11 +11,20 @@ import {
   ConfirmDeleteModal,
   PageContainer,
   HandleResponse,
+  ReveiwSkeleton,
 } from 'components'
 
 import useDisclosure from 'hooks/useDisclosure'
+import useChangeRoute from 'hooks/useChangeRoute'
+import { useRouter } from 'next/router'
 
 export default function Reviews() {
+  //? Assets
+  const { query } = useRouter()
+  const changeRoute = useChangeRoute({
+    shallow: true,
+  })
+
   //? Modals
   const [isShowConfirmDeleteModal, confirmDeleteModalHandlers] = useDisclosure()
 
@@ -23,7 +32,6 @@ export default function Reviews() {
   const [deleteInfo, setDeleteInfo] = useState({
     id: '',
   })
-  const [page, setPage] = useState(1)
 
   //? Queries
   //*    Delete Review
@@ -41,7 +49,7 @@ export default function Reviews() {
   //*   Get Reviews
   const { data, isSuccess, isFetching, error, isError, refetch } =
     useGetReviewsQuery({
-      page,
+      page: query?.page || 1,
     })
 
   //? Handlers
@@ -94,7 +102,8 @@ export default function Reviews() {
             isFetching={isFetching}
             isSuccess={isSuccess}
             dataLength={data ? data.reviewsLength : 0}
-            emptyElement={<EmptyCommentsList />}
+            emptyComponent={<EmptyCommentsList />}
+            loadingComponent={<ReveiwSkeleton />}
           >
             <div className='px-4 py-3 space-y-3 '>
               {data?.reviews.map((item) => (
@@ -110,13 +119,8 @@ export default function Reviews() {
           {data?.reviewsLength > 5 && (
             <div className='py-4 mx-auto lg:max-w-5xl'>
               <Pagination
-                currentPage={data.currentPage}
-                nextPage={data.nextPage}
-                previousPage={data.previousPage}
-                hasNextPage={data.hasNextPage}
-                hasPreviousPage={data.hasPreviousPage}
-                lastPage={data.lastPage}
-                setPage={setPage}
+                pagination={data.pagination}
+                changeRoute={changeRoute}
                 section='profileReviews'
                 client
               />

@@ -74,14 +74,15 @@ export default function CartDropdown() {
                   <ArrowLink path='/checkout/cart'>مشاهده‌ی سبد خرید</ArrowLink>
                 </div>
                 {/* Itmes */}
-                <div className='divide-y divide-gray-50 overflow-y-auto h-80 mx-1'>
+                <div className='mx-1 overflow-y-auto divide-y divide-gray-50 h-80'>
                   {cartItems.map((item) => (
                     <CartItem item={item} key={item.itemID} />
                   ))}
                 </div>
                 {/* Footer */}
-                <div className='px-3 py-2 flex justify-between items-center border-t'>
-                  <div>revie
+                <div className='flex items-center justify-between px-3 py-2 border-t'>
+                  <div>
+                    revie
                     <span>مبلغ قابل پرداخت</span>
                     <div className='flex-center'>
                       <span className='text-sm farsi-digits'>
@@ -97,7 +98,7 @@ export default function CartDropdown() {
             ) : (
               <>
                 <EmptyCart className='mx-auto h-44 w-44' />
-                <p className='text-base font-bold text-center pt-2'>
+                <p className='pt-2 text-base font-bold text-center'>
                   سبد خرید شما خالی است!
                 </p>
               </>

@@ -28,7 +28,7 @@ export default function PersonalInfo() {
           {isLoading ? (
             <Skeleton.Item animated='background' height='h-5' width='w-44' />
           ) : (
-            <p className='text-sm h-5'>{info}</p>
+            <p className='h-5 text-sm'>{info}</p>
           )}
         </div>
         {isLoading ? null : info ? (

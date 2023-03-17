@@ -6,7 +6,7 @@ import moment from 'moment-jalaali'
 import { HandleResponse, Icons, Toman } from 'components'
 
 import { formatNumber } from 'utils/formatNumber'
-import { useEditOrderMutation } from 'app/api/orderApi'
+import { useEditOrderMutation } from 'services'
 
 export default function OrderCard({ order, singleOrder }) {
   //? Edit Order Query

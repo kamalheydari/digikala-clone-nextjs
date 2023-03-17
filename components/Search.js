@@ -20,7 +20,7 @@ export default function Search() {
           disabled={true}
           type='text'
           placeholder='جستجو'
-          className='flex-grow p-1 text-right bg-transparent outline-none input cursor-pointer'
+          className='flex-grow p-1 text-right bg-transparent outline-none cursor-pointer input'
         />
         <button className='p-2'>
           <Icons.Search className='icon' />

@@ -1,8 +1,7 @@
 import { useRouter } from 'next/router'
 
 import { useDispatch } from 'react-redux'
-import { userLogout } from 'app/slices/user.slice'
-import { showAlert } from 'app/slices/alert.slice'
+import { userLogout, showAlert } from 'store'
 
 import { Icons } from 'components'
 

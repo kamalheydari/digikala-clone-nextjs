@@ -8,9 +8,8 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { useDispatch } from 'react-redux'
-import { userLogin } from 'app/slices/user.slice'
-import { showAlert } from 'app/slices/alert.slice'
-import { useLoginMutation } from 'app/api/userApi'
+import { userLogin, showAlert } from 'store'
+import { useLoginMutation } from 'services'
 
 import { TextField, LoginBtn, Logo } from 'components'
 
