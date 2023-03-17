@@ -61,7 +61,11 @@ export async function getStaticProps({ params: { category } }) {
     slug: category,
   }).lean()
 
-  const currentCategoryID = JSON.parse(JSON.stringify(currentCategory._id))
+  if (!currentCategory) return { notFound: true }
+
+  const currentCategoryID = await JSON.parse(
+    JSON.stringify(currentCategory._id)
+  )
 
   const categoryFilter = {
     category: { $in: currentCategoryID },
