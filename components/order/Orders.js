@@ -14,7 +14,6 @@ export default function Orders() {
 
   //? Get Order Query
   const { data, isLoading } = useGetOrdersQuery({})
-  console.log(data)
 
   //? Handle Get Order Response
   useEffect(() => {

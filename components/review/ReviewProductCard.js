@@ -3,7 +3,7 @@ import moment from 'moment-jalaali'
 
 export default function ReviewProductCard({ item }) {
   return (
-    <article className='flex py-3' key={item._id}>
+    <article className='flex py-3'>
       <span
         className={`farsi-digits w-5 h-5 text-center pt-0.5 inline-block rounded-md text-white  ${
           item.rating <= 2

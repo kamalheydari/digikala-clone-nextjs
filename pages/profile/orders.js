@@ -57,7 +57,6 @@ export default function Orders() {
               pagination={data.pagination}
               changeRoute={changeRoute}
               section='profileOrders'
-              client
             />
           </div>
         )}

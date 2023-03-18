@@ -85,7 +85,7 @@ export default function Users() {
         />
       )}
 
-      <main id='adminUsers'>
+      <main id='_adminUsers'>
         <Head>
           <title>مدیریت | کاربران</title>
         </Head>
@@ -110,7 +110,7 @@ export default function Users() {
               <Pagination
                 pagination={data.pagination}
                 changeRoute={changeRoute}
-                section='adminUsers'
+                section='_adminUsers'
               />
             </div>
           )}

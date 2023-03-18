@@ -28,7 +28,7 @@ export default function Reviews() {
 
   //? Render
   return (
-    <main id='adminReviews'>
+    <main id='_adminReviews'>
       <Head>
         <title>مدیریت | دیدگاه‌ها</title>
       </Head>
@@ -49,7 +49,7 @@ export default function Reviews() {
             <Pagination
               pagination={data.pagination}
               changeRoute={changeRoute}
-              section='adminReviews'
+              section='_adminReviews'
             />
           </div>
         )}

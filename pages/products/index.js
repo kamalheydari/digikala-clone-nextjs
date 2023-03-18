@@ -66,7 +66,7 @@ export default function ProductsHome(props) {
   return (
     <main
       className='lg:px-3 lg:container lg:max-w-[1700px] xl:mt-32'
-      id='products'
+      id='_products'
     >
       <Head>
         <title>دیجی‌کالا | فروشگاه</title>
@@ -123,7 +123,8 @@ export default function ProductsHome(props) {
           <Pagination
             pagination={pagination}
             changeRoute={changeRoute}
-            section='products'
+            section='_products'
+            slient
           />
         </div>
       )}

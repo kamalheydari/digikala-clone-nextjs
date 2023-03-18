@@ -199,7 +199,7 @@ export default function Products() {
               <BigLoading />
             </section>
           ) : (
-            <section className='p-3 space-y-7' id='adminProducts'>
+            <section className='p-3 space-y-7' id='_adminProducts'>
               <form
                 className='max-w-4xl mx-auto space-y-5'
                 onSubmit={handleSubmit}
@@ -271,7 +271,7 @@ export default function Products() {
                     <Pagination
                       pagination={data.pagination}
                       changeRoute={changeRoute}
-                      section='adminProducts'
+                      section='_adminProducts'
                     />
                   )}
                 </>

@@ -1,5 +1,5 @@
 import { Icons } from 'components'
-import { useEffect, useState } from 'react'
+import useMediaQuery from 'hooks/useMediaQuery'
 
 export default function Pagination(props) {
   //? Props
@@ -14,15 +14,15 @@ export default function Pagination(props) {
     lastPage,
   } = pagination
 
+  const isDesktop = useMediaQuery('(min-width:1024px)')
+
   const scrollToTop = () => {
     const element = document.getElementById(section)
-    element.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-    })
-    if (client && window.innerWidth > 1024) {
-      window.scrollTo(0, 60)
-    }
+
+    const scrollY =
+      client && isDesktop ? element?.offsetTop - 115 : element?.offsetTop
+
+    window.scrollTo(0, scrollY)
   }
 
   return (
