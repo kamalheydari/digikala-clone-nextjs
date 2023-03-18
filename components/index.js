@@ -58,6 +58,7 @@ export { default as SelectSize } from './product/SelectSize'
 export { default as OutOfStock } from './product/OutOfStock'
 export { default as SubCategories } from './product/SubCategories'
 export { default as Info } from './product/Info'
+export { default as Breadcrumb } from './product/Breadcrumb'
 
 //* SKELETON
 export { default as ReveiwSkeleton } from './skeleton/ReveiwSkeleton'

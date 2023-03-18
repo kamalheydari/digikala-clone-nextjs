@@ -21,6 +21,7 @@ import {
   OutOfStock,
   AddToCart,
   Info,
+  Breadcrumb,
 } from 'components'
 
 export default function SingleProduct(props) {
@@ -66,6 +67,8 @@ export default function SingleProduct(props) {
           content='هر آنچه که نیاز دارید با بهترین قیمت از دیجی‌کالا بخرید! جدیدترین انواع گوشی موبایل، لپ تاپ، لباس، لوازم آرایشی و بهداشتی، کتاب، لوازم خانگی، خودرو و... با امکان تعویض و مرجوعی آسان | ✓ارسال رايگان ✓پرداخت در محل ✓ضمانت بازگشت کالا - برای خرید کلیک کنید!'
         />
       </Head>
+
+      <Breadcrumb categoires={product.category_levels} />
 
       <div className='h-fit lg:h-fit lg:grid lg:grid-cols-9 lg:px-4 lg:gap-x-2 lg:gap-y-4 lg:mb-10 xl:gap-x-7'>
         <ImageGallery
@@ -136,7 +139,11 @@ export default function SingleProduct(props) {
 
 export async function getServerSideProps({ params: { id } }) {
   await db.connect()
-  const product = await Product.findById({ _id: id }).lean()
+  const product = await Product.findById({ _id: id })
+    .populate('category_levels.level_one')
+    .populate('category_levels.level_two')
+    .populate('category_levels.Level_three')
+    .lean()
 
   if (!product) return { notFound: true }
 
