@@ -72,7 +72,7 @@ export default function Categories() {
                         <td className='w-3/4 px-2 py-4 text-right'>
                           {category.name}
                         </td>
-                        <td className='flex flex-col items-center gap-3 px-2 py-4'>
+                        <td className='flex flex-wrap items-center gap-3 px-2 py-4'>
                           {category.level !== 3 && (
                             <Link
                               href={`/admin/categories?parent_id=${category._id}`}
