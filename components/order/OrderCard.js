@@ -1,9 +1,8 @@
-import Image from 'next/image'
 import Link from 'next/link'
 
 import moment from 'moment-jalaali'
 
-import { HandleResponse, Icons, Toman } from 'components'
+import { HandleResponse, Icons, ResponsiveImage, Toman } from 'components'
 
 import { formatNumber } from 'utils/formatNumber'
 import { useEditOrderMutation } from 'services'
@@ -99,17 +98,11 @@ export default function OrderCard({ order, singleOrder }) {
         <div className='flex flex-wrap py-5 gap-x-5 gap-y-3 lg:border-t lg:border-gray-200 lg:px-3'>
           {order.cart.map((cartItem, index) => (
             <Link href={`/products/${cartItem.productID}`} key={index}>
-              <a>
-                <div className='relative w-16 h-16 '>
-                  <Image
-                    src={cartItem.img.url}
-                    layout='fill'
-                    alt={cartItem.name}
-                    placeholder='blur'
-                    blurDataURL='/placeholder.png'
-                  />
-                </div>
-              </a>
+              <ResponsiveImage
+                dimensions='w-16 h-16'
+                src={cartItem.img.url}
+                alt={cartItem.name}
+              />
             </Link>
           ))}
         </div>

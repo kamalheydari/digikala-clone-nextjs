@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 
 import { Icons, BoxLink, Logout, Orders, Person } from 'components'
@@ -63,9 +62,7 @@ function ProfileAside() {
           )}
         </div>
         <Link href='/profile/personal-info'>
-          <a>
             <Icons.Edit className='w-6 h-6 text-blue-400' />
-          </a>
         </Link>
       </div>
 

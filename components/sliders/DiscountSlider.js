@@ -1,10 +1,14 @@
 import Link from 'next/link'
 import Image from 'next/image'
-
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 
-import { AmazingTypo, DiscountProduct, ProductPrice } from 'components'
+import {
+  AmazingTypo,
+  DiscountProduct,
+  ProductPrice,
+  ResponsiveImage,
+} from 'components'
 
 export default function DiscountSlider(props) {
   //? Props
@@ -26,17 +30,15 @@ export default function DiscountSlider(props) {
             490: { width: 490, slidesPerView: 3 },
           }}
         >
-          <SwiperSlide className='py-10 '>
-            <AmazingTypo className='w-20 h-20 mx-auto' />
-            <div className='relative w-20 h-20 mx-auto'>
-              <Image
-                src={currentCategory.image}
-                layout='fill'
-                alt='icon'
-                placeholder='blur'
-                blurDataURL='/placeholder.png'
-              />
-            </div>
+          <SwiperSlide className='py-10 flex-center flex-col'>
+            <AmazingTypo className='w-20 h-20' />
+            <Image
+              src={currentCategory.image}
+              alt={currentCategory.name}
+              width={96}
+              height={96}
+              priority
+            />
           </SwiperSlide>
           {discountProducts.products.map((product, index) => (
             <SwiperSlide
@@ -46,29 +48,25 @@ export default function DiscountSlider(props) {
               } `}
             >
               <Link href={`/products/${product._id}`}>
-                <a>
-                  <article>
-                    <div className='relative w-32 h-32 mx-auto lg:w-36 lg:h-36'>
-                      <Image
-                        src={product.images[0].url}
-                        layout='fill'
-                        alt={product.title}
-                        placeholder='blur'
-                        blurDataURL='/placeholder.png'
-                      />
+                <article>
+                  <ResponsiveImage
+                    dimensions='w-32 h-32 lg:w-36 lg:h-36'
+                    className=' mx-auto'
+                    src={product.images[0].url}
+                    alt={product.title}
+                  />
+
+                  <div className='flex px-2 mt-1.5 justify-evenly gap-x-2 '>
+                    <div>
+                      <DiscountProduct discount={product.discount} />
                     </div>
-                    <div className='flex px-2 justify-evenly gap-x-2 '>
-                      <div>
-                        <DiscountProduct discount={product.discount} />
-                      </div>
-                      <ProductPrice
-                        inStock={product.inStock}
-                        discount={product.discount}
-                        price={product.price}
-                      />
-                    </div>
-                  </article>
-                </a>
+                    <ProductPrice
+                      inStock={product.inStock}
+                      discount={product.discount}
+                      price={product.price}
+                    />
+                  </div>
+                </article>
               </Link>
             </SwiperSlide>
           ))}

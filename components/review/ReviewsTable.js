@@ -1,6 +1,7 @@
-import { EditIconBtn } from 'components'
-import Image from 'next/image'
 import Link from 'next/link'
+
+import { EditIconBtn, ResponsiveImage } from 'components'
+
 
 export default function ReviewsTable({ reviews }) {
   return (
@@ -23,15 +24,14 @@ export default function ReviewsTable({ reviews }) {
                 key={review._id}
               >
                 <td className='p-2'>
-                  <div className='relative mx-auto w-7 h-7'>
-                    <Image
-                      src={review.product.images[0].url}
-                      layout='fill'
-                      alt='تصویر محصول'
-                      placeholder='blur'
-                      blurDataURL='/placeholder.png'
-                    />
-                  </div>
+                  <ResponsiveImage
+                    dimensions='w-7 h-7'
+                    className='mx-auto'
+                    src={review.product.images[0].url}
+                    alt='تصویر محصول'
+                  />
+
+                  
                 </td>
                 <td className='p-2'>{review._id}</td>
                 <td className='p-2 font-bold'>
@@ -57,9 +57,7 @@ export default function ReviewsTable({ reviews }) {
 
                 <td className='p-2'>
                   <Link href={`/admin/reviews/${review._id}`}>
-                    <a>
-                      <EditIconBtn />
-                    </a>
+                    <EditIconBtn />
                   </Link>
                 </td>
               </tr>

@@ -1,7 +1,6 @@
-import Image from 'next/image'
 import Link from 'next/link'
 
-import { CategoriesSkeleton } from 'components'
+import { CategoriesSkeleton, ResponsiveImage } from 'components'
 
 import useCategory from 'hooks/useCategory'
 
@@ -37,19 +36,15 @@ export default function Categories(props) {
                     ? `/main/${item.slug}`
                     : `/products?category=${item.slug}`
                 }
+                className='text-center'
               >
-                <a className='text-center'>
-                  <div className='relative w-24 h-24 mx-auto mb-1 lg:h-44 lg:w-44'>
-                    <Image
-                      src={item.image}
-                      layout='fill'
-                      alt={item.name}
-                      placeholder='blur'
-                      blurDataURL='/placeholder.png'
-                    />
-                  </div>
-                  <span className='text-sm text-black'>{item.name}</span>
-                </a>
+                <ResponsiveImage
+                  dimensions='w-24 h-24 lg:h-44 lg:w-44'
+                  className='mx-auto mb-1'
+                  src={item.image}
+                  alt={item.name}
+                />
+                <span className='text-sm text-black'>{item.name}</span>
               </Link>
             </div>
           ))}

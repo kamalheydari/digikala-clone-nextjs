@@ -93,14 +93,17 @@ export default function SearchModal(props) {
                       <div className='relative w-12 h-12'>
                         <Image
                           src={item.images[0].url}
-                          layout='fill'
+                          width={48}
+                          height={48}
                           alt={item.name}
                         />
                       </div>
-                      <Link href={`/products/${item._id}`}>
-                        <a onClick={() => onClose()} className='py-1 text-sm'>
-                          {truncate(item.title, 70)}
-                        </a>
+                      <Link
+                        href={`/products/${item._id}`}
+                        onClick={() => onClose()}
+                        className='py-1 text-sm'
+                      >
+                        {truncate(item.title, 70)}
                       </Link>
                       <div className='flex justify-between'>
                         <div>

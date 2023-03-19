@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 
-import { Icons, NavbarSkeleton } from 'components'
+import { Icons, NavbarSkeleton, ResponsiveImage } from 'components'
 
 import useCategory from 'hooks/useCategory'
 
@@ -62,18 +61,14 @@ export default function Navbar() {
                     onMouseOver={() => handleActive(levelOneCategory)}
                   >
                     <Link href={`/main/${levelOneCategory.slug}`}>
-                      <a>
-                        <div className='relative h-7 w-7 grayscale '>
-                          <Image
-                            src={levelOneCategory.image}
-                            layout='fill'
-                            alt={levelOneCategory.name}
-                            placeholder='blur'
-                            blurDataURL='/placeholder.png'
-                          />
-                        </div>
-                        <span>{levelOneCategory.name}</span>
-                      </a>
+                      <ResponsiveImage
+                        dimensions='w-7 h-7'
+                        className='grayscale'
+                        src={levelOneCategory.image}
+                        alt={levelOneCategory.name}
+                      />
+
+                      <span>{levelOneCategory.name}</span>
                     </Link>
                   </li>
                 ))
@@ -89,11 +84,10 @@ export default function Navbar() {
                       <li key={levelTwoCategory._id} className='sub-category'>
                         <Link
                           href={`/products?category=${levelTwoCategory.slug}`}
+                          className='lvl-two_category'
                         >
-                          <a className='lvl-two_category'>
-                            {levelTwoCategory.name}
-                            <Icons.ArrowLeft className='icon' />
-                          </a>
+                          {levelTwoCategory.name}
+                          <Icons.ArrowLeft className='icon' />
                         </Link>
                         <ul className='space-y-1'>
                           {categories
@@ -105,10 +99,9 @@ export default function Navbar() {
                               <li key={levelThreeCategory._id}>
                                 <Link
                                   href={`/products?category=${levelThreeCategory.slug}`}
+                                  className='lvl-three_category'
                                 >
-                                  <a className='lvl-three_category'>
-                                    {levelThreeCategory.name}
-                                  </a>
+                                  {levelThreeCategory.name}
                                 </Link>
                               </li>
                             ))}

@@ -16,15 +16,13 @@ function Signup() {
   else if (!isVerify) {
     return (
       <div className='user-signup'>
-        <Link href='/login'>
-          <a className='flex-center gap-x-1'>
-            <Icons.Login className='icon' />
-            ورود
-          </a>
+        <Link href='/login' className='flex-center gap-x-1'>
+          <Icons.Login className='icon' />
+          ورود
         </Link>
         <span className='user-signup__divider' />
-        <Link href='/register'>
-          <a className='hidden px-2 lg:block'>ثبت‌نام</a>
+        <Link href='/register' className='hidden px-2 lg:block'>
+          ثبت‌نام
         </Link>
       </div>
     )
@@ -33,9 +31,7 @@ function Signup() {
       <>
         <div className='lg:hidden'>
           <Link href='/profile'>
-            <a>
               <Icons.User className='icon h-7 w-7' />
-            </a>
           </Link>
         </div>
         <div className='hidden lg:block'>

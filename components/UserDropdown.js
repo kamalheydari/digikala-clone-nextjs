@@ -1,9 +1,9 @@
+import Link from 'next/link'
 import { Fragment } from 'react'
 
 import { Menu, Transition } from '@headlessui/react'
 
 import { Icons, Logout, Person } from 'components'
-import Link from 'next/link'
 
 export default function UserDropdown({ name }) {
   return (
@@ -24,12 +24,13 @@ export default function UserDropdown({ name }) {
         <Menu.Items className='w-56 dropdown__items'>
           <Menu.Item>
             <div className='px-3 transition-colors hover:bg-gray-100'>
-              <Link href='/profile'>
-                <a className='py-4 mx-4 text-xs font-medium text-gray-700 flex-center gap-x-1 md:text-sm'>
-                  <Person className='w-6 h-6' />
-                  <span className='ml-auto mr-4 text-gray-700'>{name}</span>
-                  <Icons.ArrowLeft className='text-gray-700 icon lg:mr-3' />
-                </a>
+              <Link
+                href='/profile'
+                className='py-4 mx-4 text-xs font-medium text-gray-700 flex-center gap-x-1 md:text-sm'
+              >
+                <Person className='w-6 h-6' />
+                <span className='ml-auto mr-4 text-gray-700'>{name}</span>
+                <Icons.ArrowLeft className='text-gray-700 icon lg:mr-3' />
               </Link>
             </div>
           </Menu.Item>

@@ -37,9 +37,7 @@ export default function OrdersTable({ orders }) {
                 <td className='py-3 px-1.5'>{order.user.email}</td>
                 <td className='p-2'>
                   <Link href={`/admin/orders/${order._id}`}>
-                    <a>
-                      <EditIconBtn />
-                    </a>
+                    <EditIconBtn />
                   </Link>
                 </td>
               </tr>

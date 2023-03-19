@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 import { useSelector } from 'react-redux'
 
-import { AddToCartOperation, Depot, Icons } from 'components'
+import { AddToCartOperation, Depot, Icons, ResponsiveImage } from 'components'
 
 import { formatNumber } from 'utils/formatNumber'
 
@@ -25,24 +25,24 @@ export default function AddToCart({ second, product }) {
         <div className='add-to-cart__desktop__header'>
           <span className='text-base text-black'>فروشنده :</span>
           <div className='flex gap-x-2'>
-            <div className='relative w-6 h-6'>
-              <Image src='/icons/mini-logo.png' layout='fill' alt='دیجی‌کالا' />
-            </div>
+            <Image
+              src='/icons/mini-logo.png'
+              width={24}
+              height={24}
+              alt='دیجی‌کالا'
+            />
             <span>دیجی‌کالا</span>
           </div>
         </div>
         {second && (
           <>
             <div className='flex py-3 gap-x-4 '>
-              <div className='relative w-28 h-28'>
-                <Image
-                  src={product.images[0].url}
-                  layout='fill'
-                  alt={product.title}
-                  placeholder='blur'
-                  blurDataURL='/placeholder.png'
-                />
-              </div>
+              <ResponsiveImage
+                dimensions='w-28 h-28'
+                src={product.images[0].url}
+                alt={product.title}
+              />
+
               <span className='flex-1 text-justify'>{product.title}</span>
             </div>
 

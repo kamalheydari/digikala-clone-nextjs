@@ -16,6 +16,7 @@ import {
   HandleResponse,
   Icons,
   LogoPersian,
+  ResponsiveImage,
 } from 'components'
 
 import { withAddressModal } from 'HOCs/withAddressModal'
@@ -106,16 +107,15 @@ export default function ShippingPage() {
         {/* header */}
         <header className='lg:border lg:border-gray-200 lg:rounded-lg'>
           <Link href='/'>
-            <a>
-              <LogoPersian className='w-24 h-12 mx-auto' />
-            </a>
+            <LogoPersian className='w-24 h-12 mx-auto' />
           </Link>
           <div className='flex items-center justify-evenly'>
-            <Link href='/checkout/cart'>
-              <a className='flex flex-col items-center gap-y-2'>
-                <Icons.Cart className='text-red-300 icon' />
-                <span className='font-normal text-red-300'>سبد خرید</span>
-              </a>
+            <Link
+              href='/checkout/cart'
+              className='flex flex-col items-center gap-y-2'
+            >
+              <Icons.Cart className='text-red-300 icon' />
+              <span className='font-normal text-red-300'>سبد خرید</span>
             </Link>
 
             <div className='h-[1px] w-8  bg-red-300' />
@@ -148,9 +148,13 @@ export default function ShippingPage() {
             {/* products */}
             <section className='px-2 py-4 mx-3 border border-gray-200 rounded-lg lg:mx-0 lg:mt-3 '>
               <div className='flex mb-5'>
-                <div className='relative w-10 h-10 ml-4 '>
-                  <Image src='/icons/car.png' layout='fill' alt='ارسال' />
-                </div>
+                <Image
+                  src='/icons/car.png'
+                  className='ml-4'
+                  width={40}
+                  height={40}
+                  alt='ارسال'
+                />
                 <div>
                   <span className='text-base text-black'>ارسال عادی</span>
                   <span className='block'>موجود در انبار</span>
@@ -162,18 +166,12 @@ export default function ShippingPage() {
               <div className='flex flex-wrap justify-start gap-x-8 gap-y-5'>
                 {cartItems.map((item) => (
                   <article key={item.itemID}>
-                    <div className='relative w-24 h-28 '>
-                      <Image
-                        src={item.img.url}
-                        layout='fill'
-                        alt={item.name}
-                        placeholder='blur'
-                        blurDataURL='/placeholder.png'
-                      />
-                      <span className='absolute farsi-digits order-badge lg:block'>
-                        {formatNumber(item.quantity)}
-                      </span>
-                    </div>
+                    <ResponsiveImage
+                      dimensions='w-28 h-28'
+                      src={item.img.url}
+                      alt={item.name}
+                    />
+
                     {item.color && (
                       <div className='flex items-center gap-x-2 mr-3 mt-1.5'>
                         <span
@@ -194,10 +192,11 @@ export default function ShippingPage() {
                 ))}
               </div>
 
-              <Link href='/checkout/cart'>
-                <a className='inline-block mt-6 text-sm text-sky-500'>
-                  بازگشت به سبد خرید
-                </a>
+              <Link
+                href='/checkout/cart'
+                className='inline-block mt-6 text-sm text-sky-500'
+              >
+                بازگشت به سبد خرید
               </Link>
             </section>
           </div>

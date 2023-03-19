@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 
 import { formatNumber } from 'utils/formatNumber'
 
@@ -9,6 +8,7 @@ import {
   Icons,
   DiscountCartItem,
   Toman,
+  ResponsiveImage,
 } from 'components'
 
 export default function CartItem({ item }) {
@@ -16,27 +16,23 @@ export default function CartItem({ item }) {
     <article className='flex px-4 py-5 gap-x-4 '>
       {/* image & cartButtons */}
       <div className='space-y-4'>
-        <div className='relative w-28 h-28'>
-          <Image
-            src={item.img.url}
-            layout='fill'
-            alt={item.name}
-            placeholder='blur'
-            blurDataURL='/placeholder.png'
-          />
-        </div>
+        <ResponsiveImage
+          dimensions='w-28 h-28'
+          src={item.img.url}
+          alt={item.name}
+        />
+
         <div className='mx-auto w-fit '>
           <SpecialSell product={item} />
         </div>
+
         <CartButtons item={item} />
       </div>
 
       {/* name */}
       <div>
         <h5 className='mb-3 text-sm'>
-          <Link href={`/products/${item.productID}`}>
-            <a>{item.name}</a>
-          </Link>
+          <Link href={`/products/${item.productID}`}>{item.name}</Link>
         </h5>
 
         {/* info */}

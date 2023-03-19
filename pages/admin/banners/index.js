@@ -48,10 +48,11 @@ export default function Banners() {
                           {category.name}
                         </td>
                         <td className='px-2 py-4'>
-                          <Link href={`/admin/banners/${category._id}`}>
-                            <a className='bg-rose-50 text-rose-500 rounded-sm py-1 px-1.5 mx-1.5 inline-block'>
-                              بنرها
-                            </a>
+                          <Link
+                            href={`/admin/banners/${category._id}`}
+                            className='bg-rose-50 text-rose-500 rounded-sm py-1 px-1.5 mx-1.5 inline-block'
+                          >
+                            بنرها
                           </Link>
                         </td>
                       </tr>

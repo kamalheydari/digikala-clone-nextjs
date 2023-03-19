@@ -51,11 +51,7 @@ export default function Orders() {
           ) : (
             <div className='flex flex-col items-center lg:flex-row lg:gap-x-2'>
               <div className='relative w-12 h-12 lg:w-14 lg:h-14'>
-                <Image
-                  src='/icons/status-processing.svg'
-                  layout='fill'
-                  alt='جاری'
-                />
+                <Image src='/icons/status-processing.svg' fill alt='جاری' />
                 <span className='absolute farsi-digits order-badge'>
                   {formatNumber(pendingOrder)}
                 </span>
@@ -76,11 +72,7 @@ export default function Orders() {
           ) : (
             <div className='flex flex-col items-center lg:flex-row lg:gap-x-2'>
               <div className='relative w-12 h-12 lg:w-14 lg:h-14'>
-                <Image
-                  src='/icons/status-delivered.svg'
-                  layout='fill'
-                  alt='تحویل شده'
-                />
+                <Image src='/icons/status-delivered.svg' fill alt='تحویل شده' />
                 <span className='absolute farsi-digits order-badge'>
                   {formatNumber(successOrder)}
                 </span>
@@ -101,11 +93,7 @@ export default function Orders() {
           ) : (
             <div className='flex flex-col items-center lg:flex-row lg:gap-x-2'>
               <div className='relative w-12 h-12 lg:w-14 lg:h-14'>
-                <Image
-                  src='/icons/status-returned.svg'
-                  layout='fill'
-                  alt='مرجوع'
-                />
+                <Image src='/icons/status-returned.svg' fill alt='مرجوع' />
                 <span className='absolute order-badge farsi-digits'>0</span>
               </div>
               <div className='text-gray-700'>

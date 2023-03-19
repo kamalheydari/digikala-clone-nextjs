@@ -90,9 +90,7 @@ export default function LoginPage() {
       </Head>
       <section className='container max-w-xl px-12 py-6 space-y-6 lg:border lg:border-gray-100 lg:rounded-lg lg:shadow'>
         <Link passHref href='/'>
-          <a>
-            <Logo className='h-24 mx-auto w-44' />
-          </a>
+          <Logo className='h-24 mx-auto w-44' />
         </Link>
         <h2>ورود</h2>
         <form className='space-y-4' onSubmit={handleSubmit(submitHander)}>

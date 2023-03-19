@@ -8,9 +8,7 @@ function Error({ statusCode }) {
           ? `An error ${statusCode} occurred on server`
           : 'An error occurred on client'}
       </p>
-      <Link href='/'>
-        <a>home</a>
-      </Link>
+      <Link href='/'>home</Link>
     </div>
   )
 }

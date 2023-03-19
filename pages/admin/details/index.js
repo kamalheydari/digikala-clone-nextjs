@@ -46,10 +46,11 @@ export default function DetailsHome() {
                           {category.name}
                         </td>
                         <td className='px-2 py-4'>
-                          <Link href={`/admin/details/${category._id}`}>
-                            <a className='bg-blue-50 text-blue-500 rounded-sm py-1 px-1.5 mx-1.5 inline-block'>
-                              مشخصات و ویژگی ها
-                            </a>
+                          <Link
+                            href={`/admin/details/${category._id}`}
+                            className='bg-blue-50 text-blue-500 rounded-sm py-1 px-1.5 mx-1.5 inline-block'
+                          >
+                            مشخصات و ویژگی ها
                           </Link>
                         </td>
                       </tr>

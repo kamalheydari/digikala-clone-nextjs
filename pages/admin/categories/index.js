@@ -39,16 +39,16 @@ export default function Categories() {
                     ? `?parent_id=${router.query.parent_id}`
                     : ''
                 }`}
+                className='flex items-center px-3 py-2 text-red-600 border-2 border-red-600 rounded-lg max-w-max gap-x-3'
               >
-                <a className='flex items-center px-3 py-2 text-red-600 border-2 border-red-600 rounded-lg max-w-max gap-x-3'>
-                  افزودن دسته‌بندی جدید
-                </a>
+                افزودن دسته‌بندی جدید
               </Link>
 
-              <Link href='/admin/categories/tree'>
-                <a className='flex items-center px-3 py-2 text-red-600 border-2 border-red-600 rounded-lg max-w-max gap-x-3'>
-                  نمودار دسته بندی ها
-                </a>
+              <Link
+                href='/admin/categories/tree'
+                className='flex items-center px-3 py-2 text-red-600 border-2 border-red-600 rounded-lg max-w-max gap-x-3'
+              >
+                نمودار دسته بندی ها
               </Link>
             </div>
 
@@ -76,10 +76,9 @@ export default function Categories() {
                           {category.level !== 3 && (
                             <Link
                               href={`/admin/categories?parent_id=${category._id}`}
+                              className='bg-green-50 text-green-500 rounded-sm py-1 px-1.5 max-w-min'
                             >
-                              <a className='bg-green-50 text-green-500 rounded-sm py-1 px-1.5 max-w-min'>
-                                زیردسته ها
-                              </a>
+                              زیردسته ها
                             </Link>
                           )}
                           <Link
@@ -88,29 +87,31 @@ export default function Categories() {
                                 ? `&parent_id=${router.query.parent_id}`
                                 : ''
                             }`}
+                            className='bg-amber-50 text-amber-500 rounded-sm py-1 px-1.5 max-w-min'
                           >
-                            <a className='bg-amber-50 text-amber-500 rounded-sm py-1 px-1.5 max-w-min'>
-                              ویرایش
-                            </a>
+                            ویرایش
                           </Link>
                           {category.level === 2 && (
-                            <Link href={`/admin/details/${category._id}`}>
-                              <a className='bg-blue-50 text-blue-500 rounded-sm py-1 px-1.5 max-w-min'>
-                                مشخصات و ویژگی ها
-                              </a>
+                            <Link
+                              href={`/admin/details/${category._id}`}
+                              className='bg-blue-50 text-blue-500 rounded-sm py-1 px-1.5 max-w-min'
+                            >
+                              مشخصات و ویژگی ها
                             </Link>
                           )}
                           {category.level < 2 && (
                             <>
-                              <Link href={`/admin/sliders/${category._id}`}>
-                                <a className='bg-fuchsia-50 text-fuchsia-500 rounded-sm py-1 px-1.5 max-w-min'>
-                                  اسلایدرها
-                                </a>
+                              <Link
+                                href={`/admin/sliders/${category._id}`}
+                                className='bg-fuchsia-50 text-fuchsia-500 rounded-sm py-1 px-1.5 max-w-min'
+                              >
+                                اسلایدرها
                               </Link>
-                              <Link href={`/admin/banners/${category._id}`}>
-                                <a className='bg-rose-50 text-rose-500 rounded-sm py-1 px-1.5 max-w-min'>
-                                  بنرها
-                                </a>
+                              <Link
+                                href={`/admin/banners/${category._id}`}
+                                className='bg-rose-50 text-rose-500 rounded-sm py-1 px-1.5 max-w-min'
+                              >
+                                نرها
                               </Link>
                             </>
                           )}

@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Head from 'next/head'
 
 import {
@@ -22,7 +23,6 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import useDisclosure from 'hooks/useDisclosure'
 import useCategory from 'hooks/useCategory'
-import Image from 'next/image'
 
 export default function CreateCategory() {
   //? Assets
@@ -243,16 +243,15 @@ export default function CreateCategory() {
                 direction='ltr'
               />
               {getValues('image') && (
-                <div className='mx-auto'>
                   <Image
                     src={getValues('image')}
                     width={200}
                     height={200}
+                    className='mx-auto'
                     alt='category image'
                     placeholder='blur'
                     blurDataURL='/placeholder.png'
                   />
-                </div>
               )}
 
               {selectedCategory.level < 2 && (

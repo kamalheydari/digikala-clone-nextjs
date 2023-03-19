@@ -88,9 +88,7 @@ export default function RegisterPage() {
         </Head>
         <section className='container max-w-xl px-12 py-6 space-y-6 lg:border lg:border-gray-100 lg:rounded-lg lg:shadow'>
           <Link passHref href='/'>
-            <a>
-              <Logo className='h-24 mx-auto w-44' />
-            </a>
+            <Logo className='h-24 mx-auto w-44' />
           </Link>
           <h2 className='text-gray-700'>ثبت‌نام</h2>
           <form
@@ -134,8 +132,8 @@ export default function RegisterPage() {
 
           <div>
             <p className='inline ml-2 text-gray-800'>حساب کاربری دارید؟</p>
-            <Link href='/login'>
-              <a className='text-lg text-blue-400 '>ورود</a>
+            <Link href='/login' className='text-lg text-blue-400'>
+              ورود
             </Link>
           </div>
         </section>

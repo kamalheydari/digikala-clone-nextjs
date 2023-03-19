@@ -13,6 +13,7 @@ export { default as HandleResponse } from './common/HandleResponse'
 export { default as SelectBox } from './common/SelectBox'
 export { default as ImageList } from './common/ImageList'
 export { default as Checkbox } from './common/Checkbox'
+export { default as ResponsiveImage } from './common/ResponsiveImage'
 export * from './common/IconBtns'
 export * from './common/Buttons'
 

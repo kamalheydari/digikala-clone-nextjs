@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Link from 'next/link'
 
 import {
@@ -20,9 +19,7 @@ export default function Header() {
           <div className='header__top'>
             <Sidebar />
             <Link passHref href='/'>
-              <a>
                 <Logo className='w-24 h-14' />
-              </a>
             </Link>
             <Icons.Question className='icon lg:hidden' />
           </div>

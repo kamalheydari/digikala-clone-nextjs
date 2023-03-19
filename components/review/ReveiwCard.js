@@ -1,9 +1,8 @@
-import Image from 'next/image'
 import { Fragment, useState } from 'react'
 
 import { useEditReviewMutation } from 'services'
 
-import { HandleResponse, Icons } from 'components'
+import { HandleResponse, Icons, ResponsiveImage } from 'components'
 import { Menu, Transition } from '@headlessui/react'
 
 export default function ReveiwCard({
@@ -101,15 +100,12 @@ export default function ReveiwCard({
       <div className='flex py-4 space-y-3 border-b border-gray-200 lg:px-2 lg:border gap-x-3 lg:gap-x-8 lg:rounded-lg '>
         {/* image */}
         <div>
-          <div className='relative w-16 h-12 lg:w-24 lg:h-20'>
-            <Image
-              src={item.product.images[0].url}
-              layout='fill'
-              alt='تصویر محصول'
-              placeholder='blur'
-              blurDataURL='/placeholder.png'
-            />
-          </div>
+          <ResponsiveImage
+            dimensions='w-16 h-12 lg:w-24 lg:h-20'
+            src={item.product.images[0].url}
+            alt='تصویر محصول'
+          />
+
           <span
             className={`farsi-digits w-5 h-5 text-center pt-0.5 inline-block rounded-md text-white  mr-10 lg:mr-20 ${
               item.rating <= 2

@@ -54,9 +54,13 @@ export default function Alert() {
         } max-w-md fixed transition-all duration-700 left-0 right-0 mx-auto z-40`}
       >
         <div className='p-3 mx-2 text-center bg-white rounded-md shadow h-fit'>
-          <div className='relative w-20 h-20 mx-auto '>
-            <Image src={IconSrc} layout='fill' alt={status} />
-          </div>
+          <Image
+            className='mx-auto'
+            src={IconSrc}
+            width='80'
+            height='80'
+            alt={status}
+          />
           <p className='mt-2'>{title}</p>
         </div>
       </div>

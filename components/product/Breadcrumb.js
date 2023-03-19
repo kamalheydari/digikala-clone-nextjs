@@ -5,20 +5,29 @@ export default function Breadcrumb({ categoires }) {
 
   return (
     <div className='pr-5'>
-      <Link href='/'>
-        <a className='inline-block px-1 py-1 text-sm text-gray-700 '>دیجی‌کالا</a>
+      <Link href='/' className='inline-block px-1 py-1 text-sm text-gray-700 '>
+        دیجی‌کالا
       </Link>
       {' / '}
-      <Link href={`/main/${level_one.slug}`}>
-        <a className='inline-block px-1 py-1 text-sm text-gray-700 '>{level_one.name}</a>
+      <Link
+        href={`/main/${level_one.slug}`}
+        className='inline-block px-1 py-1 text-sm text-gray-700 '
+      >
+        {level_one.name}
       </Link>
       {' / '}
-      <Link href={`/products?category=${level_two.slug}`}>
-        <a className='inline-block px-1 py-1 text-sm text-gray-700 '>{level_two.name}</a>
+      <Link
+        href={`/products?category=${level_two.slug}`}
+        className='inline-block px-1 py-1 text-sm text-gray-700 '
+      >
+        {level_two.name}
       </Link>
       {' / '}
-      <Link href={`/products?category=${Level_three.slug}`}>
-        <a className='inline-block px-1 py-1 text-sm text-gray-700 '>{Level_three.name}</a>
+      <Link
+        href={`/products?category=${Level_three.slug}`}
+        className='inline-block px-1 py-1 text-sm text-gray-700 '
+      >
+        {Level_three.name}
       </Link>
     </div>
   )

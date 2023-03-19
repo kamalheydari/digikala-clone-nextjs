@@ -11,12 +11,10 @@ export default function BoxLink({ children, path, name }) {
         router.asPath === path ? 'box-link--active' : 'box-link--deactive'
       }`}
     >
-      <Link href={path}>
-        <a className='box-link__anchor'>
-          {children}
-          <span className='box-link__text'>{name}</span>
-          <Icons.ArrowLeft className='box-link__icon' />
-        </a>
+      <Link href={path} className='box-link__anchor'>
+        {children}
+        <span className='box-link__text'>{name}</span>
+        <Icons.ArrowLeft className='box-link__icon' />
       </Link>
     </div>
   )

@@ -1,5 +1,4 @@
 import { Toman, TomanRed } from 'components'
-import Image from 'next/image'
 
 import { formatNumber } from 'utils/formatNumber'
 

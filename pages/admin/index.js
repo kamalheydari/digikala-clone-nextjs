@@ -25,9 +25,13 @@ export default function AdminPage() {
         </div>
         <div className='hidden py-6 lg:inline-block lg:flex-1 lg:border lg:border-gray-300 lg:rounded-md lg:mt-6 h-fit'>
           <section className='py-20'>
-            <div className='relative mx-auto mb-8 h-52 w-52'>
-              <Image src='/icons/chart.png' layout='fill' alt='نمودار' />
-            </div>
+            <Image
+              src='/icons/chart.png'
+              alt='نمودار'
+              width={208}
+              height={208}
+              className='mx-auto mb-8'
+            />
 
             <p className='text-center'>آنالیز وضعیت</p>
             <span className='block my-3 text-base text-center text-amber-500'>

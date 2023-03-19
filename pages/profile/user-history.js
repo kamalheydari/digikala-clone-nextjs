@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import Head from 'next/head'
 import Link from 'next/link'
 
@@ -6,7 +5,7 @@ import { useSelector } from 'react-redux'
 
 import { truncate } from 'utils/truncate'
 
-import { EmptyCart, PageContainer } from 'components'
+import { EmptyCart, PageContainer, ResponsiveImage } from 'components'
 
 export default function UserHistory() {
   //? Store
@@ -26,21 +25,20 @@ export default function UserHistory() {
                 className='border-b md:hover:shadow-3xl md:h-64 md:border-0 '
                 key={item.productID}
               >
-                <Link href={`/products/${item.productID}`}>
-                  <a className='flex items-center gap-4 py-4 md:items-start md:flex-col'>
-                    <div className='relative w-32 h-36 md:mx-auto'>
-                      <Image
-                        src={item.image.url}
-                        layout='fill'
-                        alt={item.title}
-                        placeholder='blur'
-                        blurDataURL='/placeholder.png'
-                      />
-                    </div>
-                    <h5 className='flex-1 px-3 text-right text-gray-800 leadiri-6 md:h-32'>
-                      {truncate(item.title, 80)}
-                    </h5>
-                  </a>
+                <Link
+                  href={`/products/${item.productID}`}
+                  className='flex items-center gap-4 py-4 md:items-start md:flex-col'
+                >
+                  <ResponsiveImage
+                    dimensions='w-36 h-36'
+                    className='md:mx-auto'
+                    src={item.image.url}
+                    alt={item.title}
+                  />
+
+                  <h5 className='flex-1 px-3 text-right text-gray-800 leadiri-6 md:h-32'>
+                    {truncate(item.title, 80)}
+                  </h5>
                 </Link>
               </article>
             ))}

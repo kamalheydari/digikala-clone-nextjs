@@ -1,7 +1,6 @@
 import Head from 'next/head'
-import Image from 'next/image'
 
-import { ArrowLink } from 'components'
+import { ArrowLink, ResponsiveImage } from 'components'
 
 export default function NotFoundPage() {
   return (
@@ -13,13 +12,17 @@ export default function NotFoundPage() {
         صفحه‌ای که دنبال آن بودید پیدا نشد!
       </p>
       <ArrowLink path='/'>صفحه اصلی</ArrowLink>
-      <div className='relative w-full max-w-lg h-72'>
-        <Image src='/icons/page-not-found.png' layout='fill' alt='404' />
-      </div>
+      <ResponsiveImage
+        dimensions='w-full max-w-lg h-72'
+        src='/icons/page-not-found.png'
+        layout='fill'
+        alt='404'
+      />
     </main>
   )
 }
 
+//? Layout
 NotFoundPage.getClientLayout = function pageLayout(page) {
   return <>{page}</>
 }

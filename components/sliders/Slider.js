@@ -1,4 +1,3 @@
-import Image from 'next/image'
 
 import { useGetSingleSliderQuery } from 'services'
 
@@ -7,13 +6,22 @@ import { Pagination, Autoplay } from 'swiper'
 import 'swiper/css'
 import 'swiper/css/pagination'
 
-import { Skeleton } from 'components'
+import { ResponsiveImage, Skeleton } from 'components'
 
 export default function Slider({ id }) {
   //? Get Data
   const { data, isLoading } = useGetSingleSliderQuery({
     id,
   })
+
+  const SliderImage = ({ item }) => (
+    <ResponsiveImage
+      dimensions='w-full h-52 md:h-70 lg:h-[370px]'
+      className='object-cover object-[70%] lg:object-center'
+      src={item.image.url}
+      alt={item.title}
+    />
+  )
 
   if (isLoading) {
     return (
@@ -40,33 +48,13 @@ export default function Slider({ id }) {
             .filter((item) => item.public)
             .map((item, index) => (
               <SwiperSlide key={index}>
-                <div
-                  className='relative w-full h-52 md:h-70 lg:h-[370px]
-                  '
-                  title={item.title}
-                >
-                  {item.uri.length > 0 ? (
-                    <a href={item.uri} target='_blank'>
-                      <Image
-                        className='object-cover object-[70%] lg:object-center'
-                        src={item.image.url}
-                        layout='fill'
-                        alt={item.title}
-                        placeholder='blur'
-                        blurDataURL='/placeholder.png'
-                      />
-                    </a>
-                  ) : (
-                    <Image
-                      className='object-cover object-[70%] lg:object-center'
-                      src={item.image.url}
-                      layout='fill'
-                      alt={item.title}
-                      placeholder='blur'
-                      blurDataURL='/placeholder.png'
-                    />
-                  )}
-                </div>
+                {item.uri.length > 0 ? (
+                  <a href={item.uri} target='_blank'>
+                    <SliderImage item={item} />
+                  </a>
+                ) : (
+                  <SliderImage item={item} />
+                )}
               </SwiperSlide>
             ))}
         </Swiper>

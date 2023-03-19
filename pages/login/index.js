@@ -73,9 +73,7 @@ export default function LoginPage() {
         </Head>
         <section className='container max-w-xl px-12 py-6 space-y-6 lg:border lg:border-gray-100 lg:rounded-lg lg:shadow'>
           <Link passHref href='/'>
-            <a>
-              <Logo className='h-24 mx-auto w-44' />
-            </a>
+            <Logo className='h-24 mx-auto w-44' />
           </Link>
           <h2 className='text-gray-700'>ورود</h2>
           <form
@@ -104,8 +102,8 @@ export default function LoginPage() {
 
           <div>
             <p className='inline ml-2 text-gray-800'>هنوز ثبت‌نام نکردی؟</p>
-            <Link href='/register'>
-              <a className='text-lg text-blue-400 '>ثبت‌نام</a>
+            <Link href='/register' className='text-lg text-blue-400'>
+              ثبت‌نام
             </Link>
           </div>
         </section>

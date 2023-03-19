@@ -69,15 +69,12 @@ export default function Footer() {
         {/* Apps */}
         <div className='flex flex-col items-center gap-6 py-3 rounded-md bg-sky-900 lg:flex-row lg:justify-evenly'>
           <div className='flex items-center gap-x-3 '>
-            <div className='relative w-8 h-8 '>
-              <Image
-                placeholder='blur'
-                blurDataURL='/placeholder.png'
-                src='/icons/mini-logo.png'
-                layout='fill'
-                alt='دیجی‌کالا'
-              />
-            </div>
+            <Image
+              src='/icons/mini-logo.png'
+              alt='دیجی‌کالا'
+              width={32}
+              height={32}
+            />
             <span className='text-xl text-white'>
               دانلود اپلیکیشن دیجی‌کالا
             </span>
@@ -108,54 +105,43 @@ export default function Footer() {
 
           <div className='flex justify-center gap-x-2'>
             <div className='p-2 border border-gray-300 rounded-md w-fit'>
-              <div className='relative w-16 h-16 '>
-                <Image
-                  placeholder='blur'
-                  blurDataURL='/placeholder.png'
-                  src='/icons/m-enamad.png'
-                  layout='fill'
-                  alt='ای نماد'
-                />
-              </div>
+              <Image
+                src='/icons/m-enamad.png'
+                alt='ای نماد'
+                width={64}
+                height={64}
+              />
             </div>
 
             <div className='p-2 border border-gray-300 rounded-md w-fit'>
-              <div className='relative w-16 h-16 '>
-                <Image
-                  placeholder='blur'
-                  blurDataURL='/placeholder.png'
-                  src='/icons/m-kasbokar.png'
-                  layout='fill'
-                  alt='کسب و کار'
-                />
-              </div>
+              <Image
+                src='/icons/m-kasbokar.png'
+                alt='کسب و کار'
+                width={64}
+                height={64}
+              />
             </div>
 
             <div className='p-2 border border-gray-300 rounded-md w-fit'>
-              <div className='relative w-16 h-16 '>
-                <Image
-                  placeholder='blur'
-                  blurDataURL='/placeholder.png'
-                  src='/icons/m-rezi.png'
-                  layout='fill'
-                  alt='ساماندهی'
-                />
-              </div>
+              <Image
+                src='/icons/m-rezi.png'
+                alt='ساماندهی'
+                width={64}
+                height={64}
+              />
             </div>
           </div>
         </div>
       </div>
 
       <div className='flex items-center justify-center py-3 mt-6 bg-gray-600 gap-x-3'>
-        <div className='relative w-16 h-16 overflow-hidden border-4 border-red-600 rounded-full'>
-          <Image
-            placeholder='blur'
-            blurDataURL='/placeholder.png'
-            src='/developer.jpg'
-            layout='fill'
-            alt='کمال حیدری'
-          />
-        </div>
+        <Image
+          src='/developer.jpg'
+          className='overflow-hidden border-4 border-red-600 rounded-full'
+          alt='کمال حیدری'
+          width={64}
+          height={64}
+        />
         <p className='text-white'>
           توسعه داده شده توسط{' '}
           <a

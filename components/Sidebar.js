@@ -99,14 +99,13 @@ export default function Sidebar() {
                         />
                       </Disclosure.Button>
                       <Disclosure.Panel className=' text-sm bg-gray-100 text-gray-500 !mt-0'>
-                        <Link href={`/main/${category.slug}`}>
-                          <a
-                            className='py-2 text-gray-500 arrow-link pr-7'
-                            onClick={handleClose}
-                          >
-                            تمام موارد این دسته
-                            <Icons.ArrowLeft className='text-gray-500 icon' />
-                          </a>
+                        <Link
+                          href={`/main/${category.slug}`}
+                          className='py-2 text-gray-500 arrow-link pr-7'
+                          onClick={handleClose}
+                        >
+                          تمام موارد این دسته
+                          <Icons.ArrowLeft className='text-gray-500 icon' />
                         </Link>
                         {category?.children &&
                           category.children.map((category) => (
@@ -136,27 +135,21 @@ export default function Sidebar() {
                                   >
                                     <Link
                                       href={`/products?category=${category.slug}`}
+                                      className='py-2 text-gray-500 arrow-link pr-9'
+                                      onClick={handleClose}
                                     >
-                                      <a
-                                        className='py-2 text-gray-500 arrow-link pr-9'
-                                        onClick={handleClose}
-                                      >
-                                        تمام موارد این دسته
-                                        <Icons.ArrowLeft className='text-gray-500 icon' />
-                                      </a>
+                                      تمام موارد این دسته
+                                      <Icons.ArrowLeft className='text-gray-500 icon' />
                                     </Link>
                                     {category.children &&
                                       category.children.map((category) => (
                                         <Link
                                           key={category._id}
                                           href={`/products?category=${category.slug}`}
+                                          className='pr-9 py-2.5 my-2 font-normal tracking-wide block'
+                                          onClick={handleClose}
                                         >
-                                          <a
-                                            className='pr-9 py-2.5 my-2 font-normal tracking-wide block'
-                                            onClick={handleClose}
-                                          >
-                                            {category.name}
-                                          </a>
+                                          {category.name}
                                         </Link>
                                       ))}
                                   </Disclosure.Panel>
