@@ -7,8 +7,13 @@ import {
   AppSib,
   Icons,
   LogoPersian,
+  ResponsiveImage,
   Services,
 } from 'components'
+
+import Enamad from '../public/icons/m-enamad.png'
+import Kasbokar from '../public/icons/m-kasbokar.png'
+import Samandehi from '../public/icons/m-rezi.png'
 
 export default function Footer() {
   return (
@@ -104,32 +109,27 @@ export default function Footer() {
           </div>
 
           <div className='flex justify-center gap-x-2'>
-            <div className='p-2 border border-gray-300 rounded-md w-fit'>
-              <Image
-                src='/icons/m-enamad.png'
-                alt='ای نماد'
-                width={64}
-                height={64}
-              />
-            </div>
-
-            <div className='p-2 border border-gray-300 rounded-md w-fit'>
-              <Image
-                src='/icons/m-kasbokar.png'
-                alt='کسب و کار'
-                width={64}
-                height={64}
-              />
-            </div>
-
-            <div className='p-2 border border-gray-300 rounded-md w-fit'>
-              <Image
-                src='/icons/m-rezi.png'
-                alt='ساماندهی'
-                width={64}
-                height={64}
-              />
-            </div>
+            <ResponsiveImage
+              className='p-2 border border-gray-300 rounded-md'
+              dimensions='h-20 w-20'
+              src={Enamad}
+              alt='ای نماد'
+            />
+            <ResponsiveImage
+              className='p-2 border border-gray-300 rounded-md'
+              dimensions='h-20 w-20'
+              src={Kasbokar}
+              alt='کسب و کار'
+            />
+            <ResponsiveImage
+              className='p-2 border border-gray-300 rounded-md'
+              dimensions='h-20 w-20'
+              src={Samandehi}
+              alt='ساماندهی'
+            />
+            {/* <div className='relative h-20 w-20'>
+              <Image src={Samandehi} fill />
+            </div> */}
           </div>
         </div>
       </div>

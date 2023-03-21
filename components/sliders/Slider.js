@@ -17,7 +17,7 @@ export default function Slider({ id }) {
   const SliderImage = ({ item }) => (
     <ResponsiveImage
       dimensions='w-full h-52 md:h-70 lg:h-[370px]'
-      className='object-cover object-[70%] lg:object-center'
+      imageStyles='object-cover object-[70%] lg:object-center'
       src={item.image.url}
       alt={item.title}
     />

@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export default function ResponsiveImage(props) {
   //? Props
-  const { dimensions, className, src, alt, ...rest } = props
+  const { dimensions, className, src, alt, imageStyles, ...rest } = props
 
   return (
     <div
@@ -13,6 +13,7 @@ export default function ResponsiveImage(props) {
       <Image
         src={src}
         alt={alt}
+        className={imageStyles}
         placeholder='blur'
         blurDataURL='/placeholder.png'
         fill
