@@ -44,7 +44,7 @@ export default function SearchModal(props) {
       setSearch('')
     }
   }, [isShow])
-
+console.log(data)
   //? Handlers
   const handleChange = (e) => {
     setSearch(e.target.value)
@@ -83,7 +83,7 @@ export default function SearchModal(props) {
               isFetching={isFetching}
               isSuccess={isSuccess}
               dataLength={data ? data.productsLength : 0}
-              emptyElement={<EmptySearchList />}
+              emptyComponent={<EmptySearchList />}
             >
               <div className='px-4 py-3 divide-y space-y-3'>
                 {data?.productsLength > 0 &&
