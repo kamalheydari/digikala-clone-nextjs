@@ -6,7 +6,7 @@
     @apply flex-center text-sm px-2 gap-x-1;
   }
   .navbar__dropshadow {
-    @apply fixed left-0 z-20 w-full h-screen top-32 bg-gray-400/50;
+    @apply fixed left-0 z-20 w-full h-screen top-28 bg-gray-400/50;
   }
   .navbar__content {
     @apply absolute z-40 hidden w-full bg-white rounded-md shadow-lg border border-gray-100 top-8 group-hover:block;

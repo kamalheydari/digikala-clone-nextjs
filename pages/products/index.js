@@ -64,10 +64,7 @@ export default function ProductsHome(props) {
   const resetRoute = () => push(`${pathname}?category=${query.category}`)
 
   return (
-    <main
-      className='lg:px-3 lg:container lg:max-w-[1700px] xl:mt-32'
-      id='_products'
-    >
+    <main className='lg:px-3 lg:container lg:max-w-[1700px] xl:mt-32'>
       <Head>
         <title>دیجی‌کالا | فروشگاه</title>
       </Head>
@@ -105,7 +102,10 @@ export default function ProductsHome(props) {
 
           {/* Products */}
           {products.length > 0 ? (
-            <section className='sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5'>
+            <section
+              id='_products'
+              className='sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5'
+            >
               {products.map((item) => (
                 <ProductCard product={item} key={item._id} />
               ))}
@@ -124,8 +124,8 @@ export default function ProductsHome(props) {
             pagination={pagination}
             changeRoute={changeRoute}
             section='_products'
-            slient
-          />
+            client
+        />
         </div>
       )}
     </main>

@@ -32,8 +32,14 @@ export default function MostFavouraiteProducts({ mostFavourite }) {
                   src={product.images[0].url}
                   alt={product.title}
                 />
-                <div className='flex items-start mt-2 gap-x-2 justify-evenly'>
-                  <DiscountProduct discount={product.discount} />
+                <div
+                  className={`flex items-start mt-2 gap-x-2 ${product.discount?'justify-evenly':'justify-end pl-8'}`}
+                >
+                  {product.discount ? (
+                    <DiscountProduct discount={product.discount} />
+                  ) : (
+                    null
+                  )}
                   <ProductPrice
                     inStock={product.inStock}
                     discount={product.discount}
