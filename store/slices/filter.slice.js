@@ -26,14 +26,8 @@ const filterSlice = createSlice({
     loadFilters: (state, action) => {
       const { sort, discount, inStock, price } = action.payload
       if (sort) state.sort = sorts[sort - 1]
-      if (discount) {
-        if (discount === 'true') state.discount = true
-        if (discount === 'false') state.discount = false
-      }
-      if (inStock) {
-        if (inStock === 'true') state.inStock = true
-        if (inStock === 'false') state.inStock = false
-      }
+      if (discount) state.discount = discount === 'true'
+      if (inStock) state.inStock = inStock === 'true'
       if (price) {
         const splitPrice = price.split('-')
         state.min_price = +splitPrice[0]
