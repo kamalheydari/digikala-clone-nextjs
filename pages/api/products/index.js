@@ -25,11 +25,12 @@ const getProducts = async (req, res) => {
   const { category, search } = req.query
 
   //? Filters
-  const categoryFilter = category
-    ? {
-        category: { $in: category },
-      }
-    : {}
+  const categoryFilter =
+    category && category !== 'all'
+      ? {
+          category: { $in: category },
+        }
+      : {}
 
   const searchFilter =
     search && search !== 'all'

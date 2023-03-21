@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 
-import Image from 'next/image'
 import Link from 'next/link'
 
 import {
@@ -10,6 +9,7 @@ import {
   EmptySearchList,
   ShowWrapper,
   Modal,
+  ResponsiveImage,
 } from 'components'
 
 import { truncate } from 'utils/truncate'
@@ -85,38 +85,36 @@ export default function SearchModal(props) {
               dataLength={data ? data.productsLength : 0}
               emptyElement={<EmptySearchList />}
             >
-              <div className='px-4 py-3 divide-y'>
+              <div className='px-4 py-3 divide-y space-y-3'>
                 {data?.productsLength > 0 &&
                   search.length > 0 &&
                   data?.products.map((item) => (
-                    <article key={item._id} className='pt-1'>
-                      <div className='relative w-12 h-12'>
-                        <Image
-                          src={item.images[0].url}
-                          width={48}
-                          height={48}
-                          alt={item.name}
-                        />
-                      </div>
+                    <article key={item._id} className='py-2'>
                       <Link
                         href={`/products/${item._id}`}
                         onClick={() => onClose()}
-                        className='py-1 text-sm'
                       >
-                        {truncate(item.title, 70)}
-                      </Link>
-                      <div className='flex justify-between'>
-                        <div>
-                          {item.discount > 0 && (
-                            <DiscountProduct discount={item.discount} />
-                          )}
-                        </div>
-                        <ProductPrice
-                          inStock={item.inStock}
-                          discount={item.discount}
-                          price={item.price}
+                        <ResponsiveImage
+                          dimensions='w-20 h-20'
+                          src={item.images[0].url}
+                          alt={item.name}
                         />
-                      </div>
+                        <span className='py-2 text-sm'>
+                          {truncate(item.title, 70)}
+                        </span>
+                        <div className='flex justify-between'>
+                          <div>
+                            {item.discount > 0 && (
+                              <DiscountProduct discount={item.discount} />
+                            )}
+                          </div>
+                          <ProductPrice
+                            inStock={item.inStock}
+                            discount={item.discount}
+                            price={item.price}
+                          />
+                        </div>
+                      </Link>
                     </article>
                   ))}
               </div>
