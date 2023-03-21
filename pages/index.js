@@ -20,7 +20,7 @@ export default function Home(props) {
 
   //? Render(s)
   return (
-    <main className='min-h-screen space-y-12 xl:mt-28'>
+    <main className='min-h-screen space-y-4 xl:mt-28'>
       <Head>
         <title>فروشگاه اینترنتی دیجی‌کالا</title>
         <meta

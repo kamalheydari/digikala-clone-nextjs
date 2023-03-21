@@ -20,7 +20,7 @@ export default function MainCategory(props) {
 
   //? Render
   return (
-    <main className='min-h-screen space-y-12 xl:mt-28'>
+    <main className='min-h-screen space-y-6 xl:mt-28'>
       <Head>
         <title>{`دیجی‌کالا | ${currentCategory.name}`}</title>
       </Head>

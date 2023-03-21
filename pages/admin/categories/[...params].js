@@ -249,8 +249,6 @@ export default function CreateCategory() {
                     height={200}
                     className='mx-auto'
                     alt='category image'
-                    placeholder='blur'
-                    blurDataURL='/placeholder.png'
                   />
               )}
 

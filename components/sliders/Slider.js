@@ -1,4 +1,3 @@
-
 import { useGetSingleSliderQuery } from 'services'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
@@ -17,7 +16,7 @@ export default function Slider({ id }) {
   const SliderImage = ({ item }) => (
     <ResponsiveImage
       dimensions='w-full h-52 md:h-70 lg:h-[370px]'
-      imageStyles='object-cover object-[70%] lg:object-center'
+      imageStyles='object-cover object-[62%] lg:object-center'
       src={item.image.url}
       alt={item.title}
     />
@@ -49,7 +48,7 @@ export default function Slider({ id }) {
             .map((item, index) => (
               <SwiperSlide key={index}>
                 {item.uri.length > 0 ? (
-                  <a href={item.uri} target='_blank'>
+                  <a href={item.uri} target='_blank' className=''>
                     <SliderImage item={item} />
                   </a>
                 ) : (

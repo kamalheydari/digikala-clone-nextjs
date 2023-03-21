@@ -80,9 +80,8 @@ export default function CartDropdown() {
                   ))}
                 </div>
                 {/* Footer */}
-                <div className='flex items-center justify-between px-3 py-2 border-t'>
+                <div className='flex items-center justify-between p-3 border-t'>
                   <div>
-                    revie
                     <span>مبلغ قابل پرداخت</span>
                     <div className='flex-center'>
                       <span className='text-sm farsi-digits'>
