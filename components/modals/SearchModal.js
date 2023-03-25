@@ -44,7 +44,6 @@ export default function SearchModal(props) {
       setSearch('')
     }
   }, [isShow])
-console.log(data)
   //? Handlers
   const handleChange = (e) => {
     setSearch(e.target.value)
