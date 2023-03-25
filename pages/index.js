@@ -16,7 +16,13 @@ import {
 
 export default function Home(props) {
   //? Props
-  const { bestSells, discountProducts, mostFavourite, currentCategory } = props
+  const {
+    bestSells,
+    discountProducts,
+    mostFavourite,
+    currentCategory,
+    childCategories,
+  } = props
 
   //? Render(s)
   return (
@@ -38,7 +44,7 @@ export default function Home(props) {
         />
 
         <Categories
-          parent={currentCategory._id}
+          childCategories={childCategories}
           color={currentCategory.colors?.start}
           name={currentCategory.name}
           homePage
@@ -87,6 +93,10 @@ export async function getStaticProps() {
     parent: undefined,
   }).lean()
 
+  const childCategories = await Category.find({
+    parent: currentCategory._id,
+  }).lean()
+  
   await db.disconnect()
 
   return {
@@ -105,6 +115,7 @@ export async function getStaticProps() {
         products: JSON.parse(JSON.stringify(mostFavourite)),
       },
       currentCategory: JSON.parse(JSON.stringify(currentCategory)),
+      childCategories: JSON.parse(JSON.stringify(childCategories)),
     },
   }
 }

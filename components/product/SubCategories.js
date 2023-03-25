@@ -1,17 +1,11 @@
 import Link from 'next/link'
 
-import { ResponsiveImage, SubCategoriesSkeleton } from 'components'
-
-import useCategory from 'hooks/useCategory'
+import { ResponsiveImage } from 'components'
 
 export default function SubCategories(props) {
-  const { categoryID } = props
-  const { childCategories, isLoading } = useCategory({
-    parent: categoryID,
-  })
+  const { childCategories } = props
 
-  if (isLoading) return <SubCategoriesSkeleton />
-  else if (childCategories.length > 0)
+  if (childCategories.length > 0)
     return (
       <section className='px-4 my-7'>
         <h4 className='mb-4 text-base text-black lg:pt-4'>دسته‌بندی‌ها</h4>
@@ -28,7 +22,6 @@ export default function SubCategories(props) {
                 alt={item.name}
               />
 
-            
               <span className='inline-block mt-2'>{item.name}</span>
             </Link>
           ))}

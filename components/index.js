@@ -63,8 +63,6 @@ export { default as Breadcrumb } from './product/Breadcrumb'
 
 //* SKELETON
 export { default as ReveiwSkeleton } from './skeleton/ReveiwSkeleton'
-export { default as CategoriesSkeleton } from './skeleton/CategoriesSkeleton'
-export { default as SubCategoriesSkeleton } from './skeleton/SubCategoriesSkeleton'
 export { default as NavbarSkeleton } from './skeleton/NavbarSkeleton'
 export { default as SidebarSkeleton } from './skeleton/SidebarSkeleton'
 export { default as OrderSkeleton } from './skeleton/OrderSkeleton'

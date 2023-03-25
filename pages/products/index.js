@@ -25,12 +25,12 @@ import Filter from 'components/filter/Filter'
 export default function ProductsHome(props) {
   //? Props
   const {
-    currentCategoryID,
     mainMinPrice,
     mainMaxPrice,
     productsLength,
     products,
     pagination,
+    childCategories,
   } = props
 
   //? Assets
@@ -69,7 +69,7 @@ export default function ProductsHome(props) {
         <title>دیجی‌کالا | فروشگاه</title>
       </Head>
 
-      <SubCategories categoryID={currentCategoryID} />
+      <SubCategories childCategories={childCategories} />
 
       <div className='px-1 lg:flex lg:gap-x-0 xl:gap-x-3'>
         <ProductsAside
@@ -125,7 +125,7 @@ export default function ProductsHome(props) {
             changeRoute={changeRoute}
             section='_products'
             client
-        />
+          />
         </div>
       )}
     </main>
@@ -146,6 +146,10 @@ export async function getServerSideProps({ query }) {
 
   const currentCategory = await Category.findOne({
     slug: category,
+  }).lean()
+
+  const childCategories = await Category.find({
+    parent: currentCategory._id,
   }).lean()
 
   const currentCategoryID = JSON.parse(JSON.stringify(currentCategory._id))
@@ -221,7 +225,7 @@ export async function getServerSideProps({ query }) {
   return {
     props: {
       products: JSON.parse(JSON.stringify(products)),
-      currentCategoryID,
+      childCategories: JSON.parse(JSON.stringify(childCategories)),
       productsLength,
       mainMaxPrice,
       mainMinPrice,

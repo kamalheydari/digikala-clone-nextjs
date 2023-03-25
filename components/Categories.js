@@ -1,19 +1,12 @@
 import Link from 'next/link'
 
-import { CategoriesSkeleton, ResponsiveImage } from 'components'
-
-import useCategory from 'hooks/useCategory'
+import { ResponsiveImage } from 'components'
 
 export default function Categories(props) {
   //? Props
-  const { homePage, parent, color, name } = props
+  const { homePage, childCategories, color, name } = props
 
-  const { isLoading, childCategories } = useCategory({ parent })
-
-  //? Render(s)
-  if (isLoading) {
-    return <CategoriesSkeleton />
-  } else if (childCategories.length > 0 && color && name) {
+  if (childCategories.length > 0 && color && name) {
     return (
       <section className='px-3'>
         <h4 className='mb-3 text-xl text-center'>
