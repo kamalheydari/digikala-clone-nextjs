@@ -26,10 +26,13 @@ export default function Reviews({ numReviews, prdouctID, productTitle }) {
 
   //? Get Product-Reviews Query
   const { data, isSuccess, isFetching, error, isError, refetch } =
-    useGetProductReviewsQuery({
-      id: prdouctID,
-      page: query?.page || 1,
-    })
+    useGetProductReviewsQuery(
+      {
+        id: prdouctID,
+        page: query?.page || 1,
+      },
+      { skip: numReviews > 0 ? false : true }
+    )
 
   //? Handlers
   const handleOpenCommentModal = () => reviewModalHandlers.open()
