@@ -122,6 +122,7 @@ export default function Reviews() {
                 pagination={data.pagination}
                 changeRoute={changeRoute}
                 section='profileReviews'
+                client
               />
             </div>
           )}
