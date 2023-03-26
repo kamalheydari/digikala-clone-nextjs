@@ -9,9 +9,10 @@ export default function ResponsiveImage(props) {
 
   return (
     <div
-      className={`relative ${dimensions} ${className}`}
+      className={`relative ${dimensions ? dimensions : ''} ${
+        className ? className : ''
+      }`}
       title={alt}
-      {...rest}
     >
       <Image
         src={src}
@@ -21,6 +22,7 @@ export default function ResponsiveImage(props) {
         blurDataURL={blurDataURL}
         quality='100'
         fill
+        {...rest}
       />
     </div>
   )

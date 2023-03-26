@@ -14,10 +14,12 @@ export default function Slider({ id }) {
   })
 
   const SliderImage = ({ item }) => (
-    <img
-      className='object-cover object-[70%] lg:object-center w-full h-52 md:h-70 lg:h-[370px]'
+    <ResponsiveImage
+      dimensions='w-full h-64 md:h-72 lg:h-[400px]'
+      imageStyles='object-cover object-[72%] lg:object-center '
       src={item.image.url}
       alt={item.title}
+      unoptimized={true}
     />
   )
 
