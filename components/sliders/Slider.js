@@ -27,7 +27,7 @@ export default function Slider({ id }) {
     return (
       <Skeleton.Item
         animated='background'
-        height='h-52 md:h-70 lg:h-[370px]'
+        height='h-64 md:h-72 lg:h-[400px]'
         width='w-full'
       />
     )
