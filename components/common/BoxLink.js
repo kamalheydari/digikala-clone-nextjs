@@ -8,7 +8,7 @@ export default function BoxLink({ children, path, name }) {
   return (
     <div
       className={`box-link ${
-        router.asPath === path ? 'box-link--active' : 'box-link--deactive'
+        router.pathname === path ? 'box-link--active' : 'box-link--deactive'
       }`}
     >
       <Link href={path} className='box-link__anchor'>
