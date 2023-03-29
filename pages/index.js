@@ -1,8 +1,8 @@
 import Head from 'next/head'
 
 import { db } from 'utils'
-import Product from 'models/Product'
-import Category from 'models/Category'
+
+import { Product, Category } from 'models'
 
 import {
   BannerOne,

@@ -1,4 +1,4 @@
-import Products from 'models/Product'
+import { Product } from 'models'
 
 import auth from 'middleware/auth'
 
@@ -45,14 +45,14 @@ const getProducts = async (req, res) => {
   try {
     await db.connect()
 
-    const products = await Products.find({ ...categoryFilter, ...searchFilter })
+    const products = await Product.find({ ...categoryFilter, ...searchFilter })
       .skip((page - 1) * page_size)
       .limit(page_size)
       .sort({
         createdAt: 'desc',
       })
 
-    const productsLength = await Products.countDocuments({
+    const productsLength = await Product.countDocuments({
       ...categoryFilter,
       ...searchFilter,
     })
@@ -108,7 +108,7 @@ const createProduct = async (req, res) => {
       return sendError(res, 204, 'لطفا تمام فیلد ها را پر کنید')
 
     await db.connect()
-    const newProduct = new Products({
+    const newProduct = new Product({
       title,
       price,
       discount,

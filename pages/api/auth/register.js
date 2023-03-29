@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt'
 
-import User from 'models/User'
+import { User } from 'models'
 
 import { createAccessToken, sendError, db } from 'utils'
 

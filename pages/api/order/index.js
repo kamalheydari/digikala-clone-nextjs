@@ -1,7 +1,7 @@
-import Order from 'models/Order'
-import Product from 'models/Product'
+import { Product, Order } from 'models'
 
 import auth from 'middleware/auth'
+
 import { sendError, db } from 'utils'
 
 export default async (req, res) => {

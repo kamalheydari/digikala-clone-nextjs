@@ -1,5 +1,7 @@
 import auth from 'middleware/auth'
-import User from 'models/User'
+
+import { User } from 'models'
+
 import { sendError, db } from 'utils'
 
 export default async function (req, res) {

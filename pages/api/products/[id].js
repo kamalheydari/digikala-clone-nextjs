@@ -1,4 +1,4 @@
-import Products from 'models/Product'
+import { Product } from 'models'
 
 import auth from 'middleware/auth'
 import { sendError, db } from 'utils'
@@ -28,7 +28,7 @@ const getProduct = async (req, res) => {
 
     await db.connect()
 
-    const product = await Products.findById(id)
+    const product = await Product.findById(id)
       .populate('category_levels.level_one')
       .populate('category_levels.level_two')
       .populate('category_levels.Level_three')
@@ -65,7 +65,7 @@ const updateProduct = async (req, res) => {
       return sendError(res, 204, 'لطفا تمام فیلد ها را پر کنید')
 
     await db.connect()
-    await Products.findByIdAndUpdate(
+    await Product.findByIdAndUpdate(
       { _id: id },
       {
         ...req.body,
@@ -89,7 +89,7 @@ const deleteProduct = async (req, res) => {
     const { id } = req.query
 
     await db.connect()
-    await Products.findByIdAndDelete(id)
+    await Product.findByIdAndDelete(id)
     await db.disconnect()
 
     res.status(200).json({ msg: 'محصول با موفقیت حذف شد' })

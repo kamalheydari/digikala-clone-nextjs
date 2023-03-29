@@ -1,6 +1,7 @@
-import Review from 'models/Review'
+import { Review } from 'models'
 
 import auth from 'middleware/auth'
+
 import { sendError, db } from 'utils'
 
 export default async function (req, res) {

@@ -1,4 +1,4 @@
-import Category from 'models/Category'
+import { Category } from 'models'
 
 import auth from 'middleware/auth'
 import { sendError, db } from 'utils'

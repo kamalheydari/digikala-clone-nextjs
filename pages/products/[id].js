@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 
 import { db } from 'utils'
-import Product from 'models/Product'
+import { Product } from 'models'
 
 import { useDispatch } from 'react-redux'
 import { setTempColor, setTempSize, addToLastSeen } from 'store'

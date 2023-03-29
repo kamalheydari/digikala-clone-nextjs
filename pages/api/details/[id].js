@@ -1,8 +1,8 @@
-import Details from 'models/Details'
+import { Details } from 'models'
 
 import auth from 'middleware/auth'
-import { sendError, db } from 'utils'
 
+import { sendError, db } from 'utils'
 
 export default async function (req, res) {
   switch (req.method) {

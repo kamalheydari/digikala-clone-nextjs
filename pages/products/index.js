@@ -2,8 +2,7 @@ import { useEffect } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-import Product from 'models/Product'
-import Category from 'models/Category'
+import { Category, Product } from 'models'
 
 import { useDispatch } from 'react-redux'
 import { updateFilter, loadFilters } from 'store'

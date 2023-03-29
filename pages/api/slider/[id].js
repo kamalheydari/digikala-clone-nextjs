@@ -1,4 +1,4 @@
-import Slider from 'models/Slider'
+import { Slider } from 'models'
 
 import auth from 'middleware/auth'
 

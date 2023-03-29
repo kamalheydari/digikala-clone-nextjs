@@ -1,9 +1,7 @@
-import Product from 'models/Product'
-import Review from 'models/Review'
+import { Review, Product } from 'models'
 
 import auth from 'middleware/auth'
 import { sendError, db } from 'utils'
-
 
 export default async function (req, res) {
   switch (req.method) {

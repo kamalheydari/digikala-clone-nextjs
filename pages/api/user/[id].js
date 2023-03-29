@@ -1,4 +1,4 @@
-import User from 'models/User'
+import { User } from 'models'
 
 import auth from 'middleware/auth'
 import { sendError, db } from 'utils'

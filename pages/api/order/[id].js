@@ -1,8 +1,7 @@
 import auth from 'middleware/auth'
-import Order from 'models/Order'
+import { Order } from 'models'
 
 import { sendError, db } from 'utils'
-
 
 export default async function (req, res) {
   switch (req.method) {

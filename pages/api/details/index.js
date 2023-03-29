@@ -1,4 +1,4 @@
-import Details from 'models/Details'
+import { Details } from 'models'
 
 import auth from 'middleware/auth'
 import { sendError, db } from 'utils'

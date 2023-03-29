@@ -1,6 +1,7 @@
-import Banner from 'models/Banner'
+import { Banner } from 'models'
 
 import auth from 'middleware/auth'
+
 import { sendError, db } from 'utils'
 
 export default async function (req, res) {
