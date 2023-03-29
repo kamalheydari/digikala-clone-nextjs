@@ -15,9 +15,8 @@ import {
   Pagination,
   SelectCategories,
 } from 'components'
-import useDisclosure from 'hooks/useDisclosure'
-import useChangeRoute from 'hooks/useChangeRoute'
-import useCategory from 'hooks/useCategory'
+
+import { useDisclosure, useChangeRoute, useCategory } from 'hooks'
 
 export default function Products() {
   //? Assets

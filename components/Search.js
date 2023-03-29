@@ -1,6 +1,6 @@
 import { Icons, SearchModal } from 'components'
 
-import useDisclosure from 'hooks/useDisclosure'
+import { useDisclosure } from 'hooks'
 
 export default function Search() {
   //? Assets

@@ -1,7 +1,6 @@
 import { AddressForm } from 'components'
 
-import useDisclosure from 'hooks/useDisclosure'
-import useUserInfo from 'hooks/useUserInfo'
+import { useUserInfo, useDisclosure } from 'hooks'
 
 export const withAddressModal = (Component) => {
   return (props) => {

@@ -1,7 +1,7 @@
 import { DashboardAside } from 'components'
 import { useRouter } from 'next/router'
 
-import useUserInfo from 'hooks/useUserInfo'
+import { useUserInfo } from 'hooks'
 
 export default function DashboardLayout({ children }) {
   const router = useRouter()

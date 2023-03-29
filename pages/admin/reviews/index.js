@@ -11,7 +11,7 @@ import {
   ReviewsTable,
 } from 'components'
 
-import useChangeRoute from 'hooks/useChangeRoute'
+import { useChangeRoute } from 'hooks'
 
 export default function Reviews() {
   //? Assets

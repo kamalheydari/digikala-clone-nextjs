@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router'
+
 import { useGetProductReviewsQuery } from 'services'
 
 import {
@@ -10,9 +12,7 @@ import {
   ReviewProductCard,
 } from 'components'
 
-import useDisclosure from 'hooks/useDisclosure'
-import { useRouter } from 'next/router'
-import useChangeRoute from 'hooks/useChangeRoute'
+import { useDisclosure, useChangeRoute } from 'hooks'
 
 export default function Reviews({ numReviews, prdouctID, productTitle }) {
   //? Assets

@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { userLogout } from 'store'
 
-import {verifyToken} from 'utils'
+import { verifyToken } from 'utils'
 
 import RedirectToLogin from './modals/RedirectToLogin'
-import useDisclosure from 'hooks/useDisclosure'
+import { useDisclosure } from 'hooks'
 
 export default function ValidationToken() {
   const [isShowRedirectModal, redirectModalHandlers] = useDisclosure()

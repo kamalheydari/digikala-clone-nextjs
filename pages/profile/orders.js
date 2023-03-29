@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 
-import useChangeRoute from 'hooks/useChangeRoute'
+import { useChangeRoute } from 'hooks'
 
 import {
   OrderCard,
@@ -11,6 +11,7 @@ import {
   PageContainer,
   OrderSkeleton,
 } from 'components'
+
 import { useGetOrdersQuery } from 'services'
 
 export default function Orders() {

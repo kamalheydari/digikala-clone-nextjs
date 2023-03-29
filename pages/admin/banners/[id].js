@@ -22,8 +22,7 @@ import {
 } from 'components'
 import { Disclosure } from '@headlessui/react'
 
-import useCategory from 'hooks/useCategory'
-import useDisclosure from 'hooks/useDisclosure'
+import { useCategory, useDisclosure } from 'hooks'
 
 import { useFieldArray, useForm } from 'react-hook-form'
 import {

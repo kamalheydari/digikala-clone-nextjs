@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import { Icons, NavbarSkeleton, ResponsiveImage } from 'components'
 
-import useCategory from 'hooks/useCategory'
+import { useCategory } from 'hooks'
 
 export default function Navbar() {
   const { categories, isLoading } = useCategory()

@@ -40,6 +40,7 @@ export { default as BannerTwo } from './banners/BannerTwo'
 //* FILTER COMPONENTS
 export { default as FilterCheckbox } from './filter/FilterCheckbox'
 export { default as FilterOperation } from './filter/FilterOperation'
+export { default as Filter } from './filter/Filter'
 
 //* PRODUCT COMPONENTS
 export { default as ProductCard } from './product/ProductCard'

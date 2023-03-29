@@ -15,10 +15,10 @@ import {
   Sort,
   ProductsAside,
   SubCategories,
+  Filter,
 } from 'components'
 
-import useChangeRoute from 'hooks/useChangeRoute'
-import Filter from 'components/filter/Filter'
+import { useChangeRoute } from 'hooks'
 
 export default function ProductsHome(props) {
   //? Props

@@ -17,7 +17,7 @@ import {
   HandleResponse,
 } from 'components'
 
-import useUserInfo from 'hooks/useUserInfo'
+import { useUserInfo } from 'hooks'
 
 export default function AddressForm(props) {
   //? Porps

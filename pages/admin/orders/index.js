@@ -11,7 +11,7 @@ import {
   OrdersTable,
 } from 'components'
 
-import useChangeRoute from 'hooks/useChangeRoute'
+import { useChangeRoute } from 'hooks'
 
 export default function OrdersHome() {
   //? Assets

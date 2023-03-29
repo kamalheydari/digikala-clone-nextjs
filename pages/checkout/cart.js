@@ -20,8 +20,7 @@ import { Menu, Transition } from '@headlessui/react'
 
 import { formatNumber } from 'utils'
 
-import useUserInfo from 'hooks/useUserInfo'
-import useDisclosure from 'hooks/useDisclosure'
+import { useUserInfo, useDisclosure } from 'hooks'
 
 export default function Cart() {
   //? Assets

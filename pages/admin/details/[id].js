@@ -22,8 +22,7 @@ import {
   PageContainer,
 } from 'components'
 
-import useCategory from 'hooks/useCategory'
-import useDisclosure from 'hooks/useDisclosure'
+import { useCategory, useDisclosure } from 'hooks'
 
 import { useForm } from 'react-hook-form'
 

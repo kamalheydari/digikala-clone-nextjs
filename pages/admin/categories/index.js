@@ -1,10 +1,10 @@
+import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
 
 import { BigLoading, PageContainer } from 'components'
 
-import useCategory from 'hooks/useCategory'
-import { useRouter } from 'next/router'
+import { useCategory } from 'hooks'
 
 export default function Categories() {
   //? Assets

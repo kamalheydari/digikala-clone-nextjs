@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+
 import { registerSchema } from 'utils'
 
 import { useDispatch } from 'react-redux'
@@ -13,7 +14,8 @@ import { showAlert, userLogin } from 'store'
 import { useCreateUserMutation } from 'services'
 
 import { TextField, LoginBtn, RedirectToLogin, Logo } from 'components'
-import useDisclosure from 'hooks/useDisclosure'
+
+import { useDisclosure } from 'hooks'
 
 export default function RegisterPage() {
   //? Assets

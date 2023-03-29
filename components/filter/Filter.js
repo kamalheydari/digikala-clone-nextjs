@@ -1,7 +1,6 @@
-import { Modal } from 'components'
-import Icons from 'components/common/Icons'
-import useDisclosure from 'hooks/useDisclosure'
-import FilterOperation from './FilterOperation'
+import { Modal, FilterOperation, Icons } from 'components'
+
+import { useDisclosure } from 'hooks'
 
 export default function Filter(props) {
   //? Props

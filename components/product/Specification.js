@@ -1,4 +1,4 @@
-import useDisclosure from 'hooks/useDisclosure'
+import { useDisclosure } from 'hooks'
 
 import { Icons } from 'components'
 

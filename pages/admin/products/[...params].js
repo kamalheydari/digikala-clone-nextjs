@@ -22,7 +22,7 @@ import {
   ImageList,
 } from 'components'
 
-import useDisclosure from 'hooks/useDisclosure'
+import { useDisclosure } from 'hooks'
 
 import { useForm } from 'react-hook-form'
 

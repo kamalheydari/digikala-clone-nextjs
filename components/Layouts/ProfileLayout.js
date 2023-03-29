@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 
 import { Header, ProfileAside } from 'components'
 
-import useVerify from 'hooks/useVerify'
+import { useVerify } from 'hooks'
 
 export default function ProfileLayout({ children }) {
   const isVerify = useVerify(false)

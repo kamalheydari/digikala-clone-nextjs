@@ -4,7 +4,7 @@ import { Address, Icons, PageContainer, Skeleton } from 'components'
 
 import { withAddressModal } from 'HOCs/withAddressModal'
 
-import useUserInfo from 'hooks/useUserInfo'
+import { useUserInfo } from 'hooks'
 
 export default function Addresses() {
   //? Get User Data

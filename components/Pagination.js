@@ -1,5 +1,6 @@
 import { Icons } from 'components'
-import useMediaQuery from 'hooks/useMediaQuery'
+
+import { useMediaQuery } from 'hooks'
 
 export default function Pagination(props) {
   //? Props

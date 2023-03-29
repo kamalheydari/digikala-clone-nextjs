@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 
 import { SelectBox } from 'components'
-import useCategory from 'hooks/useCategory'
+
+import { useCategory } from 'hooks'
 
 export default function SelectCategories(props) {
   //? Props

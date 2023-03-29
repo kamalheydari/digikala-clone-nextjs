@@ -22,7 +22,8 @@ import {
 import { withAddressModal } from 'HOCs/withAddressModal'
 
 import { formatNumber } from 'utils'
-import useUserInfo from 'hooks/useUserInfo'
+
+import { useUserInfo } from 'hooks'
 
 export default function ShippingPage() {
   //? Assets

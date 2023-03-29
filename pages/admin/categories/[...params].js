@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Head from 'next/head'
 
@@ -9,6 +11,7 @@ import {
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
+
 import { categorySchema } from 'utils'
 
 import {
@@ -19,10 +22,8 @@ import {
   ConfirmUpdateModal,
   BigLoading,
 } from 'components'
-import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
-import useDisclosure from 'hooks/useDisclosure'
-import useCategory from 'hooks/useCategory'
+
+import { useDisclosure, useCategory } from 'hooks'
 
 export default function CreateCategory() {
   //? Assets
@@ -243,13 +244,13 @@ export default function CreateCategory() {
                 direction='ltr'
               />
               {getValues('image') && (
-                  <Image
-                    src={getValues('image')}
-                    width={200}
-                    height={200}
-                    className='mx-auto'
-                    alt='category image'
-                  />
+                <Image
+                  src={getValues('image')}
+                  width={200}
+                  height={200}
+                  className='mx-auto'
+                  alt='category image'
+                />
               )}
 
               {selectedCategory.level < 2 && (

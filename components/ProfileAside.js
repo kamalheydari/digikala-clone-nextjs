@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { Icons, BoxLink, Logout, Orders, Person } from 'components'
 
-import useUserInfo from 'hooks/useUserInfo'
+import { useUserInfo } from 'hooks'
 
 function ProfileAside() {
   const { userInfo, isLoading } = useUserInfo()

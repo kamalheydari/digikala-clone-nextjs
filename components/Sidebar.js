@@ -4,8 +4,7 @@ import Link from 'next/link'
 import { Disclosure } from '@headlessui/react'
 import { Icons, LogoPersian, SidebarSkeleton } from 'components'
 
-import useDisclosure from 'hooks/useDisclosure'
-import useCategory from 'hooks/useCategory'
+import { useDisclosure, useCategory } from 'hooks'
 
 export default function Sidebar() {
   //? Assets

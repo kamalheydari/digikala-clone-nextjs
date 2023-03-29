@@ -2,7 +2,7 @@ import Head from 'next/head'
 
 import { BigLoading, PageContainer } from 'components'
 
-import useCategory from 'hooks/useCategory'
+import { useCategory } from 'hooks'
 
 export default function Categories() {
   //? Get Categories Data

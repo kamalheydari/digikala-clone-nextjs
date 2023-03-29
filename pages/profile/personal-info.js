@@ -8,8 +8,7 @@ import {
   Skeleton,
 } from 'components'
 
-import useUserInfo from 'hooks/useUserInfo'
-import useDisclosure from 'hooks/useDisclosure'
+import { useUserInfo, useDisclosure } from 'hooks'
 
 export default function PersonalInfo() {
   //? Assets

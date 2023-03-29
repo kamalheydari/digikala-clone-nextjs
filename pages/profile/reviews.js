@@ -14,8 +14,8 @@ import {
   ReveiwSkeleton,
 } from 'components'
 
-import useDisclosure from 'hooks/useDisclosure'
-import useChangeRoute from 'hooks/useChangeRoute'
+import { useDisclosure, useChangeRoute } from 'hooks'
+
 import { useRouter } from 'next/router'
 
 export default function Reviews() {

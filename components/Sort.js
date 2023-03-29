@@ -6,7 +6,7 @@ import { sorts } from 'utils'
 
 import { Icons, Modal } from 'components'
 
-import useDisclosure from 'hooks/useDisclosure'
+import { useDisclosure } from 'hooks'
 
 export default function Sort(props) {
   //? Props

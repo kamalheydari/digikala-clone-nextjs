@@ -1,8 +1,9 @@
+import { useRouter } from 'next/router'
 import Head from 'next/head'
 
 import { Header, Orders, ProfileAside } from 'components'
-import useVerify from 'hooks/useVerify'
-import { useRouter } from 'next/router'
+
+import { useVerify } from 'hooks'
 
 export default function ProfilePage() {
   const isVerify = useVerify(false)

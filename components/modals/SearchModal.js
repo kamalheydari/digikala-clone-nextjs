@@ -13,8 +13,10 @@ import {
 } from 'components'
 
 import { truncate } from 'utils'
+
 import { useGetProductsQuery } from 'services'
-import useDebounce from 'hooks/useDebounce'
+
+import { useDebounce } from 'hooks'
 
 export default function SearchModal(props) {
   //? Props

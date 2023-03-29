@@ -1,3 +1,4 @@
+import { Fragment } from 'react'
 import { useRouter } from 'next/router'
 
 import { useSelector } from 'react-redux'
@@ -14,10 +15,9 @@ import {
   EmptyCart,
 } from 'components'
 
-import useUserInfo from 'hooks/useUserInfo'
+import { useUserInfo, useDisclosure } from 'hooks'
+
 import { Menu, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
-import useDisclosure from 'hooks/useDisclosure'
 
 export default function CartDropdown() {
   //? Assets

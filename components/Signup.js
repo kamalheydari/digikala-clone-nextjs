@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { Icons, Skeleton, UserDropdown } from 'components'
 
-import useUserInfo from 'hooks/useUserInfo'
+import { useUserInfo } from 'hooks'
 
 function Signup() {
   const { userInfo, isVerify, isLoading } = useUserInfo()
@@ -31,7 +31,7 @@ function Signup() {
       <>
         <div className='lg:hidden'>
           <Link href='/profile'>
-              <Icons.User className='icon h-7 w-7' />
+            <Icons.User className='icon h-7 w-7' />
           </Link>
         </div>
         <div className='hidden lg:block'>
