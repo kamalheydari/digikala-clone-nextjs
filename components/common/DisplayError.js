@@ -13,7 +13,7 @@ export default function DisplayError({ errors }) {
         leaveFrom='opacity-100'
         leaveTo='opacity-0'
       >
-        <div className='display-error'>
+        <div className='min-w-max mt-1.5 inline-flex gap-x-1 justify-center text-sm text-red-600'>
           {errors && <Icons.Exclamation />}
           <span>{errors?.message}</span>
         </div>

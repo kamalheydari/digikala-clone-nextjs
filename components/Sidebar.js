@@ -60,7 +60,11 @@ export default function Sidebar() {
       >
         <Icons.Bars className='icon' />
       </button>
-      <div className={`sidebar ${isSidebar ? 'right-0' : '-right-full'} `}>
+      <div
+        className={`w-full h-screen fixed duration-200 z-10 top-0 lg:hidden ${
+          isSidebar ? 'right-0' : '-right-full'
+        } `}
+      >
         <div
           className={`${
             isSidebar
@@ -70,9 +74,9 @@ export default function Sidebar() {
           onClick={sidebarHandlers.close}
         />
 
-        <div className='overflow-y-auto sidebar__content'>
+        <div className='overflow-y-auto absolute py-4 top-0 right-0 z-20 w-3/4 h-screen max-w-sm space-y-4 bg-white'>
           <LogoPersian className='h-10 mr-3 w-28' />
-          <h5 className='sidebar__title'>دسته‌بندی کالاها</h5>
+          <h5 className='p-3 border-t-2  border-gray-200'>دسته‌بندی کالاها</h5>
           {isLoading ? (
             <SidebarSkeleton />
           ) : categories ? (
@@ -81,7 +85,7 @@ export default function Sidebar() {
                 <Disclosure key={category._id}>
                   {({ open }) => (
                     <>
-                      <Disclosure.Button className='sidebar__category'>
+                      <Disclosure.Button className='flex items-center justify-between px-4 py-2 w-full !mt-0'>
                         <span
                           className={`pl-3 font-semibold tracking-wide ${
                             open ? 'text-red-400' : 'text-gray-600'
@@ -112,7 +116,7 @@ export default function Sidebar() {
                             <Disclosure key={category._id}>
                               {({ open }) => (
                                 <>
-                                  <Disclosure.Button className='sidebar__category pr-7'>
+                                  <Disclosure.Button className='flex items-center justify-between px-4 py-2 w-full !mt-0 pr-7'>
                                     <span
                                       className={`font-medium text-md ${
                                         open ? 'text-red-400' : 'text-gray-600'

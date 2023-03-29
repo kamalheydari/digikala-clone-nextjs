@@ -12,17 +12,17 @@ export default function AddToCart({ second, product }) {
   return (
     <>
       {/* mobile */}
-      <div className='add-to-cart__mobile'>
+      <div className='fixed bottom-0 left-0 right-0 z-20 lg:hidden'>
         <AddToCartOperation product={product} />
       </div>
 
       {/* desktop */}
       <div
-        className={`add-to-cart__desktop ${
+        className={`hidden divide-y lg:col-start-8 lg:col-end-10 lg:row-start-2 lg:row-end-5 lg:rounded-lg lg:bg-gray-100 lg:flex lg:flex-col   xl:row-end-5 lg:px-3 lg:py-1.5 lg:border lg:border-gray-200 lg:shadow lg:sticky ${
           second ? 'lg:top-4 xl:top-32' : 'lg:top-60 xl:top-[260px]'
         } `}
       >
-        <div className='add-to-cart__desktop__header'>
+        <div className='items-center justify-between hidden space-y-2 lg:py-3 lg:flex'>
           <span className='text-base text-black'>فروشنده :</span>
           <div className='flex gap-x-2'>
             <Image
@@ -47,7 +47,7 @@ export default function AddToCart({ second, product }) {
             </div>
 
             {tempColor && (
-              <div className='add-to-cart__desktop__item'>
+              <div className='flex items-center gap-x-2 py-3'>
                 <span
                   className='inline-block w-5 h-5 shadow rounded-xl'
                   style={{ background: tempColor.hashCode }}
@@ -56,7 +56,7 @@ export default function AddToCart({ second, product }) {
               </div>
             )}
             {tempSize && (
-              <div className='add-to-cart__desktop__item'>
+              <div className='flex items-center gap-x-2 py-3'>
                 <Icons.Rule className='icon' />
                 <span className='farsi-digits'>{tempSize.size}</span>
               </div>

@@ -1,5 +1,0 @@
-@layer components {
-  .arrow-link {
-    @apply inline-flex items-center text-sm text-blue-400 max-w-max;
-  }
-}

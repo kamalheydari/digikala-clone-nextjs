@@ -23,13 +23,16 @@ export default function TextField({
   return (
     <div className={`${label ? 'space-y-3' : ''}`}>
       {label && (
-        <label className='text-field__label' htmlFor={name}>
+        <label
+          className='text-xs text-gray-700 lg:text-sm md:min-w-max'
+          htmlFor={name}
+        >
           {label}
         </label>
       )}
       <input
         style={{ direction: `${direction === 'ltr' ? 'ltr' : ''}` }}
-        className='text-field__input'
+        className='block w-full px-3 py-1.5 text-base transition-colors border border-gray-200 rounded-md outline-none bg-zinc-50/30 lg:text-lg focus:border-blue-600'
         id={name}
         type={type === 'password' ? 'password' : 'text'}
         value={field?.value}

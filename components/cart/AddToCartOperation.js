@@ -50,7 +50,7 @@ export default function AddToCartOperation({ product }) {
   }
 
   return (
-    <div className='add-to-cart-operation'>
+    <div className='flex items-center justify-between p-3 bg-white border-t border-gray-300 sm:px-5 lg:py-3 lg:p-0 shadow-3xl lg:sticky lg:flex-col-reverse lg:top-32 lg:bg-gray-100 lg:gap-y-4 lg:border-t-0 lg:shadow-none'>
       {currentItemInCart ? (
         <div className='flex w-full gap-x-4'>
           <div className='w-44 lg:w-1/2 '>

@@ -1,5 +1,0 @@
-@layer components {
-  .display-error {
-    @apply min-w-max mt-1.5 inline-flex gap-x-1 justify-center text-sm text-red-600;
-  }
-}

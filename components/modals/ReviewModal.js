@@ -140,11 +140,14 @@ export default function ReviewModal(props) {
                   }}
                 />
                 <div className='flex justify-between'>
-                  <span className='h-1 w-1 rounded-full mx-1.5 bg-gray-300 inline-block' />
-                  <span className='h-1 w-1 rounded-full mx-1.5 bg-gray-300 inline-block' />
-                  <span className='h-1 w-1 rounded-full mx-1.5 bg-gray-300 inline-block' />
-                  <span className='h-1 w-1 rounded-full mx-1.5 bg-gray-300 inline-block' />
-                  <span className='h-1 w-1 rounded-full mx-1.5 bg-gray-300 inline-block' />
+                  {Array(5)
+                    .fill('_')
+                    .map((i) => (
+                      <span
+                        key={i}
+                        className='h-1 w-1 rounded-full mx-1.5 bg-gray-300 inline-block'
+                      />
+                    ))}
                 </div>
               </div>
 

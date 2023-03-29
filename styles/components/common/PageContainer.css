@@ -1,8 +1,0 @@
-@layer components {
-  .page-container {
-    @apply flex items-center py-1;
-  }
-  .page-container__title {
-    @apply pb-1 text-gray-500 text-sm lg:border-red-500 lg:border-b-2 lg:mx-3 md:text-base;
-  }
-}

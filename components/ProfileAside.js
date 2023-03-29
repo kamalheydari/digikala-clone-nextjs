@@ -10,32 +10,32 @@ function ProfileAside() {
   const profilePaths = [
     {
       name: 'سفارش‌ها',
-      icon: <Icons.Bag className='text-black icon' />,
+      Icon: Icons.Bag,
       path: '/profile/orders',
     },
     {
       name: 'لیست‌های من',
-      icon: <Icons.Heart className='text-black icon' />,
+      Icon: Icons.Heart,
       path: '/profile/lists',
     },
     {
       name: 'دیدگاه‌ها',
-      icon: <Icons.Comment className='text-black icon' />,
+      Icon: Icons.Comment,
       path: '/profile/reviews',
     },
     {
       name: 'آدرس‌ها',
-      icon: <Icons.Location className='text-black icon' />,
+      Icon: Icons.Location,
       path: '/profile/addresses',
     },
     {
       name: 'بازدید‌های اخیر',
-      icon: <Icons.Clock className='text-black icon' />,
+      Icon: Icons.Clock,
       path: '/profile/user-history',
     },
     {
       name: 'اطلاعات حساب کاربری',
-      icon: <Icons.User className='text-black icon' />,
+      Icon: Icons.User,
       path: '/profile/personal-info',
     },
   ]
@@ -62,7 +62,7 @@ function ProfileAside() {
           )}
         </div>
         <Link href='/profile/personal-info'>
-            <Icons.Edit className='w-6 h-6 text-blue-400' />
+          <Icons.Edit className='w-6 h-6 text-blue-400' />
         </Link>
       </div>
 
@@ -78,7 +78,7 @@ function ProfileAside() {
         </div>
         {profilePaths.map((item, index) => (
           <BoxLink key={index} path={item.path} name={item.name}>
-            {item.icon}
+            <item.Icon className='icon text-black' />
           </BoxLink>
         ))}
         <Logout />

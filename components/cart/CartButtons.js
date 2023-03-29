@@ -9,25 +9,27 @@ export default function CartButtons({ item }) {
   const dispatch = useDispatch()
 
   return (
-    <div className='cart-buttons'>
-      <button type='button'>
+    <div className='flex items-center py-2 text-sm rounded-md shadow-3xl justify-evenly'>
+      <button className='active:scale-90' type='button'>
         <Icons.Plus
           onClick={() => dispatch(increase(item.itemID))}
           className='text-red-500 icon'
         />
       </button>
 
-      <span>{formatNumber(item.quantity)}</span>
+      <span className='text-sm farsi-digits min-w-[22px] text-center'>
+        {formatNumber(item.quantity)}
+      </span>
 
       {item.quantity === 1 ? (
-        <button type='button'>
+        <button className='active:scale-90' type='button'>
           <Icons.Delete
             onClick={() => dispatch(removeFromCart(item.itemID))}
             className='text-red-500 icon'
           />
         </button>
       ) : (
-        <button type='button'>
+        <button className='active:scale-90' type='button'>
           <Icons.Minus
             onClick={() => dispatch(decrease(item.itemID))}
             className='text-red-500 icon'

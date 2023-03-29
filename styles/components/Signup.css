@@ -1,9 +1,0 @@
-@layer components {
-  .user-signup {
-    @apply flex-center text-sm gap-x-2 lg:border lg:border-gray-300 lg:rounded-md lg:py-2 lg:px-3;
-  }
-
-  .user-signup__divider {
-    @apply hidden lg:block lg:bg-gray-300 w-0.5 lg:h-6;
-  }
-}

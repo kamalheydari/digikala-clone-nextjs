@@ -12,11 +12,13 @@ export default function DashboardLayout({ children }) {
 
   if (userInfo?.role === 'admin' || userInfo?.root)
     return (
-      <div className='dashboard-layout'>
-        <div className='dashboard-layout__aside'>
+      <div className='lg:flex lg:gap-x-4 lg:px-3 lg:container lg:max-w-7xl'>
+        <div className='hidden lg:block'>
           <DashboardAside user={userInfo} />
         </div>
-        <div className='dashboard-layout__content'>{children}</div>
+        <div className='flex-1 lg:py-8 lg:border lg:border-gray-200 lg:rounded-md lg:mt-6 h-fit'>
+          {children}
+        </div>
       </div>
     )
 }

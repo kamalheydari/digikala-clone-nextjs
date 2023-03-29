@@ -28,19 +28,23 @@ export default function Navbar() {
 
   //? Render
   return (
-    <div className='navbar group'>
+    <div className='hidden lg:block group'>
       <button
-        className='navbar__button'
+        className='flex-center text-sm px-2 gap-x-1'
         onMouseOver={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
         <Icons.Bars className='icon' />
         دسته‌بندی کالاها
       </button>
-      <div className={`navbar__dropshadow ${hover ? 'block' : 'hidden'}`} />
+      <div
+        className={`fixed left-0 z-20 w-full h-screen top-28 bg-gray-400/50 ${
+          hover ? 'block' : 'hidden'
+        }`}
+      />
 
       <div
-        className='navbar__content '
+        className='absolute z-40 hidden w-full bg-white rounded-md shadow-lg border border-gray-100 top-8 group-hover:block'
         onMouseOver={() => setHover(true)}
         onMouseLeave={() => {
           hanldeDeactive()
@@ -48,7 +52,7 @@ export default function Navbar() {
         }}
       >
         <div className='flex'>
-          <ul className='navbar__content__main-categories'>
+          <ul className='border-l-2 border-gray-100 w-72'>
             {isLoading ? (
               <NavbarSkeleton />
             ) : categories ? (
@@ -57,10 +61,13 @@ export default function Navbar() {
                 .map((levelOneCategory) => (
                   <li
                     key={levelOneCategory._id}
-                    className='main-category group'
+                    className='w-full px-2 py-0.5 text-sm hover:bg-gray-100 group'
                     onMouseOver={() => handleActive(levelOneCategory)}
                   >
-                    <Link href={`/main/${levelOneCategory.slug}`}>
+                    <Link
+                      href={`/main/${levelOneCategory.slug}`}
+                      className='px-3 py-3 flex gap-x-1.5 items-center'
+                    >
                       <ResponsiveImage
                         dimensions='w-7 h-7'
                         className='grayscale'
@@ -74,17 +81,17 @@ export default function Navbar() {
                 ))
             ) : null}
           </ul>
-          <ul className='navbar__content__sub-categories'>
+          <ul className='flex flex-wrap w-full gap-10 px-2 py-4'>
             {isLoading
               ? null
               : activeMinCat
               ? categories.map((levelTwoCategory) => {
                   if (levelTwoCategory.parent === activeMinCat._id) {
                     return (
-                      <li key={levelTwoCategory._id} className='sub-category'>
+                      <li key={levelTwoCategory._id} className='h-fit'>
                         <Link
                           href={`/products?category=${levelTwoCategory.slug}`}
-                          className='lvl-two_category'
+                          className='flex-center px-2 mb-1 text-sm font-semibold tracking-wider text-gray-700 border-r-2 border-red-500'
                         >
                           {levelTwoCategory.name}
                           <Icons.ArrowLeft className='icon' />
@@ -99,7 +106,7 @@ export default function Navbar() {
                               <li key={levelThreeCategory._id}>
                                 <Link
                                   href={`/products?category=${levelThreeCategory.slug}`}
-                                  className='lvl-three_category'
+                                  className='px-3 text-xs font-medium text-gray-700'
                                 >
                                   {levelThreeCategory.name}
                                 </Link>

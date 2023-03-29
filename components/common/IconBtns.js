@@ -17,7 +17,7 @@ export const BackIconBtn = (props) => {
     <IconButton
       title='برگشت'
       icon={
-        <Icons.ArrowRight className='text-gray-500 icon-button bg-gray-50' />
+        <Icons.ArrowRight className='text-gray-500 rounded-2xl w-8 h-8 p-1 lg:w-9 lg:h-9 lg:p-1.5 active:scale-95 bg-gray-50' />
       }
       onClick={() => back()}
       {...props}
@@ -28,7 +28,7 @@ export const BackIconBtn = (props) => {
 export const EditIconBtn = (props) => (
   <IconButton
     title='تغییر'
-    icon={<Icons.Edit className='icon-button text-amber-500 bg-amber-100' />}
+    icon={<Icons.Edit className='rounded-2xl w-8 h-8 p-1 lg:w-9 lg:h-9 lg:p-1.5 active:scale-95 text-amber-500 bg-amber-100' />}
     {...props}
   />
 )
@@ -36,7 +36,7 @@ export const EditIconBtn = (props) => (
 export const DeleteIconBtn = (props) => (
   <IconButton
     title='حذف'
-    icon={<Icons.Delete className='text-red-500 bg-red-100 icon-button' />}
+    icon={<Icons.Delete className='text-red-500 bg-red-100 rounded-2xl w-8 h-8 p-1 lg:w-9 lg:h-9 lg:p-1.5 active:scale-95' />}
     {...props}
   />
 )
@@ -44,7 +44,7 @@ export const DeleteIconBtn = (props) => (
 export const AddIconBtn = (props) => (
   <IconButton
     title='اضافه'
-    icon={<Icons.Plus className='text-green-500 bg-green-100 icon-button' />}
+    icon={<Icons.Plus className='text-green-500 bg-green-100 rounded-2xl w-8 h-8 p-1 lg:w-9 lg:h-9 lg:p-1.5 active:scale-95' />}
     {...props}
   />
 )

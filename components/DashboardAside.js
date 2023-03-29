@@ -6,47 +6,47 @@ export default function ProfileAside() {
   const profilePaths = [
     {
       name: 'محصول جدید',
-      icon: <Icons.Plus className='text-black icon' />,
+      Icon: Icons.Plus,
       path: '/admin/products/create',
     },
     {
       name: 'محصولات',
-      icon: <Icons.Save className='text-black icon' />,
+      Icon: Icons.Save,
       path: '/admin/products',
     },
     {
       name: 'سفارشات',
-      icon: <Icons.Bag className='text-black icon' />,
+      Icon: Icons.Bag,
       path: '/admin/orders',
     },
     {
       name: 'دسته بندی ها',
-      icon: <Icons.Category className='text-black icon' />,
+      Icon: Icons.Category,
       path: '/admin/categories',
     },
     {
       name: 'مشخصات دسته بندی ها',
-      icon: <Icons.Location className='text-black icon' />,
+      Icon: Icons.Location,
       path: '/admin/details',
     },
     {
       name: 'کاربران',
-      icon: <Icons.Users className='text-black icon' />,
+      Icon: Icons.Users,
       path: '/admin/users',
     },
     {
       name: 'دیدگاه‌ها',
-      icon: <Icons.Comment className='text-black icon' />,
+      Icon: Icons.Comment,
       path: '/admin/reviews',
     },
     {
       name: 'اسلایدرها',
-      icon: <Icons.Slider className='text-black icon' />,
+      Icon: Icons.Slider,
       path: '/admin/sliders',
     },
     {
       name: 'بنرها',
-      icon: <Icons.Image className='text-black icon' />,
+      Icon: Icons.Image,
       path: '/admin/banners',
     },
   ]
@@ -60,7 +60,7 @@ export default function ProfileAside() {
       <div className='mt-4'>
         {profilePaths.map((item, index) => (
           <BoxLink key={index} path={item.path} name={item.name}>
-            {item.icon}
+            <item.Icon className='icon text-black' />
           </BoxLink>
         ))}
         <Logout />

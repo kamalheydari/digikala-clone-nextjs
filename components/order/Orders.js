@@ -30,9 +30,9 @@ export default function Orders() {
   const StatusSkeleton = () => (
     <Skeleton.Item
       animated='background'
-      height=' h-16  lg:h-14'
+      height=' h-16 lg:h-14'
       width='w-12 lg:w-28'
-      className='rounded-full'
+      className='rounded-sm'
     />
   )
 
