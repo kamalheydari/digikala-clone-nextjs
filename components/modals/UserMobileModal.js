@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { mobileSchema } from 'utils/validation'
+import { mobileSchema } from 'utils'
 
 import { useEditUserMutation } from 'services'
 

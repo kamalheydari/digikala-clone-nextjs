@@ -1,4 +1,4 @@
-export const imageUpload = async (images) => {
+const imageUpload = async (images) => {
   let imgArr = []
   for (const item of images) {
     const formData = new FormData()
@@ -21,3 +21,5 @@ export const imageUpload = async (images) => {
 
   return imgArr
 }
+
+export default imageUpload

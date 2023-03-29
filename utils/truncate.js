@@ -1,4 +1,4 @@
-export const truncate = (str = '', len) => {
+const truncate = (str = '', len) => {
   if (str.length > len && str.length > 0) {
     let newStr = `${str} `
     newStr = str.substring(0, len)
@@ -8,8 +8,4 @@ export const truncate = (str = '', len) => {
   }
   return str
 }
-
-export const getUniqueValues = (data, type) => {
-  let unique = data.map((item) => item[type])
-  return ['all', ...new Set(unique)]
-}
+export default truncate

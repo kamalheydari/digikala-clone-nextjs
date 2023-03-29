@@ -1,8 +1,7 @@
 import Category from 'models/Category'
-import db from 'lib/db'
 
 import auth from 'middleware/auth'
-import sendError from 'utils/sendError'
+import { sendError, db } from 'utils'
 
 export default async (req, res) => {
   switch (req.method) {
@@ -38,7 +37,7 @@ const createCategory = async (req, res) => {
         slug: req.body.slug,
         image: req.body.image,
         colors: req.body.colors,
-        level:req.body.level
+        level: req.body.level,
       })
     await newCategory.save()
     await db.disconnect()

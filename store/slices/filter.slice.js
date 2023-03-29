@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { sorts } from 'utils/constatns'
+import { sorts } from 'utils'
 
 const initialState = {
   sort: sorts[0],

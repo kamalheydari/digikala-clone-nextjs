@@ -21,7 +21,7 @@ import {
 
 import { withAddressModal } from 'HOCs/withAddressModal'
 
-import { formatNumber } from 'utils/formatNumber'
+import { formatNumber } from 'utils'
 import useUserInfo from 'hooks/useUserInfo'
 
 export default function ShippingPage() {

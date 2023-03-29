@@ -12,7 +12,7 @@ import {
   ResponsiveImage,
 } from 'components'
 
-import { truncate } from 'utils/truncate'
+import { truncate } from 'utils'
 import { useGetProductsQuery } from 'services'
 import useDebounce from 'hooks/useDebounce'
 

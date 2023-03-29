@@ -4,7 +4,7 @@ import moment from 'moment-jalaali'
 
 import { HandleResponse, Icons, ResponsiveImage, Toman } from 'components'
 
-import { formatNumber } from 'utils/formatNumber'
+import { formatNumber } from 'utils'
 import { useEditOrderMutation } from 'services'
 
 export default function OrderCard({ order, singleOrder }) {

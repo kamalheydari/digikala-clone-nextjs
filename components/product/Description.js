@@ -2,7 +2,7 @@ import useDisclosure from 'hooks/useDisclosure'
 
 import { Icons } from 'components'
 
-import { truncate } from 'utils/truncate'
+import { truncate } from 'utils'
 
 export default function Description({ description }) {
   const [isShowDesc, showDescHandlers] = useDisclosure()

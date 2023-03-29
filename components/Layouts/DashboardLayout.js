@@ -12,7 +12,7 @@ export default function DashboardLayout({ children }) {
 
   if (userInfo?.role === 'admin' || userInfo?.root)
     return (
-      <div className='lg:flex lg:gap-x-4 lg:px-3 lg:container lg:max-w-7xl'>
+      <div className='lg:flex lg:gap-x-4 lg:px-3 lg:container lg:max-w-8xl'>
         <div className='hidden lg:block'>
           <DashboardAside user={userInfo} />
         </div>

@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import { useSelector } from 'react-redux'
 
-import { truncate } from 'utils/truncate'
+import { truncate } from 'utils'
 
 import { EmptyCart, PageContainer, ResponsiveImage } from 'components'
 

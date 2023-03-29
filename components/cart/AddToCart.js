@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 
 import { AddToCartOperation, Depot, Icons, ResponsiveImage } from 'components'
 
-import { formatNumber } from 'utils/formatNumber'
+import { formatNumber } from 'utils'
 
 export default function AddToCart({ second, product }) {
   //? Store

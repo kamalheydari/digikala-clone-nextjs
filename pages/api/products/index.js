@@ -1,8 +1,8 @@
-import db from 'lib/db'
 import Products from 'models/Product'
 
-import sendError from 'utils/sendError'
 import auth from 'middleware/auth'
+
+import { sendError, db } from 'utils'
 
 export default async (req, res) => {
   switch (req.method) {

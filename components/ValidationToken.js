@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { userLogout } from 'store'
 
-import verifyToken from 'utils/verifyToken'
+import {verifyToken} from 'utils'
 
 import RedirectToLogin from './modals/RedirectToLogin'
 import useDisclosure from 'hooks/useDisclosure'

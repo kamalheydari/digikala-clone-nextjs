@@ -9,7 +9,7 @@ import {
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
-import { categorySchema } from 'utils/validation'
+import { categorySchema } from 'utils'
 
 import {
   TextField,

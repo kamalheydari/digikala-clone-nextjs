@@ -9,7 +9,7 @@ import {
   ResponsiveImage,
 } from 'components'
 
-import { truncate } from 'utils/truncate'
+import { truncate } from 'utils'
 
 export default function ProductCard({ product, slide }) {
   return (

@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-import db from 'lib/db'
+import { db } from 'utils'
 import Product from 'models/Product'
 import Category from 'models/Category'
 

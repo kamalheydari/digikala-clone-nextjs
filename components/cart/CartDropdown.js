@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 
 import { useSelector } from 'react-redux'
 
-import { formatNumber } from 'utils/formatNumber'
+import { formatNumber } from 'utils'
 
 import {
   ArrowLink,

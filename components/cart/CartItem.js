@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { formatNumber } from 'utils/formatNumber'
+import { formatNumber } from 'utils'
 
 import {
   SpecialSell,

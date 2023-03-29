@@ -1,7 +1,6 @@
-import db from 'lib/db'
 import Review from 'models/Review'
 
-import sendError from 'utils/sendError'
+import { sendError, db } from 'utils'
 
 export default async function (req, res) {
   switch (req.method) {

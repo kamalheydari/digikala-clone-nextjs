@@ -5,7 +5,7 @@ import Head from 'next/head'
 
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { logInSchema } from 'utils/validation'
+import { logInSchema } from 'utils'
 
 import { useLoginMutation } from 'services'
 import { useDispatch } from 'react-redux'

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 
 import { useGetOrdersQuery } from 'services'
 
-import { formatNumber } from 'utils/formatNumber'
+import { formatNumber } from 'utils'
 
 import { ArrowLink, Skeleton } from 'components'
 

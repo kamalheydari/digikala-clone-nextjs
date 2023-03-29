@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { updateFilter } from 'store'
 
-import { sorts } from 'utils/constatns'
+import { sorts } from 'utils'
 
 import { Icons, Modal } from 'components'
 

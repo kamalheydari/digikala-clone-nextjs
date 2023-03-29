@@ -1,6 +1,6 @@
 import { Icons } from 'components'
 
-import { formatNumber } from 'utils/formatNumber'
+import { formatNumber } from 'utils'
 
 export default function Depot({ inStock }) {
   if (inStock < 10 && inStock !== 0) {

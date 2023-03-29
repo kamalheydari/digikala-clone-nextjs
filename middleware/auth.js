@@ -1,7 +1,8 @@
-import sendError from 'utils/sendError'
 import jwt from 'jsonwebtoken'
+
 import Users from 'models/User'
-import db from 'lib/db'
+
+import { db, sendError } from 'utils'
 
 export default async function auth(req, res) {
   const token = req.headers.authorization

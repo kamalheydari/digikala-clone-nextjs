@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 
-import { formatNumber } from 'utils/formatNumber'
+import { formatNumber } from 'utils'
 
 import { Button, Toman, TomanRed } from 'components'
 

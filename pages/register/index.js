@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { registerSchema } from 'utils/validation'
+import { registerSchema } from 'utils'
 
 import { useDispatch } from 'react-redux'
 import { showAlert, userLogin } from 'store'

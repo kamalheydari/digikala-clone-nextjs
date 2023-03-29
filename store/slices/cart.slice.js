@@ -1,6 +1,6 @@
 import { createSlice, nanoid } from '@reduxjs/toolkit'
-import getTotal from 'utils/getTotal'
-import exsitItem from 'utils/exsitItem'
+
+import { exsitItem, getTotal } from 'utils'
 
 const getCartItems =
   typeof window !== 'undefined' && localStorage.getItem('cartItems')

@@ -1,6 +1,6 @@
 import { Toman, TomanRed } from 'components'
 
-import { formatNumber } from 'utils/formatNumber'
+import { formatNumber } from 'utils'
 
 export default function DiscountCartItem({ item }) {
   const discount = item.discount / 100

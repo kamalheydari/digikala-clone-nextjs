@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import Cookies from 'js-cookie'
-import exsitItem from 'utils/exsitItem'
+import { exsitItem } from 'utils'
 
 const lastSeen =
   typeof window !== 'undefined' && localStorage.getItem('lastSeen')

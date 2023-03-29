@@ -2,14 +2,13 @@ import { useEffect } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-import db from 'lib/db'
 import Product from 'models/Product'
 import Category from 'models/Category'
 
 import { useDispatch } from 'react-redux'
 import { updateFilter, loadFilters } from 'store'
 
-import { formatNumber } from 'utils/formatNumber'
+import { formatNumber, db } from 'utils'
 
 import {
   ProductCard,

@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { showAlert } from 'store'
 
-import { imageUpload } from 'utils/imageUpload'
+import { imageUpload } from 'utils'
 
 import { Button, Icons } from 'components'
 

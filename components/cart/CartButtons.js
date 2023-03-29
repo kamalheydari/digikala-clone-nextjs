@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 
 import { Icons } from 'components'
 
-import { formatNumber } from 'utils/formatNumber'
+import { formatNumber } from 'utils'
 
 export default function CartButtons({ item }) {
   const dispatch = useDispatch()

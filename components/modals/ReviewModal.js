@@ -3,11 +3,10 @@ import { useState, useRef } from 'react'
 import { nanoid } from '@reduxjs/toolkit'
 import { useCreateReviewMutation } from 'services'
 
-import { ratingStatus } from 'utils/constatns'
+import { ratingStatus, reviewSchema } from 'utils'
 
 import { useFieldArray, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { reviewSchema } from 'utils/validation'
 
 import {
   Icons,

@@ -1,7 +1,7 @@
 import { setTempSize } from 'store'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { formatNumber } from 'utils/formatNumber'
+import { formatNumber } from 'utils'
 
 export default function SelectSize({ sizes }) {
   const dispatch = useDispatch()

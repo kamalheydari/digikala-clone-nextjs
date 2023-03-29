@@ -2,7 +2,7 @@ import Icons from 'components/common/Icons'
 
 import { useSelector } from 'react-redux'
 
-import { formatNumber } from 'utils/formatNumber'
+import { formatNumber } from 'utils'
 
 export default function CartBadge() {
   const { totalItems } = useSelector((state) => state.cart)

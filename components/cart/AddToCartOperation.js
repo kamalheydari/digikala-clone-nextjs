@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addToCart, showAlert } from 'store'
 
-import exsitItem from 'utils/exsitItem'
+import {exsitItem} from 'utils'
 
 import { ArrowLink, ProductPrice, CartButtons } from 'components'
 

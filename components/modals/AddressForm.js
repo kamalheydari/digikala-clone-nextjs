@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useEditUserMutation } from 'services'
 
 import { useForm } from 'react-hook-form'
-import { addressSchema } from 'utils/validation'
+import { addressSchema } from 'utils'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 let iranCity = require('iran-city')
