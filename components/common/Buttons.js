@@ -12,7 +12,7 @@ export const Button = ({
     <button
       type={type ? type : 'button'}
       disabled={isLoading}
-      className={`text-white py-3 px-8 flex-center outline-none rounded-md active:scale-[.98] bg-red-500 ${
+      className={`button ${
         rounded ? 'rounded-3xl' : ''
       } ${className ? className : ''}
       `}
