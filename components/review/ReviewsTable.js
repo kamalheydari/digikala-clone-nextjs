@@ -2,8 +2,11 @@ import Link from 'next/link'
 
 import { EditIconBtn, ResponsiveImage } from 'components'
 
+export default function ReviewsTable(props) {
+  //? Props
+  const { reviews } = props
 
-export default function ReviewsTable({ reviews }) {
+  //? Render(s)
   return (
     <section className='mx-3 overflow-x-auto mt-7 lg:mx-10'>
       <table className='w-full whitespace-nowrap'>
@@ -30,8 +33,6 @@ export default function ReviewsTable({ reviews }) {
                     src={review.product.images[0].url}
                     alt='تصویر محصول'
                   />
-
-                  
                 </td>
                 <td className='p-2'>{review._id}</td>
                 <td className='p-2 font-bold'>

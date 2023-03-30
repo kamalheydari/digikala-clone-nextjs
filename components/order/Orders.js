@@ -8,7 +8,7 @@ import { formatNumber } from 'utils'
 import { ArrowLink, Skeleton } from 'components'
 
 export default function Orders() {
-  //? Local State
+  //? States
   const [pendingOrder, setPendingOrder] = useState(0)
   const [successOrder, setSuccessOrder] = useState(0)
 
@@ -36,6 +36,7 @@ export default function Orders() {
     />
   )
 
+  //? Render(s)
   return (
     <section>
       <div className='py-6 lg:py-0'>

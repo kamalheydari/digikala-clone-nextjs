@@ -1,6 +1,10 @@
 import { BackIconBtn } from 'components'
 
-const PageContainer = ({ title, children }) => {
+const PageContainer = (props) => {
+  //? Props
+  const { title, children } = props
+
+  //? Render(s)
   return (
     <>
       <div className='flex items-center py-1'>

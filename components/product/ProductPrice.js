@@ -2,12 +2,11 @@ import { formatNumber } from 'utils'
 
 import { DiscountProduct, Toman } from 'components'
 
-export default function ProductPrice({
-  singleProduct,
-  inStock,
-  discount,
-  price,
-}) {
+export default function ProductPrice(props) {
+  //? Props
+  const { singleProduct, inStock, discount, price } = props
+
+  //? Render(s)
   return (
     <div className={`${singleProduct && 'flex flex-col-reverse'}`}>
       <div className='flex items-center'>

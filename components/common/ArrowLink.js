@@ -2,7 +2,11 @@ import Link from 'next/link'
 
 import { Icons } from 'components'
 
-const ArrowLink = ({ children, path }) => {
+const ArrowLink = (props) => {
+  //? Props
+  const { children, path } = props
+
+  //? Render(s)
   return (
     <Link
       href={path}

@@ -5,9 +5,13 @@ import moment from 'moment-jalaali'
 import { HandleResponse, Icons, ResponsiveImage, Toman } from 'components'
 
 import { formatNumber } from 'utils'
+
 import { useEditOrderMutation } from 'services'
 
-export default function OrderCard({ order, singleOrder }) {
+export default function OrderCard(props) {
+  //? Props
+  const { order, singleOrder } = props
+
   //? Edit Order Query
   const [editOrder, { data, isSuccess, isError, error }] =
     useEditOrderMutation()
@@ -26,6 +30,7 @@ export default function OrderCard({ order, singleOrder }) {
     })
   }
 
+  //? Render(s)
   return (
     <>
       {/* Handle Edit Order Response */}

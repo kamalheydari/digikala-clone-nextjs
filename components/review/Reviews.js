@@ -14,7 +14,10 @@ import {
 
 import { useDisclosure, useChangeRoute } from 'hooks'
 
-export default function Reviews({ numReviews, prdouctID, productTitle }) {
+export default function Reviews(props) {
+  //? Props
+  const { numReviews, prdouctID, productTitle } = props
+
   //? Assets
   const { query } = useRouter()
   const changeRoute = useChangeRoute({

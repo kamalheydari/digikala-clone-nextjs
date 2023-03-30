@@ -2,8 +2,9 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 
-import { db } from 'utils'
 import { Product } from 'models'
+
+import { db } from 'utils'
 
 import { useDispatch } from 'react-redux'
 import { setTempColor, setTempSize, addToLastSeen } from 'store'
@@ -57,7 +58,7 @@ export default function SingleProduct(props) {
     )
   }, [product._id])
 
-  //? Render
+  //? Render(s)
   return (
     <main className='xl:mt-28 lg:max-w-[1550px] mx-auto py-4 space-y-4'>
       <Head>

@@ -2,13 +2,16 @@ import React, { useEffect } from 'react'
 import Icons from './Icons'
 
 const Modal = (props) => {
+  //? Porps
   const { isShow, onClose, effect, children } = props
 
+  //? Re-Renders
   useEffect(() => {
     if (isShow) document.body.style.overflow = 'hidden'
     else document.body.style.overflow = 'unset'
   }, [isShow])
 
+  //? Styles
   const effectClasses =
     effect === 'bottom-to-top'
       ? `
@@ -28,6 +31,7 @@ const Modal = (props) => {
    fixed transition-all duration-700 left-0 right-0 mx-auto`
       : ''
 
+  //? Render(s)
   return (
     <div
       className={`${
@@ -48,7 +52,11 @@ const Modal = (props) => {
   )
 }
 
-const Content = ({ onClose, children, ...restProps }) => {
+const Content = (props) => {
+  //? Props
+  const { onClose, children, ...restProps } = props
+
+  //? Render(s)
   return (
     <div {...restProps}>
       {React.Children.map(children, (child) => {
@@ -62,7 +70,11 @@ const Content = ({ onClose, children, ...restProps }) => {
   )
 }
 
-const Header = ({ onClose, children }) => {
+const Header = (props) => {
+  //? Props
+  const { onClose, children } = props
+
+  //? Render(s)
   return (
     <div className='flex items-center justify-between pb-2 border-b-2 border-gray-200'>
       <span className='text-sm'>{children}</span>

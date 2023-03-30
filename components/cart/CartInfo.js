@@ -4,11 +4,16 @@ import { formatNumber } from 'utils'
 
 import { Button, Toman, TomanRed } from 'components'
 
-export default function CartInfo({ handleRoute, cart }) {
+export default function CartInfo(props) {
+  //? Porps
+  const { handleRoute, cart } = props
+
   //? Store
   const { totalItems, totalPrice, totalDiscount } = useSelector(
     (state) => state.cart
   )
+
+  //? Render(s)
   return (
     <div className='px-4 py-2 mt-10 space-y-5 lg:mt-0 lg:h-fit lg:py-4'>
       {/* total cart price */}

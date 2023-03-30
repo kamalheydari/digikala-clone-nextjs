@@ -56,6 +56,7 @@ export default function SelectCategories(props) {
     })
   }
 
+  //? Render(s)
   return (
     <div className='flex flex-wrap justify-evenly gap-y-6'>
       <SelectBox

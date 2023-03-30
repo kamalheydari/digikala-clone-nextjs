@@ -3,22 +3,19 @@ import { useState } from 'react'
 import { ResponsiveImage, SpecialSell } from 'components'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
-
-// Import Swiper styles
+import { Pagination } from 'swiper'
 import 'swiper/css'
 import 'swiper/css/pagination'
 
-// import required modules
-import { Pagination } from 'swiper'
 
-export default function ImageGallery({
-  images,
-  discount,
-  inStock,
-  productName,
-}) {
+export default function ImageGallery(props) {
+  //? Porps
+  const { images, discount, inStock, productName } = props
+
+  //? States
   const [currentImage, setCurrentImage] = useState(0)
 
+  //? Render(s)
   return (
     <section className='mb-5 lg:col-span-3 '>
       <div className='hidden lg:block'>

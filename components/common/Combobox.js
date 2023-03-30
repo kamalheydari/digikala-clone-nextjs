@@ -6,11 +6,17 @@ import { HiCheck, HiChevronDown } from 'react-icons/hi'
 
 import { useController } from 'react-hook-form'
 
-export default function Combobox({ list, name, control, placeholder }) {
+export default function Combobox(props) {
+  //? Props
+  const { list, name, control, placeholder } = props
+
+  //? Form Hook
   const { field } = useController({ name, control })
 
+  //? States
   const [query, setQuery] = useState('')
 
+  //? Handlers
   const filteredList =
     query === ''
       ? list
@@ -18,6 +24,7 @@ export default function Combobox({ list, name, control, placeholder }) {
           return item.name.toLowerCase().includes(query.toLowerCase())
         })
 
+  //? Render(s)
   return (
     <HUICombobox
       value={field.value}

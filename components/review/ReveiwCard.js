@@ -5,12 +5,11 @@ import { useEditReviewMutation } from 'services'
 import { HandleResponse, Icons, ResponsiveImage } from 'components'
 import { Menu, Transition } from '@headlessui/react'
 
-export default function ReveiwCard({
-  item,
-  singleComment,
-  deleteReviewHandler,
-}) {
-  //? Local State
+export default function ReveiwCard(props) {
+  //? Props
+  const { item, singleComment, deleteReviewHandler } = props
+
+  //? States
   const [status, setStatus] = useState(item.status)
 
   //? Edit Review Query
@@ -27,7 +26,6 @@ export default function ReveiwCard({
   }
 
   //? Local Components
-
   const DropdownReview = ({ openConfirmDeleteModal }) => (
     <Menu as='div' className='dropdown'>
       <Menu.Button className='dropdown__button'>
@@ -85,6 +83,8 @@ export default function ReveiwCard({
       </Transition>
     </Menu>
   )
+
+  //? Render(s)
   return (
     <>
       {/* Handle Edit Review Response */}

@@ -27,6 +27,7 @@ export default function OrdersHome() {
       pageSize: 5,
     })
 
+  //? Render(s)
   return (
     <main id='_adminOrders'>
       <Head>
@@ -60,6 +61,8 @@ export default function OrdersHome() {
     </main>
   )
 }
+
+//? Layout
 OrdersHome.getDashboardLayout = function pageLayout(page) {
   return <>{page}</>
 }

@@ -5,11 +5,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { removeAlert } from 'store'
 
 export default function Alert() {
-  const dispatch = useDispatch()
-
   //? Store
   const { isShow, status, title } = useSelector((state) => state.alert)
 
+  //? Assets
+  const dispatch = useDispatch()
   let IconSrc
   switch (status) {
     case 'error':
@@ -29,6 +29,7 @@ export default function Alert() {
       break
   }
 
+  //? Re-Renders
   useEffect(() => {
     if (isShow) {
       const timeout = setTimeout(() => {
@@ -38,6 +39,7 @@ export default function Alert() {
     }
   }, [isShow])
 
+  //? Render(s)
   return (
     <div
       className={`${

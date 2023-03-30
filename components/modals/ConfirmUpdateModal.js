@@ -25,6 +25,7 @@ export default function ConfirmUpdateModal(props) {
     onClose()
   }
 
+  //? Render(s)
   return (
     <Modal isShow={isShow} onClose={onClose} effect='ease-out'>
       <Modal.Content>

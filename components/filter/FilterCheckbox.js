@@ -1,4 +1,8 @@
-export default function FilterCheckbox({ children, name, onChange, value }) {
+export default function FilterCheckbox(props) {
+  //? Porps
+  const { children, name, onChange, value } = props
+
+  //? Render(s)
   return (
     <div className='flex justify-between py-4'>
       <span className='font-medium text-gray-700'>{children}</span>

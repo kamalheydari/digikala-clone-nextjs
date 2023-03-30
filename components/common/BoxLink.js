@@ -3,8 +3,14 @@ import { useRouter } from 'next/router'
 
 import { Icons } from 'components'
 
-export default function BoxLink({ children, path, name }) {
+export default function BoxLink(props) {
+  //? Props
+  const { children, path, name } = props
+
+  //? Assets
   const router = useRouter()
+
+  //? Render(s)
   return (
     <div
       className={`transition-colors hover:bg-gray-200 px-3 ${

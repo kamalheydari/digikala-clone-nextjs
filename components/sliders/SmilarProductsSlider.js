@@ -10,7 +10,11 @@ import 'swiper/css/navigation'
 import { Navigation, FreeMode } from 'swiper'
 import { ProductCard } from 'components'
 
-export default function SmilarProductsSlider({ smilarProducts }) {
+export default function SmilarProductsSlider(props) {
+  //? Props
+  const { smilarProducts } = props
+
+  //? Render(s)
   return (
     <section className='px-3 py-4 overflow-hidden lg:border lg:border-gray-100 lg:rounded-md'>
       <h4 className='mb-3 lg:border-b-2 lg:border-red-500 w-24'>

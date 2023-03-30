@@ -26,6 +26,7 @@ export default function Sort(props) {
     sortHandlers.close()
   }
 
+  //? Render(s)
   return (
     <>
       <div className='xl:hidden'>

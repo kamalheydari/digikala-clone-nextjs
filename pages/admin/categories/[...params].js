@@ -310,6 +310,7 @@ export default function CreateCategory() {
   )
 }
 
+//? Layout
 CreateCategory.getDashboardLayout = function pageLayout(page) {
   return <>{page}</>
 }

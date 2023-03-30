@@ -40,6 +40,7 @@ function ProfileAside() {
     },
   ]
 
+  //? Render(s)
   return (
     <aside className='sticky mt-6 lg:border lg:border-gray-200 lg:rounded-md lg:pt-4 lg:top-6 xl:top-[136px]'>
       <div className='flex items-center justify-between px-5 py-2 '>

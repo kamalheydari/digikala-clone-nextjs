@@ -4,9 +4,14 @@ import { Icons } from 'components'
 
 import { truncate } from 'utils'
 
-export default function Description({ description }) {
+export default function Description(props) {
+  //? Porps
+  const { description } = props
+
+  //? Assets
   const [isShowDesc, showDescHandlers] = useDisclosure()
 
+  //? Render(s)
   return (
     <section>
       <div className='px-3 lg:max-w-3xl xl:max-w-5xl'>

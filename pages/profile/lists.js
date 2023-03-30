@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { FavoritesListEmpty, PageContainer } from 'components'
 
 export default function Lists() {
+  //? Render(s)
   return (
     <main>
       <Head>
@@ -20,6 +21,8 @@ export default function Lists() {
     </main>
   )
 }
+
+//? Layout
 Lists.getProfileLayout = function pageLayout(page) {
   return <>{page}</>
 }

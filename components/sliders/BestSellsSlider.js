@@ -4,7 +4,11 @@ import { Icons, ResponsiveImage } from 'components'
 
 import { truncate } from 'utils'
 
-export default function BestSellsSlider({ bestSells }) {
+export default function BestSellsSlider(props) {
+  //? Props
+  const { bestSells } = props
+
+  //? Render(s)
   if (bestSells.products.length > 0)
     return (
       <section className='px-3'>

@@ -5,7 +5,7 @@ import { Header, ProfileAside } from 'components'
 import { useVerify } from 'hooks'
 
 export default function ProfileLayout({ children }) {
-  const isVerify = useVerify(false)
+  const isVerify = useVerify()
   const router = useRouter()
 
   if (!isVerify) router.push('/')

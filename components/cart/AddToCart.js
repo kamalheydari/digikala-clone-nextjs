@@ -6,9 +6,14 @@ import { AddToCartOperation, Depot, Icons, ResponsiveImage } from 'components'
 
 import { formatNumber } from 'utils'
 
-export default function AddToCart({ second, product }) {
+export default function AddToCart(props) {
+  //? Props
+  const { second, product } = props
+
   //? Store
   const { tempColor, tempSize } = useSelector((state) => state.cart)
+
+  //? Render(s)
   return (
     <>
       {/* mobile */}

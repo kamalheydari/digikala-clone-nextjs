@@ -11,7 +11,11 @@ import {
 
 import { truncate } from 'utils'
 
-export default function ProductCard({ product, slide }) {
+export default function ProductCard(props) {
+  //? Props
+  const { product, slide } = props
+
+  //? Render(s)
   return (
     <Link href={`/products/${product._id}`}>
       <article

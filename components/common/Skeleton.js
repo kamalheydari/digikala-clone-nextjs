@@ -1,8 +1,13 @@
 import React from 'react'
 
-const Skeleton = ({ count, children }) => {
+const Skeleton = (props) => {
+  //? Porps
+  const { count, children } = props
+
+  //? Assets
   const arr = Array(count).fill('_')
 
+  //? Render(s)
   return (
     <>
       {arr.map((item, index) =>
@@ -18,7 +23,11 @@ const Skeleton = ({ count, children }) => {
   )
 }
 
-const Items = ({ index, children, className }) => {
+const Items = (props) => {
+  //? Props
+  const { index, children, className } = props
+
+  //? Render(s)
   return (
     <div className={className}>
       {React.Children.map(children, (child) => {

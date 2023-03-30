@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { ArrowLink, ResponsiveImage } from 'components'
 
 export default function NotFoundPage() {
+  //? Render(s)
   return (
     <main className='flex flex-col items-center justify-center py-8 gap-y-6 xl:mt-28'>
       <Head>

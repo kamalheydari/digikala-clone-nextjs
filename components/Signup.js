@@ -7,8 +7,7 @@ import { useUserInfo } from 'hooks'
 function Signup() {
   const { userInfo, isVerify, isLoading } = useUserInfo()
 
-  //? Render
-
+  //? Render(s)
   if (isLoading)
     return (
       <Skeleton.Item height='h-8' width='w-7 lg:w-12' animated='background' />

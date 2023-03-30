@@ -1,7 +1,11 @@
 import { Icons } from 'components'
 import moment from 'moment-jalaali'
 
-export default function ReviewProductCard({ item }) {
+export default function ReviewProductCard(props) {
+  //? Props
+  const { item } = props
+
+  //? Render(s)
   return (
     <article className='flex py-3'>
       <span

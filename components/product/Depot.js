@@ -3,6 +3,7 @@ import { Icons } from 'components'
 import { formatNumber } from 'utils'
 
 export default function Depot({ inStock }) {
+  //? Render(s)
   if (inStock < 10 && inStock !== 0) {
     return (
       <span className='text-red-500 farsi-digits'>

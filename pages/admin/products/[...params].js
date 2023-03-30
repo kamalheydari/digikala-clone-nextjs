@@ -185,7 +185,6 @@ export default function Product() {
   }
 
   //? Render(s)
-
   if (id && isLoading_get)
     return (
       <div className='px-3 py-20'>
@@ -393,6 +392,7 @@ export default function Product() {
   )
 }
 
+//? Layout
 Product.getDashboardLayout = function pageLayout(page) {
   return <>{page}</>
 }

@@ -6,6 +6,7 @@ export default function Categories(props) {
   //? Props
   const { homePage, childCategories, color, name } = props
 
+  //? Re-Renders
   if (childCategories.length > 0 && color && name) {
     return (
       <section className='px-3'>

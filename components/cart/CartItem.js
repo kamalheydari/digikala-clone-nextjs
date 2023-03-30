@@ -11,7 +11,11 @@ import {
   ResponsiveImage,
 } from 'components'
 
-export default function CartItem({ item }) {
+export default function CartItem(props) {
+  //? Props
+  const { item } = props
+
+  //? Render(s)
   return (
     <article className='flex px-4 py-5 gap-x-4 '>
       {/* image & cartButtons */}

@@ -1,20 +1,17 @@
 import { Loading } from 'components'
 
-export const Button = ({
-  type,
-  isLoading,
-  children,
-  className,
-  rounded,
-  ...restPropps
-}) => {
+export const Button = (props) => {
+  //? Props
+  const { type, isLoading, children, className, rounded, ...restPropps } = props
+
+  //? Render
   return (
     <button
       type={type ? type : 'button'}
       disabled={isLoading}
-      className={`button ${
-        rounded ? 'rounded-3xl' : ''
-      } ${className ? className : ''}
+      className={`button ${rounded ? 'rounded-3xl' : ''} ${
+        className ? className : ''
+      }
       `}
       {...restPropps}
     >

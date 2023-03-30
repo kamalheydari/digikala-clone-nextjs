@@ -1,4 +1,8 @@
-export default function Info({ infos }) {
+export default function Info(props) {
+  //? Props
+  const { infos } = props
+
+  //? Render(s)
   return (
     <section className='px-4 pb-2'>
       <h4 className='my-3 lg:mt-6'>ویژگی‌ها</h4>

@@ -2,7 +2,11 @@ import { Icons } from 'components'
 
 import { useRouter } from 'next/router'
 
-const IconButton = ({ title, icon, children, ...restPorps }) => {
+const IconButton = (props) => {
+  //? Props
+  const { title, icon, children, ...restPorps } = props
+
+  //? Render(s)
   return (
     <button type='button' title={title} className='mx-3 my-2' {...restPorps}>
       {icon}
@@ -12,7 +16,10 @@ const IconButton = ({ title, icon, children, ...restPorps }) => {
 }
 
 export const BackIconBtn = (props) => {
+  //? Assets
   const { back } = useRouter()
+
+  //? Render(s)
   return (
     <IconButton
       title='برگشت'
@@ -28,7 +35,9 @@ export const BackIconBtn = (props) => {
 export const EditIconBtn = (props) => (
   <IconButton
     title='تغییر'
-    icon={<Icons.Edit className='rounded-2xl w-8 h-8 p-1 lg:w-9 lg:h-9 lg:p-1.5 active:scale-95 text-amber-500 bg-amber-100' />}
+    icon={
+      <Icons.Edit className='rounded-2xl w-8 h-8 p-1 lg:w-9 lg:h-9 lg:p-1.5 active:scale-95 text-amber-500 bg-amber-100' />
+    }
     {...props}
   />
 )
@@ -36,7 +45,9 @@ export const EditIconBtn = (props) => (
 export const DeleteIconBtn = (props) => (
   <IconButton
     title='حذف'
-    icon={<Icons.Delete className='text-red-500 bg-red-100 rounded-2xl w-8 h-8 p-1 lg:w-9 lg:h-9 lg:p-1.5 active:scale-95' />}
+    icon={
+      <Icons.Delete className='text-red-500 bg-red-100 rounded-2xl w-8 h-8 p-1 lg:w-9 lg:h-9 lg:p-1.5 active:scale-95' />
+    }
     {...props}
   />
 )
@@ -44,7 +55,9 @@ export const DeleteIconBtn = (props) => (
 export const AddIconBtn = (props) => (
   <IconButton
     title='اضافه'
-    icon={<Icons.Plus className='text-green-500 bg-green-100 rounded-2xl w-8 h-8 p-1 lg:w-9 lg:h-9 lg:p-1.5 active:scale-95' />}
+    icon={
+      <Icons.Plus className='text-green-500 bg-green-100 rounded-2xl w-8 h-8 p-1 lg:w-9 lg:h-9 lg:p-1.5 active:scale-95' />
+    }
     {...props}
   />
 )

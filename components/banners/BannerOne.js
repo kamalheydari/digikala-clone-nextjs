@@ -2,7 +2,10 @@ import { ResponsiveImage } from 'components'
 
 import { useGetSingleBannerQuery } from 'services'
 
-export default function BannerOne({ id }) {
+export default function BannerOne(props) {
+  //? Props
+  const { id } = props
+
   //? Get Banners Query
   const { data } = useGetSingleBannerQuery({
     id,
@@ -26,6 +29,7 @@ export default function BannerOne({ id }) {
     />
   )
 
+  //? Render(s)
   if (data?.banners && data.banners.length > 0) {
     return (
       <section className='grid gap-3 px-3 lg:relative lg:grid-cols-2 lg:gap-4'>

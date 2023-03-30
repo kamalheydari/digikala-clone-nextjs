@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 import { useDispatch } from 'react-redux'
-
 import { showAlert } from 'store'
+
 import {
   useCreateDetailsMutation,
   useDeleteDetailsMutation,
@@ -156,7 +156,7 @@ export default function DetailsPage() {
     confirmUpdateModalHandlers.open()
   }
 
-  //? Render
+  //? Render(s)
   return (
     <>
       <ConfirmDeleteModal
@@ -333,6 +333,7 @@ export default function DetailsPage() {
   )
 }
 
+//? Layout
 DetailsPage.getDashboardLayout = function pageLayout(page) {
   return <>{page}</>
 }

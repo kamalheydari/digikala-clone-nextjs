@@ -6,6 +6,7 @@ export default function Search() {
   //? Assets
   const [isShowSearchModal, searchModalHanlders] = useDisclosure()
 
+  //? Render(s)
   return (
     <>
       <SearchModal

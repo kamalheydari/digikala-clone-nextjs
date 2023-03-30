@@ -1,7 +1,11 @@
 import { EditIconBtn } from 'components/common/IconBtns'
 import Link from 'next/link'
 
-export default function OrdersTable({ orders }) {
+export default function OrdersTable(props) {
+  //? Props
+  const { orders } = props
+
+  //? Render(s)
   return (
     <div className='overflow-x-auto mt-7'>
       <table className='w-full whitespace-nowrap'>

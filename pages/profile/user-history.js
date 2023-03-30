@@ -54,6 +54,7 @@ export default function UserHistory() {
   )
 }
 
+//? Layout
 UserHistory.getProfileLayout = function pageLayout(page) {
   return <>{page}</>
 }

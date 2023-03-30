@@ -6,9 +6,11 @@ import { userLogout, showAlert } from 'store'
 import { Icons } from 'components'
 
 export default function Logout() {
+  //? Assets
   const dispatch = useDispatch()
   const router = useRouter()
 
+  //? Handlers
   const handleLogout = () => {
     router.push('/')
     dispatch(userLogout())
@@ -20,6 +22,7 @@ export default function Logout() {
     )
   }
 
+  //? Render(s)
   return (
     <button
       type='button'

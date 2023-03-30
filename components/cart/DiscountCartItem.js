@@ -2,9 +2,14 @@ import { Toman, TomanRed } from 'components'
 
 import { formatNumber } from 'utils'
 
-export default function DiscountCartItem({ item }) {
+export default function DiscountCartItem(props) {
+  //? Props
+  const { item } = props
+
+  //? Assets
   const discount = item.discount / 100
 
+  //? Render(s)
   return (
     <div>
       <div className='flex items-center gap-x-2'>

@@ -5,15 +5,18 @@ import Head from 'next/head'
 
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+
 import { logInSchema } from 'utils'
 
 import { useLoginMutation } from 'services'
+
 import { useDispatch } from 'react-redux'
 import { userLogin } from 'store'
 
 import { TextField, LoginBtn, Logo, HandleResponse } from 'components'
 
 export default function LoginPage() {
+  //? Assets
   const dispatch = useDispatch()
   const router = useRouter()
 
@@ -50,7 +53,7 @@ export default function LoginPage() {
     }
   }
 
-  //? Render
+  //? Render(s)
   return (
     <>
       {/*  Handle Login Response */}

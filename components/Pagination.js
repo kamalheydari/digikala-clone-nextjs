@@ -17,6 +17,7 @@ export default function Pagination(props) {
 
   const isDesktop = useMediaQuery('(min-width:1024px)')
 
+  //? Handlers
   const scrollToTop = () => {
     const element = document.getElementById(section)
 
@@ -26,6 +27,7 @@ export default function Pagination(props) {
     window.scrollTo(0, scrollY)
   }
 
+  //? Render(s)
   return (
     <nav>
       <ul className='inline-flex items-center w-full px-10 gap-x-2 farsi-digits'>

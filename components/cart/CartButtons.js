@@ -5,9 +5,14 @@ import { Icons } from 'components'
 
 import { formatNumber } from 'utils'
 
-export default function CartButtons({ item }) {
+export default function CartButtons(props) {
+  //? Props
+  const { item } = props
+
+  //? Assets
   const dispatch = useDispatch()
 
+  //? Render(s)
   return (
     <div className='flex items-center py-2 text-sm rounded-md shadow-3xl justify-evenly'>
       <button className='active:scale-90' type='button'>

@@ -3,19 +3,21 @@ import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addToCart, showAlert } from 'store'
 
-import {exsitItem} from 'utils'
+import { exsitItem } from 'utils'
 
 import { ArrowLink, ProductPrice, CartButtons } from 'components'
 
-export default function AddToCartOperation({ product }) {
+export default function AddToCartOperation(props) {
+  //? Props
+  const { product } = props
+
   //? Assets
   const dispatch = useDispatch()
 
   //? Store
-  const { tempColor, tempSize } = useSelector((state) => state.cart)
-  const { cartItems } = useSelector((state) => state.cart)
+  const { cartItems, tempColor, tempSize } = useSelector((state) => state.cart)
 
-  //? Local State
+  //? State
   const [currentItemInCart, setCurrentItemInCart] = useState(null)
 
   //? Re-Renders
@@ -49,6 +51,7 @@ export default function AddToCartOperation({ product }) {
     )
   }
 
+  //? Render(s)
   return (
     <div className='flex items-center justify-between p-3 bg-white border-t border-gray-300 sm:px-5 lg:py-3 lg:p-0 shadow-3xl lg:sticky lg:flex-col-reverse lg:top-32 lg:bg-gray-100 lg:gap-y-4 lg:border-t-0 lg:shadow-none'>
       {currentItemInCart ? (

@@ -3,12 +3,17 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { Icons } from 'components'
 
-export default function SelectColor({ colors }) {
+export default function SelectColor(props) {
+  //? Props
+  const { colors } = props
+
+  //? Assets
   const dispatch = useDispatch()
 
   //? Store
   const { tempColor } = useSelector((state) => state.cart)
 
+  //? Render(s)
   return (
     <section className=''>
       <div className='flex justify-between p-4'>

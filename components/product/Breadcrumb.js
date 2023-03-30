@@ -1,8 +1,9 @@
 import Link from 'next/link'
 
-export default function Breadcrumb({ categoires }) {
-  const { level_one, level_two, Level_three } = categoires
+export default function Breadcrumb(props) {
+  const { level_one, level_two, Level_three } = props.categoires
 
+  //? Render(s)
   return (
     <div className='pr-5'>
       <Link href='/' className='inline-block px-1 py-1 text-sm text-gray-700 '>

@@ -1,17 +1,17 @@
-import { resetFilter, updateFilter } from 'store'
-import { FilterCheckbox, Toman } from 'components'
 import { useDispatch, useSelector } from 'react-redux'
+import { resetFilter, updateFilter } from 'store'
+
+import { FilterCheckbox, Toman } from 'components'
 
 export default function FilterOperation(props) {
   //? Props
   const { main_maxPrice, main_minPrice, changeRoute, resetRoute } = props
 
-  const dispatch = useDispatch()
-
   //? store
   const { inStock, discount, max_price, min_price } = useSelector(
     (state) => state.filter
   )
+  const dispatch = useDispatch()
 
   //? Handlers
   const handlefilter = (e) => {
@@ -28,6 +28,7 @@ export default function FilterOperation(props) {
     resetRoute()
   }
 
+  //? Render(s)
   return (
     <>
       <div className='flex justify-end '>

@@ -1,16 +1,20 @@
 import { BigLoading, Button } from 'components'
 
-export default function ShowWrapper({
-  isError,
-  error,
-  refetch,
-  isFetching,
-  dataLength,
-  isSuccess,
-  emptyComponent,
-  loadingComponent,
-  children,
-}) {
+export default function ShowWrapper(props) {
+  //? Porps
+  const {
+    isError,
+    error,
+    refetch,
+    isFetching,
+    dataLength,
+    isSuccess,
+    emptyComponent,
+    loadingComponent,
+    children,
+  } = props
+
+  //? Render(s)
   return (
     <section>
       {isError ? (

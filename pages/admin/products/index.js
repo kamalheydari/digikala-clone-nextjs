@@ -149,7 +149,7 @@ export default function Products() {
     }
   }, [categories])
 
-  //? Render
+  //? Render(s)
   return (
     <>
       <ConfirmDeleteModal
@@ -287,6 +287,7 @@ export default function Products() {
   )
 }
 
+//? Layout
 Products.getDashboardLayout = function pageLayout(page) {
   return <>{page}</>
 }

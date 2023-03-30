@@ -5,6 +5,9 @@ import { useSelector } from 'react-redux'
 
 import { formatNumber } from 'utils'
 
+import { useUserInfo, useDisclosure } from 'hooks'
+
+import { Menu, Transition } from '@headlessui/react'
 import {
   ArrowLink,
   CartItem,
@@ -14,10 +17,6 @@ import {
   Toman,
   EmptyCart,
 } from 'components'
-
-import { useUserInfo, useDisclosure } from 'hooks'
-
-import { Menu, Transition } from '@headlessui/react'
 
 export default function CartDropdown() {
   //? Assets
@@ -39,6 +38,7 @@ export default function CartDropdown() {
     router.push('/checkout/shipping')
   }
 
+  //? Render(s)
   return (
     <>
       <RedirectToLogin

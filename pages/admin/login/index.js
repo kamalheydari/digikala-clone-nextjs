@@ -4,16 +4,19 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { logInSchema } from 'utils'
+
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { useDispatch } from 'react-redux'
 import { userLogin, showAlert } from 'store'
+
 import { useLoginMutation } from 'services'
 
 import { TextField, LoginBtn, Logo } from 'components'
 
 export default function LoginPage() {
+  //? Assets
   const dispatch = useDispatch()
   const router = useRouter()
 
@@ -82,7 +85,7 @@ export default function LoginPage() {
     }
   }
 
-  //? Render
+  //? Render(s)
   return (
     <main className='grid items-center min-h-screen '>
       <Head>

@@ -6,6 +6,7 @@ export default function SelectBox(props) {
   //? Props
   const { list, placeholder, onChange, value } = props
 
+  //? Render(s)
   return (
     <Listbox value={value} onChange={onChange}>
       <div className='relative w-64 mt-1'>

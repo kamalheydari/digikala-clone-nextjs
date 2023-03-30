@@ -12,6 +12,7 @@ import {
 } from 'components'
 
 export default function Header() {
+  //? Render(s)
   return (
     <>
       <header className='px-4 bg-white lg:shadow xl:fixed xl:z-20 xl:top-0 xl:left-0 xl:right-0'>

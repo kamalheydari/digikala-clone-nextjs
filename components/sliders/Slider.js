@@ -7,7 +7,10 @@ import 'swiper/css/pagination'
 
 import { ResponsiveImage, Skeleton } from 'components'
 
-export default function Slider({ id }) {
+export default function Slider(props) {
+  //? Props
+  const { id } = props
+
   //? Get Data
   const { data, isLoading } = useGetSingleSliderQuery({
     id,
@@ -23,6 +26,7 @@ export default function Slider({ id }) {
     />
   )
 
+  //? Render(s)
   if (isLoading) {
     return (
       <Skeleton.Item

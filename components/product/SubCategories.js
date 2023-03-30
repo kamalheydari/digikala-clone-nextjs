@@ -3,8 +3,10 @@ import Link from 'next/link'
 import { ResponsiveImage } from 'components'
 
 export default function SubCategories(props) {
+  //? Props
   const { childCategories } = props
 
+  //? Render(s)
   if (childCategories.length > 0)
     return (
       <section className='px-4 my-7'>

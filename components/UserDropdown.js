@@ -5,7 +5,11 @@ import { Menu, Transition } from '@headlessui/react'
 
 import { Icons, Logout, Person } from 'components'
 
-export default function UserDropdown({ name }) {
+export default function UserDropdown(props) {
+  //? Props
+  const { name } = props
+
+  //? Render(s)
   return (
     <Menu as='div' className='dropdown'>
       <Menu.Button className='dropdown__button'>

@@ -119,6 +119,7 @@ export default function Addresses() {
   )
 }
 
+//? Layout
 Addresses.getProfileLayout = function pageLayout(page) {
   return <>{page}</>
 }

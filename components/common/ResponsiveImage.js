@@ -7,6 +7,7 @@ export default function ResponsiveImage(props) {
   //? Props
   const { dimensions, className, src, alt, imageStyles, ...rest } = props
 
+  //? Render(s)
   return (
     <div
       className={`relative ${dimensions ? dimensions : ''} ${

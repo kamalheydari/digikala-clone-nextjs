@@ -49,7 +49,7 @@ export default function Sidebar() {
     else document.body.style.overflow = 'unset'
   }, [isSidebar])
 
-  //? Render
+  //? Render(s)
   return (
     <>
       <button
@@ -104,7 +104,7 @@ export default function Sidebar() {
                       <Disclosure.Panel className=' text-sm bg-gray-100 text-gray-500 !mt-0'>
                         <Link
                           href={`/main/${category.slug}`}
-                          className='py-2 text-gray-500 arrow-link pr-7'
+                          className='py-2 text-gray-500 inline-flex items-center text-sm max-w-max pr-7'
                           onClick={handleClose}
                         >
                           تمام موارد این دسته
@@ -138,7 +138,7 @@ export default function Sidebar() {
                                   >
                                     <Link
                                       href={`/products?category=${category.slug}`}
-                                      className='py-2 text-gray-500 arrow-link pr-9'
+                                      className='py-2 text-gray-500 inline-flex items-center text-sm max-w-max pr-9'
                                       onClick={handleClose}
                                     >
                                       تمام موارد این دسته

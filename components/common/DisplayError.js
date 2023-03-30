@@ -1,7 +1,11 @@
 import { Transition } from '@headlessui/react'
-import Icons from './Icons'
+import { Icons } from 'components'
 
-export default function DisplayError({ errors }) {
+export default function DisplayError(props) {
+  //? Props
+  const { errors } = props
+
+  //? Render(s)
   return (
     <div className='min-h-[29px]'>
       <Transition

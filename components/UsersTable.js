@@ -5,6 +5,7 @@ export default function UsersTable(props) {
   //? Props
   const { deleteUserHandler, users } = props
 
+  //? Render(s)
   return (
     <div className='mx-3 overflow-x-auto mt-7 lg:mx-5 xl:mx-10'>
       <table className='w-full whitespace-nowrap'>

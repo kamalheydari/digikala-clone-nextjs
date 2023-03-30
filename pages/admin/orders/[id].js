@@ -6,6 +6,7 @@ import { useGetSingleOrderQuery } from 'services'
 import { OrderCard, PageContainer, ShowWrapper } from 'components'
 
 export default function SingleOrder() {
+  //? Assets
   const router = useRouter()
 
   //? Get Order Data
@@ -14,7 +15,7 @@ export default function SingleOrder() {
       id: router.query.id,
     })
 
-  //? Render
+  //? Render(s)
   return (
     <main>
       <Head>
@@ -40,6 +41,7 @@ export default function SingleOrder() {
   )
 }
 
+//? Layout
 SingleOrder.getDashboardLayout = function pageLayout(page) {
   return <>{page}</>
 }

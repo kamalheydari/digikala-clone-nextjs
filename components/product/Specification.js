@@ -2,13 +2,18 @@ import { useDisclosure } from 'hooks'
 
 import { Icons } from 'components'
 
-export default function Specification({ specification }) {
+export default function Specification(props) {
+  //? Props
+  const { specification } = props
+
+  //? Assets
   const [isShowSpec, showSpecHandlers] = useDisclosure()
 
   let renderSpecification = isShowSpec
     ? specification
     : specification.slice(0, 7)
 
+  //? Render(s)
   return (
     <section className='px-4 '>
       <div className='lg:max-w-3xl xl:max-w-5xl lg:flex lg:gap-x-20'>

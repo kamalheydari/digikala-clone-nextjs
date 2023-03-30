@@ -58,6 +58,7 @@ export default function Reviews() {
   )
 }
 
+//? Layout
 Reviews.getDashboardLayout = function pageLayout(page) {
   return <>{page}</>
 }

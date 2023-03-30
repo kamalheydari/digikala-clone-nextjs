@@ -76,6 +76,7 @@ export default function RegisterPage() {
     }
   }
 
+  //? Render(s)
   return (
     <>
       <RedirectToLogin

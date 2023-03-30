@@ -1,8 +1,13 @@
 import { useController } from 'react-hook-form'
 
-export default function Checkbox({ name, control, label, ...restProps }) {
+export default function Checkbox(props) {
+  //? Porps
+  const { name, control, label, ...restProps } = props
+
+  //? Form Hook
   const { field } = useController({ name, control })
 
+  //? Render(s)
   return (
     <label className='flex items-center mb-3 gap-x-2'>
       <input

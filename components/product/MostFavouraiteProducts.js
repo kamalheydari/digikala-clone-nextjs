@@ -7,7 +7,11 @@ import {
   ResponsiveImage,
 } from 'components'
 
-export default function MostFavouraiteProducts({ mostFavourite }) {
+export default function MostFavouraiteProducts(props) {
+  //? Props
+  const { mostFavourite } = props
+
+  //? Render(s)
   if (mostFavourite.products.length > 0)
     return (
       <section className='px-3'>
@@ -33,13 +37,13 @@ export default function MostFavouraiteProducts({ mostFavourite }) {
                   alt={product.title}
                 />
                 <div
-                  className={`flex items-start mt-2 gap-x-2 ${product.discount?'justify-evenly':'justify-end pl-8'}`}
+                  className={`flex items-start mt-2 gap-x-2 ${
+                    product.discount ? 'justify-evenly' : 'justify-end pl-8'
+                  }`}
                 >
                   {product.discount ? (
                     <DiscountProduct discount={product.discount} />
-                  ) : (
-                    null
-                  )}
+                  ) : null}
                   <ProductPrice
                     inStock={product.inStock}
                     discount={product.discount}

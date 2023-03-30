@@ -1,17 +1,14 @@
 import { DisplayError } from 'components'
 import { useController } from 'react-hook-form'
 
-export default function TextField({
-  label,
-  errors,
-  name,
-  type,
-  control,
-  direction,
-  ...inputProps
-}) {
+export default function TextField(props) {
+  //? Props
+  const { label, errors, name, type, control, direction, ...inputProps } = props
+
+  //? Form Hook
   const { field } = useController({ name, control, rules: { required: true } })
 
+  //? Handlers
   const onChangeHandler = (e) => {
     if (type === 'number' && e.target.value.length !== 0) {
       field.onChange(parseInt(e.target.value))
@@ -20,6 +17,7 @@ export default function TextField({
     }
   }
 
+  //? Render(s)
   return (
     <div className={`${label ? 'space-y-3' : ''}`}>
       {label && (

@@ -6,8 +6,10 @@ export default function Filter(props) {
   //? Props
   const { main_maxPrice, main_minPrice, changeRoute, resetRoute } = props
 
+  //? Assets
   const [isFilters, filtersHandlers] = useDisclosure()
 
+  //? Render(s)
   return (
     <div className='xl:hidden'>
       <button

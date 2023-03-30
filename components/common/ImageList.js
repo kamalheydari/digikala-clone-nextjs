@@ -17,12 +17,14 @@ export default function ImageList(props) {
     control,
   })
 
+  //? Handlers
   const handleAddImage = () => {
     if (inputRef.current.value.trim() === '') return
     append({ url: inputRef.current.value })
     inputRef.current.value = ''
   }
 
+  //? Render(s)
   return (
     <div className='space-y-3'>
       <div className='space-y-3'>

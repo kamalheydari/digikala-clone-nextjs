@@ -7,13 +7,12 @@ import { imageUpload } from 'utils'
 
 import { Button, Icons } from 'components'
 
-export default function UploadImages({
-  multiple,
-  deleteImageHandler,
-  images,
-  addImage,
-  getUploadedImages,
-}) {
+export default function UploadImages(props) {
+  //? Props
+  const { multiple, deleteImageHandler, images, addImage, getUploadedImages } =
+    props
+
+  //? Assets
   const dispatch = useDispatch()
 
   //? Local State

@@ -4,7 +4,10 @@ import { useFieldArray } from 'react-hook-form'
 
 import { AddIconBtn, DeleteIconBtn } from 'components'
 
-export default function AddSizes({ name, control, register }) {
+export default function AddSizes(props) {
+  //? Props
+  const { name, control, register } = props
+
   //? Refs
   const inputRef = useRef()
 
@@ -21,7 +24,7 @@ export default function AddSizes({ name, control, register }) {
     inputRef.current.value = ''
   }
 
-  //? Render
+  //? Render(s)
   return (
     <div className='text-sm space-y-1.5'>
       <span>اندازه ها</span>

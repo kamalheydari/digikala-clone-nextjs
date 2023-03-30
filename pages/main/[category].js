@@ -24,7 +24,7 @@ export default function MainCategory(props) {
     childCategories,
   } = props
 
-  //? Render
+  //? Render(s)
   return (
     <main className='min-h-screen space-y-6 xl:mt-28'>
       <Head>

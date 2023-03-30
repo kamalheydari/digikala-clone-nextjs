@@ -4,7 +4,10 @@ import { AddIconBtn, DeleteIconBtn } from 'components'
 
 import { useFieldArray } from 'react-hook-form'
 
-export default function AddColors({ control, register, name }) {
+export default function AddColors(props) {
+  //? Props
+  const { control, register, name } = props
+
   //? Refs
   const inputTextRef = useRef()
   const inputColorRef = useRef()
@@ -26,6 +29,7 @@ export default function AddColors({ control, register, name }) {
     inputColorRef.current.value = '#bc203f'
   }
 
+  //? Render(s)
   return (
     <div className='text-sm space-y-1.5'>
       <span>اندازه ها</span>

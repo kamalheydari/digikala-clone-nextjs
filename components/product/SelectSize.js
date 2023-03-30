@@ -3,12 +3,17 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { formatNumber } from 'utils'
 
-export default function SelectSize({ sizes }) {
+export default function SelectSize(props) {
+  //? Props
+  const { sizes } = props
+
+  //? Assets
   const dispatch = useDispatch()
 
   //? Store
   const { tempSize } = useSelector((state) => state.cart)
 
+  //? Render(s)
   return (
     <section className='farsi-digits'>
       <div className='flex justify-between p-4'>

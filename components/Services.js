@@ -26,6 +26,8 @@ export default function Services() {
       icon: <OriginalProducts className='w-10 h-10' />,
     },
   ]
+
+  //? Render(s)
   return (
     <section className='hidden py-5 border-t border-b-2 border-gray-200 lg:flex justify-evenly'>
       {services.map((item, i) => (

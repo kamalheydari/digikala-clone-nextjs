@@ -38,6 +38,7 @@ export default function ReviewModal(props) {
   } = useForm({
     resolver: yupResolver(reviewSchema),
   })
+  
   const {
     fields: positivePointsFields,
     append: appentPositivePoint,

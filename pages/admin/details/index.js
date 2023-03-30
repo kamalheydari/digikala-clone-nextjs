@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Head from 'next/head'
 
 import { BigLoading, PageContainer } from 'components'
+
 import { useCategory } from 'hooks'
 
 export default function DetailsHome() {
@@ -64,6 +65,7 @@ export default function DetailsHome() {
   )
 }
 
+//? Layout
 DetailsHome.getDashboardLayout = function pageLayout(page) {
   return <>{page}</>
 }

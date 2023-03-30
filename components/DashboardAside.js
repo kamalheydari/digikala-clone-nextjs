@@ -51,6 +51,7 @@ export default function ProfileAside() {
     },
   ]
 
+  //? Render(s)
   return (
     <aside className='sticky mt-6 lg:border lg:border-gray-200 lg:rounded-md lg:pt-4 min-w-max top-6'>
       <Link passHref href='/admin'>

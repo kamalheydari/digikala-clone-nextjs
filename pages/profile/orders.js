@@ -66,6 +66,8 @@ export default function Orders() {
     </main>
   )
 }
+
+//? Layout
 Orders.getProfileLayout = function pageLayout(page) {
   return <>{page}</>
 }

@@ -84,7 +84,7 @@ export default function ShippingPage() {
     </button>
   ))
 
-  //? Render
+  //? Render(s)
   return (
     <>
       {/*  Handle Create Order Response */}

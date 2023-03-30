@@ -14,7 +14,7 @@ export default function SingleComment() {
       id: router.query.id,
     })
 
-  //? Render
+  //? Render(s)
   return (
     <main>
       <Head>
@@ -39,6 +39,7 @@ export default function SingleComment() {
   )
 }
 
+//? Layout
 SingleComment.getDashboardLayout = function pageLayout(page) {
   return <>{page}</>
 }

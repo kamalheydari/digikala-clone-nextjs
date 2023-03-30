@@ -94,6 +94,7 @@ export default function Categories() {
   )
 }
 
+//? Layout
 Categories.getDashboardLayout = function pageLayout(page) {
   return <>{page}</>
 }
