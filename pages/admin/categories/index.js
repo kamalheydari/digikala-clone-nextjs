@@ -111,7 +111,7 @@ export default function Categories() {
                                 href={`/admin/banners/${category._id}`}
                                 className='bg-rose-50 text-rose-500 rounded-sm py-1 px-1.5 max-w-min'
                               >
-                                نرها
+                                بنرها
                               </Link>
                             </>
                           )}
