@@ -33,6 +33,7 @@ export default function Slider(props) {
         animated='background'
         height='h-64 md:h-72 lg:h-[400px]'
         width='w-full'
+        className='rounded-none'
       />
     )
   } else if (data?.sliders && data.sliders.length > 0) {
