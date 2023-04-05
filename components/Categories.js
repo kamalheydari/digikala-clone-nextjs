@@ -7,11 +7,11 @@ export default function Categories(props) {
   const { homePage, childCategories, color, name } = props
 
   //? Re-Renders
-  if (childCategories.length > 0 && color && name) {
+  if (childCategories.categories.length > 0 && color && name) {
     return (
       <section className='px-3'>
         <h4 className='mb-3 text-xl text-center'>
-          خرید بر اساس دسته‌بندهای{' '}
+          {childCategories.title}{' '}
           <span
             className='text-xl'
             style={{
@@ -22,7 +22,7 @@ export default function Categories(props) {
           </span>
         </h4>
         <div className='flex flex-wrap justify-center gap-4 mx-auto space-x-4 w-fit'>
-          {childCategories.map((item, index) => (
+          {childCategories.categories.map((item, index) => (
             <div key={index} className='text-center'>
               <Link
                 href={

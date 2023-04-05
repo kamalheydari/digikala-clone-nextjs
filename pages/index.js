@@ -115,7 +115,10 @@ export async function getStaticProps() {
         products: JSON.parse(JSON.stringify(mostFavourite)),
       },
       currentCategory: JSON.parse(JSON.stringify(currentCategory)),
-      childCategories: JSON.parse(JSON.stringify(childCategories)),
+      childCategories: {
+        title: 'خرید بر اساس دسته‌بندهای',
+        categories: JSON.parse(JSON.stringify(childCategories)),
+      },
     },
   }
 }
