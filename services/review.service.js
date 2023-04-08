@@ -7,7 +7,16 @@ export const reviewApiSlice = apiSlice.injectEndpoints({
         url: `/api/reviews?page=${page}`,
         method: 'GET',
       }),
-      providesTags: ['Review'],
+      providesTags: (result, error, arg) =>
+        result
+          ? [
+              ...result.reviews.map(({ _id }) => ({
+                type: 'Review',
+                id: _id,
+              })),
+              'Review',
+            ]
+          : ['Review'],
     }),
 
     createReview: builder.mutation({
@@ -24,7 +33,16 @@ export const reviewApiSlice = apiSlice.injectEndpoints({
         url: `/api/reviews/product/${id}?page=${page}&page_size=5`,
         method: 'GET',
       }),
-      providesTags: ['Review'],
+      providesTags: (result, error, arg) =>
+        result
+          ? [
+              ...result.reviews.map(({ _id }) => ({
+                type: 'Review',
+                id: _id,
+              })),
+              'Review',
+            ]
+          : ['Review'],
     }),
 
     getSingleReview: builder.query({
@@ -32,7 +50,7 @@ export const reviewApiSlice = apiSlice.injectEndpoints({
         url: `/api/reviews/${id}`,
         method: 'GET',
       }),
-      providesTags: ['Review'],
+      providesTags: (result, err, arg) => [{ type: 'Review', id: arg.id }],
     }),
 
     deleteReview: builder.mutation({
@@ -49,7 +67,7 @@ export const reviewApiSlice = apiSlice.injectEndpoints({
         method: 'PATCH',
         body,
       }),
-      invalidatesTags: ['Review'],
+      invalidatesTags: (result, err, arg) => [{ type: 'Review', id: arg.id }],
     }),
   }),
 })

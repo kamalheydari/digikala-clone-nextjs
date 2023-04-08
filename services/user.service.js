@@ -7,7 +7,16 @@ export const userApiSlice = apiSlice.injectEndpoints({
         url: `/api/user?page=${page}`,
         method: 'GET',
       }),
-      providesTags: ['User'],
+      providesTags: (result, error, arg) =>
+        result
+          ? [
+              ...result.users.map(({ _id }) => ({
+                type: 'User',
+                id: _id,
+              })),
+              'User',
+            ]
+          : ['User'],
     }),
 
     createUser: builder.mutation({
@@ -42,7 +51,9 @@ export const userApiSlice = apiSlice.injectEndpoints({
         method: 'PATCH',
         body,
       }),
-      invalidatesTags: ['User'],
+      invalidatesTags: (result, err, arg) => [
+        { type: 'User', id: arg.body._id },
+      ],
     }),
 
     getUserInfo: builder.query({

@@ -7,7 +7,13 @@ export const orderApiSlice = apiSlice.injectEndpoints({
         url: `/api/order?page=${page}&page_size=${pageSize}`,
         method: 'GET',
       }),
-      providesTags: ['Order'],
+      providesTags: (result, error, arg) =>
+        result
+          ? [
+              ...result.orders.map(({ _id }) => ({ type: 'Order', id: _id })),
+              'Order',
+            ]
+          : ['Order'],
     }),
 
     getSingleOrder: builder.query({
@@ -15,7 +21,7 @@ export const orderApiSlice = apiSlice.injectEndpoints({
         url: `/api/order/${id}`,
         method: 'GET',
       }),
-      providesTags: ['Order'],
+      providesTags: (result, error, arg) => [{ type: 'Order', id: arg.id }],
     }),
 
     updateOrder: builder.mutation({
@@ -24,7 +30,7 @@ export const orderApiSlice = apiSlice.injectEndpoints({
         method: 'PUT',
         body,
       }),
-      invalidatesTags: ['Order'],
+      invalidatesTags: (result, error, arg) => [{ type: 'Order', id: arg.id }],
     }),
 
     editOrder: builder.mutation({
@@ -33,7 +39,7 @@ export const orderApiSlice = apiSlice.injectEndpoints({
         method: 'PATCH',
         body,
       }),
-      invalidatesTags: ['Order'],
+      invalidatesTags: (result, error, arg) => [{ type: 'Order', id: arg.id }],
     }),
 
     createOrder: builder.mutation({

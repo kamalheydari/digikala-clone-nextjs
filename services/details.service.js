@@ -7,7 +7,7 @@ export const detailsApiSlice = apiSlice.injectEndpoints({
         url: `/api/details/${id}`,
         method: 'GET',
       }),
-      providesTags: ['Details'],
+      providesTags: (result, err, arg) => [{ type: 'Details', id: arg.id }],
     }),
 
     deleteDetails: builder.mutation({
@@ -33,7 +33,9 @@ export const detailsApiSlice = apiSlice.injectEndpoints({
         method: 'PUT',
         body,
       }),
-      invalidatesTags: ['Details'],
+      invalidatesTags: (result, err, arg) => [
+        { type: 'Details', id: result.category_id },
+      ],
     }),
   }),
 })

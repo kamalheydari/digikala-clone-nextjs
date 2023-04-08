@@ -7,7 +7,7 @@ export const bannerApiSlice = apiSlice.injectEndpoints({
         url: `/api/banner/${id}`,
         method: 'GET',
       }),
-      providesTags: ['Banner'],
+      providesTags: (result, err, arg) => [{ type: 'Banner', id: arg.id }],
     }),
 
     updateBanner: builder.mutation({
@@ -16,7 +16,9 @@ export const bannerApiSlice = apiSlice.injectEndpoints({
         method: 'PATCH',
         body,
       }),
-      invalidatesTags: ['Banner'],
+      invalidatesTags: (result, err, arg) => [
+        { type: 'Banner', id: result.category_id },
+      ],
     }),
 
     createBanner: builder.mutation({
