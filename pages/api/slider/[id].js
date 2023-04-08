@@ -46,9 +46,15 @@ const updateSlider = async (req, res) => {
 
     await db.connect()
     await Slider.findByIdAndUpdate({ _id: id }, req.body)
+    const slider = await Slider.findById(id)
     await db.disconnect()
 
-    res.status(200).json({ msg: 'اسلایدر با موفقیت بروزرسانی شد' })
+    res
+      .status(200)
+      .json({
+        msg: 'اسلایدر با موفقیت بروزرسانی شد',
+        category_id: slider.category_id,
+      })
   } catch (error) {
     sendError(res, 500, error.message)
   }

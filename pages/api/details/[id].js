@@ -46,9 +46,13 @@ const updateDetails = async (req, res) => {
 
     await db.connect()
     await Details.findByIdAndUpdate({ _id: id }, { ...req.body })
+    const details = await Details.findById(id)
     await db.disconnect()
 
-    res.status(200).json({ msg: 'مشخصات دسته بندی با موفقیت بروزرسانی شد' })
+    res.status(200).json({
+      msg: 'مشخصات دسته بندی با موفقیت بروزرسانی شد',
+      category_id: details.category_id,
+    })
   } catch (error) {
     sendError(res, 500, error.message)
   }

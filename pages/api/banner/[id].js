@@ -46,9 +46,13 @@ const updateBanner = async (req, res) => {
 
     await db.connect()
     await Banner.findByIdAndUpdate({ _id: id }, req.body)
+    const banner = await Banner.findById(id)
     await db.disconnect()
 
-    res.status(200).json({ msg: 'بنر با موفقیت بروزرسانی شد' })
+    res.status(200).json({
+      msg: 'بنر با موفقیت بروزرسانی شد',
+      category_id: banner.category_id,
+    })
   } catch (error) {
     sendError(res, 500, error.message)
   }
