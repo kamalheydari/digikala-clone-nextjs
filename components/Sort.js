@@ -1,27 +1,27 @@
-import { useDispatch, useSelector } from 'react-redux'
-
-import { updateFilter } from 'store'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
 
 import { sorts } from 'utils'
 
 import { Icons, Modal } from 'components'
 
-import { useDisclosure } from 'hooks'
+import { useChangeRoute, useDisclosure } from 'hooks'
 
-export default function Sort(props) {
-  //? Props
-  const { changeRoute } = props
-
+export default function Sort() {
   //? Assets
   const [isSort, sortHandlers] = useDisclosure()
-  const dispatch = useDispatch()
+  const { query } = useRouter()
 
-  //? Store
-  const { sort } = useSelector((state) => state.filter)
+  //? State
+  const [sort, setSort] = useState(
+    query.sort ? sorts[query.sort - 1] : sorts[0]
+  )
 
   //? Handlers
-  const handleSort = (item) => {
-    dispatch(updateFilter({ name: 'sort', value: item }))
+  const changeRoute = useChangeRoute({ shallow: false })
+
+  const handleChangeSort = (item) => {
+    setSort(sorts[item.value - 1])
     changeRoute({ sort: item.value })
     sortHandlers.close()
   }
@@ -54,7 +54,7 @@ export default function Sort(props) {
                       className='block w-full py-3 text-right text-gray-700'
                       type='button'
                       name='sort'
-                      onClick={() => handleSort(item)}
+                      onClick={() => handleChangeSort(item)}
                     >
                       {item.name}
                     </button>
@@ -81,7 +81,7 @@ export default function Sort(props) {
             }`}
             type='button'
             name='sort'
-            onClick={() => handleSort(item)}
+            onClick={() => handleChangeSort(item)}
           >
             {item.name}
           </button>
