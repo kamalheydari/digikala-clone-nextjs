@@ -45,6 +45,7 @@ export default function SearchModal(props) {
       setSearch('')
     }
   }, [isShow])
+  
   //? Handlers
   const handleChange = (e) => {
     setSearch(e.target.value)
@@ -97,7 +98,7 @@ export default function SearchModal(props) {
                         <ResponsiveImage
                           dimensions='w-20 h-20'
                           src={item.images[0].url}
-                          alt={item.name}
+                          alt={item.title}
                         />
                         <span className='py-2 text-sm'>
                           {truncate(item.title, 70)}
