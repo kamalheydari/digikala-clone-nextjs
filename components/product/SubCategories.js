@@ -1,10 +1,24 @@
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import { ResponsiveImage } from 'components'
 
 export default function SubCategories(props) {
   //? Props
   const { childCategories } = props
+
+  //? States
+  const [queris, setQueris] = useState('')
+
+  const router = useRouter()
+
+  //? Re-Renders
+  useEffect(() => {
+    if (router.asPath.indexOf('&') !== -1) {
+      setQueris(router.asPath.substring(router.asPath.indexOf('&')))
+    }
+  }, [router.query])
 
   //? Render(s)
   if (childCategories.length > 0)
@@ -15,7 +29,7 @@ export default function SubCategories(props) {
           {childCategories.map((item) => (
             <Link
               key={item._id}
-              href={`/products?category=${item.slug}`}
+              href={`/products?category=${item.slug}${queris}`}
               className='px-3 pt-4 pb-2 text-center border-4 border-gray-100 rounded-md'
             >
               <ResponsiveImage

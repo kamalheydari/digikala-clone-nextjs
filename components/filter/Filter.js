@@ -4,7 +4,7 @@ import { useDisclosure } from 'hooks'
 
 export default function Filter(props) {
   //? Props
-  const { main_maxPrice, main_minPrice, changeRoute, resetRoute } = props
+  const { mainMinPrice, mainMaxPrice } = props
 
   //? Assets
   const [isFilters, filtersHandlers] = useDisclosure()
@@ -30,10 +30,8 @@ export default function Filter(props) {
           <Modal.Header>فیلترها</Modal.Header>
           <Modal.Body>
             <FilterOperation
-              main_maxPrice={main_maxPrice}
-              main_minPrice={main_minPrice}
-              changeRoute={changeRoute}
-              resetRoute={resetRoute}
+              mainMinPrice={mainMinPrice}
+              mainMaxPrice={mainMaxPrice}
             />
           </Modal.Body>
         </Modal.Content>

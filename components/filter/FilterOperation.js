@@ -1,32 +1,69 @@
-import { useDispatch, useSelector } from 'react-redux'
-import { resetFilter, updateFilter } from 'store'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 
 import { FilterCheckbox, Toman } from 'components'
+import { useChangeRoute, useDebounce } from 'hooks'
 
 export default function FilterOperation(props) {
   //? Props
-  const { main_maxPrice, main_minPrice, changeRoute, resetRoute } = props
+  const { mainMaxPrice, mainMinPrice } = props
 
-  //? store
-  const { inStock, discount, max_price, min_price } = useSelector(
-    (state) => state.filter
-  )
-  const dispatch = useDispatch()
+  //? Assets
+  const { query, push, pathname } = useRouter()
+  const { discount, inStock, price } = query
+
+  const initialFilter = {
+    inStock: inStock ? inStock === 'true' : false,
+    discount: discount ? discount === 'true' : false,
+    maxPrice: price ? +price.split('-')[1] : mainMaxPrice,
+    minPrice: price ? +price.split('-')[0] : mainMinPrice,
+  }
+
+  //? State
+  const [filters, setFilters] = useState(initialFilter)
+
+  //? Debounced Values
+  const debouncedMinPrice = useDebounce(filters.minPrice, 1200)
+  const debouncedMaxPrice = useDebounce(filters.maxPrice, 1200)
 
   //? Handlers
+  const changeRoute = useChangeRoute({ shallow: false })
+
   const handlefilter = (e) => {
     if (e.target.type === 'checkbox') {
-      dispatch(updateFilter({ name: e.target.name, value: e.target.checked }))
+      setFilters({ ...filters, [e.target.name]: e.target.checked })
       changeRoute({ [e.target.name]: e.target.checked })
     } else if (e.target.type === 'number') {
-      dispatch(updateFilter({ name: e.target.name, value: +e.target.value }))
+      setFilters({ ...filters, [e.target.name]: +e.target.value })
     }
   }
 
-  const handleReset = () => {
-    dispatch(resetFilter({ maxPrice: main_maxPrice, minPrice: main_minPrice }))
-    resetRoute()
+  const handleResetFilters = () => {
+    push(
+      `${pathname}?category=${query.category}&${
+        query.sort ? `sort=${query.sort}` : ''
+      }`
+    )
   }
+
+  const canReset =
+    !!inStock ||
+    !!discount ||
+    mainMinPrice !== debouncedMinPrice ||
+    mainMaxPrice !== debouncedMaxPrice
+
+  //? Re-Renders
+  useEffect(() => {
+    if (mainMinPrice !== debouncedMinPrice)
+      changeRoute({
+        price: `${debouncedMinPrice}-${debouncedMaxPrice}`,
+      })
+  }, [debouncedMinPrice])
+
+  useEffect(() => {
+    if (mainMaxPrice !== debouncedMaxPrice)
+      changeRoute({ price: `${debouncedMinPrice}-${debouncedMaxPrice}` })
+  }, [debouncedMaxPrice])
 
   //? Render(s)
   return (
@@ -35,19 +72,24 @@ export default function FilterOperation(props) {
         <button
           type='button'
           className='text-sm text-sky-500'
-          onClick={handleReset}
+          onClick={handleResetFilters}
+          disabled={!canReset}
         >
           حذف فیلتر‌ها
         </button>
       </div>
 
       <div className='divide-y'>
-        <FilterCheckbox name='inStock' value={inStock} onChange={handlefilter}>
+        <FilterCheckbox
+          name='inStock'
+          value={filters.inStock}
+          onChange={handlefilter}
+        >
           فقط کالاهای موجود
         </FilterCheckbox>
         <FilterCheckbox
           name='discount'
-          value={discount}
+          value={filters.discount}
           onChange={handlefilter}
         >
           فقط کالاهای فروش ویژه
@@ -60,14 +102,10 @@ export default function FilterOperation(props) {
             <input
               type='number'
               className='w-3/4 px-1 text-xl text-left border-b border-gray-200 outline-none farsi-digits'
-              name='min_price'
-              min={main_minPrice}
-              max={main_maxPrice}
-              value={min_price}
-              onChange={(e) => {
-                handlefilter(e)
-                changeRoute({ price: `${e.target.value}-${max_price}` })
-              }}
+              style={{ direction: 'ltr' }}
+              name='minPrice'
+              value={filters.minPrice}
+              onChange={handlefilter}
             />
             <Toman className='w-6 h-6' />
           </div>
@@ -76,15 +114,12 @@ export default function FilterOperation(props) {
             <input
               type='number'
               className='w-3/4 px-1 text-xl text-left border-b border-gray-200 outline-none farsi-digits'
-              name='max_price'
-              value={max_price}
-              max={main_maxPrice}
-              min={main_minPrice}
-              onChange={(e) => {
-                handlefilter(e),
-                  changeRoute({ price: `${min_price}-${e.target.value}` })
-              }}
+              style={{ direction: 'ltr' }}
+              name='maxPrice'
+              value={filters.maxPrice}
+              onChange={handlefilter}
             />
+
             <Toman className='w-6 h-6' />
           </div>
         </div>

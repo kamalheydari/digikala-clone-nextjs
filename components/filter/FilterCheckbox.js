@@ -5,7 +5,7 @@ export default function FilterCheckbox(props) {
   //? Render(s)
   return (
     <div className='flex justify-between py-4'>
-      <span className='font-medium text-gray-700'>{children}</span>
+      <span className='font-medium text-gray-700 w-3/4'>{children}</span>
       <div className='relative inline-block w-12 mr-2 align-middle select-none'>
         <input
           type='checkbox'
@@ -13,7 +13,7 @@ export default function FilterCheckbox(props) {
           id={name}
           checked={value}
           onChange={onChange}
-          className='absolute block w-4 h-4 duration-200 ease-in bg-gray-400 rounded-full appearance-none cursor-pointer checked:bg-white right-7 top-1 checked:right-1'
+          className='absolute block w-4 h-4 duration-200 ease-in bg-gray-400 rounded-full appearance-none cursor-pointer checked:bg-white right-7 top-1 lg:right-6 checked:right-1'
         />
         <label
           htmlFor={name}

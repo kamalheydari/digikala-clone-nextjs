@@ -1,13 +1,8 @@
-import { useEffect } from 'react'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 
 import { Category, Product } from 'models'
 
-import { useDispatch } from 'react-redux'
-import { updateFilter, loadFilters } from 'store'
-
-import { formatNumber, db } from 'utils'
+import { db } from 'utils'
 
 import {
   ProductCard,
@@ -31,36 +26,10 @@ export default function ProductsHome(props) {
     childCategories,
   } = props
 
-  //? Assets
-  let { query, pathname, push } = useRouter()
-  const dispatch = useDispatch()
+  //? Handlers
   const changeRoute = useChangeRoute({ shallow: false })
 
-  //? Re-Renders
-  //* Change Price Range On Filter Change
-  useEffect(() => {
-    dispatch(
-      updateFilter({
-        name: 'min_price',
-        value: mainMinPrice,
-      })
-    )
-    dispatch(
-      updateFilter({
-        name: 'max_price',
-        value: mainMaxPrice,
-      })
-    )
-  }, [query.category, query.inStock, query.discount])
-
-  //*   load Filters
-  useEffect(() => {
-    dispatch(loadFilters(query))
-  }, [])
-
-  //? Handlers
-  const resetRoute = () => push(`${pathname}?category=${query.category}`)
-
+  //? Render(s)
   return (
     <main className='lg:px-3 lg:container lg:max-w-[1700px] xl:mt-32'>
       <Head>
@@ -71,30 +40,21 @@ export default function ProductsHome(props) {
 
       <div className='px-1 lg:flex lg:gap-x-0 xl:gap-x-3'>
         <ProductsAside
-          main_maxPrice={mainMaxPrice}
-          main_minPrice={mainMinPrice}
-          changeRoute={changeRoute}
-          resetRoute={resetRoute}
+          mainMaxPrice={mainMaxPrice}
+          mainMinPrice={mainMinPrice}
         />
         <div className='w-full p-4 mt-3 '>
           {/* Filters & Sort */}
           <div className='divide-y-2 '>
             <div className='flex py-2 gap-x-3'>
-              <Filter
-                main_maxPrice={mainMaxPrice}
-                main_minPrice={mainMinPrice}
-                changeRoute={changeRoute}
-                resetRoute={resetRoute}
-              />
+              <Filter mainMaxPrice={mainMaxPrice} mainMinPrice={mainMinPrice} />
 
-              <Sort changeRoute={changeRoute} />
+              <Sort />
             </div>
 
             <div className='flex justify-between py-2'>
               <span>همه کالاها</span>
-              <span className='farsi-digits'>
-                {formatNumber(productsLength)} کالا
-              </span>
+              <span className='farsi-digits'>{productsLength} کالا</span>
             </div>
           </div>
 
