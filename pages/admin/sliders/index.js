@@ -3,10 +3,18 @@ import Head from 'next/head'
 
 import { BigLoading, PageContainer } from 'components'
 
-import { useCategory } from 'hooks'
+import { useGetCategoriesQuery } from 'services'
 
 export default function Sliders() {
-  const { categories, isLoading } = useCategory()
+  //? Get Categories
+  const { categories, isLoading } = useGetCategoriesQuery(undefined, {
+    selectFromResult: ({ data, isLoading }) => ({
+      categories: data?.categories
+        .filter((category) => category.level < 2)
+        .sort((a, b) => a.level - b.level),
+      isLoading,
+    }),
+  })
 
   //? Render(s)
   if (isLoading)
@@ -36,27 +44,24 @@ export default function Sliders() {
               </thead>
               <tbody className='text-gray-600'>
                 {categories &&
-                  categories
-                    .filter((cat) => cat.level < 2)
-                    .sort((a, b) => a.level - b.level)
-                    .map((category) => (
-                      <tr
-                        className='text-xs text-center transition-colors border-b border-gray-100 md:text-sm hover:bg-gray-50/50'
-                        key={category._id}
-                      >
-                        <td className='w-3/4 px-2 py-4 text-right'>
-                          {category.name}
-                        </td>
-                        <td className='px-2 py-4'>
-                          <Link
-                            href={`/admin/sliders/${category._id}`}
-                            className='bg-fuchsia-50 text-fuchsia-500 rounded-sm py-1 px-1.5 mx-1.5 inline-block'
-                          >
-                            اسلایدر
-                          </Link>
-                        </td>
-                      </tr>
-                    ))}
+                  categories.map((category) => (
+                    <tr
+                      className='text-xs text-center transition-colors border-b border-gray-100 md:text-sm hover:bg-gray-50/50'
+                      key={category._id}
+                    >
+                      <td className='w-3/4 px-2 py-4 text-right'>
+                        {category.name}
+                      </td>
+                      <td className='px-2 py-4'>
+                        <Link
+                          href={`/admin/sliders/${category._id}`}
+                          className='bg-fuchsia-50 text-fuchsia-500 rounded-sm py-1 px-1.5 mx-1.5 inline-block'
+                        >
+                          اسلایدر
+                        </Link>
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>

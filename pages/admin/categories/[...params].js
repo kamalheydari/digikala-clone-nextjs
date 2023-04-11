@@ -5,7 +5,7 @@ import Head from 'next/head'
 
 import {
   useCreateCategoryMutation,
-  useGetSingleCategoryQuery,
+  useGetCategoriesQuery,
   useUpdateCategoryMutation,
 } from 'services'
 
@@ -23,27 +23,38 @@ import {
   BigLoading,
 } from 'components'
 
-import { useDisclosure, useCategory } from 'hooks'
+import { useDisclosure } from 'hooks'
 
 export default function CreateCategory() {
   //? Assets
-  const router = useRouter()
+  const { query, push } = useRouter()
 
   //? Modals
   const [isShowConfirmUpdateModal, confirmUpdateModalHandlers] = useDisclosure()
 
   //? States
-  const [isEdit, setIsEdit] = useState(false)
   const [updateInfo, setUpdateInfo] = useState({
     id: '',
     editedData: {},
   })
 
-  const { selectedCategory } = useCategory({
-    catID: router.query.id || router.query.parent_id,
-  })
-
   //? Queries
+  //*   Get Categories
+  const { isLoading, selectedCategory, parentCategory } = useGetCategoriesQuery(
+    undefined,
+    {
+      selectFromResult: ({ data, isLoading }) => ({
+        selectedCategory: data?.categories.find(
+          (category) => category._id === query.id
+        ),
+        parentCategory: data?.categories.find(
+          (category) => category._id === query.parent_id
+        ),
+        isLoading,
+      }),
+    }
+  )
+  
   //*   Create Category
   const [
     createCtegory,
@@ -55,15 +66,6 @@ export default function CreateCategory() {
       isError: isError_create,
     },
   ] = useCreateCategoryMutation()
-
-  //*   Get Category
-  const { data: data_get, isLoading: isLoading_get } =
-    useGetSingleCategoryQuery(
-      {
-        id: router.query.id,
-      },
-      { skip: !isEdit }
-    )
 
   //*   Update Category
   const [
@@ -99,39 +101,32 @@ export default function CreateCategory() {
   //? Re-Renders
   //*   Set Category Details on Edit Mode
   useEffect(() => {
-    if (data_get) {
-      const { image, name, slug, colors } = data_get
+    if (selectedCategory) {
+      const { image, name, slug, colors } = selectedCategory
       reset({ image, name, slug, colors })
     }
-  }, [data_get])
-
-  //*   Execute Get Category Query
-  useEffect(() => {
-    if (router.query.params[0] === 'edit' && router.query.id) {
-      setIsEdit(true)
-    }
-  }, [])
+  }, [selectedCategory])
 
   //? Handlers
   const submitHander = ({ name, slug, image, colors }) => {
     createCtegory({
       body: {
         name,
-        parent: router.query?.parent_id || '',
+        parent: query?.parent_id || '',
         slug: slug.trim().split(' ').join('-'),
         image,
         colors,
-        level: selectedCategory.level ? selectedCategory.level + 1 : 1,
+        level: parentCategory ? parentCategory?.level + 1 : 0,
       },
     })
   }
 
-  const updateHandler = (async) => {
+  const updateHandler = () => {
     setUpdateInfo({
       ...updateInfo,
-      id: router.query.id,
+      id: query.id,
       editedData: {
-        ...data_get,
+        ...selectedCategory,
         ...watch(),
       },
     })
@@ -139,8 +134,7 @@ export default function CreateCategory() {
   }
 
   //? Render(s)
-
-  if (isLoading_get)
+  if (isLoading)
     return (
       <div className='px-3 py-20'>
         <BigLoading />
@@ -158,11 +152,9 @@ export default function CreateCategory() {
           message={data_create?.msg}
           onSuccess={() => {
             reset()
-            router.push(
+            push(
               `/admin/categories${
-                router.query.parent_id
-                  ? `?parent_id=${router.query.parent_id}`
-                  : ''
+                query.parent_id ? `?parent_id=${query.parent_id}` : ''
               }`
             )
           }}
@@ -179,11 +171,9 @@ export default function CreateCategory() {
           onSuccess={() => {
             setUpdateInfo({ id: '', editedData: {} })
             confirmUpdateModalHandlers.close()
-            router.push(
+            push(
               `/admin/categories${
-                router.query.parent_id
-                  ? `?parent_id=${router.query.parent_id}`
-                  : ''
+                query.parent_id ? `?parent_id=${query.parent_id}` : ''
               }`
             )
           }}
@@ -211,9 +201,7 @@ export default function CreateCategory() {
 
         <PageContainer
           title={
-            router.query.params[0] === 'create'
-              ? 'دسته بندی جدید'
-              : 'ویرایش دسته بندی'
+            query.params[0] === 'create' ? 'دسته بندی جدید' : 'ویرایش دسته بندی'
           }
         >
           <section className='p-3 md:px-3 xl:px-8 2xl:px-10'>
@@ -253,7 +241,8 @@ export default function CreateCategory() {
                 />
               )}
 
-              {selectedCategory.level < 2 && (
+              {(selectedCategory?.level <= 1 ||
+                parentCategory?.level === 0) && (
                 <div className='flex justify-evenly'>
                   <div className='flex flex-col space-y-3'>
                     <label className='text-field__label' htmlFor='colors.start'>
@@ -282,7 +271,7 @@ export default function CreateCategory() {
               )}
 
               <div className='py-3 lg:pb-0 '>
-                {router.query.params[0] === 'edit' && router.query.id ? (
+                {query.params[0] === 'edit' && query.id ? (
                   <Button
                     className='mx-auto bg-amber-500'
                     rounded

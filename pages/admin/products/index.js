@@ -2,7 +2,11 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
 
-import { useDeleteProductMutation, useGetProductsQuery } from 'services'
+import {
+  useDeleteProductMutation,
+  useGetCategoriesQuery,
+  useGetProductsQuery,
+} from 'services'
 
 import {
   BigLoading,
@@ -16,7 +20,7 @@ import {
   SelectCategories,
 } from 'components'
 
-import { useDisclosure, useChangeRoute, useCategory } from 'hooks'
+import { useDisclosure, useChangeRoute } from 'hooks'
 
 export default function Products() {
   //? Assets
@@ -24,7 +28,13 @@ export default function Products() {
   const changeRoute = useChangeRoute({
     shallow: true,
   })
-  const { categories } = useCategory()
+
+  //? Get Categories Query
+  const { categories } = useGetCategoriesQuery(undefined, {
+    selectFromResult: ({ data }) => ({
+      categories: data?.categories,
+    }),
+  })
 
   //? Modals
   const [isShowConfirmDeleteModal, confirmDeleteModalHandlers] = useDisclosure()

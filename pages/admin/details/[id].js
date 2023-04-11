@@ -9,6 +9,7 @@ import {
   useCreateDetailsMutation,
   useDeleteDetailsMutation,
   useGetDetailsQuery,
+  useGetSingleCategoryQuery,
   useUpdateDetailsMutation,
 } from 'services'
 
@@ -22,7 +23,7 @@ import {
   PageContainer,
 } from 'components'
 
-import { useCategory, useDisclosure } from 'hooks'
+import { useDisclosure } from 'hooks'
 
 import { useForm } from 'react-hook-form'
 
@@ -46,17 +47,12 @@ export default function DetailsPage() {
 
   //? Queries
   //*   Get Category
-  const { categories, selectedCategory: category } = useCategory({
-    catID: router.query.id,
+  const { data: category } = useGetSingleCategoryQuery({
+    id: router.query.id,
   })
 
   //*   Get Details
-  const {
-    data: details,
-    isFetching: isFetching_get,
-    isSuccess: isSuccess_get,
-    isLoading: isLoading_get,
-  } = useGetDetailsQuery({
+  const { data: details, isLoading: isLoading_get } = useGetDetailsQuery({
     id: router.query.id,
   })
 
@@ -233,16 +229,16 @@ export default function DetailsPage() {
           <title>مدیریت | مشخصات</title>
         </Head>
 
-        <PageContainer
-          title={` مشخصات و ویژگی‌های دسته‌بندی ${
-            category?.name ? category?.name : ''
-          }`}
-        >
-          {isLoading_get ? (
-            <div className='px-3 py-20'>
-              <BigLoading />
-            </div>
-          ) : (
+        {isLoading_get ? (
+          <div className='px-3 py-20'>
+            <BigLoading />
+          </div>
+        ) : (
+          <PageContainer
+            title={` مشخصات و ویژگی‌های دسته‌بندی ${
+              category?.name ? category?.name : ''
+            }`}
+          >
             <form
               onSubmit={handleSubmit(submitHander)}
               className='p-3 space-y-6'
@@ -326,8 +322,8 @@ export default function DetailsPage() {
                 )}
               </div>
             </form>
-          )}
-        </PageContainer>
+          </PageContainer>
+        )}
       </main>
     </>
   )

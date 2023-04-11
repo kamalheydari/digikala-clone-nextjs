@@ -22,7 +22,7 @@ import {
 } from 'components'
 import { Disclosure } from '@headlessui/react'
 
-import { useCategory, useDisclosure } from 'hooks'
+import { useDisclosure } from 'hooks'
 
 import { useFieldArray, useForm } from 'react-hook-form'
 
@@ -30,6 +30,7 @@ import {
   useCreateBannerMutation,
   useDeleteBannerMutation,
   useGetSingleBannerQuery,
+  useGetSingleCategoryQuery,
   useUpdateBannerMutation,
 } from 'services'
 
@@ -62,7 +63,9 @@ export default function Banner() {
   })
 
   //? Get Category
-  const { selectedCategory } = useCategory({ catID: router.query.id })
+  const { data: selectedCategory } = useGetSingleCategoryQuery({
+    id: router.query.id,
+  })
 
   //? Hook Form
   const { control, getValues, reset, register } = useForm({

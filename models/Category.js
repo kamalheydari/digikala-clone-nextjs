@@ -24,6 +24,7 @@ const CategorySchema = new mongoose.Schema(
     },
     colors: { type: Object },
     level: { type: Number, required: true },
+    children: { type: Array },
   },
   { timestamps: true }
 )

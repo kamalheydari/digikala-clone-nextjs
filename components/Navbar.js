@@ -3,10 +3,16 @@ import Link from 'next/link'
 
 import { Icons, NavbarSkeleton, ResponsiveImage } from 'components'
 
-import { useCategory } from 'hooks'
+import { useGetCategoriesQuery } from 'services'
 
 export default function Navbar() {
-  const { categories, isLoading } = useCategory()
+  //? Get Categories Query
+  const { categories, isLoading } = useGetCategoriesQuery(undefined, {
+    selectFromResult: ({ data, isLoading }) => ({
+      categories: data?.categories,
+      isLoading,
+    }),
+  })
 
   //? State
   const [activeMinCat, setActiveMinCat] = useState({})
@@ -85,7 +91,7 @@ export default function Navbar() {
             {isLoading
               ? null
               : activeMinCat
-              ? categories.map((levelTwoCategory) => {
+              ? categories?.map((levelTwoCategory) => {
                   if (levelTwoCategory.parent === activeMinCat._id) {
                     return (
                       <li key={levelTwoCategory._id} className='h-fit'>

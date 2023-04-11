@@ -2,11 +2,16 @@ import Head from 'next/head'
 
 import { BigLoading, PageContainer } from 'components'
 
-import { useCategory } from 'hooks'
+import { useGetCategoriesQuery } from 'services'
 
 export default function Categories() {
   //? Get Categories Data
-  const { isLoading, categories } = useCategory()
+  const { categoriesList, isLoading } = useGetCategoriesQuery(undefined, {
+    selectFromResult: ({ data, isLoading }) => ({
+      categoriesList: data?.categoriesList,
+      isLoading,
+    }),
+  })
 
   //? Render(s)
   if (isLoading)
@@ -40,52 +45,35 @@ export default function Categories() {
               </p>
             </div>
             <ul className='space-y-8'>
-              {categories.map((mainCategory) => {
-                if (mainCategory.level === 1) {
-                  return (
-                    <li
-                      key={mainCategory._id}
-                      className='p-2 border border-gray-100 rounded-md shadow'
-                    >
-                      <div className='p-2 text-center bg-red-500 rounded'>
-                        {mainCategory.name}
-                      </div>
-                      <ul className='flex flex-wrap gap-x-4'>
-                        {categories.map((parentCategory) => {
-                          if (parentCategory.parent === mainCategory._id) {
-                            return (
-                              <li key={parentCategory._id} className='flex-1'>
-                                <div className='p-2 mt-2 text-center bg-green-500 rounded'>
-                                  {parentCategory.name}
+              {categoriesList &&
+                categoriesList.children?.map((mainCategory) => (
+                  <li
+                    key={mainCategory._id}
+                    className='p-2 border border-gray-100 rounded-md shadow'
+                  >
+                    <div className='p-2 text-center bg-red-500 rounded'>
+                      {mainCategory.name}
+                    </div>
+                    <ul className='flex flex-wrap gap-x-4'>
+                      {mainCategory.children.map((parentCategory) => (
+                        <li key={parentCategory._id} className='flex-1'>
+                          <div className='p-2 mt-2 text-center bg-green-500 rounded'>
+                            {parentCategory.name}
+                          </div>
+                          <ul className='flex flex-wrap gap-x-4'>
+                            {parentCategory.children.map((childCategory) => (
+                              <li key={childCategory._id} className='flex-1'>
+                                <div className='flex-1 p-2 mt-2 text-center bg-blue-500 rounded'>
+                                  {childCategory.name}
                                 </div>
-                                <ul className='flex flex-wrap gap-x-4'>
-                                  {categories.map((childCategory) => {
-                                    if (
-                                      childCategory.parent ===
-                                      parentCategory._id
-                                    ) {
-                                      return (
-                                        <li
-                                          key={childCategory._id}
-                                          className='flex-1'
-                                        >
-                                          <div className='flex-1 p-2 mt-2 text-center bg-blue-500 rounded'>
-                                            {childCategory.name}
-                                          </div>
-                                        </li>
-                                      )
-                                    }
-                                  })}
-                                </ul>
                               </li>
-                            )
-                          }
-                        })}
-                      </ul>
-                    </li>
-                  )
-                }
-              })}
+                            ))}
+                          </ul>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                ))}
             </ul>
           </div>
         </section>

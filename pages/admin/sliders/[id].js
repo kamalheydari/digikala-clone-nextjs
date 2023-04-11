@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import {
   useCreateSliderMutation,
   useDeleteSliderMutation,
+  useGetSingleCategoryQuery,
   useGetSingleSliderQuery,
   useUpdateSliderMutation,
 } from 'services'
@@ -29,7 +30,7 @@ import {
 } from 'components'
 import { Disclosure } from '@headlessui/react'
 
-import { useCategory, useDisclosure } from 'hooks'
+import { useDisclosure } from 'hooks'
 
 import { useFieldArray, useForm } from 'react-hook-form'
 
@@ -56,7 +57,9 @@ export default function Slider() {
   })
 
   //? Get Category
-  const { selectedCategory } = useCategory({ catID: router.query.id })
+  const { data: selectedCategory } = useGetSingleCategoryQuery({
+    id: router.query.id,
+  })
 
   //? Hook Form
   const { control, getValues, reset } = useForm({

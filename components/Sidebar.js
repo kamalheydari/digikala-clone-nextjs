@@ -4,40 +4,21 @@ import Link from 'next/link'
 import { Disclosure } from '@headlessui/react'
 import { Icons, LogoPersian, SidebarSkeleton } from 'components'
 
-import { useDisclosure, useCategory } from 'hooks'
+import { useDisclosure } from 'hooks'
+
+import { useGetCategoriesQuery } from 'services'
 
 export default function Sidebar() {
   //? Assets
   const [isSidebar, sidebarHandlers] = useDisclosure()
-  const { categories, isLoading } = useCategory()
 
-  //? Create Category List
-  const categoryList = categories
-    .filter((category) => category.level === 1)
-    .map((levelOne) => {
-      let children = categories.filter(
-        (category) => category.parent === levelOne._id
-      )
-      if (children.length > 0)
-        return {
-          ...levelOne,
-          children,
-        }
-      else return levelOne
-    })
-    .map((levelOne) => {
-      if (levelOne.children) {
-        let newLevelTwo = levelOne.children.map((levelTwo) => {
-          let children = categories.filter(
-            (category) => category.parent === levelTwo._id
-          )
-
-          if (children.length > 0) return { ...levelTwo, children }
-          else return levelTwo
-        })
-        return { ...levelOne, children: newLevelTwo }
-      } else return levelOne
-    })
+  //? Get Categories Query
+  const { categoriesList, isLoading } = useGetCategoriesQuery(undefined, {
+    selectFromResult: ({ data, isLoading }) => ({
+      categoriesList: data?.categoriesList,
+      isLoading,
+    }),
+  })
 
   //? Handlers
   const handleClose = () => sidebarHandlers.close()
@@ -78,9 +59,9 @@ export default function Sidebar() {
           <h5 className='p-3 border-t-2  border-gray-200'>دسته‌بندی کالاها</h5>
           {isLoading ? (
             <SidebarSkeleton />
-          ) : categories ? (
+          ) : categoriesList ? (
             <div>
-              {categoryList.map((category) => (
+              {categoriesList.children.map((category) => (
                 <Disclosure key={category._id}>
                   {({ open }) => (
                     <>

@@ -4,15 +4,20 @@ import Link from 'next/link'
 
 import { BigLoading, PageContainer } from 'components'
 
-import { useCategory } from 'hooks'
+import { useGetCategoriesQuery } from 'services'
 
 export default function Categories() {
   //? Assets
-  const router = useRouter()
+  const { query } = useRouter()
 
   //? Get Categories Data
-  const { childCategories, isLoading } = useCategory({
-    parent: router.query.parent_id ? router.query.parent_id : 'main',
+  const { childCategories, isLoading } = useGetCategoriesQuery(undefined, {
+    selectFromResult: ({ data, isLoading }) => ({
+      childCategories: data?.categories.filter(
+        (category) => category.parent === query.parent_id
+      ),
+      isLoading,
+    }),
   })
 
   //? Render(s)
@@ -33,17 +38,18 @@ export default function Categories() {
         <section className='p-3'>
           <div className='space-y-8 text-white'>
             <div className='flex justify-between'>
-              <Link
-                href={`categories/create${
-                  router.query.parent_id
-                    ? `?parent_id=${router.query.parent_id}`
-                    : ''
-                }`}
-                className='flex items-center px-3 py-2 text-red-600 border-2 border-red-600 rounded-lg max-w-max gap-x-3'
-              >
-                افزودن دسته‌بندی جدید
-              </Link>
-
+              {childCategories && childCategories[0].level !== 0 ? (
+                <Link
+                  href={`categories/create${
+                    query.parent_id ? `?parent_id=${query.parent_id}` : ''
+                  }`}
+                  className='flex items-center px-3 py-2 text-red-600 border-2 border-red-600 rounded-lg max-w-max gap-x-3'
+                >
+                  افزودن دسته‌بندی جدید
+                </Link>
+              ) : (
+                <div />
+              )}
               <Link
                 href='/admin/categories/tree'
                 className='flex items-center px-3 py-2 text-red-600 border-2 border-red-600 rounded-lg max-w-max gap-x-3'
@@ -83,8 +89,8 @@ export default function Categories() {
                           )}
                           <Link
                             href={`/admin/categories/edit?id=${category._id}${
-                              router.query.parent_id
-                                ? `&parent_id=${router.query.parent_id}`
+                              query.parent_id
+                                ? `&parent_id=${query.parent_id}`
                                 : ''
                             }`}
                             className='bg-amber-50 text-amber-500 rounded-sm py-1 px-1.5 max-w-min'

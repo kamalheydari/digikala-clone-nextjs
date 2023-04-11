@@ -2,15 +2,19 @@ import { useEffect, useState } from 'react'
 
 import { SelectBox } from 'components'
 
-import { useCategory } from 'hooks'
+import { useGetCategoriesQuery } from 'services'
 
 export default function SelectCategories(props) {
   //? Props
   const { selectedCategories, setSelectedCategories } = props
 
-  //? Assets
-  const { categories } = useCategory()
-
+  //? Get Categories Query
+  const { categories } = useGetCategoriesQuery(undefined, {
+    selectFromResult: ({ data }) => ({
+      categories: data?.categories,
+    }),
+  })
+  
   //? States
   const [levelTwoCategories, setLevelTwoCategories] = useState([])
   const [levelThreeCategories, setlevelThreeCategories] = useState([])
