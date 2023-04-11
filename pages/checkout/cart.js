@@ -145,7 +145,7 @@ export default function Cart() {
             ادامه
           </Button>
           <div>
-            <span className='font-thin'>جمع سبد خرید</span>
+            <span className='font-light'>جمع سبد خرید</span>
             <div className='flex items-center'>
               <span className='text-sm farsi-digits'>
                 {formatNumber(totalPrice - totalDiscount)}

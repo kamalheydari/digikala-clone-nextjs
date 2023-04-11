@@ -25,6 +25,6 @@
   }
   label,
   span {
-    @apply text-xs text-gray-500 md:text-sm font-thin;
+    @apply text-xs text-gray-500 md:text-sm font-light;
   }
 }
