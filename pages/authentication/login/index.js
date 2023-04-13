@@ -105,7 +105,10 @@ export default function LoginPage() {
 
           <div>
             <p className='inline ml-2 text-gray-800'>هنوز ثبت‌نام نکردی؟</p>
-            <Link href='/register' className='text-lg text-blue-400'>
+            <Link
+              href='/authentication/register'
+              className='text-lg text-blue-400'
+            >
               ثبت‌نام
             </Link>
           </div>

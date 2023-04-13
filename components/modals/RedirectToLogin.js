@@ -10,7 +10,7 @@ export default function RedirectToLogin(props) {
 
   //? Handlers
   const handleClick = () => {
-    router.push('/login')
+    router.push('/authentication/login')
 
     onClose()
   }
