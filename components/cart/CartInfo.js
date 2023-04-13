@@ -18,7 +18,7 @@ export default function CartInfo(props) {
     <div className='px-4 py-2 mt-10 space-y-5 lg:mt-0 lg:h-fit lg:py-4'>
       {/* total cart price */}
       <div className='pb-2 border-b border-gray-200 flex justify-between'>
-        <span className='text-sm '>
+        <span className='text-sm farsi-digits'>
           قیمت کالاها ({formatNumber(totalItems)})
         </span>
         <div className='flex-center'>

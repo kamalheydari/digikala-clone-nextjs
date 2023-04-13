@@ -114,7 +114,7 @@ export default function Cart() {
           <section className='flex justify-between px-4'>
             <div>
               <h3 className='mb-2 text-sm font-bold'>سبد خرید شما</h3>
-              <span className='text-farsi-digits'>
+              <span className='farsi-digits'>
                 {formatNumber(totalItems)} کالا
               </span>
             </div>
