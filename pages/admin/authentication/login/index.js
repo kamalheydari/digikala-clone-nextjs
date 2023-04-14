@@ -113,7 +113,7 @@ export default function LoginPage() {
             name='password'
           />
 
-          <LoginBtn isLoading={isLoading}>ورود</authentication/loginBtn>
+          <LoginBtn isLoading={isLoading}>ورود</LoginBtn>
         </form>
       </section>
 

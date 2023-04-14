@@ -135,7 +135,10 @@ export default function RegisterPage() {
 
           <div>
             <p className='inline ml-2 text-gray-800'>حساب کاربری دارید؟</p>
-            <Link href='/login' className='text-lg text-blue-400'>
+            <Link
+              href='/authentication/login'
+              className='text-lg text-blue-400'
+            >
               ورود
             </Link>
           </div>
