@@ -66,7 +66,7 @@ export default function SelectCategories(props) {
       <SelectBox
         name='level_one'
         value={selectedCategories.level_one}
-        list={categories.filter((cat) => cat.level === 1)}
+        list={categories?.filter((cat) => cat.level === 1)}
         onChange={handleLevelOneChange}
         placeholder='دسته بندی سطح اول'
       />

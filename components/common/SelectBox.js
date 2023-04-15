@@ -30,7 +30,7 @@ export default function SelectBox(props) {
           leaveTo='opacity-0'
         >
           <Listbox.Options className='absolute z-40 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
-            {list.map((item, idx) => (
+            {list?.map((item, idx) => (
               <Listbox.Option
                 key={idx}
                 className={({ active }) =>

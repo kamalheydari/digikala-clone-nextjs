@@ -43,7 +43,6 @@ export default function Products() {
   const inputSearchRef = useRef()
 
   //?  State
-  const [skip, setSkip] = useState(false)
   const [deleteInfo, setDeleteInfo] = useState({
     id: '',
   })
@@ -57,14 +56,11 @@ export default function Products() {
 
   //? Querirs
   //*    Get Products Data
-  const { data, isFetching, error, isError, refetch } = useGetProductsQuery(
-    {
-      page: router.query?.page || 1,
-      filterCategory: router.query?.filterCategory || filterCategory,
-      search: router.query?.search || search,
-    },
-    { skip }
-  )
+  const { data, isFetching, error, isError, refetch } = useGetProductsQuery({
+    page: router.query?.page || 1,
+    filterCategory: router.query?.filterCategory || filterCategory,
+    search: router.query?.search || search,
+  })
 
   //*    Delete Product
   const [
@@ -87,38 +83,37 @@ export default function Products() {
   const handleEdit = (id) => {
     router.push(`/admin/products/edit?id=${id}`)
   }
+
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    if (selectedCategories?.level_three?._id) {
-      setFilterCategory(selectedCategories?.level_three._id)
-      changeRoute({
-        filterCategory: selectedCategories?.level_three._id,
-        level_one: selectedCategories?.level_one._id,
-        level_two: selectedCategories?.level_two._id,
-        level_three: selectedCategories?.level_three._id,
-      })
-    } else if (selectedCategories?.level_two?._id) {
-      setFilterCategory(selectedCategories?.level_two._id)
-      changeRoute({
-        filterCategory: selectedCategories?.level_two?._id,
-        level_one: selectedCategories?.level_one._id,
-        level_two: selectedCategories?.level_two._id,
-      })
-    } else if (selectedCategories?.level_one?._id) {
-      setFilterCategory(selectedCategories?.level_one._id)
-      changeRoute({
-        filterCategory: selectedCategories?.level_one._id,
-        level_one: selectedCategories?.level_one._id,
-      })
+    let queris = {
+      page: 1,
     }
 
-    if (inputSearchRef.current.value) {
-      setSearch(inputSearchRef.current.value)
-      changeRoute({ search: inputSearchRef.current.value })
+    if (selectedCategories?.level_three?._id) {
+      setFilterCategory(selectedCategories?.level_three._id)
+      queris.filterCategory = selectedCategories?.level_three._id
+      queris.level_one = selectedCategories?.level_one._id
+      queris.level_two = selectedCategories?.level_two._id
+      queris.level_three = selectedCategories?.level_three._id
+    } else if (selectedCategories?.level_two?._id) {
+      setFilterCategory(selectedCategories?.level_two._id)
+      queris.filterCategory = selectedCategories?.level_two?._id
+      queris.level_one = selectedCategories?.level_one._id
+      queris.level_two = selectedCategories?.level_two._id
+    } else if (selectedCategories?.level_one?._id) {
+      setFilterCategory(selectedCategories?.level_one._id)
+      queris.filterCategory = selectedCategories?.level_one._id
+      queris.level_one = selectedCategories?.level_one._id
     }
-    changeRoute({ page: 1 })
-    setSkip(false)
+
+    if (inputSearchRef.current.value.trim()) {
+      setSearch(inputSearchRef.current.value)
+      queris.search = inputSearchRef.current.value
+    }
+
+    changeRoute(queris)
   }
 
   const handleRemoveSearch = () => {
@@ -134,7 +129,7 @@ export default function Products() {
     router.push('/admin/products', undefined, { shallow: true })
   }
 
-  const findCategory = (id) => categories.find((cat) => cat._id === id)
+  const findCategory = (id) => categories?.find((cat) => cat._id === id)
 
   //? Re-Render
   useEffect(() => {

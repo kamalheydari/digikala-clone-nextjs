@@ -32,8 +32,6 @@ export default function SearchModal(props) {
     useGetProductsQuery(
       {
         search,
-        page: 1,
-        filterCategory: 'all',
       },
       { skip: !Boolean(debouncedSearch) }
     )
@@ -45,7 +43,7 @@ export default function SearchModal(props) {
       setSearch('')
     }
   }, [isShow])
-  
+
   //? Handlers
   const handleChange = (e) => {
     setSearch(e.target.value)

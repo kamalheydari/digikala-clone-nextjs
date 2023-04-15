@@ -20,10 +20,7 @@ export default function Reviews(props) {
 
   //? Assets
   const { query } = useRouter()
-  const changeRoute = useChangeRoute({
-    shallow: true,
-  })
-
+  const changeRoute = useChangeRoute()
   //? Modals
   const [isShowReviewModal, reviewModalHandlers] = useDisclosure()
 

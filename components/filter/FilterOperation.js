@@ -42,7 +42,9 @@ export default function FilterOperation(props) {
     push(
       `${pathname}?category=${query.category}&${
         query.sort ? `sort=${query.sort}` : ''
-      }`
+      }`,
+      undefined,
+      { shallow: false }
     )
   }
 
