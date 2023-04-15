@@ -9,7 +9,7 @@ import { store } from 'store'
 import { Provider } from 'react-redux'
 
 //? Components
-import { ValidationToken, PageLoading, Alert } from 'components'
+import { PageLoading, Alert } from 'components'
 
 export default function MyApp({ Component, pageProps }) {
   //? Fix Hydration failed
@@ -27,7 +27,6 @@ export default function MyApp({ Component, pageProps }) {
       <Component {...pageProps} />
       <PageLoading />
       <Alert />
-      <ValidationToken />
     </Provider>
   )
 }
