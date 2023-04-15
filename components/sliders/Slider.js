@@ -1,20 +1,13 @@
-import { useGetSingleSliderQuery } from 'services'
-
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Autoplay } from 'swiper'
 import 'swiper/css'
 import 'swiper/css/pagination'
 
-import { ResponsiveImage, Skeleton } from 'components'
+import { ResponsiveImage } from 'components'
 
 export default function Slider(props) {
   //? Props
-  const { id } = props
-
-  //? Get Data
-  const { data, isLoading } = useGetSingleSliderQuery({
-    id,
-  })
+  const { data } = props
 
   const SliderImage = ({ item }) => (
     <ResponsiveImage
@@ -27,17 +20,9 @@ export default function Slider(props) {
   )
 
   //? Render(s)
-  if (isLoading) {
-    return (
-      <Skeleton.Item
-        animated='background'
-        height='h-64 md:h-72 lg:h-[400px]'
-        width='w-full'
-        className='rounded-none'
-      />
-    )
-  } else if (data?.sliders && data.sliders.length > 0) {
-    return (
+  if (data?.sliders.length === 0) return null
+
+  return (
       <section>
         <Swiper
           pagination={{ clickable: true }}
@@ -49,7 +34,7 @@ export default function Slider(props) {
           modules={[Pagination, Autoplay]}
           className='mySwiper'
         >
-          {data.sliders
+          {data?.sliders
             .filter((item) => item.public)
             .map((item, index) => (
               <SwiperSlide key={index}>
@@ -65,6 +50,4 @@ export default function Slider(props) {
         </Swiper>
       </section>
     )
-  }
-  return null
 }

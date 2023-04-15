@@ -2,7 +2,7 @@ import Head from 'next/head'
 
 import { db } from 'utils'
 
-import { Product, Category } from 'models'
+import { Category, Slider, Banner } from 'models'
 
 import {
   BannerOne,
@@ -12,18 +12,12 @@ import {
   ClientLayout,
   DiscountSlider,
   MostFavouraiteProducts,
-  Slider,
+  Slider as MainSlider,
 } from 'components'
 
 export default function Home(props) {
   //? Props
-  const {
-    bestSells,
-    discountProducts,
-    mostFavourite,
-    currentCategory,
-    childCategories,
-  } = props
+  const { currentCategory, childCategories, slider, banners } = props
 
   //? Render(s)
   return (
@@ -37,13 +31,10 @@ export default function Home(props) {
           />
         </Head>
 
-        <Slider id={currentCategory._id} />
+        <MainSlider data={slider} />
 
         <div className='py-4 mx-auto space-y-24 xl:mt-28 lg:max-w-[1450px]'>
-          <DiscountSlider
-            discountProducts={discountProducts}
-            currentCategory={currentCategory}
-          />
+          <DiscountSlider currentCategory={currentCategory} />
 
           <Categories
             childCategories={childCategories}
@@ -52,13 +43,13 @@ export default function Home(props) {
             homePage
           />
 
-          <BannerOne id={currentCategory._id} />
+          <BannerOne data={banners} />
 
-          <BestSellsSlider bestSells={bestSells} />
+          <BestSellsSlider />
 
-          <BannerTwo id={currentCategory._id} />
+          <BannerTwo data={banners} />
 
-          <MostFavouraiteProducts mostFavourite={mostFavourite} />
+          <MostFavouraiteProducts />
         </div>
       </main>
     </ClientLayout>
@@ -66,31 +57,7 @@ export default function Home(props) {
 }
 
 export async function getStaticProps() {
-  const filterFilelds =
-    '-description -info -specification -sizes -colors -category -category_levels -numReviews -reviews'
-
   await db.connect()
-
-  const bestSells = await Product.find()
-    .select(filterFilelds)
-    .sort({ sold: -1 })
-    .limit(15)
-    .lean()
-
-  const discountProducts = await Product.find({
-    discount: { $gte: 1 },
-    inStock: { $gte: 1 },
-  })
-    .select(filterFilelds)
-    .sort({ discount: -1 })
-    .limit(15)
-    .lean()
-
-  const mostFavourite = await Product.find()
-    .select(filterFilelds)
-    .sort({ rating: -1 })
-    .limit(10)
-    .lean()
 
   const currentCategory = await Category.findOne({
     parent: undefined,
@@ -100,28 +67,22 @@ export async function getStaticProps() {
     parent: currentCategory._id,
   }).lean()
 
+  const slider = await Slider.findOne({ category_id: currentCategory._id })
+
+  const banners = await Banner.findOne({ category_id: currentCategory._id })
+
   await db.disconnect()
 
   return {
     revalidate: 180,
     props: {
-      bestSells: {
-        title: 'پرفروش‌ترین کالاها',
-        products: JSON.parse(JSON.stringify(bestSells)),
-      },
-      discountProducts: {
-        title: 'بیشترین تخیف',
-        products: JSON.parse(JSON.stringify(discountProducts)),
-      },
-      mostFavourite: {
-        title: ' محبوب ترین کالاها',
-        products: JSON.parse(JSON.stringify(mostFavourite)),
-      },
       currentCategory: JSON.parse(JSON.stringify(currentCategory)),
       childCategories: {
         title: 'خرید بر اساس دسته‌بندهای',
         categories: JSON.parse(JSON.stringify(childCategories)),
       },
+      slider: JSON.parse(JSON.stringify(slider)),
+      banners: JSON.parse(JSON.stringify(banners)),
     },
   }
 }
