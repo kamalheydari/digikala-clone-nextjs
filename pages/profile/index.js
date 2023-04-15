@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 
@@ -5,7 +6,7 @@ import { Header, Orders, ProfileAside } from 'components'
 
 import { useVerify } from 'hooks'
 
-export default function ProfilePage() {
+function ProfilePage() {
   const isVerify = useVerify(false)
   const router = useRouter()
 
@@ -28,3 +29,5 @@ export default function ProfilePage() {
       </>
     )
 }
+
+export default dynamic(() => Promise.resolve(ProfilePage), { ssr: false })

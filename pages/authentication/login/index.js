@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
@@ -15,7 +16,7 @@ import { userLogin } from 'store'
 
 import { TextField, LoginBtn, Logo, HandleResponse } from 'components'
 
-export default function LoginPage() {
+function LoginPage() {
   //? Assets
   const dispatch = useDispatch()
   const router = useRouter()
@@ -117,3 +118,5 @@ export default function LoginPage() {
     </>
   )
 }
+
+export default dynamic(() => Promise.resolve(LoginPage), { ssr: false })

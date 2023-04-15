@@ -1,19 +1,24 @@
+import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
 import { useGetSingleOrderQuery } from 'services'
 
-import { OrderCard, PageContainer, ShowWrapper } from 'components'
+import {
+  BigLoading,
+  DashboardLayout,
+  OrderCard,
+  PageContainer,
+} from 'components'
 
-export default function SingleOrder() {
+function SingleOrder() {
   //? Assets
   const router = useRouter()
 
   //? Get Order Data
-  const { data, isError, error, isFetching, refetch, isSuccess } =
-    useGetSingleOrderQuery({
-      id: router.query.id,
-    })
+  const { data, isLoading } = useGetSingleOrderQuery({
+    id: router.query.id,
+  })
 
   //? Render(s)
   return (
@@ -22,26 +27,21 @@ export default function SingleOrder() {
         <title>مدیریت | سفارش</title>
       </Head>
 
-      <PageContainer title='سفارشات'>
-        <ShowWrapper
-          error={error}
-          isError={isError}
-          refetch={refetch}
-          isFetching={isFetching}
-          isSuccess={isSuccess}
-          dataLength={data ? 1 : 0}
-          emptyComponent={null}
-        >
-          <section className='max-w-5xl px-3 py-3 mx-auto lg:px-8'>
-            <OrderCard singleOrder order={data?.order} />
-          </section>
-        </ShowWrapper>
-      </PageContainer>
+      <DashboardLayout>
+        <PageContainer title='سفارشات'>
+          {isLoading ? (
+            <div className='px-3 py-20'>
+              <BigLoading />
+            </div>
+          ) : (
+            <section className='max-w-5xl px-3 py-3 mx-auto lg:px-8'>
+              <OrderCard singleOrder order={data?.order} />
+            </section>
+          )}
+        </PageContainer>
+      </DashboardLayout>
     </main>
   )
 }
 
-//? Layout
-SingleOrder.getDashboardLayout = function pageLayout(page) {
-  return <>{page}</>
-}
+export default dynamic(() => Promise.resolve(SingleOrder), { ssr: false })

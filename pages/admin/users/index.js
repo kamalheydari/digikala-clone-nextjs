@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 
@@ -13,11 +14,12 @@ import {
   PageContainer,
   HandleResponse,
   UsersTable,
+  DashboardLayout,
 } from 'components'
 
 import { useDisclosure, useChangeRoute } from 'hooks'
 
-export default function Users() {
+function Users() {
   //? Assets
   const { query } = useRouter()
   const changeRoute = useChangeRoute({
@@ -88,38 +90,38 @@ export default function Users() {
         <Head>
           <title>مدیریت | کاربران</title>
         </Head>
-        <PageContainer title='کاربران'>
-          <ShowWrapper
-            error={error}
-            isError={isError}
-            refetch={refetch}
-            isFetching={isFetching}
-            isSuccess={isSuccess}
-            dataLength={data ? data.usersLength : 0}
-            emptyComponent={<EmptyUsersList />}
-          >
-            <UsersTable
-              deleteUserHandler={deleteUserHandler}
-              users={data?.users}
-            />
-          </ShowWrapper>
 
-          {data?.usersLength > 5 && (
-            <div className='py-4 mx-auto lg:max-w-5xl'>
-              <Pagination
-                pagination={data.pagination}
-                changeRoute={changeRoute}
-                section='_adminUsers'
+        <DashboardLayout>
+          <PageContainer title='کاربران'>
+            <ShowWrapper
+              error={error}
+              isError={isError}
+              refetch={refetch}
+              isFetching={isFetching}
+              isSuccess={isSuccess}
+              dataLength={data ? data.usersLength : 0}
+              emptyComponent={<EmptyUsersList />}
+            >
+              <UsersTable
+                deleteUserHandler={deleteUserHandler}
+                users={data?.users}
               />
-            </div>
-          )}
-        </PageContainer>
+            </ShowWrapper>
+
+            {data?.usersLength > 5 && (
+              <div className='py-4 mx-auto lg:max-w-5xl'>
+                <Pagination
+                  pagination={data.pagination}
+                  changeRoute={changeRoute}
+                  section='_adminUsers'
+                />
+              </div>
+            )}
+          </PageContainer>
+        </DashboardLayout>
       </main>
     </>
   )
 }
 
-//? Layout
-Users.getDashboardLayout = function pageLayout(page) {
-  return <>{page}</>
-}
+export default dynamic(() => Promise.resolve(Users), { ssr: false })

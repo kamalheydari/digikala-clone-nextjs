@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -25,7 +26,7 @@ import { formatNumber } from 'utils'
 
 import { useUserInfo } from 'hooks'
 
-export default function ShippingPage() {
+function ShippingPage() {
   //? Assets
   const router = useRouter()
   const dispatch = useDispatch()
@@ -249,3 +250,5 @@ export default function ShippingPage() {
     </>
   )
 }
+
+export default dynamic(() => Promise.resolve(ShippingPage), { ssr: false })

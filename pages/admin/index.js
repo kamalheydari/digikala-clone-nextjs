@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
@@ -6,7 +7,7 @@ import { DashboardAside } from 'components'
 
 import { useUserInfo } from 'hooks'
 
-export default function AdminPage() {
+function AdminPage() {
   const router = useRouter()
 
   const { userInfo, isVerify } = useUserInfo()
@@ -43,3 +44,5 @@ export default function AdminPage() {
       </div>
     )
 }
+
+export default dynamic(() => Promise.resolve(AdminPage), { ssr: false })

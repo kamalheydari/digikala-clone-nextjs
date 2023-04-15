@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import Head from 'next/head'
 
 import {
@@ -6,11 +7,12 @@ import {
   UserNameModal,
   PageContainer,
   Skeleton,
+  ProfileLayout,
 } from 'components'
 
 import { useUserInfo, useDisclosure } from 'hooks'
 
-export default function PersonalInfo() {
+function PersonalInfo() {
   //? Assets
   const [isShowNameModal, nameModalHandlers] = useDisclosure()
   const [isShowPhoneModal, phoneModalHandlers] = useDisclosure()
@@ -61,28 +63,28 @@ export default function PersonalInfo() {
         <Head>
           <title>پروفایل | اطلاعات حساب کاربری</title>
         </Head>
-        <PageContainer title='اطلاعات حساب کاربری'>
-          <section className='lg:flex'>
-            <InfoField
-              label='نام و نام خانوادگی'
-              info={userInfo?.name}
-              editHandler={nameModalHandlers.open}
-              isLoading={isLoading}
-            />
-            <InfoField
-              label='شماره موبایل'
-              info={userInfo?.mobile}
-              editHandler={phoneModalHandlers.open}
-              isLoading={isLoading}
-            />
-          </section>
-        </PageContainer>
+
+        <ProfileLayout>
+          <PageContainer title='اطلاعات حساب کاربری'>
+            <section className='lg:flex'>
+              <InfoField
+                label='نام و نام خانوادگی'
+                info={userInfo?.name}
+                editHandler={nameModalHandlers.open}
+                isLoading={isLoading}
+              />
+              <InfoField
+                label='شماره موبایل'
+                info={userInfo?.mobile}
+                editHandler={phoneModalHandlers.open}
+                isLoading={isLoading}
+              />
+            </section>
+          </PageContainer>
+        </ProfileLayout>
       </main>
     </>
   )
 }
 
-//? Layout
-PersonalInfo.getProfileLayout = function pageLayout(page) {
-  return <>{page}</>
-}
+export default dynamic(() => Promise.resolve(PersonalInfo), { ssr: false })

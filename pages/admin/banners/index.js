@@ -1,11 +1,12 @@
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import Head from 'next/head'
 
-import { BigLoading, PageContainer } from 'components'
+import { BigLoading, DashboardLayout, PageContainer } from 'components'
 
 import { useGetCategoriesQuery } from 'services'
 
-export default function Banners() {
+function Banners() {
   //? Get Categories
   const { categories, isLoading } = useGetCategoriesQuery(undefined, {
     selectFromResult: ({ data, isLoading }) => ({
@@ -30,48 +31,47 @@ export default function Banners() {
         <title>مدیریت | بنرها</title>
       </Head>
 
-      <PageContainer title='بنرها'>
-        <section className='p-3 mx-auto mb-10 space-y-8'>
-          <div className='mx-3 overflow-x-auto mt-7 lg:mx-5 xl:mx-10'>
-            <table className='w-full whitespace-nowrap'>
-              <thead className='h-9 bg-emerald-50'>
-                <tr className='text-emerald-500'>
-                  <th className='px-2 text-right border-gray-100 border-x-2'>
-                    نام
-                  </th>
-                  <th className='border-gray-100 border-x-2'>بیشتر</th>
-                </tr>
-              </thead>
-              <tbody className='text-gray-600'>
-                {categories &&
-                  categories.map((category) => (
-                    <tr
-                      className='text-xs text-center transition-colors border-b border-gray-100 md:text-sm hover:bg-gray-50/50'
-                      key={category._id}
-                    >
-                      <td className='w-3/4 px-2 py-4 text-right'>
-                        {category.name}
-                      </td>
-                      <td className='px-2 py-4'>
-                        <Link
-                          href={`/admin/banners/${category._id}`}
-                          className='bg-rose-50 text-rose-500 rounded-sm py-1 px-1.5 mx-1.5 inline-block'
-                        >
-                          بنرها
-                        </Link>
-                      </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
-          </div>
-        </section>
-      </PageContainer>
+      <DashboardLayout>
+        <PageContainer title='بنرها'>
+          <section className='p-3 mx-auto mb-10 space-y-8'>
+            <div className='mx-3 overflow-x-auto mt-7 lg:mx-5 xl:mx-10'>
+              <table className='w-full whitespace-nowrap'>
+                <thead className='h-9 bg-emerald-50'>
+                  <tr className='text-emerald-500'>
+                    <th className='px-2 text-right border-gray-100 border-x-2'>
+                      نام
+                    </th>
+                    <th className='border-gray-100 border-x-2'>بیشتر</th>
+                  </tr>
+                </thead>
+                <tbody className='text-gray-600'>
+                  {categories &&
+                    categories.map((category) => (
+                      <tr
+                        className='text-xs text-center transition-colors border-b border-gray-100 md:text-sm hover:bg-gray-50/50'
+                        key={category._id}
+                      >
+                        <td className='w-3/4 px-2 py-4 text-right'>
+                          {category.name}
+                        </td>
+                        <td className='px-2 py-4'>
+                          <Link
+                            href={`/admin/banners/${category._id}`}
+                            className='bg-rose-50 text-rose-500 rounded-sm py-1 px-1.5 mx-1.5 inline-block'
+                          >
+                            بنرها
+                          </Link>
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </PageContainer>
+      </DashboardLayout>
     </main>
   )
 }
 
-//? Layout
-Banners.getDashboardLayout = function pageLayout(page) {
-  return <>{page}</>
-}
+export default dynamic(() => Promise.resolve(Banners), { ssr: false })

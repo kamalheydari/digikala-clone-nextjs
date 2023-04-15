@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
@@ -18,6 +19,7 @@ import {
   Button,
   ConfirmDeleteModal,
   ConfirmUpdateModal,
+  DashboardLayout,
   DetailsList,
   HandleResponse,
   PageContainer,
@@ -27,7 +29,7 @@ import { useDisclosure } from 'hooks'
 
 import { useForm } from 'react-hook-form'
 
-export default function DetailsPage() {
+function DetailsPage() {
   //? Assets
   const router = useRouter()
   const dispatch = useDispatch()
@@ -229,107 +231,106 @@ export default function DetailsPage() {
           <title>مدیریت | مشخصات</title>
         </Head>
 
-        {isLoading_get ? (
-          <div className='px-3 py-20'>
-            <BigLoading />
-          </div>
-        ) : (
-          <PageContainer
-            title={` مشخصات و ویژگی‌های دسته‌بندی ${
-              category?.name ? category?.name : ''
-            }`}
-          >
-            <form
-              onSubmit={handleSubmit(submitHander)}
-              className='p-3 space-y-6'
+        <DashboardLayout>
+          {isLoading_get ? (
+            <div className='px-3 py-20'>
+              <BigLoading />
+            </div>
+          ) : (
+            <PageContainer
+              title={` مشخصات و ویژگی‌های دسته‌بندی ${
+                category?.name ? category?.name : ''
+              }`}
             >
-              <div className='space-y-3'>
-                <p className='mb-2'>نوع انتخاب :</p>
-                <div className='flex items-center gap-x-1'>
-                  <input
-                    type='radio'
-                    name='optionsType'
-                    id='none'
-                    value='none'
-                    className='ml-1'
-                    {...register('optionsType')}
-                  />
-                  <label htmlFor='none'>بدون حق انتخاب</label>
+              <form
+                onSubmit={handleSubmit(submitHander)}
+                className='p-3 space-y-6'
+              >
+                <div className='space-y-3'>
+                  <p className='mb-2'>نوع انتخاب :</p>
+                  <div className='flex items-center gap-x-1'>
+                    <input
+                      type='radio'
+                      name='optionsType'
+                      id='none'
+                      value='none'
+                      className='ml-1'
+                      {...register('optionsType')}
+                    />
+                    <label htmlFor='none'>بدون حق انتخاب</label>
+                  </div>
+                  <div className='flex items-center gap-x-1'>
+                    <input
+                      type='radio'
+                      name='optionsType'
+                      id='colors'
+                      value='colors'
+                      className='ml-1'
+                      {...register('optionsType')}
+                    />
+                    <label htmlFor='colors'>بر اساس رنگ</label>
+                  </div>
+                  <div className='flex items-center gap-x-1'>
+                    <input
+                      type='radio'
+                      name='optionsType'
+                      id='sizes'
+                      value='sizes'
+                      className='ml-1'
+                      {...register('optionsType')}
+                    />
+                    <label htmlFor='sizes'>بر اساس سایز</label>
+                  </div>
                 </div>
-                <div className='flex items-center gap-x-1'>
-                  <input
-                    type='radio'
-                    name='optionsType'
-                    id='colors'
-                    value='colors'
-                    className='ml-1'
-                    {...register('optionsType')}
-                  />
-                  <label htmlFor='colors'>بر اساس رنگ</label>
-                </div>
-                <div className='flex items-center gap-x-1'>
-                  <input
-                    type='radio'
-                    name='optionsType'
-                    id='sizes'
-                    value='sizes'
-                    className='ml-1'
-                    {...register('optionsType')}
-                  />
-                  <label htmlFor='sizes'>بر اساس سایز</label>
-                </div>
-              </div>
-              <DetailsList
-                name='info'
-                control={control}
-                register={register}
-                category={category}
-              />
-              <DetailsList
-                name='specification'
-                control={control}
-                register={register}
-                category={category}
-              />
-              <div className='flex justify-center gap-x-4'>
-                {details ? (
-                  <>
-                    <Button
-                      className='bg-amber-500 rounded-3xl'
-                      onClick={updateHandler}
-                      isLoading={isLoading_update}
-                    >
-                      بروزرسانی اطلاعات
-                    </Button>
+                <DetailsList
+                  name='info'
+                  control={control}
+                  register={register}
+                  category={category}
+                />
+                <DetailsList
+                  name='specification'
+                  control={control}
+                  register={register}
+                  category={category}
+                />
+                <div className='flex justify-center gap-x-4'>
+                  {details ? (
+                    <>
+                      <Button
+                        className='bg-amber-500 rounded-3xl'
+                        onClick={updateHandler}
+                        isLoading={isLoading_update}
+                      >
+                        بروزرسانی اطلاعات
+                      </Button>
 
+                      <Button
+                        className='rounded-3xl'
+                        isLoading={isLoading_delete}
+                        onClick={deleteHandler}
+                      >
+                        حذف اطلاعات
+                      </Button>
+                    </>
+                  ) : (
                     <Button
-                      className='rounded-3xl'
-                      isLoading={isLoading_delete}
-                      onClick={deleteHandler}
+                      className='bg-green-500 '
+                      rounded
+                      type='submit'
+                      isLoading={isLoading_create}
                     >
-                      حذف اطلاعات
+                      ثبت اطلاعات
                     </Button>
-                  </>
-                ) : (
-                  <Button
-                    className='bg-green-500 '
-                    rounded
-                    type='submit'
-                    isLoading={isLoading_create}
-                  >
-                    ثبت اطلاعات
-                  </Button>
-                )}
-              </div>
-            </form>
-          </PageContainer>
-        )}
+                  )}
+                </div>
+              </form>
+            </PageContainer>
+          )}
+        </DashboardLayout>
       </main>
     </>
   )
 }
 
-//? Layout
-DetailsPage.getDashboardLayout = function pageLayout(page) {
-  return <>{page}</>
-}
+export default dynamic(() => Promise.resolve(DetailsPage), { ssr: false })

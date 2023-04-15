@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useRef, useState } from 'react'
@@ -11,6 +12,7 @@ import {
 import {
   BigLoading,
   ConfirmDeleteModal,
+  DashboardLayout,
   DeleteIconBtn,
   EditIconBtn,
   HandleResponse,
@@ -22,7 +24,7 @@ import {
 
 import { useDisclosure, useChangeRoute } from 'hooks'
 
-export default function Products() {
+function Products() {
   //? Assets
   const router = useRouter()
   const changeRoute = useChangeRoute({
@@ -189,110 +191,109 @@ export default function Products() {
         <Head>
           <title>مدیریت | محصولات</title>
         </Head>
-        <PageContainer title='محصولات'>
-          {isError ? (
-            <div className='py-20 mx-auto space-y-3 text-center w-fit'>
-              <h5 className='text-xl'>خطایی رخ داده</h5>
-              <p className='text-lg text-red-500'>{error.data.err}</p>
-              <button className='mx-auto btn' onClick={refetch}>
-                تلاش مجدد
-              </button>
-            </div>
-          ) : isFetching ? (
-            <section className='px-3 py-20'>
-              <BigLoading />
-            </section>
-          ) : (
-            <section className='p-3 space-y-7' id='_adminProducts'>
-              <form
-                className='max-w-4xl mx-auto space-y-5'
-                onSubmit={handleSubmit}
-              >
-                <SelectCategories
-                  setSelectedCategories={setSelectedCategories}
-                  selectedCategories={selectedCategories}
-                />
-
-                <div className='flex flex-row-reverse rounded-md gap-x-2 '>
-                  <button
-                    type='button'
-                    className='p-2 text-white border flex-center gap-x-2 min-w-max'
-                    onClick={handleRemoveSearch}
-                  >
-                    <span>حذف فیلترها</span>
-                    <Icons.Close className='icon' />
-                  </button>
-                  <input
-                    type='text'
-                    placeholder='نام محصول ...'
-                    className='flex-grow p-1 text-right input'
-                    ref={inputSearchRef}
-                    defaultValue={search}
+        <DashboardLayout>
+          <PageContainer title='محصولات'>
+            {isError ? (
+              <div className='py-20 mx-auto space-y-3 text-center w-fit'>
+                <h5 className='text-xl'>خطایی رخ داده</h5>
+                <p className='text-lg text-red-500'>{error.data.err}</p>
+                <button className='mx-auto btn' onClick={refetch}>
+                  تلاش مجدد
+                </button>
+              </div>
+            ) : isFetching ? (
+              <section className='px-3 py-20'>
+                <BigLoading />
+              </section>
+            ) : (
+              <section className='p-3 space-y-7' id='_adminProducts'>
+                <form
+                  className='max-w-4xl mx-auto space-y-5'
+                  onSubmit={handleSubmit}
+                >
+                  <SelectCategories
+                    setSelectedCategories={setSelectedCategories}
+                    selectedCategories={selectedCategories}
                   />
-                  <button
-                    type='submit'
-                    className='p-2 border flex-center gap-x-2 min-w-max'
-                  >
-                    <span>اعمال فیلتر</span>
-                    <Icons.Search className='icon' />
-                  </button>
-                </div>
-              </form>
 
-              {data?.productsLength > 0 ? (
-                <>
-                  <section className='overflow-x mt-7'>
-                    <table className='w-full overflow-scroll table-auto'>
-                      <thead className='bg-zinc-50 h-9'>
-                        <tr className='text-zinc-500'>
-                          <th className='w-28'></th>
-                          <th className='border-r-2 border-zinc-200'>
-                            نام محصول (تعداد: {data.productsLength})
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {data.products.map((item) => (
-                          <tr
-                            key={item._id}
-                            className='border-b-2 border-gray-100'
-                          >
-                            <td className='flex items-center justify-center p-2 gap-x-4'>
-                              <DeleteIconBtn
-                                onClick={() => handleDelete(item._id)}
-                              />
-                              <EditIconBtn
-                                onClick={() => handleEdit(item._id)}
-                              />
-                            </td>
-                            <td className='p-2'>{item.title}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </section>
-                  {data?.productsLength > 10 && (
-                    <Pagination
-                      pagination={data.pagination}
-                      changeRoute={changeRoute}
-                      section='_adminProducts'
+                  <div className='flex flex-row-reverse rounded-md gap-x-2 '>
+                    <button
+                      type='button'
+                      className='p-2 text-white border flex-center gap-x-2 min-w-max'
+                      onClick={handleRemoveSearch}
+                    >
+                      <span>حذف فیلترها</span>
+                      <Icons.Close className='icon' />
+                    </button>
+                    <input
+                      type='text'
+                      placeholder='نام محصول ...'
+                      className='flex-grow p-1 text-right input'
+                      ref={inputSearchRef}
+                      defaultValue={search}
                     />
-                  )}
-                </>
-              ) : (
-                <div className='text-center text-red-500 lg:border lg:border-gray-200 lg:rounded-md lg:py-4'>
-                  کالایی یافت نشد
-                </div>
-              )}
-            </section>
-          )}
-        </PageContainer>
+                    <button
+                      type='submit'
+                      className='p-2 border flex-center gap-x-2 min-w-max'
+                    >
+                      <span>اعمال فیلتر</span>
+                      <Icons.Search className='icon' />
+                    </button>
+                  </div>
+                </form>
+
+                {data?.productsLength > 0 ? (
+                  <>
+                    <section className='overflow-x mt-7'>
+                      <table className='w-full overflow-scroll table-auto'>
+                        <thead className='bg-zinc-50 h-9'>
+                          <tr className='text-zinc-500'>
+                            <th className='w-28'></th>
+                            <th className='border-r-2 border-zinc-200'>
+                              نام محصول (تعداد: {data.productsLength})
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {data.products.map((item) => (
+                            <tr
+                              key={item._id}
+                              className='border-b-2 border-gray-100'
+                            >
+                              <td className='flex items-center justify-center p-2 gap-x-4'>
+                                <DeleteIconBtn
+                                  onClick={() => handleDelete(item._id)}
+                                />
+                                <EditIconBtn
+                                  onClick={() => handleEdit(item._id)}
+                                />
+                              </td>
+                              <td className='p-2'>{item.title}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </section>
+                    {data?.productsLength > 10 && (
+                      <Pagination
+                        pagination={data.pagination}
+                        changeRoute={changeRoute}
+                        section='_adminProducts'
+                      />
+                    )}
+                  </>
+                ) : (
+                  <div className='text-center text-red-500 lg:border lg:border-gray-200 lg:rounded-md lg:py-4'>
+                    کالایی یافت نشد
+                  </div>
+                )}
+              </section>
+            )}
+          </PageContainer>
+        </DashboardLayout>
       </main>
     </>
   )
 }
 
-//? Layout
-Products.getDashboardLayout = function pageLayout(page) {
-  return <>{page}</>
-}
+export default dynamic(() => Promise.resolve(Products), { ssr: false })

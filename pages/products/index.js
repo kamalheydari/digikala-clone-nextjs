@@ -11,6 +11,7 @@ import {
   ProductsAside,
   SubCategories,
   Filter,
+  ClientLayout,
 } from 'components'
 
 import { useChangeRoute } from 'hooks'
@@ -31,62 +32,69 @@ export default function ProductsHome(props) {
 
   //? Render(s)
   return (
-    <main className='lg:px-3 lg:container lg:max-w-[1700px] xl:mt-32'>
+    <>
       <Head>
         <title>دیجی‌کالا | فروشگاه</title>
       </Head>
 
-      <SubCategories childCategories={childCategories} />
+      <ClientLayout>
+        <main className='lg:px-3 lg:container lg:max-w-[1700px] xl:mt-32'>
+          <SubCategories childCategories={childCategories} />
 
-      <div className='px-1 lg:flex lg:gap-x-0 xl:gap-x-3'>
-        <ProductsAside
-          mainMaxPrice={mainMaxPrice}
-          mainMinPrice={mainMinPrice}
-        />
-        <div className='w-full p-4 mt-3 '>
-          {/* Filters & Sort */}
-          <div className='divide-y-2 '>
-            <div className='flex py-2 gap-x-3'>
-              <Filter mainMaxPrice={mainMaxPrice} mainMinPrice={mainMinPrice} />
+          <div className='px-1 lg:flex lg:gap-x-0 xl:gap-x-3'>
+            <ProductsAside
+              mainMaxPrice={mainMaxPrice}
+              mainMinPrice={mainMinPrice}
+            />
+            <div className='w-full p-4 mt-3 '>
+              {/* Filters & Sort */}
+              <div className='divide-y-2 '>
+                <div className='flex py-2 gap-x-3'>
+                  <Filter
+                    mainMaxPrice={mainMaxPrice}
+                    mainMinPrice={mainMinPrice}
+                  />
 
-              <Sort />
-            </div>
+                  <Sort />
+                </div>
 
-            <div className='flex justify-between py-2'>
-              <span>همه کالاها</span>
-              <span className='farsi-digits'>{productsLength} کالا</span>
+                <div className='flex justify-between py-2'>
+                  <span>همه کالاها</span>
+                  <span className='farsi-digits'>{productsLength} کالا</span>
+                </div>
+              </div>
+
+              {/* Products */}
+              {products.length > 0 ? (
+                <section
+                  id='_products'
+                  className='sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5'
+                >
+                  {products.map((item) => (
+                    <ProductCard product={item} key={item._id} />
+                  ))}
+                </section>
+              ) : (
+                <section className='text-center text-red-500 xl:border xl:border-gray-200 xl:rounded-md xl:py-4'>
+                  کالایی یافت نشد
+                </section>
+              )}
             </div>
           </div>
 
-          {/* Products */}
-          {products.length > 0 ? (
-            <section
-              id='_products'
-              className='sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5'
-            >
-              {products.map((item) => (
-                <ProductCard product={item} key={item._id} />
-              ))}
-            </section>
-          ) : (
-            <section className='text-center text-red-500 xl:border xl:border-gray-200 xl:rounded-md xl:py-4'>
-              کالایی یافت نشد
-            </section>
+          {productsLength > 10 && (
+            <div className='py-4 mx-auto lg:max-w-5xl'>
+              <Pagination
+                pagination={pagination}
+                changeRoute={changeRoute}
+                section='_products'
+                client
+              />
+            </div>
           )}
-        </div>
-      </div>
-
-      {productsLength > 10 && (
-        <div className='py-4 mx-auto lg:max-w-5xl'>
-          <Pagination
-            pagination={pagination}
-            changeRoute={changeRoute}
-            section='_products'
-            client
-          />
-        </div>
-      )}
-    </main>
+        </main>
+      </ClientLayout>
+    </>
   )
 }
 
@@ -199,7 +207,3 @@ export async function getServerSideProps({ query }) {
   }
 }
 
-//? Layout
-ProductsHome.getClientLayout = function pageLayout(page) {
-  return <>{page}</>
-}

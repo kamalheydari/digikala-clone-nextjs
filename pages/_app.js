@@ -8,16 +8,8 @@ import '/styles/swiper.css'
 import { store } from 'store'
 import { Provider } from 'react-redux'
 
-//? Layouts & Components
-import {
-  DashboardLayout,
-  ClientLayout,
-  ProfileLayout,
-  ValidationToken,
-  PageLoading,
-  Alert,
-} from 'components'
-import { useRouter } from 'next/router'
+//? Components
+import { ValidationToken, PageLoading, Alert } from 'components'
 
 export default function MyApp({ Component, pageProps }) {
   //? Fix Hydration failed
@@ -30,54 +22,12 @@ export default function MyApp({ Component, pageProps }) {
     return null
   }
 
-  const router = useRouter()
-
-  //? Lyout Config
-  if (Component.getClientLayout) {
-    return Component.getClientLayout(
-      <Provider store={store}>
-        <ClientLayout>
-          <PageLoading />
-          <Component key={router.asPath} {...pageProps} />
-          <ValidationToken />
-          <Alert />
-        </ClientLayout>
-      </Provider>
-    )
-  }
-
-  //? Lyout Config
-  if (Component.getDashboardLayout) {
-    return Component.getDashboardLayout(
-      <Provider store={store}>
-
-        <DashboardLayout>
-          <Component key={router.asPath} {...pageProps} />
-          <ValidationToken />
-          <Alert />
-        </DashboardLayout>
-      </Provider>
-    )
-  }
-  //? Lyout Config
-  if (Component.getProfileLayout) {
-    return Component.getProfileLayout(
-      <Provider store={store}>
-        <ProfileLayout>
-          <PageLoading />
-          <Component {...pageProps} />
-          <ValidationToken />
-          <Alert />
-        </ProfileLayout>
-      </Provider>
-    )
-  }
-
   return (
     <Provider store={store}>
-      <PageLoading />
       <Component {...pageProps} />
+      <PageLoading />
       <Alert />
+      <ValidationToken />
     </Provider>
   )
 }

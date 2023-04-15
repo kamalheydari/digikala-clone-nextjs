@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-
+import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
@@ -22,6 +22,7 @@ import {
   Checkbox,
   ConfirmDeleteModal,
   ConfirmUpdateModal,
+  DashboardLayout,
   DeleteFromListIconBtn,
   HandleResponse,
   Icons,
@@ -34,7 +35,7 @@ import { useDisclosure } from 'hooks'
 
 import { useFieldArray, useForm } from 'react-hook-form'
 
-export default function Slider() {
+function Slider() {
   //? Assets
   const router = useRouter()
   const dispatch = useDispatch()
@@ -182,13 +183,6 @@ export default function Slider() {
   }
 
   //? Render(s)
-  if (isLoading_get)
-    return (
-      <div className='px-3 py-20'>
-        <BigLoading />
-      </div>
-    )
-
   return (
     <>
       {/* Handle Create Product Response */}
@@ -267,141 +261,150 @@ export default function Slider() {
           <title>مدیریت | اسلایدر</title>
         </Head>
 
-        <PageContainer title={`اسلایدر دسته بندی ${selectedCategory?.name}`}>
-          <section className='p-3 mx-auto mb-10 space-y-8'>
-            <div className='mx-3 overflow-x-auto mt-7 lg:mx-5 xl:mx-10'>
-              <form>
-                {/* new slider form */}
-                <Disclosure>
-                  {({ open }) => (
-                    <>
-                      <Disclosure.Button className='flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-purple-900 bg-purple-100 rounded-lg hover:bg-purple-200 '>
-                        <span className='text-base'>افزودن اسلایدر جدید</span>
-                        <Icons.ArrowDown
-                          className={`${
-                            open ? 'rotate-180 transform' : ''
-                          } h-5 w-5 text-purple-500`}
-                        />
-                      </Disclosure.Button>
-                      <Disclosure.Panel className='px-4 pt-4 pb-2 text-sm text-gray-500'>
-                        <TextField
-                          label='عنوان اسلایدر'
-                          control={control}
-                          name='newSlider.title'
-                        />
-                        <TextField
-                          label='آدرس تصویر'
-                          direction='ltr'
-                          control={control}
-                          name='newSlider.image.url'
-                        />
-
-                        <TextField
-                          label='آدرس لینک'
-                          direction='ltr'
-                          control={control}
-                          name='newSlider.uri'
-                        />
-
-                        <Checkbox
-                          name='newSlider.public'
-                          control={control}
-                          label='منتشر شده'
-                        />
-
-                        <AddToListIconBtn onClick={addSliderHandler} />
-
-                        <div className='my-4 section-divide-y lg:block' />
-                      </Disclosure.Panel>
-                    </>
-                  )}
-                </Disclosure>
-
-                {/* sliders */}
-                <section className='my-4 space-y-3 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-x-2 lg:gap-y-4 '>
-                  {fields.map((slider, idx) => (
-                    <div
-                      className='p-2 border border-gray-300 rounded-md'
-                      key={idx}
-                    >
-                      <Image
-                        src={slider.image.url}
-                        width={1000}
-                        height={230}
-                        alt='slider image'
-                      />
-
-                      <TextField
-                        label='عنوان اسلایدر'
-                        control={control}
-                        name={`sliders.${idx}.title`}
-                      />
-
-                      <TextField
-                        label='آدرس تصویر'
-                        direction='ltr'
-                        control={control}
-                        name={`sliders.${idx}.image.url`}
-                      />
-
-                      <TextField
-                        label='آدرس لینک'
-                        direction='ltr'
-                        control={control}
-                        name={`sliders.${idx}.uri`}
-                      />
-
-                      <Checkbox
-                        name={`sliders.${idx}.public`}
-                        control={control}
-                        label='منتشر شده'
-                      />
-
-                      <DeleteFromListIconBtn onClick={() => remove(idx)} />
-                    </div>
-                  ))}
-                </section>
-                <div className='flex justify-evenly gap-x-4'>
-                  {data_get ? (
-                    <>
-                      <Button
-                        className='bg-amber-500 '
-                        rounded
-                        onClick={updateHandler}
-                        isLoading={isLoading_update}
-                      >
-                        بروزرسانی اسلایدر
-                      </Button>
-
-                      <Button
-                        className='rounded-3xl'
-                        isLoading={isLoading_delete}
-                        onClick={deleteHandler}
-                      >
-                        حذف اسلایدر
-                      </Button>
-                    </>
-                  ) : getValues('sliders').length > 0 ? (
-                    <Button
-                      className='bg-green-500 '
-                      rounded
-                      onClick={submitHander}
-                      isLoading={isLoading_create}
-                    >
-                      ثبت اسلایدر
-                    </Button>
-                  ) : null}
-                </div>
-              </form>
+        <DashboardLayout>
+          {isLoading_get ? (
+            <div className='px-3 py-20'>
+              <BigLoading />
             </div>
-          </section>
-        </PageContainer>
+          ) : (
+            <PageContainer
+              title={`اسلایدر دسته بندی ${selectedCategory?.name}`}
+            >
+              <section className='p-3 mx-auto mb-10 space-y-8'>
+                <div className='mx-3 overflow-x-auto mt-7 lg:mx-5 xl:mx-10'>
+                  <form>
+                    {/* new slider form */}
+                    <Disclosure>
+                      {({ open }) => (
+                        <>
+                          <Disclosure.Button className='flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-purple-900 bg-purple-100 rounded-lg hover:bg-purple-200 '>
+                            <span className='text-base'>
+                              افزودن اسلایدر جدید
+                            </span>
+                            <Icons.ArrowDown
+                              className={`${
+                                open ? 'rotate-180 transform' : ''
+                              } h-5 w-5 text-purple-500`}
+                            />
+                          </Disclosure.Button>
+                          <Disclosure.Panel className='px-4 pt-4 pb-2 text-sm text-gray-500'>
+                            <TextField
+                              label='عنوان اسلایدر'
+                              control={control}
+                              name='newSlider.title'
+                            />
+                            <TextField
+                              label='آدرس تصویر'
+                              direction='ltr'
+                              control={control}
+                              name='newSlider.image.url'
+                            />
+
+                            <TextField
+                              label='آدرس لینک'
+                              direction='ltr'
+                              control={control}
+                              name='newSlider.uri'
+                            />
+
+                            <Checkbox
+                              name='newSlider.public'
+                              control={control}
+                              label='منتشر شده'
+                            />
+
+                            <AddToListIconBtn onClick={addSliderHandler} />
+
+                            <div className='my-4 section-divide-y lg:block' />
+                          </Disclosure.Panel>
+                        </>
+                      )}
+                    </Disclosure>
+
+                    {/* sliders */}
+                    <section className='my-4 space-y-3 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-x-2 lg:gap-y-4 '>
+                      {fields.map((slider, idx) => (
+                        <div
+                          className='p-2 border border-gray-300 rounded-md'
+                          key={idx}
+                        >
+                          <Image
+                            src={slider.image.url}
+                            width={1000}
+                            height={230}
+                            alt='slider image'
+                          />
+
+                          <TextField
+                            label='عنوان اسلایدر'
+                            control={control}
+                            name={`sliders.${idx}.title`}
+                          />
+
+                          <TextField
+                            label='آدرس تصویر'
+                            direction='ltr'
+                            control={control}
+                            name={`sliders.${idx}.image.url`}
+                          />
+
+                          <TextField
+                            label='آدرس لینک'
+                            direction='ltr'
+                            control={control}
+                            name={`sliders.${idx}.uri`}
+                          />
+
+                          <Checkbox
+                            name={`sliders.${idx}.public`}
+                            control={control}
+                            label='منتشر شده'
+                          />
+
+                          <DeleteFromListIconBtn onClick={() => remove(idx)} />
+                        </div>
+                      ))}
+                    </section>
+                    <div className='flex justify-evenly gap-x-4'>
+                      {data_get ? (
+                        <>
+                          <Button
+                            className='bg-amber-500 '
+                            rounded
+                            onClick={updateHandler}
+                            isLoading={isLoading_update}
+                          >
+                            بروزرسانی اسلایدر
+                          </Button>
+
+                          <Button
+                            className='rounded-3xl'
+                            isLoading={isLoading_delete}
+                            onClick={deleteHandler}
+                          >
+                            حذف اسلایدر
+                          </Button>
+                        </>
+                      ) : getValues('sliders').length > 0 ? (
+                        <Button
+                          className='bg-green-500 '
+                          rounded
+                          onClick={submitHander}
+                          isLoading={isLoading_create}
+                        >
+                          ثبت اسلایدر
+                        </Button>
+                      ) : null}
+                    </div>
+                  </form>
+                </div>
+              </section>
+            </PageContainer>
+          )}
+        </DashboardLayout>
       </main>
     </>
   )
 }
 
-//? Layout
-Slider.getDashboardLayout = function pageLayout(page) {
-  return <>{page}</>
-}
+export default dynamic(() => Promise.resolve(Slider), { ssr: false })

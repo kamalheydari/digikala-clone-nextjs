@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Head from 'next/head'
+import { useEffect, useState } from 'react'
 
 import {
   useCreateCategoryMutation,
@@ -21,11 +22,12 @@ import {
   HandleResponse,
   ConfirmUpdateModal,
   BigLoading,
+  DashboardLayout,
 } from 'components'
 
 import { useDisclosure } from 'hooks'
 
-export default function CreateCategory() {
+function CreateCategory() {
   //? Assets
   const { query, push } = useRouter()
 
@@ -54,7 +56,7 @@ export default function CreateCategory() {
       }),
     }
   )
-  
+
   //*   Create Category
   const [
     createCtegory,
@@ -133,14 +135,6 @@ export default function CreateCategory() {
     confirmUpdateModalHandlers.open()
   }
 
-  //? Render(s)
-  if (isLoading)
-    return (
-      <div className='px-3 py-20'>
-        <BigLoading />
-      </div>
-    )
-
   return (
     <>
       {/* Handle Create Category Response */}
@@ -199,107 +193,120 @@ export default function CreateCategory() {
           <title>مدیریت | دسته بندی جدید</title>
         </Head>
 
-        <PageContainer
-          title={
-            query.params[0] === 'create' ? 'دسته بندی جدید' : 'ویرایش دسته بندی'
-          }
-        >
-          <section className='p-3 md:px-3 xl:px-8 2xl:px-10'>
-            <form
-              className='flex flex-col justify-between flex-1 pl-4 overflow-y-auto gap-y-5'
-              onSubmit={handleSubmit(submitHander)}
-            >
-              <TextField
-                label='نام دسته‌بندی'
-                control={control}
-                errors={formErrors.name}
-                name='name'
-              />
-
-              <TextField
-                label='مسیر (با حروف انگلیسی)'
-                control={control}
-                errors={formErrors.slug}
-                name='slug'
-                direction='ltr'
-              />
-
-              <TextField
-                label='آدرس تصویر'
-                control={control}
-                errors={formErrors.image}
-                name='image'
-                direction='ltr'
-              />
-              {getValues('image') && (
-                <Image
-                  src={getValues('image')}
-                  width={200}
-                  height={200}
-                  className='mx-auto'
-                  alt='category image'
-                />
-              )}
-
-              {(selectedCategory?.level <= 1 ||
-                parentCategory?.level === 0) && (
-                <div className='flex justify-evenly'>
-                  <div className='flex flex-col space-y-3'>
-                    <label className='text-field__label' htmlFor='colors.start'>
-                      رنگ اول
-                    </label>
-                    <input
-                      className='w-40 h-10'
-                      id='colors.start'
-                      type='color'
-                      {...register('colors.start')}
-                    />
-                  </div>
-
-                  <div className='flex flex-col space-y-3'>
-                    <label className='text-field__label' htmlFor='colors.end'>
-                      رنگ دوم
-                    </label>
-                    <input
-                      className='w-40 h-10'
-                      id='colors.end'
-                      type='color'
-                      {...register('colors.end')}
-                    />
-                  </div>
-                </div>
-              )}
-
-              <div className='py-3 lg:pb-0 '>
-                {query.params[0] === 'edit' && query.id ? (
-                  <Button
-                    className='mx-auto bg-amber-500'
-                    rounded
-                    onClick={updateHandler}
-                    isLoading={isLoading_update}
-                  >
-                    بروزرسانی اطلاعات
-                  </Button>
-                ) : (
-                  <Button
-                    type='submit'
-                    className='mx-auto !bg-green-500 '
-                    isLoading={isLoading_create}
-                    rounded
-                  >
-                    ثبت اطلاعات
-                  </Button>
-                )}
+        <DashboardLayout>
+          <PageContainer
+            title={
+              query?.params?.[0] === 'create'
+                ? 'دسته بندی جدید'
+                : 'ویرایش دسته بندی'
+            }
+          >
+            {isLoading ? (
+              <div className='px-3 py-20'>
+                <BigLoading />
               </div>
-            </form>
-          </section>
-        </PageContainer>
+            ) : (
+              <section className='p-3 md:px-3 xl:px-8 2xl:px-10'>
+                <form
+                  className='flex flex-col justify-between flex-1 pl-4 overflow-y-auto gap-y-5'
+                  onSubmit={handleSubmit(submitHander)}
+                >
+                  <TextField
+                    label='نام دسته‌بندی'
+                    control={control}
+                    errors={formErrors.name}
+                    name='name'
+                  />
+
+                  <TextField
+                    label='مسیر (با حروف انگلیسی)'
+                    control={control}
+                    errors={formErrors.slug}
+                    name='slug'
+                    direction='ltr'
+                  />
+
+                  <TextField
+                    label='آدرس تصویر'
+                    control={control}
+                    errors={formErrors.image}
+                    name='image'
+                    direction='ltr'
+                  />
+                  {getValues('image') && (
+                    <Image
+                      src={getValues('image')}
+                      width={200}
+                      height={200}
+                      className='mx-auto'
+                      alt='category image'
+                    />
+                  )}
+
+                  {(selectedCategory?.level <= 1 ||
+                    parentCategory?.level === 0) && (
+                    <div className='flex justify-evenly'>
+                      <div className='flex flex-col space-y-3'>
+                        <label
+                          className='text-field__label'
+                          htmlFor='colors.start'
+                        >
+                          رنگ اول
+                        </label>
+                        <input
+                          className='w-40 h-10'
+                          id='colors.start'
+                          type='color'
+                          {...register('colors.start')}
+                        />
+                      </div>
+
+                      <div className='flex flex-col space-y-3'>
+                        <label
+                          className='text-field__label'
+                          htmlFor='colors.end'
+                        >
+                          رنگ دوم
+                        </label>
+                        <input
+                          className='w-40 h-10'
+                          id='colors.end'
+                          type='color'
+                          {...register('colors.end')}
+                        />
+                      </div>
+                    </div>
+                  )}
+
+                  <div className='py-3 lg:pb-0 '>
+                    {query?.params?.[0] === 'edit' && query.id ? (
+                      <Button
+                        className='mx-auto bg-amber-500'
+                        rounded
+                        onClick={updateHandler}
+                        isLoading={isLoading_update}
+                      >
+                        بروزرسانی اطلاعات
+                      </Button>
+                    ) : (
+                      <Button
+                        type='submit'
+                        className='mx-auto !bg-green-500 '
+                        isLoading={isLoading_create}
+                        rounded
+                      >
+                        ثبت اطلاعات
+                      </Button>
+                    )}
+                  </div>
+                </form>
+              </section>
+            )}
+          </PageContainer>
+        </DashboardLayout>
       </main>
     </>
   )
 }
 
-//? Layout
-CreateCategory.getDashboardLayout = function pageLayout(page) {
-  return <>{page}</>
-}
+export default dynamic(() => Promise.resolve(CreateCategory), { ssr: false })

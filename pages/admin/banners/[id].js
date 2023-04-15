@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
 
 import Head from 'next/head'
@@ -14,6 +15,7 @@ import {
   Checkbox,
   ConfirmDeleteModal,
   ConfirmUpdateModal,
+  DashboardLayout,
   DeleteFromListIconBtn,
   HandleResponse,
   Icons,
@@ -34,7 +36,7 @@ import {
   useUpdateBannerMutation,
 } from 'services'
 
-export default function Banner() {
+function Banner() {
   //? Assets
   const router = useRouter()
   const dispatch = useDispatch()
@@ -213,13 +215,6 @@ export default function Banner() {
   )
 
   //? Render(s)
-  if (isLoading_get)
-    return (
-      <div className='px-3 py-20'>
-        <BigLoading />
-      </div>
-    )
-
   return (
     <>
       {/* Handle Create Product Response */}
@@ -299,152 +294,157 @@ export default function Banner() {
           <title>مدیریت | بنر</title>
         </Head>
 
-        <PageContainer title={`بنر دسته بندی ${selectedCategory?.name}`}>
-          <section className='p-3 mx-auto mb-10 space-y-8'>
-            <div className='mx-3 overflow-x-auto mt-7 lg:mx-5 xl:mx-10'>
-              <form>
-                {/* new baneer form */}
-                <Disclosure>
-                  {({ open }) => (
-                    <>
-                      <Disclosure.Button className='flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-purple-900 bg-purple-100 rounded-lg hover:bg-purple-200 '>
-                        <span className='text-base'>افزودن بنر جدید</span>
-                        <Icons.ArrowDown
-                          className={`${
-                            open ? 'rotate-180 transform' : ''
-                          } h-5 w-5 text-purple-500`}
-                        />
-                      </Disclosure.Button>
-                      <Disclosure.Panel className='px-4 pt-4 pb-2 text-sm text-gray-500'>
-                        <TextField
-                          label='عنوان بنر'
-                          control={control}
-                          name='newBanner.title'
-                        />
-                        <TextField
-                          label='آدرس تصویر'
-                          direction='ltr'
-                          control={control}
-                          name='newBanner.image.url'
-                        />
-
-                        <TextField
-                          label='آدرس لینک'
-                          direction='ltr'
-                          control={control}
-                          name='newBanner.uri'
-                        />
-
-                        <Checkbox
-                          name='newBanner.public'
-                          control={control}
-                          label='منتشر شده'
-                        />
-
-                        <RadioButtons name='newBanner.type' />
-
-                        <AddToListIconBtn onClick={addBannerHandler} />
-
-                        <div className='my-4 section-divide-y lg:block' />
-                      </Disclosure.Panel>
-                    </>
-                  )}
-                </Disclosure>
-
-                {/* banners */}
-                <section className='my-4 space-y-3 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-x-2 lg:gap-y-4 '>
-                  {fields.map((banner, idx) => (
-                    <div
-                      className='p-2 border border-gray-300 rounded-md'
-                      key={idx}
-                    >
-                      <div className='mx-auto max-w-max'>
-                        <Image
-                          src={banner.image.url}
-                          width={
-                            getValues(`banners.${idx}.type`) === 'one'
-                              ? 400
-                              : 300
-                          }
-                          height={200}
-                          alt='banner image'
-                        />
-                      </div>
-
-                      <TextField
-                        label='عنوان بنر'
-                        control={control}
-                        name={`banners.${idx}.title`}
-                      />
-
-                      <TextField
-                        label='آدرس تصویر'
-                        direction='ltr'
-                        control={control}
-                        name={`banners.${idx}.image.url`}
-                      />
-
-                      <TextField
-                        label='آدرس لینک'
-                        direction='ltr'
-                        control={control}
-                        name={`banners.${idx}.uri`}
-                      />
-
-                      {/* <Checkbox name={`banners.${idx}.public`} /> */}
-                      <Checkbox
-                        name={`banners.${idx}.public`}
-                        control={control}
-                        label='منتشر شده'
-                      />
-
-                      <RadioButtons name={`banners.${idx}.type`} />
-
-                      <DeleteFromListIconBtn onClick={() => remove(idx)} />
-                    </div>
-                  ))}
-                </section>
-                <div className='flex justify-evenly gap-x-4'>
-                  {data_get ? (
-                    <>
-                      <Button
-                        className='bg-amber-500 '
-                        rounded
-                        onClick={updateHandler}
-                        isLoading={isLoading_update}
-                      >
-                        بروزرسانی بنر
-                      </Button>
-
-                      <Button
-                        className='rounded-3xl'
-                        isLoading={isLoading_delete}
-                        onClick={deleteHandler}
-                      >
-                        حذف بنر
-                      </Button>
-                    </>
-                  ) : getValues('banners').length > 0 ? (
-                    <Button
-                      className='bg-green-500 '
-                      rounded
-                      onClick={submitHander}
-                      isLoading={isLoading_create}
-                    >
-                      ثبت بنر
-                    </Button>
-                  ) : null}
-                </div>
-              </form>
+        <DashboardLayout>
+          {isLoading_get ? (
+            <div className='px-3 py-20'>
+              <BigLoading />
             </div>
-          </section>
-        </PageContainer>
+          ) : (
+            <PageContainer title={`بنر دسته بندی ${selectedCategory?.name}`}>
+              <section className='p-3 mx-auto mb-10 space-y-8'>
+                <div className='mx-3 overflow-x-auto mt-7 lg:mx-5 xl:mx-10'>
+                  <form>
+                    {/* new baneer form */}
+                    <Disclosure>
+                      {({ open }) => (
+                        <>
+                          <Disclosure.Button className='flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-purple-900 bg-purple-100 rounded-lg hover:bg-purple-200 '>
+                            <span className='text-base'>افزودن بنر جدید</span>
+                            <Icons.ArrowDown
+                              className={`${
+                                open ? 'rotate-180 transform' : ''
+                              } h-5 w-5 text-purple-500`}
+                            />
+                          </Disclosure.Button>
+                          <Disclosure.Panel className='px-4 pt-4 pb-2 text-sm text-gray-500'>
+                            <TextField
+                              label='عنوان بنر'
+                              control={control}
+                              name='newBanner.title'
+                            />
+                            <TextField
+                              label='آدرس تصویر'
+                              direction='ltr'
+                              control={control}
+                              name='newBanner.image.url'
+                            />
+
+                            <TextField
+                              label='آدرس لینک'
+                              direction='ltr'
+                              control={control}
+                              name='newBanner.uri'
+                            />
+
+                            <Checkbox
+                              name='newBanner.public'
+                              control={control}
+                              label='منتشر شده'
+                            />
+
+                            <RadioButtons name='newBanner.type' />
+
+                            <AddToListIconBtn onClick={addBannerHandler} />
+
+                            <div className='my-4 section-divide-y lg:block' />
+                          </Disclosure.Panel>
+                        </>
+                      )}
+                    </Disclosure>
+
+                    {/* banners */}
+                    <section className='my-4 space-y-3 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-x-2 lg:gap-y-4 '>
+                      {fields.map((banner, idx) => (
+                        <div
+                          className='p-2 border border-gray-300 rounded-md'
+                          key={idx}
+                        >
+                          <div className='mx-auto max-w-max'>
+                            <Image
+                              src={banner.image.url}
+                              width={
+                                getValues(`banners.${idx}.type`) === 'one'
+                                  ? 400
+                                  : 300
+                              }
+                              height={200}
+                              alt='banner image'
+                            />
+                          </div>
+
+                          <TextField
+                            label='عنوان بنر'
+                            control={control}
+                            name={`banners.${idx}.title`}
+                          />
+
+                          <TextField
+                            label='آدرس تصویر'
+                            direction='ltr'
+                            control={control}
+                            name={`banners.${idx}.image.url`}
+                          />
+
+                          <TextField
+                            label='آدرس لینک'
+                            direction='ltr'
+                            control={control}
+                            name={`banners.${idx}.uri`}
+                          />
+
+                          {/* <Checkbox name={`banners.${idx}.public`} /> */}
+                          <Checkbox
+                            name={`banners.${idx}.public`}
+                            control={control}
+                            label='منتشر شده'
+                          />
+
+                          <RadioButtons name={`banners.${idx}.type`} />
+
+                          <DeleteFromListIconBtn onClick={() => remove(idx)} />
+                        </div>
+                      ))}
+                    </section>
+                    <div className='flex justify-evenly gap-x-4'>
+                      {data_get ? (
+                        <>
+                          <Button
+                            className='bg-amber-500 '
+                            rounded
+                            onClick={updateHandler}
+                            isLoading={isLoading_update}
+                          >
+                            بروزرسانی بنر
+                          </Button>
+
+                          <Button
+                            className='rounded-3xl'
+                            isLoading={isLoading_delete}
+                            onClick={deleteHandler}
+                          >
+                            حذف بنر
+                          </Button>
+                        </>
+                      ) : getValues('banners').length > 0 ? (
+                        <Button
+                          className='bg-green-500 '
+                          rounded
+                          onClick={submitHander}
+                          isLoading={isLoading_create}
+                        >
+                          ثبت بنر
+                        </Button>
+                      ) : null}
+                    </div>
+                  </form>
+                </div>
+              </section>
+            </PageContainer>
+          )}
+        </DashboardLayout>
       </main>
     </>
   )
 }
 
-//? Layout
-Banner.getDashboardLayout = function pageLayout(page) {
-  return <>{page}</>
-}
+export default dynamic(() => Promise.resolve(Banner), { ssr: false })

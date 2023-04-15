@@ -9,6 +9,7 @@ import {
   BannerTwo,
   BestSellsSlider,
   Categories,
+  ClientLayout,
   DiscountSlider,
   MostFavouraiteProducts,
   Slider,
@@ -26,39 +27,41 @@ export default function Home(props) {
 
   //? Render(s)
   return (
-    <main className='min-h-screen space-y-4 xl:mt-28'>
-      <Head>
-        <title>فروشگاه اینترنتی دیجی‌کالا</title>
-        <meta
-          name='description'
-          content='هر آنچه که نیاز دارید با بهترین قیمت از دیجی‌کالا بخرید! جدیدترین انواع گوشی موبایل، لپ تاپ، لباس، لوازم آرایشی و بهداشتی، کتاب، لوازم خانگی، خودرو و... با امکان تعویض و مرجوعی آسان | ✓ارسال رايگان ✓پرداخت در محل ✓ضمانت بازگشت کالا - برای خرید کلیک کنید!'
-        />
-      </Head>
+    <ClientLayout>
+      <main className='min-h-screen space-y-4 xl:mt-28'>
+        <Head>
+          <title>فروشگاه اینترنتی دیجی‌کالا</title>
+          <meta
+            name='description'
+            content='هر آنچه که نیاز دارید با بهترین قیمت از دیجی‌کالا بخرید! جدیدترین انواع گوشی موبایل، لپ تاپ، لباس، لوازم آرایشی و بهداشتی، کتاب، لوازم خانگی، خودرو و... با امکان تعویض و مرجوعی آسان | ✓ارسال رايگان ✓پرداخت در محل ✓ضمانت بازگشت کالا - برای خرید کلیک کنید!'
+          />
+        </Head>
 
-      <Slider id={currentCategory._id} />
+        <Slider id={currentCategory._id} />
 
-      <div className='py-4 mx-auto space-y-24 xl:mt-28 lg:max-w-[1450px]'>
-        <DiscountSlider
-          discountProducts={discountProducts}
-          currentCategory={currentCategory}
-        />
+        <div className='py-4 mx-auto space-y-24 xl:mt-28 lg:max-w-[1450px]'>
+          <DiscountSlider
+            discountProducts={discountProducts}
+            currentCategory={currentCategory}
+          />
 
-        <Categories
-          childCategories={childCategories}
-          color={currentCategory.colors?.start}
-          name={currentCategory.name}
-          homePage
-        />
+          <Categories
+            childCategories={childCategories}
+            color={currentCategory.colors?.start}
+            name={currentCategory.name}
+            homePage
+          />
 
-        <BannerOne id={currentCategory._id} />
+          <BannerOne id={currentCategory._id} />
 
-        <BestSellsSlider bestSells={bestSells} />
+          <BestSellsSlider bestSells={bestSells} />
 
-        <BannerTwo id={currentCategory._id} />
+          <BannerTwo id={currentCategory._id} />
 
-        <MostFavouraiteProducts mostFavourite={mostFavourite} />
-      </div>
-    </main>
+          <MostFavouraiteProducts mostFavourite={mostFavourite} />
+        </div>
+      </main>
+    </ClientLayout>
   )
 }
 
@@ -121,9 +124,4 @@ export async function getStaticProps() {
       },
     },
   }
-}
-
-//? Layout
-Home.getClientLayout = function pageLayout(page) {
-  return <>{page}</>
 }

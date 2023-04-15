@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { useState } from 'react'
 
@@ -12,13 +13,14 @@ import {
   PageContainer,
   HandleResponse,
   ReveiwSkeleton,
+  ProfileLayout,
 } from 'components'
 
 import { useDisclosure, useChangeRoute } from 'hooks'
 
 import { useRouter } from 'next/router'
 
-export default function Reviews() {
+function Reviews() {
   //? Assets
   const { query } = useRouter()
   const changeRoute = useChangeRoute({
@@ -93,46 +95,45 @@ export default function Reviews() {
         <Head>
           <title>پروفایل | دیدگاه‌ها</title>
         </Head>
+        
+        <ProfileLayout>
+          <PageContainer title='دیدگاه‌ها'>
+            <ShowWrapper
+              error={error}
+              isError={isError}
+              refetch={refetch}
+              isFetching={isFetching}
+              isSuccess={isSuccess}
+              dataLength={data ? data.reviewsLength : 0}
+              emptyComponent={<EmptyCommentsList />}
+              loadingComponent={<ReveiwSkeleton />}
+            >
+              <div className='px-4 py-3 space-y-3 '>
+                {data?.reviews.map((item) => (
+                  <ReveiwCard
+                    deleteReviewHandler={deleteReviewHandler}
+                    key={item._id}
+                    item={item}
+                  />
+                ))}
+              </div>
+            </ShowWrapper>
 
-        <PageContainer title='دیدگاه‌ها'>
-          <ShowWrapper
-            error={error}
-            isError={isError}
-            refetch={refetch}
-            isFetching={isFetching}
-            isSuccess={isSuccess}
-            dataLength={data ? data.reviewsLength : 0}
-            emptyComponent={<EmptyCommentsList />}
-            loadingComponent={<ReveiwSkeleton />}
-          >
-            <div className='px-4 py-3 space-y-3 '>
-              {data?.reviews.map((item) => (
-                <ReveiwCard
-                  deleteReviewHandler={deleteReviewHandler}
-                  key={item._id}
-                  item={item}
+            {data?.reviewsLength > 5 && (
+              <div className='py-4 mx-auto lg:max-w-5xl'>
+                <Pagination
+                  pagination={data.pagination}
+                  changeRoute={changeRoute}
+                  section='profileReviews'
+                  client
                 />
-              ))}
-            </div>
-          </ShowWrapper>
-
-          {data?.reviewsLength > 5 && (
-            <div className='py-4 mx-auto lg:max-w-5xl'>
-              <Pagination
-                pagination={data.pagination}
-                changeRoute={changeRoute}
-                section='profileReviews'
-                client
-              />
-            </div>
-          )}
-        </PageContainer>
+              </div>
+            )}
+          </PageContainer>
+        </ProfileLayout>
       </main>
     </>
   )
 }
 
-//? Layout
-Reviews.getProfileLayout = function pageLayout(page) {
-  return <>{page}</>
-}
+export default dynamic(() => Promise.resolve(Reviews), { ssr: false })

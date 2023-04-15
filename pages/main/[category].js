@@ -9,6 +9,7 @@ import {
   BannerTwo,
   BestSellsSlider,
   Categories,
+  ClientLayout,
   DiscountSlider,
   MostFavouraiteProducts,
   Slider,
@@ -26,34 +27,36 @@ export default function MainCategory(props) {
 
   //? Render(s)
   return (
-    <main className='min-h-screen space-y-6 xl:mt-28'>
-      <Head>
-        <title>{`دیجی‌کالا | ${currentCategory.name}`}</title>
-      </Head>
+    <ClientLayout>
+      <main className='min-h-screen space-y-6 xl:mt-28'>
+        <Head>
+          <title>{`دیجی‌کالا | ${currentCategory.name}`}</title>
+        </Head>
 
-      <Slider id={currentCategory._id} />
+        <Slider id={currentCategory._id} />
 
-      <div className='py-4 mx-auto space-y-12 xl:mt-28 lg:max-w-[1450px]'>
-        <DiscountSlider
-          discountProducts={discountProducts}
-          currentCategory={currentCategory}
-        />
+        <div className='py-4 mx-auto space-y-12 xl:mt-28 lg:max-w-[1450px]'>
+          <DiscountSlider
+            discountProducts={discountProducts}
+            currentCategory={currentCategory}
+          />
 
-        <Categories
-          childCategories={childCategories}
-          color={currentCategory.colors?.start}
-          name={currentCategory.name}
-        />
+          <Categories
+            childCategories={childCategories}
+            color={currentCategory.colors?.start}
+            name={currentCategory.name}
+          />
 
-        <BannerOne id={currentCategory._id} />
+          <BannerOne id={currentCategory._id} />
 
-        <BestSellsSlider bestSells={bestSells} />
+          <BestSellsSlider bestSells={bestSells} />
 
-        <BannerTwo id={currentCategory._id} />
+          <BannerTwo id={currentCategory._id} />
 
-        <MostFavouraiteProducts mostFavourite={mostFavourite} />
-      </div>
-    </main>
+          <MostFavouraiteProducts mostFavourite={mostFavourite} />
+        </div>
+      </main>
+    </ClientLayout>
   )
 }
 
@@ -143,9 +146,4 @@ export async function getStaticPaths() {
     paths,
     fallback: false,
   }
-}
-
-//? Layout
-MainCategory.getClientLayout = function pageLayout(page) {
-  return <>{page}</>
 }

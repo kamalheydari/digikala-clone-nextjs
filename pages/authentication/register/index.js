@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { useEffect } from 'react'
 import Link from 'next/link'
@@ -17,7 +18,7 @@ import { TextField, LoginBtn, RedirectToLogin, Logo } from 'components'
 
 import { useDisclosure } from 'hooks'
 
-export default function RegisterPage() {
+ function RegisterPage() {
   //? Assets
   const [isShowRedirectModal, redirectModalHandlers] = useDisclosure()
   const dispatch = useDispatch()
@@ -147,3 +148,5 @@ export default function RegisterPage() {
     </>
   )
 }
+
+export default dynamic(() => Promise.resolve(RegisterPage), { ssr: false })

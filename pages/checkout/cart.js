@@ -1,4 +1,5 @@
 import { Fragment } from 'react'
+import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
@@ -22,7 +23,7 @@ import { formatNumber } from 'utils'
 
 import { useUserInfo, useDisclosure } from 'hooks'
 
-export default function Cart() {
+function Cart() {
   //? Assets
   const [isShowRedirectModal, redirectModalHandlers] = useDisclosure()
   const dispatch = useDispatch()
@@ -158,3 +159,5 @@ export default function Cart() {
     </>
   )
 }
+
+export default dynamic(() => Promise.resolve(Cart), { ssr: false })

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
@@ -20,13 +21,14 @@ import {
   TextField,
   BigLoading,
   ImageList,
+  DashboardLayout,
 } from 'components'
 
 import { useDisclosure } from 'hooks'
 
 import { useForm } from 'react-hook-form'
 
-export default function Product() {
+function Product() {
   //? Assets
   const router = useRouter()
   const { id } = router.query
@@ -185,12 +187,6 @@ export default function Product() {
   }
 
   //? Render(s)
-  if (id && isLoading_get)
-    return (
-      <div className='px-3 py-20'>
-        <BigLoading />
-      </div>
-    )
   return (
     <>
       <ConfirmUpdateModal
@@ -239,160 +235,178 @@ export default function Product() {
           <title>مدیریت | {id ? 'بروزرسانی محصول' : 'محصول جدید'}</title>
         </Head>
 
-        <PageContainer title={id ? 'بروزرسانی محصول' : 'محصول جدید'}>
-          <section className='p-3 md:px-3 xl:px-8 2xl:px-10'>
-            <form onSubmit={handleSubmit(submitHandler)} className='space-y-10'>
-              <TextField label='عنوان' name='title' control={control} />
-              <div className='space-y-1.5'>
-                <label htmlFor='description'>معرفی</label>
-                <textarea
-                  cols='30'
-                  rows='4'
-                  type='text'
-                  className='text-right input'
-                  name='description'
-                  id='description'
-                  {...register('description')}
-                />
-              </div>
-
-              <ImageList control={control} name='images' />
-
-              <div className='space-y-4 md:flex md:gap-x-2 md:items-baseline md:justify-evenly'>
-                <TextField
-                  label='قیمت'
-                  name='price'
-                  control={control}
-                  type='number'
-                  direction='ltr'
-                />
-                <TextField
-                  label='موجودی'
-                  name='inStock'
-                  control={control}
-                  type='number'
-                  direction='ltr'
-                />
-
-                <TextField
-                  label='تخفیف برحسب درصد'
-                  name='discount'
-                  control={control}
-                  type='number'
-                  direction='ltr'
-                />
-              </div>
-
-              {!id && (
-                <SelectCategories
-                  setSelectedCategories={setSelectedCategories}
-                  selectedCategories={selectedCategories}
-                />
-              )}
-
-              {details?.optionsType === 'colors' ||
-              getValues('colors').length > 0 ? (
-                <AddColors
-                  name='colors'
-                  control={control}
-                  register={register}
-                />
-              ) : details?.optionsType === 'sizes' ||
-                getValues('sizes').length > 0 ? (
-                <AddSizes name='sizes' control={control} register={register} />
-              ) : (
-                ''
-              )}
-              <div className='text-sm space-y-1.5'>
-                <span>ویژگی‌ها</span>
-                <table className='w-full max-w-2xl mx-auto'>
-                  <thead className='bg-emerald-50 text-emerald-500'>
-                    <tr className=''>
-                      <th className='w-2/5  p-2.5'>نام</th>
-                      <th>مقدار</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {getValues('info').map((item, index) => (
-                      <tr key={index} className='border-b-2 border-gray-100'>
-                        <td className='my-0.5 text-right'>
-                          <input
-                            type='text'
-                            className='text-field__input'
-                            {...register(`info.${index}.title`)}
-                          />
-                        </td>
-                        <td className='p-2'>
-                          <textarea
-                            type='text'
-                            className='text-field__input'
-                            {...register(`info.${index}.value`)}
-                          />
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              <div className='text-sm space-y-1.5'>
-                <span>مشخصات</span>
-                <table className='w-full max-w-2xl mx-auto'>
-                  <thead className='bg-fuchsia-50 text-fuchsia-500 '>
-                    <tr>
-                      <th className='w-2/5 p-2.5'>نام</th>
-                      <th>مقدار</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {getValues('specification').map((item, index) => (
-                      <tr key={index} className='border-b-2 border-gray-100'>
-                        <td className='my-0.5 text-right'>
-                          <input
-                            type='text'
-                            className='text-field__input'
-                            {...register(`specification.${index}.title`)}
-                          />
-                        </td>
-                        <td className='p-2'>
-                          <textarea
-                            type='text'
-                            className='text-field__input'
-                            {...register(`specification.${index}.value`)}
-                          />
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              {id ? (
-                <Button
-                  className='mx-auto bg-amber-500'
-                  rounded
-                  onClick={updateHandler}
-                  isLoading={isLoading_update}
+        <DashboardLayout>
+          {id && isLoading_get ? (
+            <div className='px-3 py-20'>
+              <BigLoading />
+            </div>
+          ) : (
+            <PageContainer title={id ? 'بروزرسانی محصول' : 'محصول جدید'}>
+              <section className='p-3 md:px-3 xl:px-8 2xl:px-10'>
+                <form
+                  onSubmit={handleSubmit(submitHandler)}
+                  className='space-y-10'
                 >
-                  بروزرسانی اطلاعات
-                </Button>
-              ) : (
-                <Button
-                  className='mx-auto bg-green-500'
-                  rounded
-                  type='submit'
-                  isLoading={isLoading}
-                >
-                  ثبت اطلاعات
-                </Button>
-              )}
-            </form>
-          </section>
-        </PageContainer>
+                  <TextField label='عنوان' name='title' control={control} />
+                  <div className='space-y-1.5'>
+                    <label htmlFor='description'>معرفی</label>
+                    <textarea
+                      cols='30'
+                      rows='4'
+                      type='text'
+                      className='text-right input'
+                      name='description'
+                      id='description'
+                      {...register('description')}
+                    />
+                  </div>
+
+                  <ImageList control={control} name='images' />
+
+                  <div className='space-y-4 md:flex md:gap-x-2 md:items-baseline md:justify-evenly'>
+                    <TextField
+                      label='قیمت'
+                      name='price'
+                      control={control}
+                      type='number'
+                      direction='ltr'
+                    />
+                    <TextField
+                      label='موجودی'
+                      name='inStock'
+                      control={control}
+                      type='number'
+                      direction='ltr'
+                    />
+
+                    <TextField
+                      label='تخفیف برحسب درصد'
+                      name='discount'
+                      control={control}
+                      type='number'
+                      direction='ltr'
+                    />
+                  </div>
+
+                  {!id && (
+                    <SelectCategories
+                      setSelectedCategories={setSelectedCategories}
+                      selectedCategories={selectedCategories}
+                    />
+                  )}
+
+                  {details?.optionsType === 'colors' ||
+                  getValues('colors').length > 0 ? (
+                    <AddColors
+                      name='colors'
+                      control={control}
+                      register={register}
+                    />
+                  ) : details?.optionsType === 'sizes' ||
+                    getValues('sizes').length > 0 ? (
+                    <AddSizes
+                      name='sizes'
+                      control={control}
+                      register={register}
+                    />
+                  ) : (
+                    ''
+                  )}
+                  <div className='text-sm space-y-1.5'>
+                    <span>ویژگی‌ها</span>
+                    <table className='w-full max-w-2xl mx-auto'>
+                      <thead className='bg-emerald-50 text-emerald-500'>
+                        <tr className=''>
+                          <th className='w-2/5  p-2.5'>نام</th>
+                          <th>مقدار</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {getValues('info').map((item, index) => (
+                          <tr
+                            key={index}
+                            className='border-b-2 border-gray-100'
+                          >
+                            <td className='my-0.5 text-right'>
+                              <input
+                                type='text'
+                                className='text-field__input'
+                                {...register(`info.${index}.title`)}
+                              />
+                            </td>
+                            <td className='p-2'>
+                              <textarea
+                                type='text'
+                                className='text-field__input'
+                                {...register(`info.${index}.value`)}
+                              />
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div className='text-sm space-y-1.5'>
+                    <span>مشخصات</span>
+                    <table className='w-full max-w-2xl mx-auto'>
+                      <thead className='bg-fuchsia-50 text-fuchsia-500 '>
+                        <tr>
+                          <th className='w-2/5 p-2.5'>نام</th>
+                          <th>مقدار</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {getValues('specification').map((item, index) => (
+                          <tr
+                            key={index}
+                            className='border-b-2 border-gray-100'
+                          >
+                            <td className='my-0.5 text-right'>
+                              <input
+                                type='text'
+                                className='text-field__input'
+                                {...register(`specification.${index}.title`)}
+                              />
+                            </td>
+                            <td className='p-2'>
+                              <textarea
+                                type='text'
+                                className='text-field__input'
+                                {...register(`specification.${index}.value`)}
+                              />
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  {id ? (
+                    <Button
+                      className='mx-auto bg-amber-500'
+                      rounded
+                      onClick={updateHandler}
+                      isLoading={isLoading_update}
+                    >
+                      بروزرسانی اطلاعات
+                    </Button>
+                  ) : (
+                    <Button
+                      className='mx-auto bg-green-500'
+                      rounded
+                      type='submit'
+                      isLoading={isLoading}
+                    >
+                      ثبت اطلاعات
+                    </Button>
+                  )}
+                </form>
+              </section>
+            </PageContainer>
+          )}
+        </DashboardLayout>
       </main>
     </>
   )
 }
 
-//? Layout
-Product.getDashboardLayout = function pageLayout(page) {
-  return <>{page}</>
-}
+export default dynamic(() => Promise.resolve(Product), { ssr: false })
