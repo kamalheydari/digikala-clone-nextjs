@@ -22,46 +22,102 @@ export default async (req, res) => {
 const getProducts = async (req, res) => {
   const page = +req.query.page || 1
   const page_size = +req.query.page_size || 10
-  const { category, search } = req.query
+  const search = req.query.search
+  const category = req.query.category
+  const sort = +req.query.sort || 1
+  const inStock = req.query.inStock || null
+  const discount = req.query.discount || null
+  const price = req.query.price
 
   //? Filters
-  const categoryFilter =
-    category && category !== 'all'
-      ? {
-          category: { $in: category },
-        }
-      : {}
+  const categoryFilter = category
+    ? {
+        category: { $in: category },
+      }
+    : {}
 
-  const searchFilter =
-    search && search !== 'all'
-      ? {
-          title: {
-            $regex: search,
-            $options: 'i',
-          },
-        }
-      : {}
+  const searchFilter = search
+    ? {
+        title: {
+          $regex: search,
+          $options: 'i',
+        },
+      }
+    : {}
+
+  const inStockFilter = inStock === 'true' ? { inStock: { $gte: 1 } } : {}
+
+  const discountFilter =
+    discount === 'true' ? { discount: { $gte: 1 }, inStock: { $gte: 1 } } : {}
+
+  const priceFilter = price
+    ? {
+        price: {
+          $gte: +price.split('-')[0],
+          $lte: +price.split('-')[1],
+        },
+      }
+    : {}
+
+  //? Sort
+  const order =
+    sort === 3
+      ? { price: 1 }
+      : sort === 4
+      ? { price: -1 }
+      : sort === 2
+      ? { sold: -1 }
+      : sort === 1
+      ? { createdAt: -1 }
+      : { _id: -1 }
 
   try {
     await db.connect()
 
-    const products = await Product.find({ ...categoryFilter, ...searchFilter })
+    const products = await Product.find({
+      ...categoryFilter,
+      ...inStockFilter,
+      ...discountFilter,
+      ...priceFilter,
+      ...searchFilter,
+    })
+      .select(
+        '-description -info -specification -category -category_levels -sizes -reviews'
+      )
+      .sort(order)
       .skip((page - 1) * page_size)
       .limit(page_size)
-      .sort({
-        createdAt: 'desc',
-      })
 
     const productsLength = await Product.countDocuments({
       ...categoryFilter,
+      ...inStockFilter,
+      ...discountFilter,
+      ...priceFilter,
       ...searchFilter,
     })
+
+    const mainMaxPrice = Math.max(
+      ...(await Product.find({
+        ...categoryFilter,
+        ...inStockFilter,
+        ...discountFilter,
+      }).distinct('price'))
+    )
+    const mainMinPrice = Math.min(
+      ...(await Product.find({
+        ...categoryFilter,
+        ...inStockFilter,
+        ...discountFilter,
+      }).distinct('price'))
+    )
 
     await db.disconnect()
 
     res.status(200).json({
       productsLength,
       products,
+      mainMaxPrice,
+      mainMinPrice,
       pagination: {
         currentPage: page,
         nextPage: page + 1,

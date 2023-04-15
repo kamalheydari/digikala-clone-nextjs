@@ -3,10 +3,31 @@ import apiSlice from 'services/api'
 export const productApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getProducts: builder.query({
-      query: ({ page, filterCategory, search }) => ({
-        url: `/api/products?page_size=10&page=${page}&category=${filterCategory}&search=${search}`,
-        method: 'GET',
-      }),
+      query: ({
+        page,
+        filterCategory,
+        search,
+        sort,
+        price,
+        inStock,
+        discount,
+      }) => {
+        const queryParams = new URLSearchParams({
+          page_size: 10,
+          ...(page && { page }),
+          ...(sort && { sort }),
+          ...(search && { search }),
+          ...(inStock && { inStock }),
+          ...(discount && { discount }),
+          ...(price && { price }),
+          ...(filterCategory && { category: filterCategory }),
+        })
+
+        return {
+          url: `/api/products?${queryParams.toString()}`,
+          method: 'GET',
+        }
+      },
       providesTags: (result, error, arg) =>
         result
           ? [
@@ -18,7 +39,7 @@ export const productApiSlice = apiSlice.injectEndpoints({
             ]
           : ['Product'],
     }),
-    
+
     getSingleProduct: builder.query({
       query: ({ id }) => ({
         url: `/api/products/${id}`,
