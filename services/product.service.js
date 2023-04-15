@@ -11,9 +11,10 @@ export const productApiSlice = apiSlice.injectEndpoints({
         price,
         inStock,
         discount,
+        page_size,
       }) => {
         const queryParams = new URLSearchParams({
-          page_size: 10,
+          ...(page_size && { page_size }),
           ...(page && { page }),
           ...(sort && { sort }),
           ...(search && { search }),

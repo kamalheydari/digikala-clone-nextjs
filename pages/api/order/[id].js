@@ -18,7 +18,6 @@ export default async function (req, res) {
 const getOrder = async (req, res) => {
   try {
     await db.connect()
-    console.log(req.query.id)
     const order = await Order.findOne({ _id: req.query.id })
 
     if (!order) return sendError(res, 404, 'این سفارش وجود ندارد')

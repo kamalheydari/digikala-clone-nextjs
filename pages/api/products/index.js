@@ -69,6 +69,10 @@ const getProducts = async (req, res) => {
       ? { sold: -1 }
       : sort === 1
       ? { createdAt: -1 }
+      : sort === 5
+      ? { rating: -1 }
+      : sort === 6
+      ? { discount: -1 }
       : { _id: -1 }
 
   try {
@@ -82,7 +86,7 @@ const getProducts = async (req, res) => {
       ...searchFilter,
     })
       .select(
-        '-description -info -specification -category -category_levels -sizes -reviews'
+        '-description -info -specification -category -category_levels -sizes  -reviews -numReviews'
       )
       .sort(order)
       .skip((page - 1) * page_size)
