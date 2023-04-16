@@ -27,7 +27,7 @@ export default function Logout() {
     <button
       type='button'
       className='flex justify-between px-7 transition-colors hover:bg-gray-100 py-4  text-xs text-gray-700 w-full border-t border-gray-300 cursor-pointer gap-x-2 md:text-sm'
-      onClick={() => handleLogout()}
+      onClick={handleLogout}
     >
       <Icons.Logout className='text-black icon' />
       <span className='ml-auto mr-3 text-gray-700'>خروج از حساب کاربری</span>

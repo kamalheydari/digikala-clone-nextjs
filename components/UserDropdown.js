@@ -39,9 +39,7 @@ export default function UserDropdown(props) {
             </div>
           </Menu.Item>
 
-          <Menu.Item>
-            <Logout />
-          </Menu.Item>
+          <Logout />
         </Menu.Items>
       </Transition>
     </Menu>

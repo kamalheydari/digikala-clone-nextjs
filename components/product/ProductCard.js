@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 import {
   Icons,
   SpecialSell,
@@ -17,7 +15,7 @@ export default function ProductCard(props) {
 
   //? Render(s)
   return (
-    <Link href={`/products/${product._id}`}>
+    <a target='_blank' href={`/products/${product._id}`}>
       <article
         className={`pt-2 pb-3 border-b border-gray-100 sm:h-[540px] xl:h-[470px] sm:px-3 ${
           !slide && 'sm:border sm:hover:shadow-3xl'
@@ -86,6 +84,6 @@ export default function ProductCard(props) {
           </div>
         </div>
       </article>
-    </Link>
+    </a>
   )
 }

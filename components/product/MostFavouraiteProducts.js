@@ -27,7 +27,6 @@ export default function MostFavouraiteProducts(props) {
   )
 
   //? Render(s)
-  // if (isLoading) return null
 
   return (
     <section className='px-3'>
