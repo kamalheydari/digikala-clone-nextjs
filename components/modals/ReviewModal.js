@@ -38,7 +38,7 @@ export default function ReviewModal(props) {
   } = useForm({
     resolver: yupResolver(reviewSchema),
   })
-  
+
   const {
     fields: positivePointsFields,
     append: appentPositivePoint,
@@ -142,7 +142,7 @@ export default function ReviewModal(props) {
                 <div className='flex justify-between'>
                   {Array(5)
                     .fill('_')
-                    .map((i) => (
+                    .map((_, i) => (
                       <span
                         key={i}
                         className='h-1 w-1 rounded-full mx-1.5 bg-gray-300 inline-block'
