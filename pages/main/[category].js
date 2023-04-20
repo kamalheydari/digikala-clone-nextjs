@@ -27,9 +27,9 @@ export default function MainCategory(props) {
           <title>{`دیجی‌کالا | ${currentCategory.name}`}</title>
         </Head>
 
-        <MainSlider data={slider} />
-
         <div className='py-4 mx-auto space-y-12 xl:mt-28 lg:max-w-[1450px]'>
+          <MainSlider data={slider} />
+
           <DiscountSlider
             categoryId={currentCategory._id}
             currentCategory={currentCategory}

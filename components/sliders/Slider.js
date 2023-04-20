@@ -23,31 +23,31 @@ export default function Slider(props) {
   if (data?.sliders.length === 0) return null
 
   return (
-      <section>
-        <Swiper
-          pagination={{ clickable: true }}
-          autoplay={{
-            delay: 2500,
-            loop: true,
-            disableOnInteraction: false,
-          }}
-          modules={[Pagination, Autoplay]}
-          className='mySwiper'
-        >
-          {data?.sliders
-            .filter((item) => item.public)
-            .map((item, index) => (
-              <SwiperSlide key={index}>
-                {item.uri.length > 0 ? (
-                  <a href={item.uri} target='_blank' className=''>
-                    <SliderImage item={item} />
-                  </a>
-                ) : (
+    <section className='lg:mx-3'>
+      <Swiper
+        pagination={{ clickable: true }}
+        autoplay={{
+          delay: 2500,
+          loop: true,
+          disableOnInteraction: false,
+        }}
+        modules={[Pagination, Autoplay]}
+        className='mySwiper overflow-hidden lg:rounded-2xl'
+      >
+        {data?.sliders
+          .filter((item) => item.public)
+          .map((item, index) => (
+            <SwiperSlide key={index}>
+              {item.uri.length > 0 ? (
+                <a href={item.uri} target='_blank' className=''>
                   <SliderImage item={item} />
-                )}
-              </SwiperSlide>
-            ))}
-        </Swiper>
-      </section>
-    )
+                </a>
+              ) : (
+                <SliderImage item={item} />
+              )}
+            </SwiperSlide>
+          ))}
+      </Swiper>
+    </section>
+  )
 }

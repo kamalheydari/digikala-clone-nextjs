@@ -31,9 +31,8 @@ export default function Home(props) {
           />
         </Head>
 
-        <MainSlider data={slider} />
-
         <div className='py-4 mx-auto space-y-24 xl:mt-28 lg:max-w-[1450px]'>
+          <MainSlider data={slider} />
           <DiscountSlider currentCategory={currentCategory} />
 
           <Categories
