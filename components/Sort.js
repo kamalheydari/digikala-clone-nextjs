@@ -12,14 +12,21 @@ export default function Sort({ handleChangeRoute }) {
   const [isSort, sortHandlers] = useDisclosure()
   const { query } = useRouter()
 
-  let sortName = query.sort ? sorts[query.sort - 1].name : sorts[0].name
-  let sortValue = query.sort ? sorts[query.sort - 1].value : sorts[0].value
+  //? State
+  const [sort, setSort] = useState(
+    query.sort ? sorts[query.sort - 1] : sorts[0]
+  )
 
   //? Handlers
   const handleChangeSort = (item) => {
-    sortHandlers.close()
+    setSort(sorts[item.value - 1])
     handleChangeRoute({ sort: item.value })
+    sortHandlers.close()
   }
+
+  useEffect(() => {
+    setSort(sorts[0])
+  }, [query.category])
 
   //? Render(s)
   return (
@@ -31,7 +38,7 @@ export default function Sort({ handleChangeRoute }) {
           onClick={sortHandlers.open}
         >
           <Icons.Sort className='w-6 h-6 icon' />
-          <span>{sortName}</span>
+          <span>{sort?.name}</span>
         </button>
 
         <Modal
@@ -53,7 +60,7 @@ export default function Sort({ handleChangeRoute }) {
                     >
                       {item.name}
                     </button>
-                    {sortValue === item.value && (
+                    {sort?.value === item.value && (
                       <Icons.Check className='icon' />
                     )}
                   </div>
@@ -72,7 +79,7 @@ export default function Sort({ handleChangeRoute }) {
           <button
             key={i}
             className={`py-0.5  text-sm ${
-              sortValue === item.value ? 'text-red-500' : 'text-gray-600'
+              sort?.value === item.value ? 'text-red-500' : 'text-gray-600'
             }`}
             type='button'
             name='sort'
