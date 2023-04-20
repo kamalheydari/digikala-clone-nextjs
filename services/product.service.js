@@ -4,24 +4,28 @@ export const productApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getProducts: builder.query({
       query: ({
+        category,
+        page_size,
         page,
-        filterCategory,
-        search,
         sort,
-        price,
+        search,
         inStock,
         discount,
-        page_size,
+        price,
       }) => {
-        const queryParams = new URLSearchParams({
-          ...(page_size && { page_size }),
-          ...(page && { page }),
-          ...(sort && { sort }),
-          ...(search && { search }),
-          ...(inStock && { inStock }),
-          ...(discount && { discount }),
-          ...(price && { price }),
-          ...(filterCategory && { category: filterCategory }),
+        const queryParams = new URLSearchParams()
+
+        Object.entries({
+          category,
+          page_size,
+          page,
+          sort,
+          search,
+          inStock,
+          discount,
+          price,
+        }).forEach(([key, value]) => {
+          if (value) queryParams.set(key, value)
         })
 
         return {
