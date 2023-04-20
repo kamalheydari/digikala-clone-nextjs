@@ -14,7 +14,11 @@ import {
   ClientLayout,
 } from 'components'
 
-import { useChangeRoute } from 'hooks'
+import { useChangeRoute, useMediaQuery } from 'hooks'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
+import { loadFilters } from 'store'
+import { useDispatch } from 'react-redux'
 
 export default function ProductsHome(props) {
   //? Props
@@ -27,8 +31,19 @@ export default function ProductsHome(props) {
     childCategories,
   } = props
 
+  //? Assets
+  const { query } = useRouter()
+  const isMobile = useMediaQuery('(max-width:1024px)')
+
   //? Handlers
   const changeRoute = useChangeRoute({ shallow: false })
+  const handleChangeRoute = (newQueries) => {
+    changeRoute({
+      ...query,
+      page: 1,
+      ...newQueries,
+    })
+  }
 
   //? Render(s)
   return (
@@ -45,17 +60,21 @@ export default function ProductsHome(props) {
             <ProductsAside
               mainMaxPrice={mainMaxPrice}
               mainMinPrice={mainMinPrice}
+              handleChangeRoute={handleChangeRoute}
             />
             <div className='w-full p-4 mt-3 '>
               {/* Filters & Sort */}
               <div className='divide-y-2 '>
                 <div className='flex py-2 gap-x-3'>
+                  {/* {isMobile && (
+                    )} */}
                   <Filter
                     mainMaxPrice={mainMaxPrice}
                     mainMinPrice={mainMinPrice}
+                    handleChangeRoute={handleChangeRoute}
                   />
 
-                  <Sort />
+                  <Sort handleChangeRoute={handleChangeRoute} />
                 </div>
 
                 <div className='flex justify-between py-2'>
@@ -86,7 +105,7 @@ export default function ProductsHome(props) {
             <div className='py-4 mx-auto lg:max-w-5xl'>
               <Pagination
                 pagination={pagination}
-                changeRoute={changeRoute}
+                changeRoute={handleChangeRoute}
                 section='_products'
                 client
               />
@@ -103,9 +122,11 @@ export async function getServerSideProps({ query }) {
   const page = +query.page || 1
   const page_size = +query.page_size || 10
   const sort = +query.sort || 1
-  const inStock = query.inStock || null
-  const discount = query.discount || null
+  const inStock = query.inStock
+  const discount = query.discount
   const price = query.price
+  const max_price = +query.max_price
+  const min_price = +query.min_price
 
   //? Filters
   await db.connect()
@@ -128,6 +149,22 @@ export async function getServerSideProps({ query }) {
 
   const discountFilter =
     discount === 'true' ? { discount: { $gte: 1 }, inStock: { $gte: 1 } } : {}
+
+  // const priceFilter =
+  //   min_price && max_price
+  //     ? {
+  //         price: {
+  //           $gte: min_price,
+  //           $lte: max_price,
+  //         },
+  //       }
+  //     : min_price
+  //     ? {
+  //         price: { $gte: min_price },
+  //       }
+  //     : max_price
+  //     ? { price: { $gte: max_price } }
+  //     : {}
 
   const priceFilter = price
     ? {
@@ -174,15 +211,15 @@ export async function getServerSideProps({ query }) {
   const mainMaxPrice = Math.max(
     ...(await Product.find({
       ...categoryFilter,
-      ...inStockFilter,
       ...discountFilter,
+      inStock: { $gte: 1 },
     }).distinct('price'))
   )
   const mainMinPrice = Math.min(
     ...(await Product.find({
       ...categoryFilter,
-      ...inStockFilter,
       ...discountFilter,
+      inStock: { $gte: 1 },
     }).distinct('price'))
   )
 

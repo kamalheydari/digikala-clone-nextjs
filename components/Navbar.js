@@ -23,13 +23,13 @@ export default function Navbar() {
     setActiveMinCat(cat)
   }
   const hanldeDeactive = () => {
-    setActiveMinCat(categories.filter((category) => category.level === 1)[0])
+    setActiveMinCat(categories?.filter((category) => category.level === 1)[0])
   }
 
   //? Re-Renders
   useEffect(() => {
     if (categories)
-      setActiveMinCat(categories.filter((category) => category.level === 1)[0])
+      setActiveMinCat(categories?.filter((category) => category.level === 1)[0])
   }, [categories])
 
   //? Render

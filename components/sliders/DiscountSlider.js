@@ -19,7 +19,7 @@ export default function DiscountSlider(props) {
   const { products, isLoading } = useGetProductsQuery(
     {
       sort: 6,
-      filterCategory: categoryId,
+      category: categoryId,
       page_size: 15,
       discount: true,
     },

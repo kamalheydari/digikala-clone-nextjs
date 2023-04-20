@@ -16,7 +16,7 @@ export default function MostFavouraiteProducts(props) {
   const { products, isLoading } = useGetProductsQuery(
     {
       sort: 5,
-      filterCategory: categoryId,
+      category: categoryId,
     },
     {
       selectFromResult: ({ data, isLoading }) => ({

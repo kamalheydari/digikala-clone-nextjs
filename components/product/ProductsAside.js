@@ -2,7 +2,7 @@ import { FilterOperation } from 'components'
 
 export default function ProductsAside(props) {
   //? Props
-  const { mainMaxPrice, mainMinPrice } = props
+  const { mainMaxPrice, mainMinPrice, handleChangeRoute } = props
 
   //? Render(s)
   return (
@@ -10,6 +10,7 @@ export default function ProductsAside(props) {
       <FilterOperation
         mainMaxPrice={mainMaxPrice}
         mainMinPrice={mainMinPrice}
+        handleChangeRoute={handleChangeRoute}
       />
     </aside>
   )

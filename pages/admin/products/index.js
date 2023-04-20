@@ -60,7 +60,7 @@ function Products() {
   //*    Get Products Data
   const { data, isFetching, error, isError, refetch } = useGetProductsQuery({
     page: router.query?.page || 1,
-    filterCategory: router.query?.filterCategory || filterCategory,
+    category: router.query?.filterCategory || filterCategory,
     search: router.query?.search || search,
   })
 

@@ -12,7 +12,7 @@ export default function BestSellsSlider(props) {
   const { products, isLoading } = useGetProductsQuery(
     {
       sort: 2,
-      filterCategory: categoryId,
+      category: categoryId,
       page_size: 15,
     },
     {
