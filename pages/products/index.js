@@ -14,11 +14,8 @@ import {
   ClientLayout,
 } from 'components'
 
-import { useChangeRoute, useMediaQuery } from 'hooks'
+import { useChangeRoute } from 'hooks'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
-import { loadFilters } from 'store'
-import { useDispatch } from 'react-redux'
 
 export default function ProductsHome(props) {
   //? Props
@@ -33,7 +30,6 @@ export default function ProductsHome(props) {
 
   //? Assets
   const { query } = useRouter()
-  const isMobile = useMediaQuery('(max-width:1024px)')
 
   //? Handlers
   const changeRoute = useChangeRoute({ shallow: false })
@@ -66,8 +62,6 @@ export default function ProductsHome(props) {
               {/* Filters & Sort */}
               <div className='divide-y-2 '>
                 <div className='flex py-2 gap-x-3'>
-                  {/* {isMobile && (
-                    )} */}
                   <Filter
                     mainMaxPrice={mainMaxPrice}
                     mainMinPrice={mainMinPrice}
@@ -135,6 +129,8 @@ export async function getServerSideProps({ query }) {
     slug: category,
   }).lean()
 
+  if (!currentCategory) return { notFound: true }
+
   const childCategories = await Category.find({
     parent: currentCategory._id,
   }).lean()
@@ -149,22 +145,6 @@ export async function getServerSideProps({ query }) {
 
   const discountFilter =
     discount === 'true' ? { discount: { $gte: 1 }, inStock: { $gte: 1 } } : {}
-
-  // const priceFilter =
-  //   min_price && max_price
-  //     ? {
-  //         price: {
-  //           $gte: min_price,
-  //           $lte: max_price,
-  //         },
-  //       }
-  //     : min_price
-  //     ? {
-  //         price: { $gte: min_price },
-  //       }
-  //     : max_price
-  //     ? { price: { $gte: max_price } }
-  //     : {}
 
   const priceFilter = price
     ? {

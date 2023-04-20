@@ -1,17 +1,37 @@
 import { useRouter } from 'next/router'
 
 export default function useChangeRoute(options = { shallow: true }) {
-  let { query, pathname, push } = useRouter()
+  const { pathname, push,replace } = useRouter()
 
-  const chaneRoute = (newQueris) => {
-    if (!newQueris.hasOwnProperty('page')) newQueris.page = 1
+  const changeRoute = (newQueries) => {
+    const {
+      category,
+      page_size,
+      page,
+      sort,
+      search,
+      inStock,
+      discount,
+      price,
+    } = newQueries
 
-    query = { ...query, ...newQueris }
+    const queryParams = new URLSearchParams()
 
-    const queryParams = new URLSearchParams(query)
+    Object.entries({
+      category,
+      page_size,
+      page,
+      sort,
+      search,
+      inStock,
+      discount,
+      price,
+    }).forEach(([key, value]) => {
+      if (value) queryParams.set(key, value)
+    })
 
-    push(`${pathname}?${queryParams.toString()}`, undefined, { ...options })
+    replace(`${pathname}?${queryParams.toString()}`, undefined, { ...options })
   }
 
-  return chaneRoute
+  return changeRoute
 }

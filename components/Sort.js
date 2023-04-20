@@ -1,29 +1,24 @@
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { sorts } from 'utils'
 
 import { Icons, Modal } from 'components'
 
-import { useChangeRoute, useDisclosure } from 'hooks'
+import { useDisclosure } from 'hooks'
 
-export default function Sort() {
+export default function Sort({ handleChangeRoute }) {
   //? Assets
   const [isSort, sortHandlers] = useDisclosure()
   const { query } = useRouter()
 
-  //? State
-  const [sort, setSort] = useState(
-    query.sort ? sorts[query.sort - 1] : sorts[0]
-  )
+  let sortName = query.sort ? sorts[query.sort - 1].name : sorts[0].name
+  let sortValue = query.sort ? sorts[query.sort - 1].value : sorts[0].value
 
   //? Handlers
-  const changeRoute = useChangeRoute({ shallow: false })
-
   const handleChangeSort = (item) => {
-    setSort(sorts[item.value - 1])
-    changeRoute({ sort: item.value })
     sortHandlers.close()
+    handleChangeRoute({ sort: item.value })
   }
 
   //? Render(s)
@@ -36,7 +31,7 @@ export default function Sort() {
           onClick={sortHandlers.open}
         >
           <Icons.Sort className='w-6 h-6 icon' />
-          <span>{sort?.name}</span>
+          <span>{sortName}</span>
         </button>
 
         <Modal
@@ -58,7 +53,7 @@ export default function Sort() {
                     >
                       {item.name}
                     </button>
-                    {sort?.value === item.value && (
+                    {sortValue === item.value && (
                       <Icons.Check className='icon' />
                     )}
                   </div>
@@ -77,7 +72,7 @@ export default function Sort() {
           <button
             key={i}
             className={`py-0.5  text-sm ${
-              sort?.value === item.value ? 'text-red-500' : 'text-gray-600'
+              sortValue === item.value ? 'text-red-500' : 'text-gray-600'
             }`}
             type='button'
             name='sort'
