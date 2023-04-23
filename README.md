@@ -9,6 +9,20 @@ A advance clone of digikala includes products page, single product page, categor
 - Redux - Toolkit
 - JWT
 
+## Features:
+Full-stack e-commerce website
+- Allows registered users to place orders, write product reviews, and update their account information.
+
+Admin privileges
+- Enables creation of new product categories.
+- Allows definition of unique specifications and features for each category.
+- Manages banners, sliders, and new product listings.
+- Updates the status of orders and reviews.
+
+User-friendly search, filter, and sort functions
+- Enables easy product discovery and sorting based on user preferences.
+- Displays top discount products, most favorited items, and best-selling products for each category.
+
 ## Demo
 
 See demo on vercel
