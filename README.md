@@ -9,7 +9,7 @@ A advance clone of digikala includes products page, single product page, categor
 - Redux - Toolkit
 - JWT
 
-## Features:
+## Features
 Full-stack e-commerce website
 - Allows registered users to place orders, write product reviews, and update their account information.
 
