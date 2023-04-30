@@ -28,7 +28,6 @@ export default function FilterOperation(props) {
     if (e.target.type === 'checkbox') {
       dispatch(updateFilter({ name: [e.target.name], value: e.target.checked }))
       handleChangeRoute({ [e.target.name]: e.target.checked })
-      if (onClose) onClose()
     } else if (e.target.type === 'number') {
       dispatch(updateFilter({ name: [e.target.name], value: +e.target.value }))
     }
@@ -61,22 +60,23 @@ export default function FilterOperation(props) {
 
   //*   Change Route After Debounce
   useEffect(() => {
-    if (debouncedMinPrice && mainMinPrice !== debouncedMinPrice) {
+    if (debouncedMinPrice && mainMinPrice !== debouncedMinPrice)
       handleChangeRoute({
         price: `${debouncedMinPrice}-${debouncedMaxPrice}`,
       })
-      if (onClose) onClose()
-    }
   }, [debouncedMinPrice])
 
   useEffect(() => {
-    if (debouncedMaxPrice && mainMaxPrice !== debouncedMaxPrice) {
+    if (debouncedMaxPrice && mainMaxPrice !== debouncedMaxPrice)
       handleChangeRoute({
         price: `${debouncedMinPrice}-${debouncedMaxPrice}`,
       })
-      if (onClose) onClose()
-    }
   }, [debouncedMaxPrice])
+
+  //*   Close Modal on Change Filter
+  useEffect(() => {
+    if (onClose) onClose()
+  }, [filters.discount, filters.inStock, debouncedMaxPrice, debouncedMinPrice])
 
   //? Render(s)
   return (

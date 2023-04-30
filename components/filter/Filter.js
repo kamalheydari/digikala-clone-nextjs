@@ -11,7 +11,7 @@ export default function Filter(props) {
 
   //? Render(s)
   return (
-    <div className='xl:hidden'>
+    <>
       <button
         type='button'
         className='flex items-center gap-x-1'
@@ -38,6 +38,6 @@ export default function Filter(props) {
           </Modal.Body>
         </Modal.Content>
       </Modal>
-    </div>
+    </>
   )
 }

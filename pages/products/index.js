@@ -10,17 +10,16 @@ import {
   Filter,
   ClientLayout,
   ProductSkeleton,
-  Skeleton,
 } from 'components'
 
 import { useChangeRoute, useMediaQuery } from 'hooks'
+
 import { useGetCategoriesQuery, useGetProductsQuery } from 'services'
-import { useMemo } from 'react'
 
 export default function ProductsHome() {
   //? Assets
   const { query } = useRouter()
-  // const isDesktop = useMediaQuery('(min-width:1280px)')
+  const isDesktop = useMediaQuery('(min-width:1280px)')
 
   //? Handlers
   const changeRoute = useChangeRoute()
@@ -66,31 +65,22 @@ export default function ProductsHome() {
           />
 
           <div className='px-1 lg:flex lg:gap-x-0 xl:gap-x-3'>
-            {/* {isFetching ? (
-              <Skeleton.Item
-                height='h-[304px]'
-                width='xl:w-60 2xl:w-64'
-                animated='background'
-                className='xl:mt-6'
-              />
-            ) : (
-              )} */}
-              <ProductsAside
-                mainMaxPrice={data?.mainMaxPrice}
-                mainMinPrice={data?.mainMinPrice}
-                handleChangeRoute={handleChangeRoute}
-              />
+            <ProductsAside
+              mainMaxPrice={data?.mainMaxPrice}
+              mainMinPrice={data?.mainMinPrice}
+              handleChangeRoute={handleChangeRoute}
+            />
             <div id='_products' className='w-full p-4 mt-3 '>
               {/* Filters & Sort */}
               <div className='divide-y-2 '>
                 <div className='flex py-2 gap-x-3'>
-                  {/* {!isDesktop && (
-                    )} */}
+                  {!isDesktop && (
                     <Filter
                       mainMaxPrice={data?.mainMaxPrice}
                       mainMinPrice={data?.mainMinPrice}
                       handleChangeRoute={handleChangeRoute}
                     />
+                  )}
 
                   <Sort handleChangeRoute={handleChangeRoute} />
                 </div>
