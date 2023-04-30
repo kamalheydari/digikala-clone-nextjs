@@ -68,6 +68,7 @@ export { default as NavbarSkeleton } from './skeleton/NavbarSkeleton'
 export { default as SidebarSkeleton } from './skeleton/SidebarSkeleton'
 export { default as OrderSkeleton } from './skeleton/OrderSkeleton'
 export { default as ProductSkeleton } from './skeleton/ProductSkeleton'
+export { default as SubCategoriesSkeleton } from './skeleton/SubCategoriesSkeleton'
 
 //* CART COMPONENTS
 export { default as Cart } from './cart/Cart'

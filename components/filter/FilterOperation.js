@@ -10,7 +10,7 @@ import { loadFilters, updateFilter, resetFilter } from 'store'
 
 export default function FilterOperation(props) {
   //? Props
-  const { mainMaxPrice, mainMinPrice, handleChangeRoute } = props
+  const { mainMaxPrice, mainMinPrice, handleChangeRoute, onClose } = props
 
   //? Assets
   const dispatch = useDispatch()
@@ -28,6 +28,7 @@ export default function FilterOperation(props) {
     if (e.target.type === 'checkbox') {
       dispatch(updateFilter({ name: [e.target.name], value: e.target.checked }))
       handleChangeRoute({ [e.target.name]: e.target.checked })
+      if (onClose) onClose()
     } else if (e.target.type === 'number') {
       dispatch(updateFilter({ name: [e.target.name], value: +e.target.value }))
     }
@@ -36,6 +37,7 @@ export default function FilterOperation(props) {
   const handleResetFilters = () => {
     handleChangeRoute({ inStock: '', discount: '', price: '' })
     dispatch(resetFilter({ maxPrice: mainMaxPrice, minPrice: mainMinPrice }))
+    if (onClose) onClose()
   }
 
   const canReset =
@@ -55,21 +57,25 @@ export default function FilterOperation(props) {
         ...query,
       })
     )
-  }, [query.category])
+  }, [query.category, mainMaxPrice, mainMinPrice])
 
   //*   Change Route After Debounce
   useEffect(() => {
-    if (debouncedMinPrice && mainMinPrice !== debouncedMinPrice)
+    if (debouncedMinPrice && mainMinPrice !== debouncedMinPrice) {
       handleChangeRoute({
         price: `${debouncedMinPrice}-${debouncedMaxPrice}`,
       })
+      if (onClose) onClose()
+    }
   }, [debouncedMinPrice])
 
   useEffect(() => {
-    if (debouncedMaxPrice && mainMaxPrice !== debouncedMaxPrice)
+    if (debouncedMaxPrice && mainMaxPrice !== debouncedMaxPrice) {
       handleChangeRoute({
         price: `${debouncedMinPrice}-${debouncedMaxPrice}`,
       })
+      if (onClose) onClose()
+    }
   }, [debouncedMaxPrice])
 
   //? Render(s)
@@ -111,7 +117,7 @@ export default function FilterOperation(props) {
               className='w-3/4 px-1 text-xl text-left border-b border-gray-200 outline-none farsi-digits'
               style={{ direction: 'ltr' }}
               name='minPrice'
-              value={filters.minPrice}
+              value={filters.minPrice || 0}
               onChange={handlefilter}
             />
             <Toman className='w-6 h-6' />
@@ -123,7 +129,7 @@ export default function FilterOperation(props) {
               className='w-3/4 px-1 text-xl text-left border-b border-gray-200 outline-none farsi-digits'
               style={{ direction: 'ltr' }}
               name='maxPrice'
-              value={filters.maxPrice}
+              value={filters.maxPrice || 0}
               onChange={handlefilter}
             />
 

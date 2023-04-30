@@ -33,6 +33,7 @@ export default function Filter(props) {
               mainMinPrice={mainMinPrice}
               mainMaxPrice={mainMaxPrice}
               handleChangeRoute={handleChangeRoute}
+              onClose={filtersHandlers.close}
             />
           </Modal.Body>
         </Modal.Content>

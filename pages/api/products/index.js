@@ -106,15 +106,13 @@ const getProducts = async (req, res) => {
     const mainMaxPrice = Math.max(
       ...(await Product.find({
         ...categoryFilter,
-        ...inStockFilter,
-        ...discountFilter,
+        inStock: { $gte: 1 },
       }).distinct('price'))
     )
     const mainMinPrice = Math.min(
       ...(await Product.find({
         ...categoryFilter,
-        ...inStockFilter,
-        ...discountFilter,
+        inStock: { $gte: 1 },
       }).distinct('price'))
     )
 
