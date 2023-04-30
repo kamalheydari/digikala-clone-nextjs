@@ -1,4 +1,4 @@
-import { Product } from 'models'
+import { Category, Product } from 'models'
 
 import auth from 'middleware/auth'
 
@@ -29,54 +29,57 @@ const getProducts = async (req, res) => {
   const discount = req.query.discount || null
   const price = req.query.price
 
-  //? Filters
-  const categoryFilter = category
-    ? {
-        category: { $in: category },
-      }
-    : {}
-
-  const searchFilter = search
-    ? {
-        title: {
-          $regex: search,
-          $options: 'i',
-        },
-      }
-    : {}
-
-  const inStockFilter = inStock === 'true' ? { inStock: { $gte: 1 } } : {}
-
-  const discountFilter =
-    discount === 'true' ? { discount: { $gte: 1 }, inStock: { $gte: 1 } } : {}
-
-  const priceFilter = price
-    ? {
-        price: {
-          $gte: +price.split('-')[0],
-          $lte: +price.split('-')[1],
-        },
-      }
-    : {}
-
-  //? Sort
-  const order =
-    sort === 3
-      ? { price: 1 }
-      : sort === 4
-      ? { price: -1 }
-      : sort === 2
-      ? { sold: -1 }
-      : sort === 1
-      ? { createdAt: -1 }
-      : sort === 5
-      ? { rating: -1 }
-      : sort === 6
-      ? { discount: -1 }
-      : { _id: -1 }
-
   try {
     await db.connect()
+
+    //? Filters
+
+    const currentCategory = await Category.findOne({ slug: category })
+
+    const categoryFilter = currentCategory
+      ? {
+          category: { $in: currentCategory._id.toString() },
+        }
+      : {}
+
+    const searchFilter = search
+      ? {
+          title: {
+            $regex: search,
+            $options: 'i',
+          },
+        }
+      : {}
+
+    const inStockFilter = inStock === 'true' ? { inStock: { $gte: 1 } } : {}
+
+    const discountFilter =
+      discount === 'true' ? { discount: { $gte: 1 }, inStock: { $gte: 1 } } : {}
+
+    const priceFilter = price
+      ? {
+          price: {
+            $gte: +price.split('-')[0],
+            $lte: +price.split('-')[1],
+          },
+        }
+      : {}
+
+    //? Sort
+    const order =
+      sort === 3
+        ? { price: 1 }
+        : sort === 4
+        ? { price: -1 }
+        : sort === 2
+        ? { sold: -1 }
+        : sort === 1
+        ? { createdAt: -1 }
+        : sort === 5
+        ? { rating: -1 }
+        : sort === 6
+        ? { discount: -1 }
+        : { _id: -1 }
 
     const products = await Product.find({
       ...categoryFilter,

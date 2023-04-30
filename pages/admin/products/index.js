@@ -48,7 +48,6 @@ function Products() {
   const [deleteInfo, setDeleteInfo] = useState({
     id: '',
   })
-  const [filterCategory, setFilterCategory] = useState('')
   const [search, setSearch] = useState(router.query?.search || '')
   const [selectedCategories, setSelectedCategories] = useState({
     level_one: {},
@@ -60,7 +59,7 @@ function Products() {
   //*    Get Products Data
   const { data, isFetching, error, isError, refetch } = useGetProductsQuery({
     page: router.query?.page || 1,
-    category: router.query?.filterCategory || filterCategory,
+    category: router.query?.category || '',
     search: router.query?.search || search,
   })
 
@@ -94,19 +93,16 @@ function Products() {
     }
 
     if (selectedCategories?.level_three?._id) {
-      setFilterCategory(selectedCategories?.level_three._id)
-      queris.filterCategory = selectedCategories?.level_three._id
+      queris.category = selectedCategories?.level_three.slug
       queris.level_one = selectedCategories?.level_one._id
       queris.level_two = selectedCategories?.level_two._id
       queris.level_three = selectedCategories?.level_three._id
     } else if (selectedCategories?.level_two?._id) {
-      setFilterCategory(selectedCategories?.level_two._id)
-      queris.filterCategory = selectedCategories?.level_two?._id
+      queris.category = selectedCategories?.level_two?.slug
       queris.level_one = selectedCategories?.level_one._id
       queris.level_two = selectedCategories?.level_two._id
     } else if (selectedCategories?.level_one?._id) {
-      setFilterCategory(selectedCategories?.level_one._id)
-      queris.filterCategory = selectedCategories?.level_one._id
+      queris.category = selectedCategories?.level_one.slug
       queris.level_one = selectedCategories?.level_one._id
     }
 
@@ -126,7 +122,6 @@ function Products() {
       level_two: {},
       level_three: {},
     })
-    setFilterCategory('')
     refetch()
     router.push('/admin/products', undefined, { shallow: true })
   }
