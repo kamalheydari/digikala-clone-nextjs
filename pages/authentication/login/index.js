@@ -19,7 +19,7 @@ import { TextField, LoginBtn, Logo, HandleResponse } from 'components'
 function LoginPage() {
   //? Assets
   const dispatch = useDispatch()
-  const router = useRouter()
+  const { replace, query } = useRouter()
 
   //? Login User
   const [login, { data, isSuccess, isError, isLoading, error }] =
@@ -67,7 +67,7 @@ function LoginPage() {
           onSuccess={() => {
             dispatch(userLogin(data.data.access_token))
             reset()
-            router.push('/')
+            replace(query?.redirectTo || '/')
           }}
         />
       )}

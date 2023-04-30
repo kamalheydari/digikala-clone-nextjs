@@ -6,11 +6,11 @@ import { Button, Modal } from 'components'
 export default function RedirectToLogin(props) {
   //? Props
   const { isShow, onClose, title, text } = props
-  const router = useRouter()
+  const { push, asPath } = useRouter()
 
   //? Handlers
   const handleClick = () => {
-    router.push('/authentication/login')
+    push(`/authentication/login?redirectTo=${asPath}`)
 
     onClose()
   }

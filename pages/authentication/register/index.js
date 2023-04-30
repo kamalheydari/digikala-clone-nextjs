@@ -18,11 +18,11 @@ import { TextField, LoginBtn, RedirectToLogin, Logo } from 'components'
 
 import { useDisclosure } from 'hooks'
 
- function RegisterPage() {
+function RegisterPage() {
   //? Assets
   const [isShowRedirectModal, redirectModalHandlers] = useDisclosure()
   const dispatch = useDispatch()
-  const router = useRouter()
+  const { query, replace } = useRouter()
 
   //? Create User
   const [createUser, { data, isSuccess, isError, isLoading, error }] =
@@ -41,7 +41,7 @@ import { useDisclosure } from 'hooks'
       )
 
       reset()
-      router.push('/')
+      replace(query?.redirectTo || '/')
     }
   }, [isSuccess])
 
