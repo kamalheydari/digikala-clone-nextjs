@@ -15,8 +15,9 @@ import {
 import { useChangeRoute, useMediaQuery } from 'hooks'
 
 import { useGetCategoriesQuery, useGetProductsQuery } from 'services'
+import dynamic from 'next/dynamic'
 
-export default function ProductsHome() {
+function ProductsHome() {
   //? Assets
   const { query } = useRouter()
   const isDesktop = useMediaQuery('(min-width:1280px)')
@@ -125,3 +126,5 @@ export default function ProductsHome() {
     </>
   )
 }
+
+export default dynamic(() => Promise.resolve(ProductsHome), { ssr: false })
