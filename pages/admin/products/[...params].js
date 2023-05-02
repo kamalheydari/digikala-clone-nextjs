@@ -261,7 +261,10 @@ function Product() {
                     />
                   </div>
 
-                  <ImageList control={control} name='images' />
+                  <ImageList
+                    control={control}
+                    name='images'
+                  />
 
                   <div className='space-y-4 md:flex md:gap-x-2 md:items-baseline md:justify-evenly'>
                     <TextField

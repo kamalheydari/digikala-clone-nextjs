@@ -23,6 +23,7 @@ import {
   ConfirmUpdateModal,
   BigLoading,
   DashboardLayout,
+  UploadImage,
 } from 'components'
 
 import { useDisclosure } from 'hooks'
@@ -90,6 +91,7 @@ function CreateCategory() {
     register,
     watch,
     getValues,
+    setValue,
   } = useForm({
     resolver: yupResolver(categorySchema),
     defaultValues: {
@@ -134,6 +136,7 @@ function CreateCategory() {
     })
     confirmUpdateModalHandlers.open()
   }
+  const handleAddUploadedImageUrl = (url) => setValue('image', url)
 
   return (
     <>
@@ -208,7 +211,7 @@ function CreateCategory() {
             ) : (
               <section className='p-3 md:px-3 xl:px-8 2xl:px-10'>
                 <form
-                  className='flex flex-col justify-between flex-1 pl-4 overflow-y-auto gap-y-5'
+                  className='flex flex-col justify-between flex-1 overflow-y-auto gap-y-5'
                   onSubmit={handleSubmit(submitHander)}
                 >
                   <TextField
@@ -233,6 +236,12 @@ function CreateCategory() {
                     name='image'
                     direction='ltr'
                   />
+
+                  <UploadImage
+                    folder='/icons'
+                    handleAddUploadedImageUrl={handleAddUploadedImageUrl}
+                  />
+                  
                   {getValues('image') && (
                     <Image
                       src={getValues('image')}

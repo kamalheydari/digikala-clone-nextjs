@@ -21,6 +21,7 @@ import {
   Icons,
   PageContainer,
   TextField,
+  UploadImage,
 } from 'components'
 import { Disclosure } from '@headlessui/react'
 
@@ -70,7 +71,7 @@ function Banner() {
   })
 
   //? Hook Form
-  const { control, getValues, reset, register } = useForm({
+  const { control, getValues, reset, register, setValue } = useForm({
     defaultValues,
   })
 
@@ -189,6 +190,9 @@ function Banner() {
     setDeleteInfo({ ...deleteInfo, id: data_get?._id })
     confirmDeleteModalHandlers.open()
   }
+
+  const handleAddUploadedImageUrl = (url) =>
+    setValue('newBanner.image.url', url)
 
   //? Local Components
   const RadioButtons = ({ name }) => (
@@ -322,6 +326,14 @@ function Banner() {
                               control={control}
                               name='newBanner.title'
                             />
+
+                            <TextField
+                              label='آدرس لینک'
+                              direction='ltr'
+                              control={control}
+                              name='newBanner.uri'
+                            />
+
                             <TextField
                               label='آدرس تصویر'
                               direction='ltr'
@@ -329,11 +341,11 @@ function Banner() {
                               name='newBanner.image.url'
                             />
 
-                            <TextField
-                              label='آدرس لینک'
-                              direction='ltr'
-                              control={control}
-                              name='newBanner.uri'
+                            <UploadImage
+                              folder='/banners'
+                              handleAddUploadedImageUrl={
+                                handleAddUploadedImageUrl
+                              }
                             />
 
                             <Checkbox
@@ -379,17 +391,24 @@ function Banner() {
                           />
 
                           <TextField
+                            label='آدرس لینک'
+                            direction='ltr'
+                            control={control}
+                            name={`banners.${idx}.uri`}
+                          />
+
+                          <TextField
                             label='آدرس تصویر'
                             direction='ltr'
                             control={control}
                             name={`banners.${idx}.image.url`}
                           />
 
-                          <TextField
-                            label='آدرس لینک'
-                            direction='ltr'
-                            control={control}
-                            name={`banners.${idx}.uri`}
+                          <UploadImage
+                            folder='/banners'
+                            handleAddUploadedImageUrl={(url) => {
+                              setValue(`banners.${idx}.image.url`, url)
+                            }}
                           />
 
                           {/* <Checkbox name={`banners.${idx}.public`} /> */}

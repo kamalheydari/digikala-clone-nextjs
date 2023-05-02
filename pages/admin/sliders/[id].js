@@ -28,6 +28,7 @@ import {
   Icons,
   PageContainer,
   TextField,
+  UploadImage,
 } from 'components'
 import { Disclosure } from '@headlessui/react'
 
@@ -63,10 +64,9 @@ function Slider() {
   })
 
   //? Hook Form
-  const { control, getValues, reset } = useForm({
+  const { control, getValues, reset, setValue } = useForm({
     defaultValues,
   })
-
   const { fields, remove, prepend } = useFieldArray({
     name: 'sliders',
     control,
@@ -182,6 +182,9 @@ function Slider() {
     confirmDeleteModalHandlers.open()
   }
 
+  const handleAddUploadedImageUrl = (url) =>
+    setValue('newSlider.image.url', url)
+
   //? Render(s)
   return (
     <>
@@ -293,6 +296,14 @@ function Slider() {
                               control={control}
                               name='newSlider.title'
                             />
+
+                            <TextField
+                              label='آدرس لینک'
+                              direction='ltr'
+                              control={control}
+                              name='newSlider.uri'
+                            />
+
                             <TextField
                               label='آدرس تصویر'
                               direction='ltr'
@@ -300,11 +311,11 @@ function Slider() {
                               name='newSlider.image.url'
                             />
 
-                            <TextField
-                              label='آدرس لینک'
-                              direction='ltr'
-                              control={control}
-                              name='newSlider.uri'
+                            <UploadImage
+                              folder='/sliders'
+                              handleAddUploadedImageUrl={
+                                handleAddUploadedImageUrl
+                              }
                             />
 
                             <Checkbox
@@ -342,17 +353,24 @@ function Slider() {
                           />
 
                           <TextField
+                            label='آدرس لینک'
+                            direction='ltr'
+                            control={control}
+                            name={`sliders.${idx}.uri`}
+                          />
+
+                          <TextField
                             label='آدرس تصویر'
                             direction='ltr'
                             control={control}
                             name={`sliders.${idx}.image.url`}
                           />
 
-                          <TextField
-                            label='آدرس لینک'
-                            direction='ltr'
-                            control={control}
-                            name={`sliders.${idx}.uri`}
+                          <UploadImage
+                            folder='/sliders'
+                            handleAddUploadedImageUrl={(url) => {
+                              setValue(`sliders.${idx}.image.url`, url)
+                            }}
                           />
 
                           <Checkbox

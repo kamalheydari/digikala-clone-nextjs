@@ -1,8 +1,9 @@
 import Image from 'next/image'
 import { useRef } from 'react'
+
 import { useFieldArray } from 'react-hook-form'
-import { AddIconBtn } from './IconBtns'
-import Icons from './Icons'
+
+import { UploadImage, Icons, AddIconBtn } from 'components'
 
 export default function ImageList(props) {
   //? Props
@@ -18,11 +19,14 @@ export default function ImageList(props) {
   })
 
   //? Handlers
-  const handleAddImage = () => {
+  const handleAddImageUrl = () => {
     if (inputRef.current.value.trim() === '') return
+
     append({ url: inputRef.current.value })
     inputRef.current.value = ''
   }
+
+  const handleAddUploadedImageUrl = (url) => append({ url })
 
   //? Render(s)
   return (
@@ -32,7 +36,6 @@ export default function ImageList(props) {
           آدرس تصویر
         </label>
         <div className='flex items-center gap-x-2'>
-          <AddIconBtn onClick={handleAddImage} />
           <input
             style={{ direction: 'ltr' }}
             type='text'
@@ -40,8 +43,15 @@ export default function ImageList(props) {
             placeholder='...'
             ref={inputRef}
           />
+          <AddIconBtn onClick={handleAddImageUrl} />
         </div>
       </div>
+
+      <UploadImage
+        folder='/products'
+        handleAddUploadedImageUrl={handleAddUploadedImageUrl}
+      />
+
       <div className='flex flex-wrap mx-3 gap-x-2 gap-y-3'>
         {fields.map((image, idx) => (
           <div
