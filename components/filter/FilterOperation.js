@@ -25,12 +25,11 @@ export default function FilterOperation(props) {
 
   //? Handlers
   const handlefilter = (e) => {
-    if (e.target.type === 'checkbox') {
-      dispatch(updateFilter({ name: [e.target.name], value: e.target.checked }))
-      handleChangeRoute({ [e.target.name]: e.target.checked })
-    } else if (e.target.type === 'number') {
-      dispatch(updateFilter({ name: [e.target.name], value: +e.target.value }))
-    }
+    const { name, type, checked, value } = e.target
+    const filterValue = type === 'checkbox' ? checked : +value
+    dispatch(updateFilter({ name: [name], value: filterValue }))
+
+    if (type === 'checkbox') handleChangeRoute({ [name]: filterValue })
   }
 
   const handleResetFilters = () => {
@@ -56,7 +55,7 @@ export default function FilterOperation(props) {
         ...query,
       })
     )
-  }, [query.category, mainMaxPrice, mainMinPrice])
+  }, [query.category, mainMaxPrice, mainMinPrice, dispatch])
 
   //*   Change Route After Debounce
   useEffect(() => {
