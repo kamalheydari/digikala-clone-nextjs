@@ -113,6 +113,7 @@ function RegisterPage() {
               type='email'
               placeholder='آدرس ایمیل'
               name='email'
+              inputMode='email'
             />
 
             <TextField

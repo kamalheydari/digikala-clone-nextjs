@@ -128,6 +128,7 @@ export default function AddressForm(props) {
                   name='postalCode'
                   type='number'
                   direction='ltr'
+                  inputMode='numeric'
                 />
               </div>
 

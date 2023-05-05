@@ -60,6 +60,7 @@ export default function UserMobileModal(props) {
                 errors={formErrors.mobile}
                 name='mobile'
                 direction='ltr'
+                inputMode='tel'
               />
 
               <div className='py-3 border-t-2 border-gray-200 lg:pb-0 '>

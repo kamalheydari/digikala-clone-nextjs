@@ -12,9 +12,9 @@ import {
   AddToListIconBtn,
   BigLoading,
   Button,
-  Checkbox,
   ConfirmDeleteModal,
   ConfirmUpdateModal,
+  ControlledCheckbox,
   DashboardLayout,
   DeleteFromListIconBtn,
   HandleResponse,
@@ -23,6 +23,7 @@ import {
   TextField,
   UploadImage,
 } from 'components'
+
 import { Disclosure } from '@headlessui/react'
 
 import { useDisclosure } from 'hooks'
@@ -33,7 +34,6 @@ import {
   useCreateBannerMutation,
   useDeleteBannerMutation,
   useGetSingleBannerQuery,
-  useGetSingleCategoryQuery,
   useUpdateBannerMutation,
 } from 'services'
 
@@ -63,11 +63,6 @@ function Banner() {
   const [updateInfo, setUpdateInfo] = useState({
     id: '',
     editedData: {},
-  })
-
-  //? Get Category
-  const { data: selectedCategory } = useGetSingleCategoryQuery({
-    id: router.query.id,
   })
 
   //? Hook Form
@@ -143,7 +138,7 @@ function Banner() {
       )
     else {
       createBanner({
-        body: { category_id: selectedCategory._id, banners },
+        body: { category_id: router.query.id, banners },
       })
     }
   }
@@ -196,7 +191,7 @@ function Banner() {
 
   //? Local Components
   const RadioButtons = ({ name }) => (
-    <div className='flex items-center gap-8 my-3'>
+    <div className='flex items-center gap-8 py-3'>
       <label className='inline-flex items-center gap-x-2'>
         <input
           className='w-5 h-5 text-red-600'
@@ -304,7 +299,9 @@ function Banner() {
               <BigLoading />
             </div>
           ) : (
-            <PageContainer title={`بنر دسته بندی ${selectedCategory?.name}`}>
+            <PageContainer
+              title={`بنرهای دسته بندی ${router.query?.category_name}`}
+            >
               <section className='p-3 mx-auto mb-10 space-y-8'>
                 <div className='mx-3 overflow-x-auto mt-7 lg:mx-5 xl:mx-10'>
                   <form>
@@ -320,7 +317,7 @@ function Banner() {
                               } h-5 w-5 text-purple-500`}
                             />
                           </Disclosure.Button>
-                          <Disclosure.Panel className='px-4 pt-4 pb-2 text-sm text-gray-500'>
+                          <Disclosure.Panel className='px-4 pt-4 pb-2 space-y-2 text-sm text-gray-500'>
                             <TextField
                               label='عنوان بنر'
                               control={control}
@@ -348,11 +345,13 @@ function Banner() {
                               }
                             />
 
-                            <Checkbox
-                              name='newBanner.public'
-                              control={control}
-                              label='منتشر شده'
-                            />
+                            <div className='max-w-fit my-3'>
+                              <ControlledCheckbox
+                                name='newBanner.public'
+                                control={control}
+                                label='وضعیت انتشار'
+                              />
+                            </div>
 
                             <RadioButtons name='newBanner.type' />
 
@@ -368,7 +367,7 @@ function Banner() {
                     <section className='my-4 space-y-3 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-x-2 lg:gap-y-4 '>
                       {fields.map((banner, idx) => (
                         <div
-                          className='p-2 border border-gray-300 rounded-md'
+                          className='p-2 border border-gray-300 rounded-md space-y-2'
                           key={idx}
                         >
                           <div className='mx-auto max-w-max'>
@@ -412,11 +411,13 @@ function Banner() {
                           />
 
                           {/* <Checkbox name={`banners.${idx}.public`} /> */}
-                          <Checkbox
-                            name={`banners.${idx}.public`}
-                            control={control}
-                            label='منتشر شده'
-                          />
+                          <div className='max-w-fit my-3'>
+                            <ControlledCheckbox
+                              name={`banners.${idx}.public`}
+                              control={control}
+                              label='وضعیت انتشار'
+                            />
+                          </div>
 
                           <RadioButtons name={`banners.${idx}.type`} />
 

@@ -91,6 +91,7 @@ function LoginPage() {
               name='email'
               control={control}
               type='email'
+              inputMode='email'
             />
 
             <TextField

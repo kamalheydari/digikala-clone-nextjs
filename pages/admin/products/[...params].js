@@ -54,15 +54,15 @@ function Product() {
     useForm({
       defaultValues: {
         title: '',
-        price: 0,
-        discount: 0,
+        price: '',
+        discount: '',
         description: '',
         images: [],
         sizes: [],
         colors: [],
         category_levels: { level_one: '', level_two: '', Level_three: '' },
         category: '',
-        inStock: 0,
+        inStock: '',
         info: [],
         specification: [],
       },
@@ -261,10 +261,7 @@ function Product() {
                     />
                   </div>
 
-                  <ImageList
-                    control={control}
-                    name='images'
-                  />
+                  <ImageList control={control} name='images' />
 
                   <div className='space-y-4 md:flex md:gap-x-2 md:items-baseline md:justify-evenly'>
                     <TextField
@@ -272,6 +269,7 @@ function Product() {
                       name='price'
                       control={control}
                       type='number'
+                      inputMode='numeric'
                       direction='ltr'
                     />
                     <TextField
@@ -279,6 +277,7 @@ function Product() {
                       name='inStock'
                       control={control}
                       type='number'
+                      inputMode='numeric'
                       direction='ltr'
                     />
 
@@ -287,6 +286,7 @@ function Product() {
                       name='discount'
                       control={control}
                       type='number'
+                      inputMode='numeric'
                       direction='ltr'
                     />
                   </div>

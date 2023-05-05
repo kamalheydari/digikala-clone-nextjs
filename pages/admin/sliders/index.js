@@ -56,7 +56,7 @@ function Sliders() {
                         </td>
                         <td className='px-2 py-4'>
                           <Link
-                            href={`/admin/sliders/${category._id}`}
+                            href={`/admin/sliders/${category._id}?category_name=${category.name}`}
                             className='bg-fuchsia-50 text-fuchsia-500 rounded-sm py-1 px-1.5 mx-1.5 inline-block'
                           >
                             اسلایدر

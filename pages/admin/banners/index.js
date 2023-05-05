@@ -56,7 +56,7 @@ function Banners() {
                         </td>
                         <td className='px-2 py-4'>
                           <Link
-                            href={`/admin/banners/${category._id}`}
+                            href={`/admin/banners/${category._id}?category_name=${category.name}`}
                             className='bg-rose-50 text-rose-500 rounded-sm py-1 px-1.5 mx-1.5 inline-block'
                           >
                             بنرها

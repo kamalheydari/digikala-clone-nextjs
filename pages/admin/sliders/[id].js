@@ -7,7 +7,6 @@ import { useRouter } from 'next/router'
 import {
   useCreateSliderMutation,
   useDeleteSliderMutation,
-  useGetSingleCategoryQuery,
   useGetSingleSliderQuery,
   useUpdateSliderMutation,
 } from 'services'
@@ -19,9 +18,9 @@ import {
   AddToListIconBtn,
   BigLoading,
   Button,
-  Checkbox,
   ConfirmDeleteModal,
   ConfirmUpdateModal,
+  ControlledCheckbox,
   DashboardLayout,
   DeleteFromListIconBtn,
   HandleResponse,
@@ -56,11 +55,6 @@ function Slider() {
   const [updateInfo, setUpdateInfo] = useState({
     id: '',
     editedData: {},
-  })
-
-  //? Get Category
-  const { data: selectedCategory } = useGetSingleCategoryQuery({
-    id: router.query.id,
   })
 
   //? Hook Form
@@ -135,7 +129,7 @@ function Slider() {
       )
     else {
       createSlider({
-        body: { category_id: selectedCategory._id, sliders },
+        body: { category_id: router.query.id, sliders },
       })
     }
   }
@@ -271,7 +265,7 @@ function Slider() {
             </div>
           ) : (
             <PageContainer
-              title={`اسلایدر دسته بندی ${selectedCategory?.name}`}
+              title={`اسلایدر دسته بندی ${router.query?.category_name}`}
             >
               <section className='p-3 mx-auto mb-10 space-y-8'>
                 <div className='mx-3 overflow-x-auto mt-7 lg:mx-5 xl:mx-10'>
@@ -318,11 +312,13 @@ function Slider() {
                               }
                             />
 
-                            <Checkbox
-                              name='newSlider.public'
-                              control={control}
-                              label='منتشر شده'
-                            />
+                            <div className='max-w-fit my-3'>
+                              <ControlledCheckbox
+                                name='newSlider.public'
+                                control={control}
+                                label='وضعیت انتشار'
+                              />
+                            </div>
 
                             <AddToListIconBtn onClick={addSliderHandler} />
 
@@ -336,7 +332,7 @@ function Slider() {
                     <section className='my-4 space-y-3 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-x-2 lg:gap-y-4 '>
                       {fields.map((slider, idx) => (
                         <div
-                          className='p-2 border border-gray-300 rounded-md'
+                          className='p-2 border border-gray-300 rounded-md space-y-2'
                           key={idx}
                         >
                           <Image
@@ -373,11 +369,13 @@ function Slider() {
                             }}
                           />
 
-                          <Checkbox
-                            name={`sliders.${idx}.public`}
-                            control={control}
-                            label='منتشر شده'
-                          />
+                          <div className='max-w-fit my-3'>
+                            <ControlledCheckbox
+                              name={`sliders.${idx}.public`}
+                              control={control}
+                              label='وضعیت انتشار'
+                            />
+                          </div>
 
                           <DeleteFromListIconBtn onClick={() => remove(idx)} />
                         </div>

@@ -104,6 +104,7 @@ function LoginPage() {
             placeholder='آدرس ایمیل'
             name='email'
             type='email'
+            inputMode='email'
           />
 
           <TextField

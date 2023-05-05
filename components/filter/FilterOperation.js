@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
-import { FilterCheckbox, Toman } from 'components'
+import { CustomCheckbox, Toman } from 'components'
 
 import { useDebounce } from 'hooks'
 
@@ -92,20 +92,19 @@ export default function FilterOperation(props) {
       </div>
 
       <div className='divide-y'>
-        <FilterCheckbox
+        <CustomCheckbox
           name='inStock'
           checked={filters.inStock}
           onChange={handlefilter}
-        >
-          فقط کالاهای موجود
-        </FilterCheckbox>
-        <FilterCheckbox
+          label='فقط کالاهای موجود'
+        />
+        
+        <CustomCheckbox
           name='discount'
           checked={filters.discount}
           onChange={handlefilter}
-        >
-          فقط کالاهای فروش ویژه
-        </FilterCheckbox>
+          label='فقط کالاهای فروش ویژه'
+        />
 
         <div className='py-4'>
           <span className='font-medium text-gray-700'>محدوده قیمت</span>

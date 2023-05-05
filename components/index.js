@@ -12,11 +12,11 @@ export { default as Modal } from './common/Modal'
 export { default as HandleResponse } from './common/HandleResponse'
 export { default as SelectBox } from './common/SelectBox'
 export { default as ImageList } from './product/ImageList'
-export { default as Checkbox } from './common/Checkbox'
 export { default as ResponsiveImage } from './common/ResponsiveImage'
 export { default as UploadImage } from './common/UploadImage'
 export * from './common/IconBtns'
 export * from './common/Buttons'
+export * from './common/Checkbox'
 
 //* LOADING
 export { default as BigLoading } from './loading/BigLoading'
@@ -39,7 +39,6 @@ export { default as BannerOne } from './banners/BannerOne'
 export { default as BannerTwo } from './banners/BannerTwo'
 
 //* FILTER COMPONENTS
-export { default as FilterCheckbox } from './filter/FilterCheckbox'
 export { default as FilterOperation } from './filter/FilterOperation'
 export { default as Filter } from './filter/Filter'
 
