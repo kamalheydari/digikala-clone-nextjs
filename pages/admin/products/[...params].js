@@ -22,6 +22,7 @@ import {
   BigLoading,
   ImageList,
   DashboardLayout,
+  TextArea,
 } from 'components'
 
 import { useDisclosure } from 'hooks'
@@ -248,18 +249,12 @@ function Product() {
                   className='space-y-10'
                 >
                   <TextField label='عنوان' name='title' control={control} />
-                  <div className='space-y-1.5'>
-                    <label htmlFor='description'>معرفی</label>
-                    <textarea
-                      cols='30'
-                      rows='4'
-                      type='text'
-                      className='text-right input'
-                      name='description'
-                      id='description'
-                      {...register('description')}
-                    />
-                  </div>
+
+                  <TextArea
+                    name='description'
+                    control={control}
+                    label='معرفی'
+                  />
 
                   <ImageList control={control} name='images' />
 
