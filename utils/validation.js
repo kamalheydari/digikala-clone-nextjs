@@ -53,7 +53,13 @@ export const sliderSchema = Yup.object().shape({
         'آدرس تصویر اشتباه است'
       ),
   }),
-  uri: Yup.string().required('آدرس تصویر را وارد کنید'),
+  uri: Yup.string().required('آدرس لینک را وارد کنید'),
+})
+export const bannerSchema = Yup.object().shape({
+  title: Yup.string().required('نام بنر نباید خالی باشد'),
+  image: Yup.object().shape({
+    url: Yup.string().required('آدرس تصویر را وارد کنید'),
+  }),
 })
 
 export const addressSchema = Yup.object().shape({

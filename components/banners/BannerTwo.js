@@ -15,21 +15,19 @@ export default function Bannertwo(props) {
   )
 
   //? Render(s)
-  if (data?.banners.length === 0) return null
+  if (data.length === 0) return null
 
   return (
     <section className='grid grid-cols-2 gap-3 px-3 lg:grid-cols-4 lg:gap-4'>
-      {data?.banners
-        .filter((item) => item.public && item.type === 'two')
-        .map((item, index) =>
-          item.uri.length > 0 ? (
-            <a href={item.uri} target='_blank' key={index}>
-              <BannerImage item={item} />
-            </a>
-          ) : (
-            <BannerImage key={index} item={item} />
-          )
-        )}
+      {data.map((item, index) =>
+        item.uri.length > 0 ? (
+          <a href={item.uri} target='_blank' key={index}>
+            <BannerImage item={item} />
+          </a>
+        ) : (
+          <BannerImage key={index} item={item} />
+        )
+      )}
     </section>
   )
 }

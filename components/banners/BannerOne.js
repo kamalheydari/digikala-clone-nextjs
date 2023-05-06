@@ -1,6 +1,5 @@
 import { ResponsiveImage } from 'components'
 
-
 export default function BannerOne(props) {
   //? Props
   const { data } = props
@@ -24,21 +23,19 @@ export default function BannerOne(props) {
   )
 
   //? Render(s)
-  if (data?.banners.length === 0) return null
+  if (data.length === 0) return null
 
   return (
     <section className='grid gap-3 px-3 lg:relative lg:grid-cols-2 lg:gap-4'>
-      {data?.banners
-        .filter((item) => item.public && item.type === 'one')
-        .map((item, index) =>
-          item.uri.length > 0 ? (
-            <a href={item.uri} target='_blank' key={index}>
-              <BannerImage item={item} index={index} />
-            </a>
-          ) : (
-            <BannerImage key={index} item={item} index={index} />
-          )
-        )}
+      {data.map((item, index) =>
+        item.uri.length > 0 ? (
+          <a href={item.uri} target='_blank' key={index}>
+            <BannerImage item={item} index={index} />
+          </a>
+        ) : (
+          <BannerImage key={index} item={item} index={index} />
+        )
+      )}
       <div className='absolute z-10 hidden w-16 h-16 translate-x-1/2 -translate-y-1/2 bg-white rounded-full inset-1/2 lg:block' />
     </section>
   )

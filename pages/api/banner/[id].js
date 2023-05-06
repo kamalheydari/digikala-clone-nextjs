@@ -27,7 +27,7 @@ const getBanner = async (req, res) => {
   try {
     const { id } = req.query
     await db.connect()
-    const banner = await Banner.findOne({ category_id: id })
+    const banner = await Banner.findById(id)
     await db.disconnect()
 
     res.status(200).json(banner)

@@ -2,6 +2,24 @@ import apiSlice from 'services/api'
 
 export const bannerApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+    getBanners: builder.query({
+      query: ({ category }) => ({
+        url: `/api/banner?category=${category}`,
+        method: 'GET',
+      }),
+      // providesTags: (result, err, arg) => [{ type: 'Banner', id: arg.id }],
+      providesTags: (result, error, arg) =>
+        result
+          ? [
+              ...result.map(({ _id }) => ({
+                type: 'Banner',
+                id: _id,
+              })),
+              'Banner',
+            ]
+          : ['Banner'],
+    }),
+
     getSingleBanner: builder.query({
       query: ({ id }) => ({
         url: `/api/banner/${id}`,
@@ -16,9 +34,7 @@ export const bannerApiSlice = apiSlice.injectEndpoints({
         method: 'PATCH',
         body,
       }),
-      invalidatesTags: (result, err, arg) => [
-        { type: 'Banner', id: result.category_id },
-      ],
+      invalidatesTags: (result, err, arg) => [{ type: 'Banner', id: arg.id }],
     }),
 
     createBanner: builder.mutation({
@@ -45,4 +61,5 @@ export const {
   useUpdateBannerMutation,
   useCreateBannerMutation,
   useDeleteBannerMutation,
+  useGetBannersQuery
 } = bannerApiSlice

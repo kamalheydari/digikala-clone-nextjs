@@ -17,7 +17,13 @@ import {
 
 export default function Home(props) {
   //? Props
-  const { currentCategory, childCategories, slider, banners } = props
+  const {
+    currentCategory,
+    childCategories,
+    slider,
+    bannerOneType,
+    bannerTwoType,
+  } = props
 
   //? Render(s)
   return (
@@ -42,11 +48,11 @@ export default function Home(props) {
             homePage
           />
 
-          <BannerOne data={banners} />
+          <BannerOne data={bannerOneType} />
 
           <BestSellsSlider />
 
-          <BannerTwo data={banners} />
+          <BannerTwo data={bannerTwoType} />
 
           <MostFavouraiteProducts />
         </div>
@@ -68,7 +74,14 @@ export async function getStaticProps() {
 
   const slider = await Slider.findOne({ category_id: currentCategory._id })
 
-  const banners = await Banner.findOne({ category_id: currentCategory._id })
+  const bannerOneType = await Banner.find({
+    category_id: currentCategory._id,
+    type: 'one',
+  })
+  const bannerTwoType = await Banner.find({
+    category_id: currentCategory._id,
+    type: 'two',
+  })
 
   await db.disconnect()
 
@@ -81,7 +94,8 @@ export async function getStaticProps() {
         categories: JSON.parse(JSON.stringify(childCategories)),
       },
       slider: JSON.parse(JSON.stringify(slider)),
-      banners: JSON.parse(JSON.stringify(banners)),
+      bannerOneType: JSON.parse(JSON.stringify(bannerOneType)),
+      bannerTwoType: JSON.parse(JSON.stringify(bannerTwoType)),
     },
   }
 }

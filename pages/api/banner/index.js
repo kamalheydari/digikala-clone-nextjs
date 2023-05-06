@@ -9,6 +9,9 @@ export default async function (req, res) {
     case 'POST':
       await createBanner(req, res)
       break
+    case 'GET':
+      await getBanners(req, res)
+      break
 
     default:
       break
@@ -28,6 +31,19 @@ const createBanner = async (req, res) => {
     await db.disconnect()
 
     res.status(201).json({ msg: 'ساخت بنر جدید موفقیت آمیز بود' })
+  } catch (error) {
+    sendError(res, 500, error.message)
+  }
+}
+
+const getBanners = async (req, res) => {
+  const category = req.query?.category
+  try {
+    await db.connect()
+    const banners = await Banner.find({ category_id: category })
+    await db.disconnect()
+
+    res.status(201).json(banners)
   } catch (error) {
     sendError(res, 500, error.message)
   }
