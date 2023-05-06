@@ -5,7 +5,7 @@ export const CustomCheckbox = forwardRef((props, ref) => {
   const { label, name, checked, onChange, ...restProps } = props
 
   return (
-    <div className='flex justify-between py-2.5'>
+    <div className='flex justify-between items-center py-2.5'>
       <span className='font-medium text-gray-700 w-3/4'>{label}</span>
       <div className='relative inline-block w-12 mr-2 align-middle select-none'>
         <input
@@ -16,7 +16,7 @@ export const CustomCheckbox = forwardRef((props, ref) => {
           onChange={onChange}
           ref={ref ? ref : null}
           {...restProps}
-          className='absolute block w-4 h-4 duration-200 ease-in bg-gray-400 rounded-full appearance-none cursor-pointer checked:bg-white right-7 top-1 lg:right-6 checked:right-1'
+          className='absolute block w-4 h-4 duration-200 ease-in bg-gray-400 rounded-full appearance-none cursor-pointer checked:bg-white right-6 top-1 checked:right-1'
         />
         <label
           htmlFor={name}
