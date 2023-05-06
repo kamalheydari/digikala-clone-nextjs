@@ -66,7 +66,15 @@ function Banner() {
   })
 
   //? Hook Form
-  const { control, getValues, reset, register, setValue } = useForm({
+  const {
+    control,
+    getValues,
+    reset,
+    register,
+    setValue,
+    setError,
+    formState: { errors: formErrors },
+  } = useForm({
     defaultValues,
   })
 
@@ -144,24 +152,32 @@ function Banner() {
   }
 
   const addBannerHandler = () => {
-    if (
-      getValues('newBanner.title') === '' ||
-      getValues('newBanner.image.url') === ''
-    ) {
-      dispatch(
-        showAlert({
-          status: 'error',
-          title: 'عنوان و آدرس تصویر را وارد کنید',
-        })
-      )
+    const {
+      title,
+      image: { url },
+      uri,
+      type,
+    } = getValues('newBanner')
+
+    if (!title) {
+      setError('newBanner.title', {
+        message: 'نام بنر نباید خالی باشد',
+        shouldFocus: true,
+      })
+    } else if (!url) {
+      setError('newBanner.image.url', {
+        message: 'آدرس تصویر بنر نباید خالی باشد',
+        shouldFocus: true,
+      })
     } else {
       prepend({
-        image: { url: getValues('newBanner.image.url') },
-        title: getValues('newBanner.title'),
-        uri: getValues('newBanner.uri'),
+        image: { url },
+        title,
+        uri,
+        type,
         public: getValues('newBanner.public'),
-        type: getValues('newBanner.type'),
       })
+
       reset({
         banners: getValues('banners'),
         newBanner: defaultValues.newBanner,
@@ -322,6 +338,7 @@ function Banner() {
                               label='عنوان بنر'
                               control={control}
                               name='newBanner.title'
+                              errors={formErrors.newBanner?.title}
                             />
 
                             <TextField
@@ -336,6 +353,7 @@ function Banner() {
                               direction='ltr'
                               control={control}
                               name='newBanner.image.url'
+                              errors={formErrors.newBanner?.image?.url}
                             />
 
                             <UploadImage
@@ -410,7 +428,6 @@ function Banner() {
                             }}
                           />
 
-                          {/* <Checkbox name={`banners.${idx}.public`} /> */}
                           <div className='max-w-fit my-3'>
                             <ControlledCheckbox
                               name={`banners.${idx}.public`}

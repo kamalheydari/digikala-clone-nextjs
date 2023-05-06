@@ -58,9 +58,17 @@ function Slider() {
   })
 
   //? Hook Form
-  const { control, getValues, reset, setValue } = useForm({
+  const {
+    control,
+    getValues,
+    reset,
+    setValue,
+    setError,
+    formState: { errors: formErrors },
+  } = useForm({
     defaultValues,
   })
+
   const { fields, remove, prepend } = useFieldArray({
     name: 'sliders',
     control,
@@ -135,23 +143,30 @@ function Slider() {
   }
 
   const addSliderHandler = () => {
-    if (
-      getValues('newSlider.title') === '' ||
-      getValues('newSlider.image.url') === ''
-    ) {
-      dispatch(
-        showAlert({
-          status: 'error',
-          title: 'عنوان و آدرس تصویر را وارد کنید',
-        })
-      )
+    const {
+      title,
+      image: { url },
+      uri,
+    } = getValues('newSlider')
+
+    if (!title) {
+      setError('newSlider.title', {
+        message: 'نام اسلایدر نباید خالی باشد',
+        shouldFocus: true,
+      })
+    } else if (!url) {
+      setError('newSlider.image.url', {
+        message: 'آدرس تصویر اسلایدر نباید خالی باشد',
+        shouldFocus: true,
+      })
     } else {
       prepend({
-        image: { url: getValues('newSlider.image.url') },
-        title: getValues('newSlider.title'),
-        uri: getValues('newSlider.uri'),
+        title,
+        image: { url },
+        uri,
         public: getValues('newSlider.public'),
       })
+
       reset({
         sliders: getValues('sliders'),
         newSlider: defaultValues.newSlider,
@@ -289,6 +304,7 @@ function Slider() {
                               label='عنوان اسلایدر'
                               control={control}
                               name='newSlider.title'
+                              errors={formErrors.newSlider?.title}
                             />
 
                             <TextField
@@ -303,6 +319,7 @@ function Slider() {
                               direction='ltr'
                               control={control}
                               name='newSlider.image.url'
+                              errors={formErrors.newSlider?.image?.url}
                             />
 
                             <UploadImage

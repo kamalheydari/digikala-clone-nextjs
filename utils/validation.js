@@ -75,3 +75,37 @@ export const reviewSchema = Yup.object().shape({
     .required('متن نظر نباید خالی باشد')
     .min(4, 'متن نظر نباید کمتر از 4 حرف باشد'),
 })
+
+export const productSchema = Yup.object().shape({
+  title: Yup.string().required('عنوان الزامی است'),
+  description: Yup.string(),
+  price: Yup.number('قیمت باید عددی باشد').required('قیمت الزامی است'),
+  discount: Yup.number('تخفیف باید عددی باشد'),
+  images: Yup.array()
+    .min(1, 'حداقل یک تصویر الزامی است')
+    .required('تصویر الزامی است'),
+  sizes: Yup.array(),
+  colors: Yup.array(),
+  category: Yup.array()
+    .min(1, 'حداقل یک دسته‌بندی الزامی است')
+    .required('دسته‌بندی الزامی است'),
+  category_levels: Yup.object().shape({
+    level_one: Yup.string().required('دسته‌بندی سطح ۱ الزامی است'),
+    level_two: Yup.string().required('دسته‌بندی سطح ۲ الزامی است'),
+    Level_three: Yup.string().required('دسته‌بندی سطح ۳ الزامی است'),
+  }),
+  inStock: Yup.number('موجودی باید عددی باشد'),
+  sold: Yup.number(),
+  info: Yup.array(
+    Yup.object({
+      title: Yup.string().required('عنوان اطلاعات الزامی است'),
+      description: Yup.string().required('توضیحات اطلاعات الزامی است'),
+    })
+  ),
+  specification: Yup.array(
+    Yup.object({
+      title: Yup.string().required('عنوان مشخصات الزامی است'),
+      value: Yup.string().required('مقدار مشخصات الزامی است'),
+    })
+  ),
+})
