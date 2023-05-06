@@ -17,7 +17,7 @@ import {
 
 export default function MainCategory(props) {
   //? Props
-  const { currentCategory, childCategories, slider, banners } = props
+  const { currentCategory, childCategories, slider, bannerOneType,bannerTwoType } = props
 
   //? Render(s)
   return (
@@ -41,11 +41,11 @@ export default function MainCategory(props) {
             name={currentCategory.name}
           />
 
-          <BannerOne data={banners} />
+          <BannerOne data={bannerOneType} />
 
           <BestSellsSlider categoryId={currentCategory._id} />
 
-          <BannerTwo data={banners} />
+          <BannerTwo data={bannerTwoType} />
 
           <MostFavouraiteProducts categoryId={currentCategory._id} />
         </div>
@@ -65,7 +65,14 @@ export async function getStaticProps({ params: { category } }) {
 
   const slider = await Slider.findOne({ category_id: currentCategory._id })
 
-  const banners = await Banner.findOne({ category_id: currentCategory._id })
+  const bannerOneType = await Banner.find({
+    category_id: currentCategory._id,
+    type: 'one',
+  })
+  const bannerTwoType = await Banner.find({
+    category_id: currentCategory._id,
+    type: 'two',
+  })
 
   const childCategories = await Category.find({
     parent: currentCategory._id,
@@ -82,7 +89,8 @@ export async function getStaticProps({ params: { category } }) {
         categories: JSON.parse(JSON.stringify(childCategories)),
       },
       slider: JSON.parse(JSON.stringify(slider)),
-      banners: JSON.parse(JSON.stringify(banners)),
+      bannerOneType: JSON.parse(JSON.stringify(bannerOneType)),
+      bannerTwoType: JSON.parse(JSON.stringify(bannerTwoType)),
     },
   }
 }
