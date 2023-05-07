@@ -1,11 +1,9 @@
-import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
-
+import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
-import { useDispatch } from 'react-redux'
 
 import {
   BigLoading,
@@ -248,10 +246,7 @@ function Banner() {
           error={error_delete?.data?.err}
           message={data_delete?.msg}
           onSuccess={() => {
-            reset({
-              banners: [],
-              banner: defaultValues.banner,
-            })
+            reset(defaultValues)
             confirmDeleteModalHandlers.close()
             back()
           }}

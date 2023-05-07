@@ -31,6 +31,10 @@ function Sliders() {
     useGetSlidersQuery({ category: category_id }, { skip: !!!category_id })
 
   //? Render(s)
+  const title = category_name
+    ? `اسلایدرهای دسته بندی ${category_name}`
+    : 'اسلایدرها'
+
   const renderContent = () => {
     if (isLoading_get_categories || isLoading_get_sliders) {
       return (
@@ -84,15 +88,11 @@ function Sliders() {
   return (
     <main>
       <Head>
-        <title>مدیریت | اسلایدرها</title>
+        <title>مدیریت | {title}</title>
       </Head>
 
       <DashboardLayout>
-        <PageContainer
-          title={
-            category_name ? `اسلایدرها دسته بندی ${category_name}` : 'اسلایدرها'
-          }
-        >
+        <PageContainer title={title}>
           <section className='p-3 mx-auto mb-10 space-y-8'>
             {category_id && (
               <Link

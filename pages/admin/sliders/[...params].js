@@ -11,8 +11,6 @@ import {
   useUpdateSliderMutation,
 } from 'services'
 
-import { useDispatch } from 'react-redux'
-
 import {
   BigLoading,
   Button,
@@ -30,6 +28,7 @@ import { useDisclosure } from 'hooks'
 
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+
 import { sliderSchema } from 'utils'
 
 function Slider() {
