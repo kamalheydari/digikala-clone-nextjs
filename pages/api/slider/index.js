@@ -10,8 +10,25 @@ export default async function (req, res) {
       await createSlider(req, res)
       break
 
+    case 'GET':
+      await getSliders(req, res)
+      break
+
     default:
       break
+  }
+}
+
+const getSliders = async (req, res) => {
+  const category = req.query?.category
+  try {
+    await db.connect()
+    const sliders = await Slider.find({ category_id: category })
+    await db.disconnect()
+
+    res.status(201).json(sliders)
+  } catch (error) {
+    sendError(res, 500, error.message)
   }
 }
 

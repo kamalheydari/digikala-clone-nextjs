@@ -7,7 +7,25 @@ const SliderSchema = new mongoose.Schema(
       ref: 'category',
       required: true,
     },
-    sliders: { type: [Object], required: true },
+    image: {
+      url: {
+        type: String,
+        required: true,
+      },
+    },
+    title: {
+      type: String,
+      required: true,
+    },
+    uri: {
+      type: String,
+      required: false,
+    },
+    public: {
+      type: Boolean,
+      required: true,
+      default: true,
+    },
   },
   { timestamps: true }
 )

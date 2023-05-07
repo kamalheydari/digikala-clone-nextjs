@@ -27,7 +27,7 @@ const getSlider = async (req, res) => {
   try {
     const { id } = req.query
     await db.connect()
-    const slider = await Slider.findOne({ category_id: id })
+    const slider = await Slider.findById(id )
     await db.disconnect()
 
     res.status(200).json(slider)

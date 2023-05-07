@@ -17,7 +17,7 @@ import {
 
 export default function MainCategory(props) {
   //? Props
-  const { currentCategory, childCategories, slider, bannerOneType,bannerTwoType } = props
+  const { currentCategory, childCategories, sliders, bannerOneType,bannerTwoType } = props
 
   //? Render(s)
   return (
@@ -28,7 +28,7 @@ export default function MainCategory(props) {
         </Head>
 
         <div className='py-4 mx-auto space-y-12 xl:mt-28 lg:max-w-[1450px]'>
-          <MainSlider data={slider} />
+          <MainSlider data={sliders} />
 
           <DiscountSlider
             categoryId={currentCategory._id}
@@ -63,7 +63,7 @@ export async function getStaticProps({ params: { category } }) {
 
   if (!currentCategory) return { notFound: true }
 
-  const slider = await Slider.findOne({ category_id: currentCategory._id })
+  const sliders = await Slider.find({ category_id: currentCategory._id })
 
   const bannerOneType = await Banner.find({
     category_id: currentCategory._id,
@@ -88,7 +88,7 @@ export async function getStaticProps({ params: { category } }) {
         title: 'خرید بر اساس دسته‌بندهای',
         categories: JSON.parse(JSON.stringify(childCategories)),
       },
-      slider: JSON.parse(JSON.stringify(slider)),
+      sliders: JSON.parse(JSON.stringify(sliders)),
       bannerOneType: JSON.parse(JSON.stringify(bannerOneType)),
       bannerTwoType: JSON.parse(JSON.stringify(bannerTwoType)),
     },

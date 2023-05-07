@@ -10,15 +10,30 @@ export const sliderApiSlice = apiSlice.injectEndpoints({
       providesTags: (result, err, arg) => [{ type: 'Slider', id: arg.id }],
     }),
 
+    getSliders: builder.query({
+      query: ({ category }) => ({
+        url: `/api/slider?category=${category}`,
+        method: 'GET',
+      }),
+      providesTags: (result, error, arg) =>
+        result
+          ? [
+              ...result.map(({ _id }) => ({
+                type: 'Slider',
+                id: _id,
+              })),
+              'Slider',
+            ]
+          : ['Slider'],
+    }),
+
     updateSlider: builder.mutation({
       query: ({ id, body }) => ({
         url: `/api/slider/${id}`,
         method: 'PATCH',
         body,
       }),
-      invalidatesTags: (result, err, arg) => [
-        { type: 'Slider', id: result.category_id },
-      ],
+      invalidatesTags: (result, err, arg) => [{ type: 'Slider', id: arg.id }],
     }),
 
     createSlider: builder.mutation({
@@ -45,4 +60,5 @@ export const {
   useUpdateSliderMutation,
   useCreateSliderMutation,
   useDeleteSliderMutation,
+  useGetSlidersQuery,
 } = sliderApiSlice

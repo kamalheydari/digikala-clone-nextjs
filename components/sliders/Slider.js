@@ -20,7 +20,7 @@ export default function Slider(props) {
   )
 
   //? Render(s)
-  if (data?.sliders.length === 0) return null
+  if (data?.length === 0) return null
 
   return (
     <section className='lg:mx-3'>
@@ -34,7 +34,7 @@ export default function Slider(props) {
         modules={[Pagination, Autoplay]}
         className='mySwiper overflow-hidden lg:rounded-2xl'
       >
-        {data?.sliders
+        {data
           .filter((item) => item.public)
           .map((item, index) => (
             <SwiperSlide key={index}>
