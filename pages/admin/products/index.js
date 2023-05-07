@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import {
   useDeleteProductMutation,
@@ -10,7 +10,6 @@ import {
 } from 'services'
 
 import {
-  BigLoading,
   ConfirmDeleteModal,
   DashboardLayout,
   DeleteIconBtn,
@@ -20,6 +19,8 @@ import {
   PageContainer,
   Pagination,
   SelectCategories,
+  ShowWrapper,
+  TableSkeleton,
 } from 'components'
 
 import { useDisclosure, useChangeRoute } from 'hooks'
@@ -41,14 +42,11 @@ function Products() {
   //? Modals
   const [isShowConfirmDeleteModal, confirmDeleteModalHandlers] = useDisclosure()
 
-  //? Refs
-  const inputSearchRef = useRef()
-
   //?  State
   const [deleteInfo, setDeleteInfo] = useState({
     id: '',
   })
-  const [search, setSearch] = useState(router.query?.search || '')
+  const [search, setSearch] = useState('')
   const [selectedCategories, setSelectedCategories] = useState({
     level_one: {},
     level_two: {},
@@ -57,11 +55,12 @@ function Products() {
 
   //? Querirs
   //*    Get Products Data
-  const { data, isFetching, error, isError, refetch } = useGetProductsQuery({
-    page: router.query?.page || 1,
-    category: router.query?.category || '',
-    search: router.query?.search || search,
-  })
+  const { data, isFetching, error, isError, refetch, isSuccess } =
+    useGetProductsQuery({
+      page: router.query?.page || 1,
+      category: router.query?.category || '',
+      search: router.query?.search,
+    })
 
   //*    Delete Product
   const [
@@ -85,6 +84,8 @@ function Products() {
     router.push(`/admin/products/edit?id=${id}`)
   }
 
+  const handleSearchChange = (e) => setSearch(e.target.value)
+
   const handleSubmit = (e) => {
     e.preventDefault()
 
@@ -106,16 +107,14 @@ function Products() {
       queris.level_one = selectedCategories?.level_one._id
     }
 
-    if (inputSearchRef.current.value.trim()) {
-      setSearch(inputSearchRef.current.value)
-      queris.search = inputSearchRef.current.value
+    if (search.trim()) {
+      queris.search = search
     }
 
     changeRoute(queris)
   }
 
   const handleRemoveSearch = () => {
-    inputSearchRef.current.value = ''
     setSearch('')
     setSelectedCategories({
       level_one: {},
@@ -150,6 +149,10 @@ function Products() {
         })
     }
   }, [categories])
+
+  useEffect(() => {
+    if (router.query?.search) setSearch(router.query.search)
+  }, [router.query?.search])
 
   //? Render(s)
   return (
@@ -188,102 +191,89 @@ function Products() {
         </Head>
         <DashboardLayout>
           <PageContainer title='محصولات'>
-            {isError ? (
-              <div className='py-20 mx-auto space-y-3 text-center w-fit'>
-                <h5 className='text-xl'>خطایی رخ داده</h5>
-                <p className='text-lg text-red-500'>{error.data.err}</p>
-                <button className='mx-auto btn' onClick={refetch}>
-                  تلاش مجدد
-                </button>
-              </div>
-            ) : isFetching ? (
-              <section className='px-3 py-20'>
-                <BigLoading />
-              </section>
-            ) : (
-              <section className='p-3 space-y-7' id='_adminProducts'>
-                <form
-                  className='max-w-4xl mx-auto space-y-5'
-                  onSubmit={handleSubmit}
-                >
-                  <SelectCategories
-                    setSelectedCategories={setSelectedCategories}
-                    selectedCategories={selectedCategories}
+            <section className='p-3 space-y-7' id='_adminProducts'>
+              <form
+                className='max-w-4xl mx-auto space-y-5'
+                onSubmit={handleSubmit}
+              >
+                <SelectCategories
+                  setSelectedCategories={setSelectedCategories}
+                  selectedCategories={selectedCategories}
+                />
+
+                <div className='flex flex-row-reverse rounded-md gap-x-2 '>
+                  <button
+                    type='button'
+                    className='p-2 text-white border flex-center gap-x-2 min-w-max'
+                    onClick={handleRemoveSearch}
+                  >
+                    <span>حذف فیلترها</span>
+                    <Icons.Close className='icon' />
+                  </button>
+                  <input
+                    type='text'
+                    placeholder='نام محصول ...'
+                    className='flex-grow p-1 text-right input'
+                    value={search}
+                    onChange={handleSearchChange}
                   />
+                  <button
+                    type='submit'
+                    className='p-2 border flex-center gap-x-2 min-w-max'
+                  >
+                    <span>اعمال فیلتر</span>
+                    <Icons.Search className='icon' />
+                  </button>
+                </div>
+              </form>
 
-                  <div className='flex flex-row-reverse rounded-md gap-x-2 '>
-                    <button
-                      type='button'
-                      className='p-2 text-white border flex-center gap-x-2 min-w-max'
-                      onClick={handleRemoveSearch}
-                    >
-                      <span>حذف فیلترها</span>
-                      <Icons.Close className='icon' />
-                    </button>
-                    <input
-                      type='text'
-                      placeholder='نام محصول ...'
-                      className='flex-grow p-1 text-right input'
-                      ref={inputSearchRef}
-                      defaultValue={search}
-                    />
-                    <button
-                      type='submit'
-                      className='p-2 border flex-center gap-x-2 min-w-max'
-                    >
-                      <span>اعمال فیلتر</span>
-                      <Icons.Search className='icon' />
-                    </button>
-                  </div>
-                </form>
+              <ShowWrapper
+                error={error}
+                isError={isError}
+                refetch={refetch}
+                isFetching={isFetching}
+                isSuccess={isSuccess}
+                dataLength={data ? data.productsLength : 0}
+                loadingComponent={<TableSkeleton count={10} />}
+              >
+                <section className='overflow-x mt-7'>
+                  <table className='w-full overflow-scroll table-auto'>
+                    <thead className='bg-zinc-50 h-9'>
+                      <tr className='text-zinc-500'>
+                        <th className='w-28'></th>
+                        <th className='border-r-2 border-zinc-200'>
+                          نام محصول (تعداد: {data?.productsLength})
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {data?.products.map((item) => (
+                        <tr
+                          key={item._id}
+                          className='border-b-2 border-gray-100'
+                        >
+                          <td className='flex items-center justify-center p-2 gap-x-4'>
+                            <DeleteIconBtn
+                              onClick={() => handleDelete(item._id)}
+                            />
+                            <EditIconBtn onClick={() => handleEdit(item._id)} />
+                          </td>
+                          <td className='p-2'>{item.title}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </section>
+              </ShowWrapper>
 
-                {data?.productsLength > 0 ? (
-                  <>
-                    <section className='overflow-x mt-7'>
-                      <table className='w-full overflow-scroll table-auto'>
-                        <thead className='bg-zinc-50 h-9'>
-                          <tr className='text-zinc-500'>
-                            <th className='w-28'></th>
-                            <th className='border-r-2 border-zinc-200'>
-                              نام محصول (تعداد: {data.productsLength})
-                            </th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {data.products.map((item) => (
-                            <tr
-                              key={item._id}
-                              className='border-b-2 border-gray-100'
-                            >
-                              <td className='flex items-center justify-center p-2 gap-x-4'>
-                                <DeleteIconBtn
-                                  onClick={() => handleDelete(item._id)}
-                                />
-                                <EditIconBtn
-                                  onClick={() => handleEdit(item._id)}
-                                />
-                              </td>
-                              <td className='p-2'>{item.title}</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </section>
-                    {data?.productsLength > 10 && (
-                      <Pagination
-                        pagination={data.pagination}
-                        changeRoute={changeRoute}
-                        section='_adminProducts'
-                      />
-                    )}
-                  </>
-                ) : (
-                  <div className='text-center text-red-500 lg:border lg:border-gray-200 lg:rounded-md lg:py-4'>
-                    کالایی یافت نشد
-                  </div>
-                )}
-              </section>
-            )}
+              {data?.productsLength > 10 && (
+                <Pagination
+                  pagination={data.pagination}
+                  changeRoute={changeRoute}
+                  section='_adminProducts'
+                />
+              )}
+            </section>
           </PageContainer>
         </DashboardLayout>
       </main>

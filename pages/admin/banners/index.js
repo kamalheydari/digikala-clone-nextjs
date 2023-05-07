@@ -3,7 +3,12 @@ import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import Head from 'next/head'
 
-import { BigLoading, DashboardLayout, PageContainer } from 'components'
+import {
+  DashboardLayout,
+  EmptyCustomList,
+  PageContainer,
+  TableSkeleton,
+} from 'components'
 
 import { useGetBannersQuery, useGetCategoriesQuery } from 'services'
 
@@ -38,11 +43,7 @@ function Banners() {
 
   const renderContent = () => {
     if (isLoading_get_banners || isLoding_get_categories) {
-      return (
-        <div className='px-3 py-20'>
-          <BigLoading />
-        </div>
-      )
+      return <TableSkeleton />
     }
 
     if (categories && !category_id) {
@@ -83,7 +84,7 @@ function Banners() {
       ))
     }
 
-    return null
+    return <EmptyCustomList />
   }
 
   return (

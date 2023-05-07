@@ -15,6 +15,7 @@ import {
   HandleResponse,
   UsersTable,
   DashboardLayout,
+  TableSkeleton,
 } from 'components'
 
 import { useDisclosure, useChangeRoute } from 'hooks'
@@ -101,6 +102,7 @@ function Users() {
               isSuccess={isSuccess}
               dataLength={data ? data.usersLength : 0}
               emptyComponent={<EmptyUsersList />}
+              loadingComponent={<TableSkeleton />}
             >
               <UsersTable
                 deleteUserHandler={deleteUserHandler}

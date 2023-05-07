@@ -3,7 +3,12 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Head from 'next/head'
 
-import { BigLoading, DashboardLayout, PageContainer } from 'components'
+import {
+  DashboardLayout,
+  EmptyCustomList,
+  PageContainer,
+  TableSkeleton,
+} from 'components'
 
 import { useGetCategoriesQuery, useGetSlidersQuery } from 'services'
 
@@ -37,11 +42,7 @@ function Sliders() {
 
   const renderContent = () => {
     if (isLoading_get_categories || isLoading_get_sliders) {
-      return (
-        <div className='px-3 py-20'>
-          <BigLoading />
-        </div>
-      )
+      return <TableSkeleton />
     }
 
     if (categories && !category_id) {
@@ -82,7 +83,7 @@ function Sliders() {
       ))
     }
 
-    return null
+    return <EmptyCustomList />
   }
 
   return (

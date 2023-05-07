@@ -1,4 +1,4 @@
-import { BigLoading, Button } from 'components'
+import { BigLoading, Button, EmptyCustomList } from 'components'
 
 export default function ShowWrapper(props) {
   //? Porps
@@ -20,19 +20,17 @@ export default function ShowWrapper(props) {
       {isError ? (
         <div className='py-20 mx-auto space-y-3 text-center w-fit'>
           <h5 className='text-xl'>خطایی رخ داده</h5>
-          <p className='text-lg text-red-500'>{error.data.err}</p>
+          <p className='text-lg text-red-500'>{error?.data?.err}</p>
           <Button className='mx-auto' onClick={refetch}>
             تلاش مجدد
           </Button>
         </div>
       ) : isFetching ? (
-        <div className='px-3 py-20'>
-          {loadingComponent ? loadingComponent : <BigLoading />}
-        </div>
+        <div className='px-3'>{loadingComponent || <BigLoading />}</div>
       ) : isSuccess && dataLength > 0 ? (
         <>{children}</>
       ) : isSuccess && dataLength === 0 ? (
-        <>{emptyComponent}</>
+        <>{emptyComponent || <EmptyCustomList />}</>
       ) : null}
     </section>
   )

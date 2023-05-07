@@ -10,6 +10,7 @@ import {
   PageContainer,
   ReviewsTable,
   DashboardLayout,
+  TableSkeleton,
 } from 'components'
 
 import { useChangeRoute } from 'hooks'
@@ -45,6 +46,7 @@ function Reviews() {
             isSuccess={isSuccess}
             dataLength={data ? data.reviewsLength : 0}
             emptyComponent={<EmptyCommentsList />}
+            loadingComponent={<TableSkeleton />}
           >
             <ReviewsTable reviews={data?.reviews} />
           </ShowWrapper>

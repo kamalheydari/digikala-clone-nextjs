@@ -11,6 +11,7 @@ import {
   PageContainer,
   OrdersTable,
   DashboardLayout,
+  TableSkeleton,
 } from 'components'
 
 import { useChangeRoute } from 'hooks'
@@ -47,6 +48,7 @@ function OrdersHome() {
               isSuccess={isSuccess}
               dataLength={data ? data.ordersLength : 0}
               emptyComponent={<EmptyOrdersList />}
+              loadingComponent={<TableSkeleton />}
             >
               <OrdersTable orders={data?.orders} />
             </ShowWrapper>

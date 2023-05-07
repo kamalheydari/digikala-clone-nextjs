@@ -10,11 +10,17 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { registerSchema } from 'utils'
 
 import { useDispatch } from 'react-redux'
-import { showAlert, userLogin } from 'store'
+import { userLogin } from 'store'
 
 import { useCreateUserMutation } from 'services'
 
-import { TextField, LoginBtn, RedirectToLogin, Logo } from 'components'
+import {
+  TextField,
+  LoginBtn,
+  RedirectToLogin,
+  Logo,
+  HandleResponse,
+} from 'components'
 
 import { useDisclosure } from 'hooks'
 
@@ -28,28 +34,6 @@ function RegisterPage() {
   const [createUser, { data, isSuccess, isError, isLoading, error }] =
     useCreateUserMutation()
 
-  //? Handle Create User Response
-  useEffect(() => {
-    if (isSuccess) {
-      dispatch(userLogin(data.data.access_token))
-
-      dispatch(
-        showAlert({
-          status: 'success',
-          title: data.msg,
-        })
-      )
-
-      reset()
-      replace(query?.redirectTo || '/')
-    }
-  }, [isSuccess])
-
-  useEffect(() => {
-    if (isError) {
-      redirectModalHandlers.open()
-    }
-  }, [isError])
 
   //? Form Hook
   const {
@@ -77,6 +61,18 @@ function RegisterPage() {
     }
   }
 
+  const onError = () => {
+    if (error.status === 422) {
+      redirectModalHandlers.open()
+    }
+  }
+
+  const onSuccess = () => {
+    dispatch(userLogin(data.data.access_token))
+    reset()
+    replace(query?.redirectTo || '/')
+  }
+
   //? Render(s)
   return (
     <>
@@ -86,6 +82,19 @@ function RegisterPage() {
         onClose={redirectModalHandlers.close}
         isShow={isShowRedirectModal}
       />
+
+      {/* Handle Update Response */}
+      {(isSuccess || isError) && (
+        <HandleResponse
+          isError={isError}
+          isSuccess={isSuccess}
+          error={error?.data?.err}
+          message={data?.msg}
+          onSuccess={onSuccess}
+          onError={onError}
+        />
+      )}
+
       <main className='grid items-center min-h-screen '>
         <Head>
           <title>دیجی‌کالا | ثبت‌نام</title>
