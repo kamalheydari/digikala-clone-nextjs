@@ -33,8 +33,7 @@ const getProducts = async (req, res) => {
     await db.connect()
 
     //? Filters
-
-    const currentCategory = await Category.findOne({ slug: category })
+    const currentCategory = await Category.findById({ _id: category })
 
     const categoryFilter = currentCategory
       ? {

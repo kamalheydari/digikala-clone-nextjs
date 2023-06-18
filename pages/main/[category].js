@@ -30,10 +30,7 @@ export default function MainCategory(props) {
         <div className='py-4 mx-auto space-y-12 xl:mt-28 lg:max-w-[1450px]'>
           <MainSlider data={sliders} />
 
-          <DiscountSlider
-            categoryId={currentCategory._id}
-            currentCategory={currentCategory}
-          />
+          <DiscountSlider currentCategory={currentCategory} />
 
           <Categories
             childCategories={childCategories}

@@ -14,12 +14,12 @@ import { useGetProductsQuery } from 'services'
 
 export default function DiscountSlider(props) {
   //? Props
-  const { currentCategory, categoryId } = props
+  const { currentCategory } = props
 
   const { products, isLoading } = useGetProductsQuery(
     {
       sort: 6,
-      category: categoryId,
+      category: currentCategory?._id,
       page_size: 15,
       discount: true,
     },
