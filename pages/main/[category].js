@@ -40,11 +40,11 @@ export default function MainCategory(props) {
 
           <BannerOne data={bannerOneType} />
 
-          <BestSellsSlider categoryId={currentCategory._id} />
+          <BestSellsSlider categorySlug={currentCategory.slug} />
 
           <BannerTwo data={bannerTwoType} />
 
-          <MostFavouraiteProducts categoryId={currentCategory._id} />
+          <MostFavouraiteProducts categorySlug={currentCategory.slug} />
         </div>
       </main>
     </ClientLayout>

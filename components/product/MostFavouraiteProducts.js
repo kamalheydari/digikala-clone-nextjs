@@ -11,12 +11,12 @@ import { useGetProductsQuery } from 'services'
 
 export default function MostFavouraiteProducts(props) {
   //? Props
-  const { categoryId } = props
+  const { categorySlug } = props
 
   const { products, isLoading } = useGetProductsQuery(
     {
       sort: 5,
-      category: categoryId,
+      category: categorySlug,
     },
     {
       selectFromResult: ({ data, isLoading }) => ({

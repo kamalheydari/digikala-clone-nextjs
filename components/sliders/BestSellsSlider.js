@@ -7,12 +7,12 @@ import { useGetProductsQuery } from 'services'
 
 export default function BestSellsSlider(props) {
   //? Props
-  const { categoryId } = props
+  const { categorySlug } = props
 
   const { products, isLoading } = useGetProductsQuery(
     {
       sort: 2,
-      category: categoryId,
+      category: categorySlug,
       page_size: 15,
     },
     {

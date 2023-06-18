@@ -47,11 +47,14 @@ export default function Home(props) {
 
           <BannerOne data={bannerOneType} />
 
-          <BestSellsSlider categoryId={currentCategory._id} />
+          <BestSellsSlider categorySlug={currentCategory.slug} />
 
           <BannerTwo data={bannerTwoType} />
 
-          <MostFavouraiteProducts categoryId={currentCategory._id} />
+          <MostFavouraiteProducts
+            BestSellsSlider
+            categorySlug={currentCategory.slug}
+          />
         </div>
       </main>
     </ClientLayout>
