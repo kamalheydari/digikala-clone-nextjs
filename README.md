@@ -1,4 +1,4 @@
-﻿# Digikala Clone NextJs
+# Digikala Clone NextJs
 
 A advance clone of digikala includes products page, single product page, category, sorting, filtering, JWT authentication, login page, register page, edit user information, order cart, review and admin dashbord to add new product, accept reviews, add category, details and specification for category and more...
 
@@ -22,6 +22,60 @@ Admin privileges
 User-friendly search, filter, and sort functions
 - Enables easy product discovery and sorting based on user preferences.
 - Displays top discount products, most favorited items, and best-selling products for each category.
+
+## How to install and run the project ...
+
+1. Clone or download the repository by running the following command in your terminal:
+
+```bash
+git clone https://github.com/kamalheydari/digikala-clone-nextjs.git
+```
+
+2. Install the project dependencies using either npm or yarn:
+
+```bash
+npm install
+```
+or
+```bash
+yarn 
+```
+
+3. Define the required environment variables in a file named .env.local located in the root directory of the project. The following variables are necessary:
+```bash
+    MONGODB_URL=<your MongoDB connection URL>
+
+    NEXT_PUBLIC_ACCESS_TOKEN_SECRET=<your access token secret>
+    ACCESS_TOKEN_SECRET=<your access token secret>
+    #  set the same value for this two varialbels
+    #  Example:
+    #  NEXT_PUBLIC_ACCESS_TOKEN_SECRET=69i60j69i57j35i39i650l2j0i512l3j69i60
+    #  ACCESS_TOKEN_SECRET=69i60j69i57j35i39i650l2j0i512l3j69i60
+
+    NEXT_PUBLIC_LIARA_ENDPOINT=<your Liara endpoint>
+    NEXT_PUBLIC_LIARA_BUCKET_NAME=<your Liara bucket name>
+    NEXT_PUBLIC_LIARA_ACCESS_KEY=<your Liara access key>
+    NEXT_PUBLIC_LIARA_SECRET_KEY=<your Liara secret key>
+
+```
+
+4. Install [MongoDB](https://www.mongodb.com/try/download/community-kubernetes-operator) and [MongoDB Compass](https://www.mongodb.com/products/compass) on your local machine. If you already have a MongoDB instance set up, skip this step.
+
+5. Download the database from the following link:
+```bash
+https://drive.google.com/file/d/1lZW98V__nb6LGe39P4QAJBSdzAhVenE_/view?usp=sharing
+```
+
+6. Create a new database in MongoDB Compass and create the required collections with the same names as the downloaded JSON files. Then, import the data from the downloaded files into the corresponding collections.
+
+7. Log in to [Liara](https://liara.ir/) for free and create a new bucket (ذخیره سازی ابری). Then, set the last four environment variables listed above to the corresponding values provided by Liara. This will allow the application to use Liara for cloud storage.
+
+8. Create an account by accessing the following URL in your web browser:
+```bash
+http://localhost:3000/authentication/login
+```
+
+9. After creating the account, find your account in the database and change the `role` field to `root` and `root` field to `true`. This will grant you access to all the admin dashboard features.
 
 ## Demo
 
