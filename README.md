@@ -63,7 +63,7 @@ yarn
 
 5. Download the database from the following link:
 ```bash
-https://drive.google.com/file/d/1lZW98V__nb6LGe39P4QAJBSdzAhVenE_/view?usp=sharing
+https://drive.google.com/file/d/1KPemPYDEPmLcKg_nJTV4IyHOXzpxYIKd/view?usp=drivesdk
 ```
 
 6. Create a new database in MongoDB Compass and create the required collections with the same names as the downloaded JSON files. Then, import the data from the downloaded files into the corresponding collections.
