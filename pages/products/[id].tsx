@@ -30,36 +30,17 @@ import {
 import type { GetServerSideProps, NextPage } from 'next'
 import type { DataModels } from 'types'
 
-export type SmilarProductListType = Pick<
-  DataModels.IProduct,
-  | '_id'
-  | 'colors'
-  | 'discount'
-  | 'images'
-  | 'inStock'
-  | 'price'
-  | 'rating'
-  | 'sold'
-  | 'title'
->
-
-export type CategoryLevels = Record<
-  'levelOne' | 'levelTwo' | 'LevelThree',
-  { name: string; slug: string }
->
-
 interface Props {
   product: DataModels.IProduct
   smilarProducts: {
     title: string
-    products: SmilarProductListType[]
+    products: DataModels.IProduct[]
   }
-  categoryLevels: CategoryLevels
 }
 
 const SingleProduct: NextPage<Props> = (props) => {
   //? Props
-  const { product, smilarProducts, categoryLevels } = props
+  const { product, smilarProducts } = props
 
   //? Assets
   const dispatch = useAppDispatch()
@@ -100,7 +81,7 @@ const SingleProduct: NextPage<Props> = (props) => {
 
       <ClientLayout>
         <main className='xl:mt-28 lg:max-w-[1550px] mx-auto py-4 space-y-4'>
-          <Breadcrumb categoryLevels={categoryLevels} />
+          <Breadcrumb categoryLevels={product.category_levels} />
 
           <div className='h-fit lg:h-fit lg:grid lg:grid-cols-9 lg:px-4 lg:gap-x-2 lg:gap-y-4 lg:mb-10 xl:gap-x-7'>
             <ImageGallery
@@ -176,37 +157,20 @@ export const getServerSideProps: GetServerSideProps<
   { id: string }
 > = async ({ params }) => {
   await db.connect()
-  const product = await Product.findById({ _id: params?.id }).lean()
-
-  if (!product) return { notFound: true }
-
-  const productCategoryLevels = await Product.findById({ _id: params?.id })
+  const product = await Product.findById({ _id: params?.id })
     .populate('category_levels.level_one')
     .populate('category_levels.level_two')
     .populate('category_levels.Level_three')
     .lean()
-    .select('category_levels')
 
-  const categoryLevels = {
-    levelOne: {
-      name: productCategoryLevels?.category_levels.level_one.name,
-      slug: productCategoryLevels?.category_levels.level_one.slug,
-    },
-    levelTwo: {
-      name: productCategoryLevels?.category_levels.level_two.name,
-      slug: productCategoryLevels?.category_levels.level_two.slug,
-    },
-    LevelThree: {
-      name: productCategoryLevels?.category_levels.Level_three.name,
-      slug: productCategoryLevels?.category_levels.Level_three.slug,
-    },
-  }
+  if (!product) return { notFound: true }
 
   const productCategoryID = product.category.pop()
 
-  let smilarProducts = await Product.find({
+  const smilarProducts = await Product.find({
     category: { $in: productCategoryID },
     inStock: { $gte: 1 },
+    _id: { $ne: product._id },
   })
     .select(
       '-description -info -specification -category -category_levels -sizes  -reviews -numReviews'
@@ -214,19 +178,14 @@ export const getServerSideProps: GetServerSideProps<
     .limit(11)
     .lean()
 
-  smilarProducts = JSON.parse(JSON.stringify(smilarProducts)).filter(
-    (item: SmilarProductListType) => item._id !== params?.id
-  )
-
   await db.disconnect()
 
   return {
     props: {
       product: JSON.parse(JSON.stringify(product)),
-      categoryLevels: JSON.parse(JSON.stringify(categoryLevels)),
       smilarProducts: {
         title: 'کالاهای مشابه',
-        products: smilarProducts,
+        products: JSON.parse(JSON.stringify(smilarProducts)),
       },
     },
   }

@@ -43,10 +43,7 @@ const createBanner = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-const getBanners = async (
-  req: NextApiRequest,
-  res: NextApiResponse<DataModels.IBanner[]>
-) => {
+const getBanners = async (req: NextApiRequest, res: NextApiResponse) => {
   const category = req.query?.category
   try {
     await db.connect()

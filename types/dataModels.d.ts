@@ -1,4 +1,4 @@
-import { Document } from 'mongoose'
+import { Document, ObjectId } from 'mongoose'
 import type { IAddress, IColor, ISize } from 'types'
 
 declare namespace DataModels {
@@ -12,8 +12,6 @@ declare namespace DataModels {
     uri?: string
     isPublic: boolean
     type: string
-    createdAt: Date
-    updatedAt: Date
   }
 
   interface ISlider {
@@ -25,8 +23,6 @@ declare namespace DataModels {
     title: string
     uri?: string
     isPublic: boolean
-    createdAt: Date
-    updatedAt: Date
   }
 
   interface ICategory {
@@ -38,8 +34,6 @@ declare namespace DataModels {
     colors?: { start: string; end: string }
     level: number
     children?: ICategory[]
-    createdAt: Date
-    updatedAt: Date
   }
 
   interface IDetails {
@@ -48,8 +42,6 @@ declare namespace DataModels {
     info: { title: string }[]
     specification: { title: string }[]
     optionsType: 'colors' | 'sizes' | 'none'
-    createdAt: Date
-    updatedAt: Date
   }
 
   interface IProduct {
@@ -106,7 +98,6 @@ declare namespace DataModels {
     delivered: boolean
     paid: boolean
     dateOfPayment: Date
-    createdAt: Date
     updatedAt: Date
   }
 
@@ -126,26 +117,68 @@ declare namespace DataModels {
       id: string
       title: string
     }[]
+  }
+
+  // Define type for MongoDB documents
+  interface IBannerDocument extends IBanner, Document {
+    _id: ObjectId
+    category_id: ObjectId
     createdAt: Date
     updatedAt: Date
   }
 
-  // Define type for MongoDB documents
-  type IBannerDocument = IBanner & Document
+  interface ISliderDocument extends ISlider, Document {
+    _id: ObjectId
+    category_id: ObjectId
+    createdAt: Date
+    updatedAt: Date
+  }
 
-  type ISliderDocument = ISlider & Document
+  interface ICategoryDocument extends ICategory, Document {
+    _id: ObjectId
+    createdAt: Date
+    updatedAt: Date
+  }
 
-  type ICategoryDocument = ICategory & Document
+  interface IDetailsDocument extends IDetails, Document {
+    _id: ObjectId
+    category_id: ObjectId
+    createdAt: Date
+    updatedAt: Date
+  }
 
-  type IDetailsDocument = IDetails & Document
+  interface IProductDocument extends IProduct, Document {
+    _id: ObjectId
+    category: ObjectId[]
+    category_levels: {
+      level_one: ObjectId
+      level_two: ObjectId
+      Level_three: ObjectId
+    }
+    createdAt: Date
+    updatedAt: Date
+  }
 
-  type IProductDocument = IProduct & Document
+  interface IUserDocument extends IUser, Document {
+    _id: ObjectId
+    createdAt: Date
+    updatedAt: Date
+  }
 
-  type IUserDocument = IUser & Document
+  interface IOrderDocument extends IOrder, Document {
+    _id: ObjectId
+    user: ObjectId
+    createdAt: Date
+    updatedAt: Date
+  }
 
-  type IOrderDocument = IOrder & Document
-
-  type IReviewDocument = IReview & Document
+  interface IReviewDocument extends IReview, Document {
+    _id: ObjectId
+    user: ObjectId
+    product: ObjectId
+    createdAt: Date
+    updatedAt: Date
+  }
 }
 
 export default DataModels

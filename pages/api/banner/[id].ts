@@ -29,10 +29,7 @@ const handler: NextApiHandler = async (
   }
 }
 
-const getBanner = async (
-  req: NextApiRequest,
-  res: NextApiResponse<DataModels.IBanner>
-) => {
+const getBanner = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { id } = req.query
     await db.connect()

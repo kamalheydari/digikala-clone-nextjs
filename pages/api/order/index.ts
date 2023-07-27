@@ -26,14 +26,7 @@ const handler: NextApiHandler = async (
   }
 }
 
-const getOrders = async (
-  req: NextApiRequest,
-  res: NextApiResponse<{
-    orders: DataModels.IOrder[]
-    ordersLength: number
-    pagination: IPagination
-  }>
-) => {
+const getOrders = async (req: NextApiRequest, res: NextApiResponse) => {
   const page = req.query.page ? +req.query.page : 1
   const page_size = req.query.page_size ? +req.query.page_size : 10
 

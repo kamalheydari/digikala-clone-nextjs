@@ -9,7 +9,6 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 import { registerSchema } from 'utils'
 
-import { useDispatch } from 'react-redux'
 import { userLogin } from 'store'
 
 import { useCreateUserMutation } from 'services'
@@ -17,7 +16,6 @@ import { useCreateUserMutation } from 'services'
 import {
   TextField,
   LoginButton,
-  RedirectToLogin,
   Logo,
   HandleResponse,
 } from 'components'
@@ -31,8 +29,6 @@ const RegisterPage: NextPage = () => {
   //? Assets
   const dispatch = useAppDispatch()
   const { query, replace } = useRouter()
-
-  const [isShowRedirectModal, redirectModalHandlers] = useDisclosure()
 
   //? Create User
   const [createUser, { data, isSuccess, isError, isLoading, error }] =
@@ -76,13 +72,6 @@ const RegisterPage: NextPage = () => {
   //? Render(s)
   return (
     <>
-      <RedirectToLogin
-        title='مشکلی در ثبت‌نام شما وجود دارد'
-        text={error}
-        onClose={redirectModalHandlers.close}
-        isShow={isShowRedirectModal}
-      />
-
       {/* Handle Update Response */}
       {(isSuccess || isError) && (
         <HandleResponse

@@ -10,12 +10,12 @@ import 'swiper/css/navigation'
 import { Navigation, FreeMode } from 'swiper'
 import { ProductCard } from 'components'
 
-import type { SmilarProductListType } from 'pages/products/[id]'
+import type { DataModels } from 'types'
 
 interface Props {
   smilarProducts: {
     title: string
-    products: SmilarProductListType[]
+    products: DataModels.IProduct[]
   }
 }
 

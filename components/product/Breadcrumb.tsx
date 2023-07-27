@@ -1,13 +1,12 @@
 import Link from 'next/link'
-
-import type { CategoryLevels } from 'pages/products/[id]'
+import { DataModels } from 'types'
 
 interface Props {
-  categoryLevels: CategoryLevels
+  categoryLevels: DataModels.IProduct['category_levels']
 }
 
 const Breadcrumb: React.FC<Props> = ({ categoryLevels }) => {
-  const { levelOne, levelTwo, LevelThree } = categoryLevels
+  const { level_one, Level_three, level_two } = categoryLevels
 
   //? Render(s)
   return (
@@ -17,24 +16,24 @@ const Breadcrumb: React.FC<Props> = ({ categoryLevels }) => {
       </Link>
       {' / '}
       <Link
-        href={`/main/${levelOne.slug}`}
+        href={`/main/${level_one.slug}`}
         className='inline-block px-1 py-1 text-sm text-gray-700 '
       >
-        {levelOne.name}
+        {level_one.name}
       </Link>
       {' / '}
       <Link
-        href={`/products?category=${levelTwo.slug}`}
+        href={`/products?category=${level_two.slug}`}
         className='inline-block px-1 py-1 text-sm text-gray-700 '
       >
-        {levelTwo.name}
+        {level_two.name}
       </Link>
       {' / '}
       <Link
-        href={`/products?category=${LevelThree.slug}`}
+        href={`/products?category=${Level_three.slug}`}
         className='inline-block px-1 py-1 text-sm text-gray-700 '
       >
-        {LevelThree.name}
+        {Level_three.name}
       </Link>
     </div>
   )

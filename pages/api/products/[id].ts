@@ -31,7 +31,7 @@ const handler: NextApiHandler = async (
 
 const getProduct = async (
   req: NextApiRequest,
-  res: NextApiResponse<{ product: DataModels.IProduct }>
+  res: NextApiResponse
 ) => {
   try {
     const { id } = req.query

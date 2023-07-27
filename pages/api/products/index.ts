@@ -208,7 +208,7 @@ const createProduct = async (req: NextApiRequest, res: NextApiResponse) => {
       parent: undefined,
     })
 
-    newProduct.category.unshift(mainCategory?._id)
+    if (mainCategory) newProduct.category.unshift(mainCategory?._id)
 
     await newProduct.save()
     await db.disconnect()
