@@ -10,6 +10,8 @@ A advance clone of digikala includes products page, single product page, categor
 - MongoDB
 - Redux - Toolkit - RTK Query
 - JWT
+- react-hook-form
+- headlessui
 
 ## Features
 Full-stack e-commerce website
