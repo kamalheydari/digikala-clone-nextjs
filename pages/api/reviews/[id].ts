@@ -1,7 +1,5 @@
 import { Review, Product } from 'models'
 
-import auth from 'middleware/auth'
-
 import { sendError, db } from 'utils'
 
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
@@ -32,12 +30,12 @@ const handler: NextApiHandler = async (
 
 const createReview = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const result = await auth(req, res)
+    const userId = req.headers['user-id']
 
     await db.connect()
 
     const newReview = new Review({
-      user: result?.id,
+      user: userId,
       product: req.query.id,
       ...req.body,
     })
@@ -75,15 +73,15 @@ const getReview = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const deleteReview = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const result = await auth(req, res)
+    const userId = req.headers['user-id']
 
     await db.connect()
 
     const review: DataModels.IReviewDocument | null = await Review.findOne({
-      user: result?.id,
+      user: userId,
     })
 
-    if (review?.user.toString() !== result?.id.toString())
+    if (review?.user.toString() !== userId)
       return sendError(res, 403, 'شما اجازه انجام این عملیات را ندارید')
 
     await Review.findByIdAndDelete(req.query.id)
@@ -98,8 +96,9 @@ const deleteReview = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const updateReview = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const result = await auth(req, res)
-    if (!result?.root)
+    const userRole = req.headers['user-role']
+
+    if (userRole !== 'root')
       return sendError(res, 403, 'شما اجازه انجام این عملیات را ندارید')
 
     await db.connect()

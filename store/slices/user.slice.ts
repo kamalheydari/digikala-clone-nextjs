@@ -1,7 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-import Cookies from 'js-cookie'
-
 interface Product {
   productID: string
   title: string
@@ -10,7 +8,6 @@ interface Product {
 
 interface UserState {
   lastSeen: Product[]
-  token: string
 }
 
 const getLastSeen = (): Product[] => {
@@ -22,25 +19,12 @@ const getLastSeen = (): Product[] => {
   return [] as Product[]
 }
 
-const getToken = (): string => Cookies.get('token') ?? ''
-
-const initialState: UserState = { lastSeen: getLastSeen(), token: getToken() }
+const initialState: UserState = { lastSeen: getLastSeen() }
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    userLogout: (state) => {
-      Cookies.remove('token')
-      state.token = ''
-    },
-
-    userLogin: (state, action: PayloadAction<string>) => {
-      Cookies.set('token', action.payload, { expires: 10 })
-
-      state.token = action.payload
-    },
-
     addToLastSeen: (state, action: PayloadAction<Product>) => {
       let isItemExist = state.lastSeen.find(
         (item) => item.productID === action.payload.productID
@@ -57,6 +41,6 @@ const userSlice = createSlice({
   },
 })
 
-export const { userLogout, userLogin, addToLastSeen } = userSlice.actions
+export const { addToLastSeen } = userSlice.actions
 
 export default userSlice.reducer

@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt'
 
 import { User } from 'models'
 
-import { createAccessToken, sendError, db } from 'utils'
+import { sendError, db, setUserCookie } from 'utils'
 
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
 import type { DataModels } from 'types'
@@ -38,13 +38,15 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
     await newUser.save()
     await db.disconnect()
 
-    const access_token = createAccessToken({ id: newUser._id })
+    const token = await setUserCookie({
+      id: newUser._id,
+      role: newUser.role,
+    })
+
+    res.setHeader('Set-Cookie', token)
 
     res.status(201).json({
       msg: 'عضویت موفقیت آمیز بود',
-      data: {
-        access_token,
-      },
     })
   } catch (error) {
     sendError(res, 500, (error as Error).message)

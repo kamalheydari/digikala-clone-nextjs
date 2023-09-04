@@ -1,7 +1,5 @@
 import { Review } from 'models'
 
-import auth from 'middleware/auth'
-
 import { sendError, db } from 'utils'
 
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
@@ -26,14 +24,15 @@ const getReviews = async (req: NextApiRequest, res: NextApiResponse) => {
   const page_size = req.query.page_size ? +req.query.page_size : 5
 
   try {
-    const result = await auth(req, res)
+    const userRole = req.headers['user-role']
+    const userId = req.headers['user-id']
 
     let reviews: DataModels.IReviewDocument[], reviewsLength: number
 
     await db.connect()
 
-    if (!result?.root) {
-      reviews = await Review.find({ user: result?.id })
+    if (userRole === 'user') {
+      reviews = await Review.find({ user: userId })
         .populate('product', 'images')
         .populate('user', 'name')
         .skip((page - 1) * page_size)
@@ -42,7 +41,7 @@ const getReviews = async (req: NextApiRequest, res: NextApiResponse) => {
           createdAt: 'desc',
         })
 
-      reviewsLength = await Review.countDocuments({ user: result?.id })
+      reviewsLength = await Review.countDocuments({ user: userId })
     } else {
       reviews = await Review.find()
         .populate('product', 'images')

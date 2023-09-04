@@ -1,7 +1,5 @@
 import { Product, Order } from 'models'
 
-import auth from 'middleware/auth'
-
 import { sendError, db } from 'utils'
 
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
@@ -31,13 +29,14 @@ const getOrders = async (req: NextApiRequest, res: NextApiResponse) => {
   const page_size = req.query.page_size ? +req.query.page_size : 10
 
   try {
-    const result = await auth(req, res)
+    const userRole = req.headers['user-role']
+    const userId = req.headers['user-id']
 
     let orders: DataModels.IOrderDocument[], ordersLength: number
 
     await db.connect()
-    if (!result?.root) {
-      orders = await Order.find({ user: result?.id })
+    if (userRole === 'user') {
+      orders = await Order.find({ user: userId })
         .populate('user', '-password -address')
         .skip((page - 1) * page_size)
         .limit(page_size)
@@ -45,7 +44,7 @@ const getOrders = async (req: NextApiRequest, res: NextApiResponse) => {
           createdAt: 'desc',
         })
 
-      ordersLength = await Order.countDocuments({ user: result?.id })
+      ordersLength = await Order.countDocuments({ user: userId })
     } else {
       orders = await Order.find()
         .populate('user', '-password -address')
@@ -78,12 +77,13 @@ const getOrders = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const createOrder = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const result = await auth(req, res)
+    const userId = req.headers['user-id']
+
     const { cart } = req.body
 
     await db.connect()
     const newOrder = new Order({
-      user: result?.id,
+      user: userId,
       ...req.body,
     })
 

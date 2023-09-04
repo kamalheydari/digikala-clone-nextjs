@@ -1,7 +1,5 @@
 import { Product } from 'models'
 
-import auth from 'middleware/auth'
-
 import { sendError, db } from 'utils'
 
 import type { DataModels } from 'types'
@@ -29,10 +27,7 @@ const handler: NextApiHandler = async (
   }
 }
 
-const getProduct = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-) => {
+const getProduct = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { id } = req.query
 
@@ -49,7 +44,7 @@ const getProduct = async (
 
     if (!product) return sendError(res, 404, 'این محصول موجود نمیباشد')
 
-    res.status(200).json({ product })
+    res.status(200).json(product)
   } catch (error) {
     sendError(res, 500, (error as Error).message)
   }
@@ -57,24 +52,12 @@ const getProduct = async (
 
 const updateProduct = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const result = await auth(req, res)
+    const userRole = req.headers['user-role']
 
-    if (!result?.root)
+    if (userRole !== 'root')
       return sendError(res, 403, 'شما اجازه انجام این عملیات را ندارید')
 
     const { id } = req.query
-
-    const { title, price, images, category, info, specification } = req.body
-
-    if (
-      !title ||
-      !price ||
-      !category ||
-      images.length === 0 ||
-      info.length === 0 ||
-      specification.length === 0
-    )
-      return sendError(res, 204, 'لطفا تمام فیلد ها را پر کنید')
 
     await db.connect()
     await Product.findByIdAndUpdate(
@@ -93,9 +76,9 @@ const updateProduct = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const deleteProduct = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const result = await auth(req, res)
+    const userRole = req.headers['user-role']
 
-    if (!result?.root)
+    if (userRole !== 'root')
       return sendError(res, 403, 'شما اجازه انجام این عملیات را ندارید')
 
     const { id } = req.query

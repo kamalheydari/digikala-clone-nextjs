@@ -37,9 +37,7 @@ const LoginForm: React.FC<Props> = (props) => {
         errors={formErrors.email}
         placeholder='آدرس ایمیل'
         name='email'
-        type='email'
         inputMode='email'
-        direction='ltr'
       />
 
       <TextField
@@ -48,7 +46,6 @@ const LoginForm: React.FC<Props> = (props) => {
         type='password'
         placeholder='رمز عبور'
         name='password'
-        direction='ltr'
       />
 
       <LoginButton isLoading={isLoading}>ورود</LoginButton>

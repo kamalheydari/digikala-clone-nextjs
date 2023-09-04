@@ -1,5 +1,3 @@
-import auth from 'middleware/auth'
-
 import { Order } from 'models'
 
 import { sendError, db } from 'utils'
@@ -44,9 +42,9 @@ const getOrder = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const updateOrder = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const result = await auth(req, res)
+    const userRole = req.headers['user-role']
 
-    if (!result?.root)
+    if (userRole !== 'root')
       return sendError(res, 403, 'شما اجازه انجام این عملیات را ندارید')
 
     await db.connect()

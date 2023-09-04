@@ -1,7 +1,5 @@
 import { Details } from 'models'
 
-import auth from 'middleware/auth'
-
 import { sendError, db } from 'utils'
 
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
@@ -23,9 +21,9 @@ const handler: NextApiHandler = async (
 
 const createDetails = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const result = await auth(req, res)
+    const userRole = req.headers['user-role']
 
-    if (!result?.root)
+    if (userRole !== 'root')
       return sendError(res, 403, 'شما اجازه انجام این عملیات را ندارید')
 
     await db.connect()

@@ -1,7 +1,5 @@
 import { User } from 'models'
 
-import auth from 'middleware/auth'
-
 import { sendError, db } from 'utils'
 
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
@@ -27,12 +25,14 @@ const handler: NextApiHandler = async (
 
 const uploadInfo = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const result = await auth(req, res)
-    if (!result)
-      return sendError(res, 403, 'شما اجازه انجام این عملیات را ندارید')
+    const userId = req.headers['user-id']
+    // const userRole = req.headers['user-role']
+
+    // if (userRole !== 'root')
+    //   return sendError(res, 403, 'شما اجازه انجام این عملیات را ندارید')
 
     await db.connect()
-    await User.findOneAndUpdate({ _id: result.id }, req.body)
+    await User.findOneAndUpdate({ _id: userId }, req.body)
     await db.disconnect()
 
     res.status(201).json({
@@ -48,8 +48,9 @@ const getUsers = async (req: NextApiRequest, res: NextApiResponse) => {
   const page_size = req.query.page_size ? +req.query.page_size : 5
 
   try {
-    const result = await auth(req, res)
-    if (!result?.root && result?.role !== 'admin')
+    const userRole = req.headers['user-role']
+
+    if (userRole === 'user')
       return sendError(res, 403, 'شما اجازه انجام این عملیات را ندارید')
 
     await db.connect()

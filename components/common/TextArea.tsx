@@ -14,7 +14,7 @@ const TextArea: React.FC<Props> = (props) => {
   const { name, control, label, errors, ...restProps } = props
 
   //? Form Hook
-  const { field } = useController({ name, control, rules: { required: true } })
+  const { field } = useController({ name, control })
 
   return (
     <div className='space-y-1.5'>

@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react'
 
-import { useEditUserMutation } from 'services'
+import { useEditUserMutation, useGetUserInfoQuery } from 'services'
 
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { addressSchema } from 'utils'
-
-import { useUserInfo } from 'hooks'
 
 let iranCity = require('iran-city')
 
@@ -35,8 +33,8 @@ const AddressModal: React.FC<Props> = (props) => {
   //? Assets
   let AllProvinces = iranCity.allProvinces()
 
-  //? Get User Data
-  const { userInfo } = useUserInfo()
+  //? Get UserInfo
+  const { data: userInfo } = useGetUserInfoQuery()
 
   //? State
   const [cities, setCities] = useState([])
@@ -138,7 +136,6 @@ const AddressModal: React.FC<Props> = (props) => {
                   errors={formErrors.postalCode}
                   name='postalCode'
                   type='number'
-                  direction='ltr'
                   inputMode='numeric'
                 />
               </div>

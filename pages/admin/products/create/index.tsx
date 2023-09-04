@@ -26,7 +26,6 @@ const Create: NextPage<Props> = () => {
 
   //? Handlers
   const createHandler = (data: IProductForm) => {
-    console.log(data)
     createProduct({ body: data })
   }
 

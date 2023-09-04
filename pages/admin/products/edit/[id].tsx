@@ -55,7 +55,30 @@ const Edit: NextPage<Props> = () => {
 
   //? Handlers
   const updateHandler: SubmitHandler<IProductForm> = (data) => {
-    setUpdateInfo((prev) => ({ ...prev, ...selectedProduct, ...data }))
+    const {
+      title,
+      description,
+      colors,
+      sizes,
+      discount,
+      price,
+      info,
+      specification,
+      images,
+    } = data
+    setUpdateInfo((prev) => ({
+      ...prev,
+      ...selectedProduct,
+      title,
+      description,
+      colors,
+      sizes,
+      discount,
+      price,
+      info,
+      specification,
+      images,
+    }))
     confirmUpdateModalHandlers.open()
   }
 
@@ -120,7 +143,7 @@ const Edit: NextPage<Props> = () => {
                 mode='edit'
                 isLoadingUpdate={isLoadingUpdate}
                 updateHandler={updateHandler}
-                selectedProduct={selectedProduct.product}
+                selectedProduct={selectedProduct}
               />
             ) : null}
           </PageContainer>

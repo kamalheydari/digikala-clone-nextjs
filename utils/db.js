@@ -1,10 +1,10 @@
-import mongoose, { Connection } from 'mongoose'
+import mongoose from 'mongoose'
 
 const connection = {
   isConnected: 0,
 }
 
-async function connect(): Promise<void> {
+async function connect() {
   if (connection.isConnected === 1) {
     console.log('already connected')
     return
@@ -21,7 +21,7 @@ async function connect(): Promise<void> {
     await mongoose.disconnect()
   }
 
-  const db: Connection = await mongoose.connect(process.env.MONGODB_URL!, {
+  const db = await mongoose.connect(process.env.MONGODB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -30,7 +30,7 @@ async function connect(): Promise<void> {
   connection.isConnected = db.connections[0].readyState
 }
 
-async function disconnect(): Promise<void> {
+async function disconnect() {
   if (connection.isConnected === 1) {
     if (process.env.NODE_ENV === 'production') {
       await mongoose.disconnect()

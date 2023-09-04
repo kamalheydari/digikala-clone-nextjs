@@ -2,10 +2,10 @@ import Link from 'next/link'
 
 import { Icons, BoxLink, Logout, Orders, Person } from 'components'
 
-import { useUserInfo } from 'hooks'
+import { useGetUserInfoQuery } from 'services'
 
 function ProfileAside() {
-  const { userInfo, isLoading } = useUserInfo()
+  const { data: userInfo, isLoading } = useGetUserInfoQuery()
 
   const profilePaths = [
     {

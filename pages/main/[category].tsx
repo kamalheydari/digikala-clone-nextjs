@@ -108,7 +108,7 @@ export const getStaticProps: GetStaticProps<
   await db.disconnect()
 
   return {
-    revalidate: 180,
+    revalidate: 60 * 60 * 24,
     props: {
       currentCategory: JSON.parse(JSON.stringify(currentCategory)),
       childCategories: {

@@ -94,7 +94,6 @@ const CategoryForm: React.FC<Props> = (props) => {
           control={control}
           errors={formErrors.slug}
           name='slug'
-          direction='ltr'
         />
 
         <TextField
@@ -102,7 +101,6 @@ const CategoryForm: React.FC<Props> = (props) => {
           control={control}
           errors={formErrors.image}
           name='image'
-          direction='ltr'
         />
 
         <UploadImage

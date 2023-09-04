@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt'
 
 import { User } from 'models'
 
-import { createAccessToken, sendError, db } from 'utils'
+import { setUserCookie, sendError, db } from 'utils'
 
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
 import type { DataModels } from 'types'
@@ -29,17 +29,17 @@ const handler: NextApiHandler = async (
         if (!isMatch)
           return sendError(res, 422, 'آدرس ایمیل یا کلمه عبور اشتباه است')
 
-        const access_token = createAccessToken({ id: user._id })
+        const token = await setUserCookie({
+          id: user._id,
+          role: user.role,
+        })
+
+        res.setHeader('Set-Cookie', token)
 
         await db.disconnect()
 
         res.status(200).json({
           msg: 'ورود موفقیت آمیز بود',
-          data: {
-            access_token,
-            root: user.root,
-            role: user.role,
-          },
         })
       } catch (error) {
         sendError(res, 500, (error as Error).message)

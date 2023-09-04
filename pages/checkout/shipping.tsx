@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 
 import { clearCart, showAlert } from 'store'
 
-import { useCreateOrderMutation } from 'services'
+import { useCreateOrderMutation, useGetUserInfoQuery } from 'services'
 
 import {
   Button,
@@ -22,7 +22,7 @@ import {
 
 import { formatNumber } from 'utils'
 
-import { useAppDispatch, useAppSelector, useUserInfo } from 'hooks'
+import { useAppDispatch, useAppSelector } from 'hooks'
 
 import type { NextPage } from 'next'
 import type { WithAddressModalProps } from 'types'
@@ -32,8 +32,8 @@ const ShippingPage: NextPage = () => {
   const router = useRouter()
   const dispatch = useAppDispatch()
 
-  //? Get User Data
-  const { userInfo } = useUserInfo()
+  //? Get UserInfo
+  const { data: userInfo } = useGetUserInfoQuery()
 
   //? States
   const [paymentMethod, setPaymentMethod] = useState('پرداخت در محل')

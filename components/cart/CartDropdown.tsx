@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 
 import { formatNumber } from 'utils'
 
-import { useUserInfo, useDisclosure, useAppSelector } from 'hooks'
+import { useDisclosure, useAppSelector } from 'hooks'
 
 import { Menu, Transition } from '@headlessui/react'
 import {
@@ -15,12 +15,14 @@ import {
   Toman,
   EmptyCart,
 } from 'components'
+import { useGetUserInfoQuery } from 'services'
 
 export default function CartDropdown() {
   //? Assets
   const { push } = useRouter()
 
-  const { isVerify } = useUserInfo()
+  //? Get UserInfo
+  const { data: userInfo } = useGetUserInfoQuery()
 
   const [isShowRedirectModal, redirectModalHandlers] = useDisclosure()
 
@@ -31,7 +33,7 @@ export default function CartDropdown() {
 
   //? Handlers
   const handleRoute = () => {
-    if (!isVerify) return redirectModalHandlers.open()
+    if (!userInfo) return redirectModalHandlers.open()
 
     push('/checkout/shipping')
   }

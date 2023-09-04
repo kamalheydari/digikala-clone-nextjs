@@ -12,9 +12,7 @@ const BasicAddressBar: React.FC<Props> = ({ addressModalProps }) => {
     addressModalProps || {}
 
   //? Render(s)
-  if (!isVerify) {
-    return null
-  } else if (isLoading) {
+  if (isLoading) {
     return (
       <Skeleton.Item
         animated='background'
@@ -22,6 +20,8 @@ const BasicAddressBar: React.FC<Props> = ({ addressModalProps }) => {
         width='w-3/4 lg:w-1/4'
       />
     )
+  } else if (!isVerify) {
+    return null
   } else if (!isAddress) {
     return (
       <button

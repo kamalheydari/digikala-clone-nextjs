@@ -10,9 +10,10 @@ import {
   WithAddressModal,
 } from 'components'
 
-import { useUserInfo } from 'hooks'
-
 import type { NextPage } from 'next'
+
+import { useGetUserInfoQuery } from 'services'
+
 import type { WithAddressModalProps } from 'types'
 
 interface Props {
@@ -23,8 +24,8 @@ const BasicAddresses: NextPage<Props> = ({ addressModalProps }) => {
   const { isAddress, address, isLoading, openAddressModal } =
     addressModalProps || {}
 
-  //? Get User Data
-  const { userInfo } = useUserInfo()
+  //? Get UserInfo
+  const { data: userInfo } = useGetUserInfoQuery()
 
   //? Render(s)
   return (

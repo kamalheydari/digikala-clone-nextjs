@@ -20,12 +20,9 @@ import { Menu, Transition } from '@headlessui/react'
 
 import { formatNumber } from 'utils'
 
-import {
-  useUserInfo,
-  useDisclosure,
-  useAppSelector,
-  useAppDispatch,
-} from 'hooks'
+import { useDisclosure, useAppSelector, useAppDispatch } from 'hooks'
+
+import { useGetUserInfoQuery } from 'services'
 
 import type { NextPage } from 'next'
 
@@ -36,8 +33,8 @@ const Cart: NextPage = () => {
 
   const [isShowRedirectModal, redirectModalHandlers] = useDisclosure()
 
-  //? Get User Data
-  const { userInfo } = useUserInfo()
+  //? Get UserInfo
+  const { data: userInfo } = useGetUserInfoQuery()
 
   //? Store
   const { cartItems, totalItems, totalPrice, totalDiscount } = useAppSelector(

@@ -9,25 +9,15 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 import { registerSchema } from 'utils'
 
-import { userLogin } from 'store'
-
 import { useCreateUserMutation } from 'services'
 
-import {
-  TextField,
-  LoginButton,
-  Logo,
-  HandleResponse,
-} from 'components'
-
-import { useAppDispatch, useDisclosure } from 'hooks'
+import { TextField, LoginButton, Logo, HandleResponse } from 'components'
 
 import type { NextPage } from 'next'
 import type { IRegister } from 'types'
 
 const RegisterPage: NextPage = () => {
   //? Assets
-  const dispatch = useAppDispatch()
   const { query, replace } = useRouter()
 
   //? Create User
@@ -63,8 +53,6 @@ const RegisterPage: NextPage = () => {
   }
 
   const onSuccess = () => {
-    if (data) dispatch(userLogin(data.data.access_token))
-
     reset()
     replace(query?.redirectTo?.toString() || '/')
   }
@@ -107,7 +95,6 @@ const RegisterPage: NextPage = () => {
             <TextField
               control={control}
               errors={formErrors.email}
-              type='email'
               placeholder='آدرس ایمیل'
               name='email'
               inputMode='email'

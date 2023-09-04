@@ -11,7 +11,7 @@ type GetProductsResult = {
   pagination: IPagination
 }
 type GetProductsQuery = { [key: string]: string | number | boolean }
-type GetSingleProductResult = { product: DataModels.IProduct }
+type GetSingleProductResult = DataModels.IProduct
 type CreateProductQuery = { body: IProductForm }
 type UpdateProductQuery = { body: DataModels.IProduct; id: string }
 

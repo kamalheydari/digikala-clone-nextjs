@@ -1,7 +1,5 @@
 import { Banner } from 'models'
 
-import auth from 'middleware/auth'
-
 import { sendError, db } from 'utils'
 
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
@@ -44,8 +42,9 @@ const getBanner = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const updateBanner = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const result = await auth(req, res)
-    if (!result?.root)
+    const userRole = req.headers['user-role']
+
+    if (userRole !== 'root')
       return sendError(res, 403, 'شما اجازه انجام این عملیات را ندارید')
 
     const { id } = req.query
@@ -64,9 +63,9 @@ const updateBanner = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const deleteBanner = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const result = await auth(req, res)
+    const userRole = req.headers['user-role']
 
-    if (!result?.root)
+    if (userRole !== 'root')
       return sendError(res, 403, 'شما اجازه انجام این عملیات را ندارید')
 
     const { id } = req.query

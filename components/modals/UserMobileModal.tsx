@@ -51,6 +51,7 @@ const UserMobileModal: React.FC<Props> = (props) => {
           error={error}
           message={data?.msg}
           onSuccess={onClose}
+          onError={onClose}
         />
       )}
 
@@ -73,7 +74,6 @@ const UserMobileModal: React.FC<Props> = (props) => {
                 control={control}
                 errors={formErrors.mobile}
                 name='mobile'
-                direction='ltr'
                 inputMode='tel'
               />
 

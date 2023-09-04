@@ -30,10 +30,16 @@ export type IProductForm = Omit<
   | 'rating'
   | 'info'
   | 'specification'
+  | 'category_levels'
 > & {
   info: { title: string; value: string }[] | { title: string }[]
   specification: { title: string; value: string }[] | { title: string }[]
   optionsType: 'colors' | 'sizes' | 'none'
+  category_levels: {
+    level_one: string
+    level_two: string
+    Level_three: string
+  }
 }
 
 export type IReviewForm = Pick<

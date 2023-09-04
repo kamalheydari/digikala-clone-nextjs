@@ -1,31 +1,18 @@
-import { useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-
-import { logInSchema } from 'utils'
+import { SubmitHandler } from 'react-hook-form'
 
 import { useLoginMutation } from 'services'
 
-import { useDispatch } from 'react-redux'
-import { userLogin } from 'store'
+import { Logo, HandleResponse, LoginForm } from 'components'
 
-import {
-  TextField,
-  LoginButton,
-  Logo,
-  HandleResponse,
-  LoginForm,
-} from 'components'
-import { ILoginForm } from 'types'
+import type { ILoginForm } from 'types'
 
 function LoginPage() {
   //? Assets
-  const dispatch = useDispatch()
   const { replace, query } = useRouter()
 
   //? Login User
@@ -40,8 +27,6 @@ function LoginPage() {
   }
 
   const onSuccess = () => {
-    if (data) dispatch(userLogin(data.data.access_token))
-
     replace(query?.redirectTo?.toString() || '/')
   }
 

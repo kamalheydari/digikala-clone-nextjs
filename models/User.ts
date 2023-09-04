@@ -44,7 +44,6 @@ const userSchema = new Schema<DataModels.IUserDocument>({
   },
   mobile: { type: String },
   role: { type: String, default: 'user' },
-  root: { type: Boolean, default: false },
 })
 
 const User: Model<DataModels.IUserDocument> =

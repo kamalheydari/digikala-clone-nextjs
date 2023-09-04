@@ -107,10 +107,33 @@ const ProductsForm: React.FC<Props> = (props) => {
   //*   Set Product Details On Edit Mode
   useEffect(() => {
     if (selectedProduct && mode === 'edit') {
-      reset({ ...selectedProduct })
+      const {
+        info,
+        specification,
+        title,
+        description,
+        colors,
+        sizes,
+        images,
+        price,
+        inStock,
+        discount,
+      } = selectedProduct
+      reset({
+        info,
+        specification,
+        title,
+        description,
+        colors,
+        sizes,
+        images,
+        price,
+        inStock,
+        discount,
+      })
     }
   }, [selectedProduct])
-
+  
   //? Handlers
   const editedCreateHandler: SubmitHandler<IProductForm> = (data) => {
     if (mode === 'create')
@@ -177,15 +200,14 @@ const ProductsForm: React.FC<Props> = (props) => {
                   control={control}
                   type='number'
                   inputMode='numeric'
-                  direction='ltr'
                 />
+
                 <TextField
                   label='موجودی'
                   name='inStock'
                   control={control}
                   type='number'
                   inputMode='numeric'
-                  direction='ltr'
                 />
 
                 <TextField
@@ -194,7 +216,6 @@ const ProductsForm: React.FC<Props> = (props) => {
                   control={control}
                   type='number'
                   inputMode='numeric'
-                  direction='ltr'
                 />
               </div>
             </Tab.Panel>

@@ -10,26 +10,16 @@ type GetUsersResult = {
 type GetUsersQuery = {
   page: number
 }
-type CreateUserResult = MsgResult & {
-  data: {
-    access_token: string
-  }
-}
+type CreateUserResult = MsgResult
 type CreateUserQuery = {
   body: Pick<DataModels.IUser, 'name' | 'email' | 'password'>
 }
-type LoginResult = MsgResult & {
-  data: {
-    access_token: string
-    root: boolean
-    role: string
-  }
-}
+type LoginResult = MsgResult
 type LoginQuery = { body: ILoginForm }
 type EditUserQuery = {
   body: Partial<DataModels.IUser>
 }
-type GetUserInfoResult = { user: Exclude<DataModels.IUser, 'password'> }
+type GetUserInfoResult = Exclude<DataModels.IUser, 'password'>
 
 export const userApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -68,6 +58,14 @@ export const userApiSlice = apiSlice.injectEndpoints({
       invalidatesTags: ['User'],
     }),
 
+    logout: builder.query<MsgResult, undefined>({
+      query: () => ({
+        url: '/api/auth/logout',
+        method: 'GET',
+      }),
+      providesTags: ['User'],
+    }),
+
     editUser: builder.mutation<MsgResult, EditUserQuery>({
       query: ({ body }) => ({
         url: '/api/user',
@@ -95,4 +93,5 @@ export const {
   useLoginMutation,
   useEditUserMutation,
   useGetUserInfoQuery,
+  useLogoutQuery,
 } = userApiSlice

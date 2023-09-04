@@ -1,36 +1,52 @@
+import { useState } from 'react'
 import { useRouter } from 'next/router'
 
-import { userLogout, showAlert } from 'store'
+import { useLogoutQuery } from 'services'
 
-import { Icons } from 'components'
-import { useAppDispatch } from 'hooks'
+import { Button, HandleResponse, Icons } from 'components'
 
 export default function Logout() {
+  const [skip, setSkip] = useState(true)
+
   //? Assets
-  const dispatch = useAppDispatch()
-  const { push } = useRouter()
+  const { reload } = useRouter()
+
+  //? Logout Query
+  const { data, isError, isLoading, error, isSuccess } = useLogoutQuery(
+    undefined,
+    {
+      skip,
+    }
+  )
 
   //? Handlers
   const handleLogout = () => {
-    push('/')
-    dispatch(userLogout())
-    dispatch(
-      showAlert({
-        status: 'success',
-        title: 'خروج موفقیت آمیز بود',
-      })
-    )
+    setSkip(false)
   }
+  const onSuccessLogout = () => reload()
 
   //? Render(s)
   return (
-    <button
-      type='button'
-      className='flex justify-between px-7 transition-colors hover:bg-gray-100 py-4  text-xs text-gray-700 w-full border-t border-gray-300 cursor-pointer gap-x-2 md:text-sm'
-      onClick={handleLogout}
-    >
-      <Icons.Logout className='text-black icon' />
-      <span className='ml-auto mr-3 text-gray-700'>خروج از حساب کاربری</span>
-    </button>
+    <>
+      {/* Handle Delete Response */}
+      {(isSuccess || isError) && (
+        <HandleResponse
+          isError={isError}
+          isSuccess={isSuccess}
+          error={error}
+          message={data?.msg}
+          onSuccess={onSuccessLogout}
+        />
+      )}
+
+      <Button
+        className='flex justify-between px-7 transition-colors hover:bg-gray-100 py-4 text-xs text-gray-700 bg-gray-50 w-full cursor-pointer gap-x-2 md:text-sm'
+        onClick={handleLogout}
+        isLoading={isLoading}
+      >
+        <Icons.Logout className='text-black icon' />
+        <span className='ml-auto mr-3 text-gray-700'>خروج از حساب کاربری</span>
+      </Button>
+    </>
   )
 }

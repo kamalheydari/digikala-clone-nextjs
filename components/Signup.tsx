@@ -3,18 +3,20 @@ import { useRouter } from 'next/router'
 
 import { Icons, Skeleton, UserDropdown } from 'components'
 
-import { useUserInfo } from 'hooks'
+import { useGetUserInfoQuery } from 'services'
 
 const Signup = () => {
   const { asPath } = useRouter()
-  const { userInfo, isVerify, isLoading } = useUserInfo()
+
+  //? Get UserInfo
+  const { data: userInfo, isLoading } = useGetUserInfoQuery()
 
   //? Render(s)
   if (isLoading)
     return (
       <Skeleton.Item height='h-8' width='w-7 lg:w-12' animated='background' />
     )
-  else if (!isVerify) {
+  else if (!userInfo) {
     return (
       <div className='flex-center text-sm gap-x-2 lg:border lg:border-gray-300 lg:rounded-md lg:py-2 lg:px-3'>
         <Link

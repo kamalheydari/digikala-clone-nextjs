@@ -1,7 +1,5 @@
 import { Category, Product } from 'models'
 
-import auth from 'middleware/auth'
-
 import { sendError, db } from 'utils'
 
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
@@ -159,9 +157,10 @@ const getProducts = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const createProduct = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const result = await auth(req, res)
+    const userRole = req.headers['user-role']
 
-    if (!result?.root) return sendError(res, 403, 'توکن احراز هویت نامعتبر است')
+    if (userRole !== 'root')
+      return sendError(res, 403, 'شما اجازه انجام این عملیات را ندارید')
 
     const {
       title,
@@ -186,7 +185,7 @@ const createProduct = async (req: NextApiRequest, res: NextApiResponse) => {
       info.length === 0 ||
       specification.length === 0
     )
-      return sendError(res, 204, 'لطفا تمام فیلد ها را پر کنید')
+      return sendError(res, 400, 'لطفا تمام فیلد ها را پر کنید')
 
     await db.connect()
     const newProduct = new Product({

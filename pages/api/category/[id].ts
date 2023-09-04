@@ -1,7 +1,5 @@
 import { Category } from 'models'
 
-import auth from 'middleware/auth'
-
 import { sendError, db } from 'utils'
 
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
@@ -41,8 +39,9 @@ const getCategory = async (req: NextApiRequest, res: NextApiResponse) => {
 
 const updateCategory = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    const result = await auth(req, res)
-    if (!result?.root)
+    const userRole = req.headers['user-role']
+
+    if (userRole !== 'root')
       return sendError(res, 403, 'شما اجازه انجام این عملیات را ندارید')
 
     const { id } = req.query

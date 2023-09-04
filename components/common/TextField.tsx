@@ -6,24 +6,17 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string
   errors?: FieldError | undefined
   name: string
-  direction?: 'ltr' | 'rtl'
   control: Control<any>
 }
 
 const TextField: React.FC<Props> = (props) => {
   //? Props
-  const {
-    label,
-    errors,
-    name,
-    type = 'text',
-    control,
-    direction,
-    ...restProps
-  } = props
+  const { label, errors, name, type = 'text', control, ...restProps } = props
 
   //? Form Hook
   const { field } = useController({ name, control, rules: { required: true } })
+
+  const direction = /^[a-zA-Z0-9]+$/.test(field.value?.[0]) ? 'ltr' : 'rtl'
 
   //? Handlers
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,8 +41,8 @@ const TextField: React.FC<Props> = (props) => {
         </label>
       )}
       <input
-        style={{ direction: `${direction === 'ltr' ? 'ltr' : 'unset'}` }}
-        className='block w-full px-3 py-1.5 text-base transition-colors border border-gray-200 rounded-md outline-none bg-zinc-50/30 lg:text-lg focus:border-blue-600'
+        className='block w-full px-3 py-1.5 text-base transition-colors border border-gray-200 rounded-md outline-none bg-zinc-50/30 lg:text-lg focus:border-blue-600 placeholder:text-center'
+        style={{ direction }}
         id={name}
         type={type}
         value={field?.value}

@@ -1,11 +1,8 @@
-import auth from 'middleware/auth'
-
 import { User } from 'models'
 
 import { sendError, db } from 'utils'
 
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
-import type { DataModels } from 'types'
 
 const handler: NextApiHandler = async (
   req: NextApiRequest,
@@ -14,19 +11,18 @@ const handler: NextApiHandler = async (
   switch (req.method) {
     case 'GET':
       try {
-        const result = await auth(req, res)
+        const userId = req.headers['user-id']
 
         await db.connect()
 
-        const user: DataModels.IUserDocument | null = await User.findById({
-          _id: result?.id,
+        if (!userId) sendError(res, 400, 'havent account')
+        const user = await User.findById({
+          _id: userId,
         }).select('-password')
+
         await db.disconnect()
 
-        if (user)
-          res.status(200).json({
-            user,
-          })
+        if (user) res.status(200).json(user)
       } catch (error) {
         sendError(res, 500, (error as Error).message)
       }

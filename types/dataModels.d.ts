@@ -75,7 +75,6 @@ declare namespace DataModels {
     email: string
     password: string
     role: 'root' | 'user' | 'admin'
-    root: boolean
     mobile: string
     address?: IAddress
   }
@@ -117,6 +116,8 @@ declare namespace DataModels {
       id: string
       title: string
     }[]
+    createdAt: Date
+    updatedAt: Date
   }
 
   // Define type for MongoDB documents
@@ -176,8 +177,6 @@ declare namespace DataModels {
     _id: ObjectId
     user: ObjectId
     product: ObjectId
-    createdAt: Date
-    updatedAt: Date
   }
 }
 

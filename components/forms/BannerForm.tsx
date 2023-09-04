@@ -103,7 +103,6 @@ const BannerForm: React.FC<Props> = (props) => {
 
           <TextField
             label='آدرس لینک'
-            direction='ltr'
             control={control}
             name='uri'
             errors={formErrors?.uri}
@@ -141,7 +140,6 @@ const BannerForm: React.FC<Props> = (props) => {
 
           <TextField
             label='آدرس تصویر'
-            direction='ltr'
             control={control}
             name='image.url'
             errors={formErrors?.image?.url}

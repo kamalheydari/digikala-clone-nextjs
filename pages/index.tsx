@@ -56,18 +56,18 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 
           <Categories
             childCategories={childCategories}
-            color={currentCategory.colors?.start}
-            name={currentCategory.name}
+            color={currentCategory?.colors?.start}
+            name={currentCategory?.name}
             homePage
           />
 
           <BannerOne data={bannerOneType} />
 
-          <BestSellsSlider categorySlug={currentCategory.slug} />
+          <BestSellsSlider categorySlug={currentCategory?.slug} />
 
           <BannerTwo data={bannerTwoType} />
 
-          <MostFavouraiteProducts categorySlug={currentCategory.slug} />
+          <MostFavouraiteProducts categorySlug={currentCategory?.slug} />
         </div>
       </main>
     </ClientLayout>
@@ -99,7 +99,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   await db.disconnect()
 
   return {
-    revalidate: 180,
+    revalidate: 60 * 60 * 24,
     props: {
       currentCategory: JSON.parse(JSON.stringify(currentCategory)),
       childCategories: {

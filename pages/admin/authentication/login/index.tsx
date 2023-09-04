@@ -1,65 +1,24 @@
-import { useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { getErrorMessage } from 'utils'
-
 import { SubmitHandler } from 'react-hook-form'
-
-import { useDispatch } from 'react-redux'
-import { userLogin, showAlert } from 'store'
 
 import { useLoginMutation } from 'services'
 
-import { LoginForm, Logo } from 'components'
+import { HandleResponse, LoginForm, Logo } from 'components'
 
 import type { ILoginForm } from 'types'
 import type { NextPage } from 'next'
 
 const LoginPage: NextPage = () => {
   //? Assets
-  const dispatch = useDispatch()
-  const { push } = useRouter()
+  const { replace } = useRouter()
 
   //? Login User
   const [login, { data, isSuccess, isError, isLoading, error }] =
     useLoginMutation()
-
-  //? Handle Login User Response
-  useEffect(() => {
-    if (isSuccess) {
-      if (data?.data.root || data?.data.role === 'admin') {
-        dispatch(userLogin(data?.data.access_token))
-
-        dispatch(
-          showAlert({
-            status: 'success',
-            title: data.msg,
-          })
-        )
-        push('/admin')
-      } else {
-        dispatch(
-          showAlert({
-            status: 'error',
-            title: 'شما اجازه دسترسی به پنل ادمین را ندارید',
-          })
-        )
-      }
-    }
-  }, [isSuccess])
-
-  useEffect(() => {
-    if (isError && error)
-      dispatch(
-        showAlert({
-          status: 'error',
-          title: getErrorMessage(error),
-        })
-      )
-  }, [isError])
 
   //? Handlers
   const submitHander: SubmitHandler<ILoginForm> = (data) => {
@@ -68,9 +27,22 @@ const LoginPage: NextPage = () => {
     })
   }
 
+  const onSuccess = () => replace('/admin')
+
   //? Render(s)
   return (
     <>
+      {/*  Handle Login Response */}
+      {(isSuccess || isError) && (
+        <HandleResponse
+          isError={isError}
+          isSuccess={isSuccess}
+          error={error}
+          message={data?.msg}
+          onSuccess={onSuccess}
+        />
+      )}
+
       <main className='grid items-center min-h-screen '>
         <Head>
           <title>مدیریت | ورود</title>

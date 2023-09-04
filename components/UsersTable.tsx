@@ -42,7 +42,7 @@ const UsersTable: React.FC<Props> = (props) => {
                   ? 'text-blue-600 bg-blue-50'
                   : user.role === 'user'
                   ? 'text-amber-600 bg-amber-50'
-                  : user.root
+                  : user.role === 'root'
                   ? 'text-green-600 bg-green-50'
                   : ''
               }
