@@ -10,20 +10,22 @@ A advance clone of digikala includes products page, single product page, categor
 - MongoDB
 - Redux - Toolkit - RTK Query
 - JWT
-- react-hook-form
-- headlessui
 
 ## Features
+
 Full-stack e-commerce website
+
 - Allows registered users to place orders, write product reviews, and update their account information.
 
 Admin privileges
+
 - Enables creation of new product categories.
 - Allows definition of unique specifications and features for each category.
 - Manages banners, sliders, and new product listings.
 - Updates the status of orders and reviews.
 
 User-friendly search, filter, and sort functions
+
 - Enables easy product discovery and sorting based on user preferences.
 - Displays top discount products, most favorited items, and best-selling products for each category.
 
@@ -40,21 +42,19 @@ git clone https://github.com/kamalheydari/digikala-clone-nextjs.git
 ```bash
 npm install
 ```
+
 or
+
 ```bash
-yarn 
+yarn
 ```
 
 3. Define the required environment variables in a file named .env.local located in the root directory of the project. The following variables are necessary:
+
 ```bash
     MONGODB_URL=<your MongoDB connection URL>
 
-    NEXT_PUBLIC_ACCESS_TOKEN_SECRET=<your access token secret>
-    ACCESS_TOKEN_SECRET=<your access token secret>
-    #  set the same value for this two varialbels
-    #  Example:
-    #  NEXT_PUBLIC_ACCESS_TOKEN_SECRET=69i60j69i57j35i39i650l2j0i512l3j69i60
-    #  ACCESS_TOKEN_SECRET=69i60j69i57j35i39i650l2j0i512l3j69i60
+    JWT_SECRET_KEY=<your access token secret>
 
     NEXT_PUBLIC_LIARA_ENDPOINT=<your Liara endpoint>
     NEXT_PUBLIC_LIARA_BUCKET_NAME=<your Liara bucket name>
@@ -66,6 +66,7 @@ yarn
 4. Install [MongoDB](https://www.mongodb.com/try/download/community-kubernetes-operator) and [MongoDB Compass](https://www.mongodb.com/products/compass) on your local machine. If you already have a MongoDB instance set up, skip this step.
 
 5. Download the database from the following link:
+
 ```bash
 https://drive.google.com/drive/folders/1tonl8z-LbPM_umavCs9DBVs4hc0CmwVd?usp=sharing
 ```
@@ -75,11 +76,12 @@ https://drive.google.com/drive/folders/1tonl8z-LbPM_umavCs9DBVs4hc0CmwVd?usp=sha
 7. Log in to [Liara](https://liara.ir/) for free and create a new bucket (ذخیره سازی ابری). Then, set the last four environment variables listed above to the corresponding values provided by Liara. This will allow the application to use Liara for cloud storage.
 
 8. Create an account by accessing the following URL in your web browser:
+
 ```bash
 http://localhost:3000/authentication/login
 ```
 
-9. After creating the account, find your account in the database and change the `role` field to `root` and `root` field to `true`. This will grant you access to all the admin dashboard features.
+9. After creating the account, find your account in the database and change the `role` field to `root`. This will grant you access to all the admin dashboard features.
 
 ## Demo
 
