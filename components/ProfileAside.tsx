@@ -2,11 +2,11 @@ import Link from 'next/link'
 
 import { Icons, BoxLink, Logout, Orders, Person } from 'components'
 
-import { useAppSelector } from 'hooks'
+import { useUserInfo } from 'hooks'
 
 function ProfileAside() {
   //? Get UserInfo
-  const { userInfo, isLoading } = useAppSelector((state) => state.user)
+  const { userInfo, isLoading } = useUserInfo()
 
   const profilePaths = [
     {

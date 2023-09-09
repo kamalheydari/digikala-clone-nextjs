@@ -3,13 +3,13 @@ import { useRouter } from 'next/router'
 
 import { Icons, Skeleton, UserDropdown } from 'components'
 
-import { useAppSelector } from 'hooks'
+import { useUserInfo } from '../hooks'
 
 const Signup = () => {
   const { asPath } = useRouter()
 
   //? Get UserInfo
-  const { userInfo, isLoading } = useAppSelector((state) => state.user)
+  const { userInfo, isLoading } = useUserInfo()
 
   //? Render(s)
   if (isLoading)

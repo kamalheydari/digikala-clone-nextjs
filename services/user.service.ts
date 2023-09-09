@@ -1,5 +1,4 @@
 import apiSlice from 'services/api'
-import { endFetching, login, startFetching } from 'store'
 
 import type { DataModels, IPagination } from 'types'
 
@@ -24,16 +23,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
         url: `/api/user?page=${page}`,
         method: 'GET',
       }),
-      providesTags: (result) =>
-        result
-          ? [
-              ...result.users.map(({ _id }) => ({
-                type: 'User' as const,
-                id: _id,
-              })),
-              'User',
-            ]
-          : ['User'],
+      providesTags: ['User'],
     }),
 
     editUser: builder.mutation<MsgResult, EditUserQuery>({
@@ -42,9 +32,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
         method: 'PATCH',
         body,
       }),
-      invalidatesTags: (result, err, arg) => [
-        { type: 'User', id: arg.body._id },
-      ],
+      invalidatesTags: ['User'],
     }),
 
     getUserInfo: builder.query<GetUserInfoResult, void>({
@@ -54,19 +42,9 @@ export const userApiSlice = apiSlice.injectEndpoints({
         credentials: 'include',
       }),
       providesTags: ['User'],
-      async onQueryStarted(args, { dispatch, queryFulfilled }) {
-        dispatch(startFetching())
-        try {
-          const { data } = await queryFulfilled
-          dispatch(login(data))
-        } catch (err) {
-        } finally {
-          dispatch(endFetching())
-        }
-      },
     }),
   }),
 })
 
-export const { useGetUsersQuery, useEditUserMutation, useGetUserInfoQuery } =
+export const { useEditUserMutation, useGetUserInfoQuery, useGetUsersQuery } =
   userApiSlice

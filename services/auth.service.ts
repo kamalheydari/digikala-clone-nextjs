@@ -2,7 +2,6 @@ import apiSlice from 'services/api'
 import { userApiSlice } from 'services'
 
 import type { DataModels, ILoginForm } from 'types'
-import { logout } from 'store'
 
 type MsgResult = { msg: string }
 
@@ -46,10 +45,10 @@ export const authApiSlice = apiSlice.injectEndpoints({
         method: 'GET',
         credentials: 'include',
       }),
-      async onQueryStarted(args, { dispatch, queryFulfilled }) {
-        await queryFulfilled
-         dispatch(logout())
-      },
+      // async onQueryStarted(args, { dispatch, queryFulfilled }) {
+      //   await queryFulfilled
+      //    dispatch(logout())
+      // },
     }),
   }),
 })

@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 
 import { formatNumber } from 'utils'
 
-import { useDisclosure, useAppSelector } from 'hooks'
+import { useDisclosure, useAppSelector, useUserInfo } from 'hooks'
 
 import { Menu, Transition } from '@headlessui/react'
 import {
@@ -21,7 +21,7 @@ export default function CartDropdown() {
   const { push } = useRouter()
 
   //? Get UserInfo
-  const { userInfo } = useAppSelector((state) => state.user)
+  const { userInfo } = useUserInfo()
 
   const [isShowRedirectModal, redirectModalHandlers] = useDisclosure()
 

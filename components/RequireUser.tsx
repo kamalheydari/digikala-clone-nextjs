@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 
-import { useAppSelector } from 'hooks'
+import { useUserInfo } from 'hooks'
 
 import Cookies from 'js-cookie'
 import { tokens } from 'utils'
@@ -18,8 +18,8 @@ const RequireUser: React.FC<Props> = (props) => {
   const { push, asPath } = useRouter()
   const loggedInCookie = Cookies.get(tokens.LOGGED_IN)
 
-  //? Store
-  const { userInfo } = useAppSelector((state) => state.user)
+  //? Get UserInfo
+  const { userInfo } = useUserInfo()
 
   if (loggedInCookie || userInfo) {
     if (allowedRoles?.includes(userInfo?.role as string)) {
@@ -27,7 +27,7 @@ const RequireUser: React.FC<Props> = (props) => {
     }
   } else {
     asPath.includes('/admin')
-      ? push(`admin/authentication/login?redirectTo=${asPath}`)
+      ? push(`/admin/authentication/login?redirectTo=${asPath}`)
       : push(`/authentication/login?redirectTo=${asPath}`)
 
     return null

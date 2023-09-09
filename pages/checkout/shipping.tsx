@@ -23,7 +23,7 @@ import {
 
 import { formatNumber, roles } from 'utils'
 
-import { useAppDispatch, useAppSelector } from 'hooks'
+import { useAppDispatch, useAppSelector, useUserInfo } from 'hooks'
 
 import type { NextPage } from 'next'
 import type { WithAddressModalProps } from 'types'
@@ -32,7 +32,7 @@ const ShippingPage: NextPage = () => {
   const { push } = useRouter()
 
   //? Get UserInfo
-  const { userInfo } = useAppSelector((state) => state.user)
+  const { userInfo } = useUserInfo()
 
   //? Assets
   const dispatch = useAppDispatch()

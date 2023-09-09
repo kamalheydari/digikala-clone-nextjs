@@ -18,8 +18,9 @@ import {
   HandleResponse,
 } from 'components'
 
+import { useUserInfo } from 'hooks'
+
 import type { IAddress } from 'types'
-import { useAppSelector } from 'hooks'
 
 interface Props {
   isShow: boolean
@@ -35,7 +36,7 @@ const AddressModal: React.FC<Props> = (props) => {
   let AllProvinces = iranCity.allProvinces()
 
   //? Get UserInfo
-  const { userInfo } = useAppSelector((state) => state.user)
+  const { userInfo } = useUserInfo()
 
   //? State
   const [cities, setCities] = useState([])

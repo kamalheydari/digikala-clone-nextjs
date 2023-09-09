@@ -47,7 +47,7 @@ const getUsers = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
   const page_size = req.query.page_size ? +req.query.page_size : 5
 
   try {
-    if (req.user.role !== roles.ROOT)
+    if (req.user.role === roles.USER)
       return sendError(res, 403, 'شما اجازه انجام این عملیات را ندارید')
 
     await db.connect()

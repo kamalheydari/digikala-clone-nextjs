@@ -1,15 +1,14 @@
 import { useState } from 'react'
-import { useRouter } from 'next/router'
 
-import { useLogoutQuery } from 'services'
+import { useLogoutQuery, userApiSlice } from 'services'
 
 import { Button, HandleResponse, Icons } from 'components'
+import { useAppDispatch } from 'hooks'
 
 export default function Logout() {
   const [skip, setSkip] = useState(true)
 
-  //? Assets
-  const { reload } = useRouter()
+  const dispatch = useAppDispatch()
 
   //? Logout Query
   const { data, isError, isLoading, error, isSuccess } = useLogoutQuery(
@@ -23,6 +22,9 @@ export default function Logout() {
   const handleLogout = () => {
     setSkip(false)
   }
+  const onSuccess = () => {
+    dispatch(userApiSlice.util.invalidateTags(['User']))
+  }
 
   //? Render(s)
   return (
@@ -34,6 +36,7 @@ export default function Logout() {
           isSuccess={isSuccess}
           error={error}
           message={data?.msg}
+          onSuccess={onSuccess}
         />
       )}
 
