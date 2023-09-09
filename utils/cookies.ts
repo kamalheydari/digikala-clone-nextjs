@@ -21,14 +21,15 @@ export const destroyAccessToken = serialize(tokens.ACCESS_TOKEN, '', {
   secure: process.env.NODE_ENV !== 'development',
   expires: new Date(0),
   path: '/',
+  sameSite: 'strict',
 })
 
-
 export const destroyLoggedIn = serialize(tokens.LOGGED_IN, '', {
-  httpOnly: true,
+  httpOnly: false,
   secure: process.env.NODE_ENV !== 'development',
   expires: new Date(0),
   path: '/',
+  sameSite: 'strict',
 })
 
 export const serializeAccessTokenCookie = (value: string) =>
