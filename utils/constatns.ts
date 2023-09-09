@@ -1,3 +1,15 @@
+export const roles = {
+  ADMIN: 'admin',
+  USER: 'user',
+  ROOT: 'root',
+}
+
+export const tokens = {
+  ACCESS_TOKEN: 'access_token',
+  REFRESH_TOKEN: 'refresh_token',
+  LOGGED_IN: 'logged_in',
+}
+
 export const sorts = [
   {
     name: 'جدیدترین',

@@ -1,14 +1,14 @@
 import { Banner } from 'models'
 
-import { sendError, db } from 'utils'
+import { sendError, db, roles } from 'utils'
 
-import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
+import { withUser } from 'middlewares'
+
+import type { NextApiRequest, NextApiResponse } from 'next'
 import type { DataModels } from 'types'
+import type { NextApiRequestWithUser } from 'types'
 
-const handler: NextApiHandler = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-) => {
+const handler = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
   switch (req.method) {
     case 'POST':
       await createBanner(req, res)
@@ -22,11 +22,12 @@ const handler: NextApiHandler = async (
   }
 }
 
-const createBanner = async (req: NextApiRequest, res: NextApiResponse) => {
+const createBanner = async (
+  req: NextApiRequestWithUser,
+  res: NextApiResponse
+) => {
   try {
-    const userRole = req.headers['user-role']
-
-    if (userRole !== 'root')
+    if (req.user.role !== roles.ROOT)
       return sendError(res, 403, 'شما اجازه انجام این عملیات را ندارید')
 
     await db.connect()
@@ -56,4 +57,4 @@ const getBanners = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-export default handler
+export default withUser(handler)

@@ -15,6 +15,8 @@ import {
   Slider as MainSlider,
 } from 'components'
 
+import config from 'config'
+
 import type { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next'
 import type { DataModels } from 'types'
 
@@ -49,7 +51,6 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
           <title>فروشگاه اینترنتی دیجی‌کالا</title>
           <meta name='description' content={siteDescription} />
         </Head>
-
         <div className='py-4 mx-auto space-y-24 xl:mt-28 lg:max-w-[1450px]'>
           <MainSlider data={sliders} />
           <DiscountSlider currentCategory={currentCategory} />
@@ -99,7 +100,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
   await db.disconnect()
 
   return {
-    revalidate: 60 * 60 * 24,
+    revalidate: config.revalidate,
     props: {
       currentCategory: JSON.parse(JSON.stringify(currentCategory)),
       childCategories: {

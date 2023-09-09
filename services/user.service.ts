@@ -1,5 +1,7 @@
 import apiSlice from 'services/api'
-import type { DataModels, ILoginForm, IPagination } from 'types'
+import { endFetching, login, startFetching } from 'store'
+
+import type { DataModels, IPagination } from 'types'
 
 type MsgResult = { msg: string }
 type GetUsersResult = {
@@ -10,12 +12,6 @@ type GetUsersResult = {
 type GetUsersQuery = {
   page: number
 }
-type CreateUserResult = MsgResult
-type CreateUserQuery = {
-  body: Pick<DataModels.IUser, 'name' | 'email' | 'password'>
-}
-type LoginResult = MsgResult
-type LoginQuery = { body: ILoginForm }
 type EditUserQuery = {
   body: Partial<DataModels.IUser>
 }
@@ -40,32 +36,6 @@ export const userApiSlice = apiSlice.injectEndpoints({
           : ['User'],
     }),
 
-    createUser: builder.mutation<CreateUserResult, CreateUserQuery>({
-      query: ({ body }) => ({
-        url: '/api/auth/register',
-        method: 'POST',
-        body,
-      }),
-      invalidatesTags: ['User'],
-    }),
-
-    login: builder.mutation<LoginResult, LoginQuery>({
-      query: ({ body }) => ({
-        url: '/api/auth/login',
-        method: 'POST',
-        body,
-      }),
-      invalidatesTags: ['User'],
-    }),
-
-    logout: builder.query<MsgResult, undefined>({
-      query: () => ({
-        url: '/api/auth/logout',
-        method: 'GET',
-      }),
-      providesTags: ['User'],
-    }),
-
     editUser: builder.mutation<MsgResult, EditUserQuery>({
       query: ({ body }) => ({
         url: '/api/user',
@@ -79,19 +49,24 @@ export const userApiSlice = apiSlice.injectEndpoints({
 
     getUserInfo: builder.query<GetUserInfoResult, void>({
       query: () => ({
-        url: '/api/auth/user',
+        url: '/api/user/me',
         method: 'GET',
+        credentials: 'include',
       }),
       providesTags: ['User'],
+      async onQueryStarted(args, { dispatch, queryFulfilled }) {
+        dispatch(startFetching())
+        try {
+          const { data } = await queryFulfilled
+          dispatch(login(data))
+        } catch (err) {
+        } finally {
+          dispatch(endFetching())
+        }
+      },
     }),
   }),
 })
 
-export const {
-  useGetUsersQuery,
-  useCreateUserMutation,
-  useLoginMutation,
-  useEditUserMutation,
-  useGetUserInfoQuery,
-  useLogoutQuery,
-} = userApiSlice
+export const { useGetUsersQuery, useEditUserMutation, useGetUserInfoQuery } =
+  userApiSlice

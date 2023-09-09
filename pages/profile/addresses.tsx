@@ -12,9 +12,8 @@ import {
 
 import type { NextPage } from 'next'
 
-import { useGetUserInfoQuery } from 'services'
-
 import type { WithAddressModalProps } from 'types'
+import { useAppSelector } from 'hooks'
 
 interface Props {
   addressModalProps?: WithAddressModalProps | null
@@ -25,7 +24,7 @@ const BasicAddresses: NextPage<Props> = ({ addressModalProps }) => {
     addressModalProps || {}
 
   //? Get UserInfo
-  const { data: userInfo } = useGetUserInfoQuery()
+  const { userInfo } = useAppSelector((state) => state.user)
 
   //? Render(s)
   return (

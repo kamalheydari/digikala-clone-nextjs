@@ -26,9 +26,7 @@ function LoginPage() {
     })
   }
 
-  const onSuccess = () => {
-    replace(query?.redirectTo?.toString() || '/')
-  }
+  const onSuccess = () => replace(query?.redirectTo?.toString() || '/')
 
   //? Render(s)
   return (

@@ -9,7 +9,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 import { registerSchema } from 'utils'
 
-import { useCreateUserMutation } from 'services'
+import { useRegisterMutation } from 'services'
 
 import { TextField, LoginButton, Logo, HandleResponse } from 'components'
 
@@ -21,8 +21,8 @@ const RegisterPage: NextPage = () => {
   const { query, replace } = useRouter()
 
   //? Create User
-  const [createUser, { data, isSuccess, isError, isLoading, error }] =
-    useCreateUserMutation()
+  const [registerUser, { data, isSuccess, isError, isLoading, error }] =
+    useRegisterMutation()
 
   //? Form Hook
   const {
@@ -47,7 +47,7 @@ const RegisterPage: NextPage = () => {
     email,
     password,
   }) => {
-    createUser({
+    registerUser({
       body: { name, email, password },
     })
   }

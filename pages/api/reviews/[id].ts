@@ -1,14 +1,14 @@
 import { Review, Product } from 'models'
 
-import { sendError, db } from 'utils'
+import { sendError, db, roles } from 'utils'
 
-import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
+import { withUser } from 'middlewares'
+
+import type { NextApiResponse } from 'next'
 import type { DataModels } from 'types'
+import type { NextApiRequestWithUser } from 'types'
 
-const handler: NextApiHandler = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-) => {
+const handler = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
   switch (req.method) {
     case 'POST':
       await createReview(req, res)
@@ -28,9 +28,12 @@ const handler: NextApiHandler = async (
   }
 }
 
-const createReview = async (req: NextApiRequest, res: NextApiResponse) => {
+const createReview = async (
+  req: NextApiRequestWithUser,
+  res: NextApiResponse
+) => {
   try {
-    const userId = req.headers['user-id']
+    const userId = req.user._id
 
     await db.connect()
 
@@ -51,7 +54,7 @@ const createReview = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-const getReview = async (req: NextApiRequest, res: NextApiResponse) => {
+const getReview = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
   try {
     await db.connect()
 
@@ -71,9 +74,12 @@ const getReview = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-const deleteReview = async (req: NextApiRequest, res: NextApiResponse) => {
+const deleteReview = async (
+  req: NextApiRequestWithUser,
+  res: NextApiResponse
+) => {
   try {
-    const userId = req.headers['user-id']
+    const userId = req.user._id
 
     await db.connect()
 
@@ -81,7 +87,7 @@ const deleteReview = async (req: NextApiRequest, res: NextApiResponse) => {
       user: userId,
     })
 
-    if (review?.user.toString() !== userId)
+    if (review?.user !== userId)
       return sendError(res, 403, 'شما اجازه انجام این عملیات را ندارید')
 
     await Review.findByIdAndDelete(req.query.id)
@@ -94,11 +100,12 @@ const deleteReview = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-const updateReview = async (req: NextApiRequest, res: NextApiResponse) => {
+const updateReview = async (
+  req: NextApiRequestWithUser,
+  res: NextApiResponse
+) => {
   try {
-    const userRole = req.headers['user-role']
-
-    if (userRole !== 'root')
+    if (req.user.role !== roles.ROOT)
       return sendError(res, 403, 'شما اجازه انجام این عملیات را ندارید')
 
     await db.connect()
@@ -140,4 +147,4 @@ const updateReview = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-export default handler
+export default withUser(handler)

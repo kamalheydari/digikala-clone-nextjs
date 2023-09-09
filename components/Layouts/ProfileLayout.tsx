@@ -1,4 +1,6 @@
-import { Header, ProfileAside } from 'components'
+import { Header, ProfileAside, RequireUser } from 'components'
+
+import { roles } from 'utils'
 
 interface Props {
   children: React.ReactNode
@@ -6,7 +8,7 @@ interface Props {
 
 const ProfileLayout: React.FC<Props> = ({ children }) => {
   return (
-    <>
+    <RequireUser allowedRoles={[roles.ADMIN, roles.ROOT, roles.USER]}>
       <Header />
       <div className='lg:flex lg:gap-x-4 lg:px-3 lg:container lg:max-w-7xl xl:mt-28'>
         <div className='hidden lg:block'>
@@ -16,7 +18,7 @@ const ProfileLayout: React.FC<Props> = ({ children }) => {
           {children}
         </div>
       </div>
-    </>
+    </RequireUser>
   )
 }
 export default ProfileLayout

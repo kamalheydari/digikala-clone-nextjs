@@ -1,14 +1,14 @@
 import { Category } from 'models'
 
-import { sendError, db } from 'utils'
+import { sendError, db, roles } from 'utils'
 
-import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
+import { withUser } from 'middlewares'
+
+import type { NextApiResponse } from 'next'
 import type { DataModels } from 'types'
+import type { NextApiRequestWithUser } from 'types'
 
-const handler: NextApiHandler = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-) => {
+const handler = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
   switch (req.method) {
     case 'GET':
       await getCategory(req, res)
@@ -23,7 +23,10 @@ const handler: NextApiHandler = async (
   }
 }
 
-const getCategory = async (req: NextApiRequest, res: NextApiResponse) => {
+const getCategory = async (
+  req: NextApiRequestWithUser,
+  res: NextApiResponse
+) => {
   try {
     const { id } = req.query
     await db.connect()
@@ -37,11 +40,12 @@ const getCategory = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-const updateCategory = async (req: NextApiRequest, res: NextApiResponse) => {
+const updateCategory = async (
+  req: NextApiRequestWithUser,
+  res: NextApiResponse
+) => {
   try {
-    const userRole = req.headers['user-role']
-
-    if (userRole !== 'root')
+    if (req.user.role !== roles.ROOT)
       return sendError(res, 403, 'شما اجازه انجام این عملیات را ندارید')
 
     const { id } = req.query
@@ -56,4 +60,4 @@ const updateCategory = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-export default handler
+export default withUser(handler)

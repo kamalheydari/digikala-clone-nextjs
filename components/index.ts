@@ -134,6 +134,7 @@ export { default as FreeShipping } from './FreeShipping'
 export { default as Footer } from './Footer'
 export { default as UserDropdown } from './UserDropdown'
 export { default as UsersTable } from './UsersTable'
+export { default as RequireUser } from './RequireUser'
 
 //* FORMS
 export { default as CategoryForm } from './forms/CategoryForm'

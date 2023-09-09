@@ -14,7 +14,7 @@ import type { NextPage } from 'next'
 
 const LoginPage: NextPage = () => {
   //? Assets
-  const { replace } = useRouter()
+  const { replace, query } = useRouter()
 
   //? Login User
   const [login, { data, isSuccess, isError, isLoading, error }] =
@@ -27,7 +27,7 @@ const LoginPage: NextPage = () => {
     })
   }
 
-  const onSuccess = () => replace('/admin')
+  const onSuccess = () => replace(query?.redirectTo?.toString() || '/admin')
 
   //? Render(s)
   return (

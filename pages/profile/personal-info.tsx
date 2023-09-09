@@ -10,9 +10,7 @@ import {
   ProfileLayout,
 } from 'components'
 
-import { useDisclosure } from 'hooks'
-
-import { useGetUserInfoQuery } from 'services'
+import { useAppSelector, useDisclosure } from 'hooks'
 
 import type { NextPage } from 'next'
 
@@ -22,7 +20,7 @@ const PersonalInfo: NextPage = () => {
   const [isShowPhoneModal, phoneModalHandlers] = useDisclosure()
 
   //? Get UserInfo
-  const { data: userInfo, isLoading } = useGetUserInfoQuery()
+  const { userInfo, isLoading } = useAppSelector((state) => state.user)
 
   //? Local Component
   const InfoField = ({

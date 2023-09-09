@@ -17,7 +17,7 @@ import type { NextPage } from 'next'
 
 const  UserHistory:NextPage=() =>{
   //? Store
-  const { lastSeen } = useAppSelector((state) => state.user)
+  const { lastSeen } = useAppSelector((state) => state.lastSeen)
 
   //? selector
   return (

@@ -1,14 +1,14 @@
 import { User } from 'models'
 
-import { sendError, db } from 'utils'
+import { sendError, db, roles } from 'utils'
 
-import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
+import { withUser } from 'middlewares'
+
+import type { NextApiResponse } from 'next'
 import type { DataModels } from 'types'
+import type { NextApiRequestWithUser } from 'types'
 
-const handler: NextApiHandler = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-) => {
+const handler = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
   switch (req.method) {
     case 'PATCH':
       await uploadInfo(req, res)
@@ -23,13 +23,12 @@ const handler: NextApiHandler = async (
   }
 }
 
-const uploadInfo = async (req: NextApiRequest, res: NextApiResponse) => {
+const uploadInfo = async (
+  req: NextApiRequestWithUser,
+  res: NextApiResponse
+) => {
   try {
-    const userId = req.headers['user-id']
-    // const userRole = req.headers['user-role']
-
-    // if (userRole !== 'root')
-    //   return sendError(res, 403, 'شما اجازه انجام این عملیات را ندارید')
+    const userId = req.user._id
 
     await db.connect()
     await User.findOneAndUpdate({ _id: userId }, req.body)
@@ -43,14 +42,12 @@ const uploadInfo = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-const getUsers = async (req: NextApiRequest, res: NextApiResponse) => {
+const getUsers = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
   const page = req.query.page ? +req.query.page : 1
   const page_size = req.query.page_size ? +req.query.page_size : 5
 
   try {
-    const userRole = req.headers['user-role']
-
-    if (userRole === 'user')
+    if (req.user.role !== roles.ROOT)
       return sendError(res, 403, 'شما اجازه انجام این عملیات را ندارید')
 
     await db.connect()
@@ -84,4 +81,4 @@ const getUsers = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-export default handler
+export default withUser(handler)

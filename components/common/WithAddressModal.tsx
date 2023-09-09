@@ -2,10 +2,9 @@ import React from 'react'
 
 import { AddressModal } from 'components'
 
-import { useDisclosure } from 'hooks'
+import { useAppSelector, useDisclosure } from 'hooks'
 
 import type { WithAddressModalProps } from 'types'
-import { useGetUserInfoQuery } from 'services'
 
 interface Props {
   children: React.ReactNode
@@ -17,7 +16,7 @@ const WithAddressModal: React.FC<Props> = (props) => {
   const [isShowAddressModal, addressModalHandlers] = useDisclosure()
 
   //? Get UserInfo
-  const { data: userInfo, isLoading } = useGetUserInfoQuery()
+  const { userInfo, isLoading } = useAppSelector((state) => state.user)
 
   const addressModalProps: WithAddressModalProps = {
     openAddressModal: addressModalHandlers.open,

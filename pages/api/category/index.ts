@@ -1,14 +1,14 @@
 import { Category } from 'models'
 
-import { sendError, db } from 'utils'
+import { sendError, db, roles } from 'utils'
 
-import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
+import { withUser } from 'middlewares'
+
+import type { NextApiResponse } from 'next'
 import type { DataModels, ICategoriesList } from 'types'
+import type { NextApiRequestWithUser } from 'types'
 
-const handler: NextApiHandler = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-) => {
+const handler = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
   switch (req.method) {
     case 'POST':
       await createCategory(req, res)
@@ -23,11 +23,12 @@ const handler: NextApiHandler = async (
   }
 }
 
-const createCategory = async (req: NextApiRequest, res: NextApiResponse) => {
+const createCategory = async (
+  req: NextApiRequestWithUser,
+  res: NextApiResponse
+) => {
   try {
-    const userRole = req.headers['user-role']
-
-    if (userRole !== 'root')
+    if (req.user.role !== roles.ROOT)
       return sendError(res, 403, 'شما اجازه انجام این عملیات را ندارید')
 
     await db.connect()
@@ -52,7 +53,10 @@ const createCategory = async (req: NextApiRequest, res: NextApiResponse) => {
     sendError(res, 500, (error as Error).message)
   }
 }
-const getCategories = async (req: NextApiRequest, res: NextApiResponse) => {
+const getCategories = async (
+  req: NextApiRequestWithUser,
+  res: NextApiResponse
+) => {
   try {
     await db.connect()
     const categories: DataModels.ICategoryDocument[] = await Category.find()
@@ -99,4 +103,4 @@ const getCategories = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-export default handler
+export default withUser(handler)

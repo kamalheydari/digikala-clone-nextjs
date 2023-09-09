@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { useEditUserMutation, useGetUserInfoQuery } from 'services'
+import { useEditUserMutation } from 'services'
 
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -19,6 +19,7 @@ import {
 } from 'components'
 
 import type { IAddress } from 'types'
+import { useAppSelector } from 'hooks'
 
 interface Props {
   isShow: boolean
@@ -34,7 +35,7 @@ const AddressModal: React.FC<Props> = (props) => {
   let AllProvinces = iranCity.allProvinces()
 
   //? Get UserInfo
-  const { data: userInfo } = useGetUserInfoQuery()
+  const { userInfo } = useAppSelector((state) => state.user)
 
   //? State
   const [cities, setCities] = useState([])

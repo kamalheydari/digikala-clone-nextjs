@@ -1,13 +1,15 @@
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 
-import { Header, Orders, ProfileAside } from 'components'
+import { Header, Orders, ProfileAside, RequireUser } from 'components'
+
+import { roles } from 'utils'
 
 import type { NextPage } from 'next'
 
 const ProfilePage: NextPage = () => {
   return (
-    <>
+    <RequireUser allowedRoles={[roles.ADMIN, roles.ROOT, roles.USER]}>
       <Head>
         <title>دیجی‌کالا | پروفایل</title>
       </Head>
@@ -20,7 +22,7 @@ const ProfilePage: NextPage = () => {
           <Orders />
         </div>
       </div>
-    </>
+    </RequireUser>
   )
 }
 

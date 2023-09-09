@@ -15,14 +15,13 @@ import {
   Toman,
   EmptyCart,
 } from 'components'
-import { useGetUserInfoQuery } from 'services'
 
 export default function CartDropdown() {
   //? Assets
   const { push } = useRouter()
 
   //? Get UserInfo
-  const { data: userInfo } = useGetUserInfoQuery()
+  const { userInfo } = useAppSelector((state) => state.user)
 
   const [isShowRedirectModal, redirectModalHandlers] = useDisclosure()
 

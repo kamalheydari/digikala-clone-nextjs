@@ -51,6 +51,7 @@ const UserNameModal: React.FC<Props> = (props) => {
           onSuccess={onClose}
         />
       )}
+
       <Modal isShow={isShow} onClose={onClose} effect='bottom-to-top'>
         <Modal.Content
           onClose={onClose}

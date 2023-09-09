@@ -2,7 +2,13 @@ import bcrypt from 'bcrypt'
 
 import { User } from 'models'
 
-import { setUserCookie, sendError, db } from 'utils'
+import {
+  signToken,
+  sendError,
+  db,
+  serializeAccessTokenCookie,
+  serializeLoggedInCookie,
+} from 'utils'
 
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
 import type { DataModels } from 'types'
@@ -29,12 +35,12 @@ const handler: NextApiHandler = async (
         if (!isMatch)
           return sendError(res, 422, 'آدرس ایمیل یا کلمه عبور اشتباه است')
 
-        const token = await setUserCookie({
-          id: user._id,
-          role: user.role,
-        })
+        const access_token = await signToken(user._id)
 
-        res.setHeader('Set-Cookie', token)
+        const accessTokenCookie = serializeAccessTokenCookie(access_token)
+        const loggedInTokenCookie = serializeLoggedInCookie('true')
+
+        res.setHeader('Set-Cookie', [accessTokenCookie, loggedInTokenCookie])
 
         await db.disconnect()
 

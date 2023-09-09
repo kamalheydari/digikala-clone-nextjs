@@ -1,14 +1,14 @@
 import { Slider } from 'models'
 
-import { sendError, db } from 'utils'
+import { sendError, db, roles } from 'utils'
 
-import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
+import { withUser } from 'middlewares'
+
+import type { NextApiResponse } from 'next'
 import type { DataModels } from 'types'
+import type { NextApiRequestWithUser } from 'types'
 
-const handler: NextApiHandler = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-) => {
+const handler = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
   switch (req.method) {
     case 'POST':
       await createSlider(req, res)
@@ -23,7 +23,10 @@ const handler: NextApiHandler = async (
   }
 }
 
-const getSliders = async (req: NextApiRequest, res: NextApiResponse) => {
+const getSliders = async (
+  req: NextApiRequestWithUser,
+  res: NextApiResponse
+) => {
   const category = req.query?.category
   try {
     await db.connect()
@@ -38,11 +41,12 @@ const getSliders = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-const createSlider = async (req: NextApiRequest, res: NextApiResponse) => {
+const createSlider = async (
+  req: NextApiRequestWithUser,
+  res: NextApiResponse
+) => {
   try {
-    const userRole = req.headers['user-role']
-
-    if (userRole !== 'root')
+    if (req.user.role !== roles.ROOT)
       return sendError(res, 403, 'شما اجازه انجام این عملیات را ندارید')
 
     await db.connect()
@@ -56,4 +60,4 @@ const createSlider = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-export default handler
+export default withUser(handler)

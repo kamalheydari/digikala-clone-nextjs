@@ -1,14 +1,14 @@
 import { Review } from 'models'
 
-import { sendError, db } from 'utils'
+import { sendError, db, roles } from 'utils'
 
-import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
+import { withUser } from 'middlewares'
+
+import type { NextApiResponse } from 'next'
 import type { DataModels } from 'types'
+import type { NextApiRequestWithUser } from 'types'
 
-const handler: NextApiHandler = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-) => {
+const handler = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
   switch (req.method) {
     case 'GET':
       getReviews(req, res)
@@ -19,19 +19,22 @@ const handler: NextApiHandler = async (
   }
 }
 
-const getReviews = async (req: NextApiRequest, res: NextApiResponse) => {
+const getReviews = async (
+  req: NextApiRequestWithUser,
+  res: NextApiResponse
+) => {
   const page = req.query.page ? +req.query.page : 1
   const page_size = req.query.page_size ? +req.query.page_size : 5
 
   try {
-    const userRole = req.headers['user-role']
-    const userId = req.headers['user-id']
+    const userRole = req.user.role
+    const userId = req.user._id
 
     let reviews: DataModels.IReviewDocument[], reviewsLength: number
 
     await db.connect()
 
-    if (userRole === 'user') {
+    if (userRole === roles.USER) {
       reviews = await Review.find({ user: userId })
         .populate('product', 'images')
         .populate('user', 'name')
@@ -74,4 +77,4 @@ const getReviews = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-export default handler
+export default withUser(handler)

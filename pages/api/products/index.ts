@@ -1,9 +1,12 @@
 import { Category, Product } from 'models'
 
-import { sendError, db } from 'utils'
+import { sendError, db, roles } from 'utils'
 
-import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
+import { withUser } from 'middlewares'
+
+import type { NextApiResponse } from 'next'
 import type { DataModels } from 'types'
+import type { NextApiRequestWithUser } from 'types'
 
 interface ProductsFilter {
   category?: string
@@ -21,10 +24,7 @@ type ProductsOrder =
   | { discount: -1 }
   | { _id: -1 }
 
-const handler: NextApiHandler = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-) => {
+const handler = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
   switch (req.method) {
     case 'GET':
       await getProducts(req, res)
@@ -39,7 +39,10 @@ const handler: NextApiHandler = async (
   }
 }
 
-const getProducts = async (req: NextApiRequest, res: NextApiResponse) => {
+const getProducts = async (
+  req: NextApiRequestWithUser,
+  res: NextApiResponse
+) => {
   const page = req.query.page ? +req.query.page : 1
   const page_size = req.query.page_size ? +req.query.page_size : 10
   const sort = req.query.sort ? +req.query.sort : 1
@@ -155,11 +158,12 @@ const getProducts = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-const createProduct = async (req: NextApiRequest, res: NextApiResponse) => {
+const createProduct = async (
+  req: NextApiRequestWithUser,
+  res: NextApiResponse
+) => {
   try {
-    const userRole = req.headers['user-role']
-
-    if (userRole !== 'root')
+    if (req.user.role !== roles.ROOT)
       return sendError(res, 403, 'شما اجازه انجام این عملیات را ندارید')
 
     const {
@@ -218,4 +222,4 @@ const createProduct = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-export default handler
+export default withUser(handler)

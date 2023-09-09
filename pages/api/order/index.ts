@@ -1,15 +1,15 @@
 import { Product, Order } from 'models'
 
-import { sendError, db } from 'utils'
+import { sendError, db, roles } from 'utils'
 
-import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
-import type { DataModels, ICart, IPagination } from 'types'
-import { ObjectId } from 'mongoose'
+import { withUser } from 'middlewares'
 
-const handler: NextApiHandler = async (
-  req: NextApiRequest,
-  res: NextApiResponse
-) => {
+import type { NextApiResponse } from 'next'
+import type { DataModels, ICart } from 'types'
+import type { ObjectId } from 'mongoose'
+import type { NextApiRequestWithUser } from 'types'
+
+const handler = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
   switch (req.method) {
     case 'POST':
       await createOrder(req, res)
@@ -24,18 +24,18 @@ const handler: NextApiHandler = async (
   }
 }
 
-const getOrders = async (req: NextApiRequest, res: NextApiResponse) => {
+const getOrders = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
   const page = req.query.page ? +req.query.page : 1
   const page_size = req.query.page_size ? +req.query.page_size : 10
 
   try {
-    const userRole = req.headers['user-role']
-    const userId = req.headers['user-id']
+    const userRole = req.user.role
+    const userId = req.user._id
 
     let orders: DataModels.IOrderDocument[], ordersLength: number
 
     await db.connect()
-    if (userRole === 'user') {
+    if (userRole === roles.USER) {
       orders = await Order.find({ user: userId })
         .populate('user', '-password -address')
         .skip((page - 1) * page_size)
@@ -75,9 +75,12 @@ const getOrders = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-const createOrder = async (req: NextApiRequest, res: NextApiResponse) => {
+const createOrder = async (
+  req: NextApiRequestWithUser,
+  res: NextApiResponse
+) => {
   try {
-    const userId = req.headers['user-id']
+    const userId = req.user._id
 
     const { cart } = req.body
 
@@ -116,4 +119,4 @@ const sold = async (
   )
 }
 
-export default handler
+export default withUser(handler)

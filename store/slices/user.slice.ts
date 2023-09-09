@@ -1,46 +1,28 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+import { DataModels } from 'types'
 
-interface Product {
-  productID: string
-  title: string
-  image: { url: string }
-}
-
-interface UserState {
-  lastSeen: Product[]
-}
-
-const getLastSeen = (): Product[] => {
-  if (typeof window !== 'undefined') {
-    const lastSeenJSON = localStorage.getItem('lastSeen')
-    if (lastSeenJSON) return JSON.parse(lastSeenJSON as string)
-  }
-
-  return [] as Product[]
-}
-
-const initialState: UserState = { lastSeen: getLastSeen() }
+const initialState: { userInfo: DataModels.IUser | null; isLoading: boolean } =
+  { userInfo: null, isLoading: false }
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    addToLastSeen: (state, action: PayloadAction<Product>) => {
-      let isItemExist = state.lastSeen.find(
-        (item) => item.productID === action.payload.productID
-      )
-
-      if (!isItemExist) {
-        if (state.lastSeen.length === 15) {
-          state.lastSeen.splice(14, 1)
-        }
-        state.lastSeen.unshift(action.payload)
-        localStorage.setItem('lastSeen', JSON.stringify(state.lastSeen))
-      }
+    login: (state, action: PayloadAction<DataModels.IUser>) => {
+      state.userInfo = action.payload
+    },
+    logout: (state) => {
+      state.userInfo = initialState.userInfo
+    },
+    startFetching: (state) => {
+      state.isLoading = true
+    },
+    endFetching: (state) => {
+      state.isLoading = false
     },
   },
 })
 
-export const { addToLastSeen } = userSlice.actions
-
 export default userSlice.reducer
+
+export const { logout, login, startFetching, endFetching } = userSlice.actions

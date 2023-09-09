@@ -1,8 +1,6 @@
-import { serialize } from 'cookie'
-
 import { NextApiHandler, type NextApiRequest, type NextApiResponse } from 'next'
 
-import { userToken } from 'utils'
+import { destroyAccessToken, destroyLoggedIn } from 'utils'
 
 const handler: NextApiHandler = async (
   req: NextApiRequest,
@@ -21,16 +19,8 @@ const handler: NextApiHandler = async (
 const logout = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     //? Destroy Cookie
-    res.setHeader(
-      'Set-Cookie',
-      serialize(userToken, '', {
-        httpOnly: true,
-        secure: process.env.NODE_ENV !== 'development',
-        expires: new Date(0),
-        sameSite: 'strict',
-        path: '/',
-      })
-    )
+
+    res.setHeader('Set-Cookie', [destroyAccessToken, destroyLoggedIn])
 
     res.status(200).json({ msg: 'خروج موفقیت آمیز بود' })
   } catch (error) {

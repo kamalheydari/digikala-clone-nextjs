@@ -15,6 +15,8 @@ import {
   Slider as MainSlider,
 } from 'components'
 
+import config from 'config'
+
 import type {
   GetStaticPaths,
   GetStaticProps,
@@ -108,7 +110,7 @@ export const getStaticProps: GetStaticProps<
   await db.disconnect()
 
   return {
-    revalidate: 60 * 60 * 24,
+    revalidate: config.revalidate,
     props: {
       currentCategory: JSON.parse(JSON.stringify(currentCategory)),
       childCategories: {

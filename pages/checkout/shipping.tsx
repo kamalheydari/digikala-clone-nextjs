@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 
 import { clearCart, showAlert } from 'store'
 
-import { useCreateOrderMutation, useGetUserInfoQuery } from 'services'
+import { useCreateOrderMutation } from 'services'
 
 import {
   Button,
@@ -16,11 +16,12 @@ import {
   HandleResponse,
   Icons,
   LogoPersian,
+  RequireUser,
   ResponsiveImage,
   WithAddressModal,
 } from 'components'
 
-import { formatNumber } from 'utils'
+import { formatNumber, roles } from 'utils'
 
 import { useAppDispatch, useAppSelector } from 'hooks'
 
@@ -28,12 +29,13 @@ import type { NextPage } from 'next'
 import type { WithAddressModalProps } from 'types'
 
 const ShippingPage: NextPage = () => {
-  //? Assets
-  const router = useRouter()
-  const dispatch = useAppDispatch()
+  const { push } = useRouter()
 
   //? Get UserInfo
-  const { data: userInfo } = useGetUserInfoQuery()
+  const { userInfo } = useAppSelector((state) => state.user)
+
+  //? Assets
+  const dispatch = useAppDispatch()
 
   //? States
   const [paymentMethod, setPaymentMethod] = useState('پرداخت در محل')
@@ -109,7 +111,7 @@ const ShippingPage: NextPage = () => {
 
   //? Render(s)
   return (
-    <>
+    <RequireUser allowedRoles={[roles.ADMIN, roles.ROOT, roles.USER]}>
       {/*  Handle Create Order Response */}
       {(isSuccess || isError) && (
         <HandleResponse
@@ -119,7 +121,7 @@ const ShippingPage: NextPage = () => {
           message={data?.msg}
           onSuccess={() => {
             dispatch(clearCart())
-            router.push('/profile')
+            push('/profile')
           }}
         />
       )}
@@ -269,7 +271,7 @@ const ShippingPage: NextPage = () => {
           </section>
         </div>
       </main>
-    </>
+    </RequireUser>
   )
 }
 

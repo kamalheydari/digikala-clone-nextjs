@@ -23,7 +23,6 @@ export default function Logout() {
   const handleLogout = () => {
     setSkip(false)
   }
-  const onSuccessLogout = () => reload()
 
   //? Render(s)
   return (
@@ -35,7 +34,6 @@ export default function Logout() {
           isSuccess={isSuccess}
           error={error}
           message={data?.msg}
-          onSuccess={onSuccessLogout}
         />
       )}
 

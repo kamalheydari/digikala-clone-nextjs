@@ -22,8 +22,6 @@ import { formatNumber } from 'utils'
 
 import { useDisclosure, useAppSelector, useAppDispatch } from 'hooks'
 
-import { useGetUserInfoQuery } from 'services'
-
 import type { NextPage } from 'next'
 
 const Cart: NextPage = () => {
@@ -34,7 +32,7 @@ const Cart: NextPage = () => {
   const [isShowRedirectModal, redirectModalHandlers] = useDisclosure()
 
   //? Get UserInfo
-  const { data: userInfo } = useGetUserInfoQuery()
+  const { userInfo } = useAppSelector((state) => state.user)
 
   //? Store
   const { cartItems, totalItems, totalPrice, totalDiscount } = useAppSelector(
