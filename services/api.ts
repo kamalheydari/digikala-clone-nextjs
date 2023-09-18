@@ -4,7 +4,9 @@ const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
     baseUrl: '',
+    timeout:15000
   }),
+
   tagTypes: [
     'User',
     'Review',
