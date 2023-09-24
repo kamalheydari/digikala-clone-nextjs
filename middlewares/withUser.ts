@@ -27,8 +27,6 @@ export default function withUser(handler: any) {
         if (!user) return sendError(res, 401, 'کاربر وجود ندارد')
 
         req.user = user
-
-        await db.disconnect()
       } catch (error) {
         sendError(res, 500, (error as Error).message)
       }

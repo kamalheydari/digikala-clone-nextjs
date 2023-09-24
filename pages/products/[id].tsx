@@ -178,8 +178,6 @@ export const getServerSideProps: GetServerSideProps<
     .limit(11)
     .lean()
 
-  await db.disconnect()
-
   return {
     props: {
       product: JSON.parse(JSON.stringify(product)),

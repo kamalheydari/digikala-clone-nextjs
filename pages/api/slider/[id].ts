@@ -32,7 +32,6 @@ const getSlider = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
     const { id } = req.query
     await db.connect()
     const slider: DataModels.ISliderDocument | null = await Slider.findById(id)
-    await db.disconnect()
 
     res.status(200).json(slider)
   } catch (error) {
@@ -52,7 +51,6 @@ const updateSlider = async (
 
     await db.connect()
     await Slider.findByIdAndUpdate({ _id: id }, req.body)
-    await db.disconnect()
 
     res.status(200).json({
       msg: 'اسلایدر با موفقیت بروزرسانی شد',
@@ -74,7 +72,6 @@ const deleteSlider = async (
 
     await db.connect()
     await Slider.findByIdAndDelete(id)
-    await db.disconnect()
 
     res.status(200).json({ msg: 'اسلایدر با موفقیت حذف شد' })
   } catch (error) {

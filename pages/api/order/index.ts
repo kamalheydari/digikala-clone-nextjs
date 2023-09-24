@@ -56,7 +56,6 @@ const getOrders = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
 
       ordersLength = await Order.countDocuments()
     }
-    await db.disconnect()
 
     res.status(200).json({
       orders,
@@ -96,7 +95,6 @@ const createOrder = async (
     )
 
     await newOrder.save()
-    await db.disconnect()
 
     res.status(200).json({ msg: 'سفاش شما ثبت شد ' })
   } catch (error) {

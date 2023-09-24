@@ -32,7 +32,6 @@ const getBanner = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
     const { id } = req.query
     await db.connect()
     const banner: DataModels.IBannerDocument | null = await Banner.findById(id)
-    await db.disconnect()
 
     if (banner) res.status(200).json(banner)
   } catch (error) {
@@ -52,7 +51,6 @@ const updateBanner = async (
 
     await db.connect()
     await Banner.findByIdAndUpdate({ _id: id }, req.body)
-    await db.disconnect()
 
     res.status(200).json({
       msg: 'بنر با موفقیت بروزرسانی شد',
@@ -74,7 +72,6 @@ const deleteBanner = async (
 
     await db.connect()
     await Banner.findByIdAndDelete(id)
-    await db.disconnect()
 
     res.status(200).json({ msg: 'بنر با موفقیت حذف شد' })
   } catch (error) {

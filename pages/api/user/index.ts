@@ -32,7 +32,7 @@ const uploadInfo = async (
 
     await db.connect()
     await User.findOneAndUpdate({ _id: userId }, req.body)
-    await db.disconnect()
+    z
 
     res.status(201).json({
       msg: 'اطلاعات کاربری با موفقیت به روز رسانی شد',
@@ -61,8 +61,6 @@ const getUsers = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
       })
 
     const usersLength = await User.countDocuments()
-
-    await db.disconnect()
 
     res.status(200).json({
       users,

@@ -42,8 +42,6 @@ const handler: NextApiHandler = async (
 
         res.setHeader('Set-Cookie', [accessTokenCookie, loggedInTokenCookie])
 
-        await db.disconnect()
-
         res.status(200).json({
           msg: 'ورود موفقیت آمیز بود',
         })

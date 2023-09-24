@@ -35,7 +35,6 @@ const getDetails = async (
     const details: DataModels.IDetailsDocument | null = await Details.findOne({
       category_id: id,
     })
-    await db.disconnect()
 
     if (details) res.status(200).json(details)
   } catch (error) {
@@ -58,7 +57,6 @@ const updateDetails = async (
     const details: DataModels.IDetailsDocument | null = await Details.findById(
       id
     )
-    await db.disconnect()
 
     res.status(200).json({
       msg: 'مشخصات دسته بندی با موفقیت بروزرسانی شد',
@@ -81,7 +79,6 @@ const deleteDetails = async (
 
     await db.connect()
     await Details.findByIdAndDelete(id)
-    await db.disconnect()
 
     res.status(200).json({ msg: 'مشخصات دسته بندی با موفقیت حذف شد' })
   } catch (error) {

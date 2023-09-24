@@ -34,7 +34,6 @@ const createBanner = async (
     const newBanner: DataModels.IBannerDocument = new Banner({ ...req.body })
 
     await newBanner.save()
-    await db.disconnect()
 
     res.status(201).json({ msg: 'ساخت بنر جدید موفقیت آمیز بود' })
   } catch (error) {
@@ -49,7 +48,6 @@ const getBanners = async (req: NextApiRequest, res: NextApiResponse) => {
     const banners: DataModels.IBannerDocument[] = await Banner.find({
       category_id: category,
     })
-    await db.disconnect()
 
     res.status(201).json(banners)
   } catch (error) {

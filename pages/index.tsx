@@ -97,8 +97,6 @@ export const getStaticProps: GetStaticProps<Props> = async () => {
     type: 'two',
   })
 
-  await db.disconnect()
-
   return {
     revalidate: config.revalidate,
     props: {

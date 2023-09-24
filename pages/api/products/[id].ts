@@ -43,8 +43,6 @@ const getProduct = async (
       .populate('category_levels.level_two')
       .populate('category_levels.Level_three')
 
-    await db.disconnect()
-
     if (!product) return sendError(res, 404, 'این محصول موجود نمیباشد')
 
     res.status(200).json(product)
@@ -70,7 +68,6 @@ const updateProduct = async (
         ...req.body,
       }
     )
-    await db.disconnect()
 
     res.status(200).json({ msg: 'اطلاعات محصول با موفقیت بروزرسانی شد' })
   } catch (error) {
@@ -90,7 +87,6 @@ const deleteProduct = async (
 
     await db.connect()
     await Product.findByIdAndDelete(id)
-    await db.disconnect()
 
     res.status(200).json({ msg: 'محصول با موفقیت حذف شد' })
   } catch (error) {

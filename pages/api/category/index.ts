@@ -46,7 +46,6 @@ const createCategory = async (
         level: req.body.level,
       })
     await newCategory.save()
-    await db.disconnect()
 
     res.status(201).json({ msg: 'ساخت دسته بندی جدید موفقیت آمیز بود' })
   } catch (error) {
@@ -94,8 +93,6 @@ const getCategories = async (
       return categoriesWithChildren
     }
     const categoriesList = await getCategoriesWithChildren()
-
-    await db.disconnect()
 
     res.status(200).json({ categoriesList: categoriesList[0], categories })
   } catch (error) {

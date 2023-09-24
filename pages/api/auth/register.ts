@@ -42,7 +42,6 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
     const newUser = new User({ name, email, password: hashPassword })
 
     await newUser.save()
-    await db.disconnect()
 
     const access_token = await signToken(newUser._id)
 

@@ -32,7 +32,6 @@ const getCategory = async (
     await db.connect()
     const category: DataModels.ICategoryDocument | null =
       await Category.findById(id)
-    await db.disconnect()
 
     if (category) res.status(200).json(category)
   } catch (error) {
@@ -52,7 +51,6 @@ const updateCategory = async (
 
     await db.connect()
     await Category.findByIdAndUpdate({ _id: id }, { ...req.body })
-    await db.disconnect()
 
     res.status(200).json({ msg: 'مشخصات دسته بندی با موفقیت بروزرسانی شد' })
   } catch (error) {

@@ -107,8 +107,6 @@ export const getStaticProps: GetStaticProps<
     parent: currentCategory?._id,
   }).lean()
 
-  await db.disconnect()
-
   return {
     revalidate: config.revalidate,
     props: {
@@ -130,8 +128,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const categories = await Category.find({
     level: 1,
   }).lean()
-
-  await db.disconnect()
 
   const paths = categories.map((cat) => ({ params: { category: cat.slug } }))
   return {

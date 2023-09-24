@@ -42,8 +42,6 @@ const getReviews = async (req: NextApiRequest, res: NextApiResponse) => {
       status: 2,
     })
 
-    await db.disconnect()
-
     res.status(200).json({
       reviews,
       reviewsLength,

@@ -24,6 +24,8 @@ async function connect() {
   const db = await mongoose.connect(process.env.MONGODB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 120000,
+    maxPoolSize: 10,
   })
 
   console.log('new connection')

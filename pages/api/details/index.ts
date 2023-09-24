@@ -30,7 +30,6 @@ const createDetails = async (
     await db.connect()
     const newDetails: DataModels.IDetailsDocument = new Details({ ...req.body })
     await newDetails.save()
-    await db.disconnect()
 
     res.status(201).json({ msg: 'ساخت جدول جزییات جدید موفقیت آمیز بود' })
   } catch (error) {

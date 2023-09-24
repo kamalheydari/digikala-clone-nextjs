@@ -44,7 +44,6 @@ const createReview = async (
     })
 
     await newReview.save()
-    await db.disconnect()
 
     res.status(201).json({
       msg: 'نظر شما با موفقیت ثبت شد و پس از تایید نمایش داده میشود',
@@ -65,8 +64,6 @@ const getReview = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
       .populate('user', 'name')
 
     if (!review) return sendError(res, 404, 'این نظر وجود ندارد')
-
-    await db.disconnect()
 
     res.status(200).json({ review })
   } catch (error) {
@@ -91,8 +88,6 @@ const deleteReview = async (
       return sendError(res, 403, 'شما اجازه انجام این عملیات را ندارید')
 
     await Review.findByIdAndDelete(req.query.id)
-
-    await db.disconnect()
 
     res.status(200).json({ msg: 'دیدگاه با موفقیت حذف شد' })
   } catch (error) {
@@ -136,8 +131,6 @@ const updateReview = async (
       product.rating = totalRating / totalReviews
       await product.save()
     }
-
-    await db.disconnect()
 
     res.status(201).json({
       msg: 'وضعیت دیدگاه با موفقیت به روز رسانی شد',

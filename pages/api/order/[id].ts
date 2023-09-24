@@ -32,8 +32,6 @@ const getOrder = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
 
     if (!order) return sendError(res, 404, 'این سفارش وجود ندارد')
 
-    await db.disconnect()
-
     if (order) res.status(200).json({ order })
   } catch (error) {
     sendError(res, 500, (error as Error).message)
@@ -55,7 +53,6 @@ const updateOrder = async (
         ...req.body,
       }
     )
-    await db.disconnect()
 
     res.status(200).json({
       msg: 'وضعیت سفارش بروزرسانی شد',

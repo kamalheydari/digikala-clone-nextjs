@@ -4,7 +4,7 @@ const apiSlice = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({
     baseUrl: '',
-    timeout:15000
+    timeout:60000
   }),
 
   tagTypes: [

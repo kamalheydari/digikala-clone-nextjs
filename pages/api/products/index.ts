@@ -137,8 +137,6 @@ const getProducts = async (
       }).distinct('price'))
     )
 
-    await db.disconnect()
-
     res.status(200).json({
       productsLength,
       products,
@@ -214,7 +212,6 @@ const createProduct = async (
     if (mainCategory) newProduct.category.unshift(mainCategory?._id)
 
     await newProduct.save()
-    await db.disconnect()
 
     res.status(201).json({ msg: 'محصول جدید با موفقیت اضافه شد' })
   } catch (error) {

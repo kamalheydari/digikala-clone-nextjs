@@ -58,8 +58,6 @@ const getReviews = async (
       reviewsLength = await Review.countDocuments()
     }
 
-    await db.disconnect()
-
     res.status(200).json({
       reviews,
       reviewsLength,

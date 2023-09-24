@@ -33,7 +33,6 @@ const getSliders = async (
     const sliders: DataModels.ISliderDocument[] | null = await Slider.find({
       category_id: category,
     })
-    await db.disconnect()
 
     res.status(201).json(sliders)
   } catch (error) {
@@ -52,7 +51,6 @@ const createSlider = async (
     await db.connect()
     const newSlider = new Slider({ ...req.body })
     await newSlider.save()
-    await db.disconnect()
 
     res.status(201).json({ msg: 'ساخت اسلایدر جدید موفقیت آمیز بود' })
   } catch (error) {
