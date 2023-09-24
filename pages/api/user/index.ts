@@ -32,7 +32,7 @@ const uploadInfo = async (
 
     await db.connect()
     await User.findOneAndUpdate({ _id: userId }, req.body)
-    z
+    
 
     res.status(201).json({
       msg: 'اطلاعات کاربری با موفقیت به روز رسانی شد',
