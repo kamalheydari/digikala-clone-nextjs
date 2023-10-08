@@ -3,7 +3,7 @@ import { Skeleton } from 'components'
 export default function OrderSkeleton() {
   return (
     <Skeleton count={5}>
-      <Skeleton.Items className='mb-8 space-y-2'>
+      <Skeleton.Items className='mb-8 py-4 space-y-2'>
         <Skeleton.Item
           animated='background'
           height='h-5'
