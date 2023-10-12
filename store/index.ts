@@ -5,21 +5,18 @@ import { setupListeners } from '@reduxjs/toolkit/dist/query'
 import lastSeenReducer from './slices/lastSeen.slice'
 import cartReducer from './slices/cart.slice'
 import alertReducer from './slices/alert.slice'
-import filtersReducer from './slices/filters.slice'
-import apiSlice from 'services/api'
+import apiSlice from 'services/baseApi'
 
 //? Actions
 export * from './slices/lastSeen.slice'
 export * from './slices/cart.slice'
 export * from './slices/alert.slice'
-export * from './slices/filters.slice'
 
 export const store = configureStore({
   reducer: {
     lastSeen: lastSeenReducer,
     cart: cartReducer,
     alert: alertReducer,
-    filters: filtersReducer,
     [apiSlice.reducerPath]: apiSlice.reducer,
   },
   middleware: (gDM) => gDM().concat(apiSlice.middleware),

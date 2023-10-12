@@ -1,51 +1,52 @@
 import Link from 'next/link'
 
-import { Icons, BoxLink, Logout, Logo } from 'components'
+import { BoxLink, Logout } from 'components'
+import { Bag, Category, Comment, Image, Location, Logo, Plus, Save, Slider, Users } from 'icons'
 
 const profilePaths = [
   {
     name: 'محصول جدید',
-    Icon: Icons.Plus,
+    Icon: Plus,
     path: '/admin/products/create',
   },
   {
     name: 'محصولات',
-    Icon: Icons.Save,
+    Icon: Save,
     path: '/admin/products',
   },
   {
     name: 'سفارشات',
-    Icon: Icons.Bag,
+    Icon: Bag,
     path: '/admin/orders',
   },
   {
     name: 'دسته بندی ها',
-    Icon: Icons.Category,
+    Icon: Category,
     path: '/admin/categories',
   },
   {
     name: 'مشخصات دسته بندی ها',
-    Icon: Icons.Location,
+    Icon: Location,
     path: '/admin/details',
   },
   {
     name: 'کاربران',
-    Icon: Icons.Users,
+    Icon: Users,
     path: '/admin/users',
   },
   {
     name: 'دیدگاه‌ها',
-    Icon: Icons.Comment,
+    Icon: Comment,
     path: '/admin/reviews',
   },
   {
     name: 'اسلایدرها',
-    Icon: Icons.Slider,
+    Icon: Slider,
     path: '/admin/sliders',
   },
   {
     name: 'بنرها',
-    Icon: Icons.Image,
+    Icon: Image,
     path: '/admin/banners',
   },
 ]

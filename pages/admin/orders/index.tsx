@@ -6,15 +6,13 @@ import { useGetOrdersQuery } from 'services'
 
 import {
   Pagination,
-  ShowWrapper,
+  DataStateDisplay,
   EmptyOrdersList,
   PageContainer,
   OrdersTable,
   DashboardLayout,
   TableSkeleton,
 } from 'components'
-
-import { useChangeRoute } from 'hooks'
 
 import type { NextPage } from 'next'
 
@@ -23,16 +21,11 @@ const OrdersHome: NextPage = () => {
   const { query } = useRouter()
   const page = query.page ? +query.page : 1
 
-  const changeRoute = useChangeRoute({
-    shallow: true,
-  })
-
   //? Get Orders Query
-  const { data, isSuccess, isFetching, error, isError, refetch } =
-    useGetOrdersQuery({
-      page,
-      pageSize: 5,
-    })
+  const { data, ...ordersQueryPorps } = useGetOrdersQuery({
+    page,
+    pageSize: 5,
+  })
 
   //? Render(s)
   return (
@@ -44,24 +37,19 @@ const OrdersHome: NextPage = () => {
       <DashboardLayout>
         <PageContainer title='سفارشات'>
           <section className='p-3 md:px-3 xl:px-8 2xl:px-10' id='orders'>
-            <ShowWrapper
-              error={error}
-              isError={isError}
-              refetch={refetch}
-              isFetching={isFetching}
-              isSuccess={isSuccess}
+            <DataStateDisplay
+              {...ordersQueryPorps}
               dataLength={data?.ordersLength ?? 0}
               emptyComponent={<EmptyOrdersList />}
               loadingComponent={<TableSkeleton />}
             >
               {data && <OrdersTable orders={data.orders} />}
-            </ShowWrapper>
+            </DataStateDisplay>
 
             {data && data.ordersLength > 10 && (
               <div className='py-4 mx-auto lg:max-w-5xl'>
                 <Pagination
                   pagination={data.pagination}
-                  changeRoute={changeRoute}
                   section='_adminOrders'
                 />
               </div>

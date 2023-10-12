@@ -1,6 +1,7 @@
 import { formatNumber } from 'utils'
 
-import { DiscountProduct, Toman } from 'components'
+import { DiscountProduct } from 'components'
+import { Toman } from 'icons'
 
 interface Props {
   singleProduct?: boolean

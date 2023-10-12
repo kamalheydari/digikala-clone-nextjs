@@ -11,10 +11,9 @@ import {
   CartItem,
   RedirectToLogin,
   Button,
-  CartBadge,
-  Toman,
-  EmptyCart,
+  CartBadge
 } from 'components'
+import { Toman,EmptyCart } from 'icons'
 
 export default function CartDropdown() {
   //? Assets

@@ -48,7 +48,7 @@ const AddColors: React.FC<Props> = (props) => {
   //? Render(s)
   return (
     <div className='text-sm space-y-1.5'>
-      <span>اندازه ها</span>
+      <span>رنگ ها</span>
       <div className='w-full max-w-2xl mx-auto space-y-3'>
         <div className='flex items-center gap-x-2'>
           <AddIconButton onClick={handleAddToColor} />

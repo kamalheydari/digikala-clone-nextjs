@@ -4,7 +4,7 @@ import { SelectBox } from 'components'
 
 import { useGetCategoriesQuery } from 'services'
 import type { SelectedCategories } from 'pages/admin/products'
-import { DataModels } from 'types'
+import { ICategory } from 'types'
 
 interface Props {
   selectedCategories: SelectedCategories
@@ -25,17 +25,17 @@ const SelectCategories: React.FC<Props> = (props) => {
   })
 
   //? States
-  const [levelOneCategories, setLevelOneCategories] = useState<
-    DataModels.ICategory[]
-  >([] as DataModels.ICategory[])
+  const [levelOneCategories, setLevelOneCategories] = useState<ICategory[]>(
+    [] as ICategory[]
+  )
 
-  const [levelTwoCategories, setLevelTwoCategories] = useState<
-    DataModels.ICategory[]
-  >([] as DataModels.ICategory[])
+  const [levelTwoCategories, setLevelTwoCategories] = useState<ICategory[]>(
+    [] as ICategory[]
+  )
 
-  const [levelThreeCategories, setlevelThreeCategories] = useState<
-    DataModels.ICategory[]
-  >([] as DataModels.ICategory[])
+  const [levelThreeCategories, setlevelThreeCategories] = useState<ICategory[]>(
+    [] as ICategory[]
+  )
 
   //? Re-Renders
   useEffect(() => {
@@ -60,21 +60,21 @@ const SelectCategories: React.FC<Props> = (props) => {
   }, [categories])
 
   //? Handlers
-  const handleLevelOneChange = (category: DataModels.ICategory): void =>
+  const handleLevelOneChange = (category: ICategory): void =>
     setSelectedCategories({
       levelOne: category,
-      levelTwo: {} as DataModels.ICategory,
-      levelThree: {} as DataModels.ICategory,
+      levelTwo: {} as ICategory,
+      levelThree: {} as ICategory,
     })
 
-  const handleLevelTwoChange = (category: DataModels.ICategory): void =>
+  const handleLevelTwoChange = (category: ICategory): void =>
     setSelectedCategories({
       ...selectedCategories,
       levelTwo: category,
-      levelThree: {} as DataModels.ICategory,
+      levelThree: {} as ICategory,
     })
 
-  const handleLevelThreeChange = (category: DataModels.ICategory): void =>
+  const handleLevelThreeChange = (category: ICategory): void =>
     setSelectedCategories({
       ...selectedCategories,
       levelThree: category,

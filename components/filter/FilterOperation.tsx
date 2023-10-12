@@ -1,73 +1,70 @@
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
-import { CustomCheckbox, Toman } from 'components'
+import { CustomCheckbox } from 'components'
+import { Toman } from 'icons'
 
-import { useAppDispatch, useAppSelector, useDebounce } from 'hooks'
+import { useChangeRoute, useDebounce } from 'hooks'
 
-import { loadFilters, updateFilter, resetFilter } from 'store'
-
-import type { NewQueries } from 'hooks/useChangeRoute'
-import type { FilterState } from 'store/slices/filters.slice'
+import { QueryParams } from 'types'
 
 interface Props {
   mainMaxPrice: number | undefined
   mainMinPrice: number | undefined
-  handleChangeRoute: (newQueries: NewQueries) => void
   onClose?: () => void
 }
 
 const FilterOperation: React.FC<Props> = (props) => {
   //? Props
-  const { mainMaxPrice, mainMinPrice, handleChangeRoute, onClose } = props
+  const { mainMaxPrice, mainMinPrice, onClose } = props
 
   //? Assets
-  const dispatch = useAppDispatch()
   const { query } = useRouter()
+  const inStockQuery = !!query?.inStock || false
+  const discountQuery = !!query?.discount || false
+  const minPriceQuery = query.price && +query.price.toString().split('-')[0]
+  const maxPriceQuery = query.price && +query.price.toString().split('-')[1]
+  const pageQuery = Number(query?.page)
+
+  const changeRoute = useChangeRoute()
 
   //? State
-  const filters = useAppSelector((state) => state.filters)
+  const [price, setPrice] = useState({
+    minPrice: mainMinPrice,
+    maxPrice: mainMaxPrice,
+  })
 
   //? Debounced Values
-  const debouncedMinPrice = useDebounce(filters.minPrice, 1200)
-  const debouncedMaxPrice = useDebounce(filters.maxPrice, 1200)
+  const debouncedMinPrice = useDebounce(price.minPrice!, 1200)
+  const debouncedMaxPrice = useDebounce(price.maxPrice!, 1200)
 
   //? Handlers
+  const handleChangeRoute = (newQueries: QueryParams) => {
+    changeRoute({
+      ...query,
+      page: pageQuery && pageQuery > 1 ? 1 : '',
+      ...newQueries,
+    })
+  }
+
   const handlefilter = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, type, checked, value } = e.target
-    const filterValue = type === 'checkbox' ? checked : +value
-    dispatch(
-      updateFilter({ name: name as keyof FilterState, value: filterValue })
-    )
-
-    if (type === 'checkbox') handleChangeRoute({ [name]: filterValue })
+    if (type === 'checkbox') handleChangeRoute({ [name]: checked })
+    if (type === 'number') setPrice((prev) => ({ ...prev, [name]: +value }))
   }
 
   const handleResetFilters = () => {
     handleChangeRoute({ inStock: '', discount: '', price: '' })
-    dispatch(resetFilter({ maxPrice: mainMaxPrice!, minPrice: mainMinPrice! }))
-    if (onClose) onClose()
+    onClose?.()
   }
 
   const canReset =
-    !!query.inStock ||
-    !!query.discount ||
+    inStockQuery ||
+    discountQuery ||
     mainMinPrice !== debouncedMinPrice ||
     mainMaxPrice !== debouncedMaxPrice
 
   //? Re-Renders
-  //*   load Filters
-  useEffect(() => {
-    dispatch(
-      loadFilters({
-        price: `${mainMinPrice}-${mainMaxPrice}`,
-        discount: 'false',
-        inStock: 'false',
-        ...query,
-      })
-    )
-  }, [query.category, mainMaxPrice, mainMinPrice, dispatch])
-
   //*   Change Route After Debounce
   useEffect(() => {
     if (debouncedMinPrice && mainMinPrice !== debouncedMinPrice)
@@ -85,8 +82,23 @@ const FilterOperation: React.FC<Props> = (props) => {
 
   //*   Close Modal on Change Filter
   useEffect(() => {
-    if (onClose) onClose()
-  }, [filters.discount, filters.inStock, debouncedMaxPrice, debouncedMinPrice])
+    onClose?.()
+  }, [discountQuery, inStockQuery, debouncedMaxPrice, debouncedMinPrice])
+
+  //*  Change prices when mainMaxPrice and mainMinPrice of category changes
+  useEffect(() => {
+    if (minPriceQuery && maxPriceQuery)
+      setPrice({
+        minPrice: minPriceQuery,
+        maxPrice: maxPriceQuery,
+      })
+    else {
+      setPrice({
+        minPrice: mainMinPrice,
+        maxPrice: mainMaxPrice,
+      })
+    }
+  }, [mainMinPrice, mainMaxPrice, minPriceQuery, maxPriceQuery])
 
   //? Render(s)
   return (
@@ -105,14 +117,14 @@ const FilterOperation: React.FC<Props> = (props) => {
       <div className='divide-y'>
         <CustomCheckbox
           name='inStock'
-          checked={filters.inStock}
+          checked={inStockQuery}
           onChange={handlefilter}
           label='فقط کالاهای موجود'
         />
 
         <CustomCheckbox
           name='discount'
-          checked={filters.discount}
+          checked={discountQuery}
           onChange={handlefilter}
           label='فقط کالاهای فروش ویژه'
         />
@@ -126,7 +138,7 @@ const FilterOperation: React.FC<Props> = (props) => {
               className='w-3/4 px-1 text-xl text-left border-b border-gray-200 outline-none farsi-digits'
               style={{ direction: 'ltr' }}
               name='minPrice'
-              value={filters.minPrice || 0}
+              value={price.minPrice}
               onChange={handlefilter}
             />
             <Toman className='w-6 h-6' />
@@ -138,7 +150,7 @@ const FilterOperation: React.FC<Props> = (props) => {
               className='w-3/4 px-1 text-xl text-left border-b border-gray-200 outline-none farsi-digits'
               style={{ direction: 'ltr' }}
               name='maxPrice'
-              value={filters.maxPrice || 0}
+              value={price.maxPrice}
               onChange={handlefilter}
             />
 

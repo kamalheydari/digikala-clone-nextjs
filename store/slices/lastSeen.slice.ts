@@ -2,6 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 interface Product {
   productID: string
+  slug: string
   title: string
   image: { url: string }
 }

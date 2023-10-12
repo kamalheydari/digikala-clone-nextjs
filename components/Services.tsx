@@ -4,7 +4,7 @@ import {
   ExpressDelivery,
   OriginalProducts,
   Support,
-} from 'components'
+} from 'icons'
 
 export default function Services() {
   const services = [

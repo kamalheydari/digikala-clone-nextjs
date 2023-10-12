@@ -6,16 +6,12 @@ import { useAppSelector } from 'hooks'
 
 import { truncate } from 'utils'
 
-import {
-  EmptyCart,
-  PageContainer,
-  ProfileLayout,
-  ResponsiveImage,
-} from 'components'
+import { PageContainer, ProfileLayout, ResponsiveImage } from 'components'
+import { EmptyCart } from 'icons'
 
 import type { NextPage } from 'next'
 
-const  UserHistory:NextPage=() =>{
+const UserHistory: NextPage = () => {
   //? Store
   const { lastSeen } = useAppSelector((state) => state.lastSeen)
 
@@ -36,7 +32,7 @@ const  UserHistory:NextPage=() =>{
                   key={item.productID}
                 >
                   <Link
-                    href={`/products/${item.productID}`}
+                    href={`/products/${item.slug}`}
                     className='flex items-center gap-4 py-4 md:items-start md:flex-col'
                   >
                     <ResponsiveImage

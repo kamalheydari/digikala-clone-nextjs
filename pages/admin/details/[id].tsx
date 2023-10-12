@@ -3,8 +3,6 @@ import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-import { showAlert } from 'store'
-
 import {
   useCreateDetailsMutation,
   useDeleteDetailsMutation,
@@ -24,37 +22,36 @@ import {
 } from 'components'
 import { Tab } from '@headlessui/react'
 
-import { useAppDispatch, useDisclosure } from 'hooks'
+import { useDisclosure } from 'hooks'
 
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { detailsSchema } from 'utils'
 
-import type { DataModels, IDetailsForm } from 'types'
+import type { IDetails, IDetailsForm } from 'types'
 import type { NextPage } from 'next'
 
 const tabListNames = [
-  { id: 0, name: 'نوع انتخاب' },
-  { id: 1, name: 'ویژگی‌ها' },
-  { id: 2, name: 'مشخصات' },
+  { id: 0, name: 'optionsType', title: 'نوع انتخاب' },
+  { id: 1, name: 'info', title: 'ویژگی‌ها' },
+  { id: 2, name: 'specification', title: 'مشخصات' },
 ]
 
 const DetailsPage: NextPage = () => {
   //? Assets
   const { query, back } = useRouter()
-  const dispatch = useAppDispatch()
 
   const categoryId = query.id as string
   const categoryName = query.category_name as string
 
-  const initialUpdataInfo = {} as DataModels.IDetails
-
+  const initialUpdataInfo = {} as IDetails
 
   //? Modals
   const [isShowConfirmDeleteModal, confirmDeleteModalHandlers] = useDisclosure()
   const [isShowConfirmUpdateModal, confirmUpdateModalHandlers] = useDisclosure()
 
   //? States
-  const [updateInfo, setUpdateInfo] =
-    useState<DataModels.IDetails>(initialUpdataInfo)
+  const [updateInfo, setUpdateInfo] = useState<IDetails>(initialUpdataInfo)
 
   const [mode, setMode] = useState<'edit' | 'create'>('create')
 
@@ -101,14 +98,20 @@ const DetailsPage: NextPage = () => {
   ] = useDeleteDetailsMutation()
 
   //? Hook Form
-  const { handleSubmit, register, reset, control } =
-    useForm<IDetailsForm>({
-      defaultValues: {
-        optionsType: 'none',
-        info: [],
-        specification: [],
-      },
-    })
+  const {
+    handleSubmit,
+    register,
+    reset,
+    control,
+    formState: { errors: formError },
+  } = useForm<IDetailsForm>({
+    resolver: yupResolver(detailsSchema),
+    defaultValues: {
+      optionsType: 'none',
+      info: [],
+      specification: [],
+    },
+  })
 
   //? Re-Renders
   useEffect(() => {
@@ -129,23 +132,14 @@ const DetailsPage: NextPage = () => {
     specification,
     optionsType,
   }) => {
-    if (info.length !== 0 && specification.length !== 0) {
-      await createDetails({
-        body: {
-          category_id: categoryId,
-          info,
-          specification,
-          optionsType,
-        },
-      })
-    } else {
-      dispatch(
-        showAlert({
-          status: 'error',
-          title: 'لطفا مشخصات و ویژگی ها را وارد کنید',
-        })
-      )
-    }
+    await createDetails({
+      body: {
+        category_id: categoryId,
+        info,
+        specification,
+        optionsType,
+      },
+    })
   }
 
   //*   Update
@@ -292,15 +286,20 @@ const DetailsPage: NextPage = () => {
                         key={item.id}
                         className={({ selected }) =>
                           `tab
+                          ${
+                            formError.hasOwnProperty(item.name) &&
+                            'bg-red-300 hover:bg-red-300 text-red-600 '
+                          }
                          ${
                            selected
-                             ? 'bg-white shadow'
-                             : 'text-blue-400 hover:bg-white/[0.12] hover:text-blue-600'
+                             ? 'bg-white shadow '
+                             : 'hover:text-blue-600 '
                          }
+                         
                         `
                         }
                       >
-                        {item.name}
+                        {item.title}
                       </Tab>
                     ))}
                   </Tab.List>
@@ -348,6 +347,7 @@ const DetailsPage: NextPage = () => {
                         control={control}
                         register={register}
                         categoryName={categoryName}
+                        errors={formError.info}
                       />
                     </Tab.Panel>
                     <Tab.Panel>
@@ -356,6 +356,7 @@ const DetailsPage: NextPage = () => {
                         control={control}
                         register={register}
                         categoryName={categoryName}
+                        errors={formError.specification}
                       />
                     </Tab.Panel>
                   </Tab.Panels>

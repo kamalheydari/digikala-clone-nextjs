@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useEffect } from 'react'
 
 import { useForm } from 'react-hook-form'
-import type { DataModels, ICategoryForm } from 'types'
+import type { ICategory, ICategoryForm } from 'types'
 import { categorySchema } from 'utils'
 
 interface CreateCategoryFormProps {
@@ -19,7 +19,7 @@ interface CreateCategoryFormProps {
 interface EditCategoryFormProps {
   mode: 'edit'
   updateHandler: (data: ICategoryForm) => void
-  selectedCategory: DataModels.ICategory
+  selectedCategory: ICategory
   createHandler?: never
   isLoading: boolean
   parentLvl?: never

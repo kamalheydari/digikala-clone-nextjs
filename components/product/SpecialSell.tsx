@@ -1,4 +1,4 @@
-import { SpecialSellLogo } from 'components'
+import { SpecialSellLogo } from 'icons'
 
 interface Props {
   discount: number

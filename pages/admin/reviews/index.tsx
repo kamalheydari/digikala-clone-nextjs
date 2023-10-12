@@ -6,15 +6,13 @@ import { useGetReviewsQuery } from 'services'
 
 import {
   Pagination,
-  ShowWrapper,
+  DataStateDisplay,
   EmptyCommentsList,
   PageContainer,
   ReviewsTable,
   DashboardLayout,
   TableSkeleton,
 } from 'components'
-
-import { useChangeRoute } from 'hooks'
 
 import type { NextPage } from 'next'
 
@@ -23,15 +21,10 @@ const Reviews: NextPage = () => {
   const { query } = useRouter()
   const page = query.page ? +query.page : 1
 
-  const changeRoute = useChangeRoute({
-    shallow: true,
-  })
-
   //? Get Review Data
-  const { data, isError, error, isFetching, refetch, isSuccess } =
-    useGetReviewsQuery({
-      page,
-    })
+  const { data, ...getReviewsQueryProps } = useGetReviewsQuery({
+    page,
+  })
 
   //? Render
   return (
@@ -42,23 +35,18 @@ const Reviews: NextPage = () => {
 
       <DashboardLayout>
         <PageContainer title='دیدگاه‌ها'>
-          <ShowWrapper
-            error={error}
-            isError={isError}
-            refetch={refetch}
-            isFetching={isFetching}
-            isSuccess={isSuccess}
+          <DataStateDisplay
+            {...getReviewsQueryProps}
             dataLength={data?.reviewsLength ?? 0}
             emptyComponent={<EmptyCommentsList />}
             loadingComponent={<TableSkeleton />}
           >
             {data && <ReviewsTable reviews={data?.reviews} />}
-          </ShowWrapper>
+          </DataStateDisplay>
           {data && data.reviewsLength > 10 && (
             <div className='py-4 mx-auto lg:max-w-5xl'>
               <Pagination
                 pagination={data.pagination}
-                changeRoute={changeRoute}
                 section='_adminReviews'
               />
             </div>

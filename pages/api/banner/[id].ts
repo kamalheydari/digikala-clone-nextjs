@@ -5,7 +5,7 @@ import { sendError, db, roles } from 'utils'
 import { withUser } from 'middlewares'
 
 import type { NextApiResponse } from 'next'
-import type { DataModels } from 'types'
+import type { IBannerDocument } from 'types'
 import type { NextApiRequestWithUser } from 'types'
 
 const handler = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
@@ -31,7 +31,7 @@ const getBanner = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
   try {
     const { id } = req.query
     await db.connect()
-    const banner: DataModels.IBannerDocument | null = await Banner.findById(id)
+    const banner: IBannerDocument | null = await Banner.findById(id)
 
     if (banner) res.status(200).json(banner)
   } catch (error) {

@@ -1,8 +1,8 @@
 import { Model, Schema, model, models } from 'mongoose'
 
-import type { DataModels } from 'types'
+import type { IReviewDocument } from 'types'
 
-const reviewSchema = new Schema<DataModels.IReviewDocument>(
+const reviewSchema = new Schema<IReviewDocument>(
   {
     user: {
       type: Schema.Types.ObjectId,
@@ -40,7 +40,7 @@ const reviewSchema = new Schema<DataModels.IReviewDocument>(
   }
 )
 
-const Review: Model<DataModels.IReviewDocument> =
-  models.review || model<DataModels.IReviewDocument>('review', reviewSchema)
+const Review: Model<IReviewDocument> =
+  models.review || model<IReviewDocument>('review', reviewSchema)
 
 export default Review

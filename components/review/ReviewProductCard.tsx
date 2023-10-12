@@ -1,10 +1,10 @@
-import { Icons } from 'components'
+import { Minus, Plus } from 'icons'
 import moment from 'moment-jalaali'
 
-import type { DataModels } from 'types'
+import type { IReview } from 'types'
 
 interface Props {
-  item: DataModels.IReview
+  item: IReview
 }
 
 const ReviewProductCard: React.FC<Props> = (props) => {
@@ -41,7 +41,7 @@ const ReviewProductCard: React.FC<Props> = (props) => {
           <div>
             {item.positivePoints.map((point) => (
               <div className='flex items-center gap-x-1' key={point.id}>
-                <Icons.Plus className='text-green-400 icon' />
+                <Plus className='text-green-400 icon' />
                 <p>{point.title}</p>
               </div>
             ))}
@@ -52,7 +52,7 @@ const ReviewProductCard: React.FC<Props> = (props) => {
           <div>
             {item.negativePoints.map((point) => (
               <div className='flex items-center gap-x-1' key={point.id}>
-                <Icons.Minus className='text-red-400 icon' />
+                <Minus className='text-red-400 icon' />
                 <p>{point.title}</p>
               </div>
             ))}

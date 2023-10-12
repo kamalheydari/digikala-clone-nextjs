@@ -1,22 +1,29 @@
+import { useEffect } from 'react'
+
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
+
 import { nameSchema } from 'utils'
 
 import { useEditUserMutation } from 'services'
 
 import { TextField, SubmitModalButton, Modal, HandleResponse } from 'components'
+import { Edit, Plus } from 'icons'
+
+import { useDisclosure } from 'hooks'
 
 type UserNameForm = { name: string }
 
 interface Props {
-  isShow: boolean
-  onClose: () => void
-  editedData: string
+  editedData?: string
 }
 
 const UserNameModal: React.FC<Props> = (props) => {
   //? Props
-  const { isShow, onClose, editedData } = props
+  const { editedData } = props
+
+  //? Assets
+  const [isShowNameModal, nameModalHandlers] = useDisclosure()
 
   //? Edit User Query
   const [editUser, { data, isSuccess, isLoading, isError, error }] =
@@ -26,6 +33,7 @@ const UserNameModal: React.FC<Props> = (props) => {
   const {
     handleSubmit,
     control,
+    setFocus,
     formState: { errors: formErrors },
   } = useForm<UserNameForm>({
     resolver: yupResolver(nameSchema),
@@ -38,6 +46,18 @@ const UserNameModal: React.FC<Props> = (props) => {
       body: { name },
     })
 
+  //? Re-Renders
+  //*    Use useEffect to set focus after a delay when the modal is shown
+  useEffect(() => {
+    if (isShowNameModal) {
+      const timeoutId = setTimeout(() => {
+        setFocus('name')
+      }, 100)
+
+      return () => clearTimeout(timeoutId)
+    }
+  }, [isShowNameModal])
+
   //? Render(s)
   return (
     <>
@@ -48,16 +68,32 @@ const UserNameModal: React.FC<Props> = (props) => {
           isSuccess={isSuccess}
           error={error}
           message={data?.msg}
-          onSuccess={onClose}
+          onSuccess={nameModalHandlers.close}
         />
       )}
 
-      <Modal isShow={isShow} onClose={onClose} effect='bottom-to-top'>
+      {editedData ? (
+        <Edit
+          className='cursor-pointer icon'
+          onClick={nameModalHandlers.open}
+        />
+      ) : (
+        <Plus
+          className='cursor-pointer icon'
+          onClick={nameModalHandlers.open}
+        />
+      )}
+
+      <Modal
+        isShow={isShowNameModal}
+        onClose={nameModalHandlers.close}
+        effect='bottom-to-top'
+      >
         <Modal.Content
-          onClose={onClose}
+          onClose={nameModalHandlers.close}
           className='flex flex-col h-full px-5 py-3 bg-white md:rounded-lg gap-y-5 '
         >
-          <Modal.Header onClose={onClose}>
+          <Modal.Header onClose={nameModalHandlers.close}>
             ثبت و ویرایش اطلاعات شناسایی
           </Modal.Header>
           <Modal.Body>

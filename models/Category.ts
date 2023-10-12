@@ -1,8 +1,8 @@
 import { Model, Schema, models, model } from 'mongoose'
 
-import type { DataModels } from 'types'
+import type { ICategoryDocument } from 'types'
 
-const CategorySchema = new Schema<DataModels.ICategoryDocument>(
+const CategorySchema = new Schema<ICategoryDocument>(
   {
     name: {
       type: String,
@@ -30,8 +30,7 @@ const CategorySchema = new Schema<DataModels.ICategoryDocument>(
   { timestamps: true }
 )
 
-const Category: Model<DataModels.ICategoryDocument> =
-  models.category ||
-  model<DataModels.ICategoryDocument>('category', CategorySchema)
+const Category: Model<ICategoryDocument> =
+  models.category || model<ICategoryDocument>('category', CategorySchema)
 
 export default Category

@@ -40,7 +40,7 @@ class MyDocument extends Document {
             crossOrigin='anonymous'
           ></link>
 
-          <link rel='icon' href='/mini-logo.ico' />
+          <link rel='icon' href='/imgs/mini-logo.ico' />
         </Head>
         <body>
           <Main></Main>

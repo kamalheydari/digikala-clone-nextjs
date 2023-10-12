@@ -19,7 +19,7 @@ import { useGetCategoriesQuery, useUpdateCategoryMutation } from 'services'
 import { SubmitHandler } from 'react-hook-form'
 
 import type { NextPage } from 'next'
-import type { DataModels, ICategoryForm } from 'types'
+import type { ICategory, ICategoryForm } from 'types'
 
 const Edit: NextPage = () => {
   //? Assets
@@ -27,14 +27,13 @@ const Edit: NextPage = () => {
   const id = query.id as string
   const parentId = query.parent_id as string
 
-  const initialUpdataInfo = {} as DataModels.ICategory
+  const initialUpdataInfo = {} as ICategory
 
   //? Modals
   const [isShowConfirmUpdateModal, confirmUpdateModalHandlers] = useDisclosure()
 
   //? States
-  const [updateInfo, setUpdateInfo] =
-    useState<DataModels.ICategory>(initialUpdataInfo)
+  const [updateInfo, setUpdateInfo] = useState<ICategory>(initialUpdataInfo)
 
   //? Queries
   //*   Get Categories

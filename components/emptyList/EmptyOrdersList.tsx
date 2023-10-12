@@ -1,4 +1,4 @@
-import { OrderEmpty } from 'components'
+import { OrderEmpty } from 'icons'
 
 export default function EmptyOrdersList() {
   return (

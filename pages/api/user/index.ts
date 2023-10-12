@@ -5,7 +5,7 @@ import { sendError, db, roles } from 'utils'
 import { withUser } from 'middlewares'
 
 import type { NextApiResponse } from 'next'
-import type { DataModels } from 'types'
+import type { IUserDocument } from 'types'
 import type { NextApiRequestWithUser } from 'types'
 
 const handler = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
@@ -32,7 +32,6 @@ const uploadInfo = async (
 
     await db.connect()
     await User.findOneAndUpdate({ _id: userId }, req.body)
-    
 
     res.status(201).json({
       msg: 'اطلاعات کاربری با موفقیت به روز رسانی شد',
@@ -52,7 +51,7 @@ const getUsers = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
 
     await db.connect()
 
-    const users: DataModels.IUserDocument[] = await User.find()
+    const users: IUserDocument[] = await User.find()
       .select('-password -address')
       .skip((page - 1) * page_size)
       .limit(page_size)

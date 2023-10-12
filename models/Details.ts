@@ -1,8 +1,8 @@
 import { Model, Schema, model, models } from 'mongoose'
 
-import type { DataModels } from 'types'
+import type {  IDetailsDocument } from 'types'
 
-const DetailsSchema = new Schema<DataModels.IDetailsDocument>(
+const DetailsSchema = new Schema<IDetailsDocument>(
   {
     category_id: {
       type: Schema.Types.ObjectId,
@@ -20,7 +20,7 @@ const DetailsSchema = new Schema<DataModels.IDetailsDocument>(
   { timestamps: true }
 )
 
-const Details: Model<DataModels.IDetailsDocument> =
-  models.details || model<DataModels.IDetailsDocument>('details', DetailsSchema)
+const Details: Model<IDetailsDocument> =
+  models.details || model<IDetailsDocument>('details', DetailsSchema)
 
 export default Details

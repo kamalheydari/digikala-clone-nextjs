@@ -1,8 +1,8 @@
 import { Model, Schema, model, models } from 'mongoose'
 
-import type { DataModels } from 'types'
+import type { IUserDocument } from 'types'
 
-const userSchema = new Schema<DataModels.IUserDocument>({
+const userSchema = new Schema<IUserDocument>({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
@@ -46,7 +46,7 @@ const userSchema = new Schema<DataModels.IUserDocument>({
   role: { type: String, default: 'user' },
 })
 
-const User: Model<DataModels.IUserDocument> =
-  models.user || model<DataModels.IUserDocument>('user', userSchema)
+const User: Model<IUserDocument> =
+  models.user || model<IUserDocument>('user', userSchema)
 
 export default User

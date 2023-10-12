@@ -1,10 +1,10 @@
 import { EditIconButton } from 'components/common/IconBtns'
 import Link from 'next/link'
 
-import type { DataModels } from 'types'
+import type { IOrder } from 'types'
 
 interface Props {
-  orders: DataModels.IOrder[]
+  orders: IOrder[]
 }
 
 const OrdersTable: React.FC<Props> = (props) => {

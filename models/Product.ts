@@ -1,10 +1,14 @@
 import { Model, Schema, model, models } from 'mongoose'
 
-import type { DataModels } from 'types'
+import type { IProductDocument } from 'types'
 
-const productSchema = new Schema<DataModels.IProductDocument>(
+const productSchema = new Schema<IProductDocument>(
   {
     title: {
+      type: String,
+      required: true,
+    },
+    slug: {
       type: String,
       required: true,
     },
@@ -74,12 +78,17 @@ const productSchema = new Schema<DataModels.IProductDocument>(
     ],
     rating: { type: Number, required: true, default: 0 },
     numReviews: { type: Number, required: true, default: 0 },
+    optionsType: {
+      type: String,
+      default: 'none',
+      enum: ['colors', 'sizes', 'none'],
+    },
   },
   {
     timestamps: true,
   }
 )
 
-const Product: Model<DataModels.IProductDocument> =
-  models.product || model<DataModels.IProductDocument>('product', productSchema)
+const Product: Model<IProductDocument> =
+  models.product || model<IProductDocument>('product', productSchema)
 export default Product

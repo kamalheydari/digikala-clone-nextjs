@@ -3,10 +3,11 @@ import Link from 'next/link'
 import {
   DiscountProduct,
   ProductPrice,
-  Icons,
   ResponsiveImage,
   Skeleton,
 } from 'components'
+import { Heart, Star } from 'icons'
+
 import { useGetProductsQuery } from 'services'
 
 interface Props {
@@ -17,15 +18,15 @@ const MostFavouraiteProducts: React.FC<Props> = (props) => {
   //? Props
   const { categorySlug } = props
 
-  const { products, isLoading } = useGetProductsQuery(
+  const { products, isFetching } = useGetProductsQuery(
     {
       sort: 5,
       category: categorySlug,
     },
     {
-      selectFromResult: ({ data, isLoading }) => ({
+      selectFromResult: ({ data, isFetching }) => ({
         products: data?.products,
-        isLoading,
+        isFetching,
       }),
     }
   )
@@ -35,11 +36,11 @@ const MostFavouraiteProducts: React.FC<Props> = (props) => {
   return (
     <section className='px-3'>
       <div className='flex items-center mb-3 gap-x-2'>
-        <Icons.Heart className='icon text-amber-400' />
+        <Heart className='icon text-amber-400' />
         <h4 className='text-xl'>محبوب ترین کالاها</h4>
       </div>
       <div className='grid grid-cols-2 gap-1 md:gap-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5'>
-        {isLoading
+        {isFetching
           ? Array(10)
               .fill('_')
               .map((_, index) => (
@@ -65,13 +66,13 @@ const MostFavouraiteProducts: React.FC<Props> = (props) => {
                 </Skeleton.Items>
               ))
           : products?.map((product) => (
-              <Link key={product._id} href={`/products/${product._id}`}>
+              <Link key={product._id} href={`/products/${product.slug}`}>
                 <article className='p-1 transition border border-gray-50 hover:border-gray-200 min-h-[248px]'>
                   <div className='flex gap-x-1 '>
                     <span className='text-base farsi-digits'>
                       {product.rating.toFixed(1)}
                     </span>
-                    <Icons.Star className='w-5 h-5 md:w-7 md:h-7 text-amber-400 ' />
+                    <Star className='w-5 h-5 md:w-7 md:h-7 text-amber-400 ' />
                   </div>
 
                   <ResponsiveImage

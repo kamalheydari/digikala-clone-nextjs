@@ -1,16 +1,15 @@
-import Link from 'next/link'
-
 import moment from 'moment-jalaali'
 
-import { HandleResponse, Icons, ResponsiveImage, Toman } from 'components'
+import { HandleResponse, ResponsiveImage } from 'components'
 
 import { formatNumber } from 'utils'
 
 import { useUpdateOrderMutation } from 'services'
-import { DataModels } from 'types'
+import { IOrder } from 'types'
+import { Check, Clock2, More, Toman } from 'icons'
 
 interface Props {
-  order: DataModels.IOrder
+  order: IOrder
   singleOrder?: boolean
 }
 
@@ -52,15 +51,14 @@ const OrderCard: React.FC<Props> = (props) => {
         <div className='flex items-center justify-between lg:px-3'>
           <div className='flex items-center gap-x-2 '>
             {order.delivered ? (
-              <Icons.Check className='p-0.5 w-6 h-6 bg-lime-500 text-white rounded-full' />
+              <Check className='p-0.5 w-6 h-6 bg-lime-500 text-white rounded-full' />
             ) : (
-              <Icons.Clock2 className='p-0.5 w-6 h-6 bg-amber-500 text-white rounded-full' />
+              <Clock2 className='p-0.5 w-6 h-6 bg-amber-500 text-white rounded-full' />
             )}
             <span className='text-sm text-black'>
               {order.delivered ? 'تحویل شده' : 'در حال پردازش'}
             </span>
           </div>
-          {/* <Icons.ArrowLeft className='icon w-7 h-7' /> */}
           {order.delivered && (
             <span className='farsi-digits'>
               {moment(order.updatedAt).format('jYYYY/jM/jD')}
@@ -68,7 +66,7 @@ const OrderCard: React.FC<Props> = (props) => {
           )}
           {singleOrder && (
             <div className='relative h-fit px-1.5 group self-end'>
-              <Icons.More className='cursor-pointer icon' />
+              <More className='cursor-pointer icon' />
               <div className='absolute left-0 z-10 hidden px-4 py-3 bg-white rounded shadow-3xl top-5 group-hover:flex'>
                 <div className='space-y-4'>
                   <button
@@ -77,7 +75,7 @@ const OrderCard: React.FC<Props> = (props) => {
                     onClick={handleChangeToDelivered}
                     disabled={order.delivered}
                   >
-                    <Icons.Check className='text-white rounded-full p-0.5 icon bg-green-500 ' />
+                    <Check className='text-white rounded-full p-0.5 icon bg-green-500 ' />
                     <span className='block'>تغییر وضعیت به تحویل شده</span>
                   </button>
                   <button
@@ -86,7 +84,7 @@ const OrderCard: React.FC<Props> = (props) => {
                     onClick={handleChangeToInProccess}
                     disabled={!order.delivered}
                   >
-                    <Icons.Clock2 className='text-white rounded-full p-0.5 icon bg-amber-500 ' />
+                    <Clock2 className='text-white rounded-full p-0.5 icon bg-amber-500 ' />
                     <span className='block'>تغییر وضعیت به در حال پردازش</span>
                   </button>
                 </div>
@@ -108,13 +106,11 @@ const OrderCard: React.FC<Props> = (props) => {
         </div>
         <div className='flex flex-wrap py-5 gap-x-5 gap-y-3 lg:border-t lg:border-gray-200 lg:px-3'>
           {order.cart.map((cartItem, index) => (
-            <Link href={`/products/${cartItem.productID}`} key={index}>
-              <ResponsiveImage
-                dimensions='w-16 h-16'
-                src={cartItem.img.url}
-                alt={cartItem.name}
-              />
-            </Link>
+            <ResponsiveImage
+              dimensions='w-16 h-16'
+              src={cartItem.img.url}
+              alt={cartItem.name}
+            />
           ))}
         </div>
       </div>

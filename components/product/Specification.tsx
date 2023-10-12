@@ -1,6 +1,5 @@
 import { useDisclosure } from 'hooks'
-
-import { Icons } from 'components'
+import { ArrowLeft } from 'icons';
 
 interface Props {
   specification: { title: string; value?: string }[]
@@ -49,7 +48,7 @@ const Specification: React.FC<Props> = (props) => {
           onClick={showSpecHandlers.toggle}
         >
           {isShowSpec ? 'بستن' : 'مشاهده بیشتر'}
-          <Icons.ArrowLeft className='icon text-sky-400' />
+          <ArrowLeft className='icon text-sky-400' />
         </button>
       )}
     </section>

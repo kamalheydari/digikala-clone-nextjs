@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { Icons } from 'components'
+import { ArrowLeft } from 'icons'
 
 interface Props {
   children: string
@@ -18,7 +18,7 @@ const ArrowLink: React.FC<Props> = (props) => {
       className='inline-flex items-center text-sm text-blue-400 max-w-max'
     >
       <span className='text-sky-500'>{children}</span>
-      <Icons.ArrowLeft className='icon text-sky-500 ' />
+      <ArrowLeft className='icon text-sky-500 ' />
     </Link>
   )
 }

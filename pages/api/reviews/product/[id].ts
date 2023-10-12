@@ -3,7 +3,7 @@ import { Review } from 'models'
 import { sendError, db } from 'utils'
 
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
-import type { DataModels } from 'types'
+import type { IReviewDocument } from 'types'
 
 const handler: NextApiHandler = async (
   req: NextApiRequest,
@@ -26,7 +26,7 @@ const getReviews = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     await db.connect()
 
-    const reviews: DataModels.IReviewDocument[] | null = await Review.find({
+    const reviews: IReviewDocument[] | null = await Review.find({
       product: req.query.id,
       status: 2,
     })

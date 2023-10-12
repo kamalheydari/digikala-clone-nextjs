@@ -24,7 +24,7 @@ import {
 import { SubmitHandler } from 'react-hook-form'
 
 import type { NextPage } from 'next'
-import type { DataModels, IBannerForm } from 'types'
+import type { IBanner, IBannerForm } from 'types'
 
 const Edit: NextPage = () => {
   //? Assets
@@ -32,15 +32,14 @@ const Edit: NextPage = () => {
   const bannerId = query?.id as string
   const bannerName = query?.banner_name
 
-  const initialUpdataInfo = {} as DataModels.IBanner
+  const initialUpdataInfo = {} as IBanner
 
   //? Modals
   const [isShowConfirmUpdateModal, confirmUpdateModalHandlers] = useDisclosure()
   const [isShowConfirmDeleteModal, confirmDeleteModalHandlers] = useDisclosure()
 
   //? States
-  const [updateInfo, setUpdateInfo] =
-    useState<DataModels.IBanner>(initialUpdataInfo)
+  const [updateInfo, setUpdateInfo] = useState<IBanner>(initialUpdataInfo)
 
   //? Queries
   //*   Get Banner

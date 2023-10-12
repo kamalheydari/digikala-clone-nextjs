@@ -19,7 +19,7 @@ import { SubmitHandler } from 'react-hook-form'
 
 import { useGetSingleProductQuery, useUpdateProductMutation } from 'services'
 
-import type { DataModels, IProductForm } from 'types'
+import type { IProduct, IProductForm } from 'types'
 
 interface Props {}
 const Edit: NextPage<Props> = () => {
@@ -27,14 +27,13 @@ const Edit: NextPage<Props> = () => {
   const { query, back } = useRouter()
   const id = query.id as string
 
-  const initialUpdataInfo = {} as DataModels.IProduct
+  const initialUpdataInfo = {} as IProduct
 
   //? Modals
   const [isShowConfirmUpdateModal, confirmUpdateModalHandlers] = useDisclosure()
 
   //? States
-  const [updateInfo, setUpdateInfo] =
-    useState<DataModels.IProduct>(initialUpdataInfo)
+  const [updateInfo, setUpdateInfo] = useState<IProduct>(initialUpdataInfo)
 
   //? Queries
   //*    Get Product

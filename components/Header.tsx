@@ -1,15 +1,14 @@
 import Link from 'next/link'
 
 import {
-  Icons,
   Signup,
   Cart,
-  Search,
+  SearchModal,
   Sidebar,
   Navbar,
   AddressBar,
-  Logo,
 } from 'components'
+import { Logo, Question } from 'icons'
 
 const Header = () => {
   //? Render(s)
@@ -22,11 +21,11 @@ const Header = () => {
             <Link passHref href='/'>
               <Logo className='w-24 h-14' />
             </Link>
-            <Icons.Question className='icon lg:hidden' />
+            <Question className='icon lg:hidden' />
           </div>
           <div className='inline-flex items-center justify-between w-full py-2 border-b gap-x-10 lg:border-b-0'>
             <div className='flex flex-grow gap-x-7'>
-              <Search />
+              <SearchModal />
             </div>
             <div className='inline-flex items-center gap-x-4'>
               <Signup />

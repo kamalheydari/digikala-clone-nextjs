@@ -23,17 +23,17 @@ import type {
   InferGetStaticPropsType,
   NextPage,
 } from 'next'
-import type { DataModels } from 'types'
+import type { IBanner, ICategory, ISlider } from 'types'
 
 interface Props {
-  currentCategory: DataModels.ICategory
+  currentCategory: ICategory
   childCategories: {
     title: string
-    categories: DataModels.ICategory[]
+    categories: ICategory[]
   }
-  sliders: DataModels.ISlider[]
-  bannerOneType: DataModels.IBanner[]
-  bannerTwoType: DataModels.IBanner[]
+  sliders: ISlider[]
+  bannerOneType: IBanner[]
+  bannerTwoType: IBanner[]
 }
 
 const MainCategory: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (

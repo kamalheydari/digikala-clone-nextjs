@@ -5,7 +5,7 @@ import { sendError, db, roles } from 'utils'
 import { withUser } from 'middlewares'
 
 import type { NextApiResponse } from 'next'
-import type { DataModels, ICart } from 'types'
+import type { ICart, IOrderDocument } from 'types'
 import type { ObjectId } from 'mongoose'
 import type { NextApiRequestWithUser } from 'types'
 
@@ -32,7 +32,7 @@ const getOrders = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
     const userRole = req.user.role
     const userId = req.user._id
 
-    let orders: DataModels.IOrderDocument[], ordersLength: number
+    let orders: IOrderDocument[], ordersLength: number
 
     await db.connect()
     if (userRole === roles.USER) {

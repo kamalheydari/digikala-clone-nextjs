@@ -1,8 +1,8 @@
 import mongoose, { Model, Schema, model, models } from 'mongoose'
 
-import type { DataModels } from 'types'
+import type { IOrderDocument } from 'types'
 
-const orderSchema = new Schema<DataModels.IOrderDocument>(
+const orderSchema = new Schema<IOrderDocument>(
   {
     user: {
       type: mongoose.Types.ObjectId,
@@ -58,6 +58,6 @@ const orderSchema = new Schema<DataModels.IOrderDocument>(
   { timestamps: true }
 )
 
-const Order: Model<DataModels.IOrderDocument> =
-  models.order || model<DataModels.IOrderDocument>('order', orderSchema)
+const Order: Model<IOrderDocument> =
+  models.order || model<IOrderDocument>('order', orderSchema)
 export default Order

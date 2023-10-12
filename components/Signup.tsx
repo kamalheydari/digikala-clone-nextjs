@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { Icons, Skeleton, UserDropdown } from 'components'
+import { Skeleton, UserDropdown } from 'components'
+import { Login, User } from 'icons'
 
 import { useUserInfo } from '../hooks'
 
@@ -23,7 +24,7 @@ const Signup = () => {
           href={`/authentication/login?redirectTo=${asPath}`}
           className='flex-center gap-x-1'
         >
-          <Icons.Login className='icon' />
+          <Login className='icon' />
           ورود
         </Link>
         <span className='hidden lg:block lg:bg-gray-300 w-0.5 lg:h-6' />
@@ -40,7 +41,7 @@ const Signup = () => {
       <>
         <div className='lg:hidden'>
           <Link href='/profile'>
-            <Icons.User className='icon h-7 w-7' />
+            <User className='icon h-7 w-7' />
           </Link>
         </div>
         <div className='hidden lg:block'>

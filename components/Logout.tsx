@@ -2,7 +2,9 @@ import { useState } from 'react'
 
 import { useLogoutQuery, userApiSlice } from 'services'
 
-import { Button, HandleResponse, Icons } from 'components'
+import { Button, HandleResponse } from 'components'
+import { Logout as LogoutIcon } from 'icons'
+
 import { useAppDispatch } from 'hooks'
 
 export default function Logout() {
@@ -45,7 +47,7 @@ export default function Logout() {
         onClick={handleLogout}
         isLoading={isLoading}
       >
-        <Icons.Logout className='text-black icon' />
+        <LogoutIcon className='text-black icon' />
         <span className='ml-auto mr-3 text-gray-700'>خروج از حساب کاربری</span>
       </Button>
     </>

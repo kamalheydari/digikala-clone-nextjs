@@ -2,7 +2,6 @@ import dynamic from 'next/dynamic'
 import Head from 'next/head'
 
 import {
-  Icons,
   UserMobileModal,
   UserNameModal,
   PageContainer,
@@ -10,15 +9,11 @@ import {
   ProfileLayout,
 } from 'components'
 
-import { useDisclosure, useUserInfo } from 'hooks'
+import { useUserInfo } from 'hooks'
 
 import type { NextPage } from 'next'
 
 const PersonalInfo: NextPage = () => {
-  //? Assets
-  const [isShowNameModal, nameModalHandlers] = useDisclosure()
-  const [isShowPhoneModal, phoneModalHandlers] = useDisclosure()
-
   //? Get UserInfo
   const { userInfo, isLoading } = useUserInfo()
 
@@ -26,76 +21,59 @@ const PersonalInfo: NextPage = () => {
   const InfoField = ({
     label,
     info,
-    editHandler,
     isLoading,
+    children,
   }: {
     label: string
     info: string | undefined
-    editHandler: () => void
     isLoading: boolean
+    children: React.ReactNode
   }) => (
     <div className='flex-1 px-5'>
       <div className='flex items-center justify-between py-4 border-b border-gray-200'>
-        <div>
+        <div className='w-full'>
           <span className='text-xs text-gray-700'>{label}</span>
           {isLoading ? (
             <Skeleton.Item animated='background' height='h-5' width='w-44' />
           ) : (
-            <p className='h-5 text-sm'>{info}</p>
+            <div className='flex items-center justify-between'>
+              <p className='h-5 text-sm'>{info}</p>
+              {children}
+            </div>
           )}
         </div>
-        {isLoading ? null : info ? (
-          <Icons.Edit className='cursor-pointer icon' onClick={editHandler} />
-        ) : (
-          <Icons.Plus className='cursor-pointer icon' onClick={editHandler} />
-        )}
       </div>
     </div>
   )
 
   //? Render(s)
   return (
-    <>
-      {!isLoading && userInfo && (
-        <>
-          <UserNameModal
-            isShow={isShowNameModal}
-            onClose={nameModalHandlers.close}
-            editedData={userInfo.name}
-          />
-          <UserMobileModal
-            isShow={isShowPhoneModal}
-            onClose={phoneModalHandlers.close}
-            editedData={userInfo.mobile}
-          />
-        </>
-      )}
+    <main>
+      <Head>
+        <title>پروفایل | اطلاعات حساب کاربری</title>
+      </Head>
 
-      <main>
-        <Head>
-          <title>پروفایل | اطلاعات حساب کاربری</title>
-        </Head>
-
-        <ProfileLayout>
-          <PageContainer title='اطلاعات حساب کاربری'>
-            <section className='lg:flex'>
-              <InfoField
-                label='نام و نام خانوادگی'
-                info={userInfo?.name}
-                editHandler={nameModalHandlers.open}
-                isLoading={isLoading}
-              />
-              <InfoField
-                label='شماره موبایل'
-                info={userInfo?.mobile}
-                editHandler={phoneModalHandlers.open}
-                isLoading={isLoading}
-              />
-            </section>
-          </PageContainer>
-        </ProfileLayout>
-      </main>
-    </>
+      <ProfileLayout>
+        <PageContainer title='اطلاعات حساب کاربری'>
+          <section className='lg:flex'>
+            <InfoField
+              label='نام و نام خانوادگی'
+              info={userInfo?.name}
+              isLoading={isLoading}
+            >
+              <UserNameModal editedData={userInfo?.name} />
+            </InfoField>
+            <InfoField
+              label='شماره موبایل'
+              info={userInfo?.mobile}
+              isLoading={isLoading}
+            >
+              <UserMobileModal editedData={userInfo?.mobile} />
+            </InfoField>
+          </section>
+        </PageContainer>
+      </ProfileLayout>
+    </main>
   )
 }
 

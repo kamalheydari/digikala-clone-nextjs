@@ -1,11 +1,10 @@
 import { decrease, increase, removeFromCart } from 'store'
 import { useDispatch } from 'react-redux'
 
-import { Icons } from 'components'
-
 import { formatNumber } from 'utils'
 
 import type { ICart } from 'types'
+import { Delete, Minus, Plus } from 'icons'
 
 interface Props {
   item: ICart
@@ -22,7 +21,7 @@ const CartButtons: React.FC<Props> = (props) => {
   return (
     <div className='flex items-center py-2 text-sm rounded-md shadow-3xl justify-evenly'>
       <button className='active:scale-90' type='button'>
-        <Icons.Plus
+        <Plus
           onClick={() => dispatch(increase(item.itemID))}
           className='text-red-500 icon'
         />
@@ -34,14 +33,14 @@ const CartButtons: React.FC<Props> = (props) => {
 
       {item.quantity === 1 ? (
         <button className='active:scale-90' type='button'>
-          <Icons.Delete
+          <Delete
             onClick={() => dispatch(removeFromCart(item.itemID))}
             className='text-red-500 icon'
           />
         </button>
       ) : (
         <button className='active:scale-90' type='button'>
-          <Icons.Minus
+          <Minus
             onClick={() => dispatch(decrease(item.itemID))}
             className='text-red-500 icon'
           />

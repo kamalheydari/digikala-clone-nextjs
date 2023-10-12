@@ -2,12 +2,11 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 
-import { useChangeRoute } from 'hooks'
 
 import {
   OrderCard,
   Pagination,
-  ShowWrapper,
+  DataStateDisplay,
   EmptyOrdersList,
   PageContainer,
   OrderSkeleton,
@@ -21,16 +20,12 @@ import type { NextPage } from 'next'
 const Orders: NextPage = () => {
   //? Assets
   const { query } = useRouter()
-  const changeRoute = useChangeRoute({
-    shallow: true,
-  })
 
   //? Get Orders Data
-  const { data, isSuccess, isFetching, error, isError, refetch } =
-    useGetOrdersQuery({
-      pageSize: 5,
-      page: query.page ? +query.page : 1,
-    })
+  const { data, ...ordersQueryProps } = useGetOrdersQuery({
+    pageSize: 5,
+    page: query.page ? +query.page : 1,
+  })
 
   //? Render
   return (
@@ -41,12 +36,8 @@ const Orders: NextPage = () => {
 
       <ProfileLayout>
         <PageContainer title='تاریخچه سفارشات'>
-          <ShowWrapper
-            error={error}
-            isError={isError}
-            refetch={refetch}
-            isFetching={isFetching}
-            isSuccess={isSuccess}
+          <DataStateDisplay
+            {...ordersQueryProps}
             dataLength={data ? data.ordersLength : 0}
             emptyComponent={<EmptyOrdersList />}
             loadingComponent={<OrderSkeleton />}
@@ -56,13 +47,12 @@ const Orders: NextPage = () => {
                 <OrderCard key={item._id} order={item} />
               ))}
             </div>
-          </ShowWrapper>
+          </DataStateDisplay>
 
           {data && data.ordersLength > 5 && (
             <div className='py-4 mx-auto lg:max-w-5xl'>
               <Pagination
                 pagination={data.pagination}
-                changeRoute={changeRoute}
                 section='profileOrders'
                 client
               />

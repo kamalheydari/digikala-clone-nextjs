@@ -11,7 +11,7 @@ import {
 } from 'utils'
 
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
-import type { DataModels } from 'types'
+import type { IUserDocument } from 'types'
 
 const handler: NextApiHandler = async (
   req: NextApiRequest,
@@ -24,7 +24,7 @@ const handler: NextApiHandler = async (
 
         await db.connect()
 
-        const user: DataModels.IUserDocument | null = await User.findOne({
+        const user: IUserDocument | null = await User.findOne({
           email,
         })
 

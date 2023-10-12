@@ -16,23 +16,23 @@ import {
   DeleteIconButton,
   EditIconButton,
   HandleResponse,
-  Icons,
   PageContainer,
   Pagination,
   SelectCategories,
-  ShowWrapper,
+  DataStateDisplay,
   TableSkeleton,
 } from 'components'
+import { Close, Search } from 'icons'
 
 import { useDisclosure, useChangeRoute } from 'hooks'
 
 import type { NextPage } from 'next'
-import type { DataModels } from 'types'
+import type { ICategory } from 'types'
 
 export interface SelectedCategories {
-  levelOne?: DataModels.ICategory
-  levelTwo?: DataModels.ICategory
-  levelThree?: DataModels.ICategory
+  levelOne?: ICategory
+  levelTwo?: ICategory
+  levelThree?: ICategory
 }
 
 const Products: NextPage = () => {
@@ -46,9 +46,9 @@ const Products: NextPage = () => {
   })
 
   const initialSelectedCategories = {
-    levelOne: {} as DataModels.ICategory,
-    levelTwo: {} as DataModels.ICategory,
-    levelThree: {} as DataModels.ICategory,
+    levelOne: {} as ICategory,
+    levelTwo: {} as ICategory,
+    levelThree: {} as ICategory,
   }
 
   //? Get Categories Query
@@ -71,12 +71,11 @@ const Products: NextPage = () => {
 
   //? Querirs
   //*    Get Products Data
-  const { data, isFetching, error, isError, refetch, isSuccess } =
-    useGetProductsQuery({
-      page,
-      category,
-      search: query?.search as string,
-    })
+  const { data, ...productsQueryProps } = useGetProductsQuery({
+    page,
+    category,
+    search: query?.search as string,
+  })
 
   //*    Delete Product
   const [
@@ -132,7 +131,7 @@ const Products: NextPage = () => {
   const handleRemoveSearch = () => {
     setSearch('')
     setSelectedCategories(initialSelectedCategories)
-    refetch()
+    productsQueryProps.refetch()
     push('/admin/products', undefined, { shallow: true })
   }
 
@@ -236,7 +235,7 @@ const Products: NextPage = () => {
                     onClick={handleRemoveSearch}
                   >
                     <span>حذف فیلترها</span>
-                    <Icons.Close className='icon' />
+                    <Close className='icon' />
                   </button>
                   <input
                     type='text'
@@ -250,17 +249,13 @@ const Products: NextPage = () => {
                     className='p-2 border flex-center gap-x-2 min-w-max'
                   >
                     <span>اعمال فیلتر</span>
-                    <Icons.Search className='icon' />
+                    <Search className='icon' />
                   </button>
                 </div>
               </form>
 
-              <ShowWrapper
-                error={error}
-                isError={isError}
-                refetch={refetch}
-                isFetching={isFetching}
-                isSuccess={isSuccess}
+              <DataStateDisplay
+                {...productsQueryProps}
                 dataLength={data ? data.productsLength : 0}
                 loadingComponent={<TableSkeleton count={10} />}
               >
@@ -294,12 +289,11 @@ const Products: NextPage = () => {
                     </tbody>
                   </table>
                 </section>
-              </ShowWrapper>
+              </DataStateDisplay>
 
               {data && data?.productsLength > 10 && (
                 <Pagination
                   pagination={data.pagination}
-                  changeRoute={changeRoute}
                   section='_adminProducts'
                 />
               )}

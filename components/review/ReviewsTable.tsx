@@ -2,10 +2,10 @@ import Link from 'next/link'
 
 import { EditIconButton, ResponsiveImage } from 'components'
 
-import  type{ DataModels } from 'types'
+import type { IReview } from 'types'
 
 interface Props {
-  reviews: DataModels.IReview[]
+  reviews: IReview[]
 }
 
 const ReviewsTable: React.FC<Props> = (props) => {

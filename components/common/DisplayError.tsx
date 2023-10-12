@@ -1,5 +1,5 @@
 import { Transition } from '@headlessui/react'
-import { Icons } from 'components'
+import { Exclamation } from 'icons'
 import { FieldError } from 'react-hook-form'
 
 interface Props {
@@ -23,7 +23,7 @@ const DisplayError: React.FC<Props> = (props) => {
         leaveTo='opacity-0'
       >
         <div className='min-w-max mt-1.5 inline-flex gap-x-1 text-sm '>
-          {errors && <Icons.Exclamation className='text-red-600' />}
+          {errors && <Exclamation className='text-red-600' />}
           <span className='text-red-600'>{errors?.message}</span>
         </div>
       </Transition>

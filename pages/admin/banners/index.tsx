@@ -7,6 +7,8 @@ import {
   DashboardLayout,
   EmptyCustomList,
   PageContainer,
+  DataStateDisplay,
+  TableContainer,
   TableSkeleton,
 } from 'components'
 
@@ -20,81 +22,73 @@ const Banners: NextPage = () => {
   const category_id = query?.category_id as string
   const category_name = query?.category_name
 
-  //? Get Categories
-  const { categories, isLoading: isLodingGetCategories } =
-    useGetCategoriesQuery(undefined, {
-      selectFromResult: ({ data, isLoading }) => ({
+  //? Queries
+  //*    Get Categories
+  const { categories, ...categoriesQueryProps } = useGetCategoriesQuery(
+    undefined,
+    {
+      selectFromResult: ({ data, ...rest }) => ({
         categories: data?.categories
           .filter((category) => category.level < 2)
           .sort((a, b) => a.level - b.level),
-        isLoading,
+        ...rest,
       }),
       skip: !!category_id,
-    })
+    }
+  )
 
-  const { data: banners, isLoading: isLoading_get_banners } =
-    useGetBannersQuery(
-      { category: category_id },
-      {
-        skip: !!!category_id,
-      }
-    )
+  //*    Get Banners
+  const { data: banners, ...bannersQueryProps } = useGetBannersQuery(
+    { category: category_id },
+    {
+      skip: !!!category_id,
+    }
+  )
 
   //? Render(s)
   const title = category_name ? `بنرهای دسته بندی ${category_name}` : 'بنرها'
 
   const renderContent = () => {
-    if (isLoading_get_banners || isLodingGetCategories) {
-      return <TableSkeleton />
-    }
-
+    // render lvl-one and lvl-two categories they can have banners
     if (categories && !category_id) {
-      return categories.map((category) => (
-        <tr
-          className='text-xs text-center transition-colors border-b border-gray-100 md:text-sm hover:bg-gray-50/50'
-          key={category._id}
+      return (
+        <DataStateDisplay
+          {...categoriesQueryProps}
+          dataLength={categories.length}
+          loadingComponent={<TableSkeleton />}
+          emptyComponent={<EmptyCustomList />}
         >
-          <td className='w-3/4 px-2 py-4 text-right'>{category.name}</td>
-          <td className='px-2 py-4'>
-            <Link
-              href={`/admin/banners?category_id=${category._id}&category_name=${category.name}`}
-              className='bg-rose-50 text-rose-500 rounded-sm py-1 px-1.5 mx-1.5 inline-block'
-            >
-              بنرها
-            </Link>
-          </td>
-        </tr>
-      ))
+          <TableContainer tHeads={['نام دسته بندی بنرها', 'بیشتر']}>
+            {categories.map((category) => (
+              <tr
+                className='text-xs text-center transition-colors border-b border-gray-100 md:text-sm hover:bg-gray-50/50'
+                key={category._id}
+              >
+                <td className='w-3/4 px-2 py-4 text-right'>{category.name}</td>
+                <td className='px-2 py-4'>
+                  <Link
+                    href={`/admin/banners?category_id=${category._id}&category_name=${category.name}`}
+                    className='bg-rose-50 text-rose-500 rounded-sm py-1 px-1.5 mx-1.5 inline-block'
+                  >
+                    بنرها
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </TableContainer>
+        </DataStateDisplay>
+      )
     }
 
-    if (banners && banners?.length > 0) {
-      return banners.map((banner) => (
-        <tr
-          className='text-xs text-center transition-colors border-b border-gray-100 md:text-sm hover:bg-gray-50/50'
-          key={banner._id}
+    // render banners based on category
+    if (banners && banners.length > 0) {
+      return (
+        <DataStateDisplay
+          {...bannersQueryProps}
+          dataLength={banners.length}
+          loadingComponent={<TableSkeleton />}
+          emptyComponent={<EmptyCustomList />}
         >
-          <td className='w-3/4 px-2 py-4 text-right'>{banner.title}</td>
-          <td className='px-2 py-4'>
-            <Link
-              href={`/admin/banners/edit/${banner._id}?banner_name=${banner.title}`}
-              className='bg-rose-50 text-rose-500 rounded-sm py-1 px-1.5 mx-1.5 inline-block'
-            >
-              ویرایش
-            </Link>
-          </td>
-        </tr>
-      ))
-    } else return <EmptyCustomList />
-  }
-
-  return (
-    <main>
-      <Head>
-        <title>مدیریت | {title}</title>
-      </Head>
-
-      <DashboardLayout>
-        <PageContainer title={title}>
           <section className='p-3 mx-auto mb-10 space-y-8'>
             {category_id && (
               <Link
@@ -104,21 +98,38 @@ const Banners: NextPage = () => {
                 افزودن بنر جدید
               </Link>
             )}
-            <div className='mx-3 overflow-x-auto mt-7 lg:mx-5 xl:mx-10'>
-              <table className='w-full whitespace-nowrap'>
-                <thead className='h-9 bg-emerald-50'>
-                  <tr className='text-emerald-500'>
-                    <th className='px-2 text-right border-gray-100 border-x-2'>
-                      {category_name ? 'عنوان بنرها' : 'نام دسته بندی بنرها'}
-                    </th>
-                    <th className='border-gray-100 border-x-2'>بیشتر</th>
-                  </tr>
-                </thead>
-                <tbody className='text-gray-600'>{renderContent()}</tbody>
-              </table>
-            </div>
+            <TableContainer tHeads={['عنوان بنرها', 'بیشتر']}>
+              {banners.map((banner) => (
+                <tr
+                  className='text-xs text-center transition-colors border-b border-gray-100 md:text-sm hover:bg-gray-50/50'
+                  key={banner._id}
+                >
+                  <td className='w-3/4 px-2 py-4 text-right'>{banner.title}</td>
+                  <td className='px-2 py-4'>
+                    <Link
+                      href={`/admin/banners/edit/${banner._id}?banner_name=${banner.title}`}
+                      className='bg-rose-50 text-rose-500 rounded-sm py-1 px-1.5 mx-1.5 inline-block'
+                    >
+                      ویرایش
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </TableContainer>
           </section>
-        </PageContainer>
+        </DataStateDisplay>
+      )
+    }
+  }
+
+  return (
+    <main>
+      <Head>
+        <title>مدیریت | {title}</title>
+      </Head>
+
+      <DashboardLayout>
+        <PageContainer title={title}>{renderContent()}</PageContainer>
       </DashboardLayout>
     </main>
   )

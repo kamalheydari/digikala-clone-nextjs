@@ -1,4 +1,5 @@
-import { Logo,Loading } from 'components'
+import { Loading } from 'components'
+import { Logo } from 'icons'
 
 export default function BigLoading() {
   return (

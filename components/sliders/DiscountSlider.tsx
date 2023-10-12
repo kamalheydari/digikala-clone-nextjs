@@ -4,25 +4,26 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 
 import {
-  AmazingTypo,
   DiscountProduct,
   ProductPrice,
   ResponsiveImage,
   Skeleton,
 } from 'components'
+import { AmazingTypo } from 'icons'
+
 import { useGetProductsQuery } from 'services'
 
-import type { DataModels } from 'types'
+import type { ICategory } from 'types'
 
 interface Props {
-  currentCategory: DataModels.ICategory
+  currentCategory: ICategory
 }
 
 const DiscountSlider: React.FC<Props> = (props) => {
   //? Props
   const { currentCategory } = props
 
-  const { products, isLoading } = useGetProductsQuery(
+  const { products, isFetching } = useGetProductsQuery(
     {
       sort: 6,
       category: currentCategory?.slug,
@@ -30,9 +31,9 @@ const DiscountSlider: React.FC<Props> = (props) => {
       discount: true,
     },
     {
-      selectFromResult: ({ data, isLoading }) => ({
+      selectFromResult: ({ data, isFetching }) => ({
         products: data?.products,
-        isLoading,
+        isFetching,
       }),
     }
   )
@@ -65,7 +66,7 @@ const DiscountSlider: React.FC<Props> = (props) => {
             />
           </SwiperSlide>
 
-          {isLoading
+          {isFetching
             ? Array(10)
                 .fill('_')
                 .map((_, index) => (
@@ -112,7 +113,7 @@ const DiscountSlider: React.FC<Props> = (props) => {
                       : ''
                   } `}
                 >
-                  <Link href={`/products/${product._id}`}>
+                  <Link href={`/products/${product.slug}`}>
                     <article>
                       <ResponsiveImage
                         dimensions='w-32 h-32 lg:w-36 lg:h-36'

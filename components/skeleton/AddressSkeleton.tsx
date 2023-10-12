@@ -1,4 +1,5 @@
-import { Icons, Skeleton } from 'components'
+import { Skeleton } from 'components'
+import { Phone, Post, User, UserLocation } from 'icons'
 
 const AddressSkeleton = () => {
   return (
@@ -8,20 +9,20 @@ const AddressSkeleton = () => {
       </div>
       <div className='my-2 space-y-3 text-gray-500'>
         <div className='flex items-center gap-x-2 '>
-          <Icons.UserLocation className='text-gray-500 icon' />
+          <UserLocation className='text-gray-500 icon' />
           <Skeleton.Item animated='background' height='h-5' width='w-40' />
         </div>
         <div className='flex items-center gap-x-2 '>
-          <Icons.Post className='text-gray-500 icon' />
+          <Post className='text-gray-500 icon' />
           <Skeleton.Item animated='background' height='h-5' width='w-40' />
         </div>
         <div className='flex items-center gap-x-2 '>
-          <Icons.Phone className='text-gray-500 icon' />
+          <Phone className='text-gray-500 icon' />
           <Skeleton.Item animated='background' height='h-5' width='w-40' />
         </div>
 
         <div className='flex items-center gap-x-2 '>
-          <Icons.User className='text-gray-500 icon' />
+          <User className='text-gray-500 icon' />
           <Skeleton.Item animated='background' height='h-5' width='w-40' />
         </div>
       </div>

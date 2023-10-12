@@ -1,6 +1,6 @@
-import { Icons } from 'components'
-
 import { useRouter } from 'next/router'
+
+import { ArrowRight, Delete, Edit, Plus } from 'icons'
 
 interface IconButtonType
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
@@ -32,7 +32,7 @@ export const BackIconButton: React.FC<IconButtonType> = (props) => {
     <IconButton
       title='برگشت'
       icon={
-        <Icons.ArrowRight className='text-gray-500 rounded-2xl w-8 h-8 p-1 lg:w-9 lg:h-9 lg:p-1.5 active:scale-95 bg-gray-50' />
+        <ArrowRight className='text-gray-500 rounded-2xl w-8 h-8 p-1 lg:w-9 lg:h-9 lg:p-1.5 active:scale-95 bg-gray-50' />
       }
       onClick={() => back()}
       {...props}
@@ -44,7 +44,7 @@ export const EditIconButton: React.FC<IconButtonType> = (props) => (
   <IconButton
     title='تغییر'
     icon={
-      <Icons.Edit className='rounded-2xl w-8 h-8 p-1 lg:w-9 lg:h-9 lg:p-1.5 active:scale-95 text-amber-500 bg-amber-100' />
+      <Edit className='rounded-2xl w-8 h-8 p-1 lg:w-9 lg:h-9 lg:p-1.5 active:scale-95 text-amber-500 bg-amber-100' />
     }
     {...props}
   />
@@ -54,7 +54,7 @@ export const DeleteIconButton: React.FC<IconButtonType> = (props) => (
   <IconButton
     title='حذف'
     icon={
-      <Icons.Delete className='text-red-500 bg-red-100 rounded-2xl w-8 h-8 p-1 lg:w-9 lg:h-9 lg:p-1.5 active:scale-95' />
+      <Delete className='text-red-500 bg-red-100 rounded-2xl w-8 h-8 p-1 lg:w-9 lg:h-9 lg:p-1.5 active:scale-95' />
     }
     {...props}
   />
@@ -64,7 +64,7 @@ export const AddIconButton: React.FC<IconButtonType> = (props) => (
   <IconButton
     title='اضافه'
     icon={
-      <Icons.Plus className='text-green-500 bg-green-100 rounded-2xl w-8 h-8 p-1 lg:w-9 lg:h-9 lg:p-1.5 active:scale-95' />
+      <Plus className='text-green-500 bg-green-100 rounded-2xl w-8 h-8 p-1 lg:w-9 lg:h-9 lg:p-1.5 active:scale-95' />
     }
     {...props}
   />

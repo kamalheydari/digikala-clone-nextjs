@@ -1,4 +1,4 @@
-import { FreeShippingSvg } from 'components'
+import { FreeShippingSvg } from 'icons'
 
 export default function FreeShipping() {
   return (

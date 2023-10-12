@@ -1,16 +1,17 @@
 import Image from 'next/image'
 
-import { AddToCartOperation, Depot, Icons, ResponsiveImage } from 'components'
+import { AddToCartOperation, Depot, ResponsiveImage } from 'components'
+import { Check, Rule, ShieldCheck } from 'icons'
 
 import { formatNumber } from 'utils'
 
 import { useAppSelector } from 'hooks'
 
-import type { DataModels } from 'types'
+import type { IProduct } from 'types'
 
 interface Props {
   second?: boolean
-  product: DataModels.IProduct
+  product: IProduct
 }
 
 const AddToCart: React.FC<Props> = (props) => {
@@ -69,7 +70,7 @@ const AddToCart: React.FC<Props> = (props) => {
             )}
             {tempSize && (
               <div className='flex items-center gap-x-2 py-3'>
-                <Icons.Rule className='icon' />
+                <Rule className='icon' />
                 <span className='farsi-digits'>{tempSize.size}</span>
               </div>
             )}
@@ -77,7 +78,7 @@ const AddToCart: React.FC<Props> = (props) => {
         )}
 
         <div className='py-3 lg:items-center lg:gap-x-2 lg:flex'>
-          <Icons.ShieldCheck className='icon' />
+          <ShieldCheck className='icon' />
           <span className='font-light'>گارانتی اصالت و ضمانت تحویل</span>
         </div>
 
@@ -86,7 +87,7 @@ const AddToCart: React.FC<Props> = (props) => {
         </div>
 
         <div className='lg:flex lg:items-center lg:gap-x-1 lg:py-3'>
-          <Icons.Check className='icon' />
+          <Check className='icon' />
           <span> فروش :</span>
           <span className='farsi-digits'>{formatNumber(product.sold)}</span>
         </div>

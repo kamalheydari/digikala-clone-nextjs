@@ -2,20 +2,30 @@ import Link from 'next/link'
 
 import { ResponsiveImage, SubCategoriesSkeleton } from 'components'
 
-import type { DataModels } from 'types'
+import { useGetSubCategoriesQuery } from 'services'
+import { generateQueryParams } from 'utils'
 
 interface Props {
-  childCategories: DataModels.ICategory[] | undefined
-  isLoading: boolean
+  category: string
 }
 
 const SubCategories: React.FC<Props> = (props) => {
-  //? Props
-  const { childCategories, isLoading } = props
+  const { category } = props
+
+  const { childCategories, isLoading } = useGetSubCategoriesQuery(
+    { slug: category },
+    {
+      skip: !category,
+      selectFromResult: ({ isLoading, data }) => ({
+        childCategories: data?.children,
+        isLoading,
+      }),
+    }
+  )
 
   //? Render(s)
   return (
-    <section className='px-4 my-7'>
+    <section className='ps-4 md:px-4 my-7'>
       {isLoading ? (
         <SubCategoriesSkeleton />
       ) : childCategories && childCategories.length > 0 ? (
@@ -25,7 +35,10 @@ const SubCategories: React.FC<Props> = (props) => {
             {childCategories.map((item) => (
               <Link
                 key={item._id}
-                href={`/products?category=${item.slug}`}
+                href={`/products?${generateQueryParams({
+                  category: item.slug,
+                  sort: '',
+                })}`}
                 className='px-3 pt-4 pb-2 text-center border-4 border-gray-100 rounded-md'
               >
                 <ResponsiveImage

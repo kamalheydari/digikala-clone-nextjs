@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { Icons } from 'components'
+import { ArrowLeft } from 'icons'
 
 interface Props {
   children: React.ReactNode
@@ -31,7 +31,7 @@ const BoxLink: React.FC<Props> = (props) => {
       >
         {children}
         <span className='ml-auto mr-3 text-gray-700'>{name}</span>
-        <Icons.ArrowLeft className='icon text-gray-700  lg:mr-3' />
+        <ArrowLeft className='icon text-gray-700  lg:mr-3' />
       </Link>
     </div>
   )

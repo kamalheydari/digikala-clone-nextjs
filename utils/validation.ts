@@ -114,43 +114,31 @@ export const productSchema = Yup.object().shape({
     )
     .min(1, 'حداقل یک تصویر الزامی است')
     .required('تصویر الزامی است'),
-  sizes: Yup.array().of(
-    Yup.object().shape({
-      id: Yup.string().required(),
-      size: Yup.string().required(),
-    })
-  ),
-  colors: Yup.array().of(
-    Yup.object().shape({
-      id: Yup.string().required(),
-      name: Yup.string().required(),
-      hashCode: Yup.string().required(),
-    })
-  ),
-  category: Yup.array().of(Yup.string().required()),
-  category_levels: Yup.object().shape({
-    level_one: Yup.object().shape({
-      $oid: Yup.string().required(),
-    }),
-    level_two: Yup.object().shape({
-      $oid: Yup.string().required(),
-    }),
-    Level_three: Yup.object().shape({
-      $oid: Yup.string().required(),
-    }),
-  }),
   inStock: Yup.number().required('موجودی الزامی است'),
-  sold: Yup.number(),
   info: Yup.array().of(
     Yup.object().shape({
-      title: Yup.string().required('عنوان اطلاعات الزامی است'),
-      description: Yup.string().required('توضیحات اطلاعات الزامی است'),
+      title: Yup.string().required('عنوان ویژگی‌ها الزامی است'),
+      description: Yup.string(),
     })
   ),
   specification: Yup.array().of(
     Yup.object().shape({
       title: Yup.string().required('عنوان مشخصات الزامی است'),
-      value: Yup.string().required('مقدار مشخصات الزامی است'),
+      value: Yup.string(),
     })
   ),
+})
+
+export const detailsSchema = Yup.object().shape({
+  info: Yup.array().of(
+    Yup.object().shape({
+      title: Yup.string().required('نام ویژگی الزامی است'),
+    })
+  ),
+  specification: Yup.array().of(
+    Yup.object().shape({
+      title: Yup.string().required('نام مشخصات الزامی است'),
+    })
+  ),
+  optionsType: Yup.string().required('نوع انتخاب را مشخص کنید'),
 })

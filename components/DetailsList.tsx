@@ -1,8 +1,13 @@
 import { useRef } from 'react'
 
-import { Control, UseFormRegister, useFieldArray } from 'react-hook-form'
+import {
+  type FieldError,
+  Control,
+  UseFormRegister,
+  useFieldArray,
+} from 'react-hook-form'
 
-import { AddIconButton, DeleteIconButton } from 'components'
+import { AddIconButton, DeleteIconButton, DisplayError } from 'components'
 import type { IDetailsForm } from 'types'
 
 interface Props {
@@ -10,11 +15,16 @@ interface Props {
   control: Control<IDetailsForm>
   categoryName: string
   register: UseFormRegister<IDetailsForm>
+  errors?:
+    | {
+        title?: FieldError | undefined
+      }[]
+    | undefined
 }
 
 const DetailsList: React.FC<Props> = (props) => {
   //? Props
-  const { categoryName, name, control, register } = props
+  const { categoryName, name, control, register, errors } = props
 
   //? Refs
   const newDetailRef = useRef<HTMLInputElement | null>(null)
@@ -24,6 +34,7 @@ const DetailsList: React.FC<Props> = (props) => {
     name,
     control,
   })
+
 
   //? Handlers
   const handleAddNewDetail = () => {
@@ -71,11 +82,13 @@ const DetailsList: React.FC<Props> = (props) => {
               </td>
               <td
                 className={
-                  name === 'info'
+                 `${ name === 'info'
                     ? 'bg-emerald-50 text-emerald-500'
-                    : 'bg-fuchsia-50 text-fuchsia-500'
+                    : 'bg-fuchsia-50 text-fuchsia-500'} px-2 `
                 }
-              ></td>
+              >
+                <DisplayError errors={errors?.[index]?.title} />
+              </td>
             </tr>
           ))}
           <tr className='border-b-2 border-green-50'>

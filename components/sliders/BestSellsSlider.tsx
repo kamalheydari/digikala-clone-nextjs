@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
-import { Icons, ResponsiveImage, Skeleton } from 'components'
+import { ResponsiveImage, Skeleton } from 'components'
+import { Check } from 'icons'
 
 import { truncate } from 'utils'
 import { useGetProductsQuery } from 'services'
@@ -13,16 +14,16 @@ const BestSellsSlider: React.FC<Props> = (props) => {
   //? Props
   const { categorySlug } = props
 
-  const { products, isLoading } = useGetProductsQuery(
+  const { products, isFetching } = useGetProductsQuery(
     {
       sort: 2,
       category: categorySlug,
       page_size: 15,
     },
     {
-      selectFromResult: ({ data, isLoading }) => ({
+      selectFromResult: ({ data, isFetching }) => ({
         products: data?.products,
-        isLoading,
+        isFetching,
       }),
     }
   )
@@ -31,12 +32,12 @@ const BestSellsSlider: React.FC<Props> = (props) => {
   return (
     <section className='px-3'>
       <div className='flex items-center mb-3 gap-x-2'>
-        <Icons.Check className='w-7 h-7 text-amber-400' />
+        <Check className='w-7 h-7 text-amber-400' />
         <h4 className='text-xl'>پرفروش‌ترین کالاها</h4>
       </div>
 
       <div className='grid grid-cols-[repeat(5,280px)] md:grid-cols-[repeat(5,300px)] grid-rows-3 xl:grid-cols-[repeat(5,330px)] grid-flow-col overflow-x-auto  gap-x-2 p-2'>
-        {isLoading
+        {isFetching
           ? Array(12)
               .fill('_')
               .map((_, index) => (
@@ -57,7 +58,7 @@ const BestSellsSlider: React.FC<Props> = (props) => {
               ))
           : products?.map((item, index) => (
               <div key={item._id} className='p-1 w-60 md:w-72 xl:w-80'>
-                <Link href={`/products/${item._id}`}>
+                <Link href={`/products/${item.slug}`}>
                   <article className='flex gap-x-4'>
                     <ResponsiveImage
                       dimensions='w-24 h-24'

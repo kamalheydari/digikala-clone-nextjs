@@ -11,7 +11,7 @@ import {
 } from 'utils'
 
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
-import type { DataModels } from 'types'
+import type { IUserDocument } from 'types'
 
 const handler: NextApiHandler = async (
   req: NextApiRequest,
@@ -32,7 +32,7 @@ const register = async (req: NextApiRequest, res: NextApiResponse) => {
     await db.connect()
     const { name, email, password } = req.body
 
-    const user: DataModels.IUserDocument | null = await User.findOne({ email })
+    const user: IUserDocument | null = await User.findOne({ email })
 
     if (user)
       return sendError(res, 422, 'شما قبلا با این آدرس ایمیل ثیت نام کردید')

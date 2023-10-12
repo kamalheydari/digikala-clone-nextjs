@@ -1,9 +1,9 @@
 import { ResponsiveImage } from 'components'
 
-import type { DataModels } from 'types'
+import type { IBanner } from 'types'
 
 interface Props {
-  data: DataModels.IBanner[]
+  data: IBanner[]
 }
 
 const BannerTwo: React.FC<Props> = (props) => {
@@ -11,7 +11,7 @@ const BannerTwo: React.FC<Props> = (props) => {
   const { data } = props
 
   //? Local components
-  const BannerImage = ({ item }: { item: DataModels.IBanner }) => (
+  const BannerImage = ({ item }: { item: IBanner }) => (
     <ResponsiveImage
       dimensions='h-[30vw] lg:h-60 w-full'
       className='rounded-xl overflow-hidden'

@@ -1,18 +1,19 @@
 import {
-  Icons,
   SpecialSell,
   DiscountProduct,
   ProductPrice,
   Depot,
   ResponsiveImage,
 } from 'components'
-import { DataModels } from 'types'
+import { Plus, Star } from 'icons'
 
 import { truncate } from 'utils'
 
+import type { IProduct } from 'types'
+
 interface Props {
   product: Pick<
-    DataModels.IProduct,
+    IProduct,
     | '_id'
     | 'colors'
     | 'discount'
@@ -22,6 +23,7 @@ interface Props {
     | 'rating'
     | 'sold'
     | 'title'
+    | 'slug'
   >
   slide?: boolean
 }
@@ -32,7 +34,7 @@ const ProductCard: React.FC<Props> = (props) => {
 
   //? Render(s)
   return (
-    <a target='_blank' href={`/products/${product._id}`}>
+    <a target='_blank' href={`/products/${product.slug}`}>
       <article
         className={`pt-2 pb-3 border-b border-gray-100 sm:h-[540px] xl:h-[470px] sm:px-3 ${
           !slide && 'sm:border sm:hover:shadow-3xl'
@@ -60,7 +62,7 @@ const ProductCard: React.FC<Props> = (props) => {
                     ></span>
                   ))}
               {product.colors.length > 3 && product.inStock !== 0 && (
-                <Icons.Plus className='w-3 h-3 mr-1 sm:mr-0' />
+                <Plus className='w-3 h-3 mr-1 sm:mr-0' />
               )}
             </div>
           </div>
@@ -79,7 +81,7 @@ const ProductCard: React.FC<Props> = (props) => {
                 <span className='farsi-digits'>
                   {product.rating.toFixed(1)}
                 </span>
-                <Icons.Star className='icon text-amber-400' />
+                <Star className='icon text-amber-400' />
               </div>
             </div>
             <div className='flex justify-between'>

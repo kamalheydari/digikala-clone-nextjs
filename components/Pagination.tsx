@@ -1,20 +1,20 @@
-import { Icons } from 'components'
+import { useRouter } from 'next/router'
 
-import { useMediaQuery } from 'hooks'
-import { ChangeRouteFunc } from 'hooks/useChangeRoute'
-import { IPagination } from 'types'
+import { ArrowLeft, ArrowRight2 } from 'icons'
+
+import { useMediaQuery,useChangeRoute } from 'hooks'
+
+import type { IPagination, QueryParams } from 'types'
 
 interface Props {
   pagination: IPagination
-  changeRoute: ChangeRouteFunc
   section: string
   client?: boolean
 }
 
 const Pagination: React.FC<Props> = (props) => {
   //? Props
-  const { pagination, changeRoute, section, client } = props
-
+  const { pagination, section, client } = props
   const {
     currentPage,
     nextPage,
@@ -24,7 +24,10 @@ const Pagination: React.FC<Props> = (props) => {
     lastPage,
   } = pagination
 
+  //? Assets
   const isDesktop = useMediaQuery('(min-width:1024px)')
+  const changeRoute = useChangeRoute()
+  const { query } = useRouter()
 
   //? Handlers
   const scrollToTop = () => {
@@ -36,6 +39,13 @@ const Pagination: React.FC<Props> = (props) => {
     window.scrollTo(0, scrollY)
   }
 
+  const handleChangePage = (pageQuery: QueryParams) => {
+    changeRoute({
+      ...query,
+      ...pageQuery,
+    })
+  }
+
   //? Render(s)
   return (
     <nav>
@@ -45,11 +55,11 @@ const Pagination: React.FC<Props> = (props) => {
             <li
               className='flex items-center p-1 text-red-500 cursor-pointer'
               onClick={() => {
-                changeRoute({ page: previousPage })
+                handleChangePage({ page: previousPage })
                 scrollToTop()
               }}
             >
-              <Icons.ArrowRight2 className='text-red-500 icon' />
+              <ArrowRight2 className='text-red-500 icon' />
               قبلی
             </li>
           )}
@@ -58,7 +68,7 @@ const Pagination: React.FC<Props> = (props) => {
           <li
             className='w-8 h-8 p-1 text-center transition-colors border-2 border-transparent cursor-pointer hover:text-red-500 hover:border-red-500 rounded-2xl'
             onClick={() => {
-              changeRoute({ page: 1 })
+              handleChangePage({ page: 1 })
               scrollToTop()
             }}
           >
@@ -71,7 +81,7 @@ const Pagination: React.FC<Props> = (props) => {
           <li
             className='w-8 h-8 p-1 text-center transition-colors border-2 border-transparent cursor-pointer hover:text-red-500 hover:border-red-500 rounded-2xl'
             onClick={() => {
-              changeRoute({ page: previousPage })
+              handleChangePage({ page: previousPage })
               scrollToTop()
             }}
           >
@@ -81,7 +91,7 @@ const Pagination: React.FC<Props> = (props) => {
         <li
           className='cursor-pointer w-8 h-8 p-1.5 text-center bg-red-500 text-white rounded-2xl'
           onClick={() => {
-            changeRoute({ page: currentPage })
+            handleChangePage({ page: currentPage })
             scrollToTop()
           }}
         >
@@ -91,7 +101,7 @@ const Pagination: React.FC<Props> = (props) => {
           <li
             className='w-8 h-8 p-1 text-center transition-colors border-2 border-transparent cursor-pointer hover:text-red-500 hover:border-red-500 rounded-2xl'
             onClick={() => {
-              changeRoute({ page: nextPage })
+              handleChangePage({ page: nextPage })
               scrollToTop()
             }}
           >
@@ -103,7 +113,7 @@ const Pagination: React.FC<Props> = (props) => {
           <li
             className='w-8 h-8 p-1 text-center transition-colors border-2 border-transparent cursor-pointer hover:text-red-500 hover:border-red-500 rounded-2xl'
             onClick={() => {
-              changeRoute({ page: lastPage })
+              handleChangePage({ page: lastPage })
               scrollToTop()
             }}
           >
@@ -115,12 +125,12 @@ const Pagination: React.FC<Props> = (props) => {
             <li
               className='flex items-center p-1 text-red-500 cursor-pointer'
               onClick={() => {
-                changeRoute({ page: nextPage })
+                handleChangePage({ page: nextPage })
                 scrollToTop()
               }}
             >
               بعدی
-              <Icons.ArrowLeft className='text-red-500 icon' />
+              <ArrowLeft className='text-red-500 icon' />
             </li>
           )}
         </div>

@@ -4,13 +4,12 @@ import dynamic from 'next/dynamic'
 import { useUserInfo } from 'hooks'
 
 import {
-  Address,
-  Icons,
   PageContainer,
   ProfileLayout,
   WithAddressModal,
   AddressSkeleton,
 } from 'components'
+import { Address, Edit, Location, Phone, Post, User, UserLocation } from 'icons'
 
 import type { NextPage } from 'next'
 import type { WithAddressModalProps } from 'types'
@@ -41,32 +40,32 @@ const BasicAddresses: NextPage<Props> = ({ addressModalProps }) => {
               <div className='flex justify-between py-4 border-b border-gray-200'>
                 <p className='text-sm'>{address?.street}</p>
                 <button onClick={openAddressModal}>
-                  <Icons.Edit className='cursor-pointer icon' />
+                  <Edit className='cursor-pointer icon' />
                 </button>
               </div>
               <div className='my-2 space-y-3 text-gray-500'>
                 <div className='flex items-center gap-x-2 '>
-                  <Icons.UserLocation className='text-gray-500 icon' />
+                  <UserLocation className='text-gray-500 icon' />
                   <span className='text-xs md:text-sm'>
                     {address?.province.name}, {address?.city.name}
                   </span>
                 </div>
                 <div className='flex items-center gap-x-2 '>
-                  <Icons.Post className='text-gray-500 icon' />
+                  <Post className='text-gray-500 icon' />
                   <span className='text-xs md:text-sm'>
                     {address?.postalCode}
                   </span>
                 </div>
                 {userInfo?.mobile && (
                   <div className='flex items-center gap-x-2 '>
-                    <Icons.Phone className='text-gray-500 icon' />
+                    <Phone className='text-gray-500 icon' />
                     <span className='text-xs md:text-sm'>
                       {userInfo?.mobile}
                     </span>
                   </div>
                 )}
                 <div className='flex items-center gap-x-2 '>
-                  <Icons.User className='text-gray-500 icon' />
+                  <User className='text-gray-500 icon' />
                   <span className='text-xs md:text-sm'>{userInfo?.name}</span>
                 </div>
               </div>
@@ -79,7 +78,7 @@ const BasicAddresses: NextPage<Props> = ({ addressModalProps }) => {
                 className='flex items-center px-3 py-2 text-red-600 border-2 border-red-600 rounded-lg gap-x-3'
                 onClick={openAddressModal}
               >
-                <Icons.Location className='text-red-600 icon' />
+                <Location className='text-red-600 icon' />
                 <span>ثبت آدرس</span>
               </button>
             </section>

@@ -3,7 +3,8 @@ import { Fragment } from 'react'
 
 import { Menu, Transition } from '@headlessui/react'
 
-import { Icons, Logout, Person } from 'components'
+import { Logout } from 'components'
+import { ArrowDown, ArrowLeft, Person, User } from 'icons'
 
 interface Props {
   name: string
@@ -17,8 +18,8 @@ const UserDropdown: React.FC<Props> = (props) => {
   return (
     <Menu as='div' className='dropdown'>
       <Menu.Button className='dropdown__button'>
-        <Icons.User className='icon' />
-        <Icons.ArrowDown className='icon' />
+        <User className='icon' />
+        <ArrowDown className='icon' />
       </Menu.Button>
       <Transition
         as={Fragment}
@@ -38,7 +39,7 @@ const UserDropdown: React.FC<Props> = (props) => {
               >
                 <Person className='w-6 h-6' />
                 <span className='ml-auto mr-4 text-gray-700'>{name}</span>
-                <Icons.ArrowLeft className='text-gray-700 icon lg:mr-3' />
+                <ArrowLeft className='text-gray-700 icon lg:mr-3' />
               </Link>
             </div>
           </Menu.Item>

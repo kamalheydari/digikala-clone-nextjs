@@ -1,16 +1,13 @@
 import { FilterOperation } from 'components'
 
-import type { NewQueries } from 'hooks/useChangeRoute'
-
 interface Props {
   mainMaxPrice: number | undefined
   mainMinPrice: number | undefined
-  handleChangeRoute: (newQueries: NewQueries) => void
 }
 
 const ProductsAside: React.FC<Props> = (props) => {
   //? Props
-  const { mainMaxPrice, mainMinPrice, handleChangeRoute } = props
+  const { mainMaxPrice, mainMinPrice } = props
 
   //? Render(s)
   return (
@@ -18,7 +15,6 @@ const ProductsAside: React.FC<Props> = (props) => {
       <FilterOperation
         mainMaxPrice={mainMaxPrice}
         mainMinPrice={mainMinPrice}
-        handleChangeRoute={handleChangeRoute}
       />
     </aside>
   )

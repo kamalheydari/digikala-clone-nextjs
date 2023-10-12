@@ -11,10 +11,11 @@ import { registerSchema } from 'utils'
 
 import { useRegisterMutation } from 'services'
 
-import { TextField, LoginButton, Logo, HandleResponse } from 'components'
+import { TextField, LoginButton, HandleResponse } from 'components'
+import { Logo } from 'icons'
 
 import type { NextPage } from 'next'
-import type { IRegister } from 'types'
+import type { IRegisterForm } from 'types'
 
 const RegisterPage: NextPage = () => {
   //? Assets
@@ -31,7 +32,7 @@ const RegisterPage: NextPage = () => {
     reset,
     setFocus,
     control,
-  } = useForm<IRegister>({
+  } = useForm<IRegisterForm>({
     resolver: yupResolver(registerSchema),
     defaultValues: { name: '', email: '', password: '', confirmPassword: '' },
   })
@@ -42,7 +43,7 @@ const RegisterPage: NextPage = () => {
   }, [])
 
   //? Handlers
-  const submitHander: SubmitHandler<IRegister> = ({
+  const submitHander: SubmitHandler<IRegisterForm> = ({
     name,
     email,
     password,

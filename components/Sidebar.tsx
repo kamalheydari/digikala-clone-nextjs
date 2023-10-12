@@ -2,11 +2,12 @@ import { useEffect } from 'react'
 import Link from 'next/link'
 
 import { Disclosure } from '@headlessui/react'
-import { Icons, LogoPersian, SidebarSkeleton } from 'components'
+import { SidebarSkeleton } from 'components'
 
 import { useDisclosure } from 'hooks'
 
 import { useGetCategoriesQuery } from 'services'
+import { ArrowDown, ArrowLeft, Bars, LogoPersian } from 'icons'
 
 export default function Sidebar() {
   //? Assets
@@ -38,7 +39,7 @@ export default function Sidebar() {
         type='button'
         onClick={sidebarHandlers.open}
       >
-        <Icons.Bars className='icon' />
+        <Bars className='icon' />
       </button>
       <div
         className={`w-full h-screen fixed duration-200 z-10 top-0 lg:hidden ${
@@ -75,7 +76,7 @@ export default function Sidebar() {
                             {category.name}
                           </span>
 
-                          <Icons.ArrowDown
+                          <ArrowDown
                             className={` ${
                               open
                                 ? 'rotate-180 transform text-red-400 '
@@ -90,7 +91,7 @@ export default function Sidebar() {
                             onClick={handleClose}
                           >
                             تمام موارد این دسته
-                            <Icons.ArrowLeft className='text-gray-500 icon' />
+                            <ArrowLeft className='text-gray-500 icon' />
                           </Link>
                           {category?.children &&
                             category.children.map((category) => (
@@ -107,7 +108,7 @@ export default function Sidebar() {
                                       >
                                         {category.name}
                                       </span>
-                                      <Icons.ArrowDown
+                                      <ArrowDown
                                         className={` ${
                                           open
                                             ? 'rotate-180 transform text-red-400 '
@@ -126,7 +127,7 @@ export default function Sidebar() {
                                         onClick={handleClose}
                                       >
                                         تمام موارد این دسته
-                                        <Icons.ArrowLeft className='text-gray-500 icon' />
+                                        <ArrowLeft className='text-gray-500 icon' />
                                       </Link>
                                       {category.children &&
                                         category.children.map((category) => (

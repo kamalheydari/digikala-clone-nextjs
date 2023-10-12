@@ -5,7 +5,6 @@ import { sendError, db, roles } from 'utils'
 import { withUser } from 'middlewares'
 
 import type { NextApiResponse } from 'next'
-import type { DataModels } from 'types'
 import type { NextApiRequestWithUser } from 'types'
 
 const handler = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
@@ -28,7 +27,7 @@ const createDetails = async (
       return sendError(res, 403, 'شما اجازه انجام این عملیات را ندارید')
 
     await db.connect()
-    const newDetails: DataModels.IDetailsDocument = new Details({ ...req.body })
+    const newDetails = new Details({ ...req.body })
     await newDetails.save()
 
     res.status(201).json({ msg: 'ساخت جدول جزییات جدید موفقیت آمیز بود' })

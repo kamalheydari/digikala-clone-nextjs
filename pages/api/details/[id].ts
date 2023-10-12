@@ -3,7 +3,7 @@ import { Details } from 'models'
 import { sendError, db, roles } from 'utils'
 
 import type { NextApiResponse } from 'next'
-import type { DataModels } from 'types'
+import type { IDetailsDocument } from 'types'
 import type { NextApiRequestWithUser } from 'types'
 
 const handler = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
@@ -32,7 +32,7 @@ const getDetails = async (
   try {
     const { id } = req.query
     await db.connect()
-    const details: DataModels.IDetailsDocument | null = await Details.findOne({
+    const details: IDetailsDocument | null = await Details.findOne({
       category_id: id,
     })
 
@@ -54,9 +54,7 @@ const updateDetails = async (
 
     await db.connect()
     await Details.findByIdAndUpdate({ _id: id }, { ...req.body })
-    const details: DataModels.IDetailsDocument | null = await Details.findById(
-      id
-    )
+    const details: IDetailsDocument | null = await Details.findById(id)
 
     res.status(200).json({
       msg: 'مشخصات دسته بندی با موفقیت بروزرسانی شد',

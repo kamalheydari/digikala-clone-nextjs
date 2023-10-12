@@ -4,15 +4,12 @@ import { useGetProductReviewsQuery } from 'services'
 
 import {
   Pagination,
-  Icons,
-  ShowWrapper,
+  DataStateDisplay,
   EmptyComment,
   ReviewModal,
   ReveiwSkeleton,
   ReviewProductCard,
 } from 'components'
-
-import { useDisclosure, useChangeRoute } from 'hooks'
 
 interface Porps {
   numReviews: number
@@ -26,34 +23,20 @@ const Reviews: React.FC<Porps> = (props) => {
 
   //? Assets
   const { query } = useRouter()
-  const changeRoute = useChangeRoute()
   const page = query.page ? +query.page : 1
 
-  //? Modals
-  const [isShowReviewModal, reviewModalHandlers] = useDisclosure()
-
   //? Get Product-Reviews Query
-  const { data, isSuccess, isFetching, error, isError, refetch } =
-    useGetProductReviewsQuery(
-      {
-        id: prdouctID,
-        page,
-      },
-      { skip: numReviews > 0 ? false : true }
-    )
-
-  //? Handlers
-  const handleOpenCommentModal = () => reviewModalHandlers.open()
+  const { data, ...productsReviewQueryProps } = useGetProductReviewsQuery(
+    {
+      id: prdouctID,
+      page,
+    },
+    { skip: numReviews > 0 ? false : true }
+  )
 
   //? Render(s)
   return (
     <>
-      <ReviewModal
-        isShow={isShowReviewModal}
-        onClose={reviewModalHandlers.close}
-        productTitle={productTitle}
-        prdouctID={prdouctID}
-      />
       <section
         className='px-3 py-3 space-y-4 lg:max-w-3xl xl:max-w-5xl'
         id='_productReviews'
@@ -66,29 +49,16 @@ const Reviews: React.FC<Porps> = (props) => {
         </div>
         <div className='lg:mr-36'>
           <div className='mb-8'>
-            <button
-              type='button'
-              onClick={handleOpenCommentModal}
-              className='flex items-center w-full gap-x-5'
-            >
-              <Icons.Comment className='icon' />
-              <span className='text-sm text-black '>
-                دیدگاه خود را درباره این کالا بنویسید
-              </span>
-              <Icons.ArrowLeft className='mr-auto icon' />
-            </button>
+            <ReviewModal productTitle={productTitle} prdouctID={prdouctID} />
+
             <p className='mt-6 text-xs text-gray-500'>
               پس از تایید نظر، با مراجعه به صفحه‌ی ماموریت‌های کلابی امتیاز خود
               را دریافت کنید.
             </p>
           </div>
 
-          <ShowWrapper
-            error={error}
-            isError={isError}
-            refetch={refetch}
-            isFetching={isFetching}
-            isSuccess={isSuccess}
+          <DataStateDisplay
+            {...productsReviewQueryProps}
             dataLength={data ? data.reviewsLength : 0}
             emptyComponent={<EmptyComment />}
             loadingComponent={<ReveiwSkeleton />}
@@ -98,13 +68,12 @@ const Reviews: React.FC<Porps> = (props) => {
                 <ReviewProductCard item={item} key={item._id} />
               ))}
             </div>
-          </ShowWrapper>
+          </DataStateDisplay>
 
           {data && data.reviewsLength > 5 && (
             <div className='py-4 mx-auto lg:max-w-5xl'>
               <Pagination
                 pagination={data.pagination}
-                changeRoute={changeRoute}
                 section='_productReviews'
                 client
               />

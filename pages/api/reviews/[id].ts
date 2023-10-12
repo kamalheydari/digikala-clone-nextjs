@@ -5,7 +5,7 @@ import { sendError, db, roles } from 'utils'
 import { withUser } from 'middlewares'
 
 import type { NextApiResponse } from 'next'
-import type { DataModels } from 'types'
+import type { IReviewDocument } from 'types'
 import type { NextApiRequestWithUser } from 'types'
 
 const handler = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
@@ -57,7 +57,7 @@ const getReview = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
   try {
     await db.connect()
 
-    const review: DataModels.IReviewDocument | null = await Review.findOne({
+    const review: IReviewDocument | null = await Review.findOne({
       _id: req.query.id,
     })
       .populate('product', 'images')
@@ -80,7 +80,7 @@ const deleteReview = async (
 
     await db.connect()
 
-    const review: DataModels.IReviewDocument | null = await Review.findOne({
+    const review: IReviewDocument | null = await Review.findOne({
       user: userId,
     })
 
@@ -105,13 +105,15 @@ const updateReview = async (
 
     await db.connect()
 
-    const review: DataModels.IReviewDocument | null =
-      await Review.findOneAndUpdate({ _id: req.query.id }, { ...req.body })
+    const review: IReviewDocument | null = await Review.findOneAndUpdate(
+      { _id: req.query.id },
+      { ...req.body }
+    )
 
-    const product: DataModels.IProductDocument | null = await Product.findOne({
+    const product = await Product.findOne({
       _id: review?.product,
     })
-    const reviews: DataModels.IReviewDocument[] | null = await Review.find({
+    const reviews: IReviewDocument[] | null = await Review.find({
       product: product?._id,
     })
 

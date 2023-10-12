@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import Icons from './Icons'
+import { Close } from 'icons'
 
 interface ModalProps {
   isShow: boolean
@@ -13,9 +13,27 @@ const Modal: React.FC<ModalProps> = (props) => {
   const { isShow, onClose, effect, children } = props
 
   //? Re-Renders
+  //* abort to scroll
   useEffect(() => {
     if (isShow) document.body.style.overflow = 'hidden'
     else document.body.style.overflow = 'unset'
+  }, [isShow])
+
+  //* close modal on press Escape
+  useEffect(() => {
+    const closeModalOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose()
+      }
+    }
+
+    if (isShow) {
+      document.addEventListener('keydown', closeModalOnEscape)
+    }
+
+    return () => {
+      document.removeEventListener('keydown', closeModalOnEscape)
+    }
   }, [isShow])
 
   //? Styles
@@ -96,7 +114,7 @@ const Header: React.FC<HeaderProps> = (props) => {
     <div className='flex items-center justify-between pb-2 border-b-2 border-gray-200'>
       <span className='text-sm'>{children}</span>
       <button onClick={onClose} className='p-1'>
-        <Icons.Close className='icon' />
+        <Close className='icon' />
       </button>
     </div>
   )

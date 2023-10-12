@@ -1,8 +1,8 @@
 import Link from 'next/link'
-import { DataModels } from 'types'
+import type { IProduct } from 'types'
 
 interface Props {
-  categoryLevels: DataModels.IProduct['category_levels']
+  categoryLevels: IProduct['category_levels']
 }
 
 const Breadcrumb: React.FC<Props> = ({ categoryLevels }) => {

@@ -1,44 +1,31 @@
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
 
 import { sorts } from 'utils'
 
-import { Icons, Modal } from 'components'
+import { Modal } from 'components'
+import { Check, Sort as SortIcon } from 'icons'
 
-import { useDisclosure } from 'hooks'
+import { useChangeRoute, useDisclosure } from 'hooks'
 
-import type { ChangeRouteFunc } from 'hooks/useChangeRoute'
+interface Props {}
 
-interface Props {
-  handleChangeRoute: ChangeRouteFunc
-}
-
-const Sort: React.FC<Props> = ({ handleChangeRoute }) => {
+const Sort: React.FC<Props> = () => {
   //? Assets
-  const [isSort, sortHandlers] = useDisclosure()
   const { query } = useRouter()
+  const sortQuery = Number(query?.sort) || 1
+  const pageQuery = Number(query?.page)
 
-  //? State
-  const [sort, setSort] = useState(sorts[0])
+  const [isSort, sortHandlers] = useDisclosure()
+  const changeRoute = useChangeRoute()
 
   //? Handlers
   const handleSortChange = (item: (typeof sorts)[number]) => {
-    setSort(sorts[item.value - 1])
-    handleChangeRoute({ sort: item.value })
+    changeRoute({
+      page: pageQuery && pageQuery > 1 ? 1 : '',
+      sort: item.value,
+    })
     sortHandlers.close()
   }
-
-  useEffect(() => {
-    if (query.sort) {
-      setSort(sorts[+query.sort - 1])
-    } else {
-      setSort(sorts[0])
-    }
-  }, [query])
-
-  useEffect(() => {
-    setSort(sorts[0])
-  }, [query.category])
 
   //? Render(s)
   return (
@@ -49,8 +36,8 @@ const Sort: React.FC<Props> = ({ handleChangeRoute }) => {
           className='flex items-center gap-x-1'
           onClick={sortHandlers.open}
         >
-          <Icons.Sort className='w-6 h-6 icon' />
-          <span>{sort?.name}</span>
+          <SortIcon className='w-6 h-6 icon' />
+          <span>{sorts[sortQuery - 1].name}</span>
         </button>
 
         <Modal
@@ -75,9 +62,7 @@ const Sort: React.FC<Props> = ({ handleChangeRoute }) => {
                     >
                       {item.name}
                     </button>
-                    {sort?.value === item.value && (
-                      <Icons.Check className='icon' />
-                    )}
+                    {sortQuery === item.value && <Check className='icon' />}
                   </div>
                 ))}
               </div>
@@ -87,14 +72,14 @@ const Sort: React.FC<Props> = ({ handleChangeRoute }) => {
       </div>
       <div className='hidden xl:flex xl:gap-x-4 xl:items-center '>
         <div className='flex items-center gap-x-1'>
-          <Icons.Sort className='icon ' />
+          <SortIcon className='icon ' />
           <span>مرتب سازی:</span>
         </div>
         {sorts.map((item, i) => (
           <button
             key={i}
             className={`py-0.5  text-sm ${
-              sort?.value === item.value ? 'text-red-500' : 'text-gray-600'
+              sortQuery === item.value ? 'text-red-500' : 'text-gray-600'
             }`}
             type='button'
             name='sort'

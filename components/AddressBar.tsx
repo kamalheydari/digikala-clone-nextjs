@@ -1,4 +1,5 @@
-import { Icons, Skeleton, WithAddressModal } from 'components'
+import { Skeleton, WithAddressModal } from 'components'
+import { ArrowLeft, Location2 } from 'icons'
 
 import type { WithAddressModalProps } from 'types'
 
@@ -29,10 +30,10 @@ const BasicAddressBar: React.FC<Props> = ({ addressModalProps }) => {
         onClick={openAddressModal}
         className='flex items-center w-full gap-x-1 lg:w-fit'
       >
-        <Icons.Location2 className='icon' />
+        <Location2 className='icon' />
         <span>لطفا شهر خود را انتخاب کنید</span>
 
-        <Icons.ArrowLeft className='mr-auto icon' />
+        <ArrowLeft className='mr-auto icon' />
       </button>
     )
   } else if (isAddress) {
@@ -42,11 +43,11 @@ const BasicAddressBar: React.FC<Props> = ({ addressModalProps }) => {
         onClick={openAddressModal}
         className='flex items-center w-full gap-x-1 lg:w-fit'
       >
-        <Icons.Location2 className='icon' />
+        <Location2 className='icon' />
         <span>
           ارسال به {address?.province.name}, {address?.city.name}
         </span>
-        <Icons.ArrowLeft className='mr-auto icon' />
+        <ArrowLeft className='mr-auto icon' />
       </button>
     )
   }

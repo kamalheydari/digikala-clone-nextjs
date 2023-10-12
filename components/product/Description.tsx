@@ -1,6 +1,5 @@
 import { useDisclosure } from 'hooks'
-
-import { Icons } from 'components'
+import { ArrowLeft } from 'icons'
 
 import { truncate } from 'utils'
 
@@ -30,7 +29,7 @@ const Description: React.FC<Props> = (props) => {
             onClick={showDescHandlers.toggle}
           >
             {isShowDesc ? 'بستن' : 'مشاهده بیشتر'}
-            <Icons.ArrowLeft className='icon text-sky-400' />
+            <ArrowLeft className='icon text-sky-400' />
           </button>
         )}
       </div>

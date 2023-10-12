@@ -5,7 +5,7 @@ import { sendError, db, roles } from 'utils'
 import { withUser } from 'middlewares'
 
 import type { NextApiRequest, NextApiResponse } from 'next'
-import type { DataModels } from 'types'
+import type { IBannerDocument } from 'types'
 import type { NextApiRequestWithUser } from 'types'
 
 const handler = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
@@ -31,7 +31,7 @@ const createBanner = async (
       return sendError(res, 403, 'شما اجازه انجام این عملیات را ندارید')
 
     await db.connect()
-    const newBanner: DataModels.IBannerDocument = new Banner({ ...req.body })
+    const newBanner = new Banner({ ...req.body })
 
     await newBanner.save()
 
@@ -45,7 +45,8 @@ const getBanners = async (req: NextApiRequest, res: NextApiResponse) => {
   const category = req.query?.category
   try {
     await db.connect()
-    const banners: DataModels.IBannerDocument[] = await Banner.find({
+
+    const banners: IBannerDocument[] = await Banner.find({
       category_id: category,
     })
 

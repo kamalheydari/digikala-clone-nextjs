@@ -5,17 +5,17 @@ import 'swiper/css/pagination'
 
 import { ResponsiveImage } from 'components'
 
-import type { DataModels } from 'types'
+import type { ISlider } from 'types'
 
 interface Props {
-  data: DataModels.ISlider[]
+  data: ISlider[]
 }
 
 const Slider: React.FC<Props> = (props) => {
   //? Props
   const { data } = props
 
-  const SliderImage = ({ item }: { item: DataModels.ISlider }) => (
+  const SliderImage = ({ item }: { item: ISlider }) => (
     <ResponsiveImage
       dimensions='w-full h-64 md:h-72 lg:h-[400px]'
       imageStyles='object-cover object-[72%] lg:object-center '
@@ -36,7 +36,6 @@ const Slider: React.FC<Props> = (props) => {
           delay: 2500,
           disableOnInteraction: false,
         }}
-        
         modules={[Pagination, Autoplay]}
         className='mySwiper overflow-hidden lg:rounded-2xl'
       >

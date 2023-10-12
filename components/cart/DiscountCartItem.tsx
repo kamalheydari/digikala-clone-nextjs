@@ -1,4 +1,4 @@
-import { Toman, TomanRed } from 'components'
+import { Toman, TomanRed } from 'icons'
 
 import { formatNumber } from 'utils'
 

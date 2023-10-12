@@ -5,7 +5,7 @@ import { sendError, db, roles } from 'utils'
 import { withUser } from 'middlewares'
 
 import type { NextApiResponse } from 'next'
-import type { DataModels } from 'types'
+import type { IOrderDocument } from 'types'
 import type { NextApiRequestWithUser } from 'types'
 
 const handler = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
@@ -26,7 +26,7 @@ const handler = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
 const getOrder = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
   try {
     await db.connect()
-    const order: DataModels.IOrderDocument | null = await Order.findOne({
+    const order: IOrderDocument | null = await Order.findOne({
       _id: req.query.id,
     })
 

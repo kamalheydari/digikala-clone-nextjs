@@ -1,15 +1,18 @@
 import Image from 'next/image'
 
+import { ResponsiveImage, Services } from 'components'
 import {
   AppCoffeBazzar,
   AppGooglePlay,
   AppMyket,
   AppSib,
-  Icons,
+  ArrowUp,
+  Instagram,
+  Linkedin,
   LogoPersian,
-  ResponsiveImage,
-  Services,
-} from 'components'
+  Twitter,
+  Youtube,
+} from 'icons'
 
 import Enamad from '../public/icons/m-enamad.png'
 import Kasbokar from '../public/icons/m-kasbokar.png'
@@ -36,7 +39,7 @@ export default function Footer() {
               className='flex items-center px-3 py-1 border border-gray-300 rounded-md'
             >
               <span className='text-sm '>بازگشت به بالا</span>
-              <Icons.ArrowUp className='text-gray-400 h-7 w-7' />
+              <ArrowUp className='text-gray-400 h-7 w-7' />
             </button>
           </div>
         </div>
@@ -50,10 +53,10 @@ export default function Footer() {
           <div className='flex items-center justify-between'>
             <p className='lg:ml-20'>همراه ما باشید!</p>
             <div className='flex gap-x-5'>
-              <Icons.Twitter className='w-8 h-8 text-gray-400' />
-              <Icons.Linkedin className='w-8 h-8 text-gray-400' />
-              <Icons.Instagram className='w-8 h-8 text-gray-400' />
-              <Icons.Youtube className='w-8 h-8 text-gray-400' />
+              <Twitter className='w-8 h-8 text-gray-400' />
+              <Linkedin className='w-8 h-8 text-gray-400' />
+              <Instagram className='w-8 h-8 text-gray-400' />
+              <Youtube className='w-8 h-8 text-gray-400' />
             </div>
           </div>
 
@@ -127,16 +130,14 @@ export default function Footer() {
               src={Samandehi}
               alt='ساماندهی'
             />
-            {/* <div className='relative h-20 w-20'>
-              <Image src={Samandehi} fill />
-            </div> */}
+
           </div>
         </div>
       </div>
 
       <div className='flex items-center justify-center py-3 mt-6 bg-gray-600 gap-x-3'>
         <Image
-          src='/developer.jpg'
+          src='/imgs/developer.jpg'
           className='overflow-hidden border-4 border-red-600 rounded-full'
           alt='کمال حیدری'
           width={64}

@@ -5,7 +5,7 @@ import { sendError, db, roles } from 'utils'
 import { withUser } from 'middlewares'
 
 import type { NextApiResponse } from 'next'
-import type { DataModels } from 'types'
+import type { ICategoryDocument } from 'types'
 import type { NextApiRequestWithUser } from 'types'
 
 const handler = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
@@ -30,8 +30,7 @@ const getCategory = async (
   try {
     const { id } = req.query
     await db.connect()
-    const category: DataModels.ICategoryDocument | null =
-      await Category.findById(id)
+    const category: ICategoryDocument | null = await Category.findById(id)
 
     if (category) res.status(200).json(category)
   } catch (error) {

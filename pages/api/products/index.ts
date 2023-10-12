@@ -1,11 +1,11 @@
 import { Category, Product } from 'models'
 
-import { sendError, db, roles } from 'utils'
+import { sendError, db, roles, makeSlug } from 'utils'
 
 import { withUser } from 'middlewares'
 
 import type { NextApiResponse } from 'next'
-import type { DataModels } from 'types'
+import type { ICategoryDocument } from 'types'
 import type { NextApiRequestWithUser } from 'types'
 
 interface ProductsFilter {
@@ -54,8 +54,9 @@ const getProducts = async (
     await db.connect()
 
     //? Filters
-    const currentCategory: DataModels.ICategoryDocument | null =
-      await Category.findOne({ slug: category })
+    const currentCategory: ICategoryDocument | null = await Category.findOne({
+      slug: category,
+    })
 
     const categoryFilter = currentCategory
       ? {
@@ -189,9 +190,12 @@ const createProduct = async (
     )
       return sendError(res, 400, 'لطفا تمام فیلد ها را پر کنید')
 
+    const slug = makeSlug(title)
+
     await db.connect()
     const newProduct = new Product({
       title,
+      slug,
       price,
       discount,
       description,

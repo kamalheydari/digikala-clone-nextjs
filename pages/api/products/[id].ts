@@ -4,7 +4,7 @@ import { sendError, db, roles } from 'utils'
 
 import { withUser } from 'middlewares'
 
-import type { DataModels } from 'types'
+import type { IProductDocument } from 'types'
 import type { NextApiResponse } from 'next'
 import type { NextApiRequestWithUser } from 'types'
 
@@ -36,9 +36,7 @@ const getProduct = async (
 
     await db.connect()
 
-    const product: DataModels.IProductDocument | null = await Product.findById(
-      id
-    )
+    const product: IProductDocument | null = await Product.findById(id)
       .populate('category_levels.level_one')
       .populate('category_levels.level_two')
       .populate('category_levels.Level_three')

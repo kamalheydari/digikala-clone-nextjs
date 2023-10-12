@@ -5,7 +5,7 @@ import { sendError, db, roles } from 'utils'
 import { withUser } from 'middlewares'
 
 import type { NextApiResponse } from 'next'
-import type { DataModels } from 'types'
+import type { IReviewDocument } from 'types'
 import type { NextApiRequestWithUser } from 'types'
 
 const handler = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
@@ -30,7 +30,7 @@ const getReviews = async (
     const userRole = req.user.role
     const userId = req.user._id
 
-    let reviews: DataModels.IReviewDocument[], reviewsLength: number
+    let reviews: IReviewDocument[], reviewsLength: number
 
     await db.connect()
 

@@ -23,7 +23,7 @@ import {
 } from 'services'
 
 import type { NextPage } from 'next'
-import type { DataModels, ISliderForm } from 'types'
+import type { ISlider, ISliderForm } from 'types'
 
 const Edit: NextPage = () => {
   //? Assets
@@ -31,11 +31,10 @@ const Edit: NextPage = () => {
   const sliderId = query?.id as string
   const sliderName = query?.slider_name
 
-  const initialUpdataInfo = {} as DataModels.ISlider
+  const initialUpdataInfo = {} as ISlider
 
   //? States
-  const [updateInfo, setUpdateInfo] =
-    useState<DataModels.ISlider>(initialUpdataInfo)
+  const [updateInfo, setUpdateInfo] = useState<ISlider>(initialUpdataInfo)
 
   //? Modals
   const [isShowConfirmDeleteModal, confirmDeleteModalHandlers] = useDisclosure()

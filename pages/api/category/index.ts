@@ -5,7 +5,7 @@ import { sendError, db, roles } from 'utils'
 import { withUser } from 'middlewares'
 
 import type { NextApiResponse } from 'next'
-import type { DataModels, ICategoriesList } from 'types'
+import type { ICategoriesList, ICategoryDocument } from 'types'
 import type { NextApiRequestWithUser } from 'types'
 
 const handler = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
@@ -58,13 +58,11 @@ const getCategories = async (
 ) => {
   try {
     await db.connect()
-    const categories: DataModels.ICategoryDocument[] = await Category.find()
+    const categories: ICategoryDocument[] = await Category.find()
 
     const getCategoriesWithChildren = async (): Promise<ICategoriesList[]> => {
-      function findChildren(
-        category: DataModels.ICategoryDocument
-      ): ICategoriesList {
-        const children: DataModels.ICategoryDocument[] = categories.filter(
+      function findChildren(category: ICategoryDocument): ICategoriesList {
+        const children: ICategoryDocument[] = categories.filter(
           // @ts-ignore
           (c) => c.parent?.equals(category._id)
         )
@@ -76,18 +74,18 @@ const getCategories = async (
         }
         if (children.length > 0) {
           categoryWithChildren.children = children.map(
-            (child: DataModels.ICategoryDocument) => findChildren(child)
+            (child: ICategoryDocument) => findChildren(child)
           )
         }
 
         return categoryWithChildren
       }
 
-      const rootCategories: DataModels.ICategoryDocument[] = categories.filter(
-        (c: DataModels.ICategoryDocument) => !c.parent
+      const rootCategories: ICategoryDocument[] = categories.filter(
+        (c: ICategoryDocument) => !c.parent
       )
       const categoriesWithChildren: ICategoriesList[] = rootCategories.map(
-        (category: DataModels.ICategoryDocument) => findChildren(category)
+        (category: ICategoryDocument) => findChildren(category)
       )
 
       return categoriesWithChildren

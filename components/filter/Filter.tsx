@@ -1,18 +1,17 @@
-import { Modal, FilterOperation, Icons } from 'components'
+import { Modal, FilterOperation } from 'components'
+import { Filter as FilterIcon } from 'icons'
 
 import { useDisclosure } from 'hooks'
 
-import type { NewQueries } from 'hooks/useChangeRoute'
 
 interface Props {
   mainMaxPrice: number | undefined
   mainMinPrice: number | undefined
-  handleChangeRoute: (newQueries: NewQueries) => void
 }
 
 const Filter: React.FC<Props> = (props) => {
   //? Props
-  const { mainMinPrice, mainMaxPrice, handleChangeRoute } = props
+  const { mainMinPrice, mainMaxPrice } = props
 
   //? Assets
   const [isFilters, filtersHandlers] = useDisclosure()
@@ -25,7 +24,7 @@ const Filter: React.FC<Props> = (props) => {
         className='flex items-center gap-x-1'
         onClick={filtersHandlers.open}
       >
-        <Icons.Filter className='w-6 h-6 icon' />
+        <FilterIcon className='w-6 h-6 icon' />
         <span>فیلتر</span>
       </button>
 
@@ -43,7 +42,6 @@ const Filter: React.FC<Props> = (props) => {
             <FilterOperation
               mainMinPrice={mainMinPrice}
               mainMaxPrice={mainMaxPrice}
-              handleChangeRoute={handleChangeRoute}
               onClose={filtersHandlers.close}
             />
           </Modal.Body>

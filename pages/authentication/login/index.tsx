@@ -7,7 +7,8 @@ import { SubmitHandler } from 'react-hook-form'
 
 import { useLoginMutation } from 'services'
 
-import { Logo, HandleResponse, LoginForm } from 'components'
+import { HandleResponse, LoginForm } from 'components'
+import { Logo } from 'icons'
 
 import type { ILoginForm } from 'types'
 

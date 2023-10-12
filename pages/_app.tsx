@@ -14,8 +14,12 @@ import { PageLoading, Alert } from 'components'
 
 import type { AppProps } from 'next/app'
 import { tokens } from 'utils'
+import { useRouter } from 'next/router'
 
 export default function MyApp({ Component, pageProps }: AppProps) {
+  const { asPath } = useRouter()
+
+  // Fix Hydration
   const [showChild, setShowChild] = useState<boolean>(false)
   useEffect(() => {
     setShowChild(true)
@@ -33,7 +37,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <Component {...pageProps} />
-      <PageLoading />
+      {!asPath.includes('/products?category') ? <PageLoading /> : null}
       <Alert />
     </Provider>
   )

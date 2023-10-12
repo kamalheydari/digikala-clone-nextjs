@@ -2,13 +2,14 @@ import { Fragment, useState } from 'react'
 
 import { useEditReviewMutation } from 'services'
 
-import { HandleResponse, Icons, ResponsiveImage } from 'components'
 import { Menu, Transition } from '@headlessui/react'
+import { HandleResponse, ResponsiveImage } from 'components'
+import { Check, Clock, Cross, Delete, Minus, More, Plus } from 'icons'
 
-import type { DataModels } from 'types'
+import type { IReview } from 'types'
 
 interface Props {
-  item: DataModels.IReview
+  item: IReview
   singleComment?: boolean
   deleteReviewHandler?: (id: string) => void
 }
@@ -37,7 +38,7 @@ const ReveiwCard: React.FC<Props> = (props) => {
   const DropdownReview = () => (
     <Menu as='div' className='dropdown'>
       <Menu.Button className='dropdown__button'>
-        <Icons.More className='icon' />
+        <More className='icon' />
       </Menu.Button>
 
       <Transition
@@ -59,7 +60,7 @@ const ReveiwCard: React.FC<Props> = (props) => {
                   onClick={() => handleChangeStatus(2)}
                   disabled={status === 2}
                 >
-                  <Icons.Check className='text-white rounded-full p-0.5 icon bg-green-500 ' />
+                  <Check className='text-white rounded-full p-0.5 icon bg-green-500 ' />
                   <span className='block'>تغییر وضعیت به تایید شده</span>
                 </button>
               </Menu.Item>
@@ -70,7 +71,7 @@ const ReveiwCard: React.FC<Props> = (props) => {
                   onClick={() => handleChangeStatus(3)}
                   disabled={status === 3}
                 >
-                  <Icons.Cross className='text-white rounded-full p-0.5 icon bg-red-500 ' />
+                  <Cross className='text-white rounded-full p-0.5 icon bg-red-500 ' />
                   <span className='block'>تغییر وضعیت به رد شده</span>
                 </button>
               </Menu.Item>
@@ -82,7 +83,7 @@ const ReveiwCard: React.FC<Props> = (props) => {
                 className='flex items-center w-52 gap-x-3 px-1.5 py-3 cursor-pointer '
                 onClick={() => deleteReviewHandler(item._id)}
               >
-                <Icons.Delete className='icon' />
+                <Delete className='icon' />
                 <span>حذف دیدگاه‌</span>
               </button>
             </Menu.Item>
@@ -141,11 +142,11 @@ const ReveiwCard: React.FC<Props> = (props) => {
                 } `}
               >
                 {status === 1 ? (
-                  <Icons.Clock className='text-white rounded-full p-0.5 icon bg-amber-500 ' />
+                  <Clock className='text-white rounded-full p-0.5 icon bg-amber-500 ' />
                 ) : status === 2 ? (
-                  <Icons.Check className='text-white rounded-full p-0.5 icon bg-green-500 ' />
+                  <Check className='text-white rounded-full p-0.5 icon bg-green-500 ' />
                 ) : (
-                  <Icons.Cross className='text-white rounded-full p-0.5 icon bg-red-500 ' />
+                  <Cross className='text-white rounded-full p-0.5 icon bg-red-500 ' />
                 )}
                 <span
                   className={`${
@@ -174,7 +175,7 @@ const ReveiwCard: React.FC<Props> = (props) => {
             <div>
               {item.positivePoints.map((point) => (
                 <div className='flex items-center gap-x-1' key={point.id}>
-                  <Icons.Plus className='text-green-400 icon' />
+                  <Plus className='text-green-400 icon' />
                   <p>{point.title}</p>
                 </div>
               ))}
@@ -182,7 +183,7 @@ const ReveiwCard: React.FC<Props> = (props) => {
             <div>
               {item.negativePoints.map((point) => (
                 <div className='flex items-center gap-x-1' key={point.id}>
-                  <Icons.Minus className='text-red-400 icon' />
+                  <Minus className='text-red-400 icon' />
                   <p>{point.title}</p>
                 </div>
               ))}

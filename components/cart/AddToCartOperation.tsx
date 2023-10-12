@@ -8,10 +8,10 @@ import { ArrowLink, ProductPrice, CartButtons } from 'components'
 
 import { useAppDispatch, useAppSelector } from 'hooks'
 
-import type { DataModels, ICart } from 'types'
+import type { IProduct, ICart } from 'types'
 
 interface Porps {
-  product: DataModels.IProduct
+  product: IProduct
 }
 
 const AddToCartOperation: React.FC<Porps> = (props) => {
@@ -51,6 +51,7 @@ const AddToCartOperation: React.FC<Porps> = (props) => {
       addToCart({
         productID: product._id,
         name: product.title,
+        slug: product.slug,
         price: product.price,
         discount: product.discount,
         inStock: product.inStock,

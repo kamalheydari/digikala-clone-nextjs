@@ -1,9 +1,10 @@
 import { setTempColor } from 'store'
 
-import { Icons } from 'components'
 import { useAppDispatch, useAppSelector } from 'hooks'
 
 import type { IColor } from 'types'
+
+import { Check } from 'icons'
 
 interface Props {
   colors: IColor[]
@@ -43,7 +44,7 @@ const SelectColor: React.FC<Props> = (props) => {
               style={{ background: item.hashCode }}
             >
               {tempColor?.id === item.id && (
-                <Icons.Check
+                <Check
                   className={`h-5 w-5 ${
                     item.hashCode === '#ffffff'
                       ? 'text-gray-600'

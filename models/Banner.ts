@@ -1,8 +1,8 @@
 import { Model, Schema, models, model } from 'mongoose'
 
-import type { DataModels } from 'types'
+import type { IBannerDocument } from 'types'
 
-const BannerSchema = new Schema<DataModels.IBannerDocument>(
+const BannerSchema = new Schema<IBannerDocument>(
   {
     category_id: {
       type: Schema.Types.ObjectId,
@@ -36,7 +36,7 @@ const BannerSchema = new Schema<DataModels.IBannerDocument>(
   { timestamps: true }
 )
 
-const Banner: Model<DataModels.IBannerDocument> =
-  models.banner || model<DataModels.IBannerDocument>('banner', BannerSchema)
+const Banner: Model<IBannerDocument> =
+  models.banner || model<IBannerDocument>('banner', BannerSchema)
 
 export default Banner

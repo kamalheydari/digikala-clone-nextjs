@@ -1,8 +1,9 @@
 import Link from 'next/link'
 
-import { Icons, BoxLink, Logout, Orders, Person } from 'components'
+import { BoxLink, Logout, Orders } from 'components'
 
 import { useUserInfo } from 'hooks'
+import { Bag, Clock, Comment, Edit, Heart, Home, Location, Person, User } from 'icons'
 
 function ProfileAside() {
   //? Get UserInfo
@@ -11,32 +12,32 @@ function ProfileAside() {
   const profilePaths = [
     {
       name: 'سفارش‌ها',
-      Icon: Icons.Bag,
+      Icon: Bag,
       path: '/profile/orders',
     },
     {
       name: 'لیست‌های من',
-      Icon: Icons.Heart,
+      Icon: Heart,
       path: '/profile/lists',
     },
     {
       name: 'دیدگاه‌ها',
-      Icon: Icons.Comment,
+      Icon: Comment,
       path: '/profile/reviews',
     },
     {
       name: 'آدرس‌ها',
-      Icon: Icons.Location,
+      Icon: Location,
       path: '/profile/addresses',
     },
     {
       name: 'بازدید‌های اخیر',
-      Icon: Icons.Clock,
+      Icon: Clock,
       path: '/profile/user-history',
     },
     {
       name: 'اطلاعات حساب کاربری',
-      Icon: Icons.User,
+      Icon: User,
       path: '/profile/personal-info',
     },
   ]
@@ -64,7 +65,7 @@ function ProfileAside() {
           )}
         </div>
         <Link href='/profile/personal-info'>
-          <Icons.Edit className='w-6 h-6 text-blue-400' />
+          <Edit className='w-6 h-6 text-blue-400' />
         </Link>
       </div>
 
@@ -75,7 +76,7 @@ function ProfileAside() {
       <div className='mt-7'>
         <div className='hidden lg:block'>
           <BoxLink name='خلاصه فعالیت ‌ها' path='/profile'>
-            <Icons.Home className='text-black icon' />
+            <Home className='text-black icon' />
           </BoxLink>
         </div>
         {profilePaths.map((item, index) => (

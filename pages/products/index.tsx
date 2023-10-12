@@ -11,67 +11,24 @@ import {
   Filter,
   ClientLayout,
   ProductSkeleton,
+  DataStateDisplay,
+  EmptyCustomList,
 } from 'components'
 
-import { useChangeRoute, useMediaQuery } from 'hooks'
+import { useChangeRoute } from 'hooks'
 
-import { useGetCategoriesQuery, useGetProductsQuery } from 'services'
+import { useGetProductsQuery } from 'services'
 
 import type { NextPage } from 'next'
-import type { NewQueries } from 'hooks/useChangeRoute'
 
 const ProductsHome: NextPage = () => {
   //? Assets
   const { query } = useRouter()
-
   const category = query?.category?.toString() ?? ''
-  const page_size = query?.page_size?.toString() ?? ''
-  const page = query?.page?.toString() ?? ''
-  const sort = query?.sort?.toString() ?? ''
-  const search = query?.search?.toString() ?? ''
-  const inStock = query?.inStock?.toString() ?? ''
-  const discount = query?.discount?.toString() ?? ''
-  const price = query?.price?.toString() ?? ''
-
-  const isDesktop = useMediaQuery('(min-width:1280px)')
-
-  //? Handlers
-  const changeRoute = useChangeRoute()
-
-  const handleChangeRoute = (newQueries: NewQueries) => {
-    changeRoute({
-      ...query,
-      page: 1,
-      ...newQueries,
-    })
-  }
 
   //? Querirs
   //*    Get Products Data
-  const { data, isFetching: isFetchingProduct } = useGetProductsQuery({
-    category,
-    page_size,
-    page,
-    sort,
-    search,
-    inStock,
-    discount,
-    price,
-  })
-
-  //*    Get childCategories Data
-  const { isLoading: isLoadingCategories, childCategories } =
-    useGetCategoriesQuery(undefined, {
-      selectFromResult: ({ isLoading, data }) => {
-        const currentCategory = data?.categories.find(
-          (cat) => cat.slug === query?.category
-        )
-        const childCategories = data?.categories.filter(
-          (cat) => cat.parent === currentCategory?._id
-        )
-        return { childCategories, isLoading }
-      },
-    })
+  const { data, ...productsQueryProps } = useGetProductsQuery(query)
 
   //? Render(s)
   return (
@@ -82,30 +39,29 @@ const ProductsHome: NextPage = () => {
 
       <ClientLayout>
         <main className='lg:px-3 lg:container lg:max-w-[1700px] xl:mt-32'>
-          <SubCategories
-            childCategories={childCategories}
-            isLoading={isLoadingCategories}
-          />
+          <SubCategories category={category} />
 
           <div className='px-1 lg:flex lg:gap-x-0 xl:gap-x-3'>
-            <ProductsAside
-              mainMaxPrice={data?.mainMaxPrice}
-              mainMinPrice={data?.mainMinPrice}
-              handleChangeRoute={handleChangeRoute}
-            />
+            {!productsQueryProps.isLoading && (
+              <ProductsAside
+                mainMaxPrice={data?.mainMaxPrice}
+                mainMinPrice={data?.mainMinPrice}
+              />
+            )}
             <div id='_products' className='w-full p-4 mt-3 '>
               {/* Filters & Sort */}
               <div className='divide-y-2 '>
                 <div className='flex py-2 gap-x-3'>
-                  {!isDesktop && (
-                    <Filter
-                      mainMaxPrice={data?.mainMaxPrice}
-                      mainMinPrice={data?.mainMinPrice}
-                      handleChangeRoute={handleChangeRoute}
-                    />
-                  )}
+                  <div className='xl:hidden block'>
+                    {!productsQueryProps.isLoading && (
+                      <Filter
+                        mainMaxPrice={data?.mainMaxPrice}
+                        mainMinPrice={data?.mainMinPrice}
+                      />
+                    )}
+                  </div>
 
-                  <Sort handleChangeRoute={handleChangeRoute} />
+                  <Sort />
                 </div>
 
                 <div className='flex justify-between py-2'>
@@ -116,20 +72,20 @@ const ProductsHome: NextPage = () => {
                 </div>
               </div>
 
-              {/* Products */}
-              {isFetchingProduct ? (
-                <ProductSkeleton />
-              ) : data && data.products.length > 0 ? (
-                <section className='sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5'>
-                  {data?.products.map((item) => (
-                    <ProductCard product={item} key={item._id} />
-                  ))}
-                </section>
-              ) : (
-                <section className='text-center text-red-500 xl:border xl:border-gray-200 xl:rounded-md xl:py-4'>
-                  کالایی یافت نشد
-                </section>
-              )}
+              <DataStateDisplay
+                {...productsQueryProps}
+                dataLength={data?.productsLength ? data.productsLength : 0}
+                loadingComponent={<ProductSkeleton />}
+                emptyComponent={<EmptyCustomList />}
+              >
+                {data && data.products.length > 0 && (
+                  <section className='sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5'>
+                    {data?.products.map((item) => (
+                      <ProductCard product={item} key={item._id} />
+                    ))}
+                  </section>
+                )}
+              </DataStateDisplay>
             </div>
           </div>
 
@@ -137,7 +93,6 @@ const ProductsHome: NextPage = () => {
             <div className='py-4 mx-auto lg:max-w-5xl'>
               <Pagination
                 pagination={data?.pagination}
-                changeRoute={handleChangeRoute}
                 section='_products'
                 client
               />

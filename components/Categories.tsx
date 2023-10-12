@@ -2,13 +2,13 @@ import Link from 'next/link'
 
 import { ResponsiveImage } from 'components'
 
-import type { DataModels } from 'types'
+import type { ICategory } from 'types'
 
 interface Props {
   homePage?: boolean
   childCategories: {
     title: string
-    categories: DataModels.ICategory[]
+    categories: ICategory[]
   }
   color?: string
   name: string

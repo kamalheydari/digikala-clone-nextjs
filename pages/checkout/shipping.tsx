@@ -14,12 +14,11 @@ import {
   Button,
   CartInfo,
   HandleResponse,
-  Icons,
-  LogoPersian,
   RequireUser,
   ResponsiveImage,
   WithAddressModal,
 } from 'components'
+import { ArrowLeft, Cart, Location2, LogoPersian, Rule, Wallet } from 'icons'
 
 import { formatNumber, roles } from 'utils'
 
@@ -97,7 +96,7 @@ const ShippingPage: NextPage = () => {
           className='flex items-center mr-auto'
         >
           <span className='text-base text-sky-500'>تغییر | ویرایش</span>
-          <Icons.ArrowLeft className='icon text-sky-500' />
+          <ArrowLeft className='icon text-sky-500' />
         </button>
       )
     }
@@ -140,13 +139,13 @@ const ShippingPage: NextPage = () => {
               href='/checkout/cart'
               className='flex flex-col items-center gap-y-2'
             >
-              <Icons.Cart className='text-red-300 icon' />
+              <Cart className='text-red-300 icon' />
               <span className='font-normal text-red-300'>سبد خرید</span>
             </Link>
 
             <div className='h-[1px] w-8  bg-red-300' />
             <div className='flex flex-col items-center gap-y-2'>
-              <Icons.Wallet className='w-6 h-6 text-red-500 icon' />
+              <Wallet className='w-6 h-6 text-red-500 icon' />
               <span className='text-base font-normal text-red-500'>پرداخت</span>
             </div>
           </div>
@@ -158,7 +157,7 @@ const ShippingPage: NextPage = () => {
           <div className='lg:flex-1'>
             {/* address */}
             <section className='flex items-center px-3 py-4 lg:border lg:border-gray-200 lg:rounded-lg gap-x-3'>
-              <Icons.Location2 className='text-black w-7 h-7' />
+              <Location2 className='text-black w-7 h-7' />
               <div className='space-y-2'>
                 <span className=''>آدرس تحویل سفارش</span>
                 <p className='text-base text-black'>
@@ -210,7 +209,7 @@ const ShippingPage: NextPage = () => {
 
                     {item.size && (
                       <div className='flex items-center gap-x-2'>
-                        <Icons.Rule className='icon' />
+                        <Rule className='icon' />
                         <span>{item.size.size}</span>
                       </div>
                     )}

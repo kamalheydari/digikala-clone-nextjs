@@ -1,8 +1,8 @@
 import { Model, Schema, model, models } from 'mongoose'
 
-import type { DataModels } from 'types'
+import type { ISliderDocument } from 'types'
 
-const SliderSchema = new Schema<DataModels.ISliderDocument>(
+const SliderSchema = new Schema<ISliderDocument>(
   {
     category_id: {
       type: Schema.Types.ObjectId,
@@ -32,7 +32,7 @@ const SliderSchema = new Schema<DataModels.ISliderDocument>(
   { timestamps: true }
 )
 
-const Slider: Model<DataModels.ISliderDocument> =
-  models.slider || model<DataModels.ISliderDocument>('slider', SliderSchema)
+const Slider: Model<ISliderDocument> =
+  models.slider || model<ISliderDocument>('slider', SliderSchema)
 
 export default Slider

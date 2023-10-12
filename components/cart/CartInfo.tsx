@@ -1,6 +1,7 @@
 import { formatNumber } from 'utils'
 
-import { Button, Toman, TomanRed } from 'components'
+import { Button } from 'components'
+import { Toman, TomanRed } from 'icons'
 
 import { useAppSelector } from 'hooks'
 

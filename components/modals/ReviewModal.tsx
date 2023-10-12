@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 import { nanoid } from '@reduxjs/toolkit'
 import { useCreateReviewMutation } from 'services'
@@ -9,26 +9,25 @@ import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import {
-  Icons,
   TextField,
   DisplayError,
   SubmitModalButton,
   Modal,
   HandleResponse,
 } from 'components'
+import { ArrowLeft, Comment, Delete, Minus, Plus } from 'icons'
 
 import type { IReviewForm } from 'types'
+import { useDisclosure } from 'hooks'
 
 interface Props {
-  isShow: boolean
-  onClose: () => void
   productTitle: string
   prdouctID: string
 }
 
 const ReviewModal: React.FC<Props> = (props) => {
   //? Props
-  const { isShow, onClose, productTitle, prdouctID } = props
+  const { productTitle, prdouctID } = props
 
   //? Refs
   const positiveRef = useRef<HTMLInputElement | null>(null)
@@ -37,6 +36,8 @@ const ReviewModal: React.FC<Props> = (props) => {
   //? State
   const [rating, setRating] = useState(1)
 
+  const [isShowReviewModal, reviewModalHandlers] = useDisclosure()
+
   //? Form Hook
   const {
     handleSubmit,
@@ -44,6 +45,7 @@ const ReviewModal: React.FC<Props> = (props) => {
     formState: { errors: formErrors },
     reset,
     control,
+    setFocus,
   } = useForm<IReviewForm>({
     resolver: yupResolver(reviewSchema),
   })
@@ -91,6 +93,18 @@ const ReviewModal: React.FC<Props> = (props) => {
       body: { ...data, rating },
     })
 
+  //? Re-Renders
+  //*    Use useEffect to set focus after a delay when the modal is shown
+  useEffect(() => {
+    if (isShowReviewModal) {
+      const timeoutId = setTimeout(() => {
+        setFocus('title')
+      }, 100)
+
+      return () => clearTimeout(timeoutId)
+    }
+  }, [isShowReviewModal])
+
   //? Render(s)
   return (
     <>
@@ -102,24 +116,40 @@ const ReviewModal: React.FC<Props> = (props) => {
           error={error}
           message={data?.msg}
           onSuccess={() => {
-            onClose()
+            reviewModalHandlers.close()
             reset()
             setRating(1)
           }}
           onError={() => {
-            onClose()
+            reviewModalHandlers.close()
             reset()
             setRating(1)
           }}
         />
       )}
 
-      <Modal isShow={isShow} onClose={onClose} effect='bottom-to-top'>
+      <button
+        type='button'
+        onClick={reviewModalHandlers.open}
+        className='flex items-center py-2 w-full gap-x-5'
+      >
+        <Comment className='icon' />
+        <span className='text-sm text-black '>
+          دیدگاه خود را درباره این کالا بنویسید
+        </span>
+        <ArrowLeft className='mr-auto icon' />
+      </button>
+
+      <Modal
+        isShow={isShowReviewModal}
+        onClose={reviewModalHandlers.close}
+        effect='bottom-to-top'
+      >
         <Modal.Content
-          onClose={onClose}
+          onClose={reviewModalHandlers.close}
           className='flex flex-col h-full lg:h-[770px] pl-2 pr-4 py-3 bg-white md:rounded-lg gap-y-3'
         >
-          <Modal.Header onClose={onClose}>
+          <Modal.Header onClose={reviewModalHandlers.close}>
             دیدگاه شما در مورد {productTitle}
           </Modal.Header>
           <Modal.Body>
@@ -186,7 +216,7 @@ const ReviewModal: React.FC<Props> = (props) => {
                       ref={positiveRef}
                     />
                     <button onClick={handleAddPositivePoint} type='button'>
-                      <Icons.Plus className='icon' />
+                      <Plus className='icon' />
                     </button>
                   </div>
                 </div>
@@ -197,10 +227,10 @@ const ReviewModal: React.FC<Props> = (props) => {
                         key={field.id}
                         className='flex items-center px-3 gap-x-4'
                       >
-                        <Icons.Plus className='text-green-500 icon' />
+                        <Plus className='text-green-500 icon' />
                         <span className='ml-auto'>{field.title}</span>
                         <button>
-                          <Icons.Delete
+                          <Delete
                             className='icon text-gray'
                             onClick={() => removePositivePoint(index)}
                           />
@@ -229,7 +259,7 @@ const ReviewModal: React.FC<Props> = (props) => {
                       ref={negativeRef}
                     />
                     <button onClick={handleAddNegativePoint} type='button'>
-                      <Icons.Plus className='icon' />
+                      <Plus className='icon' />
                     </button>
                   </div>
                 </div>
@@ -241,10 +271,10 @@ const ReviewModal: React.FC<Props> = (props) => {
                         key={field.id}
                         className='flex items-center px-3 gap-x-4'
                       >
-                        <Icons.Minus className='text-red-500 icon' />
+                        <Minus className='text-red-500 icon' />
                         <span className='ml-auto'>{field.title}</span>
                         <button>
-                          <Icons.Delete
+                          <Delete
                             className='icon text-gray'
                             onClick={() => removeNegativePoint(index)}
                           />

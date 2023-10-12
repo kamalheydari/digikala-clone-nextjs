@@ -1,4 +1,4 @@
-import { Icons } from 'components'
+import { Cart } from 'icons'
 
 import { formatNumber } from 'utils'
 
@@ -15,7 +15,7 @@ export default function CartBadge() {
         {formatNumber(totalItems)}
       </span>
 
-      <Icons.Cart className='icon h-7 w-7' />
+      <Cart className='icon h-7 w-7' />
     </div>
   )
 }

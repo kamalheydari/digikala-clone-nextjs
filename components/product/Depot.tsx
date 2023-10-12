@@ -1,5 +1,4 @@
-import { Icons } from 'components'
-
+import { Save } from 'icons'
 import { formatNumber } from 'utils'
 
 interface Props {
@@ -17,7 +16,7 @@ const Depot: React.FC<Props> = ({ inStock }) => {
   } else if (inStock > 10) {
     return (
       <div className='flex text-teal-400 gap-x-1'>
-        <Icons.Save className='text-teal-400 icon' />
+        <Save className='text-teal-400 icon' />
         <span className='text-teal-700'>موجود در انبار دیجی کالا</span>
       </div>
     )

@@ -5,13 +5,12 @@ import { formatNumber } from 'utils'
 import {
   SpecialSell,
   CartButtons,
-  Icons,
   DiscountCartItem,
-  Toman,
   ResponsiveImage,
 } from 'components'
 
 import type { ICart } from 'types'
+import { Rule, Save, ShieldCheck, Toman } from 'icons'
 
 interface Props {
   item: ICart
@@ -42,7 +41,7 @@ const CartItem: React.FC<Props> = (props) => {
       {/* name */}
       <div>
         <h5 className='mb-3 text-sm'>
-          <Link href={`/products/${item.productID}`}>{item.name}</Link>
+          <Link href={`/products/${item.slug}`}>{item.name}</Link>
         </h5>
 
         {/* info */}
@@ -58,16 +57,16 @@ const CartItem: React.FC<Props> = (props) => {
           )}
           {item.size && (
             <div className='flex items-center gap-x-2'>
-              <Icons.Rule className='icon' />
+              <Rule className='icon' />
               <span className='farsi-digits'>{item.size.size}</span>
             </div>
           )}
           <div className='flex items-center gap-x-2'>
-            <Icons.ShieldCheck className='icon' />
+            <ShieldCheck className='icon' />
             <span className='font-light'>گارانتی اصالت و ضمانت تحویل</span>
           </div>
           <div className='flex items-center gap-x-2'>
-            <Icons.Save className='icon text-sky-400' />
+            <Save className='icon text-sky-400' />
             <span className='font-light'>موجود در انبار دیجی کالا</span>
           </div>
           {item.discount > 0 ? (

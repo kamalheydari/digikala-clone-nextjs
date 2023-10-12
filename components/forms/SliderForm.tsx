@@ -8,7 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 import { sliderSchema } from 'utils'
 
-import type { DataModels, ISliderForm } from 'types'
+import type { ISlider, ISliderForm } from 'types'
 
 interface CreateBannerFormProps {
   mode: 'create'
@@ -25,7 +25,7 @@ interface EditBannerFormProps {
   mode: 'edit'
   createHandler?: never
   updateHandler: (data: ISliderForm) => void
-  selectedSlider: DataModels.ISlider
+  selectedSlider: ISlider
   isLoadingCreate?: never
   isLoadingDelete: boolean
   isLoadingUpdate: boolean

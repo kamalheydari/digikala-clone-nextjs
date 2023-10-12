@@ -5,7 +5,7 @@ import { sendError, db, roles } from 'utils'
 import { withUser } from 'middlewares'
 
 import type { NextApiResponse } from 'next'
-import type { DataModels } from 'types'
+import type { ISliderDocument } from 'types'
 import type { NextApiRequestWithUser } from 'types'
 
 const handler = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
@@ -31,7 +31,7 @@ const getSlider = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
   try {
     const { id } = req.query
     await db.connect()
-    const slider: DataModels.ISliderDocument | null = await Slider.findById(id)
+    const slider: ISliderDocument | null = await Slider.findById(id)
 
     res.status(200).json(slider)
   } catch (error) {

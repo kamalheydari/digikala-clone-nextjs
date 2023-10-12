@@ -6,18 +6,22 @@ import { mobileSchema } from 'utils'
 import { useEditUserMutation } from 'services'
 
 import { TextField, SubmitModalButton, Modal, HandleResponse } from 'components'
+import { useDisclosure } from 'hooks'
+import { Edit, Plus } from 'icons'
+import { useEffect } from 'react'
 
 type UserMobileForm = { mobile: string }
 
 interface Props {
-  isShow: boolean
-  onClose: () => void
-  editedData: string
+  editedData?: string
 }
 
 const UserMobileModal: React.FC<Props> = (props) => {
   //? Props
-  const { isShow, onClose, editedData } = props
+  const { editedData } = props
+
+  //? Assets
+  const [isShowPhoneModal, phoneModalHandlers] = useDisclosure()
 
   //? Patch Data
   const [editUser, { data, isSuccess, isLoading, error, isError }] =
@@ -27,6 +31,7 @@ const UserMobileModal: React.FC<Props> = (props) => {
   const {
     handleSubmit,
     control,
+    setFocus,
     formState: { errors: formErrors },
   } = useForm<UserMobileForm>({
     resolver: yupResolver(mobileSchema),
@@ -40,6 +45,18 @@ const UserMobileModal: React.FC<Props> = (props) => {
     })
   }
 
+  //? Re-Renders
+  //*    Use useEffect to set focus after a delay when the modal is shown
+  useEffect(() => {
+    if (isShowPhoneModal) {
+      const timeoutId = setTimeout(() => {
+        setFocus('mobile')
+      }, 100)
+
+      return () => clearTimeout(timeoutId)
+    }
+  }, [isShowPhoneModal])
+
   //? Render(s)
   return (
     <>
@@ -50,17 +67,33 @@ const UserMobileModal: React.FC<Props> = (props) => {
           isSuccess={isSuccess}
           error={error}
           message={data?.msg}
-          onSuccess={onClose}
-          onError={onClose}
+          onSuccess={phoneModalHandlers.close}
+          onError={phoneModalHandlers.close}
         />
       )}
 
-      <Modal isShow={isShow} onClose={onClose} effect='bottom-to-top'>
+      {editedData ? (
+        <Edit
+          className='cursor-pointer icon'
+          onClick={phoneModalHandlers.open}
+        />
+      ) : (
+        <Plus
+          className='cursor-pointer icon'
+          onClick={phoneModalHandlers.open}
+        />
+      )}
+
+      <Modal
+        isShow={isShowPhoneModal}
+        onClose={phoneModalHandlers.close}
+        effect='bottom-to-top'
+      >
         <Modal.Content
-          onClose={onClose}
+          onClose={phoneModalHandlers.close}
           className='flex flex-col h-full px-5 py-3 bg-white md:rounded-lg gap-y-5 '
         >
-          <Modal.Header onClose={onClose}>
+          <Modal.Header onClose={phoneModalHandlers.close}>
             ثبت و ویرایش شماره موبایل
           </Modal.Header>
           <Modal.Body>

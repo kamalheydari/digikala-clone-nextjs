@@ -7,7 +7,7 @@ import { useDeleteReviewMutation, useGetReviewsQuery } from 'services'
 import {
   Pagination,
   ReveiwCard,
-  ShowWrapper,
+  DataStateDisplay,
   EmptyCommentsList,
   ConfirmDeleteModal,
   PageContainer,
@@ -16,7 +16,7 @@ import {
   ProfileLayout,
 } from 'components'
 
-import { useDisclosure, useChangeRoute } from 'hooks'
+import { useDisclosure } from 'hooks'
 
 import { useRouter } from 'next/router'
 
@@ -25,9 +25,6 @@ import type { NextPage } from 'next'
 const Reviews: NextPage = () => {
   //? Assets
   const { query } = useRouter()
-  const changeRoute = useChangeRoute({
-    shallow: true,
-  })
 
   //? Modals
   const [isShowConfirmDeleteModal, confirmDeleteModalHandlers] = useDisclosure()
@@ -51,10 +48,9 @@ const Reviews: NextPage = () => {
   ] = useDeleteReviewMutation()
 
   //*   Get Reviews
-  const { data, isSuccess, isFetching, error, isError, refetch } =
-    useGetReviewsQuery({
-      page: query.page ? +query.page : 1,
-    })
+  const { data, ...reviewsQueryProps } = useGetReviewsQuery({
+    page: query.page ? +query.page : 1,
+  })
 
   //? Handlers
   const deleteReviewHandler = (id: string) => {
@@ -110,12 +106,8 @@ const Reviews: NextPage = () => {
 
         <ProfileLayout>
           <PageContainer title='دیدگاه‌ها'>
-            <ShowWrapper
-              error={error}
-              isError={isError}
-              refetch={refetch}
-              isFetching={isFetching}
-              isSuccess={isSuccess}
+            <DataStateDisplay
+              {...reviewsQueryProps}
               dataLength={data ? data.reviewsLength : 0}
               emptyComponent={<EmptyCommentsList />}
               loadingComponent={<ReveiwSkeleton />}
@@ -130,13 +122,12 @@ const Reviews: NextPage = () => {
                     />
                   ))}
               </div>
-            </ShowWrapper>
+            </DataStateDisplay>
 
             {data && data.reviewsLength > 5 && (
               <div className='py-4 mx-auto lg:max-w-5xl'>
                 <Pagination
                   pagination={data.pagination}
-                  changeRoute={changeRoute}
                   section='profileReviews'
                   client
                 />

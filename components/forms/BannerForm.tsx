@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 import { bannerSchema } from 'utils'
 
-import type { DataModels, IBannerForm } from 'types'
+import type { IBanner, IBannerForm } from 'types'
 import { useEffect } from 'react'
 
 interface CreateBannerFormProps {
@@ -25,7 +25,7 @@ interface EditBannerFormProps {
   mode: 'edit'
   createHandler?: never
   updateHandler: (data: IBannerForm) => void
-  selectedBanner: DataModels.IBanner
+  selectedBanner: IBanner
   isLoadingCreate?: never
   isLoadingDelete: boolean
   isLoadingUpdate: boolean

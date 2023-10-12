@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
-import { Icons, NavbarSkeleton, ResponsiveImage } from 'components'
+import { NavbarSkeleton, ResponsiveImage } from 'components'
 
 import { useGetCategoriesQuery } from 'services'
 
-import type { DataModels } from 'types'
+import type { ICategory } from 'types'
+import { ArrowLeft, Bars } from 'icons'
 
 export default function Navbar() {
   //? Get Categories Query
@@ -17,13 +18,11 @@ export default function Navbar() {
   })
 
   //? State
-  const [activeMinCat, setActiveMinCat] = useState<DataModels.ICategory>(
-    {} as DataModels.ICategory
-  )
+  const [activeMinCat, setActiveMinCat] = useState<ICategory>({} as ICategory)
   const [hover, setHover] = useState(false)
 
   //? Handlers
-  const handleActive = (cat: DataModels.ICategory) => {
+  const handleActive = (cat: ICategory) => {
     setActiveMinCat(cat)
   }
   const hanldeDeactive = () => {
@@ -45,7 +44,7 @@ export default function Navbar() {
         onMouseOver={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
       >
-        <Icons.Bars className='icon' />
+        <Bars className='icon' />
         دسته‌بندی کالاها
       </button>
       <div
@@ -105,7 +104,7 @@ export default function Navbar() {
                           className='flex-center px-2 mb-1 text-sm font-semibold tracking-wider text-gray-700 border-r-2 border-red-500'
                         >
                           {levelTwoCategory.name}
-                          <Icons.ArrowLeft className='icon' />
+                          <ArrowLeft className='icon' />
                         </Link>
                         <ul className='space-y-1'>
                           {categories

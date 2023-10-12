@@ -6,17 +6,15 @@ import { useRouter } from 'next/router'
 import { clearCart } from 'store'
 
 import {
-  Icons,
   FreeShipping,
   CartItem,
   CartInfo,
   Header,
   RedirectToLogin,
   Button,
-  EmptyCart,
-  Toman,
 } from 'components'
 import { Menu, Transition } from '@headlessui/react'
+import { Delete, EmptyCart, More, Toman } from 'icons'
 
 import { formatNumber } from 'utils'
 
@@ -55,7 +53,7 @@ const Cart: NextPage = () => {
   const DeleteAllDropDown = () => (
     <Menu as='div' className='dropdown'>
       <Menu.Button className='dropdown__button'>
-        <Icons.More className='icon' />
+        <More className='icon' />
       </Menu.Button>
 
       <Transition
@@ -73,7 +71,7 @@ const Cart: NextPage = () => {
               onClick={() => dispatch(clearCart())}
               className='px-4 py-3 flex-center gap-x-2'
             >
-              <Icons.Delete className='icon' />
+              <Delete className='icon' />
               <span>حذف همه</span>
             </button>
           </Menu.Item>
