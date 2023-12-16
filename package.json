@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prettier": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\""
   },
   "dependencies": {
     "@headlessui/react": "^1.7.10",
@@ -28,7 +29,7 @@
     "react-hook-form": "^7.31.3",
     "react-icons": "^4.8.0",
     "react-redux": "^8.0.2",
-    "sharp": "^0.30.7",
+    "sharp": "^0.33.0",
     "swiper": "^8.3.2",
     "yup": "^0.32.11"
   },
@@ -42,9 +43,15 @@
     "@types/nprogress": "^0.2.0",
     "@types/react": "^18.2.15",
     "autoprefixer": "^10.4.7",
+    "eslint": "^8.56.0",
+    "eslint-config-next": "^14.0.4",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-tailwindcss": "^3.13.0",
     "postcss": "^8.4.14",
     "postcss-import": "^15.1.0",
-    "tailwindcss": "^3.3.3",
+    "tailwindcss": "^3.3.6",
     "typescript": "5.1.6"
   }
 }

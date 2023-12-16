@@ -1,0 +1,25 @@
+@layer components {
+  .farsi-digits {
+    font-feature-settings: 'ss01';
+  }
+
+  .icon {
+    @apply w-5 h-5 md:w-6 md:h-6 text-gray-800;
+  }
+
+  .section-divide-y {
+    @apply h-2 bg-gray-300 lg:hidden;
+  }
+
+  .section-divide-x {
+    @apply w-0.5 h-4 bg-gray-200;
+  }
+
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  .bbb {
+    @apply border border-red-700;
+  }
+}

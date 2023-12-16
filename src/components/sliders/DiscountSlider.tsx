@@ -1,0 +1,112 @@
+import Link from 'next/link'
+import Image from 'next/image'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
+
+import { DiscountProduct, ProductPrice, ResponsiveImage, Skeleton } from 'components'
+import { AmazingTypo } from 'icons'
+
+import { useGetProductsQuery } from 'services'
+
+import type { ICategory } from 'types'
+
+interface Props {
+  currentCategory: ICategory
+}
+
+const DiscountSlider: React.FC<Props> = (props) => {
+  // ? Props
+  const { currentCategory } = props
+
+  const { products, isFetching } = useGetProductsQuery(
+    {
+      sort: 6,
+      category: currentCategory?.slug,
+      page_size: 15,
+      discount: true,
+    },
+    {
+      selectFromResult: ({ data, isFetching }) => ({
+        products: data?.products,
+        isFetching,
+      }),
+    }
+  )
+
+  // ? Render(s)
+
+  if (currentCategory) {
+    return (
+      <section
+        className="flex py-2.5 lg:mx-3 lg:rounded-xl lg:px-1"
+        style={{
+          background: `linear-gradient(${`${currentCategory.colors?.start},${currentCategory.colors?.end}`})`,
+        }}
+      >
+        <Swiper
+          watchSlidesProgress={true}
+          slidesPerView={2}
+          breakpoints={{
+            490: { width: 490, slidesPerView: 3 },
+          }}
+        >
+          <SwiperSlide className="flex-center flex-col py-10">
+            <AmazingTypo className="h-20 w-20" />
+            <Image src={currentCategory.image} alt={currentCategory.name} width={96} height={96} priority />
+          </SwiperSlide>
+
+          {isFetching
+            ? Array(10)
+                .fill('_')
+                .map((_, index) => (
+                  <SwiperSlide
+                    key={index}
+                    className={`mx-0.5  w-fit bg-white py-6 ${
+                      index === 0 ? 'rounded-r-lg' : index === 9 ? 'rounded-l-lg' : ''
+                    } `}
+                  >
+                    <Skeleton.Items>
+                      <Skeleton.Item
+                        height=" h-32 lg:h-36"
+                        width="w-32 lg:w-36"
+                        animated="background"
+                        className="mx-auto rounded-md"
+                      />
+                      <Skeleton.Item height="h-5" width="w-32" animated="background" className="mx-auto mt-4" />
+                      <Skeleton.Item height="h-5" width="w-20" animated="background" className="mx-auto mt-4" />
+                    </Skeleton.Items>
+                  </SwiperSlide>
+                ))
+            : products?.map((product, index) => (
+                <SwiperSlide
+                  key={product._id}
+                  className={`mx-0.5  w-fit bg-white py-6 ${
+                    index === 0 ? 'rounded-r-lg' : index === 9 ? 'rounded-l-lg' : ''
+                  } `}
+                >
+                  <Link href={`/products/${product.slug}`}>
+                    <article>
+                      <ResponsiveImage
+                        dimensions="w-32 h-32 lg:w-36 lg:h-36"
+                        className=" mx-auto"
+                        src={product.images[0].url}
+                        alt={product.title}
+                      />
+
+                      <div className="mt-1.5 flex justify-evenly gap-x-2 px-2 ">
+                        <div>
+                          <DiscountProduct discount={product.discount} />
+                        </div>
+                        <ProductPrice inStock={product.inStock} discount={product.discount} price={product.price} />
+                      </div>
+                    </article>
+                  </Link>
+                </SwiperSlide>
+              ))}
+        </Swiper>
+      </section>
+    )
+  }
+}
+
+export default DiscountSlider
