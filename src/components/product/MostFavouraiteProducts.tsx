@@ -52,7 +52,7 @@ const MostFavouraiteProducts: React.FC<Props> = (props) => {
               ))
           : products?.map((product) => (
               <Link key={product._id} href={`/products/${product.slug}`}>
-                <article className="min-h-[248px] border border-gray-300 p-1 transition hover:border-gray-300">
+                <article className="min-h-[248px] border border-gray-300/80 p-1 transition hover:border-gray-300">
                   <div className="flex gap-x-1 ">
                     <span className="farsi-digits text-base">{product.rating.toFixed(1)}</span>
                     <Star className="h-5 w-5 text-amber-500 md:h-7 md:w-7 " />

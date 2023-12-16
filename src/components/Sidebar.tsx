@@ -61,7 +61,9 @@ export default function Sidebar() {
                       <>
                         <Disclosure.Button className="!mt-0 flex w-full items-center justify-between px-4 py-2">
                           <span
-                            className={`pl-3 font-semibold tracking-wide ${open ? 'text-red-500' : 'text-gray-700'}`}
+                            className={`pl-3 text-lg font-semibold tracking-wide ${
+                              open ? 'text-red-500' : 'text-gray-700'
+                            }`}
                           >
                             {category.name}
                           </span>
@@ -88,7 +90,7 @@ export default function Sidebar() {
                                   <>
                                     <Disclosure.Button className="!mt-0 flex w-full items-center justify-between px-4 py-2 pr-7">
                                       <span
-                                        className={`text-lg font-medium ${open ? 'text-red-500' : 'text-gray-700'}`}
+                                        className={`text-base font-medium ${open ? 'text-red-500' : 'text-gray-500'}`}
                                       >
                                         {category.name}
                                       </span>

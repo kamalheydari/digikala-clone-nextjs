@@ -47,7 +47,7 @@ const Sort: React.FC<Props> = () => {
                 {sorts.map((item, i) => (
                   <div key={i} className="flex items-center">
                     <button
-                      className="block w-full py-3 text-right text-gray-800"
+                      className="block w-full py-3 text-right text-sm text-gray-600"
                       type="button"
                       name="sort"
                       onClick={() => handleSortChange(item)}

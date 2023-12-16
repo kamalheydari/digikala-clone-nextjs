@@ -5,8 +5,9 @@ import { NavbarSkeleton, ResponsiveImage } from 'components'
 
 import { useGetCategoriesQuery } from 'services'
 
-import type { ICategory } from 'types'
 import { ArrowLeft, Bars } from 'icons'
+
+import type { ICategory } from 'types'
 
 export default function Navbar() {
   // ? Get Categories Query
@@ -76,7 +77,7 @@ export default function Navbar() {
                         alt={levelOneCategory.name}
                       />
 
-                      <span>{levelOneCategory.name}</span>
+                      <span className="text-base font-normal">{levelOneCategory.name}</span>
                     </Link>
                   </li>
                 ))
@@ -86,36 +87,36 @@ export default function Navbar() {
             {isLoading
               ? null
               : activeMinCat
-                ? categories?.map((levelTwoCategory) => {
-                    if (levelTwoCategory.parent === activeMinCat._id) {
-                      return (
-                        <li key={levelTwoCategory._id} className="h-fit">
-                          <Link
-                            href={`/products?category=${levelTwoCategory.slug}`}
-                            className="flex-center mb-1 border-r-2 border-red-600 px-2 text-sm font-semibold tracking-wider text-gray-800"
-                          >
-                            {levelTwoCategory.name}
-                            <ArrowLeft className="icon" />
-                          </Link>
-                          <ul className="space-y-1">
-                            {categories
-                              .filter((category) => category.parent === levelTwoCategory._id)
-                              .map((levelThreeCategory) => (
-                                <li key={levelThreeCategory._id}>
-                                  <Link
-                                    href={`/products?category=${levelThreeCategory.slug}`}
-                                    className="px-3 text-xs font-medium text-gray-800"
-                                  >
-                                    {levelThreeCategory.name}
-                                  </Link>
-                                </li>
-                              ))}
-                          </ul>
-                        </li>
-                      )
-                    } else return null
-                  })
-                : null}
+              ? categories?.map((levelTwoCategory) => {
+                  if (levelTwoCategory.parent === activeMinCat._id) {
+                    return (
+                      <li key={levelTwoCategory._id} className="h-fit">
+                        <Link
+                          href={`/products?category=${levelTwoCategory.slug}`}
+                          className="flex-center mb-1 border-r-2 border-red-600 px-2 text-sm font-semibold tracking-wider text-gray-800"
+                        >
+                          {levelTwoCategory.name}
+                          <ArrowLeft className="icon" />
+                        </Link>
+                        <ul className="space-y-1">
+                          {categories
+                            .filter((category) => category.parent === levelTwoCategory._id)
+                            .map((levelThreeCategory) => (
+                              <li key={levelThreeCategory._id}>
+                                <Link
+                                  href={`/products?category=${levelThreeCategory.slug}`}
+                                  className="px-3 text-xs font-medium text-gray-800"
+                                >
+                                  {levelThreeCategory.name}
+                                </Link>
+                              </li>
+                            ))}
+                        </ul>
+                      </li>
+                    )
+                  } else return null
+                })
+              : null}
           </ul>
         </div>
       </div>

@@ -69,8 +69,10 @@ const ProductsHome: NextPage = () => {
                 emptyComponent={<EmptyCustomList />}
               >
                 {data && data.products.length > 0 && (
-                  <section className="sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-                    {data?.products.map((item) => <ProductCard product={item} key={item._id} />)}
+                  <section className="space-y-3 divide-y divide-gray-300 sm:grid sm:grid-cols-2 sm:space-y-0 sm:divide-y-0 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+                    {data?.products.map((item) => (
+                      <ProductCard product={item} key={item._id} />
+                    ))}
                   </section>
                 )}
               </DataStateDisplay>
