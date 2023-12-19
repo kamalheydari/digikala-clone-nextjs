@@ -162,7 +162,12 @@ const ShippingPage: NextPage = () => {
               <div className="flex flex-wrap justify-start gap-x-8 gap-y-5">
                 {cartItems.map((item) => (
                   <article key={item.itemID}>
-                    <ResponsiveImage dimensions="w-28 h-28" src={item.img.url} alt={item.name} />
+                    <ResponsiveImage
+                      dimensions="w-28 h-28"
+                      src={item.img.url}
+                      blurDataURL={item.img.placeholder}
+                      alt={item.name}
+                    />
 
                     {item.color && (
                       <div className="mr-3 mt-1.5 flex items-center gap-x-2">

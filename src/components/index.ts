@@ -32,7 +32,7 @@ export { default as DashboardLayout } from './Layouts/DashboardLayout'
 
 //* SLIDER COMPONENTS
 export { default as DiscountSlider } from './sliders/DiscountSlider'
-export { default as Slider } from './sliders/Slider'
+export { default as MainSlider } from './sliders/MainSlider'
 export { default as BestSellsSlider } from './sliders/BestSellsSlider'
 export { default as SmilarProductsSlider } from './sliders/SmilarProductsSlider'
 

@@ -24,6 +24,7 @@ const BannerOne: React.FC<Props> = (props) => {
               : 'lg:rounded-none lg:rounded-bl-2xl'
       }`}
       src={item.image.url}
+      blurDataURL={item.image.placeholder}
       alt={item.title}
     />
   )

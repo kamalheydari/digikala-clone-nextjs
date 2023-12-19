@@ -14,6 +14,10 @@ const SliderSchema = new Schema<ISliderDocument>(
         type: String,
         required: true,
       },
+      placeholder: {
+        type: String,
+        required: true,
+      },
     },
     title: {
       type: String,

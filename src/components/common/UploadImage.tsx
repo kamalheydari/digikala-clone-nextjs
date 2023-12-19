@@ -1,7 +1,11 @@
+import { useEffect, useState } from 'react'
+
 import { nanoid } from '@reduxjs/toolkit'
+
 import AWS from 'aws-sdk'
-import { PutObjectRequest } from 'aws-sdk/clients/s3'
-import { useState } from 'react'
+import type { PutObjectRequest } from 'aws-sdk/clients/s3'
+
+import { useCreatePlaceholderMutation } from 'services'
 
 export const s3 = new AWS.S3({
   endpoint: process.env.NEXT_PUBLIC_LIARA_ENDPOINT,
@@ -12,57 +16,65 @@ export const s3 = new AWS.S3({
 
 interface Props {
   folder: string
-  handleAddUploadedImageUrl: (url: string) => void
+  handleAddUploadedImage: (data: { url: string; placeholder: string; id: string }) => void
 }
 
 const UploadImage: React.FC<Props> = (props) => {
   // ? Props
-  const { folder, handleAddUploadedImageUrl } = props
+  const { folder, handleAddUploadedImage } = props
 
   const [file, setFile] = useState<File | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [message, setMessage] = useState<string | null>(null)
 
+  const [createPlaceholder, { data, isSuccess }] = useCreatePlaceholderMutation()
+
+  useEffect(() => {
+    if (isSuccess && data) {
+      handleAddUploadedImage({ url: data.imageUrl, placeholder: data.placeholder, id: nanoid() })
+      setMessage('آپلود عکس موفقیت آمیز بود')
+    }
+  }, [isSuccess])
+
+  // ? Handlers
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFile(event.target.files?.[0] || null)
   }
 
   const handleUpload = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     setLoading(true)
-
-    if (!file) {
-      setError('لطفا یک فایل انتخاب کنید')
-      setLoading(false)
-      return
-    }
-
-    if (!file.type.startsWith('image/')) {
-      setError('فایل انتخاب شده باید تصویر باشد.')
-      setLoading(false)
-      return
-    }
-
-    if (file.size > 5 * 1024 * 1024) {
-      setError('حجم تصویر نباید بیشتر از 5 مگابایت باشد.')
-      setLoading(false)
-      return
-    }
-
-    const params: PutObjectRequest = {
-      Bucket: process.env.NEXT_PUBLIC_LIARA_BUCKET_NAME!,
-      Key: `digikala${folder || '/others'}/${nanoid()}_${file?.name}`,
-      Body: file,
-      ContentType: file?.type,
-      ACL: 'public-read',
-    }
-
     try {
+      if (!file) {
+        setError('لطفا یک فایل انتخاب کنید')
+        setLoading(false)
+        return
+      }
+
+      if (!file.type.startsWith('image/')) {
+        setError('فایل انتخاب شده باید تصویر باشد.')
+        setLoading(false)
+        return
+      }
+
+      if (file.size > 5 * 1024 * 1024) {
+        setError('حجم تصویر نباید بیشتر از 5 مگابایت باشد.')
+        setLoading(false)
+        return
+      }
+
+      const params: PutObjectRequest = {
+        Bucket: process.env.NEXT_PUBLIC_LIARA_BUCKET_NAME!,
+        Key: `digikala${folder || '/others'}/${nanoid()}_${file?.name}`,
+        Body: file,
+        ContentType: file?.type,
+        ACL: 'public-read',
+      }
+
       const res = await s3.upload(params).promise()
-      handleAddUploadedImageUrl(res.Location)
-      setMessage('آپلود عکس موفقیت آمیز بود')
+      await createPlaceholder({ imageUrl: res.Location })
     } catch (error) {
-      setError('عکس آپلود نشد')
+      setError('آپلود عکس ناموفق بود')
     } finally {
       setLoading(false)
     }

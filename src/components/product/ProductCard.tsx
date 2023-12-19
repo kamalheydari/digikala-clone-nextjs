@@ -19,7 +19,7 @@ const ProductCard: React.FC<Props> = (props) => {
 
   // ? Render(s)
   return (
-    <a target="_blank" href={`/products/${product.slug}`} className='block' >
+    <a target="_blank" href={`/products/${product.slug}`} className="block">
       <article
         className={`pb-3 pt-2 sm:h-[540px] sm:px-3 xl:h-[470px] ${
           !slide ? 'border-gray-300/80 sm:border sm:hover:shadow-4xl' : 'border-l border-gray-300'
@@ -32,6 +32,7 @@ const ProductCard: React.FC<Props> = (props) => {
               dimensions="h-[28vw] w-[26vw] sm:w-56 sm:h-60 sm:mb-8 xl:w-44 xl:h-48"
               src={product.images[0].url}
               alt={product.title}
+              blurDataURL={product.images[0].placeholder}
             />
 
             <div className="flex items-center gap-1.5 p-2 sm:flex-col sm:items-end">

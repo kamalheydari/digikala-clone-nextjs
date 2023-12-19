@@ -10,6 +10,8 @@ export interface IProduct {
   discount: number
   images: {
     url: string
+    placeholder: string
+    id: string
   }[]
   sizes: ISize[] | []
   colors: IColor[] | []
@@ -37,6 +39,8 @@ export interface IProductDocument extends Document {
   discount: number
   images: {
     url: string
+    placeholder: string
+    id: string
   }[]
   sizes: ISize[] | []
   colors: IColor[] | []

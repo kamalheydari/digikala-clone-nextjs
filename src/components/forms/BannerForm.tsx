@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import Image from 'next/image'
 
 import { Button, ControlledCheckbox, TextField, UploadImage } from 'components'
@@ -8,7 +9,6 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { bannerSchema } from 'utils'
 
 import type { IBanner, IBannerForm } from 'types'
-import { useEffect } from 'react'
 
 interface CreateBannerFormProps {
   mode: 'create'
@@ -48,8 +48,8 @@ const BannerForm: React.FC<Props> = (props) => {
   } = props
 
   // ? Assets
-  const defaultValues = {
-    image: { url: '' },
+  const defaultValues: Partial<IBannerForm> = {
+    image: { url: '', placeholder: '' },
     title: '',
     uri: '',
     isPublic: true,
@@ -72,7 +72,10 @@ const BannerForm: React.FC<Props> = (props) => {
   })
 
   // ? Handlers
-  const handleAddUploadedImageUrl = (url: string) => setValue('image.url', url)
+  const handleAddUploadedImage = ({ url, placeholder }: { url: string; placeholder: string; id: string }) => {
+    setValue('image.url', url)
+    setValue('image.placeholder', placeholder)
+  }
 
   // ? Re-Renders
   useEffect(() => {
@@ -112,7 +115,7 @@ const BannerForm: React.FC<Props> = (props) => {
 
           <TextField label="آدرس تصویر" control={control} name="image.url" errors={formErrors?.image?.url} />
 
-          <UploadImage folder="/banners" handleAddUploadedImageUrl={handleAddUploadedImageUrl} />
+          <UploadImage folder="/banners" handleAddUploadedImage={handleAddUploadedImage} />
 
           {bannerSchema.isValidSync(watch()) && (
             <div className="mx-auto max-w-max">

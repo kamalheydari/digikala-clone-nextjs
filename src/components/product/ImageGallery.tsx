@@ -11,6 +11,8 @@ import 'swiper/css/pagination'
 interface Props {
   images: {
     url: string
+    placeholder: string
+    id: string
   }[]
   discount: number
   inStock: number
@@ -33,6 +35,7 @@ const ImageGallery: React.FC<Props> = (props) => {
           dimensions="lg:h-[320px] lg:w-[320px] xl:h-[420px] xl:w-[420px] 2xl:h-[500px] 2xl:w-[500px]"
           className="mx-auto"
           src={images[currentImage].url}
+          blurDataURL={images[currentImage].placeholder}
           alt={productName}
         />
 
@@ -46,6 +49,7 @@ const ImageGallery: React.FC<Props> = (props) => {
               }`}
               onClick={() => setCurrentImage(index)}
               src={image.url}
+              blurDataURL={image.placeholder}
               alt={productName}
             />
           ))}
@@ -55,7 +59,12 @@ const ImageGallery: React.FC<Props> = (props) => {
         <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
           {images.map((image, index) => (
             <SwiperSlide key={index}>
-              <ResponsiveImage dimensions="h-[95vw] w-full" src={image.url} alt={productName} />
+              <ResponsiveImage
+                dimensions="h-[95vw] w-full"
+                src={image.url}
+                blurDataURL={image.placeholder}
+                alt={productName}
+              />
             </SwiperSlide>
           ))}
         </Swiper>

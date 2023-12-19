@@ -5,6 +5,7 @@ export interface IBanner {
   category_id: string
   image: {
     url: string
+    placeholder: string
   }
   title: string
   uri?: string
@@ -17,6 +18,7 @@ export interface IBannerDocument extends Document {
   category_id: ObjectId
   image: {
     url: string
+    placeholder: string
   }
   title: string
   uri?: string

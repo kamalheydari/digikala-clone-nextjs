@@ -108,7 +108,12 @@ const ReveiwCard: React.FC<Props> = (props) => {
       <div className="flex gap-x-3 space-y-3 border-b border-gray-300 py-4 lg:gap-x-8 lg:rounded-lg lg:border lg:px-2 ">
         {/* image */}
         <div>
-          <ResponsiveImage dimensions="w-16 h-12 lg:w-24 lg:h-20" src={item.product.images[0].url} alt="تصویر محصول" />
+          <ResponsiveImage
+            dimensions="w-16 h-12 lg:w-24 lg:h-20"
+            src={item.product.images[0].url}
+            blurDataURL={item.product.images[0].placeholder}
+            alt="تصویر محصول"
+          />
 
           <span
             className={`farsi-digits mr-10 inline-block h-5 w-5 rounded-md pt-0.5 text-center  text-white lg:mr-20 ${

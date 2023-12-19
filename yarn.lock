@@ -1661,10 +1661,10 @@ available-typed-arrays@^1.0.5:
   resolved "https://registry.npmjs.org/available-typed-arrays/-/available-typed-arrays-1.0.5.tgz"
   integrity sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==
 
-aws-sdk@^2.1368.0:
-  version "2.1415.0"
-  resolved "https://registry.npmjs.org/aws-sdk/-/aws-sdk-2.1415.0.tgz"
-  integrity sha512-tJneWCa1IZnw+pn3AwjE+3u8oGSlMMk6mCkA/7BOqe+n9shLLymwPfmxeCxtArBmBzg8m74vkoEYh5tm8Eo/gw==
+aws-sdk@^2.1520.0:
+  version "2.1520.0"
+  resolved "https://registry.npmjs.org/aws-sdk/-/aws-sdk-2.1520.0.tgz"
+  integrity sha512-HskunOb5K3vJEPgvqwOWw6dsz8YePHfUvzY2bxvIMJ594AgDDjH4D9/dXhBiNVsMkRvCTZENLTjE1kh5ZkAIUQ==
   dependencies:
     buffer "4.9.2"
     events "1.1.1"

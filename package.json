@@ -14,7 +14,7 @@
     "@hookform/resolvers": "^2.9.0",
     "@reduxjs/toolkit": "^1.9.5",
     "@types/jsonwebtoken": "^9.0.2",
-    "aws-sdk": "^2.1368.0",
+    "aws-sdk": "^2.1520.0",
     "bcrypt": "^5.0.1",
     "cookie": "^0.5.0",
     "iran-city": "^1.1.4",

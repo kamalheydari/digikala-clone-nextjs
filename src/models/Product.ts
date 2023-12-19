@@ -26,6 +26,11 @@ const productSchema = new Schema<IProductDocument>(
           type: String,
           required: true,
         },
+        placeholder: {
+          type: String,
+          required: true,
+        },
+        id: String,
       },
     ],
     sizes: [

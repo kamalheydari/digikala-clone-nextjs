@@ -17,6 +17,7 @@ const BannerTwo: React.FC<Props> = (props) => {
       className="overflow-hidden rounded-xl"
       src={item.image.url}
       alt={item.title}
+      blurDataURL={item.image.placeholder}
     />
   )
 

@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 
@@ -52,7 +51,13 @@ const DiscountSlider: React.FC<Props> = (props) => {
         >
           <SwiperSlide className="flex-center flex-col py-10">
             <AmazingTypo className="h-20 w-20" />
-            <Image src={currentCategory.image} alt={currentCategory.name} width={96} height={96} priority />
+            <ResponsiveImage
+              src={currentCategory.image.url}
+              blurDataURL={currentCategory.image.placeholder}
+              alt={currentCategory.name}
+              dimensions="w-24 h-24"
+              priority
+            />
           </SwiperSlide>
 
           {isFetching
@@ -90,6 +95,7 @@ const DiscountSlider: React.FC<Props> = (props) => {
                         dimensions="w-32 h-32 lg:w-36 lg:h-36"
                         className=" mx-auto"
                         src={product.images[0].url}
+                        blurDataURL={product.images[0].placeholder}
                         alt={product.title}
                       />
 

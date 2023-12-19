@@ -92,7 +92,13 @@ const OrderCard: React.FC<Props> = (props) => {
         </div>
         <div className="flex flex-wrap gap-x-5 gap-y-3 py-5 lg:border-t lg:border-gray-300 lg:px-3">
           {order.cart.map((cartItem) => (
-            <ResponsiveImage key={cartItem.itemID} dimensions="w-16 h-16" src={cartItem.img.url} alt={cartItem.name} />
+            <ResponsiveImage
+              key={cartItem.itemID}
+              dimensions="w-16 h-16"
+              src={cartItem.img.url}
+              blurDataURL={cartItem.img.placeholder}
+              alt={cartItem.name}
+            />
           ))}
         </div>
       </div>

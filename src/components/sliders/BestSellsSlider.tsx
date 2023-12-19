@@ -50,7 +50,12 @@ const BestSellsSlider: React.FC<Props> = (props) => {
               <div key={item._id} className="w-60 p-1 md:w-72 xl:w-80">
                 <Link href={`/products/${item.slug}`}>
                   <article className="flex gap-x-4">
-                    <ResponsiveImage dimensions="w-24 h-24" src={item.images[0].url} alt={item.title} />
+                    <ResponsiveImage
+                      dimensions="w-24 h-24"
+                      src={item.images[0].url}
+                      blurDataURL={item.images[0].placeholder}
+                      alt={item.title}
+                    />
                     <div className="flex items-center gap-x-3 border-b">
                       <span className="farsi-digits text-2xl text-sky-600 ">{index + 1}</span>
                       <span>{truncate(item.title, 25)}</span>

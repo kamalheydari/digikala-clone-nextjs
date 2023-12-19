@@ -5,6 +5,7 @@ export interface ISlider {
   category_id: string
   image: {
     url: string
+    placeholder: string
   }
   title: string
   uri?: string
@@ -16,6 +17,7 @@ export interface ISliderDocument extends Document {
   category_id: ObjectId
   image: {
     url: string
+    placeholder: string
   }
   title: string
   uri?: string

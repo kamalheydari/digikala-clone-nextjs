@@ -11,6 +11,7 @@ export default interface ICart {
   size: { id: string; size: string } | null
   img: {
     url: string
+    placeholder: string
   }
   quantity: number
 }

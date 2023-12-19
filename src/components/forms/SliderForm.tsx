@@ -48,8 +48,8 @@ const SliderForm: React.FC<Props> = (props) => {
   } = props
 
   // ? Assets
-  const defaultValues = {
-    image: { url: '' },
+  const defaultValues: Partial<ISliderForm> = {
+    image: { placeholder: '', url: '' },
     title: '',
     uri: '',
     isPublic: true,
@@ -70,7 +70,10 @@ const SliderForm: React.FC<Props> = (props) => {
   })
 
   // ? Handlers
-  const handleAddUploadedImageUrl = (url: string) => setValue('image.url', url)
+  const handleAddUploadedImage = ({ url, placeholder }: { url: string; placeholder: string; id: string }) => {
+    setValue('image.url', url)
+    setValue('image.placeholder', placeholder)
+  }
 
   // ? Re-Renders
   useEffect(() => {
@@ -90,7 +93,7 @@ const SliderForm: React.FC<Props> = (props) => {
 
           <TextField label="آدرس تصویر" control={control} name="image.url" errors={formErrors?.image?.url} />
 
-          <UploadImage folder="/sliders" handleAddUploadedImageUrl={handleAddUploadedImageUrl} />
+          <UploadImage folder="/sliders" handleAddUploadedImage={handleAddUploadedImage} />
 
           <div className="my-3 w-44">
             <ControlledCheckbox name="isPublic" control={control} label="وضعیت انتشار" />

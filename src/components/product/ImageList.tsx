@@ -23,12 +23,13 @@ const ImageList: React.FC<Props> = (props) => {
   })
 
   // ? Handlers
-  const handleAddUploadedImageUrl = (url: string) => append({ url })
+  const handleAddUploadedImage = ({ url, id, placeholder }: { url: string; placeholder: string; id: string }) =>
+    append({ url, id, placeholder })
 
   // ? Render(s)
   return (
     <div className="space-y-3">
-      <UploadImage folder="/products" handleAddUploadedImageUrl={handleAddUploadedImageUrl} />
+      <UploadImage folder="/products" handleAddUploadedImage={handleAddUploadedImage} />
 
       <div className="mx-3 flex flex-wrap gap-x-2 gap-y-3">
         {/*  @ts-ignore  */}

@@ -12,7 +12,7 @@ interface Props {
   data: ISlider[]
 }
 
-const Slider: React.FC<Props> = (props) => {
+const MainSlider: React.FC<Props> = (props) => {
   // ? Props
   const { data } = props
 
@@ -23,6 +23,7 @@ const Slider: React.FC<Props> = (props) => {
       src={item.image.url}
       alt={item.title}
       unoptimized={true}
+      blurDataURL={item.image.placeholder}
     />
   )
 
@@ -58,4 +59,4 @@ const Slider: React.FC<Props> = (props) => {
   )
 }
 
-export default Slider
+export default MainSlider

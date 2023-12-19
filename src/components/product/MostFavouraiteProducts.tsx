@@ -62,6 +62,7 @@ const MostFavouraiteProducts: React.FC<Props> = (props) => {
                     dimensions="h-32 w-28 md:w-32 md:h-36"
                     className="mx-auto"
                     src={product.images[0].url}
+                    blurDataURL={product.images[0].placeholder}
                     alt={product.title}
                   />
                   <div

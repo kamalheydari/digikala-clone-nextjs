@@ -43,7 +43,8 @@ const SubCategories: React.FC<Props> = (props) => {
               >
                 <ResponsiveImage
                   dimensions="w-24 h-24 md:h-32 md:w-32 xl:w-40 xl:h-40"
-                  src={item.image}
+                  src={item.image.url}
+                  blurDataURL={item.image.placeholder}
                   alt={item.name}
                 />
 

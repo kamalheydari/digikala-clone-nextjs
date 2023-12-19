@@ -45,7 +45,12 @@ const AddToCart: React.FC<Props> = (props) => {
         {second && (
           <>
             <div className="flex gap-x-4 py-3 ">
-              <ResponsiveImage dimensions="w-28 h-28" src={product.images[0].url} alt={product.title} />
+              <ResponsiveImage
+                dimensions="w-28 h-28"
+                src={product.images[0].url}
+                blurDataURL={product.images[0].placeholder}
+                alt={product.title}
+              />
 
               <span className="flex-1 text-justify">{product.title}</span>
             </div>

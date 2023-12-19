@@ -32,15 +32,19 @@ export const mobileSchema = Yup.object().shape({
 export const categorySchema = Yup.object().shape({
   name: Yup.string().required('نام دسته‌بندی نباید خالی باشد'),
   slug: Yup.string().required('نام مسیر نباید خالی باشد'),
-  image: Yup.string()
-    .required('آدرس تصویر را وارد کنید')
-    .url('آدرس تصویر معتبر نیست')
-    .matches(/\.(gif|jpe?g|png|webp)$/i, 'آدرس تصویر باید یک URL تصویر معتبر باشد'),
+  image: Yup.object().shape({
+    placeholder: Yup.string(),
+    url: Yup.string()
+      .required('آدرس تصویر را وارد کنید')
+      .url('آدرس تصویر معتبر نیست')
+      .matches(/\.(gif|jpe?g|png|webp)$/i, 'آدرس تصویر باید یک URL تصویر معتبر باشد'),
+  }),
 })
 
 export const sliderSchema = Yup.object().shape({
   title: Yup.string().required('نام اسلایدر نباید خالی باشد'),
   image: Yup.object().shape({
+    placeholder: Yup.string(),
     url: Yup.string()
       .required('آدرس تصویر را وارد کنید')
       .url('آدرس تصویر معتبر نیست')
@@ -51,6 +55,7 @@ export const sliderSchema = Yup.object().shape({
 export const bannerSchema = Yup.object().shape({
   title: Yup.string().required('نام بنر نباید خالی باشد'),
   image: Yup.object().shape({
+    placeholder: Yup.string(),
     url: Yup.string()
       .required('آدرس تصویر را وارد کنید')
       .url('آدرس تصویر معتبر نیست')
@@ -82,6 +87,8 @@ export const productSchema = Yup.object().shape({
   images: Yup.array()
     .of(
       Yup.object().shape({
+        placeholder: Yup.string(),
+        id: Yup.string(),
         url: Yup.string()
           .required()
           .url('آدرس تصویر معتبر نیست')

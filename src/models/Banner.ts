@@ -14,6 +14,10 @@ const BannerSchema = new Schema<IBannerDocument>(
         type: String,
         required: true,
       },
+      placeholder: {
+        type: String,
+        required: true,
+      },
     },
     title: {
       type: String,

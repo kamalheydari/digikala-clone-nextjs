@@ -163,7 +163,6 @@ const ProductsForm: React.FC<Props> = (props) => {
           mode === 'create'
             ? handleSubmit(editedCreateHandler)
             : handleSubmit((data) => {
-                console.log('update onform')
                 updateHandler(data)
               })
         }

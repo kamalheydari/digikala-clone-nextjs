@@ -21,8 +21,14 @@ const CategorySchema = new Schema<ICategoryDocument>(
       ref: 'category',
     },
     image: {
-      type: String,
-      required: true,
+      url: {
+        type: String,
+        required: true,
+      },
+      placeholder: {
+        type: String,
+        required: true,
+      },
     },
     colors: { start: String, end: String },
     level: { type: Number, required: true },

@@ -4,7 +4,7 @@ interface Product {
   productID: string
   slug: string
   title: string
-  image: { url: string }
+  image: { url: string; placeholder: string }
 }
 
 interface UserState {

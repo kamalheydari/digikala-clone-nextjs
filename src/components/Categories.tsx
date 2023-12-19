@@ -40,8 +40,9 @@ const Categories: React.FC<Props> = (props) => {
                 <ResponsiveImage
                   dimensions="w-24 h-24 lg:h-44 lg:w-44"
                   className="mx-auto mb-1"
-                  src={item.image}
+                  src={item.image.url}
                   alt={item.name}
+                  blurDataURL={item.image.placeholder}
                 />
                 <span className="text-sm text-black">{item.name}</span>
               </Link>

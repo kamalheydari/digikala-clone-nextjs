@@ -37,6 +37,7 @@ const ReviewsTable: React.FC<Props> = (props) => {
                     dimensions="w-7 h-7"
                     className="mx-auto"
                     src={review.product.images[0].url}
+                    blurDataURL={review.product.images[0].placeholder}
                     alt="تصویر محصول"
                   />
                 </td>

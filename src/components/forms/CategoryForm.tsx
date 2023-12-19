@@ -31,10 +31,10 @@ const CategoryForm: React.FC<Props> = (props) => {
   const { mode, selectedCategory, createHandler, updateHandler, isLoading, parentLvl } = props
 
   // ? Assets
-  const defaultValues = {
+  const defaultValues: Partial<ICategoryForm> = {
     name: '',
     slug: '',
-    image: '',
+    image: { placeholder: '', url: '' },
     colors: { start: '#000000', end: '#000000' },
   }
 
@@ -52,7 +52,6 @@ const CategoryForm: React.FC<Props> = (props) => {
     resolver: yupResolver(categorySchema),
     defaultValues,
   })
-
   // ? Re-Renders
   //*   Set Category Details on Edit Mode
   useEffect(() => {
@@ -63,7 +62,10 @@ const CategoryForm: React.FC<Props> = (props) => {
   }, [selectedCategory])
 
   // ? Handlers
-  const handleAddUploadedImageUrl = (url: string) => setValue('image', url)
+  const handleAddUploadedImage = ({ url, placeholder }: { url: string; placeholder: string; id: string }) => {
+    setValue('image.url', url)
+    setValue('image.placeholder', placeholder)
+  }
 
   return (
     <section className="p-3 md:px-3 xl:px-8 2xl:px-10">
@@ -75,14 +77,14 @@ const CategoryForm: React.FC<Props> = (props) => {
 
         <TextField label="مسیر (با حروف انگلیسی)" control={control} errors={formErrors.slug} name="slug" />
 
-        <TextField label="آدرس تصویر" control={control} errors={formErrors.image} name="image" />
+        <TextField label="آدرس تصویر" control={control} errors={formErrors.image?.url} name="image.url" />
 
-        <UploadImage folder="/icons" handleAddUploadedImageUrl={handleAddUploadedImageUrl} />
+        <UploadImage folder="/icons" handleAddUploadedImage={handleAddUploadedImage} />
 
         {categorySchema.isValidSync(watch()) && (
           <div className="mx-auto max-w-max">
             {getValues('image') && (
-              <Image src={getValues('image')} width={200} height={200} className="mx-auto" alt="category image" />
+              <Image src={getValues('image.url')} width={200} height={200} className="mx-auto" alt="category image" />
             )}
           </div>
         )}

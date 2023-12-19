@@ -12,7 +12,7 @@ import {
   ClientLayout,
   DiscountSlider,
   MostFavouraiteProducts,
-  Slider as MainSlider,
+  MainSlider,
 } from 'components'
 
 import config from 'config'

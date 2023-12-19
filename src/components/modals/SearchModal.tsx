@@ -98,7 +98,12 @@ const SearchModal: React.FC<Props> = (props) => {
                     data?.products.map((item) => (
                       <article key={item._id} className="py-2">
                         <Link href={`/products/${item.slug}`} onClick={() => searchModalHanlders.close()}>
-                          <ResponsiveImage dimensions="w-20 h-20" src={item.images[0].url} alt={item.title} />
+                          <ResponsiveImage
+                            dimensions="w-20 h-20"
+                            src={item.images[0].url}
+                            blurDataURL={item.images[0].placeholder}
+                            alt={item.title}
+                          />
                           <span className="py-2 text-sm">{truncate(item.title, 70)}</span>
                           <div className="flex justify-between">
                             <div>{item.discount > 0 && <DiscountProduct discount={item.discount} />}</div>

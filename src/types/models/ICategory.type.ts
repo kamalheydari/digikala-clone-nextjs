@@ -5,7 +5,10 @@ export interface ICategory {
   name: string
   slug: string
   parent?: string
-  image: string
+  image: {
+    url: string
+    placeholder: string
+  }
   colors?: { start: string; end: string }
   level: number
   children?: ICategory[]
@@ -16,7 +19,10 @@ export interface ICategoryDocument extends Document {
   name: string
   slug: string
   parent?: string
-  image: string
+  image: {
+    url: string
+    placeholder: string
+  }
   colors?: { start: string; end: string }
   level: number
   createdAt: Date
