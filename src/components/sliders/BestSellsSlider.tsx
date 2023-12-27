@@ -55,6 +55,7 @@ const BestSellsSlider: React.FC<Props> = (props) => {
                       src={item.images[0].url}
                       blurDataURL={item.images[0].placeholder}
                       alt={item.title}
+                      imageStyles="object-contain"
                     />
                     <div className="flex items-center gap-x-3 border-b">
                       <span className="farsi-digits text-2xl text-sky-600 ">{index + 1}</span>

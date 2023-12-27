@@ -113,6 +113,7 @@ const ReveiwCard: React.FC<Props> = (props) => {
             src={item.product.images[0].url}
             blurDataURL={item.product.images[0].placeholder}
             alt="تصویر محصول"
+            imageStyles="object-contain"
           />
 
           <span

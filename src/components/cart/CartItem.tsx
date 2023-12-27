@@ -20,7 +20,13 @@ const CartItem: React.FC<Props> = (props) => {
     <article className="flex gap-x-4 px-4 py-5 ">
       {/* image & cartButtons */}
       <div className="space-y-4">
-        <ResponsiveImage dimensions="w-28 h-28" src={item.img.url} blurDataURL={item.img.placeholder} alt={item.name} />
+        <ResponsiveImage
+          dimensions="w-28 h-28"
+          src={item.img.url}
+          blurDataURL={item.img.placeholder}
+          alt={item.name}
+          imageStyles="object-contain"
+        />
 
         <div className="mx-auto w-fit ">
           <SpecialSell discount={item.discount} inStock={item.inStock} />

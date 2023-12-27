@@ -43,6 +43,7 @@ const Categories: React.FC<Props> = (props) => {
                   src={item.image.url}
                   alt={item.name}
                   blurDataURL={item.image.placeholder}
+                  imageStyles="object-contain"
                 />
                 <span className="text-sm text-black">{item.name}</span>
               </Link>

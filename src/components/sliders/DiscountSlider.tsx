@@ -72,7 +72,7 @@ const DiscountSlider: React.FC<Props> = (props) => {
                   >
                     <Skeleton.Items>
                       <Skeleton.Item
-                        height=" h-32 lg:h-36"
+                        height="h-32 lg:h-36"
                         width="w-32 lg:w-36"
                         animated="background"
                         className="mx-auto rounded-md"
@@ -85,27 +85,26 @@ const DiscountSlider: React.FC<Props> = (props) => {
             : products?.map((product, index) => (
                 <SwiperSlide
                   key={product._id}
-                  className={`mx-0.5  w-fit bg-white py-6 ${
+                  className={`mx-0.5 w-fit bg-white py-6 ${
                     index === 0 ? 'rounded-r-lg' : index === 9 ? 'rounded-l-lg' : ''
                   } `}
                 >
-                  <Link href={`/products/${product.slug}`}>
-                    <article>
-                      <ResponsiveImage
-                        dimensions="w-32 h-32 lg:w-36 lg:h-36"
-                        className=" mx-auto"
-                        src={product.images[0].url}
-                        blurDataURL={product.images[0].placeholder}
-                        alt={product.title}
-                      />
+                  <Link href={`/products/${product.slug}`} className="space-y-6">
+                    <ResponsiveImage
+                      dimensions="w-32 h-32 lg:w-36 lg:h-36"
+                      className="mx-auto"
+                      src={product.images[0].url}
+                      blurDataURL={product.images[0].placeholder}
+                      alt={product.title}
+                      imageStyles="object-contain"
+                    />
 
-                      <div className="mt-1.5 flex justify-evenly gap-x-2 px-2 ">
-                        <div>
-                          <DiscountProduct discount={product.discount} />
-                        </div>
-                        <ProductPrice inStock={product.inStock} discount={product.discount} price={product.price} />
+                    <div className="mt-1.5 flex justify-evenly gap-x-2 px-2 ">
+                      <div>
+                        <DiscountProduct discount={product.discount} />
                       </div>
-                    </article>
+                      <ProductPrice inStock={product.inStock} discount={product.discount} price={product.price} />
+                    </div>
                   </Link>
                 </SwiperSlide>
               ))}

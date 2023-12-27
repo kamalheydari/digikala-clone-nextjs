@@ -98,6 +98,7 @@ const OrderCard: React.FC<Props> = (props) => {
               src={cartItem.img.url}
               blurDataURL={cartItem.img.placeholder}
               alt={cartItem.name}
+              imageStyles="object-contain"
             />
           ))}
         </div>

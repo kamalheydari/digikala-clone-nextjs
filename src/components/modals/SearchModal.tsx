@@ -103,6 +103,7 @@ const SearchModal: React.FC<Props> = (props) => {
                             src={item.images[0].url}
                             blurDataURL={item.images[0].placeholder}
                             alt={item.title}
+                            imageStyles="object-contain"
                           />
                           <span className="py-2 text-sm">{truncate(item.title, 70)}</span>
                           <div className="flex justify-between">

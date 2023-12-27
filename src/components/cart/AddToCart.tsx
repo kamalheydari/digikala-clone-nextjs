@@ -50,6 +50,7 @@ const AddToCart: React.FC<Props> = (props) => {
                 src={product.images[0].url}
                 blurDataURL={product.images[0].placeholder}
                 alt={product.title}
+                imageStyles="object-contain"
               />
 
               <span className="flex-1 text-justify">{product.title}</span>

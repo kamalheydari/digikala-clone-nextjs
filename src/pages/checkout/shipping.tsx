@@ -167,6 +167,7 @@ const ShippingPage: NextPage = () => {
                       src={item.img.url}
                       blurDataURL={item.img.placeholder}
                       alt={item.name}
+                      imageStyles="object-contain"
                     />
 
                     {item.color && (

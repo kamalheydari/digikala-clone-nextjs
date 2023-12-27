@@ -99,18 +99,21 @@ export default function Footer() {
               dimensions="h-20 w-20"
               src="/icons/m-enamad.png"
               alt="ای نماد"
+              imageStyles="object-contain"
             />
             <ResponsiveImage
               className="rounded-md border border-gray-300 p-2"
               dimensions="h-20 w-20"
               src="/icons/m-kasbokar.png"
               alt="کسب و کار"
+              imageStyles="object-contain"
             />
             <ResponsiveImage
               className="rounded-md border border-gray-300 p-2"
               dimensions="h-20 w-20"
               src="/icons/m-rezi.png"
               alt="ساماندهی"
+              imageStyles="object-contain"
             />
           </div>
         </div>

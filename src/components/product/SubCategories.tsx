@@ -46,6 +46,7 @@ const SubCategories: React.FC<Props> = (props) => {
                   src={item.image.url}
                   blurDataURL={item.image.placeholder}
                   alt={item.name}
+                  imageStyles="object-contain"
                 />
 
                 <span className="mt-2 inline-block">{item.name}</span>

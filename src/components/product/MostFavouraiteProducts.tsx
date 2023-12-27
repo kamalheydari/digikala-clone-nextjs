@@ -64,6 +64,7 @@ const MostFavouraiteProducts: React.FC<Props> = (props) => {
                     src={product.images[0].url}
                     blurDataURL={product.images[0].placeholder}
                     alt={product.title}
+                    imageStyles="object-contain"
                   />
                   <div
                     className={`mt-2 flex items-start gap-x-2 ${

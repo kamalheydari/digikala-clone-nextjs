@@ -33,6 +33,7 @@ const ProductCard: React.FC<Props> = (props) => {
               src={product.images[0].url}
               alt={product.title}
               blurDataURL={product.images[0].placeholder}
+              imageStyles="object-contain"
             />
 
             <div className="flex items-center gap-1.5 p-2 sm:flex-col sm:items-end">

@@ -34,6 +34,7 @@ const ImageGallery: React.FC<Props> = (props) => {
         <ResponsiveImage
           dimensions="lg:h-[320px] lg:w-[320px] xl:h-[420px] xl:w-[420px] 2xl:h-[500px] 2xl:w-[500px]"
           className="mx-auto"
+          imageStyles="object-contain"
           src={images[currentImage].url}
           blurDataURL={images[currentImage].placeholder}
           alt={productName}
@@ -47,6 +48,7 @@ const ImageGallery: React.FC<Props> = (props) => {
               className={`relative h-24 w-24 cursor-pointer overflow-hidden rounded-md border-2 border-transparent ${
                 index === currentImage && 'border border-gray-400 shadow-4xl'
               }`}
+              imageStyles="object-contain"
               onClick={() => setCurrentImage(index)}
               src={image.url}
               blurDataURL={image.placeholder}
@@ -64,6 +66,7 @@ const ImageGallery: React.FC<Props> = (props) => {
                 src={image.url}
                 blurDataURL={image.placeholder}
                 alt={productName}
+                imageStyles="object-contain"
               />
             </SwiperSlide>
           ))}
