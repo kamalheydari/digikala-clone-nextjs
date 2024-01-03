@@ -21,14 +21,14 @@ const ConfirmDeleteModal: React.FC<Props> = (props) => {
           <Modal.Body>
             <div className="space-y-4 bg-white px-3 py-6 text-center md:rounded-lg">
               <p>
-                آیا موافق حذف <span className="font-bold text-red-600">{title}</span> انتخاب شده هستید؟
+                آیا موافق حذف <span className="font-bold text-red-500">{title}</span> انتخاب شده هستید؟
               </p>
               <div className="flex justify-center gap-x-20">
                 <Button onClick={onConfirm} isLoading={isLoading}>
                   حذف و ادامه
                 </Button>
 
-                <Button className="!bg-green-600" onClick={onCancel}>
+                <Button className="!bg-green-500" onClick={onCancel}>
                   لغو
                 </Button>
               </div>

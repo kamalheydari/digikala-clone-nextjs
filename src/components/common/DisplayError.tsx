@@ -23,8 +23,8 @@ const DisplayError: React.FC<Props> = (props) => {
         leaveTo="opacity-0"
       >
         <div className="mt-1.5 inline-flex min-w-max gap-x-1 text-sm ">
-          {errors && <Exclamation className="text-red-700" />}
-          <span className="text-red-700">{errors?.message}</span>
+          {errors && <Exclamation className="text-red-600" />}
+          <span className="text-red-600">{errors?.message}</span>
         </div>
       </Transition>
     </div>

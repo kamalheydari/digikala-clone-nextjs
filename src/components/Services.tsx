@@ -23,7 +23,7 @@ export default function Services() {
 
   // ? Render(s)
   return (
-    <section className="hidden justify-evenly border-b-2 border-t border-gray-300 py-5 lg:flex">
+    <section className="hidden justify-evenly border-b-2 border-t border-gray-200 py-5 lg:flex">
       {services.map((item, i) => (
         <div key={i} className="flex items-center gap-x-1">
           {item.icon}

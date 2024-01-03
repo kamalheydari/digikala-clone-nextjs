@@ -46,7 +46,7 @@ const ImageGallery: React.FC<Props> = (props) => {
               key={index}
               dimensions="h-24 w-24"
               className={`relative h-24 w-24 cursor-pointer overflow-hidden rounded-md border-2 border-transparent ${
-                index === currentImage && 'border border-gray-400 shadow-4xl'
+                index === currentImage && 'border-gray-300 shadow-3xl'
               }`}
               imageStyles="object-contain"
               onClick={() => setCurrentImage(index)}

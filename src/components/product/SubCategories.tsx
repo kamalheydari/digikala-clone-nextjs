@@ -39,7 +39,7 @@ const SubCategories: React.FC<Props> = (props) => {
                   category: item.slug,
                   sort: '',
                 })}`}
-                className="rounded-md border-4 border-gray-300 px-3 pb-2 pt-4 text-center"
+                className="rounded-md border-4 border-gray-100 px-3 pb-2 pt-4 text-center"
               >
                 <ResponsiveImage
                   dimensions="w-24 h-24 md:h-32 md:w-32 xl:w-40 xl:h-40"

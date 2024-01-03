@@ -54,7 +54,7 @@ const profilePaths = [
 export default function ProfileAside() {
   // ? Render(s)
   return (
-    <aside className="sticky top-6 mt-6 min-w-max lg:rounded-md lg:border lg:border-gray-300 lg:pt-4">
+    <aside className="sticky top-6 mt-6 min-w-max lg:rounded-md lg:border lg:border-gray-200 lg:pt-4">
       <Link passHref href="/admin">
         <Logo className="mx-auto h-12 w-40" />
       </Link>

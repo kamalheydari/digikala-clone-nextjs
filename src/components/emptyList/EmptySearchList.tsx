@@ -11,7 +11,7 @@ export default function EmptySearchList() {
           <Image src="/icons/exclamation.svg" alt="exclamation" width={32} height={32} />
           <h5>نتیجه‌ای یافت نشد!</h5>
         </div>
-        <p className="text-gray-600">از عبارت‌های متداول‌تر استفاده کنید و یا املای عبارت وارد‌شده را بررسی کنید.</p>
+        <p className="text-gray-500">از عبارت‌های متداول‌تر استفاده کنید و یا املای عبارت وارد‌شده را بررسی کنید.</p>
       </div>
     </div>
   )

@@ -115,7 +115,7 @@ const AddressModal: React.FC<Props> = (props) => {
                 />
               </div>
 
-              <div className="border-t-2 border-gray-300 py-3 lg:pb-0 ">
+              <div className="border-t-2 border-gray-200 py-3 lg:pb-0 ">
                 <SubmitModalButton isLoading={isLoading}>ثبت اطلاعات</SubmitModalButton>
               </div>
             </form>

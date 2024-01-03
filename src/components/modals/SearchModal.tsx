@@ -58,7 +58,7 @@ const SearchModal: React.FC<Props> = (props) => {
   // ? Render(s)
   return (
     <>
-      <button onClick={searchModalHanlders.open} className="flex max-w-3xl grow rounded-md bg-zinc-300/80">
+      <button onClick={searchModalHanlders.open} className="flex max-w-3xl grow rounded-md bg-zinc-200/80">
         <Search className="icon m-2 " />
       </button>
 
@@ -69,9 +69,9 @@ const SearchModal: React.FC<Props> = (props) => {
         >
           <Modal.Header onClose={searchModalHanlders.close}>جستسجو</Modal.Header>
           <Modal.Body>
-            <div className="my-3 flex flex-row-reverse rounded-md bg-zinc-300/80">
+            <div className="my-3 flex flex-row-reverse rounded-md bg-zinc-200/80">
               <button type="button" className="p-2.5" onClick={handleRemoveSearch}>
-                <Close className="h-4 w-4 text-gray-800 md:h-5 md:w-5" />
+                <Close className="h-4 w-4 text-gray-700 md:h-5 md:w-5" />
               </button>
               <input
                 type="text"
@@ -91,7 +91,7 @@ const SearchModal: React.FC<Props> = (props) => {
                 dataLength={data ? data.productsLength : 0}
                 emptyComponent={<EmptySearchList />}
               >
-                <div className="space-y-3 divide-y divide-gray-300/90 px-4 py-3">
+                <div className="space-y-3 divide-y px-4 py-3">
                   {data?.productsLength &&
                     data.productsLength > 0 &&
                     search.length > 0 &&

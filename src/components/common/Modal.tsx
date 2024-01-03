@@ -15,8 +15,7 @@ const Modal: React.FC<ModalProps> = (props) => {
   // ? Re-Renders
   //* abort to scroll
   useEffect(() => {
-    if (isShow) document.body.style.overflow = 'hidden'
-    else document.body.style.overflow = 'unset'
+    document.body.style.overflow = isShow ? 'hidden' : 'unset'
   }, [isShow])
 
   //* close modal on press Escape
@@ -57,9 +56,9 @@ const Modal: React.FC<ModalProps> = (props) => {
     <div
       className={`${
         isShow ? 'visible opacity-100' : 'invisible opacity-0 '
-      } fixed inset-0 z-50 border shadow drop-shadow-2xl transition-all duration-500`}
+      } fixed inset-0 z-50 transition-all duration-500`}
     >
-      <div className="h-screen w-screen bg-gray-500/20" onClick={onClose} />
+      <div className="h-screen w-screen bg-gray-400/20" onClick={onClose} />
       <div className={effectClasses}>
         {React.Children.map(children, (child) =>
           React.isValidElement(child)
@@ -108,7 +107,7 @@ const Header: React.FC<HeaderProps> = (props) => {
 
   // ? Render(s)
   return (
-    <div className="flex items-center justify-between border-b-2 border-gray-300 pb-2">
+    <div className="flex items-center justify-between border-b-2 border-gray-200 pb-2">
       <span className="text-sm">{children}</span>
       <button onClick={onClose} className="p-1">
         <Close className="icon" />

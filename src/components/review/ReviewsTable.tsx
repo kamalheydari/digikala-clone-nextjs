@@ -16,20 +16,20 @@ const ReviewsTable: React.FC<Props> = (props) => {
   return (
     <section className="mx-3 mt-7 overflow-x-auto lg:mx-10">
       <table className="w-full whitespace-nowrap">
-        <thead className="h-9 bg-emerald-200">
-          <tr className="text-emerald-600">
+        <thead className="h-9 bg-emerald-50">
+          <tr className="text-emerald-500">
             <th></th>
-            <th className="border-x-2 border-gray-300">ID</th>
+            <th className="border-x-2 border-gray-100">ID</th>
             <th>وضعیت</th>
-            <th className="border-x-2 border-gray-300">نام</th>
+            <th className="border-x-2 border-gray-100">نام</th>
             <th>تغییر وضعیت</th>
           </tr>
         </thead>
-        <tbody className="text-gray-700">
+        <tbody className="text-gray-600">
           {reviews.length > 0 &&
             reviews.map((review) => (
               <tr
-                className="border-b border-gray-300 text-center text-xs transition-colors hover:bg-gray-300/70 md:text-sm"
+                className="border-b border-gray-100 text-center text-xs transition-colors hover:bg-gray-50 md:text-sm"
                 key={review._id}
               >
                 <td className="p-2">
@@ -47,10 +47,10 @@ const ReviewsTable: React.FC<Props> = (props) => {
                     className={`inline-block rounded-lg px-2 py-1.5 font-bold
                       ${
                         review.status === 1
-                          ? 'bg-amber-100 text-amber-600'
+                          ? 'bg-amber-100 text-amber-500 '
                           : review.status === 2
-                            ? 'bg-green-200 text-green-600'
-                            : 'bg-red-200 text-red-600 '
+                            ? 'bg-green-100 text-green-500 '
+                            : 'bg-red-100 text-red-500 '
                       }
                     `}
                   >

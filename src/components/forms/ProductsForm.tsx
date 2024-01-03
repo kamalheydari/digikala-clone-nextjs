@@ -163,6 +163,7 @@ const ProductsForm: React.FC<Props> = (props) => {
           mode === 'create'
             ? handleSubmit(editedCreateHandler)
             : handleSubmit((data) => {
+                console.log('update onform')
                 updateHandler(data)
               })
         }
@@ -177,9 +178,9 @@ const ProductsForm: React.FC<Props> = (props) => {
                   `tab max-w-max px-3 mx-1
                   ${
                     Object.keys(formErrors).some((errorName) => item.names.includes(errorName)) &&
-                    'bg-red-400 hover:bg-red-400 text-red-700 '
+                    'bg-red-300 hover:bg-red-300 text-red-600 '
                   }
-                         ${selected ? 'bg-white shadow ' : ' hover:text-blue-700 '}
+                         ${selected ? 'bg-white shadow ' : ' hover:text-blue-600 '}
                         `
                 }
               >
@@ -241,7 +242,7 @@ const ProductsForm: React.FC<Props> = (props) => {
 
             <Tab.Panel>
               {mode === 'create' && isDetailsSkip ? (
-                <div className="m-3 rounded-lg bg-red-200 py-6 text-center text-red-600">
+                <div className="m-3 rounded-lg bg-red-50 py-6 text-center text-red-500">
                   ابتدا دسته‌بندی را انتخاب کنید
                 </div>
               ) : watch('optionsType') === 'colors' ? (
@@ -257,13 +258,13 @@ const ProductsForm: React.FC<Props> = (props) => {
                   <DisplayError errors={formErrors.sizes} />
                 </>
               ) : watch('optionsType') === 'none' ? (
-                <div className="m-3 rounded-lg bg-red-200 py-6 text-center text-red-600">بدون زیر محصول</div>
+                <div className="m-3 rounded-lg bg-red-50 py-6 text-center text-red-500">بدون زیر محصول</div>
               ) : null}
             </Tab.Panel>
 
             <Tab.Panel>
               {isDetailsSkip && mode === 'create' && (
-                <div className="m-3 rounded-lg bg-red-200 py-6 text-center text-red-600">
+                <div className="m-3 rounded-lg bg-red-50 py-6 text-center text-red-500">
                   ابتدا دسته‌بندی را انتخاب کنید
                 </div>
               )}
@@ -272,7 +273,7 @@ const ProductsForm: React.FC<Props> = (props) => {
                   <span>ویژگی‌ها</span>
                   <TableContainer tHeads={['نام', 'مقدار']}>
                     {watch('info').map((item, index) => (
-                      <tr key={index} className="border-b-2 border-gray-300">
+                      <tr key={index} className="border-b-2 border-gray-100">
                         <td className="my-0.5 text-right">
                           <input type="text" className="text-field__input" {...register(`info.${index}.title`)} />
                           <DisplayError errors={formErrors.info?.[index]?.title} />
@@ -288,7 +289,7 @@ const ProductsForm: React.FC<Props> = (props) => {
             </Tab.Panel>
             <Tab.Panel>
               {isDetailsSkip && mode === 'create' && (
-                <div className="m-3 rounded-lg bg-red-200 py-6 text-center text-red-600">
+                <div className="m-3 rounded-lg bg-red-50 py-6 text-center text-red-500">
                   ابتدا دسته‌بندی را انتخاب کنید
                 </div>
               )}
@@ -297,7 +298,7 @@ const ProductsForm: React.FC<Props> = (props) => {
                   <span>مشخصات</span>
                   <TableContainer tHeads={['نام', 'مقدار']}>
                     {watch('specification').map((item, index) => (
-                      <tr key={index} className="border-b-2 border-gray-300">
+                      <tr key={index} className="border-b-2 border-gray-100">
                         <td className="my-0.5 text-right">
                           <input
                             type="text"
@@ -323,11 +324,11 @@ const ProductsForm: React.FC<Props> = (props) => {
         </Tab.Group>
 
         {mode === 'edit' ? (
-          <Button className="mx-auto bg-amber-600" isRounded type="submit" isLoading={isLoadingUpdate}>
+          <Button className="mx-auto bg-amber-500" isRounded type="submit" isLoading={isLoadingUpdate}>
             بروزرسانی اطلاعات
           </Button>
         ) : (
-          <Button className="mx-auto bg-green-600" isRounded type="submit" isLoading={isLoadingCreate}>
+          <Button className="mx-auto bg-green-500" isRounded type="submit" isLoading={isLoadingCreate}>
             ثبت اطلاعات
           </Button>
         )}

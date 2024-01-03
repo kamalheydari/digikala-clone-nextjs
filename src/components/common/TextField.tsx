@@ -33,12 +33,12 @@ const TextField: React.FC<Props> = (props) => {
   return (
     <div>
       {label && (
-        <label className="mb-3 block text-xs text-gray-800 md:min-w-max lg:text-sm" htmlFor={name}>
+        <label className="mb-3 block text-xs text-gray-700 md:min-w-max lg:text-sm" htmlFor={name}>
           {label}
         </label>
       )}
       <input
-        className="block w-full rounded-md border border-gray-300 bg-zinc-300/30 px-3 py-1.5 text-base outline-none transition-colors placeholder:text-center focus:border-blue-700 lg:text-lg"
+        className="block w-full rounded-md border border-gray-200 bg-zinc-50/30 px-3 py-1.5 text-base outline-none transition-colors placeholder:text-center focus:border-blue-600 lg:text-lg"
         style={{ direction }}
         id={name}
         type={type}

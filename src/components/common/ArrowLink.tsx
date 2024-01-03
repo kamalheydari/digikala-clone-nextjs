@@ -13,9 +13,9 @@ const ArrowLink: React.FC<Props> = (props) => {
 
   // ? Render(s)
   return (
-    <Link href={path} className="inline-flex max-w-max items-center text-sm text-blue-500">
-      <span className="text-sky-600">{children}</span>
-      <ArrowLeft className="icon text-sky-600 " />
+    <Link href={path} className="inline-flex max-w-max items-center text-sm text-blue-400">
+      <span className="text-sky-500">{children}</span>
+      <ArrowLeft className="icon text-sky-500 " />
     </Link>
   )
 }

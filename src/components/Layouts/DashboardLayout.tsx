@@ -12,7 +12,7 @@ const DashboardLayout: React.FC<Props> = ({ children }) => {
         <div className="hidden lg:block">
           <DashboardAside />
         </div>
-        <div className="h-fit flex-1 lg:mt-6 lg:rounded-md lg:border lg:border-gray-300 lg:py-8">{children}</div>
+        <div className="h-fit flex-1 lg:mt-6 lg:rounded-md lg:border lg:border-gray-200 lg:py-8">{children}</div>
       </div>
     </RequireUser>
   )

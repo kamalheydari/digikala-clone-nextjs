@@ -24,7 +24,7 @@ const SelectColor: React.FC<Props> = (props) => {
   return (
     <section className="">
       <div className="flex justify-between p-4">
-        <span className="text-sm text-gray-800">رنگ: {tempColor?.name}</span>
+        <span className="text-sm text-gray-700">رنگ: {tempColor?.name}</span>
         <span className="farsi-digits text-sm">{colors.length} رنگ</span>
       </div>
       <div className="my-3 flex flex-wrap gap-3 px-5">
@@ -34,7 +34,7 @@ const SelectColor: React.FC<Props> = (props) => {
             key={item.id}
             onClick={() => dispatch(setTempColor(item))}
             className={` flex cursor-pointer items-center rounded-2xl px-1.5 py-1  ${
-              tempColor?.id === item.id ? 'border-2 border-sky-600' : ' border-2 border-gray-400'
+              tempColor?.id === item.id ? 'border-2 border-sky-500' : ' border-2 border-gray-300'
             }`}
           >
             <span className="ml-3 inline-block h-5 w-5 rounded-xl shadow" style={{ background: item.hashCode }}>
@@ -42,9 +42,9 @@ const SelectColor: React.FC<Props> = (props) => {
                 <Check
                   className={`h-5 w-5 ${
                     item.hashCode === '#ffffff'
-                      ? 'text-gray-700'
+                      ? 'text-gray-600'
                       : item.hashCode === '#000000'
-                        ? 'text-gray-300'
+                        ? 'text-gray-200'
                         : 'text-white'
                   } `}
                 />

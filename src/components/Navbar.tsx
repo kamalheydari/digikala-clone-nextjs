@@ -46,10 +46,10 @@ export default function Navbar() {
         <Bars className="icon" />
         دسته‌بندی کالاها
       </button>
-      <div className={`fixed left-0 top-28 z-20 h-screen w-full bg-gray-500/50 ${hover ? 'block' : 'hidden'}`} />
+      <div className={`fixed left-0 top-28 z-20 h-screen w-full bg-gray-400/50 ${hover ? 'block' : 'hidden'}`} />
 
       <div
-        className="absolute top-8 z-40 hidden w-full rounded-md border border-gray-300 bg-white shadow-sm group-hover:block"
+        className="absolute top-8 z-40 hidden w-full rounded-md border border-gray-100 bg-white shadow-lg group-hover:block"
         onMouseOver={() => setHover(true)}
         onMouseLeave={() => {
           hanldeDeactive()
@@ -57,7 +57,7 @@ export default function Navbar() {
         }}
       >
         <div className="flex">
-          <ul className="w-72 border-l-2 border-gray-300">
+          <ul className="w-72 border-l-2 border-gray-100">
             {isLoading ? (
               <NavbarSkeleton />
             ) : categories ? (
@@ -66,7 +66,7 @@ export default function Navbar() {
                 .map((levelOneCategory) => (
                   <li
                     key={levelOneCategory._id}
-                    className="group w-full px-2 py-0.5 text-sm hover:bg-gray-300"
+                    className="group w-full px-2 py-0.5 text-sm hover:bg-gray-100"
                     onMouseOver={() => handleActive(levelOneCategory)}
                   >
                     <Link href={`/main/${levelOneCategory.slug}`} className="flex items-center gap-x-1.5 p-3">
@@ -88,36 +88,36 @@ export default function Navbar() {
             {isLoading
               ? null
               : activeMinCat
-              ? categories?.map((levelTwoCategory) => {
-                  if (levelTwoCategory.parent === activeMinCat._id) {
-                    return (
-                      <li key={levelTwoCategory._id} className="h-fit">
-                        <Link
-                          href={`/products?category=${levelTwoCategory.slug}`}
-                          className="flex-center mb-1 border-r-2 border-red-600 px-2 text-sm font-semibold tracking-wider text-gray-800"
-                        >
-                          {levelTwoCategory.name}
-                          <ArrowLeft className="icon" />
-                        </Link>
-                        <ul className="space-y-1">
-                          {categories
-                            .filter((category) => category.parent === levelTwoCategory._id)
-                            .map((levelThreeCategory) => (
-                              <li key={levelThreeCategory._id}>
-                                <Link
-                                  href={`/products?category=${levelThreeCategory.slug}`}
-                                  className="px-3 text-xs font-medium text-gray-800"
-                                >
-                                  {levelThreeCategory.name}
-                                </Link>
-                              </li>
-                            ))}
-                        </ul>
-                      </li>
-                    )
-                  } else return null
-                })
-              : null}
+                ? categories?.map((levelTwoCategory) => {
+                    if (levelTwoCategory.parent === activeMinCat._id) {
+                      return (
+                        <li key={levelTwoCategory._id} className="h-fit">
+                          <Link
+                            href={`/products?category=${levelTwoCategory.slug}`}
+                            className="flex-center mb-1 border-r-2 border-red-500 px-2 text-sm font-semibold tracking-wider text-gray-700"
+                          >
+                            {levelTwoCategory.name}
+                            <ArrowLeft className="icon" />
+                          </Link>
+                          <ul className="space-y-1">
+                            {categories
+                              .filter((category) => category.parent === levelTwoCategory._id)
+                              .map((levelThreeCategory) => (
+                                <li key={levelThreeCategory._id}>
+                                  <Link
+                                    href={`/products?category=${levelThreeCategory.slug}`}
+                                    className="px-3 text-xs font-medium text-gray-700"
+                                  >
+                                    {levelThreeCategory.name}
+                                  </Link>
+                                </li>
+                              ))}
+                          </ul>
+                        </li>
+                      )
+                    } else return null
+                  })
+                : null}
           </ul>
         </div>
       </div>

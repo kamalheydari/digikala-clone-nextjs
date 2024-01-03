@@ -41,13 +41,13 @@ const OrderCard: React.FC<Props> = (props) => {
       {(isSuccess || isError) && (
         <HandleResponse isError={isError} isSuccess={isSuccess} error={error} message={data?.msg} />
       )}
-      <div className="space-y-3 border-b border-gray-300 py-4 lg:rounded-lg lg:border ">
+      <div className="space-y-3 border-b border-gray-200 py-4 lg:rounded-lg lg:border ">
         <div className="flex items-center justify-between lg:px-3">
           <div className="flex items-center gap-x-2 ">
             {order.delivered ? (
-              <Check className="h-6 w-6 rounded-full bg-lime-600 p-0.5 text-white" />
+              <Check className="h-6 w-6 rounded-full bg-lime-500 p-0.5 text-white" />
             ) : (
-              <Clock2 className="h-6 w-6 rounded-full bg-amber-600 p-0.5 text-white" />
+              <Clock2 className="h-6 w-6 rounded-full bg-amber-500 p-0.5 text-white" />
             )}
             <span className="text-sm text-black">{order.delivered ? 'تحویل شده' : 'در حال پردازش'}</span>
           </div>
@@ -55,7 +55,7 @@ const OrderCard: React.FC<Props> = (props) => {
           {singleOrder && (
             <div className="group relative h-fit self-end px-1.5">
               <More className="icon cursor-pointer" />
-              <div className="absolute left-0 top-5 z-10 hidden rounded bg-white px-4 py-3 shadow-4xl group-hover:flex">
+              <div className="absolute left-0 top-5 z-10 hidden rounded bg-white px-4 py-3 shadow-3xl group-hover:flex">
                 <div className="space-y-4">
                   <button
                     type="button"
@@ -63,7 +63,7 @@ const OrderCard: React.FC<Props> = (props) => {
                     onClick={handleChangeToDelivered}
                     disabled={order.delivered}
                   >
-                    <Check className="icon rounded-full bg-green-600 p-0.5 text-white " />
+                    <Check className="icon rounded-full bg-green-500 p-0.5 text-white " />
                     <span className="block">تغییر وضعیت به تحویل شده</span>
                   </button>
                   <button
@@ -72,7 +72,7 @@ const OrderCard: React.FC<Props> = (props) => {
                     onClick={handleChangeToInProccess}
                     disabled={!order.delivered}
                   >
-                    <Clock2 className="icon rounded-full bg-amber-600 p-0.5 text-white " />
+                    <Clock2 className="icon rounded-full bg-amber-500 p-0.5 text-white " />
                     <span className="block">تغییر وضعیت به در حال پردازش</span>
                   </button>
                 </div>
@@ -90,7 +90,7 @@ const OrderCard: React.FC<Props> = (props) => {
             <Toman className="h-6 w-6" />
           </div>
         </div>
-        <div className="flex flex-wrap gap-x-5 gap-y-3 py-5 lg:border-t lg:border-gray-300 lg:px-3">
+        <div className="flex flex-wrap gap-x-5 gap-y-3 py-5 lg:border-t lg:border-gray-200 lg:px-3">
           {order.cart.map((cartItem) => (
             <ResponsiveImage
               key={cartItem.itemID}

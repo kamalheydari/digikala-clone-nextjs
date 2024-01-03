@@ -110,7 +110,7 @@ const SliderForm: React.FC<Props> = (props) => {
           <div className="flex justify-evenly gap-x-4 pt-10">
             {mode === 'edit' ? (
               <>
-                <Button className="bg-amber-600 " isRounded={true} type="submit" isLoading={isLoadingUpdate}>
+                <Button className="bg-amber-500 " isRounded={true} type="submit" isLoading={isLoadingUpdate}>
                   بروزرسانی اسلایدر
                 </Button>
 
@@ -119,7 +119,7 @@ const SliderForm: React.FC<Props> = (props) => {
                 </Button>
               </>
             ) : (
-              <Button className="bg-green-600 " isRounded={true} type="submit" isLoading={isLoadingCreate}>
+              <Button className="bg-green-500 " isRounded={true} type="submit" isLoading={isLoadingCreate}>
                 ثبت اسلایدر
               </Button>
             )}

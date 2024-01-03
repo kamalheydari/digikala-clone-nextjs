@@ -19,7 +19,7 @@ const TextArea: React.FC<Props> = (props) => {
   return (
     <div className="space-y-1.5">
       {label && (
-        <label className="mb-3 block text-xs text-gray-800 md:min-w-max lg:text-sm" htmlFor={field.name}>
+        <label className="mb-3 block text-xs text-gray-700 md:min-w-max lg:text-sm" htmlFor={field.name}>
           {label}
         </label>
       )}

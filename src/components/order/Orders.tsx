@@ -36,7 +36,7 @@ export default function Orders() {
     <section>
       <div className="py-6 lg:py-0">
         <div className="mb-7 flex justify-between px-5">
-          <h4 className="inline-block border-b-2 border-red-600 py-1 text-sm md:text-base">سفارش‌های من</h4>
+          <h4 className="inline-block border-b-2 border-red-500 py-1 text-sm md:text-base">سفارش‌های من</h4>
           <ArrowLink path="profile/orders">مشاهده همه</ArrowLink>
         </div>
         <div className="flex justify-evenly lg:py-20">
@@ -48,10 +48,8 @@ export default function Orders() {
                 <Image src="/icons/status-processing.svg" fill alt="جاری" />
                 <span className="farsi-digits order-badge absolute">{formatNumber(pendingOrder)}</span>
               </div>
-              <div className="text-gray-800">
-                <span className="farsi-digits hidden lg:block lg:text-lg lg:text-black">
-                  {formatNumber(pendingOrder)} سفارش
-                </span>
+              <div className="text-gray-700">
+                <span className="farsi-digits hidden lg:block lg:text-black">{formatNumber(pendingOrder)} سفارش</span>
                 <span className="text-xs lg:text-sm">جاری</span>
               </div>
             </div>
@@ -67,10 +65,8 @@ export default function Orders() {
                 <Image src="/icons/status-delivered.svg" fill alt="تحویل شده" />
                 <span className="farsi-digits order-badge absolute">{formatNumber(successOrder)}</span>
               </div>
-              <div className="text-gray-800">
-                <span className="farsi-digits hidden lg:block lg:text-lg lg:text-black">
-                  {formatNumber(successOrder)} سفارش
-                </span>
+              <div className="text-gray-700">
+                <span className="farsi-digits hidden lg:block lg:text-black">{formatNumber(successOrder)} سفارش</span>
                 <span className="text-xs lg:text-sm">تحویل شده</span>
               </div>
             </div>
@@ -86,8 +82,8 @@ export default function Orders() {
                 <Image src="/icons/status-returned.svg" fill alt="مرجوع" />
                 <span className="order-badge farsi-digits absolute">0</span>
               </div>
-              <div className="text-gray-800">
-                <span className="farsi-digits hidden lg:block lg:text-lg lg:text-black">0 سفارش</span>
+              <div className="text-gray-700">
+                <span className="farsi-digits hidden lg:block lg:text-black">0 سفارش</span>
                 <span className="text-xs lg:text-sm">مرجوع</span>
               </div>
             </div>

@@ -91,20 +91,20 @@ const UploadImage: React.FC<Props> = (props) => {
             type="file"
             id="file"
             onChange={handleFileChange}
-            className="w-full border border-gray-400 px-3 py-2"
+            className="w-full border border-gray-300 px-3 py-2"
           />
           <button
             type="button"
             disabled={loading || !file}
             onClick={handleUpload}
-            className="w-36 rounded bg-green-200 py-2 text-green-700 hover:bg-green-200 hover:text-green-800  "
+            className="w-36 rounded bg-green-50 py-2 text-green-600 hover:bg-green-100 hover:text-green-700  "
           >
             {loading ? 'در حال آپلود...' : 'آپلود'}
           </button>
         </div>
       </div>
-      {error && <p className="my-1 text-red-600">{error}</p>}
-      {message && <p className="my-1 text-green-600">{message}</p>}
+      {error && <p className="my-1 text-red-500">{error}</p>}
+      {message && <p className="my-1 text-green-500">{message}</p>}
     </>
   )
 }

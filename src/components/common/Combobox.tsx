@@ -42,9 +42,9 @@ const Combobox: React.FC<Props> = (props) => {
   return (
     <HUICombobox value={field.value} name={field.name} onChange={field.onChange}>
       <div className="relative max-w-xl">
-        <div className="relative w-full cursor-default overflow-hidden rounded-lg border border-gray-300 bg-white text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-400 sm:text-sm">
+        <div className="relative w-full cursor-default overflow-hidden rounded-lg border border-gray-200 bg-white text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
           <HUICombobox.Input
-            className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-950 outline-none focus:ring-0"
+            className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 outline-none focus:ring-0"
             displayValue={(item: { name: string }) => item.name}
             onChange={(event) => setQuery(event.target.value)}
             placeholder={placeholder}
@@ -61,15 +61,15 @@ const Combobox: React.FC<Props> = (props) => {
           leaveTo="opacity-0"
           afterLeave={() => setQuery('')}
         >
-          <HUICombobox.Options className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md border border-gray-300 bg-white py-1 text-base shadow-sm ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+          <HUICombobox.Options className="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded-md border border-gray-100 bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
             {filteredList.length === 0 && query !== '' ? (
-              <div className="relative cursor-default select-none px-4 py-2 text-gray-800">هیچ موردی پیدا نشد!</div>
+              <div className="relative cursor-default select-none px-4 py-2 text-gray-700">هیچ موردی پیدا نشد!</div>
             ) : (
               filteredList.map((item) => (
                 <HUICombobox.Option
                   key={item.id}
-                  className={`relative cursor-pointer select-none py-3 pl-10 pr-4 text-white transition-colors hover:bg-teal-200
-                  ${field.value?.id === item.id ? 'bg-teal-200' : ''}
+                  className={`relative cursor-pointer select-none py-3 pl-10 pr-4 text-white transition-colors hover:bg-teal-100
+                  ${field.value?.id === item.id ? 'bg-teal-50' : ''}
                   `}
                   value={item}
                 >
@@ -85,10 +85,10 @@ const Combobox: React.FC<Props> = (props) => {
                       {field.value?.id === item.id ? (
                         <span
                           className={`flex-center absolute inset-y-0 left-0 pl-3  ${
-                            active ? 'text-white' : 'text-teal-700'
+                            active ? 'text-white' : 'text-teal-600'
                           }`}
                         >
-                          <HiCheck className="icon text-teal-700" aria-hidden="true" />
+                          <HiCheck className="icon text-teal-600" aria-hidden="true" />
                         </span>
                       ) : null}
                     </>

@@ -44,14 +44,14 @@ const DetailsHome: NextPage = () => {
                 {categories &&
                   categories.map((category) => (
                     <tr
-                      className="border-b border-gray-300 text-center text-xs transition-colors hover:bg-gray-300/70 md:text-sm"
+                      className="border-b border-gray-100 text-center text-xs transition-colors hover:bg-gray-50 md:text-sm"
                       key={category._id}
                     >
                       <td className="w-3/4 px-2 py-4 text-right">{category.name}</td>
                       <td className="px-2 py-4">
                         <Link
                           href={`/admin/details/${category._id}?category_name=${category.name}`}
-                          className="mx-1.5 inline-block rounded-sm bg-blue-200 px-2 py-1 text-blue-500"
+                          className="mx-1.5 inline-block rounded-sm bg-blue-50 px-1.5 py-1 text-blue-500"
                         >
                           مشخصات و ویژگی ها
                         </Link>

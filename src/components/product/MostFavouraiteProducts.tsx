@@ -31,7 +31,7 @@ const MostFavouraiteProducts: React.FC<Props> = (props) => {
   return (
     <section className="px-3">
       <div className="mb-3 flex items-center gap-x-2">
-        <Heart className="icon text-amber-500" />
+        <Heart className="icon text-amber-400" />
         <h4 className="text-xl">محبوب ترین کالاها</h4>
       </div>
       <div className="grid grid-cols-2 gap-1 md:grid-cols-3 md:gap-2 lg:grid-cols-4 xl:grid-cols-5">
@@ -52,10 +52,10 @@ const MostFavouraiteProducts: React.FC<Props> = (props) => {
               ))
           : products?.map((product) => (
               <Link key={product._id} href={`/products/${product.slug}`}>
-                <article className="min-h-[248px] border border-gray-300/80 p-1 transition hover:border-gray-300">
+                <article className="min-h-[248px] border border-gray-50 p-1 transition hover:border-gray-200">
                   <div className="flex gap-x-1 ">
                     <span className="farsi-digits text-base">{product.rating.toFixed(1)}</span>
-                    <Star className="h-5 w-5 text-amber-500 md:h-7 md:w-7 " />
+                    <Star className="h-5 w-5 text-amber-400 md:h-7 md:w-7 " />
                   </div>
 
                   <ResponsiveImage

@@ -37,7 +37,7 @@ const DataStateDisplay: React.FC<Props> = (props) => {
       {isError && error ? (
         <div className="mx-auto w-fit space-y-3 py-20 text-center">
           <h5 className="text-xl">خطایی رخ داده</h5>
-          <p className="text-lg text-red-600">{getErrorMessage(error)}</p>
+          <p className="text-lg text-red-500">{getErrorMessage(error)}</p>
           <Button className="mx-auto" onClick={refetch}>
             تلاش مجدد
           </Button>

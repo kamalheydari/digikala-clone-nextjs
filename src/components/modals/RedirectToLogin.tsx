@@ -30,7 +30,7 @@ const RedirectToLogin: React.FC<Props> = (props) => {
           <div className="space-y-4 bg-white p-3 text-center md:rounded-lg">
             <Image className="mx-auto" src="/icons/exclamation.svg" height={80} width={80} alt="!" />
             <p className="text-xl font-bold">{title}</p>
-            <p className="text-red-700">{text}</p>
+            <p className="text-red-600">{text}</p>
             <Button className="mx-auto" onClick={handleClick}>
               انتقال به صفحه ورود
             </Button>

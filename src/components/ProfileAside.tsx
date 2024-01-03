@@ -44,7 +44,7 @@ function ProfileAside() {
 
   // ? Render(s)
   return (
-    <aside className="sticky mt-6 lg:top-6 lg:rounded-md lg:border lg:border-gray-300 lg:pt-4 xl:top-[136px]">
+    <aside className="sticky mt-6 lg:top-6 lg:rounded-md lg:border lg:border-gray-200 lg:pt-4 xl:top-[136px]">
       <div className="flex items-center justify-between px-5 py-2 ">
         <Person className="h-12 w-12" />
         <div className="ml-auto mr-3 flex flex-col gap-y-1">
@@ -56,12 +56,12 @@ function ProfileAside() {
           ) : (
             <>
               <span className="text-sm font-medium lg:text-base">{userInfo?.name}</span>
-              <span className="text-[11px] text-gray-500">{userInfo?.mobile}</span>
+              <span className="text-[11px] text-gray-400">{userInfo?.mobile}</span>
             </>
           )}
         </div>
         <Link href="/profile/personal-info">
-          <Edit className="h-6 w-6 text-blue-500" />
+          <Edit className="h-6 w-6 text-blue-400" />
         </Link>
       </div>
 

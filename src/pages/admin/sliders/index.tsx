@@ -50,14 +50,14 @@ const Sliders: NextPage = () => {
           <TableContainer tHeads={['نام دسته بندی اسلایدرها', 'بیشتر']}>
             {categories.map((category) => (
               <tr
-                className="border-b border-gray-300 text-center text-xs transition-colors hover:bg-gray-300/50 md:text-sm"
+                className="border-b border-gray-100 text-center text-xs transition-colors hover:bg-gray-50/50 md:text-sm"
                 key={category._id}
               >
                 <td className="w-3/4 px-2 py-4 text-right">{category.name}</td>
                 <td className="px-2 py-4">
                   <Link
                     href={`/admin/sliders?category_id=${category._id}&category_name=${category.name}`}
-                    className="mx-1.5 inline-block rounded-sm bg-rose-200 px-2 py-1 text-rose-500"
+                    className="mx-1.5 inline-block rounded-sm bg-rose-50 px-1.5 py-1 text-rose-500"
                   >
                     اسلایدرها
                   </Link>
@@ -82,7 +82,7 @@ const Sliders: NextPage = () => {
             {category_id && (
               <Link
                 href={`sliders/create?category_id=${category_id}&category_name=${category_name}`}
-                className="flex max-w-max items-center gap-x-3 rounded-lg border-2 border-red-700 px-3 py-2 text-red-700"
+                className="flex max-w-max items-center gap-x-3 rounded-lg border-2 border-red-600 px-3 py-2 text-red-600"
               >
                 افزودن اسلایدر جدید
               </Link>
@@ -90,14 +90,14 @@ const Sliders: NextPage = () => {
             <TableContainer tHeads={['اسلایدرها', 'بیشتر']}>
               {sliders.map((slider) => (
                 <tr
-                  className="border-b border-gray-300 text-center text-xs transition-colors hover:bg-gray-300/50 md:text-sm"
+                  className="border-b border-gray-100 text-center text-xs transition-colors hover:bg-gray-50/50 md:text-sm"
                   key={slider._id}
                 >
                   <td className="w-3/4 px-2 py-4 text-right">{slider.title}</td>
                   <td className="px-2 py-4">
                     <Link
                       href={`/admin/sliders/edit/${slider._id}?slider_name=${slider.title}`}
-                      className="mx-1.5 inline-block rounded-sm bg-rose-300 px-1.5 py-1 text-rose-600"
+                      className="mx-1.5 inline-block rounded-sm bg-rose-50 px-1.5 py-1 text-rose-500"
                     >
                       ویرایش
                     </Link>

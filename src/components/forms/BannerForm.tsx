@@ -103,13 +103,13 @@ const BannerForm: React.FC<Props> = (props) => {
 
           <div className="mb-5 flex items-center gap-8">
             <label className="inline-flex items-center gap-x-2">
-              <input className="h-5 w-5 text-red-700" type="radio" value="one" {...register('type')} />
-              <span className="ml-2 text-gray-800">نوع اول</span>
+              <input className="h-5 w-5 text-red-600" type="radio" value="one" {...register('type')} />
+              <span className="ml-2 text-gray-700">نوع اول</span>
             </label>
 
             <label className="inline-flex items-center gap-x-2">
-              <input className="h-5 w-5 text-red-700" type="radio" value="two" {...register('type')} />
-              <span className="ml-2 text-gray-800">نوع دوم</span>
+              <input className="h-5 w-5 text-red-600" type="radio" value="two" {...register('type')} />
+              <span className="ml-2 text-gray-700">نوع دوم</span>
             </label>
           </div>
 
@@ -133,7 +133,7 @@ const BannerForm: React.FC<Props> = (props) => {
           <div className="flex justify-evenly gap-x-4 pt-10">
             {mode === 'edit' ? (
               <>
-                <Button className="bg-amber-600 " isRounded={true} type="submit" isLoading={isLoadingUpdate}>
+                <Button className="bg-amber-500 " isRounded={true} type="submit" isLoading={isLoadingUpdate}>
                   بروزرسانی بنر
                 </Button>
 
@@ -142,7 +142,7 @@ const BannerForm: React.FC<Props> = (props) => {
                 </Button>
               </>
             ) : (
-              <Button className="bg-green-600 " isRounded={true} type="submit" isLoading={isLoadingCreate}>
+              <Button className="bg-green-500 " isRounded={true} type="submit" isLoading={isLoadingCreate}>
                 ثبت بنر
               </Button>
             )}

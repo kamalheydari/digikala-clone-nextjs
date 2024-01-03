@@ -37,7 +37,7 @@ const CartItem: React.FC<Props> = (props) => {
 
       {/* name */}
       <div>
-        <h5 className="mb-3 text-start text-sm">
+        <h5 className="mb-3 text-sm">
           <Link href={`/products/${item.slug}`}>{item.name}</Link>
         </h5>
 
@@ -45,7 +45,7 @@ const CartItem: React.FC<Props> = (props) => {
         <div className="space-y-3">
           {item.color && (
             <div className="flex items-center gap-x-2">
-              <span className="inline-block h-5 w-5 rounded-xl shadow-sm" style={{ background: item.color.hashCode }} />
+              <span className="inline-block h-5 w-5 rounded-xl shadow" style={{ background: item.color.hashCode }} />
               <span>{item.color.name}</span>
             </div>
           )}
@@ -60,14 +60,14 @@ const CartItem: React.FC<Props> = (props) => {
             <span className="font-light">گارانتی اصالت و ضمانت تحویل</span>
           </div>
           <div className="flex items-center gap-x-2">
-            <Save className="icon text-sky-500" />
+            <Save className="icon text-sky-400" />
             <span className="font-light">موجود در انبار دیجی کالا</span>
           </div>
           {item.discount > 0 ? (
             <DiscountCartItem discount={item.discount} price={item.price} />
           ) : (
             <div className="flex items-center gap-x-2">
-              <span className="farsi-digits text-sm text-gray-800">{formatNumber(item.price)}</span>
+              <span className="farsi-digits text-sm text-gray-700">{formatNumber(item.price)}</span>
               <Toman className="h-6 w-6" />
             </div>
           )}

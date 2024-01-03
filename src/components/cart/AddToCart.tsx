@@ -31,11 +31,11 @@ const AddToCart: React.FC<Props> = (props) => {
 
       {/* desktop */}
       <div
-        className={`hidden divide-y divide-gray-300/90 lg:sticky lg:col-start-8 lg:col-end-10 lg:row-start-2 lg:row-end-5 lg:flex lg:flex-col lg:rounded-lg lg:border lg:border-gray-300 lg:bg-gray-300 lg:px-3 lg:py-1.5 lg:shadow-sm xl:row-end-5 ${
+        className={`hidden divide-y lg:sticky lg:col-start-8 lg:col-end-10 lg:row-start-2 lg:row-end-5 lg:flex lg:flex-col lg:rounded-lg   lg:border lg:border-gray-200 lg:bg-gray-100 lg:px-3 lg:py-1.5 lg:shadow xl:row-end-5 ${
           second ? 'lg:top-4 xl:top-32' : 'lg:top-60 xl:top-[260px]'
         } `}
       >
-        <div className=" hidden items-center justify-between space-y-2 lg:flex lg:py-3">
+        <div className="hidden items-center justify-between space-y-2 lg:flex lg:py-3">
           <span className="text-base text-black">فروشنده :</span>
           <div className="flex gap-x-2">
             <Image src="/icons/mini-logo.png" width={24} height={24} alt="دیجی‌کالا" />
@@ -58,10 +58,7 @@ const AddToCart: React.FC<Props> = (props) => {
 
             {tempColor && (
               <div className="flex items-center gap-x-2 py-3">
-                <span
-                  className="inline-block h-5 w-5 rounded-xl shadow-sm"
-                  style={{ background: tempColor.hashCode }}
-                />
+                <span className="inline-block h-5 w-5 rounded-xl shadow" style={{ background: tempColor.hashCode }} />
                 <span>{tempColor.name}</span>
               </div>
             )}

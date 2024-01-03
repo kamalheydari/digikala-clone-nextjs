@@ -32,7 +32,7 @@ const BestSellsSlider: React.FC<Props> = (props) => {
   return (
     <section className="px-3">
       <div className="mb-3 flex items-center gap-x-2">
-        <Check className="h-7 w-7 text-amber-500" />
+        <Check className="h-7 w-7 text-amber-400" />
         <h4 className="text-xl">پرفروش‌ترین کالاها</h4>
       </div>
 
@@ -58,7 +58,7 @@ const BestSellsSlider: React.FC<Props> = (props) => {
                       imageStyles="object-contain"
                     />
                     <div className="flex items-center gap-x-3 border-b">
-                      <span className="farsi-digits text-2xl text-sky-600 ">{index + 1}</span>
+                      <span className="farsi-digits text-2xl text-sky-500 ">{index + 1}</span>
                       <span>{truncate(item.title, 25)}</span>
                     </div>
                   </article>

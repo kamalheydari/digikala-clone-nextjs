@@ -63,10 +63,10 @@ const AddColors: React.FC<Props> = (props) => {
         </div>
         <div className="flex flex-wrap justify-center gap-x-5 gap-y-3">
           {fields.map((field, index) => (
-            <div key={field.id} className="flex items-center gap-x-2 rounded bg-gray-300 px-1.5 py-2 shadow">
+            <div key={field.id} className="flex items-center gap-x-2 rounded bg-gray-50 px-1.5 py-2 shadow">
               <DeleteIconButton onClick={() => remove(index)} />
               <input className="text-field__input w-28" {...register(`colors.${index}.name`)} />
-              <input type="color" className="mr-3 h-8 w-8 shadow " {...register(`colors.${index}.hashCode`)} />
+              <input type="color" className="mr-3 h-8 w-8 shadow-lg " {...register(`colors.${index}.hashCode`)} />
             </div>
           ))}
         </div>

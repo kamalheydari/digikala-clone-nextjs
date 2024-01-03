@@ -109,11 +109,11 @@ const CategoryForm: React.FC<Props> = (props) => {
 
         <div className="py-3 lg:pb-0 ">
           {mode === 'edit' ? (
-            <Button className="mx-auto bg-amber-600" isRounded={true} type="submit" isLoading={isLoading}>
+            <Button className="mx-auto bg-amber-500" isRounded={true} type="submit" isLoading={isLoading}>
               بروزرسانی اطلاعات
             </Button>
           ) : (
-            <Button type="submit" className="mx-auto !bg-green-600 " isLoading={isLoading} isRounded={true}>
+            <Button type="submit" className="mx-auto !bg-green-500 " isLoading={isLoading} isRounded={true}>
               ثبت اطلاعات
             </Button>
           )}

@@ -24,9 +24,9 @@ const PersonalInfo: NextPage = () => {
     children: React.ReactNode
   }) => (
     <div className="flex-1 px-5">
-      <div className="flex items-center justify-between border-b border-gray-300 py-4">
+      <div className="flex items-center justify-between border-b border-gray-200 py-4">
         <div className="w-full">
-          <span className="text-xs text-gray-800">{label}</span>
+          <span className="text-xs text-gray-700">{label}</span>
           {isLoading ? (
             <Skeleton.Item animated="background" height="h-5" width="w-44" />
           ) : (

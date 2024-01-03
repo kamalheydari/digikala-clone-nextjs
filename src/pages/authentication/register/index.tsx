@@ -71,11 +71,11 @@ const RegisterPage: NextPage = () => {
         <Head>
           <title>دیجی‌کالا | ثبت‌نام</title>
         </Head>
-        <section className="container max-w-xl space-y-6 px-12 py-6 lg:rounded-lg lg:border lg:border-gray-300 lg:shadow">
+        <section className="container max-w-xl space-y-6 px-12 py-6 lg:rounded-lg lg:border lg:border-gray-100 lg:shadow">
           <Link passHref href="/">
             <Logo className="mx-auto h-24 w-44" />
           </Link>
-          <h2 className="text-gray-800">ثبت‌نام</h2>
+          <h2 className="text-gray-700">ثبت‌نام</h2>
           <form className="space-y-4" onSubmit={handleSubmit(submitHander)} autoComplete="off">
             <TextField control={control} errors={formErrors.name} placeholder="نام و نام خانوادگی" name="name" />
 
@@ -107,8 +107,8 @@ const RegisterPage: NextPage = () => {
           </form>
 
           <div>
-            <p className="ml-2 inline text-gray-900">حساب کاربری دارید؟</p>
-            <Link href="/authentication/login" className="text-lg text-blue-500">
+            <p className="ml-2 inline text-gray-800">حساب کاربری دارید؟</p>
+            <Link href="/authentication/login" className="text-lg text-blue-400">
               ورود
             </Link>
           </div>

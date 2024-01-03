@@ -40,12 +40,12 @@ export default function Logout() {
       )}
 
       <Button
-        className="flex w-full cursor-pointer justify-between gap-x-2 bg-gray-300/70 px-7 py-4 text-xs text-gray-800 transition-colors md:text-sm"
+        className="flex w-full cursor-pointer justify-between gap-x-2 bg-gray-50 px-7 py-4 text-xs text-gray-700 transition-colors hover:bg-gray-100 md:text-sm"
         onClick={handleLogout}
         isLoading={isLoading}
       >
         <LogoutIcon className="icon text-black" />
-        <span className="ml-auto mr-3 text-gray-800">خروج از حساب کاربری</span>
+        <span className="ml-auto mr-3 text-gray-700">خروج از حساب کاربری</span>
       </Button>
     </>
   )

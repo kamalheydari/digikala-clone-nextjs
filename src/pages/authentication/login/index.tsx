@@ -45,17 +45,17 @@ function LoginPage() {
         <Head>
           <title>دیجی‌کالا | ورود</title>
         </Head>
-        <section className="container max-w-xl space-y-6 px-12 py-6 lg:rounded-lg lg:border lg:border-gray-300 lg:shadow">
+        <section className="container max-w-xl space-y-6 px-12 py-6 lg:rounded-lg lg:border lg:border-gray-100 lg:shadow">
           <Link passHref href="/">
             <Logo className="mx-auto h-24 w-44" />
           </Link>
-          <h2 className="text-gray-800">ورود</h2>
+          <h2 className="text-gray-700">ورود</h2>
 
           <LoginForm isLoading={isLoading} onSubmit={submitHander} />
 
           <div>
-            <p className="ml-2 inline text-gray-900">هنوز ثبت‌نام نکردی؟</p>
-            <Link href="/authentication/register" className="text-lg text-blue-500">
+            <p className="ml-2 inline text-gray-800">هنوز ثبت‌نام نکردی؟</p>
+            <Link href="/authentication/register" className="text-lg text-blue-400">
               ثبت‌نام
             </Link>
           </div>

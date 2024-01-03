@@ -18,13 +18,13 @@ const ProductPrice: React.FC<Props> = (props) => {
   return (
     <div className={`${singleProduct && 'flex flex-col-reverse'}`}>
       <div className="flex items-center">
-        <span className="farsi-digits text-sm text-gray-800">{formatNumber(price - (discount * price) / 100)}</span>
+        <span className="farsi-digits text-sm text-gray-700">{formatNumber(price - (discount * price) / 100)}</span>
         <Toman className="mr-1 h-7 w-7" />
       </div>
 
       {discount > 0 && (
         <div>
-          <span className="farsi-digits ml-2 text-sm text-gray-600 line-through">{formatNumber(price)}</span>
+          <span className="farsi-digits ml-2 text-sm text-gray-500 line-through">{formatNumber(price)}</span>
           {singleProduct && discount > 0 && inStock !== 0 && <DiscountProduct discount={discount} />}
         </div>
       )}

@@ -47,7 +47,7 @@ const LoginPage: NextPage = () => {
         <Head>
           <title>مدیریت | ورود</title>
         </Head>
-        <section className="container max-w-xl space-y-6 px-12 py-6 lg:rounded-lg lg:border lg:border-gray-300 lg:shadow">
+        <section className="container max-w-xl space-y-6 px-12 py-6 lg:rounded-lg lg:border lg:border-gray-100 lg:shadow">
           <Link passHref href="/">
             <Logo className="mx-auto h-24 w-44" />
           </Link>
@@ -56,13 +56,13 @@ const LoginPage: NextPage = () => {
         </section>
 
         <div className="fixed right-5 top-5 max-w-xs rounded-lg border bg-white px-2 py-3 shadow-lg">
-          <h5 className="mb-2 text-amber-700">
+          <h5 className="mb-2 text-amber-600">
             برای مشاهده داشبورد مدیریت میتوانید از آدرس ایمیل و رمز عبور زیر استفاده کنید.
           </h5>
           <div className="text-left">
-            <span className="text-sm text-zinc-600">Email: admin@gmail.com</span>
+            <span className="text-sm text-zinc-500">Email: admin@gmail.com</span>
             <br />
-            <span className="text-sm text-zinc-600">Password: 123456</span>
+            <span className="text-sm text-zinc-500">Password: 123456</span>
           </div>
         </div>
       </main>

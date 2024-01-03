@@ -43,11 +43,11 @@ const Sort: React.FC<Props> = () => {
           >
             <Modal.Header onClose={sortHandlers.close}>مرتب سازی</Modal.Header>
             <Modal.Body>
-              <div className="divide-y divide-gray-300/90">
+              <div className="divide-y">
                 {sorts.map((item, i) => (
                   <div key={i} className="flex items-center">
                     <button
-                      className="block w-full py-3 text-right text-sm text-gray-600"
+                      className="block w-full py-3 text-right text-gray-700"
                       type="button"
                       name="sort"
                       onClick={() => handleSortChange(item)}
@@ -70,7 +70,7 @@ const Sort: React.FC<Props> = () => {
         {sorts.map((item, i) => (
           <button
             key={i}
-            className={`py-0.5  text-sm ${sortQuery === item.value ? 'text-red-600' : 'text-gray-700'}`}
+            className={`py-0.5  text-sm ${sortQuery === item.value ? 'text-red-500' : 'text-gray-600'}`}
             type="button"
             name="sort"
             onClick={() => handleSortChange(item)}

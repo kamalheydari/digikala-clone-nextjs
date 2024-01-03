@@ -64,7 +64,7 @@ export default function CartDropdown() {
                   <ArrowLink path="/checkout/cart">مشاهده‌ی سبد خرید</ArrowLink>
                 </div>
                 {/* Itmes */}
-                <div className="mx-1 h-80 divide-y divide-gray-300 overflow-y-auto">
+                <div className="mx-1 h-80 divide-y divide-gray-50 overflow-y-auto">
                   {cartItems.map((item) => (
                     <CartItem item={item} key={item.itemID} />
                   ))}

@@ -89,7 +89,7 @@ const UserNameModal: React.FC<Props> = (props) => {
             <form className="flex flex-1 flex-col justify-between gap-y-5 " onSubmit={handleSubmit(submitHander)}>
               <TextField label="نام و نام خانوادگی" control={control} errors={formErrors.name} name="name" />
 
-              <div className="border-t-2 border-gray-300 py-3 lg:pb-0 ">
+              <div className="border-t-2 border-gray-200 py-3 lg:pb-0 ">
                 <SubmitModalButton isLoading={isLoading}>ثبت اطلاعات</SubmitModalButton>
               </div>
             </form>

@@ -247,17 +247,17 @@ const Products: NextPage = () => {
                 dataLength={data ? data.productsLength : 0}
                 loadingComponent={<TableSkeleton count={10} />}
               >
-                <section className="mt-7 overflow-x-auto">
+                <section className="mt-7 overflow-x-scroll">
                   <table className="w-full table-auto overflow-scroll">
-                    <thead className="h-9 bg-zinc-300">
-                      <tr className="text-zinc-600">
+                    <thead className="h-9 bg-zinc-50">
+                      <tr className="text-zinc-500">
                         <th className="w-28"></th>
-                        <th className="border-r-2 border-zinc-300">نام محصول (تعداد: {data?.productsLength})</th>
+                        <th className="border-r-2 border-zinc-200">نام محصول (تعداد: {data?.productsLength})</th>
                       </tr>
                     </thead>
                     <tbody>
                       {data?.products.map((item) => (
-                        <tr key={item._id} className="border-b-2 border-gray-300">
+                        <tr key={item._id} className="border-b-2 border-gray-100">
                           <td className="flex items-center justify-center gap-x-4 p-2">
                             <DeleteIconButton onClick={() => handleDelete(item._id)} />
                             <Link href={`/admin/products/edit/${item._id}`}>

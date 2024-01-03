@@ -40,7 +40,7 @@ const UserHistory: NextPage = () => {
                       alt={item.title}
                     />
 
-                    <h5 className="flex-1 px-3 text-right text-gray-900 md:h-32">{truncate(item.title, 80)}</h5>
+                    <h5 className="flex-1 px-3 text-right text-gray-800 md:h-32">{truncate(item.title, 80)}</h5>
                   </Link>
                 </article>
               ))}

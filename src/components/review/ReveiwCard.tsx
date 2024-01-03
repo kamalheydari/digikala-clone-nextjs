@@ -59,7 +59,7 @@ const ReveiwCard: React.FC<Props> = (props) => {
                   onClick={() => handleChangeStatus(2)}
                   disabled={status === 2}
                 >
-                  <Check className="icon rounded-full bg-green-600 p-0.5 text-white " />
+                  <Check className="icon rounded-full bg-green-500 p-0.5 text-white " />
                   <span className="block">تغییر وضعیت به تایید شده</span>
                 </button>
               </Menu.Item>
@@ -70,7 +70,7 @@ const ReveiwCard: React.FC<Props> = (props) => {
                   onClick={() => handleChangeStatus(3)}
                   disabled={status === 3}
                 >
-                  <Cross className="icon rounded-full bg-red-600 p-0.5 text-white " />
+                  <Cross className="icon rounded-full bg-red-500 p-0.5 text-white " />
                   <span className="block">تغییر وضعیت به رد شده</span>
                 </button>
               </Menu.Item>
@@ -105,7 +105,7 @@ const ReveiwCard: React.FC<Props> = (props) => {
           onError={() => setStatus(item.status)}
         />
       )}
-      <div className="flex gap-x-3 space-y-3 border-b border-gray-300 py-4 lg:gap-x-8 lg:rounded-lg lg:border lg:px-2 ">
+      <div className="flex gap-x-3 space-y-3 border-b border-gray-200 py-4 lg:gap-x-8 lg:rounded-lg lg:border lg:px-2 ">
         {/* image */}
         <div>
           <ResponsiveImage
@@ -118,7 +118,7 @@ const ReveiwCard: React.FC<Props> = (props) => {
 
           <span
             className={`farsi-digits mr-10 inline-block h-5 w-5 rounded-md pt-0.5 text-center  text-white lg:mr-20 ${
-              item.rating <= 2 ? 'bg-red-600' : item.rating === 3 ? 'bg-amber-600' : 'bg-green-600'
+              item.rating <= 2 ? 'bg-red-500' : item.rating === 3 ? 'bg-amber-500' : 'bg-green-500'
             }`}
           >
             {item.rating}
@@ -127,22 +127,22 @@ const ReveiwCard: React.FC<Props> = (props) => {
 
         <div className="flex-1 ">
           {/* header */}
-          <div className="border-b border-gray-300 pb-1 lg:ml-4 lg:flex lg:flex-row-reverse lg:items-center lg:pb-3">
+          <div className="border-b border-gray-100 pb-1 lg:ml-4 lg:flex lg:flex-row-reverse lg:items-center lg:pb-3">
             <div className="flex justify-between">
               <div
                 className={`flex w-fit items-center gap-x-2 rounded-md px-1.5 py-0.5 ${
-                  status === 1 ? 'bg-amber-100 ' : status === 2 ? 'bg-green-200 ' : 'bg-red-100 '
+                  status === 1 ? 'bg-amber-100 ' : status === 2 ? 'bg-green-100 ' : 'bg-red-100 '
                 } `}
               >
                 {status === 1 ? (
-                  <Clock className="icon rounded-full bg-amber-600 p-0.5 text-white " />
+                  <Clock className="icon rounded-full bg-amber-500 p-0.5 text-white " />
                 ) : status === 2 ? (
-                  <Check className="icon rounded-full bg-green-600 p-0.5 text-white " />
+                  <Check className="icon rounded-full bg-green-500 p-0.5 text-white " />
                 ) : (
-                  <Cross className="icon rounded-full bg-red-600 p-0.5 text-white " />
+                  <Cross className="icon rounded-full bg-red-500 p-0.5 text-white " />
                 )}
                 <span
-                  className={`${status === 1 ? 'text-amber-600' : status === 2 ? 'text-green-600' : 'text-red-600'}`}
+                  className={`${status === 1 ? 'text-amber-500' : status === 2 ? 'text-green-500' : 'text-red-500'}`}
                 >
                   {status === 1 ? 'در انتظار تایید' : status === 2 ? 'تایید شده' : 'رد شده'}
                 </span>
@@ -158,7 +158,7 @@ const ReveiwCard: React.FC<Props> = (props) => {
             <div>
               {item.positivePoints.map((point) => (
                 <div className="flex items-center gap-x-1" key={point.id}>
-                  <Plus className="icon text-green-500" />
+                  <Plus className="icon text-green-400" />
                   <p>{point.title}</p>
                 </div>
               ))}
@@ -166,7 +166,7 @@ const ReveiwCard: React.FC<Props> = (props) => {
             <div>
               {item.negativePoints.map((point) => (
                 <div className="flex items-center gap-x-1" key={point.id}>
-                  <Minus className="icon text-red-500" />
+                  <Minus className="icon text-red-400" />
                   <p>{point.title}</p>
                 </div>
               ))}

@@ -45,20 +45,20 @@ const Pagination: React.FC<Props> = (props) => {
         <div className="ml-auto">
           {hasPreviousPage && (
             <li
-              className="flex cursor-pointer items-center p-1 text-red-600"
+              className="flex cursor-pointer items-center p-1 text-red-500"
               onClick={() => {
                 handleChangePage({ page: previousPage })
                 scrollToTop()
               }}
             >
-              <ArrowRight2 className="icon text-red-600" />
+              <ArrowRight2 className="icon text-red-500" />
               قبلی
             </li>
           )}
         </div>
         {currentPage !== 1 && previousPage !== 1 && (
           <li
-            className="h-8 w-8 cursor-pointer rounded-2xl border-2 border-transparent p-1 text-center transition-colors hover:border-red-600 hover:text-red-600"
+            className="h-8 w-8 cursor-pointer rounded-2xl border-2 border-transparent p-1 text-center transition-colors hover:border-red-500 hover:text-red-500"
             onClick={() => {
               handleChangePage({ page: 1 })
               scrollToTop()
@@ -71,7 +71,7 @@ const Pagination: React.FC<Props> = (props) => {
 
         {hasPreviousPage && (
           <li
-            className="h-8 w-8 cursor-pointer rounded-2xl border-2 border-transparent p-1 text-center transition-colors hover:border-red-600 hover:text-red-600"
+            className="h-8 w-8 cursor-pointer rounded-2xl border-2 border-transparent p-1 text-center transition-colors hover:border-red-500 hover:text-red-500"
             onClick={() => {
               handleChangePage({ page: previousPage })
               scrollToTop()
@@ -81,7 +81,7 @@ const Pagination: React.FC<Props> = (props) => {
           </li>
         )}
         <li
-          className="h-8 w-8 cursor-pointer rounded-2xl bg-red-600 p-1.5 text-center text-white"
+          className="h-8 w-8 cursor-pointer rounded-2xl bg-red-500 p-1.5 text-center text-white"
           onClick={() => {
             handleChangePage({ page: currentPage })
             scrollToTop()
@@ -91,7 +91,7 @@ const Pagination: React.FC<Props> = (props) => {
         </li>
         {hasNextPage && (
           <li
-            className="h-8 w-8 cursor-pointer rounded-2xl border-2 border-transparent p-1 text-center transition-colors hover:border-red-600 hover:text-red-600"
+            className="h-8 w-8 cursor-pointer rounded-2xl border-2 border-transparent p-1 text-center transition-colors hover:border-red-500 hover:text-red-500"
             onClick={() => {
               handleChangePage({ page: nextPage })
               scrollToTop()
@@ -103,7 +103,7 @@ const Pagination: React.FC<Props> = (props) => {
         {hasNextPage && nextPage !== lastPage && <li>...</li>}
         {lastPage !== currentPage && lastPage !== nextPage && (
           <li
-            className="h-8 w-8 cursor-pointer rounded-2xl border-2 border-transparent p-1 text-center transition-colors hover:border-red-600 hover:text-red-600"
+            className="h-8 w-8 cursor-pointer rounded-2xl border-2 border-transparent p-1 text-center transition-colors hover:border-red-500 hover:text-red-500"
             onClick={() => {
               handleChangePage({ page: lastPage })
               scrollToTop()
@@ -115,14 +115,14 @@ const Pagination: React.FC<Props> = (props) => {
         <div className="mr-auto">
           {hasNextPage && (
             <li
-              className="flex cursor-pointer items-center p-1 text-red-600"
+              className="flex cursor-pointer items-center p-1 text-red-500"
               onClick={() => {
                 handleChangePage({ page: nextPage })
                 scrollToTop()
               }}
             >
               بعدی
-              <ArrowLeft className="icon text-red-600" />
+              <ArrowLeft className="icon text-red-500" />
             </li>
           )}
         </div>

@@ -36,12 +36,12 @@ const ImageList: React.FC<Props> = (props) => {
         <DisplayError errors={errors} />
         {fields.map((image, idx) => (
           <div
-            className="relative max-w-max overflow-hidden rounded-md border border-gray-300 transition-colors hover:border-gray-400"
+            className="relative max-w-max overflow-hidden rounded-md border border-gray-200 transition-colors hover:border-gray-300"
             key={idx}
           >
             <Image src={image.url} width={150} height={150} alt="product image" />
             <button type="button" className="absolute -right-1 -top-1 z-10" onClick={() => remove(idx)} title="حذف">
-              <Delete className="icon h-7 w-7 rounded-2xl bg-red-100 p-1 text-red-600" />
+              <Delete className="icon h-7 w-7 rounded-2xl bg-red-100 p-1 text-red-500" />
             </button>
           </div>
         ))}

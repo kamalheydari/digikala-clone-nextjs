@@ -35,21 +35,21 @@ const Users: NextPage = () => {
             >
               <div className="mx-3 mt-7 overflow-x-auto lg:mx-5 xl:mx-10">
                 <table className="w-full whitespace-nowrap">
-                  <thead className="h-9 bg-green-200">
-                    <tr className="text-green-600">
+                  <thead className="h-9 bg-emerald-50">
+                    <tr className="text-emerald-500">
                       <th></th>
-                      <th className="border-x-2 border-gray-300">ID</th>
+                      <th className="border-x-2 border-gray-100">ID</th>
                       <th>وضعیت</th>
-                      <th className="border-x-2 border-gray-300">نام</th>
+                      <th className="border-x-2 border-gray-100">نام</th>
                       <th>ایمیل</th>
-                      <th className="border-r-2 border-gray-300"></th>
+                      <th className="border-r-2 border-gray-100"></th>
                     </tr>
                   </thead>
-                  <tbody className="text-gray-700">
+                  <tbody className="text-gray-600">
                     {data?.users &&
                       data.users.map((user) => (
                         <tr
-                          className="border-b border-gray-300 text-center text-xs transition-colors hover:bg-gray-300/70 md:text-sm"
+                          className="border-b border-gray-100 text-center text-xs transition-colors hover:bg-gray-50 md:text-sm"
                           key={user._id}
                         >
                           <td className="px-2 py-4">
@@ -61,11 +61,11 @@ const Users: NextPage = () => {
                               className={`inline-block rounded-lg px-2 py-1.5 font-bold
               ${
                 user.role === 'admin'
-                  ? 'bg-blue-300 text-blue-600'
+                  ? 'bg-blue-50 text-blue-600'
                   : user.role === 'user'
-                    ? 'bg-amber-100 text-amber-600'
+                    ? 'bg-amber-50 text-amber-600'
                     : user.role === 'root'
-                      ? 'bg-green-200 text-green-600'
+                      ? 'bg-green-50 text-green-600'
                       : ''
               }
               `}

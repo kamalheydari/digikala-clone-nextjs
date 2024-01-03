@@ -20,14 +20,14 @@ const ConfirmUpdateModal: React.FC<Props> = (props) => {
         <Modal.Body>
           <div className="space-y-4 bg-white px-3 py-6 text-center md:rounded-lg">
             <p>
-              آیا موافق بروزرسانی <span className="font-bold text-green-600">{title}</span> تغییر داده شده هستید؟
+              آیا موافق بروزرسانی <span className="font-bold text-green-500">{title}</span> تغییر داده شده هستید؟
             </p>
             <div className="flex justify-center gap-x-20">
               <Button onClick={onConfirm} isLoading={isLoading}>
                 بروزرسانی و ادامه
               </Button>
 
-              <Button className="!bg-green-600" onClick={onCancel}>
+              <Button className="!bg-green-500" onClick={onCancel}>
                 لغو
               </Button>
             </div>

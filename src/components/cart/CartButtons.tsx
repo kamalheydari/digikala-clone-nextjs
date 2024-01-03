@@ -19,20 +19,20 @@ const CartButtons: React.FC<Props> = (props) => {
 
   // ? Render(s)
   return (
-    <div className="flex items-center justify-evenly rounded-md border border-gray-300 py-2 text-sm shadow-4xl lg:shadow">
+    <div className="flex items-center justify-evenly rounded-md py-2 text-sm shadow-3xl">
       <button className="active:scale-90" type="button">
-        <Plus onClick={() => dispatch(increase(item.itemID))} className="icon text-red-600" />
+        <Plus onClick={() => dispatch(increase(item.itemID))} className="icon text-red-500" />
       </button>
 
       <span className="farsi-digits min-w-[22px] text-center text-sm">{formatNumber(item.quantity)}</span>
 
       {item.quantity === 1 ? (
         <button className="active:scale-90" type="button">
-          <Delete onClick={() => dispatch(removeFromCart(item.itemID))} className="icon text-red-600" />
+          <Delete onClick={() => dispatch(removeFromCart(item.itemID))} className="icon text-red-500" />
         </button>
       ) : (
         <button className="active:scale-90" type="button">
-          <Minus onClick={() => dispatch(decrease(item.itemID))} className="icon text-red-600" />
+          <Minus onClick={() => dispatch(decrease(item.itemID))} className="icon text-red-500" />
         </button>
       )}
     </div>

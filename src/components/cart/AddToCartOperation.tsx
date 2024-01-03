@@ -62,7 +62,7 @@ const AddToCartOperation: React.FC<Porps> = (props) => {
 
   // ? Render(s)
   return (
-    <div className="flex items-center justify-between border-t border-gray-400/50 bg-white p-3 shadow-4xl sm:px-5 lg:sticky lg:top-32 lg:flex-col-reverse lg:gap-y-4 lg:border-gray-100 lg:bg-gray-300 lg:p-0 lg:py-3 lg:shadow-none">
+    <div className="flex items-center justify-between border-t border-gray-300 bg-white p-3 shadow-3xl sm:px-5 lg:sticky lg:top-32 lg:flex-col-reverse lg:gap-y-4 lg:border-t-0 lg:bg-gray-100 lg:p-0 lg:py-3 lg:shadow-none">
       {currentItemInCart ? (
         <div className="flex w-full gap-x-4">
           <div className="w-44 lg:w-1/2 ">

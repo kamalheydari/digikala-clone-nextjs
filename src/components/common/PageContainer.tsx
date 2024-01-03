@@ -16,7 +16,7 @@ const PageContainer: React.FC<Props> = (props) => {
         <div className="lg:hidden">
           <BackIconButton />
         </div>
-        <h3 className="pb-1 text-sm text-gray-600 md:text-base lg:mx-3 lg:border-b-2 lg:border-red-600">{title}</h3>
+        <h3 className="pb-1 text-sm text-gray-500 md:text-base lg:mx-3 lg:border-b-2 lg:border-red-500">{title}</h3>
       </div>
       <div className="section-divide-y" />
 

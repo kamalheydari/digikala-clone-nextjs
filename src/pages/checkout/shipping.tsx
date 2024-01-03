@@ -77,8 +77,8 @@ const ShippingPage: NextPage = () => {
       const { openAddressModal } = addressModalProps || {}
       return (
         <button type="button" onClick={openAddressModal} className="mr-auto flex items-center">
-          <span className="text-base text-sky-600">تغییر | ویرایش</span>
-          <ArrowLeft className="icon text-sky-600" />
+          <span className="text-base text-sky-500">تغییر | ویرایش</span>
+          <ArrowLeft className="icon text-sky-500" />
         </button>
       )
     }
@@ -118,14 +118,14 @@ const ShippingPage: NextPage = () => {
           </Link>
           <div className="flex items-center justify-evenly">
             <Link href="/checkout/cart" className="flex flex-col items-center gap-y-2">
-              <Cart className="icon text-red-400" />
-              <span className="font-normal text-red-400">سبد خرید</span>
+              <Cart className="icon text-red-300" />
+              <span className="font-normal text-red-300">سبد خرید</span>
             </Link>
 
-            <div className="h-[1px] w-8  bg-red-400" />
+            <div className="h-[1px] w-8  bg-red-300" />
             <div className="flex flex-col items-center gap-y-2">
-              <Wallet className="icon h-6 w-6 text-red-600" />
-              <span className="text-base font-normal text-red-600">پرداخت</span>
+              <Wallet className="icon h-6 w-6 text-red-500" />
+              <span className="text-base font-normal text-red-500">پرداخت</span>
             </div>
           </div>
         </header>
@@ -155,7 +155,7 @@ const ShippingPage: NextPage = () => {
                   <span className="text-base text-black">ارسال عادی</span>
                   <span className="block">موجود در انبار</span>
                 </div>
-                <span className="farsi-digits mr-3 inline-block h-fit rounded-lg bg-gray-300 px-2 py-1">
+                <span className="farsi-digits mr-3 inline-block h-fit rounded-lg bg-gray-100 px-2 py-1">
                   {formatNumber(totalItems)} کالا
                 </span>
               </div>
@@ -173,7 +173,7 @@ const ShippingPage: NextPage = () => {
                     {item.color && (
                       <div className="mr-3 mt-1.5 flex items-center gap-x-2">
                         <span
-                          className="inline-block h-4 w-4 rounded-xl border border-gray-400 shadow"
+                          className="inline-block h-4 w-4 rounded-xl shadow"
                           style={{ background: item.color.hashCode }}
                         />
                         <span>{item.color.name}</span>
@@ -190,7 +190,7 @@ const ShippingPage: NextPage = () => {
                 ))}
               </div>
 
-              <Link href="/checkout/cart" className="mt-6 inline-block text-sm text-sky-600">
+              <Link href="/checkout/cart" className="mt-6 inline-block text-sm text-sky-500">
                 بازگشت به سبد خرید
               </Link>
             </section>
@@ -200,9 +200,7 @@ const ShippingPage: NextPage = () => {
 
           {/* cart info */}
           <section className="lg:h-fit lg:rounded-md lg:border lg:border-gray-200">
-            <div className="lg:rounded-md lg:border lg:border-gray-300">
-              <CartInfo />
-            </div>
+            <CartInfo />
             <div className="space-y-3 px-3 py-2">
               <div className="flex items-center gap-x-2 ">
                 <input

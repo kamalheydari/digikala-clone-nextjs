@@ -43,13 +43,13 @@ export default function Sidebar() {
         <div
           className={`${
             isSidebar ? 'visible opacity-100 delay-200 duration-300' : 'invisible opacity-0 '
-          }  z-10  h-full w-full bg-gray-300/50`}
+          }  z-10  h-full w-full bg-gray-100/50`}
           onClick={sidebarHandlers.close}
         />
 
         <div className="absolute right-0 top-0 z-20 h-screen w-3/4 max-w-sm space-y-4 overflow-y-auto bg-white py-4">
           <LogoPersian className="mr-3 h-10 w-28" />
-          <h5 className="border-t-2 border-gray-300  p-3">دسته‌بندی کالاها</h5>
+          <h5 className="border-t-2 border-gray-200  p-3">دسته‌بندی کالاها</h5>
           {isLoading ? (
             <SidebarSkeleton />
           ) : categoriesList ? (
@@ -61,27 +61,25 @@ export default function Sidebar() {
                       <>
                         <Disclosure.Button className="!mt-0 flex w-full items-center justify-between px-4 py-2">
                           <span
-                            className={`pl-3 text-lg font-semibold tracking-wide ${
-                              open ? 'text-red-500' : 'text-gray-700'
-                            }`}
+                            className={`pl-3 font-semibold tracking-wide ${open ? 'text-red-400' : 'text-gray-600'}`}
                           >
                             {category.name}
                           </span>
 
                           <ArrowDown
                             className={` ${
-                              open ? 'rotate-180 text-red-500' : 'text-gray-800'
-                            } h-7 w-7 rounded-2xl bg-gray-300`}
+                              open ? 'rotate-180 text-red-400' : 'text-gray-700'
+                            } h-7 w-7 rounded-2xl bg-gray-50`}
                           />
                         </Disclosure.Button>
-                        <Disclosure.Panel className=" !mt-0 bg-gray-300 text-sm text-gray-600">
+                        <Disclosure.Panel className=" !mt-0 bg-gray-100 text-sm text-gray-500">
                           <Link
                             href={`/main/${category.slug}`}
-                            className="inline-flex max-w-max items-center py-2 pr-7 text-sm text-gray-600"
+                            className="inline-flex max-w-max items-center py-2 pr-7 text-sm text-gray-500"
                             onClick={handleClose}
                           >
                             تمام موارد این دسته
-                            <ArrowLeft className="icon text-gray-600" />
+                            <ArrowLeft className="icon text-gray-500" />
                           </Link>
                           {category?.children &&
                             category.children.map((category) => (
@@ -89,29 +87,27 @@ export default function Sidebar() {
                                 {({ open }) => (
                                   <>
                                     <Disclosure.Button className="!mt-0 flex w-full items-center justify-between px-4 py-2 pr-7">
-                                      <span
-                                        className={`text-base font-medium ${open ? 'text-red-500' : 'text-gray-500'}`}
-                                      >
+                                      <span className={`font-medium ${open ? 'text-red-400' : 'text-gray-600'}`}>
                                         {category.name}
                                       </span>
                                       <ArrowDown
                                         className={` ${
-                                          open ? 'rotate-180 text-red-500' : 'text-gray-800'
-                                        } h-7 w-7 rounded-2xl bg-gray-300`}
+                                          open ? 'rotate-180 text-red-400' : 'text-gray-700'
+                                        } h-7 w-7 rounded-2xl bg-gray-50`}
                                       />
                                     </Disclosure.Button>
                                     <Disclosure.Panel
-                                      className={`!mt-0 px-4 pb-1 pt-2 text-sm text-gray-600 
-                                     ${open ? 'border-b border-gray-300' : ''}
+                                      className={`!mt-0 px-4 pb-1 pt-2 text-sm text-gray-500 
+                                     ${open ? 'border-b border-gray-50' : ''}
                                     `}
                                     >
                                       <Link
                                         href={`/products?category=${category.slug}`}
-                                        className="inline-flex max-w-max items-center py-2 pr-9 text-sm text-gray-600"
+                                        className="inline-flex max-w-max items-center py-2 pr-9 text-sm text-gray-500"
                                         onClick={handleClose}
                                       >
                                         تمام موارد این دسته
-                                        <ArrowLeft className="icon text-gray-600" />
+                                        <ArrowLeft className="icon text-gray-500" />
                                       </Link>
                                       {category.children &&
                                         category.children.map((category) => (

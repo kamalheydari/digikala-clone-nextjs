@@ -16,7 +16,7 @@ import {
 
 export default function Footer() {
   return (
-    <footer className="mt-8 border-t border-gray-300 bg-gray-300/80 pt-4">
+    <footer className="mt-8 border-t border-gray-200 bg-gray-50 pt-4">
       <div className="mx-auto space-y-8 px-3 lg:max-w-[1700px] ">
         {/* Logo & scroll to top */}
         <div className="flex justify-between">
@@ -24,7 +24,7 @@ export default function Footer() {
             <LogoPersian className="mb-6 h-10 w-32" />
             <div className="flex flex-col gap-y-2 lg:flex-row lg:gap-x-5">
               <span>تلفن پشتیبانی ۶۱۹۳۰۰۰۰ - ۰۲۱</span>
-              <span className="hidden w-[2px] bg-gray-300/80 lg:block" />
+              <span className="hidden w-[2px] bg-gray-300 lg:block" />
               <span>۷ روز هفته، ۲۴ ساعته پاسخگوی شما هستیم</span>
             </div>
           </div>
@@ -32,7 +32,7 @@ export default function Footer() {
             <button
               type="button"
               onClick={() => window.scrollTo(0, 0)}
-              className="flex items-center rounded-md border border-gray-400 bg-gray-300 px-3 py-1"
+              className="flex items-center rounded-md border border-gray-300 px-3 py-1"
             >
               <span className="text-sm ">بازگشت به بالا</span>
               <ArrowUp className="h-7 w-7 text-gray-400" />
@@ -59,8 +59,8 @@ export default function Footer() {
           {/* Newslatter */}
           <div className="max-w-lg flex-1">
             <form className="flex gap-x-3">
-              <input placeholder="ایمیل شما" className="input bg-gray-300" type="email" />
-              <button type="submit" className="rounded-md bg-gray-300 px-2 text-gray-500 ">
+              <input placeholder="ایمیل شما" className="input" type="email" />
+              <button type="submit" className="rounded-md bg-gray-200 px-2 text-white ">
                 ثبت
               </button>
             </form>

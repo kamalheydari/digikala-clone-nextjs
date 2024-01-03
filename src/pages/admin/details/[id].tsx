@@ -272,9 +272,9 @@ const DetailsPage: NextPage = () => {
                           `tab
                           ${
                             Object.prototype.hasOwnProperty.call(formError, item.name) &&
-                            'bg-red-400 hover:bg-red-400 text-red-700 '
+                            'bg-red-400 hover:bg-red-300 text-red-600 '
                           }
-                         ${selected ? 'bg-white shadow ' : 'hover:text-blue-700 '}
+                         ${selected ? 'bg-white shadow ' : 'hover:text-blue-600 '}
                          
                         `
                         }
@@ -332,7 +332,7 @@ const DetailsPage: NextPage = () => {
                 <div className="flex justify-center gap-x-4">
                   {mode === 'edit' ? (
                     <>
-                      <Button className="bg-amber-600 " isRounded={true} type="submit" isLoading={isLoadingUpdate}>
+                      <Button className="bg-amber-500 " isRounded={true} type="submit" isLoading={isLoadingUpdate}>
                         بروزرسانی مشخصات و ویژگی ها
                       </Button>
 
@@ -341,7 +341,7 @@ const DetailsPage: NextPage = () => {
                       </Button>
                     </>
                   ) : (
-                    <Button className="bg-green-600 " isRounded={true} type="submit" isLoading={isLoadingCreate}>
+                    <Button className="bg-green-500 " isRounded={true} type="submit" isLoading={isLoadingCreate}>
                       ثبت مشخصات و ویژگی ها
                     </Button>
                   )}

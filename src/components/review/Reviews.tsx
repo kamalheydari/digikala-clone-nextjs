@@ -32,14 +32,14 @@ const Reviews: React.FC<Porps> = (props) => {
     <>
       <section className="space-y-4 p-3 lg:max-w-3xl xl:max-w-5xl" id="_productReviews">
         <div className="flex items-center justify-between">
-          <h4 className="mb-3 lg:border-b-2 lg:border-red-600">دیدگاه‌ها</h4>
-          <span className="farsi-digits text-xs text-sky-600">{numReviews} دیدگاه</span>
+          <h4 className="mb-3 lg:border-b-2 lg:border-red-500">دیدگاه‌ها</h4>
+          <span className="farsi-digits text-xs text-sky-500">{numReviews} دیدگاه</span>
         </div>
         <div className="lg:mr-36">
           <div className="mb-8">
             <ReviewModal productTitle={productTitle} prdouctID={prdouctID} />
 
-            <p className="mt-6 text-xs text-gray-600">
+            <p className="mt-6 text-xs text-gray-500">
               پس از تایید نظر، با مراجعه به صفحه‌ی ماموریت‌های کلابی امتیاز خود را دریافت کنید.
             </p>
           </div>
@@ -50,7 +50,7 @@ const Reviews: React.FC<Porps> = (props) => {
             emptyComponent={<EmptyComment />}
             loadingComponent={<ReveiwSkeleton />}
           >
-            <div className="space-y-4 divide-y-2 divide-gray-300/90 py-3 sm:px-2 lg:px-6">
+            <div className="space-y-4 divide-y-2 py-3 sm:px-2 lg:px-6">
               {data?.reviews?.map((item) => <ReviewProductCard item={item} key={item._id} />)}
             </div>
           </DataStateDisplay>

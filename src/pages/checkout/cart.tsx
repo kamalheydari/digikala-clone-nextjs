@@ -68,7 +68,7 @@ const Cart: NextPage = () => {
     return (
       <>
         <Header />
-        <section className="mx-auto mb-20 space-y-3 py-2 lg:mb-0 lg:mt-6 lg:max-w-7xl lg:space-y-0 lg:rounded-md lg:border lg:border-gray-300 lg:px-5 lg:py-4 xl:mt-36">
+        <section className="mx-auto mb-20 space-y-3 py-2 lg:mb-0 lg:mt-6 lg:max-w-7xl lg:space-y-0 lg:rounded-md lg:border lg:border-gray-200 lg:px-5 lg:py-4 xl:mt-36">
           <Head>
             <title>دیجی‌کالا | سبد خرید</title>
           </Head>
@@ -96,7 +96,7 @@ const Cart: NextPage = () => {
           <title>دیجی‌کالا | سبد خرید</title>
         </Head>
 
-        <div className="h-fit lg:flex-1 lg:rounded-md lg:border lg:border-gray-300 lg:py-4">
+        <div className="h-fit lg:flex-1 lg:rounded-md lg:border lg:border-gray-200 lg:py-4">
           {/* title */}
           <section className="flex justify-between px-4">
             <div>
@@ -118,14 +118,14 @@ const Cart: NextPage = () => {
 
         {/* cart Info */}
         <section className="lg:sticky lg:top-6 lg:h-fit xl:top-36">
-          <div className="lg:rounded-md lg:border lg:border-gray-300">
+          <div className="lg:rounded-md lg:border lg:border-gray-200">
             <CartInfo handleRoute={handleRoute} cart />
           </div>
           <FreeShipping />
         </section>
 
         {/* to Shipping */}
-        <section className="fixed inset-x-0 bottom-0 z-10 flex items-center justify-between border-t border-gray-400/50 bg-white p-3 shadow-4xl lg:hidden">
+        <section className="fixed inset-x-0 bottom-0 z-10 flex items-center justify-between border-t border-gray-300 bg-white p-3 shadow-3xl lg:hidden">
           <Button className="w-1/2" onClick={handleRoute}>
             ادامه
           </Button>

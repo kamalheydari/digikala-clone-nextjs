@@ -101,7 +101,7 @@ const FilterOperation: React.FC<Props> = (props) => {
   return (
     <>
       <div className="flex justify-end ">
-        <button type="button" className="text-sm text-sky-600" onClick={handleResetFilters} disabled={!canReset}>
+        <button type="button" className="text-sm text-sky-500" onClick={handleResetFilters} disabled={!canReset}>
           حذف فیلتر‌ها
         </button>
       </div>
@@ -112,12 +112,12 @@ const FilterOperation: React.FC<Props> = (props) => {
         <CustomCheckbox name="discount" checked={discountQuery} onChange={handlefilter} label="فقط کالاهای فروش ویژه" />
 
         <div className="py-4">
-          <span className="font-medium text-gray-800">محدوده قیمت</span>
+          <span className="font-medium text-gray-700">محدوده قیمت</span>
           <div className="flex items-center justify-between gap-x-1">
             <span className="text-base">از</span>
             <input
               type="number"
-              className="farsi-digits w-3/4 border-b border-gray-300 px-1 text-left text-xl outline-none"
+              className="farsi-digits w-3/4 border-b border-gray-200 px-1 text-left text-xl outline-none"
               style={{ direction: 'ltr' }}
               name="minPrice"
               value={price.minPrice}
@@ -129,7 +129,7 @@ const FilterOperation: React.FC<Props> = (props) => {
             <span className="text-base">تا</span>
             <input
               type="number"
-              className="farsi-digits w-3/4 border-b border-gray-300 px-1 text-left text-xl outline-none"
+              className="farsi-digits w-3/4 border-b border-gray-200 px-1 text-left text-xl outline-none"
               style={{ direction: 'ltr' }}
               name="maxPrice"
               value={price.maxPrice}

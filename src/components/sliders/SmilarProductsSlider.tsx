@@ -25,8 +25,8 @@ const SmilarProductsSlider: React.FC<Props> = (props) => {
 
   // ? Render(s)
   return (
-    <section className="overflow-hidden px-3 py-4 lg:rounded-md lg:border lg:border-gray-300">
-      <h4 className="mb-3 w-24 lg:border-b-2 lg:border-red-600">{smilarProducts.title}</h4>
+    <section className="overflow-hidden px-3 py-4 lg:rounded-md lg:border lg:border-gray-100">
+      <h4 className="mb-3 w-24 lg:border-b-2 lg:border-red-500">{smilarProducts.title}</h4>
       <Swiper
         navigation={true}
         modules={[Navigation, FreeMode]}
