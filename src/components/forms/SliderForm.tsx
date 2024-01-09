@@ -1,12 +1,12 @@
 import { useEffect } from 'react'
 import Image from 'next/image'
 
-import { Button, ControlledCheckbox, TextField, UploadImage } from 'components'
-
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { sliderSchema } from 'utils'
+
+import { TextField, UploadImage, ControlledCheckbox, Button } from 'components/ui'
 
 import type { ISlider, ISliderForm } from 'types'
 

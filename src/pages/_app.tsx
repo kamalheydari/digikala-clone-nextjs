@@ -11,9 +11,10 @@ import { store } from 'store'
 import { Provider } from 'react-redux'
 import { userApiSlice } from 'services'
 
-import { PageLoading, Alert } from 'components'
-
 import { tokens } from 'utils'
+
+import { Alert } from 'components/others'
+import { PageTransitionLoading } from 'components/ui/loading'
 
 import type { AppProps } from 'next/app'
 
@@ -37,7 +38,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <Component {...pageProps} />
-      {!asPath.includes('/products?category') ? <PageLoading /> : null}
+      {!asPath.includes('/products?category') ? <PageTransitionLoading /> : null}
       <Alert />
     </Provider>
   )

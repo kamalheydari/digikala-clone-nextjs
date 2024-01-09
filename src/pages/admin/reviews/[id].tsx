@@ -4,7 +4,10 @@ import { useRouter } from 'next/router'
 
 import { useGetSingleReviewQuery } from 'services'
 
-import { BigLoading, DashboardLayout, PageContainer, ReveiwCard } from 'components'
+import { DashboardLayout } from 'components/layouts'
+import { ReveiwCard } from 'components/review'
+import { PageContainer } from 'components/ui'
+import { FullScreenLoading } from 'components/ui/loading'
 
 import type { NextPage } from 'next'
 
@@ -27,7 +30,7 @@ const SingleComment: NextPage = () => {
         <PageContainer title="دیدگاه">
           {isLoading ? (
             <div className="px-3 py-20">
-              <BigLoading />
+              <FullScreenLoading />
             </div>
           ) : data ? (
             <section className="mx-auto max-w-5xl p-3 lg:px-8">

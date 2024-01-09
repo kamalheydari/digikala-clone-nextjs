@@ -1,11 +1,14 @@
-import { yupResolver } from '@hookform/resolvers/yup'
-import { TextField, Button, UploadImage } from 'components'
 import Image from 'next/image'
 import { useEffect } from 'react'
 
+import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
-import type { ICategory, ICategoryForm } from 'types'
+
 import { categorySchema } from 'utils'
+
+import { TextField, UploadImage, Button } from 'components/ui'
+
+import type { ICategory, ICategoryForm } from 'types'
 
 interface CreateCategoryFormProps {
   mode: 'create'

@@ -1,9 +1,11 @@
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 
-import { BigLoading, DashboardLayout, PageContainer } from 'components'
-
 import { useGetCategoriesQuery } from 'services'
+
+import { DashboardLayout } from 'components/layouts'
+import { PageContainer } from 'components/ui'
+import { FullScreenLoading } from 'components/ui/loading'
 
 import type { NextPage } from 'next'
 
@@ -25,7 +27,7 @@ const Categories: NextPage = () => {
       <DashboardLayout>
         {isLoading ? (
           <div className="px-3 py-20">
-            <BigLoading />
+            <FullScreenLoading />
           </div>
         ) : (
           <PageContainer title="نمودار دسته بندی ها">

@@ -3,8 +3,12 @@ import dynamic from 'next/dynamic'
 
 import { useUserInfo } from 'hooks'
 
-import { PageContainer, ProfileLayout, WithAddressModal, AddressSkeleton } from 'components'
 import { Address, Edit, Location, Phone, Post, User, UserLocation } from 'icons'
+
+import { ProfileLayout } from 'components/layouts'
+import { WithAddressModal } from 'components/shared'
+import { AddressSkeleton } from 'components/skeleton'
+import { PageContainer } from 'components/ui'
 
 import type { NextPage } from 'next'
 import type { WithAddressModalProps } from 'types'

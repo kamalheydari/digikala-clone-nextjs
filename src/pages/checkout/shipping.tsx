@@ -10,12 +10,15 @@ import { clearCart, showAlert } from 'store'
 
 import { useCreateOrderMutation } from 'services'
 
-import { Button, CartInfo, HandleResponse, RequireUser, ResponsiveImage, WithAddressModal } from 'components'
-import { ArrowLeft, Cart, Location2, LogoPersian, Rule, Wallet } from 'icons'
-
 import { formatNumber, roles } from 'utils'
 
 import { useAppDispatch, useAppSelector, useUserInfo } from 'hooks'
+
+import { ArrowLeft, Cart, Location2, LogoPersian, Rule, Wallet } from 'icons'
+import { CartSummary } from 'components/cart'
+import { WithAddressModal, HandleResponse } from 'components/shared'
+import { ResponsiveImage, Button } from 'components/ui'
+import { RequireUser } from 'components/user'
 
 import type { NextPage } from 'next'
 import type { WithAddressModalProps } from 'types'
@@ -200,7 +203,7 @@ const ShippingPage: NextPage = () => {
 
           {/* cart info */}
           <section className="lg:h-fit lg:rounded-md lg:border lg:border-gray-200">
-            <CartInfo />
+            <CartSummary />
             <div className="space-y-3 px-3 py-2">
               <div className="flex items-center gap-x-2 ">
                 <input

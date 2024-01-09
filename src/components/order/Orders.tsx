@@ -5,7 +5,7 @@ import { useGetOrdersQuery } from 'services'
 
 import { formatNumber } from 'utils'
 
-import { ArrowLink, Skeleton } from 'components'
+import { Skeleton, ArrowLink } from 'components/ui'
 
 export default function Orders() {
   // ? States

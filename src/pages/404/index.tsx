@@ -1,7 +1,8 @@
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 
-import { ArrowLink, ClientLayout, ResponsiveImage } from 'components'
+import { ClientLayout } from 'components/layouts'
+import { ArrowLink, ResponsiveImage } from 'components/ui'
 
 function NotFoundPage() {
   // ? Render(s)

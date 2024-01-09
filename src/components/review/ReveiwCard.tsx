@@ -3,7 +3,8 @@ import { Fragment, useState } from 'react'
 import { useEditReviewMutation } from 'services'
 
 import { Menu, Transition } from '@headlessui/react'
-import { HandleResponse, ResponsiveImage } from 'components'
+import { HandleResponse } from 'components/shared'
+import { ResponsiveImage } from 'components/ui'
 import { Check, Clock, Cross, Delete, Minus, More, Plus } from 'icons'
 
 import type { IReview } from 'types'

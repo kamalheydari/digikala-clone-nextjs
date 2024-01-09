@@ -10,23 +10,19 @@ import {
   useUpdateDetailsMutation,
 } from 'services'
 
-import {
-  BigLoading,
-  Button,
-  ConfirmDeleteModal,
-  ConfirmUpdateModal,
-  DashboardLayout,
-  DetailsList,
-  HandleResponse,
-  PageContainer,
-} from 'components'
-import { Tab } from '@headlessui/react'
-
 import { useDisclosure } from 'hooks'
 
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { detailsSchema } from 'utils'
+
+import { Tab } from '@headlessui/react'
+import { DashboardLayout } from 'components/layouts'
+import { ConfirmDeleteModal, ConfirmUpdateModal } from 'components/modals'
+import { DetailsList } from 'components/others'
+import { HandleResponse } from 'components/shared'
+import { PageContainer, Button } from 'components/ui'
+import { FullScreenLoading } from 'components/ui/loading'
 
 import type { IDetails, IDetailsForm } from 'types'
 import type { NextPage } from 'next'
@@ -255,7 +251,7 @@ const DetailsPage: NextPage = () => {
         <DashboardLayout>
           {isLoadingGet ? (
             <div className="px-3 py-20">
-              <BigLoading />
+              <FullScreenLoading />
             </div>
           ) : (
             <PageContainer title={` مشخصات و ویژگی‌های دسته‌بندی ${categoryName || ''}`}>

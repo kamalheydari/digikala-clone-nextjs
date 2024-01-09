@@ -1,4 +1,4 @@
-import { Skeleton } from 'components'
+import { Skeleton } from 'components/ui'
 
 export default function NavbarSkeleton() {
   return (

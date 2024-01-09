@@ -1,4 +1,4 @@
-import { Header, Footer } from 'components'
+import { Header, Footer } from 'components/layouts/shared'
 
 interface Props {
   children: React.ReactNode

@@ -1,14 +1,16 @@
+import { useEffect } from 'react'
+
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
 import { mobileSchema } from 'utils'
 
 import { useEditUserMutation } from 'services'
-
-import { TextField, SubmitModalButton, Modal, HandleResponse } from 'components'
 import { useDisclosure } from 'hooks'
+
 import { Edit, Plus } from 'icons'
-import { useEffect } from 'react'
+import { HandleResponse } from 'components/shared'
+import { Modal, TextField, SubmitModalButton } from 'components/ui'
 
 type UserMobileForm = { mobile: string }
 

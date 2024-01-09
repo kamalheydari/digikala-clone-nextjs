@@ -2,16 +2,13 @@ import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import Head from 'next/head'
 
-import {
-  DashboardLayout,
-  EmptyCustomList,
-  PageContainer,
-  DataStateDisplay,
-  TableContainer,
-  TableSkeleton,
-} from 'components'
-
 import { useGetCategoriesQuery } from 'services'
+
+import { EmptyCustomList } from 'components/emptyList'
+import { DashboardLayout } from 'components/layouts'
+import { DataStateDisplay, TableContainer } from 'components/shared'
+import { TableSkeleton } from 'components/skeleton'
+import { PageContainer } from 'components/ui'
 
 import type { NextPage } from 'next'
 

@@ -1,11 +1,14 @@
 import Link from 'next/link'
+
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 
-import { DiscountProduct, ProductPrice, ResponsiveImage, Skeleton } from 'components'
+import { useGetProductsQuery } from 'services'
+
 import { AmazingTypo } from 'icons'
 
-import { useGetProductsQuery } from 'services'
+import { ProductDiscountTag, ProductPriceDisplay } from 'components/product'
+import { ResponsiveImage, Skeleton } from 'components/ui'
 
 import type { ICategory } from 'types'
 
@@ -101,9 +104,13 @@ const DiscountSlider: React.FC<Props> = (props) => {
 
                     <div className="mt-1.5 flex justify-evenly gap-x-2 px-2 ">
                       <div>
-                        <DiscountProduct discount={product.discount} />
+                        <ProductDiscountTag discount={product.discount} />
                       </div>
-                      <ProductPrice inStock={product.inStock} discount={product.discount} price={product.price} />
+                      <ProductPriceDisplay
+                        inStock={product.inStock}
+                        discount={product.discount}
+                        price={product.price}
+                      />
                     </div>
                   </Link>
                 </SwiperSlide>

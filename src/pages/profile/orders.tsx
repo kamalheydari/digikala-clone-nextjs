@@ -2,17 +2,15 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 
-import {
-  OrderCard,
-  Pagination,
-  DataStateDisplay,
-  EmptyOrdersList,
-  PageContainer,
-  OrderSkeleton,
-  ProfileLayout,
-} from 'components'
-
 import { useGetOrdersQuery } from 'services'
+
+import { EmptyOrdersList } from 'components/emptyList'
+import { ProfileLayout } from 'components/layouts'
+import { OrderCard } from 'components/order'
+import { DataStateDisplay } from 'components/shared'
+import { OrderSkeleton } from 'components/skeleton'
+import { PageContainer } from 'components/ui'
+import { Pagination } from 'components/others'
 
 import type { NextPage } from 'next'
 

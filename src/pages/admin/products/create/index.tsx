@@ -2,9 +2,12 @@ import { useRouter } from 'next/router'
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
 
-import { DashboardLayout, HandleResponse, PageContainer, ProductsForm } from 'components'
-
 import { useCreateProductMutation } from 'services'
+
+import { ProductForm } from 'components/forms'
+import { DashboardLayout } from 'components/layouts'
+import { HandleResponse } from 'components/shared'
+import { PageContainer } from 'components/ui'
 
 import type { NextPage } from 'next'
 import type { IProductForm } from 'types'
@@ -46,7 +49,7 @@ const Create: NextPage<Props> = () => {
 
         <DashboardLayout>
           <PageContainer title="محصول جدید">
-            <ProductsForm mode="create" isLoadingCreate={isLoading} createHandler={createHandler} />
+            <ProductForm mode="create" isLoadingCreate={isLoading} createHandler={createHandler} />
           </PageContainer>
         </DashboardLayout>
       </main>

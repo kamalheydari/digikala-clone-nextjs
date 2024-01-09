@@ -1,4 +1,4 @@
-import { Skeleton } from 'components'
+import { Skeleton } from 'components/ui'
 import { Phone, Post, User, UserLocation } from 'icons'
 
 const AddressSkeleton = () => {

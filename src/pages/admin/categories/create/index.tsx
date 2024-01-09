@@ -2,11 +2,14 @@ import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-import { CategoryForm, DashboardLayout, HandleResponse, PageContainer } from 'components'
-
 import { SubmitHandler } from 'react-hook-form'
 
 import { useCreateCategoryMutation } from 'services'
+
+import { CategoryForm } from 'components/forms'
+import { DashboardLayout } from 'components/layouts'
+import { HandleResponse } from 'components/shared'
+import { PageContainer } from 'components/ui'
 
 import type { NextPage } from 'next'
 import type { ICategoryForm } from 'types'

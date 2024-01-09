@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { EditIconButton, ResponsiveImage } from 'components'
+import { ResponsiveImage, EditIconButton } from 'components/ui'
 
 import type { IReview } from 'types'
 

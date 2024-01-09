@@ -4,7 +4,7 @@ import { Pagination, Autoplay } from 'swiper'
 import 'swiper/css'
 import 'swiper/css/pagination'
 
-import { ResponsiveImage } from 'components'
+import { ResponsiveImage } from 'components/ui'
 
 import type { ISlider } from 'types'
 

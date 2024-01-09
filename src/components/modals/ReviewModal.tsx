@@ -8,11 +8,13 @@ import { ratingStatus, reviewSchema } from 'utils'
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import { TextField, DisplayError, SubmitModalButton, Modal, HandleResponse } from 'components'
+import { useDisclosure } from 'hooks'
+
 import { ArrowLeft, Comment, Delete, Minus, Plus } from 'icons'
+import { HandleResponse } from 'components/shared'
+import { Modal, TextField, DisplayError, SubmitModalButton } from 'components/ui'
 
 import type { IReviewForm } from 'types'
-import { useDisclosure } from 'hooks'
 
 interface Props {
   productTitle: string

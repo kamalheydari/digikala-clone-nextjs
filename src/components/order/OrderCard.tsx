@@ -1,12 +1,13 @@
 import moment from 'moment-jalaali'
 
-import { HandleResponse, ResponsiveImage } from 'components'
-
 import { formatNumber } from 'utils'
-
 import { useUpdateOrderMutation } from 'services'
-import { IOrder } from 'types'
+
 import { Check, Clock2, More, Toman } from 'icons'
+import { HandleResponse } from 'components/shared'
+import { ResponsiveImage } from 'components/ui'
+
+import type { IOrder } from 'types'
 
 interface Props {
   order: IOrder

@@ -2,10 +2,12 @@ import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import Image from 'next/image'
 
-import { DashboardAside, RequireUser } from 'components'
+import { roles } from 'utils'
+
+import { DashboardAdminAside } from 'components/layouts/shared'
+import { RequireUser } from 'components/user'
 
 import type { NextPage } from 'next'
-import { roles } from 'utils'
 
 const AdminPage: NextPage = () => {
   return (
@@ -16,7 +18,7 @@ const AdminPage: NextPage = () => {
         </Head>
 
         <div>
-          <DashboardAside />
+          <DashboardAdminAside />
         </div>
         <div className="hidden h-fit py-6 lg:mt-6 lg:inline-block lg:flex-1 lg:rounded-md lg:border lg:border-gray-400">
           <section className="py-20">

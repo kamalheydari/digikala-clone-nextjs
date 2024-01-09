@@ -2,20 +2,14 @@ import Head from 'next/head'
 
 import { db } from 'utils'
 
-import { Category, Banner, Slider } from 'models'
-
-import {
-  BannerOne,
-  BannerTwo,
-  BestSellsSlider,
-  Categories,
-  ClientLayout,
-  DiscountSlider,
-  MostFavouraiteProducts,
-  MainSlider,
-} from 'components'
-
 import config from 'config'
+
+import { Banner, Category, Slider } from 'models'
+
+import { LargeBanner, SmallBanner } from 'components/banners'
+import { ClientLayout } from 'components/layouts'
+import { Categories } from 'components/others'
+import { MainSlider, DiscountSlider, BestSellsSlider, ProductFavouriteSlider } from 'components/sliders'
 
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType, NextPage } from 'next'
 import type { IBanner, ICategory, ISlider } from 'types'
@@ -107,13 +101,13 @@ const MainCategory: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
             name={currentCategory.name}
           />
 
-          <BannerOne data={bannerOneType} />
+          <LargeBanner data={bannerOneType} />
 
           <BestSellsSlider categorySlug={currentCategory.slug} />
 
-          <BannerTwo data={bannerTwoType} />
+          <SmallBanner data={bannerTwoType} />
 
-          <MostFavouraiteProducts categorySlug={currentCategory.slug} />
+          <ProductFavouriteSlider categorySlug={currentCategory.slug} />
         </div>
       </main>
     </ClientLayout>

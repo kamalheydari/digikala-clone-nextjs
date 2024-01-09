@@ -6,21 +6,16 @@ import { useEffect, useState } from 'react'
 
 import { useDeleteProductMutation, useGetCategoriesQuery, useGetProductsQuery } from 'services'
 
-import {
-  ConfirmDeleteModal,
-  DashboardLayout,
-  DeleteIconButton,
-  EditIconButton,
-  HandleResponse,
-  PageContainer,
-  Pagination,
-  SelectCategories,
-  DataStateDisplay,
-  TableSkeleton,
-} from 'components'
+import { useDisclosure, useChangeRoute } from 'hooks'
+
 import { Close, Search } from 'icons'
 
-import { useDisclosure, useChangeRoute } from 'hooks'
+import { DashboardLayout } from 'components/layouts'
+import { ConfirmDeleteModal } from 'components/modals'
+import { Pagination, SelectCategories } from 'components/others'
+import { HandleResponse, DataStateDisplay } from 'components/shared'
+import { TableSkeleton } from 'components/skeleton'
+import { PageContainer, DeleteIconButton, EditIconButton } from 'components/ui'
 
 import type { NextPage } from 'next'
 import type { ICategory } from 'types'

@@ -2,11 +2,14 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 
-import { BannerForm, DashboardLayout, HandleResponse, PageContainer } from 'components'
-
 import { SubmitHandler } from 'react-hook-form'
 
 import { useCreateBannerMutation } from 'services'
+
+import { BannerForm } from 'components/forms'
+import { DashboardLayout } from 'components/layouts'
+import { HandleResponse } from 'components/shared'
+import { PageContainer } from 'components/ui'
 
 import type { NextPage } from 'next'
 import type { IBannerForm } from 'types'

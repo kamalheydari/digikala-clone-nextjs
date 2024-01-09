@@ -1,0 +1,7 @@
+export { default as UserProfileAside } from './UserProfileAside'
+export { default as DashboardAdminAside } from './DashboardAdminAside'
+export { default as Header } from './Header'
+export { default as Sidebar } from './Sidebar'
+export { default as Footer } from './Footer'
+export { default as AddressBar } from './AddressBar'
+export { default as Navbar } from './Navbar'

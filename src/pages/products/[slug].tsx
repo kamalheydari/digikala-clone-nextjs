@@ -10,22 +10,20 @@ import { useAppDispatch } from 'hooks'
 
 import { setTempColor, setTempSize, addToLastSeen } from 'store'
 
+import { ClientLayout } from 'components/layouts'
+import { FreeShipping, Services } from 'components/others'
 import {
-  FreeShipping,
-  Services,
-  SmilarProductsSlider,
-  ImageGallery,
-  Description,
-  Specification,
-  Reviews,
-  SelectColor,
-  SelectSize,
-  OutOfStock,
-  AddToCart,
-  Info,
-  Breadcrumb,
-  ClientLayout,
-} from 'components'
+  ProductBreadcrumb,
+  ProductGallery,
+  ProductInfo,
+  ProductDescription,
+  ProductSpecificationList,
+} from 'components/product'
+import { ProductColorSelector, ProductSizeSelector } from 'components/product/ProductVariants'
+import { ProductOutOfStockMessage } from 'components/product/StockInfo'
+import { ReviewsList } from 'components/review'
+import { SmilarProductsSlider } from 'components/sliders'
+import { AddToCartButton } from 'components/cart'
 
 import type { GetServerSideProps, NextPage } from 'next'
 import type { IProduct } from 'types'
@@ -114,10 +112,10 @@ const SingleProduct: NextPage<Props> = (props) => {
 
       <ClientLayout>
         <main className="mx-auto space-y-4 py-4 lg:max-w-[1550px] xl:mt-28">
-          <Breadcrumb categoryLevels={product.category_levels} />
+          <ProductBreadcrumb categoryLevels={product.category_levels} />
 
           <div className="h-fit lg:mb-10 lg:grid lg:h-fit lg:grid-cols-9 lg:gap-x-2 lg:gap-y-4 lg:px-4 xl:gap-x-7">
-            <ImageGallery
+            <ProductGallery
               images={product.images}
               discount={product.discount}
               inStock={product.inStock}
@@ -130,23 +128,25 @@ const SingleProduct: NextPage<Props> = (props) => {
 
               <div className="section-divide-y" />
 
-              {product.inStock > 0 && product.optionsType === 'colors' && <SelectColor colors={product.colors} />}
+              {product.inStock > 0 && product.optionsType === 'colors' && (
+                <ProductColorSelector colors={product.colors} />
+              )}
 
-              {product.inStock > 0 && product.optionsType === 'sizes' && <SelectSize sizes={product.sizes} />}
+              {product.inStock > 0 && product.optionsType === 'sizes' && <ProductSizeSelector sizes={product.sizes} />}
 
-              {product.inStock === 0 && <OutOfStock />}
+              {product.inStock === 0 && <ProductOutOfStockMessage />}
 
-              <Info infos={product?.info} />
+              <ProductInfo infos={product?.info} />
 
               <FreeShipping />
             </div>
 
-            <div className="lg:col-span-2">{product.inStock > 0 && <AddToCart product={product} />}</div>
+            <div className="lg:col-span-2">{product.inStock > 0 && <AddToCartButton product={product} />}</div>
           </div>
 
           <Services />
 
-          {product.description.length > 0 && <Description description={product.description} />}
+          {product.description.length > 0 && <ProductDescription description={product.description} />}
 
           <SmilarProductsSlider smilarProducts={smilarProducts} />
 
@@ -154,15 +154,15 @@ const SingleProduct: NextPage<Props> = (props) => {
 
           <div className="flex">
             <div className="flex-1">
-              <Specification specification={product.specification} />
+              <ProductSpecificationList specification={product.specification} />
 
               <div className="section-divide-y" />
 
-              <Reviews numReviews={product.numReviews} prdouctID={product._id} productTitle={product.title} />
+              <ReviewsList numReviews={product.numReviews} prdouctID={product._id} productTitle={product.title} />
             </div>
 
             <div className="hidden w-full px-3 lg:block lg:max-w-xs xl:max-w-sm">
-              {product.inStock > 0 && <AddToCart product={product} second />}
+              {product.inStock > 0 && <AddToCartButton product={product} second />}
             </div>
           </div>
         </main>

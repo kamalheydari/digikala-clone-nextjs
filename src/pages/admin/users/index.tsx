@@ -4,8 +4,14 @@ import Head from 'next/head'
 
 import { useGetUsersQuery } from 'services'
 
-import { Pagination, DataStateDisplay, EmptyUsersList, PageContainer, DashboardLayout, TableSkeleton } from 'components'
 import { Person } from 'icons'
+
+import { EmptyUsersList } from 'components/emptyList'
+import { DashboardLayout } from 'components/layouts'
+import { DataStateDisplay } from 'components/shared'
+import { TableSkeleton } from 'components/skeleton'
+import { PageContainer } from 'components/ui'
+import { Pagination } from 'components/others'
 
 import type { NextPage } from 'next'
 

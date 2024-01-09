@@ -7,9 +7,10 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 import { addressSchema } from 'utils'
 
-import { TextField, DisplayError, SubmitModalButton, Combobox, Modal, HandleResponse } from 'components'
-
 import { useUserInfo } from 'hooks'
+
+import { HandleResponse } from 'components/shared'
+import { Modal, DisplayError, TextField, SubmitModalButton, Combobox } from 'components/ui'
 
 import type { IAddress } from 'types'
 
@@ -90,6 +91,7 @@ const AddressModal: React.FC<Props> = (props) => {
               <div className="max-w-xl space-y-12 md:grid md:grid-cols-2 md:items-baseline md:gap-x-12 md:gap-y-5 ">
                 <div className="space-y-2">
                   <Combobox
+                    // @ts-ignore
                     control={control}
                     name="province"
                     list={AllProvinces}
@@ -99,7 +101,13 @@ const AddressModal: React.FC<Props> = (props) => {
                 </div>
 
                 <div className="space-y-2 ">
-                  <Combobox control={control} name="city" list={cities} placeholder="لطفا شهرستان خود را انتخاب کنید" />
+                  <Combobox
+                    // @ts-ignore
+                    control={control}
+                    name="city"
+                    list={cities}
+                    placeholder="لطفا شهرستان خود را انتخاب کنید"
+                  />
                   <DisplayError errors={formErrors.city?.name} />
                 </div>
 

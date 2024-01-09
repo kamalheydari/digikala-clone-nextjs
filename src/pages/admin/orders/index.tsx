@@ -4,15 +4,13 @@ import Head from 'next/head'
 
 import { useGetOrdersQuery } from 'services'
 
-import {
-  Pagination,
-  DataStateDisplay,
-  EmptyOrdersList,
-  PageContainer,
-  OrdersTable,
-  DashboardLayout,
-  TableSkeleton,
-} from 'components'
+import { EmptyOrdersList } from 'components/emptyList'
+import { DashboardLayout } from 'components/layouts'
+import { OrdersTable } from 'components/order'
+import { DataStateDisplay } from 'components/shared'
+import { TableSkeleton } from 'components/skeleton'
+import { PageContainer } from 'components/ui'
+import { Pagination } from 'components/others'
 
 import type { NextPage } from 'next'
 

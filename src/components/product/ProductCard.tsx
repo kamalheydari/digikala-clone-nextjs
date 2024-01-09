@@ -1,7 +1,9 @@
-import { SpecialSell, DiscountProduct, ProductPrice, Depot, ResponsiveImage } from 'components'
-import { Plus, Star } from 'icons'
-
 import { truncate } from 'utils'
+
+import { Plus, Star } from 'icons'
+import { ResponsiveImage } from 'components/ui'
+import { ProductDiscountTag, ProductSpecialOffer, ProductPriceDisplay } from 'components/product'
+import { ProductStockIndicator } from 'components/product/StockInfo'
 
 import type { IProduct } from 'types'
 
@@ -25,7 +27,7 @@ const ProductCard: React.FC<Props> = (props) => {
           !slide ? 'border-gray-200 sm:border sm:hover:shadow-3xl' : 'border-l border-gray-300'
         }`}
       >
-        <SpecialSell discount={product.discount} inStock={product.inStock} />
+        <ProductSpecialOffer discount={product.discount} inStock={product.inStock} />
         <div className="flex items-center gap-4 sm:flex-col">
           <div className="sm:flex sm:p-1 ">
             <ResponsiveImage
@@ -58,7 +60,7 @@ const ProductCard: React.FC<Props> = (props) => {
             <h2 className="h-14 text-xs leading-6 text-gray-800 xl:hidden">{truncate(product.title, 90)}</h2>
             <div className="flex justify-between">
               <div>
-                <Depot inStock={product.inStock} />
+                <ProductStockIndicator inStock={product.inStock} />
               </div>
               <div className="flex items-center gap-x-1">
                 <span className="farsi-digits">{product.rating.toFixed(1)}</span>
@@ -67,10 +69,10 @@ const ProductCard: React.FC<Props> = (props) => {
             </div>
             <div className="flex justify-between">
               <div>
-                {product.discount > 0 && product.inStock !== 0 && <DiscountProduct discount={product.discount} />}
+                {product.discount > 0 && product.inStock !== 0 && <ProductDiscountTag discount={product.discount} />}
               </div>
               {product.inStock !== 0 ? (
-                <ProductPrice inStock={product.inStock} discount={product.discount} price={product.price} />
+                <ProductPriceDisplay inStock={product.inStock} discount={product.discount} price={product.price} />
               ) : (
                 <span className="my-0.5 h-12">ناموجود</span>
               )}

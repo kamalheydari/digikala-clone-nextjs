@@ -2,21 +2,18 @@ import { useState } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-import {
-  BigLoading,
-  ConfirmDeleteModal,
-  ConfirmUpdateModal,
-  DashboardLayout,
-  HandleResponse,
-  PageContainer,
-  SliderForm,
-} from 'components'
-
 import { useDisclosure } from 'hooks'
 
 import { SubmitHandler } from 'react-hook-form'
 
 import { useDeleteSliderMutation, useGetSingleSliderQuery, useUpdateSliderMutation } from 'services'
+
+import { SliderForm } from 'components/forms'
+import { DashboardLayout } from 'components/layouts'
+import { ConfirmDeleteModal, ConfirmUpdateModal } from 'components/modals'
+import { HandleResponse } from 'components/shared'
+import { PageContainer } from 'components/ui'
+import { FullScreenLoading } from 'components/ui/loading'
 
 import type { NextPage } from 'next'
 import type { ISlider, ISliderForm } from 'types'
@@ -161,7 +158,7 @@ const Edit: NextPage = () => {
           <PageContainer title={'ویرایش اسلایدر' + ' ' + sliderName}>
             {isLoadingGetSelectedSlider ? (
               <div className="px-3 py-20">
-                <BigLoading />
+                <FullScreenLoading />
               </div>
             ) : selectedSlider ? (
               <SliderForm

@@ -1,5 +1,6 @@
-import { EditIconButton } from 'components/common/IconBtns'
 import Link from 'next/link'
+
+import { EditIconButton } from 'components/ui'
 
 import type { IOrder } from 'types'
 

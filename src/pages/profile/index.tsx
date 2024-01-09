@@ -1,9 +1,11 @@
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 
-import { Header, Orders, ProfileAside, RequireUser } from 'components'
-
 import { roles } from 'utils'
+
+import { UserProfileAside, Header } from 'components/layouts/shared'
+import { RequireUser } from 'components/user'
+import { Orders } from 'components/order'
 
 import type { NextPage } from 'next'
 
@@ -16,7 +18,7 @@ const ProfilePage: NextPage = () => {
       <Header />
       <div className="lg:container lg:flex lg:max-w-7xl lg:gap-x-4 lg:px-3 xl:mt-28">
         <div>
-          <ProfileAside />
+          <UserProfileAside />
         </div>
         <div className="hidden h-fit py-6 lg:mt-6 lg:inline-block lg:flex-1 lg:rounded-md lg:border lg:border-gray-300">
           <Orders />

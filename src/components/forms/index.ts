@@ -1,0 +1,7 @@
+export { default as CategoryForm } from './CategoryForm'
+export { default as BannerForm } from './BannerForm'
+export { default as SliderForm } from './SliderForm'
+export { default as LoginForm } from './LoginForm'
+export { default as ProductForm } from './ProductForm'
+export { default as ProductColorForm } from './ProductColorForm'
+export { default as ProductSizeForm } from './ProductSizeForm'

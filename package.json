@@ -10,7 +10,7 @@
     "prettier": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\""
   },
   "dependencies": {
-    "@headlessui/react": "^1.7.10",
+    "@headlessui/react": "^1.7.18",
     "@hookform/resolvers": "^2.9.0",
     "@reduxjs/toolkit": "^1.9.5",
     "@types/jsonwebtoken": "^9.0.2",

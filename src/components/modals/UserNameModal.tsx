@@ -5,12 +5,12 @@ import { yupResolver } from '@hookform/resolvers/yup'
 
 import { nameSchema } from 'utils'
 
+import { useDisclosure } from 'hooks'
 import { useEditUserMutation } from 'services'
 
-import { TextField, SubmitModalButton, Modal, HandleResponse } from 'components'
 import { Edit, Plus } from 'icons'
-
-import { useDisclosure } from 'hooks'
+import { HandleResponse } from 'components/shared'
+import { Modal, TextField, SubmitModalButton } from 'components/ui'
 
 type UserNameForm = { name: string }
 

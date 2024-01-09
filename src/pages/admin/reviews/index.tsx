@@ -4,15 +4,13 @@ import Head from 'next/head'
 
 import { useGetReviewsQuery } from 'services'
 
-import {
-  Pagination,
-  DataStateDisplay,
-  EmptyCommentsList,
-  PageContainer,
-  ReviewsTable,
-  DashboardLayout,
-  TableSkeleton,
-} from 'components'
+import { EmptyCommentsList } from 'components/emptyList'
+import { DashboardLayout } from 'components/layouts'
+import { ReviewsTable } from 'components/review'
+import { DataStateDisplay } from 'components/shared'
+import { TableSkeleton } from 'components/skeleton'
+import { PageContainer } from 'components/ui'
+import { Pagination } from 'components/others'
 
 import type { NextPage } from 'next'
 

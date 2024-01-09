@@ -1,10 +1,10 @@
 import Link from 'next/link'
 
-import { ResponsiveImage, Skeleton } from 'components'
-import { Check } from 'icons'
-
 import { truncate } from 'utils'
 import { useGetProductsQuery } from 'services'
+
+import { Check } from 'icons'
+import { Skeleton, ResponsiveImage } from 'components/ui'
 
 interface Props {
   categorySlug: string

@@ -1,14 +1,17 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 
-import { DiscountProduct, ProductPrice, EmptySearchList, DataStateDisplay, Modal, ResponsiveImage } from 'components'
-import { Close, Search } from 'icons'
-
 import { truncate } from 'utils'
 
 import { useGetProductsQuery } from 'services'
 
 import { useDebounce, useDisclosure } from 'hooks'
+
+import { Close, Search } from 'icons'
+import { EmptySearchList } from 'components/emptyList'
+import { ProductDiscountTag, ProductPriceDisplay } from 'components/product'
+import { DataStateDisplay } from 'components/shared'
+import { Modal, ResponsiveImage } from 'components/ui'
 
 interface Props {}
 
@@ -107,8 +110,8 @@ const SearchModal: React.FC<Props> = (props) => {
                           />
                           <span className="py-2 text-sm">{truncate(item.title, 70)}</span>
                           <div className="flex justify-between">
-                            <div>{item.discount > 0 && <DiscountProduct discount={item.discount} />}</div>
-                            <ProductPrice inStock={item.inStock} discount={item.discount} price={item.price} />
+                            <div>{item.discount > 0 && <ProductDiscountTag discount={item.discount} />}</div>
+                            <ProductPriceDisplay inStock={item.inStock} discount={item.discount} price={item.price} />
                           </div>
                         </Link>
                       </article>

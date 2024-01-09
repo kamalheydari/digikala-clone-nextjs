@@ -5,9 +5,13 @@ import { useRouter } from 'next/router'
 
 import { clearCart } from 'store'
 
-import { FreeShipping, CartItem, CartInfo, Header, RedirectToLogin, Button } from 'components'
-import { Menu, Transition } from '@headlessui/react'
 import { Delete, EmptyCart, More, Toman } from 'icons'
+import { Menu, Transition } from '@headlessui/react'
+import { CartItemDisplay, CartSummary } from 'components/cart'
+import { Header } from 'components/layouts/shared'
+import { RedirectToLogin } from 'components/modals'
+import { FreeShipping } from 'components/others'
+import { Button } from 'components/ui'
 
 import { formatNumber } from 'utils'
 
@@ -109,7 +113,7 @@ const Cart: NextPage = () => {
           {/* carts */}
           <section className="divide-y">
             {cartItems.map((item) => (
-              <CartItem item={item} key={item.itemID} />
+              <CartItemDisplay item={item} key={item.itemID} />
             ))}
           </section>
         </div>
@@ -119,7 +123,7 @@ const Cart: NextPage = () => {
         {/* cart Info */}
         <section className="lg:sticky lg:top-6 lg:h-fit xl:top-36">
           <div className="lg:rounded-md lg:border lg:border-gray-200">
-            <CartInfo handleRoute={handleRoute} cart />
+            <CartSummary handleRoute={handleRoute} cart />
           </div>
           <FreeShipping />
         </section>
