@@ -12,9 +12,10 @@ import { Close, Search } from 'icons'
 
 import { DashboardLayout } from 'components/layouts'
 import { ConfirmDeleteModal } from 'components/modals'
-import { Pagination, SelectCategories } from 'components/others'
+import { CategorySelector } from 'components/categories'
 import { HandleResponse, DataStateDisplay } from 'components/shared'
 import { TableSkeleton } from 'components/skeleton'
+import { Pagination } from 'components/navigation'
 import { PageContainer, DeleteIconButton, EditIconButton } from 'components/ui'
 
 import type { NextPage } from 'next'
@@ -209,7 +210,7 @@ const Products: NextPage = () => {
           <PageContainer title="محصولات">
             <section className="space-y-7 p-3" id="_adminProducts">
               <form className="mx-auto max-w-4xl space-y-5" onSubmit={handleSubmit}>
-                <SelectCategories
+                <CategorySelector
                   setSelectedCategories={setSelectedCategories}
                   selectedCategories={selectedCategories}
                 />

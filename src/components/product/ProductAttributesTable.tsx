@@ -18,7 +18,7 @@ interface Props {
     | undefined
 }
 
-const DetailsList: React.FC<Props> = (props) => {
+const ProductAttributesTable: React.FC<Props> = (props) => {
   // ? Props
   const { categoryName, name, control, register, errors } = props
 
@@ -82,4 +82,4 @@ const DetailsList: React.FC<Props> = (props) => {
   )
 }
 
-export default DetailsList
+export default ProductAttributesTable

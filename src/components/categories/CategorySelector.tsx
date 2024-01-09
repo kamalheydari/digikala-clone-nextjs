@@ -12,7 +12,7 @@ interface Props {
   setSelectedCategories: React.Dispatch<React.SetStateAction<SelectedCategories>>
 }
 
-const SelectCategories: React.FC<Props> = (props) => {
+const CategorySelector: React.FC<Props> = (props) => {
   // ? Props
   const { selectedCategories, setSelectedCategories } = props
 
@@ -91,4 +91,4 @@ const SelectCategories: React.FC<Props> = (props) => {
   )
 }
 
-export default SelectCategories
+export default CategorySelector

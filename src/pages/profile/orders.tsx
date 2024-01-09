@@ -10,7 +10,7 @@ import { OrderCard } from 'components/order'
 import { DataStateDisplay } from 'components/shared'
 import { OrderSkeleton } from 'components/skeleton'
 import { PageContainer } from 'components/ui'
-import { Pagination } from 'components/others'
+import { Pagination } from 'components/navigation'
 
 import type { NextPage } from 'next'
 
@@ -40,7 +40,9 @@ const Orders: NextPage = () => {
             loadingComponent={<OrderSkeleton />}
           >
             <div className="space-y-3 px-4 py-3">
-              {data?.orders.map((item) => <OrderCard key={item._id} order={item} />)}
+              {data?.orders.map((item) => (
+                <OrderCard key={item._id} order={item} />
+              ))}
             </div>
           </DataStateDisplay>
 

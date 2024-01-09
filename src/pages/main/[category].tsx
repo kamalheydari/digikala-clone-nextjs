@@ -8,7 +8,7 @@ import { Banner, Category, Slider } from 'models'
 
 import { LargeBanner, SmallBanner } from 'components/banners'
 import { ClientLayout } from 'components/layouts'
-import { Categories } from 'components/others'
+import { CategoryList } from 'components/categories'
 import { MainSlider, DiscountSlider, BestSellsSlider, ProductFavouriteSlider } from 'components/sliders'
 
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType, NextPage } from 'next'
@@ -95,7 +95,7 @@ const MainCategory: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (
 
           <DiscountSlider currentCategory={currentCategory} />
 
-          <Categories
+          <CategoryList
             childCategories={childCategories}
             color={currentCategory.colors?.start}
             name={currentCategory.name}

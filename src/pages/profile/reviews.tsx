@@ -15,7 +15,7 @@ import { ReveiwCard } from 'components/review'
 import { HandleResponse, DataStateDisplay } from 'components/shared'
 import { ReveiwSkeleton } from 'components/skeleton'
 import { PageContainer } from 'components/ui'
-import { Pagination } from 'components/others'
+import { Pagination } from 'components/navigation'
 
 import type { NextPage } from 'next'
 

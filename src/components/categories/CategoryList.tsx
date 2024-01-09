@@ -14,7 +14,7 @@ interface Props {
   name: string
 }
 
-const Categories: React.FC<Props> = (props) => {
+const CategoryList: React.FC<Props> = (props) => {
   // ? Props
   const { homePage, childCategories, color, name } = props
 
@@ -56,4 +56,4 @@ const Categories: React.FC<Props> = (props) => {
   return null
 }
 
-export default Categories
+export default CategoryList

@@ -9,7 +9,7 @@ import config from 'config'
 import { LargeBanner, SmallBanner } from 'components/banners'
 import { ClientLayout } from 'components/layouts'
 import { MainSlider, DiscountSlider, BestSellsSlider, ProductFavouriteSlider } from 'components/sliders'
-import { Categories } from 'components/others'
+import { CategoryList } from 'components/categories'
 
 import type { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next'
 import type { IBanner, ICategory, ISlider } from 'types'
@@ -78,7 +78,7 @@ const Home: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = (props) =
           <MainSlider data={sliders} />
           <DiscountSlider currentCategory={currentCategory} />
 
-          <Categories
+          <CategoryList
             childCategories={childCategories}
             color={currentCategory?.colors?.start}
             name={currentCategory?.name}

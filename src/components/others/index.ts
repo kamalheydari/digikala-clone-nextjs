@@ -1,7 +1,0 @@
-export { default as Alert } from './Alert'
-export { default as Categories } from './Categories'
-export { default as SelectCategories } from './SelectCategories'
-export { default as DetailsList } from './DetailsList'
-export { default as Pagination } from './Pagination'
-export { default as Services } from './Services'
-export { default as FreeShipping } from './FreeShipping'

@@ -1,6 +1,6 @@
 import { CashOnDelivery, Daysreturn, ExpressDelivery, OriginalProducts, Support } from 'icons'
 
-export default function Services() {
+export default function ServiceList() {
   const services = [
     {
       name: 'امکان تحویل اکسپرس',

@@ -9,7 +9,7 @@ import { ClientLayout } from 'components/layouts'
 import { ProductSubCategoriesList, ProductCard, ProductFilterControls, ProductSort } from 'components/product'
 import { DataStateDisplay } from 'components/shared'
 import { ProductSkeleton } from 'components/skeleton'
-import { Pagination } from 'components/others'
+import { Pagination } from 'components/navigation'
 import { FilterModal } from 'components/modals'
 
 import type { NextPage } from 'next'

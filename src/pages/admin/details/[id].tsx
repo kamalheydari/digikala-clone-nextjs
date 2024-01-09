@@ -19,10 +19,10 @@ import { detailsSchema } from 'utils'
 import { Tab } from '@headlessui/react'
 import { DashboardLayout } from 'components/layouts'
 import { ConfirmDeleteModal, ConfirmUpdateModal } from 'components/modals'
-import { DetailsList } from 'components/others'
 import { HandleResponse } from 'components/shared'
 import { PageContainer, Button } from 'components/ui'
 import { FullScreenLoading } from 'components/ui/loading'
+import { ProductAttributesTable } from 'components/product'
 
 import type { IDetails, IDetailsForm } from 'types'
 import type { NextPage } from 'next'
@@ -306,7 +306,7 @@ const DetailsPage: NextPage = () => {
                     </Tab.Panel>
 
                     <Tab.Panel>
-                      <DetailsList
+                      <ProductAttributesTable
                         name="info"
                         control={control}
                         register={register}
@@ -315,7 +315,7 @@ const DetailsPage: NextPage = () => {
                       />
                     </Tab.Panel>
                     <Tab.Panel>
-                      <DetailsList
+                      <ProductAttributesTable
                         name="specification"
                         control={control}
                         register={register}

@@ -12,8 +12,9 @@ import {
   Twitter,
   Youtube,
 } from 'icons'
-import { Services } from 'components/others'
+
 import { ResponsiveImage } from 'components/ui'
+import { ServiceList } from 'components/services'
 
 export default function Footer() {
   return (
@@ -42,7 +43,7 @@ export default function Footer() {
         </div>
 
         <div className="hidden lg:block">
-          <Services />
+          <ServiceList />
         </div>
 
         <div className="space-y-8 lg:flex lg:items-start lg:justify-between">

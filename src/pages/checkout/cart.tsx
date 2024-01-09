@@ -7,10 +7,9 @@ import { clearCart } from 'store'
 
 import { Delete, EmptyCart, More, Toman } from 'icons'
 import { Menu, Transition } from '@headlessui/react'
-import { CartItemDisplay, CartSummary } from 'components/cart'
+import { CartItemDisplay, CartSummary, FreeShippingIndicator } from 'components/cart'
 import { Header } from 'components/layouts/shared'
 import { RedirectToLogin } from 'components/modals'
-import { FreeShipping } from 'components/others'
 import { Button } from 'components/ui'
 
 import { formatNumber } from 'utils'
@@ -125,7 +124,7 @@ const Cart: NextPage = () => {
           <div className="lg:rounded-md lg:border lg:border-gray-200">
             <CartSummary handleRoute={handleRoute} cart />
           </div>
-          <FreeShipping />
+          <FreeShippingIndicator />
         </section>
 
         {/* to Shipping */}

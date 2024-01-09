@@ -1,6 +1,6 @@
 import { FreeShippingSvg } from 'icons'
 
-export default function FreeShipping() {
+export default function FreeShippingIndicator() {
   return (
     <div className="bg-gray-100 px-7 py-5 lg:bg-transparent lg:px-0 ">
       <div className="flex justify-between rounded-lg border border-gray-300 bg-white">

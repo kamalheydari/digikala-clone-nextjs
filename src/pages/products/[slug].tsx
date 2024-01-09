@@ -11,7 +11,6 @@ import { useAppDispatch } from 'hooks'
 import { setTempColor, setTempSize, addToLastSeen } from 'store'
 
 import { ClientLayout } from 'components/layouts'
-import { FreeShipping, Services } from 'components/others'
 import {
   ProductBreadcrumb,
   ProductGallery,
@@ -23,7 +22,8 @@ import { ProductColorSelector, ProductSizeSelector } from 'components/product/Pr
 import { ProductOutOfStockMessage } from 'components/product/StockInfo'
 import { ReviewsList } from 'components/review'
 import { SmilarProductsSlider } from 'components/sliders'
-import { AddToCartButton } from 'components/cart'
+import { AddToCartButton, FreeShippingIndicator } from 'components/cart'
+import { ServiceList } from 'components/services'
 
 import type { GetServerSideProps, NextPage } from 'next'
 import type { IProduct } from 'types'
@@ -138,13 +138,13 @@ const SingleProduct: NextPage<Props> = (props) => {
 
               <ProductInfo infos={product?.info} />
 
-              <FreeShipping />
+              <FreeShippingIndicator />
             </div>
 
             <div className="lg:col-span-2">{product.inStock > 0 && <AddToCartButton product={product} />}</div>
           </div>
 
-          <Services />
+          <ServiceList />
 
           {product.description.length > 0 && <ProductDescription description={product.description} />}
 
