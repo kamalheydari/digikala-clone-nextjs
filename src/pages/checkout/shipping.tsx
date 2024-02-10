@@ -18,7 +18,7 @@ import { ArrowLeft, Cart, Location2, LogoPersian, Rule, Wallet } from 'icons'
 import { CartSummary } from 'components/cart'
 import { WithAddressModal, HandleResponse } from 'components/shared'
 import { ResponsiveImage, Button } from 'components/ui'
-import { RequireUser } from 'components/user'
+import { ProtectedRouteWrapper } from 'components/user'
 
 import type { NextPage } from 'next'
 import type { WithAddressModalProps } from 'types'
@@ -95,7 +95,7 @@ const ShippingPage: NextPage = () => {
 
   // ? Render(s)
   return (
-    <RequireUser allowedRoles={[roles.ADMIN, roles.ROOT, roles.USER]}>
+    <ProtectedRouteWrapper allowedRoles={[roles.ADMIN, roles.ROOT, roles.USER]}>
       {/*  Handle Create Order Response */}
       {(isSuccess || isError) && (
         <HandleResponse
@@ -239,7 +239,7 @@ const ShippingPage: NextPage = () => {
           </section>
         </div>
       </main>
-    </RequireUser>
+    </ProtectedRouteWrapper>
   )
 }
 

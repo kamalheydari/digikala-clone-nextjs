@@ -2,8 +2,8 @@ import Link from 'next/link'
 
 import { Logo, Question } from 'icons'
 import { SearchModal } from 'components/modals'
-import { Signup } from 'components/user'
-import { AddressBar, Navbar, Sidebar } from 'components/layouts/shared'
+import { UserAuthLinks } from 'components/user'
+import { AddressBar, Navbar, Sidebar } from '.'
 import { CartDisplay } from 'components/cart'
 
 const Header = () => {
@@ -24,7 +24,7 @@ const Header = () => {
               <SearchModal />
             </div>
             <div className="inline-flex items-center gap-x-4">
-              <Signup />
+              <UserAuthLinks />
               <span className="hidden h-8 w-0.5 bg-gray-300 lg:block" />
               <CartDisplay />
             </div>

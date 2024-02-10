@@ -4,13 +4,13 @@ import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 
 import { ArrowDown, ArrowLeft, Person, User } from 'icons'
-import { Logout } from 'components/user'
+import { LogoutButton } from 'components/user'
 
 interface Props {
   name: string
 }
 
-const UserDropdown: React.FC<Props> = (props) => {
+const UserMenuDropdown: React.FC<Props> = (props) => {
   // ? Props
   const { name } = props
 
@@ -44,11 +44,11 @@ const UserDropdown: React.FC<Props> = (props) => {
             </div>
           </Menu.Item>
 
-          <Logout />
+          <LogoutButton />
         </Menu.Items>
       </Transition>
     </Menu>
   )
 }
 
-export default UserDropdown
+export default UserMenuDropdown

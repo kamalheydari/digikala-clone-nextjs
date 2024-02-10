@@ -5,7 +5,7 @@ import { useUserInfo } from 'hooks'
 import { Bag, Clock, Comment, Edit, Heart, Home, Location, Person, User } from 'icons'
 import { Orders } from 'components/order'
 import { BoxLink } from 'components/ui'
-import { Logout } from 'components/user'
+import { LogoutButton } from 'components/user'
 
 const profilePaths = [
   {
@@ -43,7 +43,6 @@ const profilePaths = [
 function UserProfileAside() {
   // ? Get UserInfo
   const { userInfo, isLoading } = useUserInfo()
-
 
   // ? Render(s)
   return (
@@ -83,7 +82,7 @@ function UserProfileAside() {
             <item.Icon className="icon text-black" />
           </BoxLink>
         ))}
-        <Logout />
+        <LogoutButton />
       </div>
     </aside>
   )

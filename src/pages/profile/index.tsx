@@ -4,14 +4,14 @@ import Head from 'next/head'
 import { roles } from 'utils'
 
 import { UserProfileAside, Header } from 'components/layouts/shared'
-import { RequireUser } from 'components/user'
+import { ProtectedRouteWrapper } from 'components/user'
 import { Orders } from 'components/order'
 
 import type { NextPage } from 'next'
 
 const ProfilePage: NextPage = () => {
   return (
-    <RequireUser allowedRoles={[roles.ADMIN, roles.ROOT, roles.USER]}>
+    <ProtectedRouteWrapper allowedRoles={[roles.ADMIN, roles.ROOT, roles.USER]}>
       <Head>
         <title>دیجی‌کالا | پروفایل</title>
       </Head>
@@ -24,7 +24,7 @@ const ProfilePage: NextPage = () => {
           <Orders />
         </div>
       </div>
-    </RequireUser>
+    </ProtectedRouteWrapper>
   )
 }
 

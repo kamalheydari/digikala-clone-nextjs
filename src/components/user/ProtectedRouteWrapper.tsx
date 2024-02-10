@@ -10,7 +10,7 @@ interface Props {
   allowedRoles: string[]
 }
 
-const RequireUser: React.FC<Props> = (props) => {
+const ProtectedRouteWrapper: React.FC<Props> = (props) => {
   // ? Props
   const { allowedRoles, children } = props
 
@@ -34,4 +34,4 @@ const RequireUser: React.FC<Props> = (props) => {
   }
 }
 
-export default RequireUser
+export default ProtectedRouteWrapper

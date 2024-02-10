@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { Bag, Category, Comment, Image, Location, Logo, Plus, Save, Slider, Users } from 'icons'
 import { BoxLink } from 'components/ui'
-import { Logout } from 'components/user'
+import { LogoutButton } from 'components/user'
 
 const profilePaths = [
   {
@@ -66,7 +66,7 @@ export default function DashboardAdminAside() {
             <item.Icon className="icon text-black" />
           </BoxLink>
         ))}
-        <Logout />
+        <LogoutButton />
       </div>
     </aside>
   )

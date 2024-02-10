@@ -4,10 +4,10 @@ import { useRouter } from 'next/router'
 import { useUserInfo } from 'hooks'
 
 import { Login, User } from 'icons'
-import { UserDropdown } from 'components/user'
+import { UserMenuDropdown } from 'components/user'
 import { Skeleton } from 'components/ui'
 
-const Signup = () => {
+const UserAuthLinks = () => {
   const { asPath } = useRouter()
 
   // ? Get UserInfo
@@ -37,11 +37,11 @@ const Signup = () => {
           </Link>
         </div>
         <div className="hidden lg:block">
-          <UserDropdown name={userInfo.name} />
+          <UserMenuDropdown name={userInfo.name} />
         </div>
       </>
     )
   }
 }
 
-export default Signup
+export default UserAuthLinks

@@ -8,7 +8,7 @@ import { Logout as LogoutIcon } from 'icons'
 import { HandleResponse } from 'components/shared'
 import { Button } from 'components/ui'
 
-export default function Logout() {
+export default function LogoutButton() {
   const [skip, setSkip] = useState(true)
 
   const dispatch = useAppDispatch()

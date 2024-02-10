@@ -5,13 +5,13 @@ import Image from 'next/image'
 import { roles } from 'utils'
 
 import { DashboardAdminAside } from 'components/layouts/shared'
-import { RequireUser } from 'components/user'
+import { ProtectedRouteWrapper } from 'components/user'
 
 import type { NextPage } from 'next'
 
 const AdminPage: NextPage = () => {
   return (
-    <RequireUser allowedRoles={[roles.ADMIN, roles.ROOT]}>
+    <ProtectedRouteWrapper allowedRoles={[roles.ADMIN, roles.ROOT]}>
       <div className="lg:container lg:flex lg:max-w-7xl lg:gap-x-4 lg:px-3 ">
         <Head>
           <title>دیجی‌کالا | مدیریت</title>
@@ -29,7 +29,7 @@ const AdminPage: NextPage = () => {
           </section>
         </div>
       </div>
-    </RequireUser>
+    </ProtectedRouteWrapper>
   )
 }
 
