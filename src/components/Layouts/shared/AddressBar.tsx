@@ -1,8 +1,8 @@
-import { WithAddressModal } from 'components/shared'
-import { Skeleton } from 'components/ui'
-import { ArrowLeft, Location2 } from 'icons'
+import { WithAddressModal } from '@/components/shared'
+import { Skeleton } from '@/components/ui'
+import { ArrowLeft, Location2 } from '@/icons'
 
-import type { WithAddressModalProps } from 'types'
+import type { WithAddressModalProps } from '@/types'
 
 interface Props {
   addressModalProps?: WithAddressModalProps | null

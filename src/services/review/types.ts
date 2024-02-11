@@ -1,4 +1,4 @@
-import type { IPagination, IReview, IReviewForm } from 'types'
+import type { IPagination, IReview, IReviewForm } from '@/types'
 
 export type MsgResult = { msg: string }
 export type IdQuery = { id: string }

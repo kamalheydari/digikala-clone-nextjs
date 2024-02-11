@@ -1,11 +1,11 @@
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 
-import { roles } from 'utils'
+import { roles } from '@/utils'
 
-import { UserProfileAside, Header } from 'components/layouts/shared'
-import { ProtectedRouteWrapper } from 'components/user'
-import { Orders } from 'components/order'
+import { UserProfileAside, Header } from '@/components/layouts'
+import { ProtectedRouteWrapper } from '@/components/user'
+import { Orders } from '@/components/order'
 
 import type { NextPage } from 'next'
 

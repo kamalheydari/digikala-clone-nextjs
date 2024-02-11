@@ -1,10 +1,10 @@
 import Link from 'next/link'
 
-import { useGetSubCategoriesQuery } from 'services'
-import { generateQueryParams } from 'utils'
+import { useGetSubCategoriesQuery } from '@/services'
+import { generateQueryParams } from '@/utils'
 
-import { SubCategoriesSkeleton } from 'components/skeleton'
-import { ResponsiveImage } from 'components/ui'
+import { SubCategoriesSkeleton } from '@/components/skeleton'
+import { ResponsiveImage } from '@/components/ui'
 
 interface Props {
   category: string

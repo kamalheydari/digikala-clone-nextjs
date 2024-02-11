@@ -7,16 +7,16 @@ import { useRouter } from 'next/router'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import { registerSchema } from 'utils'
+import { registerSchema } from '@/utils'
 
-import { useRegisterMutation } from 'services'
+import { useRegisterMutation } from '@/services'
 
-import { Logo } from 'icons'
-import { HandleResponse } from 'components/shared'
-import { TextField, LoginButton } from 'components/ui'
+import { Logo } from '@/icons'
+import { HandleResponse } from '@/components/shared'
+import { TextField, LoginButton } from '@/components/ui'
 
 import type { NextPage } from 'next'
-import type { IRegisterForm } from 'types'
+import type { IRegisterForm } from '@/types'
 
 const RegisterPage: NextPage = () => {
   // ? Assets

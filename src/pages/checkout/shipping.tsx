@@ -6,22 +6,22 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { clearCart, showAlert } from 'store'
+import { clearCart, showAlert } from '@/store'
 
-import { useCreateOrderMutation } from 'services'
+import { useCreateOrderMutation } from '@/services'
 
-import { formatNumber, roles } from 'utils'
+import { formatNumber, roles } from '@/utils'
 
-import { useAppDispatch, useAppSelector, useUserInfo } from 'hooks'
+import { useAppDispatch, useAppSelector, useUserInfo } from '@/hooks'
 
-import { ArrowLeft, Cart, Location2, LogoPersian, Rule, Wallet } from 'icons'
-import { CartSummary } from 'components/cart'
-import { WithAddressModal, HandleResponse } from 'components/shared'
-import { ResponsiveImage, Button } from 'components/ui'
-import { ProtectedRouteWrapper } from 'components/user'
+import { ArrowLeft, Cart, Location2, LogoPersian, Rule, Wallet } from '@/icons'
+import { CartSummary } from '@/components/cart'
+import { WithAddressModal, HandleResponse } from '@/components/shared'
+import { ResponsiveImage, Button } from '@/components/ui'
+import { ProtectedRouteWrapper } from '@/components/user'
 
 import type { NextPage } from 'next'
-import type { WithAddressModalProps } from 'types'
+import type { WithAddressModalProps } from '@/types'
 
 const ShippingPage: NextPage = () => {
   const { push } = useRouter()

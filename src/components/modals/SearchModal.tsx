@@ -1,17 +1,17 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 
-import { truncate } from 'utils'
+import { truncate } from '@/utils'
 
-import { useGetProductsQuery } from 'services'
+import { useGetProductsQuery } from '@/services'
 
-import { useDebounce, useDisclosure } from 'hooks'
+import { useDebounce, useDisclosure } from '@/hooks'
 
-import { Close, Search } from 'icons'
-import { EmptySearchList } from 'components/emptyList'
-import { ProductDiscountTag, ProductPriceDisplay } from 'components/product'
-import { DataStateDisplay } from 'components/shared'
-import { Modal, ResponsiveImage } from 'components/ui'
+import { Close, Search } from '@/icons'
+import { EmptySearchList } from '@/components/emptyList'
+import { ProductDiscountTag, ProductPriceDisplay } from '@/components/product'
+import { DataStateDisplay } from '@/components/shared'
+import { Modal, ResponsiveImage } from '@/components/ui'
 
 interface Props {}
 

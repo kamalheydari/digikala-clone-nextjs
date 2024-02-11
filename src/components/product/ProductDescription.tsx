@@ -1,7 +1,7 @@
-import { useDisclosure } from 'hooks'
-import { ArrowLeft } from 'icons'
+import { useDisclosure } from '@/hooks'
+import { ArrowLeft } from '@/icons'
 
-import { truncate } from 'utils'
+import { truncate } from '@/utils'
 
 interface Props {
   description: string

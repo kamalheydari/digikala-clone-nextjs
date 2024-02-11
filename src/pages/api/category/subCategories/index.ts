@@ -1,9 +1,9 @@
-import { Category } from 'models'
+import { Category } from '@/models'
 
-import { sendError, db } from 'utils'
+import { sendError, db } from '@/utils'
 
 import type { NextApiResponse, NextApiRequest } from 'next'
-import type { ICategoryDocument } from 'types'
+import type { ICategoryDocument } from '@/types'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {

@@ -5,13 +5,13 @@ import { useRouter } from 'next/router'
 
 import { SubmitHandler } from 'react-hook-form'
 
-import { useLoginMutation } from 'services'
+import { useLoginMutation } from '@/services'
 
-import { Logo } from 'icons'
-import { LoginForm } from 'components/forms'
-import { HandleResponse } from 'components/shared'
+import { Logo } from '@/icons'
+import { LoginForm } from '@/components/forms'
+import { HandleResponse } from '@/components/shared'
 
-import type { ILoginForm } from 'types'
+import type { ILoginForm } from '@/types'
 import type { NextPage } from 'next'
 
 const LoginPage: NextPage = () => {

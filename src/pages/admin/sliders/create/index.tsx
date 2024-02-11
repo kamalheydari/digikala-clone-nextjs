@@ -4,15 +4,15 @@ import { useRouter } from 'next/router'
 
 import { SubmitHandler } from 'react-hook-form'
 
-import { useCreateSliderMutation } from 'services'
+import { useCreateSliderMutation } from '@/services'
 
-import { SliderForm } from 'components/forms'
-import { DashboardLayout } from 'components/layouts'
-import { HandleResponse } from 'components/shared'
-import { PageContainer } from 'components/ui'
+import { SliderForm } from '@/components/forms'
+import { DashboardLayout } from '@/components/layouts'
+import { HandleResponse } from '@/components/shared'
+import { PageContainer } from '@/components/ui'
 
 import type { NextPage } from 'next'
-import type { ISliderForm } from 'types'
+import type { ISliderForm } from '@/types'
 
 const Create: NextPage = () => {
   // ? Assets

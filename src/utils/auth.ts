@@ -1,6 +1,6 @@
 import jwt, { JwtPayload, Secret } from 'jsonwebtoken'
 
-import config from 'config'
+import config from '@/config'
 
 import type { ObjectId } from 'mongoose'
 

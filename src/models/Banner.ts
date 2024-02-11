@@ -1,6 +1,6 @@
 import { Model, Schema, models, model } from 'mongoose'
 
-import type { IBannerDocument } from 'types'
+import type { IBannerDocument } from '@/types'
 
 const BannerSchema = new Schema<IBannerDocument>(
   {

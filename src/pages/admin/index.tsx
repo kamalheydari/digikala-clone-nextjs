@@ -2,10 +2,10 @@ import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import Image from 'next/image'
 
-import { roles } from 'utils'
+import { roles } from '@/utils'
 
-import { DashboardAdminAside } from 'components/layouts/shared'
-import { ProtectedRouteWrapper } from 'components/user'
+import { DashboardAdminAside } from '@/components/layouts'
+import { ProtectedRouteWrapper } from '@/components/user'
 
 import type { NextPage } from 'next'
 

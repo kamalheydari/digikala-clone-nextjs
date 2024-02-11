@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 
-import { ArrowRight, Delete, Edit, Plus } from 'icons'
+import { ArrowRight, Delete, Edit, Plus } from '@/icons'
 
 interface IconButtonType extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 

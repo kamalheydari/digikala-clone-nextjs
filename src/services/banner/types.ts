@@ -1,4 +1,4 @@
-import type { IBanner, IBannerForm } from 'types'
+import type { IBanner, IBannerForm } from '@/types'
 
 export type MsgResult = { msg: string }
 export type IdQuery = { id: string }

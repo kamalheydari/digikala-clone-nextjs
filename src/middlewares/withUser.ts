@@ -1,9 +1,9 @@
-import { User } from 'models'
+import { User } from '@/models'
 
 import type { NextApiResponse } from 'next'
-import type { NextApiRequestWithUser } from 'types'
+import type { NextApiRequestWithUser } from '@/types'
 
-import { db, sendError, tokens, verifyToken } from 'utils'
+import { db, sendError, tokens, verifyToken } from '@/utils'
 
 export default function withUser(handler: any) {
   return async (req: NextApiRequestWithUser, res: NextApiResponse) => {

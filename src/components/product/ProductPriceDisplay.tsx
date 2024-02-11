@@ -1,7 +1,7 @@
-import { formatNumber } from 'utils'
+import { formatNumber } from '@/utils'
 
-import { Toman } from 'icons'
-import { ProductDiscountTag } from 'components/product'
+import { Toman } from '@/icons'
+import { ProductDiscountTag } from '@/components/product'
 
 interface Props {
   singleProduct?: boolean

@@ -1,11 +1,11 @@
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 
-import { useUserInfo } from 'hooks'
+import { useUserInfo } from '@/hooks'
 
-import { ProfileLayout } from 'components/layouts'
-import { UserNameModal, UserMobileModal } from 'components/modals'
-import { Skeleton, PageContainer } from 'components/ui'
+import { ProfileLayout } from '@/components/layouts'
+import { UserNameModal, UserMobileModal } from '@/components/modals'
+import { Skeleton, PageContainer } from '@/components/ui'
 
 import type { NextPage } from 'next'
 

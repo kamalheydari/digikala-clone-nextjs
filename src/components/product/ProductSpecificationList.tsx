@@ -1,5 +1,5 @@
-import { useDisclosure } from 'hooks'
-import { ArrowLeft } from 'icons'
+import { useDisclosure } from '@/hooks'
+import { ArrowLeft } from '@/icons'
 
 interface Props {
   specification: { title: string; value?: string }[]

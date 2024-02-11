@@ -1,8 +1,8 @@
 import Link from 'next/link'
 
-import { ResponsiveImage, EditIconButton } from 'components/ui'
+import { ResponsiveImage, EditIconButton } from '@/components/ui'
 
-import type { IReview } from 'types'
+import type { IReview } from '@/types'
 
 interface Props {
   reviews: IReview[]

@@ -3,18 +3,18 @@ import { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import { useGetDetailsQuery } from 'services'
+import { useGetDetailsQuery } from '@/services'
 
-import { productSchema } from 'utils'
+import { productSchema } from '@/utils'
 
 import { Tab } from '@headlessui/react'
-import { ProductImageList } from 'components/product'
-import { ProductColorForm, ProductSizeForm } from 'components/forms'
-import { TableContainer } from 'components/shared'
-import { TextField, TextArea, DisplayError, Button } from 'components/ui'
-import { CategorySelector } from 'components/categories'
+import { ProductImageList } from '@/components/product'
+import { ProductColorForm, ProductSizeForm } from '@/components/forms'
+import { TableContainer } from '@/components/shared'
+import { TextField, TextArea, DisplayError, Button } from '@/components/ui'
+import { CategorySelector } from '@/components/categories'
 
-import type { IProduct, ICategory, IProductForm } from 'types'
+import type { IProduct, ICategory, IProductForm } from '@/types'
 
 interface CreateProductFormProps {
   mode: 'create'

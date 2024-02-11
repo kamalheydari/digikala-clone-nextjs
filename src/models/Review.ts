@@ -1,6 +1,6 @@
 import { Model, Schema, model, models } from 'mongoose'
 
-import type { IReviewDocument } from 'types'
+import type { IReviewDocument } from '@/types'
 
 const reviewSchema = new Schema<IReviewDocument>(
   {

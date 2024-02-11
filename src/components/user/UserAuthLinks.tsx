@@ -1,11 +1,11 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { useUserInfo } from 'hooks'
+import { useUserInfo } from '@/hooks'
 
-import { Login, User } from 'icons'
-import { UserMenuDropdown } from 'components/user'
-import { Skeleton } from 'components/ui'
+import { Login, User } from '@/icons'
+import { UserMenuDropdown } from '@/components/user'
+import { Skeleton } from '@/components/ui'
 
 const UserAuthLinks = () => {
   const { asPath } = useRouter()

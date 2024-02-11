@@ -1,4 +1,4 @@
-import { useGetUserInfoQuery } from 'services'
+import { useGetUserInfoQuery } from '@/services'
 
 export default function useUserInfo() {
   const { userInfo, isLoading, isError, error, isSuccess } = useGetUserInfoQuery(undefined, {

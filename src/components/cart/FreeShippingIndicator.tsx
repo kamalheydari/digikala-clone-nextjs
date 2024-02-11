@@ -1,4 +1,4 @@
-import { FreeShippingSvg } from 'icons'
+import { FreeShippingSvg } from '@/icons'
 
 export default function FreeShippingIndicator() {
   return (

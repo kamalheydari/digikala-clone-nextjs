@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { ArrowLeft } from 'icons'
+import { ArrowLeft } from '@/icons'
 
 interface Props {
   children: React.ReactNode

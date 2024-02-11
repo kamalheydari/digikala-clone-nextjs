@@ -1,9 +1,9 @@
-import { Review } from 'models'
+import { Review } from '@/models'
 
-import { sendError, db } from 'utils'
+import { sendError, db } from '@/utils'
 
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
-import type { IReviewDocument } from 'types'
+import type { IReviewDocument } from '@/types'
 
 const handler: NextApiHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {

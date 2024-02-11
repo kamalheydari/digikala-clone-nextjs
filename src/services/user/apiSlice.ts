@@ -1,4 +1,4 @@
-import baseApi from 'services/baseApi'
+import baseApi from '@/services/baseApi'
 
 import type { EditUserQuery, GetUserInfoResult, GetUsersQuery, GetUsersResult, MsgResult } from './types'
 

@@ -1,11 +1,11 @@
-import { Order } from 'models'
+import { Order } from '@/models'
 
-import { sendError, db, roles } from 'utils'
+import { sendError, db, roles } from '@/utils'
 
-import { withUser } from 'middlewares'
+import { withUser } from '@/middlewares'
 
 import type { NextApiResponse } from 'next'
-import type { IOrderDocument, NextApiRequestWithUser } from 'types'
+import type { IOrderDocument, NextApiRequestWithUser } from '@/types'
 
 const handler = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
   switch (req.method) {

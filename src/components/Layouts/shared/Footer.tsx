@@ -11,10 +11,10 @@ import {
   LogoPersian,
   Twitter,
   Youtube,
-} from 'icons'
+} from '@/icons'
 
-import { ResponsiveImage } from 'components/ui'
-import { ServiceList } from 'components/services'
+import { ResponsiveImage } from '@/components/ui'
+import { ServiceList } from '@/components/services'
 
 export default function Footer() {
   return (

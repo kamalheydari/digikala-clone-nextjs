@@ -1,12 +1,12 @@
 import { useEffect } from 'react'
 import Link from 'next/link'
 
-import { useDisclosure } from 'hooks'
-import { useGetCategoriesQuery } from 'services'
+import { useDisclosure } from '@/hooks'
+import { useGetCategoriesQuery } from '@/services'
 
 import { Disclosure } from '@headlessui/react'
-import { SidebarSkeleton } from 'components/skeleton'
-import { ArrowDown, ArrowLeft, Bars, LogoPersian } from 'icons'
+import { SidebarSkeleton } from '@/components/skeleton'
+import { ArrowDown, ArrowLeft, Bars, LogoPersian } from '@/icons'
 
 export default function Sidebar() {
   // ? Assets

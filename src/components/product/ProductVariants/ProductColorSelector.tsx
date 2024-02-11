@@ -1,10 +1,10 @@
-import { setTempColor } from 'store'
+import { setTempColor } from '@/store'
 
-import { useAppDispatch, useAppSelector } from 'hooks'
+import { useAppDispatch, useAppSelector } from '@/hooks'
 
-import { Check } from 'icons'
+import { Check } from '@/icons'
 
-import type { IColor } from 'types'
+import type { IColor } from '@/types'
 
 interface Props {
   colors: IColor[]

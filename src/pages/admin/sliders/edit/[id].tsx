@@ -2,21 +2,20 @@ import { useState } from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-import { useDisclosure } from 'hooks'
+import { useDisclosure } from '@/hooks'
 
 import { SubmitHandler } from 'react-hook-form'
 
-import { useDeleteSliderMutation, useGetSingleSliderQuery, useUpdateSliderMutation } from 'services'
+import { useDeleteSliderMutation, useGetSingleSliderQuery, useUpdateSliderMutation } from '@/services'
 
-import { SliderForm } from 'components/forms'
-import { DashboardLayout } from 'components/layouts'
-import { ConfirmDeleteModal, ConfirmUpdateModal } from 'components/modals'
-import { HandleResponse } from 'components/shared'
-import { PageContainer } from 'components/ui'
-import { FullScreenLoading } from 'components/ui/loading'
+import { SliderForm } from '@/components/forms'
+import { DashboardLayout } from '@/components/layouts'
+import { ConfirmDeleteModal, ConfirmUpdateModal } from '@/components/modals'
+import { HandleResponse } from '@/components/shared'
+import { PageContainer, FullScreenLoading } from '@/components/ui'
 
 import type { NextPage } from 'next'
-import type { ISlider, ISliderForm } from 'types'
+import type { ISlider, ISliderForm } from '@/types'
 
 const Edit: NextPage = () => {
   // ? Assets

@@ -1,20 +1,20 @@
 import { useState, useRef, useEffect } from 'react'
 
 import { nanoid } from '@reduxjs/toolkit'
-import { useCreateReviewMutation } from 'services'
+import { useCreateReviewMutation } from '@/services'
 
-import { ratingStatus, reviewSchema } from 'utils'
+import { ratingStatus, reviewSchema } from '@/utils'
 
 import { SubmitHandler, useFieldArray, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import { useDisclosure } from 'hooks'
+import { useDisclosure } from '@/hooks'
 
-import { ArrowLeft, Comment, Delete, Minus, Plus } from 'icons'
-import { HandleResponse } from 'components/shared'
-import { Modal, TextField, DisplayError, SubmitModalButton } from 'components/ui'
+import { ArrowLeft, Comment, Delete, Minus, Plus } from '@/icons'
+import { HandleResponse } from '@/components/shared'
+import { Modal, TextField, DisplayError, SubmitModalButton } from '@/components/ui'
 
-import type { IReviewForm } from 'types'
+import type { IReviewForm } from '@/types'
 
 interface Props {
   productTitle: string

@@ -1,11 +1,15 @@
-import { truncate } from 'utils'
+import { truncate } from '@/utils'
 
-import { Plus, Star } from 'icons'
-import { ResponsiveImage } from 'components/ui'
-import { ProductDiscountTag, ProductSpecialOffer, ProductPriceDisplay } from 'components/product'
-import { ProductStockIndicator } from 'components/product/StockInfo'
+import { Plus, Star } from '@/icons'
+import { ResponsiveImage } from '@/components/ui'
+import {
+  ProductDiscountTag,
+  ProductSpecialOffer,
+  ProductPriceDisplay,
+  ProductStockIndicator,
+} from '@/components/product'
 
-import type { IProduct } from 'types'
+import type { IProduct } from '@/types'
 
 interface Props {
   product: Pick<

@@ -1,4 +1,4 @@
-import { Modal, Button } from 'components/ui'
+import { Modal, Button } from '@/components/ui'
 
 interface Props {
   title: string

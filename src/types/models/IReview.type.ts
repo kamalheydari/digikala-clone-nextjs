@@ -1,5 +1,5 @@
 import type { ObjectId, Document } from 'mongoose'
-import type { IUser, IProduct } from 'types'
+import type { IUser, IProduct } from '@/types'
 
 export interface IReview {
   _id: string

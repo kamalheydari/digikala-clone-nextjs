@@ -1,8 +1,8 @@
 /* eslint-disable tailwindcss/no-custom-classname */
 import { useState } from 'react'
 
-import { ResponsiveImage } from 'components/ui'
-import { ProductSpecialOffer } from 'components/product'
+import { ResponsiveImage } from '@/components/ui'
+import { ProductSpecialOffer } from '@/components/product'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination } from 'swiper'

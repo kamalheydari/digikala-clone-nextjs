@@ -1,8 +1,8 @@
-import { Cart } from 'icons'
+import { Cart } from '@/icons'
 
-import { formatNumber } from 'utils'
+import { formatNumber } from '@/utils'
 
-import { useAppSelector } from 'hooks'
+import { useAppSelector } from '@/hooks'
 
 export default function CartIconBadge() {
   // ? Store

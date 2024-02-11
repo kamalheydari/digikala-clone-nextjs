@@ -1,10 +1,10 @@
-import { setTempSize } from 'store'
+import { setTempSize } from '@/store'
 
-import { formatNumber } from 'utils'
+import { formatNumber } from '@/utils'
 
-import { useAppDispatch, useAppSelector } from 'hooks'
+import { useAppDispatch, useAppSelector } from '@/hooks'
 
-import type { ISize } from 'types'
+import type { ISize } from '@/types'
 
 interface Props {
   sizes: ISize[]

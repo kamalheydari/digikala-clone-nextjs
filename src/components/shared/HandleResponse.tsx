@@ -1,10 +1,10 @@
 import { useEffect } from 'react'
 
-import { showAlert } from 'store'
+import { showAlert } from '@/store'
 
-import { useAppDispatch } from 'hooks'
+import { useAppDispatch } from '@/hooks'
 
-import { getErrorMessage } from 'utils'
+import { getErrorMessage } from '@/utils'
 
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
 import type { SerializedError } from '@reduxjs/toolkit'

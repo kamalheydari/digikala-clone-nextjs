@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-import { useChangeRoute, useDebounce } from 'hooks'
+import { useChangeRoute, useDebounce } from '@/hooks'
 
-import { Toman } from 'icons'
-import { CustomCheckbox } from 'components/ui'
+import { Toman } from '@/icons'
+import { CustomCheckbox } from '@/components/ui'
 
-import { QueryParams } from 'types'
+import { QueryParams } from '@/types'
 
 interface Props {
   mainMaxPrice: number | undefined

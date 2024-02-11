@@ -1,9 +1,9 @@
 import { useEffect } from 'react'
 import Image from 'next/image'
 
-import { removeAlert } from 'store'
+import { removeAlert } from '@/store'
 
-import { useAppDispatch, useAppSelector } from 'hooks'
+import { useAppDispatch, useAppSelector } from '@/hooks'
 
 export default function Alert() {
   // ? Store

@@ -1,8 +1,7 @@
-import { getErrorMessage } from 'utils'
+import { getErrorMessage } from '@/utils'
 
-import { EmptyCustomList } from 'components/emptyList'
-import { Button } from 'components/ui'
-import { FullScreenLoading } from 'components/ui/loading'
+import { EmptyCustomList } from '@/components/emptyList'
+import { Button, FullScreenLoading } from '@/components/ui'
 
 import type { SerializedError } from '@reduxjs/toolkit'
 import type { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'

@@ -1,10 +1,10 @@
 import Link from 'next/link'
 
-import { useGetProductsQuery } from 'services'
+import { useGetProductsQuery } from '@/services'
 
-import { Heart, Star } from 'icons'
-import { ProductDiscountTag, ProductPriceDisplay } from 'components/product'
-import { Skeleton, ResponsiveImage } from 'components/ui'
+import { Heart, Star } from '@/icons'
+import { ProductDiscountTag, ProductPriceDisplay } from '@/components/product'
+import { Skeleton, ResponsiveImage } from '@/components/ui'
 
 interface Props {
   categorySlug: string

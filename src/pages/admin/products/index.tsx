@@ -4,22 +4,22 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
-import { useDeleteProductMutation, useGetCategoriesQuery, useGetProductsQuery } from 'services'
+import { useDeleteProductMutation, useGetCategoriesQuery, useGetProductsQuery } from '@/services'
 
-import { useDisclosure, useChangeRoute } from 'hooks'
+import { useDisclosure, useChangeRoute } from '@/hooks'
 
-import { Close, Search } from 'icons'
+import { Close, Search } from '@/icons'
 
-import { DashboardLayout } from 'components/layouts'
-import { ConfirmDeleteModal } from 'components/modals'
-import { CategorySelector } from 'components/categories'
-import { HandleResponse, DataStateDisplay } from 'components/shared'
-import { TableSkeleton } from 'components/skeleton'
-import { Pagination } from 'components/navigation'
-import { PageContainer, DeleteIconButton, EditIconButton } from 'components/ui'
+import { DashboardLayout } from '@/components/layouts'
+import { ConfirmDeleteModal } from '@/components/modals'
+import { CategorySelector } from '@/components/categories'
+import { HandleResponse, DataStateDisplay } from '@/components/shared'
+import { TableSkeleton } from '@/components/skeleton'
+import { Pagination } from '@/components/navigation'
+import { PageContainer, DeleteIconButton, EditIconButton } from '@/components/ui'
 
 import type { NextPage } from 'next'
-import type { ICategory } from 'types'
+import type { ICategory } from '@/types'
 
 export interface SelectedCategories {
   levelOne?: ICategory

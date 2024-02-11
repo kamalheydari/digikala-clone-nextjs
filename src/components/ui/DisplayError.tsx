@@ -1,7 +1,7 @@
 import { FieldError } from 'react-hook-form'
 
 import { Transition } from '@headlessui/react'
-import { Exclamation } from 'icons'
+import { Exclamation } from '@/icons'
 
 interface Props {
   errors: FieldError | undefined

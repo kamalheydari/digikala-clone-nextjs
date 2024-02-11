@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { ArrowLeft } from 'icons'
+import { ArrowLeft } from '@/icons'
 
 interface Props {
   children: string

@@ -1,4 +1,4 @@
-import type { IPagination, IUser } from 'types'
+import type { IPagination, IUser } from '@/types'
 
 export type MsgResult = { msg: string }
 export type GetUsersResult = {

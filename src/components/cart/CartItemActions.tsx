@@ -1,11 +1,11 @@
-import { decrease, increase, removeFromCart } from 'store'
+import { decrease, increase, removeFromCart } from '@/store'
 import { useDispatch } from 'react-redux'
 
-import { formatNumber } from 'utils'
+import { formatNumber } from '@/utils'
 
-import { Delete, Minus, Plus } from 'icons'
+import { Delete, Minus, Plus } from '@/icons'
 
-import type { ICart } from 'types'
+import type { ICart } from '@/types'
 
 interface Props {
   item: ICart

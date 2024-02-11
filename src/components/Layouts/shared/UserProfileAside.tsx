@@ -1,11 +1,11 @@
 import Link from 'next/link'
 
-import { useUserInfo } from 'hooks'
+import { useUserInfo } from '@/hooks'
 
-import { Bag, Clock, Comment, Edit, Heart, Home, Location, Person, User } from 'icons'
-import { Orders } from 'components/order'
-import { BoxLink } from 'components/ui'
-import { LogoutButton } from 'components/user'
+import { Bag, Clock, Comment, Edit, Heart, Home, Location, Person, User } from '@/icons'
+import { Orders } from '@/components/order'
+import { BoxLink } from '@/components/ui'
+import { LogoutButton } from '@/components/user'
 
 const profilePaths = [
   {

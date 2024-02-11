@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import type { IProduct } from 'types'
+import type { IProduct } from '@/types'
 
 interface Props {
   categoryLevels: IProduct['category_levels']

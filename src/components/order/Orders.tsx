@@ -1,11 +1,11 @@
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 
-import { useGetOrdersQuery } from 'services'
+import { useGetOrdersQuery } from '@/services'
 
-import { formatNumber } from 'utils'
+import { formatNumber } from '@/utils'
 
-import { Skeleton, ArrowLink } from 'components/ui'
+import { Skeleton, ArrowLink } from '@/components/ui'
 
 export default function Orders() {
   // ? States

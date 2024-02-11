@@ -7,14 +7,14 @@ import '../styles/main.css'
 import '../styles/browser-styles.css'
 import '../styles/swiper.css'
 
-import { store } from 'store'
+import { store } from '@/store'
 import { Provider } from 'react-redux'
-import { userApiSlice } from 'services'
+import { userApiSlice } from '@/services'
 
-import { tokens } from 'utils'
+import { tokens } from '@/utils'
 
-import { PageTransitionLoading } from 'components/ui/loading'
-import { Alert } from 'components/ui'
+import { PageTransitionLoading } from '@/components/ui/loading'
+import { Alert } from '@/components/ui'
 
 import type { AppProps } from 'next/app'
 

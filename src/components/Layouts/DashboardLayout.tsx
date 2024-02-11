@@ -1,7 +1,7 @@
-import { ProtectedRouteWrapper } from 'components/user'
-import { DashboardAdminAside } from './shared'
+import { ProtectedRouteWrapper } from '@/components/user'
+import { DashboardAdminAside } from '@/components/layouts'
 
-import { roles } from 'utils'
+import { roles } from '@/utils'
 
 interface Props {
   children: React.ReactNode

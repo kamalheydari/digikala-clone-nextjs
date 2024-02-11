@@ -1,5 +1,5 @@
-import baseApi from 'services/baseApi'
-import { userApiSlice } from 'services'
+import baseApi from '@/services/baseApi'
+import { userApiSlice } from '@/services'
 
 import type { CreateUserQuery, CreateUserResult, LoginQuery, LoginResult, MsgResult } from './types'
 

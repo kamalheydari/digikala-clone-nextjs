@@ -1,10 +1,10 @@
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 
-import { FavoritesListEmpty } from 'icons'
+import { FavoritesListEmpty } from '@/icons'
 
-import { ProfileLayout } from 'components/layouts'
-import { PageContainer } from 'components/ui'
+import { ProfileLayout } from '@/components/layouts'
+import { PageContainer } from '@/components/ui'
 
 import type { NextPage } from 'next'
 

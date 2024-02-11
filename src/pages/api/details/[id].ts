@@ -1,9 +1,9 @@
-import { Details } from 'models'
+import { Details } from '@/models'
 
-import { sendError, db, roles } from 'utils'
+import { sendError, db, roles } from '@/utils'
 
 import type { NextApiResponse } from 'next'
-import type { IDetailsDocument, NextApiRequestWithUser } from 'types'
+import type { IDetailsDocument, NextApiRequestWithUser } from '@/types'
 
 const handler = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
   switch (req.method) {

@@ -1,11 +1,11 @@
-import { Category, Product } from 'models'
+import { Category, Product } from '@/models'
 
-import { sendError, db, roles, makeSlug } from 'utils'
+import { sendError, db, roles, makeSlug } from '@/utils'
 
-import { withUser } from 'middlewares'
+import { withUser } from '@/middlewares'
 
 import type { NextApiResponse } from 'next'
-import type { ICategoryDocument, NextApiRequestWithUser } from 'types'
+import type { ICategoryDocument, NextApiRequestWithUser } from '@/types'
 
 interface ProductsFilter {
   category?: string

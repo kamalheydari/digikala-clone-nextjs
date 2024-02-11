@@ -1,6 +1,6 @@
 import mongoose, { Model, Schema, model, models } from 'mongoose'
 
-import type { IOrderDocument } from 'types'
+import type { IOrderDocument } from '@/types'
 
 const orderSchema = new Schema<IOrderDocument>(
   {

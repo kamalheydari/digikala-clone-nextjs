@@ -1,12 +1,12 @@
 import { useState } from 'react'
 
-import { useLogoutQuery, userApiSlice } from 'services'
+import { useLogoutQuery, userApiSlice } from '@/services'
 
-import { useAppDispatch } from 'hooks'
+import { useAppDispatch } from '@/hooks'
 
-import { Logout as LogoutIcon } from 'icons'
-import { HandleResponse } from 'components/shared'
-import { Button } from 'components/ui'
+import { Logout as LogoutIcon } from '@/icons'
+import { HandleResponse } from '@/components/shared'
+import { Button } from '@/components/ui'
 
 export default function LogoutButton() {
   const [skip, setSkip] = useState(true)

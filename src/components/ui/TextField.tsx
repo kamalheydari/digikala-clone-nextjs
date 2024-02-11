@@ -1,4 +1,4 @@
-import { DisplayError } from 'components/ui'
+import { DisplayError } from '@/components/ui'
 
 import { Control, FieldError, useController } from 'react-hook-form'
 

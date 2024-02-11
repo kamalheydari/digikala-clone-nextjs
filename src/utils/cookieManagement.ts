@@ -1,4 +1,4 @@
-import config from 'config'
+import config from '@/config'
 import { tokens } from './constants'
 import { serialize } from 'cookie'
 

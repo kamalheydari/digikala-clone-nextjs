@@ -1,6 +1,6 @@
-import { Toman, TomanRed } from 'icons'
+import { Toman, TomanRed } from '@/icons'
 
-import { formatNumber } from 'utils'
+import { formatNumber } from '@/utils'
 
 interface Props {
   discount: number

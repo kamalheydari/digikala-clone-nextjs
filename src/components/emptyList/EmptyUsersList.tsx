@@ -1,4 +1,4 @@
-import { Users } from 'icons'
+import { Users } from '@/icons'
 
 export default function EmptyUsersList() {
   return (

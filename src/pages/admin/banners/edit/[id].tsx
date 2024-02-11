@@ -3,21 +3,20 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 
-import { useDisclosure } from 'hooks'
+import { useDisclosure } from '@/hooks'
 
-import { useDeleteBannerMutation, useGetSingleBannerQuery, useUpdateBannerMutation } from 'services'
+import { useDeleteBannerMutation, useGetSingleBannerQuery, useUpdateBannerMutation } from '@/services'
 
 import { SubmitHandler } from 'react-hook-form'
 
-import { BannerForm } from 'components/forms'
-import { DashboardLayout } from 'components/layouts'
-import { ConfirmDeleteModal, ConfirmUpdateModal } from 'components/modals'
-import { HandleResponse } from 'components/shared'
-import { PageContainer } from 'components/ui'
-import { FullScreenLoading } from 'components/ui/loading'
+import { BannerForm } from '@/components/forms'
+import { DashboardLayout } from '@/components/layouts'
+import { ConfirmDeleteModal, ConfirmUpdateModal } from '@/components/modals'
+import { HandleResponse } from '@/components/shared'
+import { PageContainer, FullScreenLoading } from '@/components/ui'
 
 import type { NextPage } from 'next'
-import type { IBanner, IBannerForm } from 'types'
+import type { IBanner, IBannerForm } from '@/types'
 
 const Edit: NextPage = () => {
   // ? Assets

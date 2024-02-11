@@ -1,11 +1,11 @@
-import { Slider } from 'models'
+import { Slider } from '@/models'
 
-import { sendError, db, roles } from 'utils'
+import { sendError, db, roles } from '@/utils'
 
-import { withUser } from 'middlewares'
+import { withUser } from '@/middlewares'
 
 import type { NextApiResponse } from 'next'
-import type { ISliderDocument, NextApiRequestWithUser } from 'types'
+import type { ISliderDocument, NextApiRequestWithUser } from '@/types'
 
 const handler = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
   switch (req.method) {

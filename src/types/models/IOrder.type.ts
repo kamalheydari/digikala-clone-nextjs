@@ -1,5 +1,5 @@
 import type { ObjectId, Document } from 'mongoose'
-import type { IUser, ICart } from 'types'
+import type { IUser, ICart } from '@/types'
 
 export interface IOrder {
   _id: string

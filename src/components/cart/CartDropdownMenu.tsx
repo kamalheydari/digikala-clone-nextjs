@@ -1,15 +1,15 @@
 import { Fragment } from 'react'
 import { useRouter } from 'next/router'
 
-import { formatNumber } from 'utils'
+import { formatNumber } from '@/utils'
 
-import { useDisclosure, useAppSelector, useUserInfo } from 'hooks'
+import { useDisclosure, useAppSelector, useUserInfo } from '@/hooks'
 
 import { Menu, Transition } from '@headlessui/react'
-import { RedirectToLogin } from 'components/modals'
-import { CartIconBadge, CartItemDisplay } from 'components/cart'
-import { ArrowLink, Button } from 'components/ui'
-import { Toman, EmptyCart } from 'icons'
+import { RedirectToLogin } from '@/components/modals'
+import { CartIconBadge, CartItemDisplay } from '@/components/cart'
+import { ArrowLink, Button } from '@/components/ui'
+import { Toman, EmptyCart } from '@/icons'
 
 export default function CartDropdownMenu() {
   // ? Assets

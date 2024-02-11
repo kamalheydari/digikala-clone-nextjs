@@ -4,15 +4,15 @@ import { useRouter } from 'next/router'
 
 import { SubmitHandler } from 'react-hook-form'
 
-import { useCreateCategoryMutation } from 'services'
+import { useCreateCategoryMutation } from '@/services'
 
-import { CategoryForm } from 'components/forms'
-import { DashboardLayout } from 'components/layouts'
-import { HandleResponse } from 'components/shared'
-import { PageContainer } from 'components/ui'
+import { CategoryForm } from '@/components/forms'
+import { DashboardLayout } from '@/components/layouts'
+import { HandleResponse } from '@/components/shared'
+import { PageContainer } from '@/components/ui'
 
 import type { NextPage } from 'next'
-import type { ICategoryForm } from 'types'
+import type { ICategoryForm } from '@/types'
 
 const Create: NextPage = () => {
   // ? Assets

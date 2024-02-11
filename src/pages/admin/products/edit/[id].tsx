@@ -4,20 +4,19 @@ import { NextPage } from 'next'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 
-import { useDisclosure } from 'hooks'
+import { useDisclosure } from '@/hooks'
 
 import { SubmitHandler } from 'react-hook-form'
 
-import { useGetSingleProductQuery, useUpdateProductMutation } from 'services'
+import { useGetSingleProductQuery, useUpdateProductMutation } from '@/services'
 
-import { ProductForm } from 'components/forms'
-import { DashboardLayout } from 'components/layouts'
-import { ConfirmUpdateModal } from 'components/modals'
-import { HandleResponse } from 'components/shared'
-import { PageContainer } from 'components/ui'
-import { FullScreenLoading } from 'components/ui/loading'
+import { ProductForm } from '@/components/forms'
+import { DashboardLayout } from '@/components/layouts'
+import { ConfirmUpdateModal } from '@/components/modals'
+import { HandleResponse } from '@/components/shared'
+import { PageContainer, FullScreenLoading } from '@/components/ui'
 
-import type { IProduct, IProductForm } from 'types'
+import type { IProduct, IProductForm } from '@/types'
 
 interface Props {}
 const Edit: NextPage<Props> = () => {

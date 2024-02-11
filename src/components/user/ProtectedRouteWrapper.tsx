@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router'
 
-import { useUserInfo } from 'hooks'
+import { useUserInfo } from '@/hooks'
 
 import Cookies from 'js-cookie'
-import { tokens } from 'utils'
+import { tokens } from '@/utils'
 
 interface Props {
   children: React.ReactNode

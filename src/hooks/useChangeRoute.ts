@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
-import { generateQueryParams } from 'utils'
+import { generateQueryParams } from '@/utils'
 
-import type { QueryParams } from 'types'
+import type { QueryParams } from '@/types'
 
 interface Options {
   shallow?: boolean

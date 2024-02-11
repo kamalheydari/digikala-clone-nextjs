@@ -2,13 +2,13 @@ import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import Link from 'next/link'
 
-import { useAppSelector } from 'hooks'
+import { useAppSelector } from '@/hooks'
 
-import { truncate } from 'utils'
+import { truncate } from '@/utils'
 
-import { EmptyCart } from 'icons'
-import { ProfileLayout } from 'components/layouts'
-import { PageContainer, ResponsiveImage } from 'components/ui'
+import { EmptyCart } from '@/icons'
+import { ProfileLayout } from '@/components/layouts'
+import { PageContainer, ResponsiveImage } from '@/components/ui'
 
 import type { NextPage } from 'next'
 

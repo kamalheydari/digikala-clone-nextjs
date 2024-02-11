@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import { EmptySearch } from 'icons'
+import { EmptySearch } from '@/icons'
 
 export default function EmptySearchList() {
   return (

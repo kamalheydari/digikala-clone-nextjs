@@ -1,9 +1,9 @@
-import { Filter as FilterIcon } from 'icons'
+import { Filter as FilterIcon } from '@/icons'
 
-import { useDisclosure } from 'hooks'
+import { useDisclosure } from '@/hooks'
 
-import { Modal } from 'components/ui'
-import { ProductFilterControls } from 'components/product'
+import { Modal } from '@/components/ui'
+import { ProductFilterControls } from '@/components/product'
 
 interface Props {
   mainMaxPrice: number | undefined

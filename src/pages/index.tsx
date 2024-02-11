@@ -1,18 +1,18 @@
 import Head from 'next/head'
 
-import { db, siteDescription } from 'utils'
+import { db, siteDescription } from '@/utils'
 
-import { Category, Slider, Banner } from 'models'
+import { Category, Slider, Banner } from '@/models'
 
-import config from 'config'
+import config from '@/config'
 
-import { LargeBanner, SmallBanner } from 'components/banners'
-import { ClientLayout } from 'components/layouts'
-import { MainSlider, DiscountSlider, BestSellsSlider, ProductFavouriteSlider } from 'components/sliders'
-import { CategoryList } from 'components/categories'
+import { LargeBanner, SmallBanner } from '@/components/banners'
+import { ClientLayout } from '@/components/layouts'
+import { MainSlider, DiscountSlider, BestSellsSlider, ProductFavouriteSlider } from '@/components/sliders'
+import { CategoryList } from '@/components/categories'
 
 import type { GetStaticProps, InferGetStaticPropsType, NextPage } from 'next'
-import type { IBanner, ICategory, ISlider } from 'types'
+import type { IBanner, ICategory, ISlider } from '@/types'
 
 interface Props {
   currentCategory: ICategory

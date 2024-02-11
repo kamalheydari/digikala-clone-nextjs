@@ -4,9 +4,9 @@ import { Control, UseFormRegister, useFieldArray } from 'react-hook-form'
 
 import { nanoid } from '@reduxjs/toolkit'
 
-import { AddIconButton, DeleteIconButton } from 'components/ui'
+import { AddIconButton, DeleteIconButton } from '@/components/ui'
 
-import type { IProductForm } from 'types'
+import type { IProductForm } from '@/types'
 
 interface Props {
   control: Control<IProductForm>

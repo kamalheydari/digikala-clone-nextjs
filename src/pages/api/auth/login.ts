@@ -1,11 +1,11 @@
 import bcrypt from 'bcrypt'
 
-import { User } from 'models'
+import { User } from '@/models'
 
-import { signToken, sendError, db, serializeAccessTokenCookie, serializeLoggedInCookie } from 'utils'
+import { signToken, sendError, db, serializeAccessTokenCookie, serializeLoggedInCookie } from '@/utils'
 
 import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next'
-import type { IUserDocument } from 'types'
+import type { IUserDocument } from '@/types'
 
 const handler: NextApiHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {

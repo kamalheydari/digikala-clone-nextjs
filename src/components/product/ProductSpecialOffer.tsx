@@ -1,4 +1,4 @@
-import { ProductSpecialOfferLogo } from 'icons'
+import { ProductSpecialOfferLogo } from '@/icons'
 
 interface Props {
   discount: number

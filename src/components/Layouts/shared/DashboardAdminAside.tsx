@@ -1,8 +1,8 @@
 import Link from 'next/link'
 
-import { Bag, Category, Comment, Image, Location, Logo, Plus, Save, Slider, Users } from 'icons'
-import { BoxLink } from 'components/ui'
-import { LogoutButton } from 'components/user'
+import { Bag, Category, Comment, Image, Location, Logo, Plus, Save, Slider, Users } from '@/icons'
+import { BoxLink } from '@/components/ui'
+import { LogoutButton } from '@/components/user'
 
 const profilePaths = [
   {

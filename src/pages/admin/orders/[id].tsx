@@ -2,12 +2,11 @@ import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-import { useGetSingleOrderQuery } from 'services'
+import { useGetSingleOrderQuery } from '@/services'
 
-import { DashboardLayout } from 'components/layouts'
-import { OrderCard } from 'components/order'
-import { PageContainer } from 'components/ui'
-import { FullScreenLoading } from 'components/ui/loading'
+import { DashboardLayout } from '@/components/layouts'
+import { OrderCard } from '@/components/order'
+import { PageContainer, FullScreenLoading } from '@/components/ui'
 
 import type { NextPage } from 'next'
 

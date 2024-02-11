@@ -3,21 +3,20 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 
-import { useDisclosure } from 'hooks'
+import { useDisclosure } from '@/hooks'
 
-import { useGetCategoriesQuery, useUpdateCategoryMutation } from 'services'
+import { useGetCategoriesQuery, useUpdateCategoryMutation } from '@/services'
 
 import { SubmitHandler } from 'react-hook-form'
 
-import { CategoryForm } from 'components/forms'
-import { DashboardLayout } from 'components/layouts'
-import { ConfirmUpdateModal } from 'components/modals'
-import { HandleResponse } from 'components/shared'
-import { PageContainer } from 'components/ui'
-import { FullScreenLoading } from 'components/ui/loading'
+import { CategoryForm } from '@/components/forms'
+import { DashboardLayout } from '@/components/layouts'
+import { ConfirmUpdateModal } from '@/components/modals'
+import { HandleResponse } from '@/components/shared'
+import { PageContainer, FullScreenLoading } from '@/components/ui'
 
 import type { NextPage } from 'next'
-import type { ICategory, ICategoryForm } from 'types'
+import type { ICategory, ICategoryForm } from '@/types'
 
 const Edit: NextPage = () => {
   // ? Assets

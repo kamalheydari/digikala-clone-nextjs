@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react'
 
-import { addToCart, showAlert } from 'store'
+import { addToCart, showAlert } from '@/store'
 
-import { exsitItem } from 'utils'
+import { exsitItem } from '@/utils'
 
-import { useAppDispatch, useAppSelector } from 'hooks'
+import { useAppDispatch, useAppSelector } from '@/hooks'
 
-import { CartItemActions } from 'components/cart'
-import { ArrowLink } from 'components/ui'
-import { ProductPriceDisplay } from 'components/product'
+import { CartItemActions } from '@/components/cart'
+import { ArrowLink } from '@/components/ui'
+import { ProductPriceDisplay } from '@/components/product'
 
-import type { IProduct, ICart } from 'types'
+import type { IProduct, ICart } from '@/types'
 
 interface Porps {
   product: IProduct

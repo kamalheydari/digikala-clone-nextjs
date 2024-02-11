@@ -1,4 +1,4 @@
-import { OrderEmpty } from 'icons'
+import { OrderEmpty } from '@/icons'
 
 export default function EmptyCommentsList() {
   return (

@@ -1,6 +1,6 @@
 import { Control, FieldError, useController } from 'react-hook-form'
 
-import { DisplayError } from 'components/ui'
+import { DisplayError } from '@/components/ui'
 
 interface Props extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   name: string

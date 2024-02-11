@@ -1,4 +1,4 @@
-import type { IPagination, IProduct, IProductForm, QueryParams } from 'types'
+import type { IPagination, IProduct, IProductForm, QueryParams } from '@/types'
 
 export type MsgResult = { msg: string }
 export type IdQuery = { id: string }

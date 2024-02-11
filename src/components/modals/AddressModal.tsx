@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react'
 
-import { useEditUserMutation } from 'services'
+import { useEditUserMutation } from '@/services'
 
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import { addressSchema } from 'utils'
+import { addressSchema } from '@/utils'
 
-import { useUserInfo } from 'hooks'
+import { useUserInfo } from '@/hooks'
 
-import { HandleResponse } from 'components/shared'
-import { Modal, DisplayError, TextField, SubmitModalButton, Combobox } from 'components/ui'
+import { HandleResponse } from '@/components/shared'
+import { Modal, DisplayError, TextField, SubmitModalButton, Combobox } from '@/components/ui'
 
-import type { IAddress } from 'types'
+import type { IAddress } from '@/types'
 
 const iranCity = require('iran-city')
 

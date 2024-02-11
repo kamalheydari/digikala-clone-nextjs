@@ -1,11 +1,11 @@
-import { Product, Order } from 'models'
+import { Product, Order } from '@/models'
 
-import { sendError, db, roles } from 'utils'
+import { sendError, db, roles } from '@/utils'
 
-import { withUser } from 'middlewares'
+import { withUser } from '@/middlewares'
 
 import type { NextApiResponse } from 'next'
-import type { ICart, IOrderDocument, NextApiRequestWithUser } from 'types'
+import type { ICart, IOrderDocument, NextApiRequestWithUser } from '@/types'
 import type { ObjectId } from 'mongoose'
 
 const handler = async (req: NextApiRequestWithUser, res: NextApiResponse) => {

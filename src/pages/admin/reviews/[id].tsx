@@ -2,12 +2,11 @@ import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-import { useGetSingleReviewQuery } from 'services'
+import { useGetSingleReviewQuery } from '@/services'
 
-import { DashboardLayout } from 'components/layouts'
-import { ReveiwCard } from 'components/review'
-import { PageContainer } from 'components/ui'
-import { FullScreenLoading } from 'components/ui/loading'
+import { DashboardLayout } from '@/components/layouts'
+import { ReveiwCard } from '@/components/review'
+import { PageContainer, FullScreenLoading } from '@/components/ui'
 
 import type { NextPage } from 'next'
 

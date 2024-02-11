@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { nanoid } from '@reduxjs/toolkit'
 
-import { useCreatePlaceholderMutation } from 'services'
+import { useCreatePlaceholderMutation } from '@/services'
 
 import AWS from 'aws-sdk'
 

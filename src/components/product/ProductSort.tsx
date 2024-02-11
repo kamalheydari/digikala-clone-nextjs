@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router'
 
-import { sorts } from 'utils'
+import { sorts } from '@/utils'
 
-import { Check, Sort as SortIcon } from 'icons'
+import { Check, Sort as SortIcon } from '@/icons'
 
-import { useChangeRoute, useDisclosure } from 'hooks'
+import { useChangeRoute, useDisclosure } from '@/hooks'
 
-import { Modal } from 'components/ui'
+import { Modal } from '@/components/ui'
 
 interface Props {}
 

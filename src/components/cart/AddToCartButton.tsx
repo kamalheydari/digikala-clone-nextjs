@@ -1,16 +1,16 @@
 import Image from 'next/image'
 
-import { Check, Rule, ShieldCheck } from 'icons'
+import { Check, Rule, ShieldCheck } from '@/icons'
 
-import { formatNumber } from 'utils'
+import { formatNumber } from '@/utils'
 
-import { useAppSelector } from 'hooks'
+import { useAppSelector } from '@/hooks'
 
-import { CartOperations } from 'components/cart'
-import { ResponsiveImage } from 'components/ui'
-import { ProductStockIndicator } from 'components/product/StockInfo'
+import { CartOperations } from '@/components/cart'
+import { ResponsiveImage } from '@/components/ui'
+import { ProductStockIndicator } from '@/components/product'
 
-import type { IProduct } from 'types'
+import type { IProduct } from '@/types'
 
 interface Props {
   second?: boolean

@@ -2,16 +2,16 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 
-import { useGetUsersQuery } from 'services'
+import { useGetUsersQuery } from '@/services'
 
-import { Person } from 'icons'
+import { Person } from '@/icons'
 
-import { EmptyUsersList } from 'components/emptyList'
-import { DashboardLayout } from 'components/layouts'
-import { DataStateDisplay } from 'components/shared'
-import { TableSkeleton } from 'components/skeleton'
-import { PageContainer } from 'components/ui'
-import { Pagination } from 'components/navigation'
+import { EmptyUsersList } from '@/components/emptyList'
+import { DashboardLayout } from '@/components/layouts'
+import { DataStateDisplay } from '@/components/shared'
+import { TableSkeleton } from '@/components/skeleton'
+import { PageContainer } from '@/components/ui'
+import { Pagination } from '@/components/navigation'
 
 import type { NextPage } from 'next'
 
@@ -69,10 +69,10 @@ const Users: NextPage = () => {
                 user.role === 'admin'
                   ? 'bg-blue-50 text-blue-600'
                   : user.role === 'user'
-                  ? 'bg-amber-50 text-amber-600'
-                  : user.role === 'root'
-                  ? 'bg-green-50 text-green-600'
-                  : ''
+                    ? 'bg-amber-50 text-amber-600'
+                    : user.role === 'root'
+                      ? 'bg-green-50 text-green-600'
+                      : ''
               }
               `}
                             >

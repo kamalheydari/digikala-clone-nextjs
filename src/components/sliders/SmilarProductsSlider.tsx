@@ -9,9 +9,9 @@ import 'swiper/css/navigation'
 // import required modules
 import { Navigation, FreeMode } from 'swiper'
 
-import { ProductCard } from 'components/product'
+import { ProductCard } from '@/components/product'
 
-import type { IProduct } from 'types'
+import type { IProduct } from '@/types'
 
 interface Props {
   smilarProducts: {

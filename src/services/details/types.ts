@@ -1,4 +1,4 @@
-import type { IDetails, IDetailsForm } from 'types'
+import type { IDetails, IDetailsForm } from '@/types'
 
 export type MsgResult = { msg: string }
 export type IdQuery = { id: string }

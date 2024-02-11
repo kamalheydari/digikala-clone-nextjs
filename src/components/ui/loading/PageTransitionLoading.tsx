@@ -1,7 +1,7 @@
 import Router from 'next/router'
 import { useEffect, useState } from 'react'
 
-import { FullScreenLoading } from 'components/ui/loading'
+import { FullScreenLoading } from '@/components/ui'
 
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'

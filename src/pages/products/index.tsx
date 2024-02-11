@@ -2,15 +2,15 @@ import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-import { useGetProductsQuery } from 'services'
+import { useGetProductsQuery } from '@/services'
 
-import { EmptyCustomList } from 'components/emptyList'
-import { ClientLayout } from 'components/layouts'
-import { ProductSubCategoriesList, ProductCard, ProductFilterControls, ProductSort } from 'components/product'
-import { DataStateDisplay } from 'components/shared'
-import { ProductSkeleton } from 'components/skeleton'
-import { Pagination } from 'components/navigation'
-import { FilterModal } from 'components/modals'
+import { EmptyCustomList } from '@/components/emptyList'
+import { ClientLayout } from '@/components/layouts'
+import { ProductSubCategoriesList, ProductCard, ProductFilterControls, ProductSort } from '@/components/product'
+import { DataStateDisplay } from '@/components/shared'
+import { ProductSkeleton } from '@/components/skeleton'
+import { Pagination } from '@/components/navigation'
+import { FilterModal } from '@/components/modals'
 
 import type { NextPage } from 'next'
 
@@ -67,9 +67,7 @@ const ProductsHome: NextPage = () => {
               >
                 {data && data.products.length > 0 && (
                   <section className="space-y-3 divide-y divide-gray-300 sm:grid sm:grid-cols-2 sm:space-y-0 sm:divide-y-0 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-                    {data?.products.map((item) => (
-                      <ProductCard product={item} key={item._id} />
-                    ))}
+                    {data?.products.map((item) => <ProductCard product={item} key={item._id} />)}
                   </section>
                 )}
               </DataStateDisplay>

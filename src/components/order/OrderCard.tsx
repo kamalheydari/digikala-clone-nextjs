@@ -1,13 +1,13 @@
 import moment from 'moment-jalaali'
 
-import { formatNumber } from 'utils'
-import { useUpdateOrderMutation } from 'services'
+import { formatNumber } from '@/utils'
+import { useUpdateOrderMutation } from '@/services'
 
-import { Check, Clock2, More, Toman } from 'icons'
-import { HandleResponse } from 'components/shared'
-import { ResponsiveImage } from 'components/ui'
+import { Check, Clock2, More, Toman } from '@/icons'
+import { HandleResponse } from '@/components/shared'
+import { ResponsiveImage } from '@/components/ui'
 
-import type { IOrder } from 'types'
+import type { IOrder } from '@/types'
 
 interface Props {
   order: IOrder

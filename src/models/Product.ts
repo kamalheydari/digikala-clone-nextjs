@@ -1,6 +1,6 @@
 import { Model, Schema, model, models } from 'mongoose'
 
-import type { IProductDocument } from 'types'
+import type { IProductDocument } from '@/types'
 
 const productSchema = new Schema<IProductDocument>(
   {

@@ -1,11 +1,11 @@
-import { sendError, roles } from 'utils'
+import { sendError, roles } from '@/utils'
 
-import { withUser } from 'middlewares'
+import { withUser } from '@/middlewares'
 
 import sharp from 'sharp'
 
 import type { NextApiResponse } from 'next'
-import type { NextApiRequestWithUser } from 'types'
+import type { NextApiRequestWithUser } from '@/types'
 
 const handler = async (req: NextApiRequestWithUser, res: NextApiResponse) => {
   switch (req.method) {

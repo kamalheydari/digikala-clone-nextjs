@@ -2,10 +2,10 @@ import Image from 'next/image'
 
 import { Control, FieldError, useFieldArray } from 'react-hook-form'
 
-import { DisplayError, UploadImage } from 'components/ui'
-import { Delete } from 'icons'
+import { DisplayError, UploadImage } from '@/components/ui'
+import { Delete } from '@/icons'
 
-import type { IProductForm } from 'types'
+import type { IProductForm } from '@/types'
 
 interface Props {
   control: Control<IProductForm>

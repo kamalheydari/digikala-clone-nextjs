@@ -1,4 +1,4 @@
-import type { IAddress } from 'types'
+import type { IAddress } from '@/types'
 
 export default interface WithAddressModalProps {
   openAddressModal: () => void

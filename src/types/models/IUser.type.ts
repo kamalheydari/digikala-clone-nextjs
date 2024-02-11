@@ -1,5 +1,5 @@
 import type { ObjectId, Document } from 'mongoose'
-import type { IAddress } from 'types'
+import type { IAddress } from '@/types'
 
 export interface IUser {
   _id: string

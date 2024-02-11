@@ -1,6 +1,6 @@
 import { Model, Schema, model, models } from 'mongoose'
 
-import type { ISliderDocument } from 'types'
+import type { ISliderDocument } from '@/types'
 
 const SliderSchema = new Schema<ISliderDocument>(
   {

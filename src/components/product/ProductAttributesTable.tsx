@@ -2,9 +2,9 @@ import { useRef } from 'react'
 
 import { type FieldError, Control, UseFormRegister, useFieldArray } from 'react-hook-form'
 
-import { DeleteIconButton, DisplayError, AddIconButton } from 'components/ui'
+import { DeleteIconButton, DisplayError, AddIconButton } from '@/components/ui'
 
-import type { IDetailsForm } from 'types'
+import type { IDetailsForm } from '@/types'
 
 interface Props {
   name: 'specification' | 'info'

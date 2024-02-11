@@ -4,9 +4,9 @@ import { Pagination, Autoplay } from 'swiper'
 import 'swiper/css'
 import 'swiper/css/pagination'
 
-import { ResponsiveImage } from 'components/ui'
+import { ResponsiveImage } from '@/components/ui'
 
-import type { ISlider } from 'types'
+import type { ISlider } from '@/types'
 
 interface Props {
   data: ISlider[]

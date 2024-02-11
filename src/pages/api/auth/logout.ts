@@ -1,6 +1,6 @@
 import { NextApiHandler, type NextApiRequest, type NextApiResponse } from 'next'
 
-import { destroyAccessToken, destroyLoggedIn } from 'utils'
+import { destroyAccessToken, destroyLoggedIn } from '@/utils'
 
 const handler: NextApiHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   switch (req.method) {

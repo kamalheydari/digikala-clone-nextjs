@@ -3,8 +3,8 @@ import { Fragment } from 'react'
 
 import { Menu, Transition } from '@headlessui/react'
 
-import { ArrowDown, ArrowLeft, Person, User } from 'icons'
-import { LogoutButton } from 'components/user'
+import { ArrowDown, ArrowLeft, Person, User } from '@/icons'
+import { LogoutButton } from '@/components/user'
 
 interface Props {
   name: string

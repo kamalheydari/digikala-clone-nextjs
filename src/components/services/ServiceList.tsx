@@ -1,4 +1,4 @@
-import { CashOnDelivery, Daysreturn, ExpressDelivery, OriginalProducts, Support } from 'icons'
+import { CashOnDelivery, Daysreturn, ExpressDelivery, OriginalProducts, Support } from '@/icons'
 
 export default function ServiceList() {
   const services = [

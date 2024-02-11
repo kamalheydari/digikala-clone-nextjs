@@ -2,31 +2,32 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 
-import { Product } from 'models'
+import { Product } from '@/models'
 
-import { db } from 'utils'
+import { db } from '@/utils'
 
-import { useAppDispatch } from 'hooks'
+import { useAppDispatch } from '@/hooks'
 
-import { setTempColor, setTempSize, addToLastSeen } from 'store'
+import { setTempColor, setTempSize, addToLastSeen } from '@/store'
 
-import { ClientLayout } from 'components/layouts'
+import { ClientLayout } from '@/components/layouts'
 import {
   ProductBreadcrumb,
   ProductGallery,
   ProductInfo,
   ProductDescription,
   ProductSpecificationList,
-} from 'components/product'
-import { ProductColorSelector, ProductSizeSelector } from 'components/product/ProductVariants'
-import { ProductOutOfStockMessage } from 'components/product/StockInfo'
-import { ReviewsList } from 'components/review'
-import { SmilarProductsSlider } from 'components/sliders'
-import { AddToCartButton, FreeShippingIndicator } from 'components/cart'
-import { ServiceList } from 'components/services'
+  ProductColorSelector,
+  ProductSizeSelector,
+  ProductOutOfStockMessage,
+} from '@/components/product'
+import { ReviewsList } from '@/components/review'
+import { SmilarProductsSlider } from '@/components/sliders'
+import { AddToCartButton, FreeShippingIndicator } from '@/components/cart'
+import { ServiceList } from '@/components/services'
 
 import type { GetServerSideProps, NextPage } from 'next'
-import type { IProduct } from 'types'
+import type { IProduct } from '@/types'
 
 interface Props {
   product: IProduct

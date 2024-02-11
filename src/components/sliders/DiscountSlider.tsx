@@ -3,14 +3,14 @@ import Link from 'next/link'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 
-import { useGetProductsQuery } from 'services'
+import { useGetProductsQuery } from '@/services'
 
-import { AmazingTypo } from 'icons'
+import { AmazingTypo } from '@/icons'
 
-import { ProductDiscountTag, ProductPriceDisplay } from 'components/product'
-import { ResponsiveImage, Skeleton } from 'components/ui'
+import { ProductDiscountTag, ProductPriceDisplay } from '@/components/product'
+import { ResponsiveImage, Skeleton } from '@/components/ui'
 
-import type { ICategory } from 'types'
+import type { ICategory } from '@/types'
 
 interface Props {
   currentCategory: ICategory

@@ -1,8 +1,8 @@
 import Link from 'next/link'
 
-import { ResponsiveImage } from 'components/ui'
+import { ResponsiveImage } from '@/components/ui'
 
-import type { ICategory } from 'types'
+import type { ICategory } from '@/types'
 
 interface Props {
   homePage?: boolean

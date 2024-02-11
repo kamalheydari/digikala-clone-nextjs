@@ -2,20 +2,20 @@ import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { useState } from 'react'
 
-import { useDeleteReviewMutation, useGetReviewsQuery } from 'services'
+import { useDeleteReviewMutation, useGetReviewsQuery } from '@/services'
 
-import { useDisclosure } from 'hooks'
+import { useDisclosure } from '@/hooks'
 
 import { useRouter } from 'next/router'
 
-import { EmptyCommentsList } from 'components/emptyList'
-import { ProfileLayout } from 'components/layouts'
-import { ConfirmDeleteModal } from 'components/modals'
-import { ReveiwCard } from 'components/review'
-import { HandleResponse, DataStateDisplay } from 'components/shared'
-import { ReveiwSkeleton } from 'components/skeleton'
-import { PageContainer } from 'components/ui'
-import { Pagination } from 'components/navigation'
+import { EmptyCommentsList } from '@/components/emptyList'
+import { ProfileLayout } from '@/components/layouts'
+import { ConfirmDeleteModal } from '@/components/modals'
+import { ReveiwCard } from '@/components/review'
+import { HandleResponse, DataStateDisplay } from '@/components/shared'
+import { ReveiwSkeleton } from '@/components/skeleton'
+import { PageContainer } from '@/components/ui'
+import { Pagination } from '@/components/navigation'
 
 import type { NextPage } from 'next'
 

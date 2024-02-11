@@ -1,8 +1,8 @@
 import Link from 'next/link'
 
-import { EditIconButton } from 'components/ui'
+import { EditIconButton } from '@/components/ui'
 
-import type { IOrder } from 'types'
+import type { IOrder } from '@/types'
 
 interface Props {
   orders: IOrder[]

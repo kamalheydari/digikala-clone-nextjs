@@ -1,5 +1,5 @@
 import type { ObjectId, Document } from 'mongoose'
-import type { ISize, IColor, ICategory } from 'types'
+import type { ISize, IColor, ICategory } from '@/types'
 
 export interface IProduct {
   _id: string

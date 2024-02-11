@@ -8,23 +8,22 @@ import {
   useDeleteDetailsMutation,
   useGetDetailsQuery,
   useUpdateDetailsMutation,
-} from 'services'
+} from '@/services'
 
-import { useDisclosure } from 'hooks'
+import { useDisclosure } from '@/hooks'
 
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { detailsSchema } from 'utils'
+import { detailsSchema } from '@/utils'
 
 import { Tab } from '@headlessui/react'
-import { DashboardLayout } from 'components/layouts'
-import { ConfirmDeleteModal, ConfirmUpdateModal } from 'components/modals'
-import { HandleResponse } from 'components/shared'
-import { PageContainer, Button } from 'components/ui'
-import { FullScreenLoading } from 'components/ui/loading'
-import { ProductAttributesTable } from 'components/product'
+import { DashboardLayout } from '@/components/layouts'
+import { ConfirmDeleteModal, ConfirmUpdateModal } from '@/components/modals'
+import { HandleResponse } from '@/components/shared'
+import { PageContainer, Button, FullScreenLoading } from '@/components/ui'
+import { ProductAttributesTable } from '@/components/product'
 
-import type { IDetails, IDetailsForm } from 'types'
+import type { IDetails, IDetailsForm } from '@/types'
 import type { NextPage } from 'next'
 
 const tabListNames = [

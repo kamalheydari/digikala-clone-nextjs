@@ -1,13 +1,13 @@
 import Link from 'next/link'
 
-import { formatNumber } from 'utils'
+import { formatNumber } from '@/utils'
 
-import { Rule, Save, ShieldCheck, Toman } from 'icons'
-import { ProductSpecialOffer } from 'components/product'
-import { ResponsiveImage } from 'components/ui'
-import { CartItemActions, CartDiscountItem } from 'components/cart'
+import { Rule, Save, ShieldCheck, Toman } from '@/icons'
+import { ProductSpecialOffer } from '@/components/product'
+import { ResponsiveImage } from '@/components/ui'
+import { CartItemActions, CartDiscountItem } from '@/components/cart'
 
-import type { ICart } from 'types'
+import type { ICart } from '@/types'
 
 interface Props {
   item: ICart

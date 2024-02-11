@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { CartDropdownMenu, CartIconBadge } from 'components/cart'
+import { CartDropdownMenu, CartIconBadge } from '@/components/cart'
 
 export default function CartDisplay() {
   // ? Render(s)

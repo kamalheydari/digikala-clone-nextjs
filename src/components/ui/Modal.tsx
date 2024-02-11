@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Close } from 'icons'
+import { Close } from '@/icons'
 
 interface ModalProps {
   isShow: boolean

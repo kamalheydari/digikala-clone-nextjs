@@ -1,13 +1,13 @@
 import { useRouter } from 'next/router'
 
-import { EmptyComment } from 'components/emptyList'
-import { ReviewModal } from 'components/modals'
-import { DataStateDisplay } from 'components/shared'
-import { ReveiwSkeleton } from 'components/skeleton'
-import { ReviewProductCard } from 'components/review'
-import { Pagination } from 'components/navigation'
+import { EmptyComment } from '@/components/emptyList'
+import { ReviewModal } from '@/components/modals'
+import { DataStateDisplay } from '@/components/shared'
+import { ReveiwSkeleton } from '@/components/skeleton'
+import { ReviewProductCard } from '@/components/review'
+import { Pagination } from '@/components/navigation'
 
-import { useGetProductReviewsQuery } from 'services'
+import { useGetProductReviewsQuery } from '@/services'
 
 interface Porps {
   numReviews: number
@@ -56,9 +56,7 @@ const ReviewsList: React.FC<Porps> = (props) => {
             loadingComponent={<ReveiwSkeleton />}
           >
             <div className="space-y-4 divide-y-2 py-3 sm:px-2 lg:px-6">
-              {data?.reviews?.map((item) => (
-                <ReviewProductCard item={item} key={item._id} />
-              ))}
+              {data?.reviews?.map((item) => <ReviewProductCard item={item} key={item._id} />)}
             </div>
           </DataStateDisplay>
 

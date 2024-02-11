@@ -1,4 +1,4 @@
-import type { QueryParams } from 'types'
+import type { QueryParams } from '@/types'
 
 const generateQueryParams = (params: QueryParams) => {
   const queryParams = new URLSearchParams()

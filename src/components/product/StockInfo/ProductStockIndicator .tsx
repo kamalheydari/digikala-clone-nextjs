@@ -1,5 +1,5 @@
-import { Save } from 'icons'
-import { formatNumber } from 'utils'
+import { Save } from '@/icons'
+import { formatNumber } from '@/utils'
 
 interface Props {
   inStock: number

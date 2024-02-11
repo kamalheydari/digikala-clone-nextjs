@@ -1,6 +1,6 @@
-import baseApi from 'services/baseApi'
+import baseApi from '@/services/baseApi'
 
-import { generateQueryParams } from 'utils'
+import { generateQueryParams } from '@/utils'
 
 import type {
   CreateProductQuery,

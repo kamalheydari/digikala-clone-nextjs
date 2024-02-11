@@ -1,7 +1,7 @@
-import { Minus, Plus } from 'icons'
+import { Minus, Plus } from '@/icons'
 import moment from 'moment-jalaali'
 
-import type { IReview } from 'types'
+import type { IReview } from '@/types'
 
 interface Props {
   item: IReview

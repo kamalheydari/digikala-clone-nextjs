@@ -2,11 +2,11 @@ import { useEffect } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 
-import { logInSchema } from 'utils'
+import { logInSchema } from '@/utils'
 
-import { TextField, LoginButton } from 'components/ui'
+import { TextField, LoginButton } from '@/components/ui'
 
-import type { ILoginForm } from 'types'
+import type { ILoginForm } from '@/types'
 
 interface Props {
   onSubmit: (data: ILoginForm) => void

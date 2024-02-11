@@ -4,11 +4,11 @@ import { useEffect } from 'react'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 
-import { categorySchema } from 'utils'
+import { categorySchema } from '@/utils'
 
-import { TextField, UploadImage, Button } from 'components/ui'
+import { TextField, UploadImage, Button } from '@/components/ui'
 
-import type { ICategory, ICategoryForm } from 'types'
+import type { ICategory, ICategoryForm } from '@/types'
 
 interface CreateCategoryFormProps {
   mode: 'create'

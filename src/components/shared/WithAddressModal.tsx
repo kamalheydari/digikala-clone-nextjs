@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { useDisclosure, useUserInfo } from 'hooks'
+import { useDisclosure, useUserInfo } from '@/hooks'
 
-import { AddressModal } from 'components/modals'
+import { AddressModal } from '@/components/modals'
 
-import type { WithAddressModalProps } from 'types'
+import type { WithAddressModalProps } from '@/types'
 
 interface Props {
   children: React.ReactNode

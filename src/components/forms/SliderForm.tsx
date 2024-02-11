@@ -4,11 +4,11 @@ import Image from 'next/image'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import { sliderSchema } from 'utils'
+import { sliderSchema } from '@/utils'
 
-import { TextField, UploadImage, ControlledCheckbox, Button } from 'components/ui'
+import { TextField, UploadImage, ControlledCheckbox, Button } from '@/components/ui'
 
-import type { ISlider, ISliderForm } from 'types'
+import type { ISlider, ISliderForm } from '@/types'
 
 interface CreateBannerFormProps {
   mode: 'create'

@@ -1,4 +1,4 @@
-import type { IBanner, ICategory, IDetails, IProduct, IReview, ISlider } from 'types'
+import type { IBanner, ICategory, IDetails, IProduct, IReview, ISlider } from '@/types'
 
 export type ICategoryForm = Omit<ICategory, '_id' | 'children' | 'createdAt' | 'updatedAt'>
 

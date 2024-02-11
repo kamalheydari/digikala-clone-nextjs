@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 
-import { useGetCategoriesQuery } from 'services'
+import { useGetCategoriesQuery } from '@/services'
 
-import { SelectBox } from 'components/ui'
+import { SelectBox } from '@/components/ui'
 
 import type { SelectedCategories } from 'pages/admin/products'
-import type { ICategory } from 'types'
+import type { ICategory } from '@/types'
 
 interface Props {
   selectedCategories: SelectedCategories

@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 
-import { Modal, Button } from 'components/ui'
+import { Modal, Button } from '@/components/ui'
 
 interface Props {
   isShow: boolean

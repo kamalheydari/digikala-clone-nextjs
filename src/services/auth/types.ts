@@ -1,4 +1,4 @@
-import type { ILoginForm, IUser } from 'types'
+import type { ILoginForm, IUser } from '@/types'
 
 export type MsgResult = { msg: string }
 

@@ -1,7 +1,7 @@
-import { roles } from 'utils'
+import { roles } from '@/utils'
 
-import { ProtectedRouteWrapper } from 'components/user'
-import { Header, UserProfileAside } from './shared'
+import { ProtectedRouteWrapper } from '@/components/user'
+import { Header, UserProfileAside } from '@/components/layouts'
 
 interface Props {
   children: React.ReactNode

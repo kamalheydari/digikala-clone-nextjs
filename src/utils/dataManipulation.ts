@@ -1,4 +1,4 @@
-import type { ICart } from 'types'
+import type { ICart } from '@/types'
 
 export function exsitItem(
   cartItems: ICart[],

@@ -1,4 +1,4 @@
-import type { ICategoriesList, ICategory, ICategoryForm } from 'types'
+import type { ICategoriesList, ICategory, ICategoryForm } from '@/types'
 
 export type MsgResult = { msg: string }
 export type IdQuery = { id: string }

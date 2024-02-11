@@ -1,4 +1,4 @@
-import { BackIconButton } from 'components/ui'
+import { BackIconButton } from '@/components/ui'
 
 interface Props {
   title: string

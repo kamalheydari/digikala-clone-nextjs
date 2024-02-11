@@ -1,11 +1,10 @@
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 
-import { useGetCategoriesQuery } from 'services'
+import { useGetCategoriesQuery } from '@/services'
 
-import { DashboardLayout } from 'components/layouts'
-import { PageContainer } from 'components/ui'
-import { FullScreenLoading } from 'components/ui/loading'
+import { DashboardLayout } from '@/components/layouts'
+import { PageContainer, FullScreenLoading } from '@/components/ui'
 
 import type { NextPage } from 'next'
 

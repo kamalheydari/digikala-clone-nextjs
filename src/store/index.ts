@@ -5,7 +5,7 @@ import { setupListeners } from '@reduxjs/toolkit/dist/query'
 import lastSeenReducer from './slices/lastSeen.slice'
 import cartReducer from './slices/cart.slice'
 import alertReducer from './slices/alert.slice'
-import apiSlice from 'services/baseApi'
+import apiSlice from '@/services/baseApi'
 
 // ? Actions
 export * from './slices/lastSeen.slice'

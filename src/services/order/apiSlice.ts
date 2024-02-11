@@ -1,4 +1,4 @@
-import baseApi from 'services/baseApi'
+import baseApi from '@/services/baseApi'
 
 import type {
   CreateOrderQuery,

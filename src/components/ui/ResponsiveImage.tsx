@@ -1,6 +1,6 @@
 import Image, { ImageProps } from 'next/image'
 
-import { customeBlurDataURL } from 'utils'
+import { customeBlurDataURL } from '@/utils'
 
 interface Props extends Omit<ImageProps, 'placeholder' | 'quality' | 'layout'> {
   dimensions?: string

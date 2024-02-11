@@ -1,9 +1,9 @@
-import { formatNumber } from 'utils'
+import { formatNumber } from '@/utils'
 
-import { Button } from 'components/ui'
-import { Toman, TomanRed } from 'icons'
+import { Button } from '@/components/ui'
+import { Toman, TomanRed } from '@/icons'
 
-import { useAppSelector } from 'hooks'
+import { useAppSelector } from '@/hooks'
 
 interface Props {
   cart?: boolean

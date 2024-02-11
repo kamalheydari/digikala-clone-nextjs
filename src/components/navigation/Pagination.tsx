@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router'
 
-import { ArrowLeft, ArrowRight2 } from 'icons'
+import { ArrowLeft, ArrowRight2 } from '@/icons'
 
-import { useMediaQuery, useChangeRoute } from 'hooks'
+import { useMediaQuery, useChangeRoute } from '@/hooks'
 
-import type { IPagination, QueryParams } from 'types'
+import type { IPagination, QueryParams } from '@/types'
 
 interface Props {
   pagination: IPagination

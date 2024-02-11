@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
-import { useGetCategoriesQuery } from 'services'
+import { useGetCategoriesQuery } from '@/services'
 
-import { ArrowLeft, Bars } from 'icons'
-import { NavbarSkeleton } from 'components/skeleton'
-import { ResponsiveImage } from 'components/ui'
+import { ArrowLeft, Bars } from '@/icons'
+import { NavbarSkeleton } from '@/components/skeleton'
+import { ResponsiveImage } from '@/components/ui'
 
-import type { ICategory } from 'types'
+import type { ICategory } from '@/types'
 
 export default function Navbar() {
   // ? Get Categories Query

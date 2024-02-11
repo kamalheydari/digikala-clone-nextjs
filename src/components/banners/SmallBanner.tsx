@@ -1,6 +1,6 @@
-import { ResponsiveImage } from 'components/ui'
+import { ResponsiveImage } from '@/components/ui'
 
-import type { IBanner } from 'types'
+import type { IBanner } from '@/types'
 
 interface Props {
   data: IBanner[]

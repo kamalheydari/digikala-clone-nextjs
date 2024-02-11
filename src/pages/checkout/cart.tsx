@@ -3,18 +3,18 @@ import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 
-import { clearCart } from 'store'
+import { clearCart } from '@/store'
 
-import { Delete, EmptyCart, More, Toman } from 'icons'
+import { Delete, EmptyCart, More, Toman } from '@/icons'
 import { Menu, Transition } from '@headlessui/react'
-import { CartItemDisplay, CartSummary, FreeShippingIndicator } from 'components/cart'
-import { Header } from 'components/layouts/shared'
-import { RedirectToLogin } from 'components/modals'
-import { Button } from 'components/ui'
+import { CartItemDisplay, CartSummary, FreeShippingIndicator } from '@/components/cart'
+import { Header } from '@/components/layouts'
+import { RedirectToLogin } from '@/components/modals'
+import { Button } from '@/components/ui'
 
-import { formatNumber } from 'utils'
+import { formatNumber } from '@/utils'
 
-import { useDisclosure, useAppSelector, useAppDispatch, useUserInfo } from 'hooks'
+import { useDisclosure, useAppSelector, useAppDispatch, useUserInfo } from '@/hooks'
 
 import type { NextPage } from 'next'
 

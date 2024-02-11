@@ -1,4 +1,4 @@
-import type { ISlider, ISliderForm } from 'types'
+import type { ISlider, ISliderForm } from '@/types'
 
 export type MsgResult = { msg: string }
 export type IdQuery = { id: string }
