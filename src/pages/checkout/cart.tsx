@@ -8,7 +8,7 @@ import { clearCart } from '@/store'
 import { Delete, EmptyCart, More, Toman } from '@/icons'
 import { Menu, Transition } from '@headlessui/react'
 import { CartItemDisplay, CartSummary, FreeShippingIndicator } from '@/components/cart'
-import { Header } from '@/components/layouts'
+import { Header } from '@/components/layouts/shared'
 import { RedirectToLogin } from '@/components/modals'
 import { Button } from '@/components/ui'
 

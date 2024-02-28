@@ -3,7 +3,7 @@ import Head from 'next/head'
 
 import { roles } from '@/utils'
 
-import { UserProfileAside, Header } from '@/components/layouts'
+import { Header, UserProfileAside } from '@/components/layouts/shared'
 import { ProtectedRouteWrapper } from '@/components/user'
 import { Orders } from '@/components/order'
 
