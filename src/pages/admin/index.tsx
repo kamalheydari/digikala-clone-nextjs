@@ -4,8 +4,8 @@ import Image from 'next/image'
 
 import { roles } from '@/utils'
 
-import { DashboardAdminAside } from '@/components/layouts/shared'
 import { ProtectedRouteWrapper } from '@/components/user'
+import { DashboardAdminAside } from '@/components/shared'
 
 import type { NextPage } from 'next'
 

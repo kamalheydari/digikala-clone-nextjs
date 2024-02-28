@@ -1,5 +1,5 @@
 import { Logo } from '@/icons'
-import { InlineLoading } from '@/components/ui/loading'
+import { InlineLoading } from '@/components/ui'
 
 export default function FullScreenLoading() {
   return (

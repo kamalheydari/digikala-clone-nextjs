@@ -13,8 +13,7 @@ import { userApiSlice } from '@/services'
 
 import { tokens } from '@/utils'
 
-import { PageTransitionLoading } from '@/components/ui/loading'
-import { Alert } from '@/components/ui'
+import { PageTransitionLoading, Alert } from '@/components/ui'
 
 import type { AppProps } from 'next/app'
 

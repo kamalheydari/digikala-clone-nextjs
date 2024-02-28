@@ -3,9 +3,9 @@ import Head from 'next/head'
 
 import { roles } from '@/utils'
 
-import { Header, UserProfileAside } from '@/components/layouts/shared'
 import { ProtectedRouteWrapper } from '@/components/user'
 import { Orders } from '@/components/order'
+import { Header, UserProfileAside } from '@/components/shared'
 
 import type { NextPage } from 'next'
 

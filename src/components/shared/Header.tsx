@@ -3,8 +3,8 @@ import Link from 'next/link'
 import { Logo, Question } from '@/icons'
 import { SearchModal } from '@/components/modals'
 import { UserAuthLinks } from '@/components/user'
-import { AddressBar, Navbar, Sidebar } from '@/components/layouts/shared'
 import { CartDisplay } from '@/components/cart'
+import { AddressBar, Navbar, Sidebar } from '@/components/shared'
 
 const Header = () => {
   // ? Render(s)

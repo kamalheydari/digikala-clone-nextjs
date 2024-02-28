@@ -1,4 +1,4 @@
-import { InlineLoading } from '@/components/ui/loading'
+import { InlineLoading } from '@/components/ui'
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading?: boolean

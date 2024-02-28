@@ -4,8 +4,8 @@ import { useGetCategoriesQuery } from '@/services'
 
 import { SelectBox } from '@/components/ui'
 
-import type { SelectedCategories } from 'pages/admin/products'
 import type { ICategory } from '@/types'
+import type { SelectedCategories } from '../forms/ProductForm'
 
 interface Props {
   selectedCategories: SelectedCategories

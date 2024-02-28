@@ -1,5 +1,5 @@
 import { ProtectedRouteWrapper } from '@/components/user'
-import { DashboardAdminAside } from '@/components/layouts/shared'
+import { DashboardAdminAside } from '@/components/shared'
 
 import { roles } from '@/utils'
 
