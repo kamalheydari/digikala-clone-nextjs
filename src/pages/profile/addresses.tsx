@@ -5,7 +5,7 @@ import { useUserInfo } from '@/hooks'
 
 import { Address, Edit, Location, Phone, Post, User, UserLocation } from '@/icons'
 
-import { ProfileLayout } from '@/components/layouts'
+import { ProfileLayout } from '@/components/Layouts'
 import { WithAddressModal } from '@/components/shared'
 import { AddressSkeleton } from '@/components/skeleton'
 import { PageContainer } from '@/components/ui'

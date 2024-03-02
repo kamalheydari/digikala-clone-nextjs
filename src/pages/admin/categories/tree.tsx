@@ -3,7 +3,7 @@ import Head from 'next/head'
 
 import { useGetCategoriesQuery } from '@/services'
 
-import { DashboardLayout } from '@/components/layouts'
+import { DashboardLayout } from '@/components/Layouts'
 import { PageContainer, FullScreenLoading } from '@/components/ui'
 
 import type { NextPage } from 'next'

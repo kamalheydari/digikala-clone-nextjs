@@ -7,7 +7,7 @@ import { SubmitHandler } from 'react-hook-form'
 import { useCreateCategoryMutation } from '@/services'
 
 import { CategoryForm } from '@/components/forms'
-import { DashboardLayout } from '@/components/layouts'
+import { DashboardLayout } from '@/components/Layouts'
 import { HandleResponse } from '@/components/shared'
 import { PageContainer } from '@/components/ui'
 

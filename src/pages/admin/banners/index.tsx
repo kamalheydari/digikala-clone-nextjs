@@ -6,7 +6,7 @@ import Head from 'next/head'
 import { useGetBannersQuery, useGetCategoriesQuery } from '@/services'
 
 import { EmptyCustomList } from '@/components/emptyList'
-import { DashboardLayout } from '@/components/layouts'
+import { DashboardLayout } from '@/components/Layouts'
 import { DataStateDisplay, TableContainer } from '@/components/shared'
 import { TableSkeleton } from '@/components/skeleton'
 import { PageContainer } from '@/components/ui'

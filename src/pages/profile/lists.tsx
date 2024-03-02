@@ -3,7 +3,7 @@ import Head from 'next/head'
 
 import { FavoritesListEmpty } from '@/icons'
 
-import { ProfileLayout } from '@/components/layouts'
+import { ProfileLayout } from '@/components/Layouts'
 import { PageContainer } from '@/components/ui'
 
 import type { NextPage } from 'next'

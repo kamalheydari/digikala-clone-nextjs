@@ -9,7 +9,7 @@ import { useDisclosure } from '@/hooks'
 import { useRouter } from 'next/router'
 
 import { EmptyCommentsList } from '@/components/emptyList'
-import { ProfileLayout } from '@/components/layouts'
+import { ProfileLayout } from '@/components/Layouts'
 import { ConfirmDeleteModal } from '@/components/modals'
 import { ReveiwCard } from '@/components/review'
 import { HandleResponse, DataStateDisplay } from '@/components/shared'

@@ -17,7 +17,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { detailsSchema } from '@/utils'
 
 import { Tab } from '@headlessui/react'
-import { DashboardLayout } from '@/components/layouts'
+import { DashboardLayout } from '@/components/Layouts'
 import { ConfirmDeleteModal, ConfirmUpdateModal } from '@/components/modals'
 import { HandleResponse } from '@/components/shared'
 import { PageContainer, Button, FullScreenLoading } from '@/components/ui'

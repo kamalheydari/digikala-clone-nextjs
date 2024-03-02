@@ -10,7 +10,7 @@ import { useGetCategoriesQuery, useUpdateCategoryMutation } from '@/services'
 import { SubmitHandler } from 'react-hook-form'
 
 import { CategoryForm } from '@/components/forms'
-import { DashboardLayout } from '@/components/layouts'
+import { DashboardLayout } from '@/components/Layouts'
 import { ConfirmUpdateModal } from '@/components/modals'
 import { HandleResponse } from '@/components/shared'
 import { PageContainer, FullScreenLoading } from '@/components/ui'

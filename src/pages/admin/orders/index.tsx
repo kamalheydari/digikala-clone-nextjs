@@ -5,7 +5,7 @@ import Head from 'next/head'
 import { useGetOrdersQuery } from '@/services'
 
 import { EmptyOrdersList } from '@/components/emptyList'
-import { DashboardLayout } from '@/components/layouts'
+import { DashboardLayout } from '@/components/Layouts'
 import { OrdersTable } from '@/components/order'
 import { DataStateDisplay } from '@/components/shared'
 import { TableSkeleton } from '@/components/skeleton'

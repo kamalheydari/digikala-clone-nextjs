@@ -10,7 +10,7 @@ import { useDeleteBannerMutation, useGetSingleBannerQuery, useUpdateBannerMutati
 import { SubmitHandler } from 'react-hook-form'
 
 import { BannerForm } from '@/components/forms'
-import { DashboardLayout } from '@/components/layouts'
+import { DashboardLayout } from '@/components/Layouts'
 import { ConfirmDeleteModal, ConfirmUpdateModal } from '@/components/modals'
 import { HandleResponse } from '@/components/shared'
 import { PageContainer, FullScreenLoading } from '@/components/ui'

@@ -3,7 +3,7 @@ import Head from 'next/head'
 
 import { useUserInfo } from '@/hooks'
 
-import { ProfileLayout } from '@/components/layouts'
+import { ProfileLayout } from '@/components/Layouts'
 import { UserNameModal, UserMobileModal } from '@/components/modals'
 import { Skeleton, PageContainer } from '@/components/ui'
 

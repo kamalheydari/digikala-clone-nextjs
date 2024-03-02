@@ -9,7 +9,7 @@ import { SubmitHandler } from 'react-hook-form'
 import { useDeleteSliderMutation, useGetSingleSliderQuery, useUpdateSliderMutation } from '@/services'
 
 import { SliderForm } from '@/components/forms'
-import { DashboardLayout } from '@/components/layouts'
+import { DashboardLayout } from '@/components/Layouts'
 import { ConfirmDeleteModal, ConfirmUpdateModal } from '@/components/modals'
 import { HandleResponse } from '@/components/shared'
 import { PageContainer, FullScreenLoading } from '@/components/ui'

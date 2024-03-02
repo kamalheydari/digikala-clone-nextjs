@@ -7,7 +7,7 @@ import config from '@/config'
 import { Banner, Category, Slider } from '@/models'
 
 import { LargeBanner, SmallBanner } from '@/components/banners'
-import { ClientLayout } from '@/components/layouts'
+import { ClientLayout } from '@/components/Layouts'
 import { CategoryList } from '@/components/categories'
 import { MainSlider, DiscountSlider, BestSellsSlider, ProductFavouriteSlider } from '@/components/sliders'
 

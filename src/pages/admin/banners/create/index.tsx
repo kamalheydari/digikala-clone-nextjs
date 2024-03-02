@@ -7,7 +7,7 @@ import { SubmitHandler } from 'react-hook-form'
 import { useCreateBannerMutation } from '@/services'
 
 import { BannerForm } from '@/components/forms'
-import { DashboardLayout } from '@/components/layouts'
+import { DashboardLayout } from '@/components/Layouts'
 import { HandleResponse } from '@/components/shared'
 import { PageContainer } from '@/components/ui'
 

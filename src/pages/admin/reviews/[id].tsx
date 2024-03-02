@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 
 import { useGetSingleReviewQuery } from '@/services'
 
-import { DashboardLayout } from '@/components/layouts'
+import { DashboardLayout } from '@/components/Layouts'
 import { ReveiwCard } from '@/components/review'
 import { PageContainer, FullScreenLoading } from '@/components/ui'
 

@@ -7,7 +7,7 @@ import { useAppSelector } from '@/hooks'
 import { truncate } from '@/utils'
 
 import { EmptyCart } from '@/icons'
-import { ProfileLayout } from '@/components/layouts'
+import { ProfileLayout } from '@/components/Layouts'
 import { PageContainer, ResponsiveImage } from '@/components/ui'
 
 import type { NextPage } from 'next'

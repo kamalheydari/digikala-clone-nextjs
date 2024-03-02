@@ -10,7 +10,7 @@ import { useDisclosure, useChangeRoute } from '@/hooks'
 
 import { Close, Search } from '@/icons'
 
-import { DashboardLayout } from '@/components/layouts'
+import { DashboardLayout } from '@/components/Layouts'
 import { ConfirmDeleteModal } from '@/components/modals'
 import { CategorySelector } from '@/components/categories'
 import { HandleResponse, DataStateDisplay } from '@/components/shared'

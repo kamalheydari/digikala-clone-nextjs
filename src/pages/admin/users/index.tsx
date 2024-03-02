@@ -7,7 +7,7 @@ import { useGetUsersQuery } from '@/services'
 import { Person } from '@/icons'
 
 import { EmptyUsersList } from '@/components/emptyList'
-import { DashboardLayout } from '@/components/layouts'
+import { DashboardLayout } from '@/components/Layouts'
 import { DataStateDisplay } from '@/components/shared'
 import { TableSkeleton } from '@/components/skeleton'
 import { PageContainer } from '@/components/ui'
@@ -69,10 +69,10 @@ const Users: NextPage = () => {
                 user.role === 'admin'
                   ? 'bg-blue-50 text-blue-600'
                   : user.role === 'user'
-                    ? 'bg-amber-50 text-amber-600'
-                    : user.role === 'root'
-                      ? 'bg-green-50 text-green-600'
-                      : ''
+                  ? 'bg-amber-50 text-amber-600'
+                  : user.role === 'root'
+                  ? 'bg-green-50 text-green-600'
+                  : ''
               }
               `}
                             >

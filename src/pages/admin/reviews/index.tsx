@@ -5,7 +5,7 @@ import Head from 'next/head'
 import { useGetReviewsQuery } from '@/services'
 
 import { EmptyCommentsList } from '@/components/emptyList'
-import { DashboardLayout } from '@/components/layouts'
+import { DashboardLayout } from '@/components/Layouts'
 import { ReviewsTable } from '@/components/review'
 import { DataStateDisplay } from '@/components/shared'
 import { TableSkeleton } from '@/components/skeleton'

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 
 import { useGetSingleOrderQuery } from '@/services'
 
-import { DashboardLayout } from '@/components/layouts'
+import { DashboardLayout } from '@/components/Layouts'
 import { OrderCard } from '@/components/order'
 import { PageContainer, FullScreenLoading } from '@/components/ui'
 

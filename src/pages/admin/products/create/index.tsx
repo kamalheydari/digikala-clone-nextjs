@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic'
 import { useCreateProductMutation } from '@/services'
 
 import { ProductForm } from '@/components/forms'
-import { DashboardLayout } from '@/components/layouts'
+import { DashboardLayout } from '@/components/Layouts'
 import { HandleResponse } from '@/components/shared'
 import { PageContainer } from '@/components/ui'
 

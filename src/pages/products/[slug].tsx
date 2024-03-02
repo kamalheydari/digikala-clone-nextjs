@@ -10,7 +10,7 @@ import { useAppDispatch } from '@/hooks'
 
 import { setTempColor, setTempSize, addToLastSeen } from '@/store'
 
-import { ClientLayout } from '@/components/layouts'
+import { ClientLayout } from '@/components/Layouts'
 import {
   ProductBreadcrumb,
   ProductGallery,
