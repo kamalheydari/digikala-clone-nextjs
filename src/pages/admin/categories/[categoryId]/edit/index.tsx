@@ -21,7 +21,7 @@ import type { ICategory, ICategoryForm } from '@/types'
 const Edit: NextPage = () => {
   // ? Assets
   const { query, push } = useRouter()
-  const id = query.id as string
+  const categoryId = query.categoryId as string
   const parentId = query.parent_id as string
 
   const initialUpdataInfo = {} as ICategory
@@ -36,7 +36,7 @@ const Edit: NextPage = () => {
   //*   Get Categories
   const { isLoading: isLoading_get, selectedCategory } = useGetCategoriesQuery(undefined, {
     selectFromResult: ({ data, isLoading }) => ({
-      selectedCategory: data?.categories.find((category) => category._id === id),
+      selectedCategory: data?.categories.find((category) => category._id === categoryId),
       isLoading,
     }),
   })
@@ -61,7 +61,7 @@ const Edit: NextPage = () => {
 
   const onConfirm = () => {
     updateCategory({
-      id,
+      id: categoryId,
       body: updateInfo,
     })
   }

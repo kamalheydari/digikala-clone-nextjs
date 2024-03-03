@@ -84,7 +84,7 @@ const Categories: NextPage = () => {
                             </Link>
                           )}
                           <Link
-                            href={`/admin/categories/edit/${category._id}?${parentId ? `parent_id=${parentId}` : ''}&${
+                            href={`/admin/categories/${category._id}/edit?${parentId ? `parent_id=${parentId}` : ''}&${
                               parentLvl ? `parent_lvl=${parentLvl}` : ''
                             }`}
                             className="max-w-min rounded-sm bg-amber-50 px-1.5 py-1 text-amber-500"
@@ -93,7 +93,7 @@ const Categories: NextPage = () => {
                           </Link>
                           {category.level === 2 && (
                             <Link
-                              href={`/admin/details/${category._id}`}
+                              href={`/admin/details/categories/${category._id}?category_name=${category.name}`}
                               className="max-w-min rounded-sm bg-blue-50 px-1.5 py-1 text-blue-500"
                             >
                               مشخصات و ویژگی ها
@@ -102,13 +102,13 @@ const Categories: NextPage = () => {
                           {category.level < 2 && (
                             <>
                               <Link
-                                href={`/admin/sliders?category_id=${category._id}&category_name=${category.name}`}
+                                href={`/admin/sliders/categories/${category._id}?category_name=${category.name}`}
                                 className="max-w-min rounded-sm bg-fuchsia-50 px-1.5 py-1 text-fuchsia-500"
                               >
                                 اسلایدرها
                               </Link>
                               <Link
-                                href={`/admin/banners?category_id=${category._id}&category_name=${category.name}`}
+                                href={`/admin/banners/categories/${category._id}?category_name=${category.name}`}
                                 className="max-w-min rounded-sm bg-rose-50 px-1.5 py-1 text-rose-500"
                               >
                                 بنرها

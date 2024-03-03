@@ -28,7 +28,7 @@ const profilePaths = [
   {
     name: 'مشخصات دسته بندی ها',
     Icon: Location,
-    path: '/admin/details',
+    path: '/admin/details/categories',
   },
   {
     name: 'کاربران',
@@ -43,12 +43,12 @@ const profilePaths = [
   {
     name: 'اسلایدرها',
     Icon: Slider,
-    path: '/admin/sliders',
+    path: '/admin/sliders/categories',
   },
   {
     name: 'بنرها',
     Icon: Image,
-    path: '/admin/banners',
+    path: '/admin/banners/categories',
   },
 ]
 

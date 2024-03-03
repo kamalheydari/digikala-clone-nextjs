@@ -47,7 +47,7 @@ const DetailsHome: NextPage = () => {
                       <td className="w-3/4 px-2 py-4 text-right">{category.name}</td>
                       <td className="px-2 py-4">
                         <Link
-                          href={`/admin/details/${category._id}?category_name=${category.name}`}
+                          href={`/admin/details/categories/${category._id}?category_name=${category.name}`}
                           className="mx-1.5 inline-block rounded-sm bg-blue-50 px-1.5 py-1 text-blue-500"
                         >
                           مشخصات و ویژگی ها

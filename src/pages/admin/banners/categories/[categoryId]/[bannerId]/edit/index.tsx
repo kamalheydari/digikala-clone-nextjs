@@ -21,7 +21,7 @@ import type { IBanner, IBannerForm } from '@/types'
 const Edit: NextPage = () => {
   // ? Assets
   const { query, back } = useRouter()
-  const bannerId = query?.id as string
+  const bannerId = query?.bannerId as string
   const bannerName = query?.banner_name
 
   const initialUpdataInfo = {} as IBanner

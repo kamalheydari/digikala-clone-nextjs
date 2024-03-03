@@ -19,7 +19,7 @@ interface Props {}
 const Create: NextPage<Props> = () => {
   // ? Assets
   const { query, back } = useRouter()
-  const categoryId = query?.category_id as string
+  const categoryId = query?.categoryId as string
 
   // ? Queries
   //*     Create Banner

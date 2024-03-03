@@ -20,7 +20,7 @@ import type { ISlider, ISliderForm } from '@/types'
 const Edit: NextPage = () => {
   // ? Assets
   const { query, back } = useRouter()
-  const sliderId = query?.id as string
+  const sliderId = query?.sliderId as string
   const sliderName = query?.slider_name
 
   const initialUpdataInfo = {} as ISlider

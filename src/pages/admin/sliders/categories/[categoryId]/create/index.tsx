@@ -18,7 +18,7 @@ const Create: NextPage = () => {
   // ? Assets
   const { query, back } = useRouter()
   const categoryName = query?.category_name
-  const categoryId = query?.category_id as string
+  const categoryId = query?.categoryId as string
 
   // ? Queries
   //*     Create Slider

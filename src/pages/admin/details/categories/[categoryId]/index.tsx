@@ -36,7 +36,7 @@ const DetailsPage: NextPage = () => {
   // ? Assets
   const { query, back } = useRouter()
 
-  const categoryId = query.id as string
+  const categoryId = query.categoryId as string
   const categoryName = query.category_name as string
 
   const initialUpdataInfo = {} as IDetails
