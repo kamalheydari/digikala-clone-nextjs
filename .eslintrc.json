@@ -1,5 +1,5 @@
 {
-  "extends": ["next/core-web-vitals", "standard", "plugin:tailwindcss/recommended", "prettier", "plugin:react-hooks/recommended"],
+  "extends": ["next/core-web-vitals", "standard", "plugin:tailwindcss/recommended", "prettier", "plugin:react-hooks/recommended","plugin:testing-library/react", "plugin:jest-dom/recommended"],
   "rules": {
     "no-undef": "off",
     "no-unused-vars": "warn",
