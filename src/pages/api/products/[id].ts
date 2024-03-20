@@ -32,6 +32,7 @@ const getProduct = async (req: NextApiRequestWithUser, res: NextApiResponse) => 
 
     await db.connect()
 
+    // eslint-disable-next-line testing-library/await-async-queries
     const product: IProductDocument | null = await Product.findById(id)
       .populate('category_levels.level_one')
       .populate('category_levels.level_two')

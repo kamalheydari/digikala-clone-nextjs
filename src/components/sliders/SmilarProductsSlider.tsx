@@ -7,7 +7,7 @@ import 'swiper/css/free-mode'
 import 'swiper/css/navigation'
 
 // import required modules
-import { Navigation, FreeMode } from 'swiper'
+import { Navigation, FreeMode } from 'swiper/modules'
 
 import { ProductCard } from '@/components/product'
 

@@ -17,6 +17,7 @@ export default function withUser(handler: any) {
 
         await db.connect()
 
+        // eslint-disable-next-line testing-library/await-async-queries
         const user = await User.findById({
           _id: userId,
         }).select('-password')
