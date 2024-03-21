@@ -32,6 +32,10 @@ module.exports = {
     'next/font/(.*)': `<rootDir>/__mocks__/nextFontMock.js`,
     // Disable server-only
     'server-only': `<rootDir>/__mocks__/empty.js`,
+    // Handle src alias
+    '^@/(.*)$': '<rootDir>/src/$1',
+    // Mock SVG imports
+    '\\.svg$': '<rootDir>/__mocks__/svgMock.js',
   },
   // Add more setup options before each test is run
   // setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
