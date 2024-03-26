@@ -17,8 +17,7 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "types": ["jest", "node"]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "jest.config.js", "jest.setup.js",],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx",],
   "exclude": ["node_modules"]
 }

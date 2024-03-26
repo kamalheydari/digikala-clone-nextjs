@@ -2,7 +2,7 @@ export { default as ProductColorSelector } from './ProductVariants/ProductColorS
 export { default as ProductSizeSelector } from './ProductVariants/ProductSizeSelector'
 
 export { default as ProductOutOfStockMessage } from './StockInfo/ProductOutOfStockMessage'
-export { default as ProductStockIndicator } from './StockInfo/ProductStockIndicator '
+export { default as ProductStockIndicator } from './StockInfo/ProductStockIndicator'
 
 export { default as ProductImageList } from './ProductImageList'
 export { default as ProductCard } from './ProductCard'
