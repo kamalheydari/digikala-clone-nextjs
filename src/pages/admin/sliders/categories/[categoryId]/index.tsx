@@ -34,21 +34,21 @@ const Sliders: NextPage = () => {
 
       <DashboardLayout>
         <PageContainer title={title}>
-          <DataStateDisplay
-            {...slidersQueryProps}
-            dataLength={sliders?.length || 0}
-            loadingComponent={<TableSkeleton />}
-            emptyComponent={<EmptyCustomList />}
-          >
-            <section className="mx-auto mb-10 space-y-8 p-3">
-              {categoryId && (
-                <Link
-                  href={`/admin/sliders/categories/${categoryId}/create?category_name=${categoryName}`}
-                  className="flex max-w-max items-center gap-x-3 rounded-lg border-2 border-red-600 px-3 py-2 text-red-600"
-                >
-                  افزودن اسلایدر جدید
-                </Link>
-              )}
+          <section className="mx-auto mb-10 space-y-8 p-3">
+            {categoryId && (
+              <Link
+                href={`/admin/sliders/categories/${categoryId}/create?category_name=${categoryName}`}
+                className="flex max-w-max items-center gap-x-3 rounded-lg border-2 border-red-600 px-3 py-2 text-red-600"
+              >
+                افزودن اسلایدر جدید
+              </Link>
+            )}
+            <DataStateDisplay
+              {...slidersQueryProps}
+              dataLength={sliders?.length || 0}
+              loadingComponent={<TableSkeleton />}
+              emptyComponent={<EmptyCustomList />}
+            >
               <TableContainer tHeads={['اسلایدرها', 'بیشتر']}>
                 {sliders &&
                   sliders.map((slider) => (
@@ -68,8 +68,8 @@ const Sliders: NextPage = () => {
                     </tr>
                   ))}
               </TableContainer>
-            </section>
-          </DataStateDisplay>
+            </DataStateDisplay>
+          </section>
         </PageContainer>
       </DashboardLayout>
     </main>

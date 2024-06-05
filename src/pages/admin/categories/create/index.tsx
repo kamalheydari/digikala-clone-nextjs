@@ -34,7 +34,7 @@ const Create: NextPage = () => {
         slug: slug.trim().split(' ').join('-'),
         image,
         colors,
-        level: parentLvl,
+        level: parentLvl + 1,
       },
     })
   }

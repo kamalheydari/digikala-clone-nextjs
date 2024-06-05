@@ -36,35 +36,35 @@ const Categories: NextPage = () => {
 
       <DashboardLayout>
         <PageContainer title="دسته بندی ها">
-          <DataStateDisplay
-            {...categoriesQueryProps}
-            dataLength={childCategories ? childCategories.length : 0}
-            loadingComponent={<TableSkeleton />}
-            emptyComponent={<EmptyCustomList />}
-          >
-            <section className="p-3">
-              <div className="space-y-8 text-white">
-                <div className="flex justify-between">
-                  {childCategories && childCategories[0]?.level !== 0 ? (
-                    <Link
-                      href={`categories/create${parentId ? `?parent_id=${parentId}` : ''}&${
-                        parentLvl ? `parent_lvl=${parentLvl}` : ''
-                      }`}
-                      className="flex max-w-max items-center gap-x-3 rounded-lg border-2 border-red-600 px-3 py-2 text-red-600"
-                    >
-                      افزودن دسته‌بندی جدید
-                    </Link>
-                  ) : (
-                    <div />
-                  )}
+          <section className="p-3">
+            <div className="space-y-8 text-white">
+              <div className="flex justify-between">
+                {childCategories && childCategories[0]?.level !== 0 ? (
                   <Link
-                    href="/admin/categories/tree"
+                    href={`categories/create${parentId ? `?parent_id=${parentId}` : ''}&${
+                      parentLvl ? `parent_lvl=${parentLvl}` : ''
+                    }`}
                     className="flex max-w-max items-center gap-x-3 rounded-lg border-2 border-red-600 px-3 py-2 text-red-600"
                   >
-                    نمودار دسته‌بندی ها
+                    افزودن دسته‌بندی جدید
                   </Link>
-                </div>
+                ) : (
+                  <div />
+                )}
+                <Link
+                  href="/admin/categories/tree"
+                  className="flex max-w-max items-center gap-x-3 rounded-lg border-2 border-red-600 px-3 py-2 text-red-600"
+                >
+                  نمودار دسته‌بندی ها
+                </Link>
+              </div>
 
+              <DataStateDisplay
+                {...categoriesQueryProps}
+                dataLength={childCategories ? childCategories.length : 0}
+                loadingComponent={<TableSkeleton />}
+                emptyComponent={<EmptyCustomList />}
+              >
                 <TableContainer tHeads={['نام', 'بیشتر']}>
                   {childCategories &&
                     childCategories.length > 0 &&
@@ -119,9 +119,9 @@ const Categories: NextPage = () => {
                       </tr>
                     ))}
                 </TableContainer>
-              </div>
-            </section>
-          </DataStateDisplay>
+              </DataStateDisplay>
+            </div>
+          </section>
         </PageContainer>
       </DashboardLayout>
     </main>

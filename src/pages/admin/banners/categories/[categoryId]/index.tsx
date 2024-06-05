@@ -34,21 +34,21 @@ const Banners: NextPage = () => {
 
       <DashboardLayout>
         <PageContainer title={title}>
-          <DataStateDisplay
-            {...bannersQueryProps}
-            dataLength={banners ? banners.length : 0}
-            loadingComponent={<TableSkeleton />}
-            emptyComponent={<EmptyCustomList />}
-          >
-            <section className="mx-auto mb-10 space-y-8 p-3">
-              {categoryId && (
-                <Link
-                  href={`/admin/banners/categories/${categoryId}/create`}
-                  className="flex max-w-max items-center gap-x-3 rounded-lg border-2 border-red-600 px-3 py-2 text-red-600"
-                >
-                  افزودن بنر جدید
-                </Link>
-              )}
+          <section className="mx-auto mb-10 space-y-8 p-3">
+            {categoryId && (
+              <Link
+                href={`/admin/banners/categories/${categoryId}/create`}
+                className="flex max-w-max items-center gap-x-3 rounded-lg border-2 border-red-600 px-3 py-2 text-red-600"
+              >
+                افزودن بنر جدید
+              </Link>
+            )}
+            <DataStateDisplay
+              {...bannersQueryProps}
+              dataLength={banners ? banners.length : 0}
+              loadingComponent={<TableSkeleton />}
+              emptyComponent={<EmptyCustomList />}
+            >
               <TableContainer tHeads={['عنوان بنرها', 'بیشتر']}>
                 {banners &&
                   banners.map((banner) => (
@@ -68,8 +68,8 @@ const Banners: NextPage = () => {
                     </tr>
                   ))}
               </TableContainer>
-            </section>
-          </DataStateDisplay>
+            </DataStateDisplay>
+          </section>
         </PageContainer>
       </DashboardLayout>
     </main>
